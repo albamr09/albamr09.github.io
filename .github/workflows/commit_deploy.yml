@@ -1,4 +1,4 @@
-name: Refresh
+name: Deploy on commit
 
 on:
   push:
