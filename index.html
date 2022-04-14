@@ -1,6 +1,10 @@
 <html>
   <head>
-    <link rel="Stylesheet" type="text/css" href="style.css" />
+    <link
+      rel="Stylesheet"
+      type="text/css"
+      href="https://albamr09.github.io/style.css"
+    />
     <title>index</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- For LaTeX -->
@@ -10,6 +14,12 @@
       async
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
     ></script>
+    <!-- Code Highlight -->
+    <link
+      rel="Stylesheet"
+      type="text/css"
+      href="https://albamr09.github.io/stackoverflow-light.min.css"
+    />
   </head>
   <body>
     <a
@@ -44,4 +54,18 @@
 <hr />
 </div>
   </body>
+  <script
+    type="text/javascript"
+    src="https://albamr09.github.io/highlight.min.js"
+  ></script>
+  <script
+    type="text/javascript"
+    src="https://albamr09.github.io/zepto.min.js"
+  ></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
 </html>
