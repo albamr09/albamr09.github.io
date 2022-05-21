@@ -93,13 +93,17 @@ function handleForm(event) {
   // Do not refresh
   event.preventDefault();
   const searchInput = document.getElementById("search_term");
-  const searchTerm = searchInput.value;
+  // Make it lowercase for comparing
+  const searchTerm = searchInput.value.toLowerCase();
   const resultDiv = document.getElementById("search-result");
+  // Try to search the list
   let resultList = document.getElementById("search-result-list");
+  // If it does not exist create it
   if (!resultList) {
     resultList = document.createElement("ul");
     resultList.setAttribute("id", "search-result-list");
   } else {
+    // Else erase all of its children
     resultList.innerHTML = "";
   }
 
@@ -107,10 +111,10 @@ function handleForm(event) {
   const lunrSearchResults = searchIndex.search(searchTerm);
   // For each document check with fuzzy search if they contain the term we are searching
   const searchResults = jsonDocuments.filter(
-    // Use fuzzy search to search in the body and title of each html document
+    // Use fuzzy search to search in the body and title of each html document (note we compare with lowercasetitle)
     (jsonDoc) =>
       jsonDoc.body.fuzzy(searchTerm, 0.8) ||
-      jsonDoc.title.fuzzy(searchTerm, 0.8)
+      jsonDoc.lowerCaseTitle.fuzzy(searchTerm, 0.8)
   );
 
   // Sort based on lunr results (on the score basically)
