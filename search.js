@@ -90,10 +90,16 @@ function handleForm(event) {
   // Obtain results from lunar
   const lunrSearchResults = searchIndex.search(searchTerm);
   // I use my own simple method because it gives me more results
+  // Split it into an array of words
+  const searchTerms = searchTerm.split(" ");
   const searchResults = jsonDocuments.filter(
-    // Basically see if the html body includes the term or the title includes the term
+    // Basically see if the html body includes the any of the terms
+    // or the title includes any of the terms
     (jsonDoc) =>
-      jsonDoc.body.includes(searchTerm) || jsonDoc.title.includes(searchTerm)
+      // Check for each term, return "true" on the first one that matches (it returns the object)
+      searchTerms.find(
+        (term) => jsonDoc.body.includes(term) || jsonDoc.title.includes(term)
+      )
   );
 
   // Sort based on lunr results (on the score basically)
@@ -131,9 +137,11 @@ function handleForm(event) {
   resultDiv.append(resultList);
   // Reset input
   searchInput.value = "";
-  // Show div
-  resultDiv.classList.remove("search-result-hide");
-  resultDiv.classList.add("search-result-diplay");
+  // Show div only if there was at least one result
+  if (searchResults.length > 0) {
+    resultDiv.classList.remove("search-result-hide");
+    resultDiv.classList.add("search-result-diplay");
+  }
 }
 
 form.addEventListener("submit", handleForm);
