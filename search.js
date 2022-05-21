@@ -24,11 +24,27 @@ var searchIndex;
 var jsonDocuments;
 const separator = ";;";
 
+//-----------------------------------------------------------
+// Helper methods
+//-----------------------------------------------------------
+
 // Helper function to map between lunrSearchResults and my search results (searchResults)
 const mapToLurn = (lunrSearchResults, item) =>
   lunrSearchResults.find(
     (lunrItem) => lunrItem.ref === item.id + separator + item.title
   );
+
+// Fuzzy search function (not mine)
+String.prototype.fuzzy = function (term, ratio) {
+  var string = this.toLowerCase();
+  var compare = term.toLowerCase();
+  var matches = 0;
+  if (string.indexOf(compare) > -1) return true; // covers basic partial matches
+  for (var i = 0; i < compare.length; i++) {
+    string.indexOf(compare[i]) > -1 ? (matches += 1) : (matches -= 1);
+  }
+  return matches / this.length >= ratio || term == "";
+};
 
 //-----------------------------------------------------------
 // LUNR INDEX GENERATION AND RETRIEVAL OF ARRAY OF JSON DOCUMENTS
@@ -89,17 +105,12 @@ function handleForm(event) {
 
   // Obtain results from lunar
   const lunrSearchResults = searchIndex.search(searchTerm);
-  // I use my own simple method because it gives me more results
-  // Split it into an array of words
-  const searchTerms = searchTerm.split(" ");
+  // For each document check with fuzzy search if they contain the term we are searching
   const searchResults = jsonDocuments.filter(
-    // Basically see if the html body includes the any of the terms
-    // or the title includes any of the terms
+    // Use fuzzy search to search in the body and title of each html document
     (jsonDoc) =>
-      // Check for each term, return "true" on the first one that matches (it returns the object)
-      searchTerms.find(
-        (term) => jsonDoc.body.includes(term) || jsonDoc.title.includes(term)
-      )
+      jsonDoc.body.fuzzy(searchTerm, 0.8) ||
+      jsonDoc.title.fuzzy(searchTerm, 0.8)
   );
 
   // Sort based on lunr results (on the score basically)
