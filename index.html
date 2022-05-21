@@ -1,6 +1,9 @@
 <html>
   <head>
+    <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="style.css" />
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="search.css" />
     <title>index</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- For LaTeX -->
@@ -32,10 +35,11 @@
       >Index</a
     >
     <hr />
-    <form action="/search/" method="GET">
-        <input required type="search" name="q" />
-        <button type="submit">Search</button>
+    <form id="search_form" class="search-form">
+      <input required type="search" id="search_term" class="searchTerm" />
+      <button type="submit" class="searchButton">Search</button>
     </form>
+    <div id="search-result" class="search-result-hide"></div>
     <hr />
     <div class="content">
 <div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>

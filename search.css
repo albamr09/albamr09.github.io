@@ -1,0 +1,66 @@
+/* Display form besides the index */
+.search-form {
+  display: inline;
+  border-radius: 5px;
+  float: right;
+  margin-right: 20px;
+}
+
+/* Search box */
+.searchTerm {
+  border: 2px solid #1e90ff;
+  border-radius: 5px;
+  outline: none;
+  color: #8f97a0;
+}
+
+.searchTerm:focus {
+  border: 2px solid #ff4500;
+}
+
+/* Search button */
+.searchButton {
+  border: 2px solid #909090;
+  background: #ccc;
+  color: #404040;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.searchButton:hover {
+  border: 2px solid #ccc;
+}
+
+/* Show results in middle of page */
+.search-result-diplay {
+  display: block;
+  padding: 50px;
+  border: 1px solid #8f97a0;
+  border-radius: 5px;
+  /* Center vertically */
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  /* Put it above rest of content */
+  box-shadow: 0px 0px 20px 0.1px #d0e0f1;
+  z-index: 1000;
+}
+
+.search-result-diplay > ul {
+  list-style-type: none;
+  /* Remove padding of list decorators */
+  padding: 0px;
+}
+
+.search-result-diplay > ul > li {
+  /* Separate each element a little bit more */
+  padding: 2px;
+}
+
+/* Hide results */
+.search-result-hide {
+  display: none;
+}
