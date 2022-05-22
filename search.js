@@ -188,3 +188,16 @@ window.addEventListener("click", function (e) {
     resultDiv.classList.remove("search-result-diplay");
   }
 });
+
+//-----------------------------------------------------------
+// HANDLE ctrl+k
+//-----------------------------------------------------------
+
+window.addEventListener("keydown", function (e) {
+  if (e.key === "k" && e.ctrlKey) {
+    // Prevent browser's default action
+    e.preventDefault();
+    // Focut on input
+    document.getElementById("search_term").focus();
+  }
+});
