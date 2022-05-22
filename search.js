@@ -2,52 +2,69 @@
 
 Some quick observations for the future:
 
-1. We are not using the lunr library to search per se, because of its inflexibility when trying to search non-complete words
-2. Instead we use the contents of our jsonDocuments JSON Object, which is an array where each object contains:
+1. First of all our jsonDocuments JSON Object is an array where each object contains:
 
 - id: the url of the page
 - title: the title of the page
 - body: the content of the page
 
-3. So, we use this array to filter, that is we search for the term inside the body and the content wich a basic includes
-4. This lets us retrieve and array of json objects of the form previously defined. We order them using the lunr result, which provides
-    us with an score. For this we do:
-    - For each element in our search result, we map it to the lurn result (where each item in the lunr result has a reference of the form: id + ;; + title)
-    - Then we compare the score of the elements to order them (the higher the score the higher the lesser the index inside the array)
-5. Finally we create an html list with the results
-
-Note that we could avoid using lunr, because we only use it for the sorting step, but is nice to have better results first.
-
+2. We use this array to populate the index of flexsearch
+3. Then we search, using enrich true to retrieve the title for each result. Therefore, flexsearch returns an array of results for title 
+and an array of results for contents, like so:
+    flexSearchResults = [
+      {
+        field: "title",
+        result: [
+          {
+            id: url of page,
+            title: title of page
+          },
+          ...
+        ]
+      }, 
+      {
+        field: "content",
+        result: [
+          {
+            id: url of page,
+            title: title of page
+          },
+          ...
+        ]
+      }
+    ]
+4. We then use streams to manipulate this array to convert it to a final array of the form:
+    flexSearchResults = [
+      {
+        id: page url,
+        title: page title
+      }
+      ...
+    ]
+  Where there are not duplicates
 */
 
-var searchIndex;
 var jsonDocuments;
-const separator = ";;";
+// Our flexsearch configuration
+var searchIndex = new FlexSearch.Document({
+  index: [
+    // Configuration for title field
+    { field: "title", tokenize: "strict", cache: 100, store: ["title"] },
+    // Configuration for content field
+    {
+      field: "content",
+      tokenize: "full",
+      context: { resolution: 5, depth: 3, bidirectional: true },
+      cache: 100,
+      // Show title when searching
+      store: ["title"],
+    },
+  ],
+  store: ["title"],
+});
 
 //-----------------------------------------------------------
-// Helper methods
-//-----------------------------------------------------------
-
-// Helper function to map between lunrSearchResults and my search results (searchResults)
-const mapToLurn = (lunrSearchResults, item) =>
-  lunrSearchResults.find(
-    (lunrItem) => lunrItem.ref === item.id + separator + item.title
-  );
-
-// Fuzzy search function (not mine)
-String.prototype.fuzzy = function (term, ratio) {
-  var string = this.toLowerCase();
-  var compare = term.toLowerCase();
-  var matches = 0;
-  if (string.indexOf(compare) > -1) return true; // covers basic partial matches
-  for (var i = 0; i < compare.length; i++) {
-    string.indexOf(compare[i]) > -1 ? (matches += 1) : (matches -= 1);
-  }
-  return matches / this.length >= ratio || term == "";
-};
-
-//-----------------------------------------------------------
-// LUNR INDEX GENERATION AND RETRIEVAL OF ARRAY OF JSON DOCUMENTS
+// FLEXSEARCH INDEX GENERATION AND RETRIEVAL OF ARRAY OF JSON DOCUMENTS
 //-----------------------------------------------------------
 
 // Retrieve .json file, where there is a JSON object per html file
@@ -61,24 +78,17 @@ async function getJSON() {
 async function generateIndex() {
   // Obtain json of html documents
   jsonDocuments = await this.getJSON();
-  // Build lunr index (not needed if I simply use
-  // includes in the body to filter)
-  searchIndex = lunr(function () {
-    this.ref("id");
-    this.field("title", { boost: 10 });
-    this.field("body");
-    jsonDocuments.forEach((document) => {
-      this.add({
-        // The reference is the url and the title
-        id: document.id + separator + document.title,
-        title: document.title,
-        body: document.body,
-      });
+  // Build flexsearch index with the retrieved documents
+  jsonDocuments.forEach((document) => {
+    searchIndex.add({
+      id: document.id,
+      title: document.title,
+      content: document.body,
     });
   });
 }
 
-// Create lunr index and obtain json documents
+// Create index and obtain json documents
 generateIndex();
 
 //-----------------------------------------------------------
@@ -107,43 +117,42 @@ function handleForm(event) {
     resultList.innerHTML = "";
   }
 
-  // Obtain results from lunar
-  const lunrSearchResults = searchIndex.search(searchTerm);
-  // For each document check with fuzzy search if they contain the term we are searching
-  const searchResults = jsonDocuments.filter(
-    // Use fuzzy search to search in the body and title of each html document (note we compare with lowercasetitle)
-    (jsonDoc) =>
-      jsonDoc.body.fuzzy(searchTerm, 0.8) ||
-      jsonDoc.lowerCaseTitle.fuzzy(searchTerm, 0.8)
-  );
-
-  // Sort based on lunr results (on the score basically)
-  searchResults.sort((first, second) => {
-    const firstLunr = mapToLurn(lunrSearchResults, first);
-    const secondLunr = mapToLurn(lunrSearchResults, second);
-    // If both are found
-    if (firstLunr && secondLunr) {
-      // Check whose score is higher
-      if (firstLunr.score >= secondLunr.score) return -1;
-      else return 1;
-    }
-    // If firsLurn is not found, then we prioritize secondLunr
-    else if (secondLunr) {
-      return 1;
-    }
-    // In this case either none are found or firstLunr is found
-    // either way we prioritize firstLunr
-    else return -1;
+  // Search using flexsearch
+  let flexSearchResults = searchIndex.search(searchTerm, {
+    // Show more information on result (like title)
+    enrich: true,
+    suggest: true,
   });
 
+  // Because we obtain an array of results, where each element stores
+  // the result for a given field: (e.g. title, content)
+  flexSearchResults = flexSearchResults
+    .map((flexResult) =>
+      // 1. For each field
+      flexResult.result.map((result) => ({
+        // 2. For each result for the field
+        // create an object with the title and the id
+        title: result.doc.title,
+        id: result.id,
+      }))
+    )
+    // Convert this into only one array
+    .flat()
+    // And now remove duplicates
+    .filter(
+      (currentResult, index, searchResults) =>
+        // Convert filterSearchResult array of objects into an array of only the ids
+        searchResults
+          .map((result) => result.id)
+          // Check if the current result.id is in this new array
+          .indexOf(currentResult.id) === index
+    );
+
   // Create a list of results
-  searchResults.forEach((item) => {
+  flexSearchResults.forEach((item) => {
     let li = document.createElement("li");
     let a = document.createElement("a");
-    // If we use lunrSearchResults instead of searchResults (because the ref is a combination of the id + ;; + title)
-    //const splittledRef = item.ref.split(separator);
-    //a.href = splittledRef[0];
-    //a.innerHTML = splittledRef[1];
+    // Each item is the object we created previously of the form {id: url of page, title: title of page}
     a.href = item.id;
     a.innerHTML = item.title;
     li.appendChild(a);
@@ -153,7 +162,7 @@ function handleForm(event) {
   // Reset input
   searchInput.value = "";
   // Show div only if there was at least one result
-  if (searchResults.length > 0) {
+  if (flexSearchResults.length > 0) {
     resultDiv.classList.remove("search-result-hide");
     resultDiv.classList.add("search-result-diplay");
   }
