@@ -95,17 +95,31 @@ generateIndex();
 // HANDLE THE SEARCH
 //-----------------------------------------------------------
 
-// Get form
-var form = document.getElementById("search_form");
+// Get normal form
+var searchForm = document.getElementById("search_form");
+// Get modal form
+var searchModalForm = document.getElementById("search-form-in-modal");
+// Get background modal
+var bgModal = document.getElementById("search-background");
+// Get seach modal
+var searchModal = document.getElementById("search-form-modal");
+// Get the result modal
+const resultDiv = document.getElementById("search-result");
 
 // Form handler
 function handleForm(event) {
   // Do not refresh
   event.preventDefault();
-  const searchInput = document.getElementById("search_term");
+  var searchInput;
+  // Check if event was from the normal form or from the modal search form
+  if (searchModal.style.display == "block") {
+    searchInput = document.getElementById("search-input-in-modal");
+  } else {
+    searchInput = document.getElementById("search_term");
+  }
+  
   // Make it lowercase for comparing
   const searchTerm = searchInput.value.toLowerCase();
-  const resultDiv = document.getElementById("search-result");
   // Try to search the list
   let resultList = document.getElementById("search-result-list");
   // If it does not exist create it
@@ -161,22 +175,30 @@ function handleForm(event) {
   resultDiv.append(resultList);
   // Reset input
   searchInput.value = "";
+  // Hide search modal if necessary 
+  if (searchModal.style.display == "block") {
+    // If the search modal is showing, hide it
+    searchModal.style.display = "none";
+    // Hide background
+    bgModal.style.display = "none";
+  }
   // Show div only if there was at least one result
   if (flexSearchResults.length > 0) {
+    // Show background modal
+    bgModal.style.display = "block";
     resultDiv.classList.remove("search-result-hide");
     resultDiv.classList.add("search-result-diplay");
   }
 }
 
-form.addEventListener("submit", handleForm);
+searchForm.addEventListener("submit", handleForm);
+searchModalForm.addEventListener("submit", handleForm);
 
 //-----------------------------------------------------------
 // HANDLE click outside div
 //-----------------------------------------------------------
 
 window.addEventListener("click", function (e) {
-  // Get the div
-  const resultDiv = document.getElementById("search-result");
   // If the div is showing and the click was outside the div
   if (
     !resultDiv.contains(e.target) &&
@@ -186,6 +208,14 @@ window.addEventListener("click", function (e) {
     resultDiv.classList.add("search-result-hide");
     // Remove the display class
     resultDiv.classList.remove("search-result-diplay");
+    // Hide background
+    bgModal.style.display = "none";
+  } else if (!searchModal.contains(e.target) && 
+    searchModal.style.display == "block") {
+    // If the search modal is showing, hide it
+    searchModal.style.display = "none";
+    // Hide background
+    bgModal.style.display = "none";
   }
 });
 
@@ -197,7 +227,24 @@ window.addEventListener("keydown", function (e) {
   if (e.key === "k" && e.ctrlKey) {
     // Prevent browser's default action
     e.preventDefault();
+    // If there are previous search results
+    // Add the hide class
+    resultDiv.classList.add("search-result-hide");
+    // Remove the display class
+    resultDiv.classList.remove("search-result-diplay");
+    bgModal.style.display = "block";
+    searchModal.style.display = "block";
     // Focut on input
-    document.getElementById("search_term").focus();
+    document.getElementById("search-input-in-modal").focus();
+  } else if (e.key === "Escape") {
+    // Prevent browser's default action
+    e.preventDefault();
+    // Hide everything
+    // Add the hide class
+    resultDiv.classList.add("search-result-hide");
+    // Remove the display class
+    resultDiv.classList.remove("search-result-diplay");
+    bgModal.style.display = "none";
+    searchModal.style.display = "none";
   }
 });
