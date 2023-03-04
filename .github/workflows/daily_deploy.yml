@@ -3,6 +3,9 @@ name: Deploy Daily
 on:
   schedule:
     - cron: "0 3 * * *" # Runs every day at 3am
+  workflow_dispatch:
+    branches:
+    - master 
 
 jobs:
   refresh:
