@@ -48,7 +48,15 @@
       <input required type="search" id="search_term" class="searchTerm" />
       <button type="submit" class="searchButton">Search</button>
     </form>
-    <div id="search-result" class="search-result-hide"></div>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever..."/>
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
     <hr />
     <div class="content">
 <div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
