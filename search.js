@@ -224,9 +224,9 @@ window.addEventListener("click", function (e) {
 //-----------------------------------------------------------
 
 window.addEventListener("keydown", function (e) {
+  // Prevent browser's default action
+  e.preventDefault();
   if (e.key === "k" && e.ctrlKey) {
-    // Prevent browser's default action
-    e.preventDefault();
     // If there are previous search results
     // Add the hide class
     resultDiv.classList.add("search-result-hide");
@@ -237,8 +237,6 @@ window.addEventListener("keydown", function (e) {
     // Focut on input
     document.getElementById("search-input-in-modal").focus();
   } else if (e.key === "Escape") {
-    // Prevent browser's default action
-    e.preventDefault();
     // Hide everything
     // Add the hide class
     resultDiv.classList.add("search-result-hide");
