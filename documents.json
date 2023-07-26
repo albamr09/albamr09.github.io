@@ -1497,7 +1497,7 @@
   {
     "id": "https://albamr09.github.io/Study/Math/CA.html",
     "title": "College Algebra",
-    "body": " index search search back college algebra todo section 9 9.3 9.4 9.5 9.6 section 10 10.1 10.2 10.3 10.4 10.5 10.6 section 11 11.1 11.2 11.3 11.4 11.5 11.6 section 12 12.1 12.2 12.3 12.4 section 13 13.1 13.2 13.3 13.4 13.5 section 14 14.1 14.2 14.3 14.4 $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.inithighlightingonload(); "
+    "body": " index search search back college algebra todo section 10 10.3 10.4 10.5 10.6 section 11 11.1 11.2 11.3 11.4 11.5 11.6 section 12 12.1 12.2 12.3 12.4 section 13 13.1 13.2 13.3 13.4 13.5 section 14 14.1 14.2 14.3 14.4 $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.inithighlightingonload(); "
   },
   {
     "id": "https://albamr09.github.io/Study/Math/index.html",
