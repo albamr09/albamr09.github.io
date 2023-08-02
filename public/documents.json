@@ -1518,6 +1518,5 @@
     "id": "https://albamr09.github.io/index.html",
     "title": "Registry Index",
     "body": " index search search registry index notes study $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
-  },
-  null
+  }
 ]
