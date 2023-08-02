@@ -69,7 +69,7 @@ var searchIndex = new FlexSearch.Document({
 
 // Retrieve .json file, where there is a JSON object per html file
 async function getJSON() {
-  return fetch("https://albamr09.github.io/documents.json")
+  return fetch("https://albamr09.github.io/public/documents.json")
     .then((response) => response.json())
     .then((responseJson) => responseJson);
 }
@@ -117,7 +117,7 @@ function handleForm(event) {
   } else {
     searchInput = document.getElementById("search_term");
   }
-  
+
   // Make it lowercase for comparing
   const searchTerm = searchInput.value.toLowerCase();
   // Try to search the list
@@ -175,7 +175,7 @@ function handleForm(event) {
   resultDiv.append(resultList);
   // Reset input
   searchInput.value = "";
-  // Hide search modal if necessary 
+  // Hide search modal if necessary
   if (searchModal.style.display == "block") {
     // If the search modal is showing, hide it
     searchModal.style.display = "none";
@@ -210,8 +210,10 @@ window.addEventListener("click", function (e) {
     resultDiv.classList.remove("search-result-diplay");
     // Hide background
     bgModal.style.display = "none";
-  } else if (!searchModal.contains(e.target) && 
-    searchModal.style.display == "block") {
+  } else if (
+    !searchModal.contains(e.target) &&
+    searchModal.style.display == "block"
+  ) {
     // If the search modal is showing, hide it
     searchModal.style.display = "none";
     // Hide background

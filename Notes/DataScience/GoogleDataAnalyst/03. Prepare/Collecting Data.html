@@ -1,18 +1,8 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <!-- Styling for search -->
-    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
     <title>Collecting Data</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!-- For LaTeX -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <!-- Code Highlight -->
-    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
-    <!-- Page icon -->
-    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
-  </head>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
         color: white;
@@ -81,7 +71,7 @@ Select the right data type
 </li></ul>
 </li></ul>
 <p>
-<img src="https://albamr09.github.io/assets/collect_data.png" alt="Data Collection Considerations" style="width:550px;height:500px">
+<img src="https://albamr09.github.io/public/assets/collect_data.png" alt="Data Collection Considerations" style="width:550px;height:500px">
 </p>
 
 <hr>
@@ -113,10 +103,6 @@ Type of data collected:
 </li></ul>
 </div>
   
-  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
   <script type="text/javascript">
     $("pre").each(function (index, item) {
       $(item).html("<code>" + $(item).html() + "</code>");
@@ -124,4 +110,4 @@ Type of data collected:
     hljs.initHighlightingOnLoad();
   </script>
 
-</body></html>
+<script src="https://albamr09.github.io/js/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/js/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/js/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/js/search.js" id="search" data-description="Library to perform search"></script></body></html>

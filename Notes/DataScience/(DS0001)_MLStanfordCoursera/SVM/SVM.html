@@ -1,18 +1,8 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <!-- Styling for search -->
-    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
     <title>SVM</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!-- For LaTeX -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <!-- Code Highlight -->
-    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
-    <!-- Page icon -->
-    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
-  </head>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
         color: white;
@@ -106,7 +96,7 @@ The <span id="SVM-Support Vector Machine"></span><strong id="Support Vector Mach
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/non_linear_boundary_SVM.png" alt="Non-Linear Boundary with SVM" style="transform: translate(28vw, 0%);">
+<img src="https://albamr09.github.io/public/assets/non_linear_boundary_SVM.png" alt="Non-Linear Boundary with SVM" style="transform: translate(28vw, 0%);">
 </p>
 
 <p>
@@ -416,7 +406,7 @@ It may be the case where you map your data to a very high dimensional space, but
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/complex_decision_boundary_svm.png" alt="Complex Desicion Boundary" style="transform:translate(22vw, 0)">
+<img src="https://albamr09.github.io/public/assets/complex_decision_boundary_svm.png" alt="Complex Desicion Boundary" style="transform:translate(22vw, 0)">
 </p>
 
 <p>
@@ -457,7 +447,7 @@ With the addition of \(\xi_i\) we are allowing some examples to have a functiona
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/soft_margin.svg" alt="Soft Margin Graphical Representation" style="witdth:500px; height:400px; transform: translate(22vw, 0)">
+<img src="https://albamr09.github.io/public/assets/soft_margin.svg" alt="Soft Margin Graphical Representation" style="witdth:500px; height:400px; transform: translate(22vw, 0)">
 </p>
 
 <div id="SVM-L1-Norm Soft Margin SVM-Outliers"><h3 id="Outliers" class="header"><a href="#SVM-L1-Norm Soft Margin SVM-Outliers">Outliers</a></h3></div>
@@ -467,7 +457,7 @@ This relaxation on the restriction upong the geometric margin also avoids the fo
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/outlier_svm.svg" alt="Outlier SVM" style="width:500px;height:400px;transform:translate(22vw,0)">
+<img src="https://albamr09.github.io/public/assets/outlier_svm.svg" alt="Outlier SVM" style="width:500px;height:400px;transform:translate(22vw,0)">
 </p>
 
 <p>
@@ -514,10 +504,6 @@ Polynomial Kernel: \(K(x, z) = (x^Tz)^d\)
 </li></ul>
 </div>
   
-  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
   <script type="text/javascript">
     $("pre").each(function (index, item) {
       $(item).html("<code>" + $(item).html() + "</code>");
@@ -525,4 +511,4 @@ Polynomial Kernel: \(K(x, z) = (x^Tz)^d\)
     hljs.initHighlightingOnLoad();
   </script>
 
-</body></html>
+<script src="https://albamr09.github.io/js/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/js/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/js/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/js/search.js" id="search" data-description="Library to perform search"></script></body></html>

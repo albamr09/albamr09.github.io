@@ -1,18 +1,8 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <!-- Styling for search -->
-    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
     <title>Expectation Maximization</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!-- For LaTeX -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <!-- Code Highlight -->
-    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
-    <!-- Page icon -->
-    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
-  </head>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
         color: white;
@@ -132,7 +122,7 @@ For example, imagine you have the following dataset:
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/anomaly_detection_data.png" alt="Dataset for Anomaly Detection" style="transform:translate(22vw,0)">
+<img src="https://albamr09.github.io/public/assets/anomaly_detection_data.png" alt="Dataset for Anomaly Detection" style="transform:translate(22vw,0)">
 </p>
 
 <p>
@@ -140,7 +130,7 @@ It looks like the data comes from two different Gaussian distributions:
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/anomaly_detection_multivariate_gaussian.png" alt="Multivariate Gaussian Distribution" style="transform:translate(30vw,0)">
+<img src="https://albamr09.github.io/public/assets/anomaly_detection_multivariate_gaussian.png" alt="Multivariate Gaussian Distribution" style="transform:translate(30vw,0)">
 </p>
 
 <p>
@@ -216,7 +206,7 @@ For example, the following plot shows what a GMM derived from 3 mixture componen
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/gmm_example.png" alt="GMM Example" style="transform:translate(10vw,0)">
+<img src="https://albamr09.github.io/public/assets/gmm_example.png" alt="GMM Example" style="transform:translate(10vw,0)">
 </p>
 
 <p>
@@ -466,7 +456,7 @@ Given any convex function (the inverse also applies to concave functions), if we
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/jensen_inequality.svg" alt="Jensen's Inequality" style="transform:translate(22vw, 0)">
+<img src="https://albamr09.github.io/public/assets/jensen_inequality.svg" alt="Jensen's Inequality" style="transform:translate(22vw, 0)">
 </p>
 
 <div id="Expectation Maximization-Generalized EM Algorithm-Motivation"><h3 id="Motivation" class="header"><a href="#Expectation Maximization-Generalized EM Algorithm-Motivation">Motivation</a></h3></div>
@@ -502,7 +492,7 @@ On the first iteration, the graph would be as follows:
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/e_step_1.svg" alt="First iteration E-Step">
+<img src="https://albamr09.github.io/public/assets/e_step_1.svg" alt="First iteration E-Step">
 </p>
 
 <p>
@@ -510,7 +500,7 @@ And on the second iteration:
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/e_step_2.svg" alt="Second iteration E-Step" style="transform: translate(12vw, 0)">
+<img src="https://albamr09.github.io/public/assets/e_step_2.svg" alt="Second iteration E-Step" style="transform: translate(12vw, 0)">
 </p>
 
 <p>
@@ -729,10 +719,6 @@ To maximize this formula over \(\phi, \mu\) and \(\Sigma\) you have to compute t
 </li></ol>
 </div>
   
-  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
   <script type="text/javascript">
     $("pre").each(function (index, item) {
       $(item).html("<code>" + $(item).html() + "</code>");
@@ -740,4 +726,4 @@ To maximize this formula over \(\phi, \mu\) and \(\Sigma\) you have to compute t
     hljs.initHighlightingOnLoad();
   </script>
 
-</body></html>
+<script src="https://albamr09.github.io/js/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/js/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/js/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/js/search.js" id="search" data-description="Library to perform search"></script></body></html>

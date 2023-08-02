@@ -1,18 +1,8 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <!-- Styling for search -->
-    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
     <title>Particle Filters</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!-- For LaTeX -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <!-- Code Highlight -->
-    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
-    <!-- Page icon -->
-    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
-  </head>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
         color: white;
@@ -116,7 +106,7 @@ So, in a first instance, given a floor plan the robot has to perform global loca
 
 
 <p>
-<img src="https://albamr09.github.io/assets/particle_filter_1.png" alt="Initial State in Particle Filter" style="transform: translate(50%, 0);">
+<img src="https://albamr09.github.io/public/assets/particle_filter_1.png" alt="Initial State in Particle Filter" style="transform: translate(50%, 0);">
 </p>
 
 <p>
@@ -133,9 +123,9 @@ So, initially the robot is completely uncertain as to where it is, which derives
 
 
 <p>
-<img src="https://albamr09.github.io/assets/particle_filter_2.png" alt="Update State in Particle Filter" style="width: 500px">
-<img src="https://albamr09.github.io/assets/particle_filter_3.png" alt="Update State in Particle Filter" style="transform: translate(10%, 0); width: 500px">
-<img src="https://albamr09.github.io/assets/particle_filter_4.png" alt="Update State in Particle Filter" style="transform: translate(20%, 0); width: 500px">
+<img src="https://albamr09.github.io/public/assets/particle_filter_2.png" alt="Update State in Particle Filter" style="width: 500px">
+<img src="https://albamr09.github.io/public/assets/particle_filter_3.png" alt="Update State in Particle Filter" style="transform: translate(10%, 0); width: 500px">
+<img src="https://albamr09.github.io/public/assets/particle_filter_4.png" alt="Update State in Particle Filter" style="transform: translate(20%, 0); width: 500px">
 </p>
 
 <p>
@@ -195,7 +185,7 @@ So, it's time for the resampling. We have to choose \(N\) particles from the ove
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/resampling_1.png" alt="Resampling" style="transform: translate(30vw, 0)">
+<img src="https://albamr09.github.io/public/assets/resampling_1.png" alt="Resampling" style="transform: translate(30vw, 0)">
 </p>
 
 <p>
@@ -203,7 +193,7 @@ Note we allow replacement, so we can draw multiple copies of the same particle \
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/resampling_2.png" alt="Resampling" style="height: 400px; transform: translate(30vw, 0)">
+<img src="https://albamr09.github.io/public/assets/resampling_2.png" alt="Resampling" style="height: 400px; transform: translate(30vw, 0)">
 </p>
 <pre><code>As you can see in the previous image, we have drawn three times \(p_2\), probably because the associated \(\alpha_2\) was larger than the rest of the \(\alpha\). 
 </code></pre>
@@ -332,10 +322,6 @@ Therefore, the particles with a low importance weight will survive with a much l
 </p>
 </div>
   
-  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
   <script type="text/javascript">
     $("pre").each(function (index, item) {
       $(item).html("<code>" + $(item).html() + "</code>");
@@ -343,4 +329,4 @@ Therefore, the particles with a low importance weight will survive with a much l
     hljs.initHighlightingOnLoad();
   </script>
 
-</body></html>
+<script src="https://albamr09.github.io/js/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/js/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/js/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/js/search.js" id="search" data-description="Library to perform search"></script></body></html>

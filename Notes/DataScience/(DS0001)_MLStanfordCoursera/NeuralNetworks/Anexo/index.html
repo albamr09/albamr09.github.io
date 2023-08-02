@@ -1,18 +1,8 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <!-- Styling for search -->
-    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
     <title>Anexo</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!-- For LaTeX -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <!-- Code Highlight -->
-    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
-    <!-- Page icon -->
-    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
-  </head>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
         color: white;
@@ -69,7 +59,7 @@ Para crear una red neuronal que permita trabajar con \(c\) clases lo que hacemos
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/nn_ejemplo_multi.svg" alt="Ejemplo Red Neuronal Clasificación Múltiple" style="width:950px;height:550px">
+<img src="https://albamr09.github.io/public/assets/nn_ejemplo_multi.svg" alt="Ejemplo Red Neuronal Clasificación Múltiple" style="width:950px;height:550px">
 </p>
 
 <p>
@@ -178,7 +168,7 @@ Si generalizamos esto a \(m\) ejemplos tenemos que la salida de cada capa es una
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/nn_multi_ejemplos.svg" alt="Red Neuronal con varios ejemplos" style="width:800px;height:600px">
+<img src="https://albamr09.github.io/public/assets/nn_multi_ejemplos.svg" alt="Red Neuronal con varios ejemplos" style="width:800px;height:600px">
 </p><hr>
 <p></p>
 
@@ -291,14 +281,10 @@ Función de activación sigmoide para clasificación o linear para regresión
 <div id="Anexo-Algoritmo-Pseudocódigo"><h3 id="Pseudocódigo" class="header"><a href="#Anexo-Algoritmo-Pseudocódigo">Pseudocódigo</a></h3></div>
 
 <p>
-<img src="https://albamr09.github.io/assets/nn_pseudocodigo.png" alt="Pseudocódigo Red Neuronal">
+<img src="https://albamr09.github.io/public/assets/nn_pseudocodigo.png" alt="Pseudocódigo Red Neuronal">
 </p>
 </div>
   
-  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
   <script type="text/javascript">
     $("pre").each(function (index, item) {
       $(item).html("<code>" + $(item).html() + "</code>");
@@ -306,4 +292,4 @@ Función de activación sigmoide para clasificación o linear para regresión
     hljs.initHighlightingOnLoad();
   </script>
 
-</body></html>
+<script src="https://albamr09.github.io/js/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/js/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/js/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/js/search.js" id="search" data-description="Library to perform search"></script></body></html>

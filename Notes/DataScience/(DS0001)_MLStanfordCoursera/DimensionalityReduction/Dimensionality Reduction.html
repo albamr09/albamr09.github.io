@@ -1,18 +1,8 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <!-- Styling for search -->
-    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
     <title>Dimensionality Reduction</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!-- For LaTeX -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <!-- Code Highlight -->
-    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
-    <!-- Page icon -->
-    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
-  </head>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
         color: white;
@@ -86,7 +76,7 @@ Given examples \(\{x^{(i)}\}_{i=1}^n\) where \(x^{(i)} \in \mathbb{R}^d\), we wa
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/dimensionality_reduction.png" alt="Dimensionality Reduction" style="transform:translate(22vw, 0)">
+<img src="https://albamr09.github.io/public/assets/dimensionality_reduction.png" alt="Dimensionality Reduction" style="transform:translate(22vw, 0)">
 </p>
 
 <p>
@@ -158,7 +148,7 @@ This projection is the closes point in the subspace to the point we are trying t
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/pca_projection.png" alt="Projection Onto Subspace" style="transform:translate(22vw, 0)">
+<img src="https://albamr09.github.io/public/assets/pca_projection.png" alt="Projection Onto Subspace" style="transform:translate(22vw, 0)">
 </p>
 
 <p>
@@ -167,11 +157,11 @@ is much bigger that if we choose the red line:
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/larger_variance_projection.svg" alt="Larger Variance Projection" style="transform:translate(22vw,0)">
+<img src="https://albamr09.github.io/public/assets/larger_variance_projection.svg" alt="Larger Variance Projection" style="transform:translate(22vw,0)">
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/smaller_variance_projection.svg" alt="Smaller Variance Projection" style="transform:translate(22vw,0)">
+<img src="https://albamr09.github.io/public/assets/smaller_variance_projection.svg" alt="Smaller Variance Projection" style="transform:translate(22vw,0)">
 </p>
 
 <div id="Dimensionality Reduction-PCA-Represent the Subspace"><h3 id="Represent the Subspace" class="header"><a href="#Dimensionality Reduction-PCA-Represent the Subspace">Represent the Subspace</a></h3></div>
@@ -201,7 +191,7 @@ So, now our goal is to find a \(u\) that maximizes the variance across the \(n\)
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/projection_norm.svg" alt="Norm of the Projection" style="transform:translate(22vw, 0)">
+<img src="https://albamr09.github.io/public/assets/projection_norm.svg" alt="Norm of the Projection" style="transform:translate(22vw, 0)">
 </p>
 
 <p>
@@ -348,7 +338,7 @@ Find a subspace such that the projection of the points are as close to the origi
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/minimize_projection_distance.svg" alt="Minimize projection distances" style="transform:translate(22vw,0)">
+<img src="https://albamr09.github.io/public/assets/minimize_projection_distance.svg" alt="Minimize projection distances" style="transform:translate(22vw,0)">
 </p>
 
 <div id="Dimensionality Reduction-ICA"><h2 id="ICA" class="header"><a href="#Dimensionality Reduction-ICA">ICA</a></h2></div>
@@ -376,7 +366,7 @@ For example, given two speaker, what they say is represented as follows:
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/intuition_speaker.svg" alt="Speaker wavepenghts">
+<img src="https://albamr09.github.io/public/assets/intuition_speaker.svg" alt="Speaker wavepenghts">
 </p>
 
 <p>
@@ -384,7 +374,7 @@ Meanwhile the recordings of the microphones are the following:
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/intuition_microphone.svg" alt="Microphone wavepenghts">
+<img src="https://albamr09.github.io/public/assets/intuition_microphone.svg" alt="Microphone wavepenghts">
 </p>
 
 <p>
@@ -432,7 +422,7 @@ Suppose we are given a random variable \(X\) such that \(X ~ Unif [0,1]\), then 
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/pdf_uniform.svg" alt="Probability Density Function for Unirform Distribution">
+<img src="https://albamr09.github.io/public/assets/pdf_uniform.svg" alt="Probability Density Function for Unirform Distribution">
 </p>
 
 <p>
@@ -440,7 +430,7 @@ Let us define a new distribution as follows \(y=2x\), then the probability densi
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/half_pdf_uniform.svg" alt="Probability Density Function for Scaled Unirform Distribution">
+<img src="https://albamr09.github.io/public/assets/half_pdf_uniform.svg" alt="Probability Density Function for Scaled Unirform Distribution">
 </p>
 
 <p>
@@ -516,10 +506,6 @@ W = W - \alpha \left\{\begin{bmatrix}
 </li></ul>
 </div>
   
-  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
-  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
   <script type="text/javascript">
     $("pre").each(function (index, item) {
       $(item).html("<code>" + $(item).html() + "</code>");
@@ -527,4 +513,4 @@ W = W - \alpha \left\{\begin{bmatrix}
     hljs.initHighlightingOnLoad();
   </script>
 
-</body></html>
+<script src="https://albamr09.github.io/js/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/js/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/js/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/js/search.js" id="search" data-description="Library to perform search"></script></body></html>
