@@ -1,0 +1,184 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Inversion of Control</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Inversion of Control"><h1 id="Inversion of Control" class="header"><a href="#Inversion of Control">Inversion of Control</a></h1></div>
+
+<hr>
+
+<p>
+To define a bean, we now use our configuration class:
+</p>
+
+<div id="Inversion of Control-Create the Bean"><h2 id="Create the Bean" class="header"><a href="#Inversion of Control-Create the Bean">Create the Bean</a></h2></div>
+
+<pre java="">package com.springdemo;
+
+// Note there are no special annotations
+public class SwimCoach implements Coach {
+
+	private FortuneService fortuneService;
+
+	public SwimCoach(FortuneService theFortuneService) {
+		fortuneService = theFortuneService;
+	}
+	
+	@Override
+	public String getDailyWorkout() {
+		return "Swim 1000 meters as a warm up.";
+	}
+
+	@Override
+	public String getDailyFortune() {
+		return fortuneService.getFortune();
+	}
+
+}
+</pre>
+
+<p>
+We also create the <code>SadFortuneService</code> Bean:
+</p>
+
+<pre java="">package com.springdemo;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class SadFortuneService implements FortuneService {
+
+	@Override
+	public String getFortune() {
+		return "Today is a sad day :(";
+	}
+
+}
+</pre>
+
+<div id="Inversion of Control-Define the Bean in the Configuration Class"><h2 id="Define the Bean in the Configuration Class" class="header"><a href="#Inversion of Control-Define the Bean in the Configuration Class">Define the Bean in the Configuration Class</a></h2></div>
+
+<pre java="">package com.springdemo;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class SportConfig {
+	
+	// define bean for our sad fortune service
+	@Bean
+	public FortuneService sadFortuneService() {
+		return new SadFortuneService();
+	}
+	
+	// define bean for our swim coach AND inject dependency
+  // without springs dependency injection
+	@Bean
+	public Coach swimCoach() {
+		SwimCoach mySwimCoach = new SwimCoach(sadFortuneService());
+		
+		return mySwimCoach;
+	}
+	
+}
+</pre>
+
+<ul>
+<li>
+The <code>@Bean</code> annotation tells Spring that we are creating a bean component manually. We didn't specify a scope so the default scope is singleton.
+
+</li><li>
+<code>public Coach swimCoach(){</code> specifies that the bean will bean id of "swimCoach".
+
+</li><li>
+The @Bean annotation will intercept any requests for "swimCoach" bean. Since we didn't specify a scope, the bean scope is singleton.
+
+</li></ul>
+<p>
+So now in our main method:
+</p>
+
+<div id="Inversion of Control-Main Method"><h2 id="Main Method" class="header"><a href="#Inversion of Control-Main Method">Main Method</a></h2></div>
+
+<pre java="">package com.luv2code.springdemo;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class JavaConfigDemoApp {
+
+	public static void main(String[] args) {
+
+		// read spring config java class
+		AnnotationConfigApplicationContext context = 
+				new AnnotationConfigApplicationContext(SportConfig.class);
+		
+		// get the bean from spring container by its id
+		Coach theCoach = context.getBean("swimCoach", Coach.class);
+		
+		// call a method on the bean
+		System.out.println(theCoach.getDailyWorkout());
+				
+		// call method to get the daily fortune
+		System.out.println(theCoach.getDailyFortune());
+					
+		// close the context
+		context.close();
+		
+	}
+
+}
+</pre>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

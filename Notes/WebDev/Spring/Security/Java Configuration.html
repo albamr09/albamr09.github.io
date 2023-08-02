@@ -1,0 +1,145 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Java Configuration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Java Configuration"><h2 id="Java Configuration" class="header"><a href="#Java Configuration">Java Configuration</a></h2></div>
+
+<hr>
+
+<p>
+We are going to show the <code>DemoAppConfig.java</code> that holds the base configuration of our application:
+</p>
+
+<pre java="">package com.springsecurity.demo.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+// Tell spring this is a configuration file
+@Configuration
+// Enables annotations
+@EnableWebMvc
+// Search for components in "com.springsecurity.demo" package
+@ComponentScan(basePackages="com.springsecurity.demo")
+public class DemoAppConfig {
+
+	// define a bean for ViewResolver
+	@Bean
+	public ViewResolver viewResolver() {
+		
+		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+		
+		viewResolver.setPrefix("/WEB-INF/view/");
+		viewResolver.setSuffix(".jsp");
+		
+		return viewResolver;
+	}
+}
+</pre>
+
+<p>
+As you can see we have defined a <code>ViewResolver</code> that prepends <code>/WEB-INF/view/</code> to every view, and appends <code>.jsp</code> to every view.
+</p>
+
+<div id="Web App Initializer"><h2 id="Web App Initializer" class="header"><a href="#Web App Initializer">Web App Initializer</a></h2></div>
+
+<p>
+Spring MVC provides support for web app initialization, and makes sure your code is automatically detected. Your code is used to initialize the servlet container. 
+</p>
+
+<p>
+As an example:
+</p>
+
+<pre java="">package com.springsecurity.demo.config;
+
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+public class MySpringMvcDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+	@Override
+	protected Class&lt;?&gt;[] getRootConfigClasses() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	// Tell spring where the configuration for the servlet is
+	protected Class&lt;?&gt;[] getServletConfigClasses() {
+		return new Class[] { DemoAppConfig.class };
+	}
+
+	@Override
+	// Map the servlet to the path "/"
+	protected String[] getServletMappings() {
+		return new String[] { "/" };
+	}
+
+}
+</pre>
+
+<p>
+Here is the correspondence with the <code>xml</code> servlet configuration file:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/servlet_config.png" alt="Servlet Configuration" style="width:800px">
+</p>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

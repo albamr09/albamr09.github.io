@@ -1,0 +1,140 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Events</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Events"><h1 id="Events" class="header"><a href="#Events">Events</a></h1></div>
+
+<hr>
+
+<p>
+In <code>Node.js</code> it the event-driven approach to programming is very commonly used. Meaning the flow of our program is in part controlled by events.
+</p>
+
+<div id="Events-Event Emitter"><h2 id="Event Emitter" class="header"><a href="#Events-Event Emitter">Event Emitter</a></h2></div>
+
+<p>
+All objects which emit events are instances of <code>EventEmitter</code>, which is accessible from the <code>events</code> module:
+</p>
+
+<pre javascript="">
+const EventEmitter = require('events')
+
+const customEmitter = new EventEmitter()
+
+customEmitter.on('response', () =&gt; {
+  console.log('some other logic here')
+})
+
+customEmitter.emit('response')
+
+</pre>
+
+<p>
+Here we can see that we create an <code>EventEmitter</code> object and we listen for the <code>response</code> event with <code>customEmitter.on()</code>. The latter function takes the name of the event as its first argument and the callback as its second. In order to emit a concrete event we use <code>customEmitter.emit()</code>, which takes the event name as its argument.
+</p>
+
+<div id="Events-Event Emitter-More Listeners"><h3 id="More Listeners" class="header"><a href="#Events-Event Emitter-More Listeners">More Listeners</a></h3></div>
+
+<p>
+We can have more than one listener:
+</p>
+
+<pre javascript="">
+const EventEmitter = require('events')
+
+const customEmitter = new EventEmitter()
+
+customEmitter.on('response', (name, id) =&gt; {
+  console.log(`data recieved user ${name} with id:${id}`)
+})
+
+customEmitter.on('response', () =&gt; {
+  console.log('some other logic here')
+})
+
+customEmitter.emit('response', 'john', 34)
+
+</pre>
+
+<p>
+Where the second listener define a callback that takes <code>name</code> and <code>id</code> as arguments. So when emitting the event we can pass those arguments to the <code>emit</code> function.
+</p>
+
+<p>
+Take into account that the functions' order matter, if you emit and event before you listen for it, the event will never be registered.
+</p>
+
+<div id="Events-Event Emitter-HTTP Events"><h3 id="HTTP Events" class="header"><a href="#Events-Event Emitter-HTTP Events">HTTP Events</a></h3></div>
+
+<p>
+Because <code>http.Server</code> extends <code>net.Server</code> which then extends <code>EventEmitter</code>, we can use the methods discussed above. So we can listen for the event <code>request</code> to handle requests from the browser.
+</p>
+
+<pre javascript="">
+const http = require('http')
+
+// Using Event Emitter API
+const server = http.createServer()
+// emits request event
+// subcribe to it / listen for it / respond to it
+server.on('request', (req, res) =&gt; {
+  res.end('Welcome')
+})
+
+server.listen(5000)
+
+</pre>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

@@ -1,0 +1,149 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>JoinPoints</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="JoinPoints"><h1 id="JoinPoints" class="header"><a href="#JoinPoints">JoinPoints</a></h1></div>
+
+<hr>
+
+<p>
+When we are in an aspect, how can we access method parameters?
+</p>
+
+<div id="JoinPoints-Display Method Signature"><h2 id="Display Method Signature" class="header"><a href="#JoinPoints-Display Method Signature">Display Method Signature</a></h2></div>
+
+<p>
+To display the method signature we do the following:
+</p>
+
+<pre java="">package com.aopdemo.aspect;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
+import com.aopdemo.Account;
+
+@Aspect
+@Component
+@Order(2)
+public class MyDemoLoggingAspect {
+	
+	@Before("com.aopdemo.aspect.LuvAopExpressions.forDaoPackageNoGetterSetter()")
+	public void beforeAddAccountAdvice(JoinPoint theJoinPoint) {
+		
+		System.out.println("\n=====&gt;&gt;&gt; Executing @Before advice on method");	
+		
+		// display the method signature
+		MethodSignature methodSig = (MethodSignature) theJoinPoint.getSignature();
+		
+		System.out.println("Method: " + methodSig);
+	}
+}
+</pre>
+
+<div id="JoinPoints-Display Method Arguments"><h2 id="Display Method Arguments" class="header"><a href="#JoinPoints-Display Method Arguments">Display Method Arguments</a></h2></div>
+
+<p>
+Also, to display the method arguments:
+</p>
+
+<pre java="">package com.aopdemo.aspect;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
+import com.aopdemo.Account;
+
+@Aspect
+@Component
+@Order(2)
+public class MyDemoLoggingAspect {
+	
+	@Before("com.aopdemo.aspect.LuvAopExpressions.forDaoPackageNoGetterSetter()")
+	public void beforeAddAccountAdvice(JoinPoint theJoinPoint) {
+		
+		System.out.println("\n=====&gt;&gt;&gt; Executing @Before advice on method");	
+    
+		// display method arguments
+		// get args
+		Object[] args = theJoinPoint.getArgs();
+		
+		// loop through args
+		for (Object tempArg : args) {
+			System.out.println(tempArg);
+			
+			if (tempArg instanceof Account) {
+				
+				// downcast and print Account specific stuff
+				Account theAccount = (Account) tempArg;
+				
+				System.out.println("account name: " + theAccount.getName());
+				System.out.println("account level: " + theAccount.getLevel());								
+
+			}
+		}		
+	}
+}
+</pre>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

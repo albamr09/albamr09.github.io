@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Inject properties file using Java annotations</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,47 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="Dependency Injection.html">Back</a>
+</p>
 
-<hr>
+<div id="Inject properties file using Java annotations"><h1 id="Inject properties file using Java annotations" class="header"><a href="#Inject properties file using Java annotations">Inject properties file using Java annotations</a></h1></div>
 
-<ul>
-<li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<p>
+This solution will show you how inject values from a properties file using annotations. The values will no longer be hard coded in the Java code.
+</p>
 
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<div id="Inject properties file using Java annotations-Create a properties file"><h2 id="Create a properties file" class="header"><a href="#Inject properties file using Java annotations-Create a properties file">Create a properties file</a></h2></div>
 
-</li></ul>
-<hr>
+<p>
+We create new text file:  <code>src/sport.properties</code>
+</p>
+
+<pre json="">foo.email=myeasycoach@luv2code.com
+foo.team=Silly Java Coders
+</pre>
+
+<div id="Inject properties file using Java annotations-Load the properties"><h2 id="Load the properties" class="header"><a href="#Inject properties file using Java annotations-Load the properties">Load the properties</a></h2></div>
+
+<p>
+We load the properties in the configuration <code>XML</code> file. For that we add the line:
+</p>
+
+<pre xml="">&lt;context:property-placeholder location="classpath:sport.properties"/&gt;
+</pre>
+
+<div id="Inject properties file using Java annotations-Inject Values"><h2 id="Inject Values" class="header"><a href="#Inject properties file using Java annotations-Inject Values">Inject Values</a></h2></div>
+
+<p>
+Lastly we inject the properties values into our bean like so:
+</p>
+
+<pre java="">@Value("${foo.email}")
+private String email;
+    
+@Value("${foo.team}")
+private String team;
+</pre>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>POM File Structure</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,81 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="POM File Structure"><h1 id="POM File Structure" class="header"><a href="#POM File Structure">POM File Structure</a></h1></div>
 
 <hr>
+
+<p>
+The POM File has the following structure:
+</p>
 
 <ul>
 <li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+Project metadata: information about the project
 
 </li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+Dependencies: list of dependencies for the project
+
+</li><li>
+Plug-ins: additional custom tasks to run (JUnit tests, reports, etc)
 
 </li></ul>
-<hr>
+<p>
+<img src="https://albamr09.github.io/assets/pom_file_structure.png" alt="Example of POM File" style="width: 800px">
+</p>
+
+<div id="POM File Structure-Project Coordinates"><h2 id="Project Coordinates" class="header"><a href="#POM File Structure-Project Coordinates">Project Coordinates</a></h2></div>
+
+<p>
+Project coordinates uniquely identify a project:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/project_coordinates.png" alt="Project Coordinates Example">
+</p>
+
+<p>
+Where:
+</p>
+
+<ul>
+<li>
+Group ID: name of company, group or organization
+
+</li><li>
+Artifact ID: name for the project
+
+</li><li>
+Version: a specific release version
+
+</li></ul>
+<div id="POM File Structure-Dependency Coordinates"><h2 id="Dependency Coordinates" class="header"><a href="#POM File Structure-Dependency Coordinates">Dependency Coordinates</a></h2></div>
+
+<p>
+To add a given dependency project, we need:
+</p>
+
+<ul>
+<li>
+Group ID
+
+</li><li>
+Artifact ID
+
+</li><li>
+Optional: version (best practice to include the version)
+
+</li></ul>
+<div id="POM File Structure-Dependency Coordinates-Find Dependencies"><h3 id="Find Dependencies" class="header"><a href="#POM File Structure-Dependency Coordinates-Find Dependencies">Find Dependencies</a></h3></div>
+
+<p>
+<a href="https://search.maven.org">Search Maven</a>
+<a href="https://www.mvnrepository.com">Maven Repository</a>
+</p>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

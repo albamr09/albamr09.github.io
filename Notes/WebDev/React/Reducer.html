@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Reducers and Actions</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,51 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Reducers and Actions"><h1 id="Reducers and Actions" class="header"><a href="#Reducers and Actions">Reducers and Actions</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<p>
+Let's now see an example of a <code>reducer</code>, more concretely the <code>reducer</code> of the <code>user</code> slice we defined <a href="Index.html">previously</a>:
+</p>
 
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<pre javascript="">// Use create slice to define the slice
+import { createSlice } from "@reduxjs/toolkit";
 
-</li></ul>
-<hr>
+// Define initial state
+const initialStateValue = { name: "", age: 0, email: "" };
+
+export const userSlice = createSlice({
+  // Name of slice
+  name: "user",
+  // Initial state of reducer
+  initialState: { value: initialStateValue },
+  // Possible reducers
+  reducers: {
+    login: (state, action) =&gt; {
+      state.value = action.payload;
+    },
+
+    logout: (state) =&gt; {
+      state.value = initialStateValue;
+    },
+  },
+});
+
+// De-structure actions
+export const { login, logout } = userSlice.actions;
+
+// Export reducer
+export default userSlice.reducer;
+</pre>
+
+<p>
+We now 
+</p>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

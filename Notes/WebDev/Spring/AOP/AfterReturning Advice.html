@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>AfterReturning Advice</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,66 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="AfterReturning Advice"><h1 id="AfterReturning Advice" class="header"><a href="#AfterReturning Advice">AfterReturning Advice</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<p>
+This advice is run after the method is done executing, and it executed successfully.
+</p>
 
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<p>
+The flow of this advice is the following:
+</p>
 
-</li></ul>
-<hr>
+<p>
+<img src="https://albamr09.github.io/assets/after_returning_interaction.png" alt="After Returning Interaction" style="width: 750px">
+</p>
+
+<p>
+So for example, if you want to have an advice run everytime we call the <code>findAccounts</code> method inside a concrete class, and we also want to print out the result we obtained we do the following:
+</p>
+
+<pre java="">package com.aopdemo.aspect;
+
+import java.util.List;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
+import com.aopdemo.Account;
+
+@Aspect
+@Component
+@Order(2)
+public class MyDemoLoggingAspect {
+		
+	// add a new advice for @AfterReturning on the findAccounts method
+	@AfterReturning(
+			pointcut="execution(* com.aopdemo.dao.AccountDAO.findAccounts(..))",
+      // This is the parameter name of the list of accounts returned by findAccounts
+			returning="result")
+	public void afterReturningFindAccountsAdvice(
+					JoinPoint theJoinPoint, List&lt;Account&gt; result) {
+		
+		// print out which method we are advising on 
+		String method = theJoinPoint.getSignature().toShortString();
+		System.out.println("\n=====&gt;&gt;&gt; Executing @AfterReturning on method: " + method);
+				
+		// print out the results of the method call
+		System.out.println("\n=====&gt;&gt;&gt; result is: " + result);
+	}
+}
+</pre>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

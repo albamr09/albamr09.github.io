@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Life Cycle</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,77 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Life Cycle"><h1 id="Life Cycle" class="header"><a href="#Life Cycle">Life Cycle</a></h1></div>
 
 <hr>
+
+<p>
+To define methods to add when the beans is constructed or destroyed we use the <code>PostConstruct</code> and <code>PreDestroy</code> annotation.
+</p>
+
+<pre java="">package com.springdemo;
+
+public class TrackCoach implements Coach {
+	
+	private FortuneService fortuneService;
+	
+	public TrackCoach() {
+		
+	}
+	
+	public TrackCoach(FortuneService fortuneService) {
+		this.fortuneService = fortuneService;
+	}
+	
+	@Override
+	public String getDailyWorkout() {
+		return "Run a hard 5k";
+	}
+	
+	@Override
+	public String getDailyFortune() {
+		return "Just Do It: " + fortuneService.getFortune();
+	}
+	
+	// Run when the bean is done creating
+	@PostConstruct
+	public void doMyStartupStuff() {
+		System.out.println("TrackCoach: inside method doMyStartupStuff");
+	}
+	
+	// Run before the bean is destroyed
+	@PreDestroy
+	public void doMyCleanupStuffYoYo() {
+		System.out.println("TrackCoach: inside method doMyCleanupStuffYoYo");		
+	}
+}
+
+</pre>
+
+<p>
+Refer to more information about scopes are in <a href="../Bean Scopes/Life Cycle.html">Bean Life Cycle</a>:
+</p>
+
+<div id="Life Cycle-Notes"><h2 id="Notes" class="header"><a href="#Life Cycle-Notes">Notes</a></h2></div>
 
 <ul>
 <li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+Access modifier: The method can have any access modifier (public, protected, private)
 
 </li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+Return type: The method can have any return type. However, "void' is most commonly used. If you give a return type just note that you will not be able to capture the return value. As a result, "void" is commonly used.
+
+</li><li>
+Method name: The method can have any method name.
+
+</li><li>
+Arguments: The method can not accept any arguments. The method should be no-arg.
 
 </li></ul>
-<hr>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

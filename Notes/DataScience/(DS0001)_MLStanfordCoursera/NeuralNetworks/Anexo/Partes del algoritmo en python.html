@@ -1,0 +1,168 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Algoritmo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Algoritmo"><h1 id="Algoritmo" class="header"><a href="#Algoritmo">Algoritmo</a></h1></div>
+
+<hr>
+
+<p>
+Dado un conjunto de entrenamiento \(X\), donde \(X\) es una matriz \((n + 1) \times m\) con \(m\) ejemplos:
+</p>
+
+<ul>
+<li>
+Propagación hacia adelante
+<pre python="">def feed_forward(self, theta=None, capa=None, test=False):
+
+    if theta is None:                                                   # Si no se introduce theta como argumento
+        theta = self.theta                                              # Inicializar theta con el almacenado en el objeto
+
+    if test:                                                            # Si se indica utilizar X_test
+        a = self.X_test
+        n, m = self.X_test.shape                                        # Guardar dimensiones de test
+    else:
+        a = self.X                                                      # La primera entrada es X
+        n, m = self.X.shape                                             # Guardar dimensiones de train
+
+    if capa is not None:                                                # Si se ha indicado una capa
+        if capa &lt;= len(theta) and capa &gt;= 0:                            # Chequeamos que la capa esta dentro de los limites
+            for i in range(capa):                                       # Recorremos las capas
+                a = self.sigmoid(theta[i], a)                           # Calculamos la salida de la capa
+                a = np.concatenate((np.matrix(np.ones(m)), a))          # Añadimos una fila de unos
+            return a
+        else:
+            print("El número de capa no es válido")                     # Mensaje de error
+    else:
+        for elemento in theta:
+            a = self.sigmoid(elemento, a)                               # Calculamos la salida de la capa actual
+            a = np.concatenate((np.matrix(np.ones(m)), a))              # Añadimos una fila de unos
+        h = a[1:, :]                                                    # Eliminamos los 1 en la última capa
+        return h
+</pre>
+
+</li><li>
+Calculo del coste en la última capa
+<pre python="">def calculo_coste(self, theta=None, unrolled=False):
+
+    if theta is None:                                                                                                   # Si no se introduce theta como argumento
+        theta = self.theta                                                                                              # Inicializar theta con el almacenado en el objeto
+
+    if unrolled:                                                                                                        # Si theta se ha flatten en un vector de una dimension
+        theta = self._roll_theta(theta)                                                                                 # Crear lista con matriz theta de capa capa
+
+    h = self.feed_forward(theta)                                                                                        # Obtener la salida para todos los ejemplo
+    coste = -np.sum(np.diagonal(self.y_hot_enc.T.dot(np.log(h)) + (1 - self.y_hot_enc.T).dot(np.log(1 - h))))/self.m    # Calcular el error con la matriz codificada de y
+
+    if self.reg:                                                                                                        # Si se ha indicado que se aplica regularizacion
+        reg_parcial = 0                                                                                                 # Inicializamos la variable temporal
+        for elemento in theta:                                                                                          # Para capa
+            reg_parcial += np.sum(np.power(elemento[:, 1:], 2))                                                         # No sumar el término independiente en cada nodo: primera fila
+        reg_result = self.reg_par/(2*self.m)*(reg_parcial)                                                              # Calcular la regularizacion
+        coste = coste + reg_result
+    
+    return coste
+</pre>
+
+</li><li>
+Actualizar los pesos con propagación hacia atrás:
+<pre python="">def back_propagation(self, theta=None, unrolled=False, unroll=False):
+  
+        if theta is None:                                                                               # Si no se ha indicado ningun theta como argumento
+            theta = self.theta                                                                          # Inicializar theta con el almacenado en el objeto
+        
+        if unrolled:
+            theta = self._roll_theta(theta)                                                             # Creamos una lista del array
+
+        delta = []                                                                                      # Inicializamos las lista temporal que contendra el delta de cada nodo
+        delta_sum = []                                                                                  # Inicializamos la lista temporal que contendra el sumatorio delta
+        gradientes = []                                                                                 # Inicializamos la lista que contendrá los gradientes de cada capa
+
+        h = self.feed_forward(theta=theta)                                                              # Calculamos el valor del la salida para empezar a propagar hacia atras   
+
+        delta_next = h - self.y_hot_enc                                                                 # Calculamos el primer delta: el de la ultima capa
+        delta.append(delta_next)                                                                        # Lo añadimos a la lista temporal
+        indice = self.numero_capas - 1                                                                  # El indice indica hasta que capa calcular la salida
+        
+        for elemento in reversed(theta[1:]):                                                            # Recorremos las capas de atras hacia adelante
+            h = self.feed_forward(theta=theta, capa=indice)                                             # Calculamos la salida de la capa actual
+            delta_aux = np.multiply(elemento.T.dot(delta_next), self.sigmoid_gradient(elemento, h))     # Aplicamos la formula del gradiente
+            delta_next = delta_aux[1:, :]                                                               # No cogemos el elemento independiente
+            delta.append(delta_next)                                                                    # Lo añadimos a la lista de delta
+            indice -= 1                                                                                 # Actualizamos el indice
+        
+        delta.reverse()                                                                                 # Damos la vuelta a la lista
+        for indice in range(len(delta)):                                
+            h = self.feed_forward(theta=theta, capa=indice)                                             # Obtenemos la salida de cada capa
+            delta_sum.append(delta[indice].dot(h.T))                                                    # Añadimos (delta * a) a la lista de delta_mayuscula -&gt; sumatorio
+
+        for indice in range(len(delta_sum)):
+            gradiente = (1/self.m) * delta_sum[indice]                                                  # Calculamos el grandiente: delta_mayuscula / m
+            if self.reg:
+                gradiente[1:, :] += (self.reg_par/self.m) * theta[indice][1:, :]                        # Si se indica regularizacion aplicarla: no regularizan primer elemento
+            gradientes.append(gradiente)                                                                # Lo añadimos a la lista
+
+        coste = self.calculo_coste(theta=theta)
+
+        if unroll:                                                                                      # Si se ha indicado que se quiere hacer flatten a un vector de una dimension
+            return coste, self._unroll_theta(gradientes)
+        else:
+            return coste, gradientes
+
+</pre>
+
+</li></ul>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

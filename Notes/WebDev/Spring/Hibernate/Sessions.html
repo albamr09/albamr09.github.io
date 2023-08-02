@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Sessions</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,57 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Sessions"><h1 id="Sessions" class="header"><a href="#Sessions">Sessions</a></h1></div>
 
 <hr>
+
+<p>
+There are two key components when it comes to session handling:
+</p>
 
 <ul>
 <li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<code>SessionFactory</code>: reads the hibernate configuration file, creates sessions objects, and is created only once in the application and reused over and over again
 
 </li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<code>Session</code>: is a wrapper around a <code>JDBC</code> connection, which is the main object used to save/retrieve objects. This object is created multiple times.
 
 </li></ul>
-<hr>
+<p>
+So to create a <code>SessionFactory</code> and then create <code>Session</code> from it:
+</p>
+
+<pre java="">public class Demo {
+  public static void main(String[] args) {
+  
+    // create session factory
+    SessionFactory factory = new Configuration()
+                              // configuration file in src/ (if it is not specified, hibernate will look for a file named hibernate.cfg.xml)
+                              .configure("hibernate.cfg.xml")
+                              // Class that was annotated to be mapped
+                              .addAnnotatedClass(Student.class)
+                              // You can add multiple classes
+                              .addAnnotatedClass(...)
+                              // Create the factory
+                              .buildSessionFactory();
+    
+    // create session
+    Session session = factory.getCurrentSession();
+    
+    try {			
+      // Use session object to perform CRUD operations	
+    }
+    finally {
+      // Delete session factory
+      factory.close();
+    }
+  }
+}
+</pre>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

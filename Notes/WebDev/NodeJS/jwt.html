@@ -1,0 +1,156 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>JSON Web Tokens</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="JSON Web Tokens"><h1 id="JSON Web Tokens" class="header"><a href="#JSON Web Tokens">JSON Web Tokens</a></h1></div>
+
+<hr>
+
+<div id="JSON Web Tokens-Installation"><h2 id="Installation" class="header"><a href="#JSON Web Tokens-Installation">Installation</a></h2></div>
+
+<pre bash="">
+$ npm install jsonwebtoken
+
+</pre>
+
+<div id="JSON Web Tokens-Example of Usage"><h2 id="Example of Usage" class="header"><a href="#JSON Web Tokens-Example of Usage">Example of Usage</a></h2></div>
+
+<p>
+We first create our <code>Express</code> application and so, we import <code>express</code> and <code>jsonwebtoken</code>. And then we start the server.
+</p>
+
+<pre javascript="">
+const express = require("express");
+const jwt = require("jsonwebtoken");
+
+const app = express();
+
+app.listen(3000, () =&gt; {
+    console.log("nodejs app running...");
+});
+
+</pre>
+
+<p>
+Now, we define two new endpoints: <code>/api</code> and <code>/api/login</code>.
+</p>
+
+<pre javascript="">
+app.get("/api", (req , res) =&gt; {
+    res.json({
+        mensaje: "Nodejs and JWT"
+    });
+});
+
+app.post("/api/login", (req , res) =&gt; {
+    const user = {
+        id: 1,
+        nombre : "Henry",
+        email: "henry@email.com"
+    }
+
+    jwt.sign({user}, 'secretkey', {expiresIn: '32s'}, (err, token) =&gt; {
+        res.json({
+            token
+        });
+    });
+
+});
+
+</pre>
+
+<p>
+Where we use the <code>sign</code> method to create a new token.
+</p>
+
+<p>
+So, if we want to define an endpoint that requires authentication we do:
+</p>
+
+<pre javascript="">
+// Middleware
+function verifyToken(req, res, next){
+     const bearerHeader =  req.headers['authorization'];
+
+     if(typeof bearerHeader !== 'undefined'){
+          const bearerToken = bearerHeader.split(" ")[1];
+          req.token  = bearerToken;
+          next();
+     }else{
+         res.sendStatus(403);
+     }
+}
+
+app.post("/api/posts", verifyToken, (req , res) =&gt; {
+
+    jwt.verify(req.token, 'secretkey', (error, authData) =&gt; {
+        if(error){
+            res.sendStatus(403);
+        }else{
+            res.json({
+                    mensaje: "Post fue creado",
+                    authData
+                });
+        }
+    });
+});
+
+</pre>
+
+<p>
+Where <code>verifyToken</code> is a middleware function that gets the token from the header, and then we use the <code>verify</code> method to check if the token is valid.
+</p>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

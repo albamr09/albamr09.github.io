@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Gradient Checking</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,29 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Gradient Checking"><h1 id="Gradient Checking" class="header"><a href="#Gradient Checking">Gradient Checking</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<p>
+Consiste en la estimación numérica de los gradientes, tal que:
+</p>
 
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+\begin{align}
+\frac{\delta J(\Theta)}{\delta \Theta} \approx \frac{J(\Theta - \epsilon) - J(\Theta + \epsilon)}{2 \cdot \epsilon}
+\end{align}
 
-</li></ul>
-<hr>
+\begin{align}
+\frac{\delta J(\Theta)}{\delta \theta_j} \approx \frac{J(\theta_0, ..., \theta_j - \epsilon, ..., \theta_n) - J(\theta_0, ..., \theta_j + \epsilon, ..., \theta_n)}{2 \cdot \epsilon}
+\end{align}
+
+<p>
+<img src="https://albamr09.github.io/assets/gradient_checking.png" alt="Grafica Gradient Checking" style="width:300px;height:250px;">
+</p>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

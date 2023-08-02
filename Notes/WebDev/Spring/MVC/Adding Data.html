@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Model</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,77 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Model"><h1 id="Model" class="header"><a href="#Model">Model</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<p>
+The Model is a container for the application data. So in your controller you can put anything in the model (strings, objects, info from DB, etc). And then you view page (<code>JSP</code>) can access data from the model.
+</p>
 
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<div id="Model-Example"><h2 id="Example" class="header"><a href="#Model-Example">Example</a></h2></div>
 
-</li></ul>
-<hr>
+<div id="Model-Example-Controller"><h3 id="Controller" class="header"><a href="#Model-Example-Controller">Controller</a></h3></div>
+
+<pre java="">package com.springdemo.mvc;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class HelloWorldController {
+  
+  // new a controller method to read form data and
+  // add data to the model
+  
+  @RequestMapping("/processFormVersionTwo")	
+  // the HttpServletRequest allows you to retrieve information from the request (like the parameters of a form)
+  // the model is our Model where we will store data
+  public String parseString(HttpServletRequest request, Model model) {
+    
+    // read the request parameter from the HTML form
+    String theName = request.getParameter("studentName");
+    
+    // convert the data to all caps
+    theName = theName.toUpperCase();
+    
+    // create the message
+    String result = "Yo! " + theName;
+    
+    // add message attribute to the model
+    model.addAttribute("message", result);
+    		
+    return "helloworld";
+  }
+  
+}
+</pre>
+
+<div id="Model-Example-View"><h3 id="View" class="header"><a href="#Model-Example-View">View</a></h3></div>
+
+<p>
+Now, on the view, we can access the <code>Model</code> data:
+</p>
+
+<pre jsp="">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  Hello World of Spring!
+  &lt;br&gt;&lt;br&gt;
+  Student name: ${param.studentName}
+  &lt;br&gt;&lt;br&gt;
+  &lt;!-- Access model data by the attribute's name--&gt;
+  The message: ${message}
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

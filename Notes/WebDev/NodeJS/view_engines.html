@@ -1,0 +1,161 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>View Engines</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="View Engines"><h1 id="View Engines" class="header"><a href="#View Engines">View Engines</a></h1></div>
+
+<hr>
+
+<p>
+We have different options:
+</p>
+
+<ul>
+<li>
+<a href="https://pugjs.org/api/express.html">Pug</a>
+
+</li><li>
+<a href="https://ejs.co/">EJS (Embedded JavaScript)</a>
+
+</li><li>
+<a href="https://www.npmjs.com/package/express3-handlebars">Express Handlebars</a>
+
+</li></ul>
+<div id="View Engines-EJS"><h2 id="EJS" class="header"><a href="#View Engines-EJS">EJS</a></h2></div>
+
+<div id="View Engines-EJS-Installing"><h3 id="Installing" class="header"><a href="#View Engines-EJS-Installing">Installing</a></h3></div>
+<p>
+We will use <code>EJS</code> in this example. First we download it:
+</p>
+
+<pre bash="">
+$ npm install ejs
+
+</pre>
+
+<div id="View Engines-EJS-Set Up"><h3 id="Set Up" class="header"><a href="#View Engines-EJS-Set Up">Set Up</a></h3></div>
+
+<p>
+Now we specify in our application that we want to use it:
+</p>
+
+<pre javascript="">
+const express = require('express')
+const app = express()
+
+// Specify view engine and settings
+app.set('view engine', 'ejs')
+app.set('views', './views')
+
+</pre>
+
+<p>
+We use the function <code>set()</code> that is used to specify app settings. There we define <code>ejs</code> as our <code>view engine</code> and then we indicate that the folder where our views are located is <code>/views</code>, which is the default folder. This means we could have omitted that last line and the functionality would remain the same.
+</p>
+
+<div id="View Engines-EJS-Rendering"><h3 id="Rendering" class="header"><a href="#View Engines-EJS-Rendering">Rendering</a></h3></div>
+
+<p>
+Inside our root folder, we create the folder <code>views</code> and the file <code>index.ejs</code> which has the same syntax as <code>HTML</code>:
+</p>
+
+<pre ejs="">
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Blog Ninja | &lt;%= title %&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;div class="blogs content"&gt;
+    &lt;h2&gt;All Blogs&lt;/h2&gt;
+
+    &lt;% if (blogs.length &gt; 0) { %&gt;
+      &lt;% blogs.forEach(blog =&gt; { %&gt;
+        &lt;h3 class="title"&gt;&lt;%= blog.title %&gt;&lt;/h3&gt;
+        &lt;p class="snippet"&gt;&lt;%= blog.snippet %&gt;&lt;/p&gt;
+      &lt;% }) %&gt;
+    &lt;% } else { %&gt;
+      &lt;p&gt;There are no blogs to display...&lt;/p&gt;
+    &lt;% } %&gt;
+    
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+
+<p>
+So in order to send this template as a response we do:
+</p>
+
+<pre javascript="">
+app.get('/', (req, res) =&gt; {
+  const blogs = [
+    {title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor sit amet consectetur'},
+    {title: 'Mario finds stars', snippet: 'Lorem ipsum dolor sit amet consectetur'},
+    {title: 'How to defeat bowser', snippet: 'Lorem ipsum dolor sit amet consectetur'},
+  ];
+  res.render('index', { title: 'Home', blogs });
+});
+
+</pre>
+
+<p>
+Note that we define an array of blog objects, and we pass them as an argument to the template. Which then iterates over them to visualize each item.
+</p>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

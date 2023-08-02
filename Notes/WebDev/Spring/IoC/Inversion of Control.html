@@ -1,0 +1,184 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Inversion of Control</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Inversion of Control"><h1 id="Inversion of Control" class="header"><a href="#Inversion of Control">Inversion of Control</a></h1></div>
+
+<hr>
+
+<p>
+The Spring container (generally known as <code>ApplicationContext</code>) has two main functions:
+</p>
+
+<ul>
+<li>
+Create and manage objects (Inversion of control)
+
+</li><li>
+Inject object's dependencies (Dependency Injection)
+
+</li></ul>
+<hr>
+
+<p>
+So Inversion Control is externalizing the construction and management of objects which will be handled by and object factory. This is illustrated in the following image:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/IoC.png" alt="IoC" style="width:550px;height:300px;">
+</p>
+
+<ul>
+<li>
+MyApp has the main method
+
+</li><li>
+MyApp asks Spring to retrieve the appropiate object based on a configuration file or an annotation, instead of having to code it manually like:
+<pre java="">package com.springdemo;
+
+public class MyApp {
+
+	public static void main(String[] args) {
+
+		Coach theCoach = new TrackCoach();
+		
+		// call methods on the bean
+		System.out.println(theCoach.getDailyWorkout());
+	}
+
+}
+</pre>
+
+</li></ul>
+<p>
+Where we have defined an interface <code>Coach</code> that is implemented by both <code>TrackCoach</code> and <code>BaseballCoach</code>
+</p>
+
+<pre java="">package com.springdemo;
+
+public interface Coach {
+
+	public String getDailyWorkout();
+	
+}
+</pre>
+
+<pre java="">package com.springdemo;
+
+public class TrackCoach implements Coach {
+
+	@Override
+	public String getDailyWorkout() {
+		return "Run a hard 5k";
+	}
+
+}
+</pre>
+
+<hr>
+
+<p>
+To avoid this approach we create a Spring container. To configure a Spring container we can use:
+</p>
+
+<ul>
+<li>
+<a href="XML configuration file.html">XML configuration file</a> (legacy)
+
+</li><li>
+Java Annotations
+
+</li><li>
+Java Source Code
+
+</li></ul>
+<hr>
+
+<p>
+<span id="Inversion of Control-However what is a Spring Bean?"></span><strong id="However what is a Spring Bean?">However what is a Spring Bean?</strong>
+</p>
+
+<p>
+A "Spring Bean" is simply a Java object.
+</p>
+
+<p>
+When Java objects are created by the Spring Container, then Spring refers to them as "Spring Beans". Spring Beans are created from normal Java classes just like Java objects. 
+</p>
+
+<p>
+<span id="Inversion of Control-Why do we specify the Coach interface in getBean()?"></span><strong id="Why do we specify the Coach interface in getBean()?">Why do we specify the Coach interface in getBean()?</strong> 
+</p>
+
+<p>
+When we pass the interface to the method, behind the scenes Spring will cast the object for you.
+</p>
+
+<pre java="">context.getBean("myCoach", Coach.class)
+</pre>
+
+<p>
+However, there are some slight differences than normal casting.
+</p>
+
+<p>
+Behaves the same as <code>getBean(String)</code>, but provides a measure of type safety by throwing a <code>BeanNotOfRequiredTypeException</code> if the bean is not of the required type. 
+</p>
+
+<p>
+This means that <code>ClassCastException</code> can't be thrown on casting the result correctly, as can happen with <code>getBean(String)</code>.
+</p>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

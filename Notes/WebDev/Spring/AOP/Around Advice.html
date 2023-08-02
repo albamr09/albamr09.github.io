@@ -1,0 +1,204 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Around Advice</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Around Advice"><h1 id="Around Advice" class="header"><a href="#Around Advice">Around Advice</a></h1></div>
+
+<hr>
+
+<p>
+This type of advice is always called before and after the target object.
+</p>
+
+<p>
+When using the <code>@Around</code> advice we have access to a reference of a <code>proceeding join point</code>. Which is a handle to the target method, and will let us execute the taget method.
+</p>
+
+<p>
+So for example if we want to measure the performance of the <code>getFortuneMethod</code>:
+</p>
+
+<pre java="">package com.aopdemo.aspect;
+
+import java.util.List;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
+import com.aopdemo.Account;
+
+@Aspect
+@Component
+@Order(2)
+public class MyDemoLoggingAspect {
+	
+	@Around("execution(* com.aopdemo.service.*.getFortune(..))")	
+	public Object aroundGetFortune(
+			ProceedingJoinPoint theProceedingJoinPoint) throws Throwable {
+		
+		// print out method we are advising on
+		String method = theProceedingJoinPoint.getSignature().toShortString();
+		System.out.println("\n=====&gt;&gt;&gt; Executing @Around on method: " + method);
+		
+		// get begin timestamp
+		long begin = System.currentTimeMillis();
+		
+		// now, let's execute the method
+		Object result = theProceedingJoinPoint.proceed();
+		
+		// get end timestamp
+		long end = System.currentTimeMillis();
+		
+		// compute duration and display it
+		long duration = end - begin;
+		System.out.println("\n=====&gt; Duration: " + duration / 1000.0 + " seconds");
+		
+		return result;
+	}
+}
+</pre>
+
+<p>
+The advice <code>aroundGetFortune</code> is called before the getFortune is called, then it proceeds to call from inside the advice and we measure how long does the method take to run.
+</p>
+
+<div id="Around Advice-Exception Handling"><h2 id="Exception Handling" class="header"><a href="#Around Advice-Exception Handling">Exception Handling</a></h2></div>
+
+<p>
+Inside an advice, to handle exceptions you can:
+</p>
+
+<ul>
+<li>
+Handle the exception inside the advice
+<pre java="">	@Around("execution(* com.aopdemo.service.*.getFortune(..))")	
+	public Object aroundGetFortune(
+			ProceedingJoinPoint theProceedingJoinPoint) throws Throwable {
+		
+		// print out method we are advising on
+		String method = theProceedingJoinPoint.getSignature().toShortString();
+		System.out.println("\n=====&gt;&gt;&gt; Executing @Around on method: " + method);
+		
+		// get begin timestamp
+		long begin = System.currentTimeMillis();
+		
+		try {
+			result = theProceedingJoinPoint.proceed();
+		} catch (Exception e) {
+			// log the exception
+			myLogger.warning(e.getMessage());
+			
+			// give users a custom messagee
+			result = "Major accident! But no worries, "
+					+ "your private AOP helicopter is on the way!";
+		}
+		
+		// get end timestamp
+		long end = System.currentTimeMillis();
+		
+		// compute duration and display it
+		long duration = end - begin;
+		System.out.println("\n=====&gt; Duration: " + duration / 1000.0 + " seconds");
+		
+		return result;
+	}
+</pre>
+
+</li><li>
+Simply rethrow the exception
+<pre java="">	@Around("execution(* com.aopdemo.service.*.getFortune(..))")	
+	public Object aroundGetFortune(
+			ProceedingJoinPoint theProceedingJoinPoint) throws Throwable {
+		
+		// print out method we are advising on
+		String method = theProceedingJoinPoint.getSignature().toShortString();
+		System.out.println("\n=====&gt;&gt;&gt; Executing @Around on method: " + method);
+		
+		// get begin timestamp
+		long begin = System.currentTimeMillis();
+		
+		try {
+			result = theProceedingJoinPoint.proceed();
+		} catch (Exception e) {
+			// log the exception
+			myLogger.warning(e.getMessage());
+
+			// rethrow exception
+			throw e;
+		}
+		
+		// get end timestamp
+		long end = System.currentTimeMillis();
+		
+		// compute duration and display it
+		long duration = end - begin;
+		System.out.println("\n=====&gt; Duration: " + duration / 1000.0 + " seconds");
+		
+		return result;
+	}
+</pre>
+
+</li></ul>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

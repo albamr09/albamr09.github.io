@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Mutations</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,69 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Mutations"><h1 id="Mutations" class="header"><a href="#Mutations">Mutations</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<p>
+In order to execute a mutation from the client side we create a mutation request:
+</p>
 
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<pre javascript="">
+const ADD_ANIMAL_MUTATION = gql`
+  mutation(
+      $name: String!,
+      $description: [String!]
+      $parameter: String!,
+      $category: String!
+    ) {
+    addAnimal(
+      name: $name,
+      description: $description,
+      parameter: $parameter,
+      category: $category
+    )
+  }
+`
 
-</li></ul>
-<hr>
+</pre>
+
+<p>
+And now we use the <code>useMutation</code> hook to obtain the function that will be called in order to update our animal:
+</p>
+
+<pre javascript="">
+import { useMutation, gql } from '@apollo/client'
+
+function Animal(){
+
+  const [addAnimal] = useMutation(ADD_ANIMAL_MUTATION)
+
+  return(
+    &lt;div&gt;
+      &lt;button onClick={() =&gt; 
+        addAnimal({
+          variables: {
+            name: 'cat',
+            description: ['This is a description'],
+            parameter: 'cat',
+            category: 'mammal'
+          } 
+        }
+      )}/&gt; 
+    &lt;/div&gt;
+  )
+}
+
+</pre>
+
+<p>
+With this we get the function <code>addAnimal</code> with the <code>useMutation</code> hook and we use it in our button, so when it is clicked we add a cat to our animal collection.
+</p>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

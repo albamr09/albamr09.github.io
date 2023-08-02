@@ -1,0 +1,191 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Image</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Image"><h1 id="Image" class="header"><a href="#Image">Image</a></h1></div>
+
+<hr>
+
+<div id="Image-LIST"><h2 id="LIST" class="header"><a href="#Image-LIST">LIST</a></h2></div>
+
+<ul>
+<li>
+<span id="Image-LIST-Lists"></span><strong id="Lists">Lists</strong> downloaded images:
+<pre console="">
+$ docker images
+
+</pre>
+
+</li></ul>
+<p>
+Or alternatively:
+</p>
+
+<pre console="">
+$ docker image ls
+
+</pre>
+
+<div id="Image-REMOVE"><h2 id="REMOVE" class="header"><a href="#Image-REMOVE">REMOVE</a></h2></div>
+
+<ul>
+<li>
+<span id="Image-REMOVE-Remove"></span><strong id="Remove">Remove</strong> an image
+<pre console="">
+$ docker rmi nginx
+
+</pre>
+
+</li></ul>
+<p>
+You must stop and remove all the containers that are instances of the image before removing said image.
+</p>
+
+<div id="Image-DOWNLOAD"><h2 id="DOWNLOAD" class="header"><a href="#Image-DOWNLOAD">DOWNLOAD</a></h2></div>
+
+<ul>
+<li>
+To only <span id="Image-DOWNLOAD-download"></span><strong id="download">download</strong> an image and not also run a container:
+<pre console="">
+$ docker pull nginx
+
+</pre>
+
+</li></ul>
+<div id="Image-Create your own image"><h2 id="Create your own image" class="header"><a href="#Image-Create your own image">Create your own image</a></h2></div>
+
+<p>
+First create a <code>Dockerfile</code> specifying all of the steps required to set up your application:
+</p>
+
+<pre dockerfile="">
+FROM ubuntu
+
+RUN apt-get update
+RUN apt-get install python
+
+RUN pip install flask
+RUN pip install flask-mysql
+
+COPY . /opt/source-code
+
+ENTRYPOINT FLASK_APP=/opt/source-code/app.py flask run
+
+</pre>
+
+<p>
+Then build your image, to store locally:
+</p>
+
+<pre console="">
+$ docker build Dockerfile -t mycustomapp
+
+</pre>
+
+<p>
+Here we specify our <code>Dockerfile</code> as input for building the image and the tag of the image with the flag <code>-t</code>.
+</p>
+
+<p>
+To make it available on the <code>DockerHub</code>:
+</p>
+
+<pre console="">
+$ docker push mycustomapp
+
+</pre>
+
+
+<div id="Image-Create your own image-`Dockerfile`"><h3 id="`Dockerfile`" class="header"><a href="#Image-Create your own image-`Dockerfile`"><code>Dockerfile</code></a></h3></div>
+
+<p>
+This is configuration file that follows a certain syntax and tells <code>Docker</code> how to build the image. The syntax is the following:
+</p>
+
+
+<pre console="">
+INSTRUCTION ARGUMENT
+
+</pre>
+
+<p>
+In the previous example we have:
+</p>
+
+<ul>
+<li>
+<code>FROM</code>: defines the base image, which can be an OS or another image (every image have to be based off another image).
+
+</li><li>
+<code>RUN</code>: run a particular command on the base image.
+
+</li><li>
+<code>COPY</code>: copies files from the host system onto the <code>Docker</code> image.
+
+</li><li>
+<code>ENTRYPOINT</code>: specifies the command that will be run when the container is started.
+
+</li></ul>
+<div id="Image-Create your own image-Layered architecture"><h3 id="Layered architecture" class="header"><a href="#Image-Create your own image-Layered architecture">Layered architecture</a></h3></div>
+
+<p>
+<code>Docker</code> follows a layered architecture so each <code>INSTRUCTION</code> represents a different layer, which contains only the changes from the layer before, and may serve as a snapshot from which to start the build from a particular layer.
+</p>
+
+<p>
+Also, <code>Docker</code> caches the layers, so if there is an error, the build would start from the last layer that did not produce a failure. Also, if you were to add additional steps, <code>Docker</code> would not start the build from scratch.
+</p>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>npm</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,56 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="npm"><h1 id="npm" class="header"><a href="#npm">npm</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<p>
+It is the <code>Node Package Manager</code>:
+</p>
 
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<p>
+Create <code>package.json</code> (manifest) file, with the list of dependencies
+</p>
+<pre bash="">$ npm init
+</pre>
 
-</li></ul>
-<hr>
+<p>
+Install package locally and add it to package.json, under the keyword "dependencies"
+</p>
+<pre bash="">$ npm install &lt;package name&gt;
+</pre>
+
+<p>
+Install package globally (requires sudo)
+</p>
+<pre bash="">$ npm install -g &lt;package name&gt;
+</pre>
+
+<p>
+Install package only for development
+</p>
+<pre bash="">$ npm install &lt;package name&gt; --save-dev
+</pre>
+
+<p>
+The packages installed with be saved under the file <code>node_modules</code>
+</p>
+
+<p>
+To install all the dependencies listed in <code>package.json</code>, just run:
+</p>
+
+<pre bash="">$ npm install
+</pre>
+
+<p>
+Where the <code>package.json</code> is.
+</p>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>List of Components</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,52 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="List of Components"><h1 id="List of Components" class="header"><a href="#List of Components">List of Components</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<p>
+React has one restriction for list of objects, and that is: <span id="List of Components-they have to have a key"></span><strong id="they have to have a key">they have to have a key</strong>. So, for example:
+</p>
 
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<pre javascript="">import React from 'react';
+import ReactDom from 'react-dom';
 
-</li></ul>
-<hr>
+// CSS
+import './index.css';
+
+import Book from './Book'
+
+// Data to create book object
+const books = [
+  {
+    id: '1',
+    title: 'Book title',
+    author: 'Book author'
+  },
+  {
+    id: '2',
+    title: 'Book title',
+    author: 'Book author'
+  },
+]
+
+const bookList = books.map((book) =&gt; {
+  // De-structure book object
+  return &lt;Book key={book.id} {...book} /&gt;;
+})
+
+ReactDom.render(
+  &lt;div&gt;
+    bookList 
+  &lt;/div&gt;,
+  document.getElementById('root')
+);
+</pre>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

@@ -1,0 +1,211 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>useState</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="useState"><h1 id="useState" class="header"><a href="#useState">useState</a></h1></div>
+
+<hr>
+
+<div id="useState-Error"><h3 id="Error" class="header"><a href="#useState-Error">Error</a></h3></div>
+
+<p>
+In the next piece of code we show how, if we change the value of a variable in <code>React</code>, it does not change in our web app because it is not re-rendered:
+</p>
+
+<pre javascript="">import React from 'react';
+
+const ErrorExample = () =&gt; {
+  let title = 'random title';
+
+  const handleClick = () =&gt; {
+    title = 'hello people';
+    console.log(title);
+  };
+  return (
+    &lt;React.Fragment&gt;
+      &lt;h2&gt;{title}&lt;/h2&gt;
+      &lt;button type='button' onClick={handleClick}&gt;
+        change title
+      &lt;/button&gt;
+    &lt;/React.Fragment&gt;
+  );
+};
+
+export default ErrorExample;
+</pre>
+
+<p>
+That is why we will need to use the hook <code>useState</code>, so we change handle state changes.
+</p>
+
+<pre javascript="">import React, { useState } from 'react';
+
+const UseStateBasics = () =&gt; {
+  const [text, setText] = useState('random title');
+  const handleClick = () =&gt; {
+    if (text === 'random title') {
+      setText('hello world');
+    } else {
+      setText('random title');
+    }
+  };
+
+  return (
+    &lt;React.Fragment&gt;
+      &lt;h1&gt;{text}&lt;/h1&gt;
+      &lt;button type='button' onClick={handleClick}&gt;
+        change title
+      &lt;/button&gt;
+    &lt;/React.Fragment&gt;
+  );
+};
+
+export default UseStateBasics;
+</pre>
+
+<p>
+When we invoke <code>useState</code> we have to pass as an argument the initial value of the state variable. <code>useState</code> is a function that returns an array:
+</p>
+
+<ul>
+<li>
+The first element: the state variable
+
+</li><li>
+The second element: the handler that controls the value of the state value
+
+</li></ul>
+<p>
+When using <code>useState</code> with objects, whenever you update one property of the object, you have to pass the object to the handler (with the spread operator), and then override the property you want to update:
+</p>
+
+<pre javascript="">import React, { useState } from 'react';
+
+const UseStateObject = () =&gt; {
+  // Object
+  const [person, setPerson] = useState({
+    name: 'peter',
+    age: 24,
+    message: 'random message',
+  });
+
+  const changeMessage = () =&gt; {
+    // Pass the person object with the spread operator 
+    // and override the message property
+    setPerson({ ...person, message: 'hello world' });
+  };
+
+  return (
+    &lt;&gt;
+      &lt;h3&gt;{person.name}&lt;/h3&gt;
+      &lt;h3&gt;{person.age}&lt;/h3&gt;
+      &lt;h4&gt;{person.message}&lt;/h4&gt;
+      &lt;button className='btn' onClick={changeMessage}&gt;
+        change message
+      &lt;/button&gt;
+    &lt;/&gt;
+  );
+};
+
+export default UseStateObject;
+</pre>
+
+<div id="useState-Asynchronous functions"><h3 id="Asynchronous functions" class="header"><a href="#useState-Asynchronous functions">Asynchronous functions</a></h3></div>
+
+<p>
+If we want to update a value asynchronally, and fetch the value of the state variable when the change happens, and not when the function is defined, then:
+</p>
+
+<pre javascript="">import React, { useState } from 'react';
+
+const UseStateCounter = () =&gt; {
+  const [value, setValue] = useState(0);
+
+  const reset = () =&gt; {
+    setValue(0);
+  };
+
+  const complexIncrease = () =&gt; {
+    setTimeout(() =&gt; {
+      // value is the value of the state variable when the timeout is defined
+      // if you call it multiple times consecutively you get the same value, because they all get value = 0
+      // setValue(value + 1);
+      // prevState is the value of the state variable when the timeout finished
+      // if you call it multiple times consecutively you get different values, because value has already been updated
+      // by another setTimeout.
+      // if you call it multiple times
+      setValue((prevState) =&gt; {
+        return prevState + 1;
+      });
+    }, 2000);
+  };
+
+  return (
+    &lt;&gt;
+      &lt;section style={{ margin: '4rem 0' }}&gt;
+        &lt;h2&gt;more complex counter&lt;/h2&gt;
+        &lt;h1&gt;{value}&lt;/h1&gt;
+        &lt;button className='btn' onClick={complexIncrease}&gt;
+          increase later
+        &lt;/button&gt;
+      &lt;/section&gt;
+    &lt;/&gt;
+  );
+};
+
+export default UseStateCounter;
+</pre>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

@@ -1,0 +1,218 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Functional Margin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="SVM.html">Back</a>
+</p>
+
+<div id="Functional Margin"><h1 id="Functional Margin" class="header"><a href="#Functional Margin">Functional Margin</a></h1></div>
+
+<hr>
+
+<div id="Functional Margin-Intuition"><h3 id="Intuition" class="header"><a href="#Functional Margin-Intuition">Intuition</a></h3></div>
+
+<p>
+The <span id="Functional Margin-Intuition-Functional Margin"></span><strong id="Functional Margin">Functional Margin</strong> describes how accurately do we classify an example. For example, for binary classification, given an example x:
+</p>
+
+\begin{align}
+h_\Theta(x) = g(\Theta x) =
+\begin{cases}
+\text{ predict } 1 &amp; \text{ if } \Theta^T x \geq 0, \text{ that is } h_\Theta(x)=g(\Theta x) \geq 0.5\\
+\text{ predict } 0 &amp; \text{ otherwise } \\
+\end{cases}
+\end{align}
+
+<p>
+Let's distinguish between the two cases when classifying an example \(x^{(i)}\):
+</p>
+
+<ul>
+<li>
+(1) If \(y^{(i)} = 1\), then we want \(h_\Theta(x) = g(\Theta x) \approx 1\), which means we want \(\Theta \cdot x &gt;&gt; 0\). 
+
+</li><li>
+(2) If \(y^{(i)} = 0\), then we want \(h_\Theta(x) = g(\Theta x) \approx 0\), which means we want \(\Theta \cdot x &lt;&lt; 0\). 
+
+</li></ul>
+<p>
+As we can see in the following graph, the bigger \(z = \Theta x\) the closer \(g(z)\) is to one and vice versa. 
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/sigmoid_function_graph.png" alt="Sigmoid Function Graph" style="transform: translate(20vw, 0%)">
+</p>
+
+<div id="Functional Margin-Formal Definition"><h3 id="Formal Definition" class="header"><a href="#Functional Margin-Formal Definition">Formal Definition</a></h3></div>
+
+<p>
+The functional margin of the hyperplane defined by \((w, b)\) with respect to the example \((x^{(i)}, y^{(i)})\) is defined as:
+</p>
+
+\begin{align}
+\hat{\gamma}^{(i)} = y^{(i)}(w^Tx^{(i)}+b)
+\end{align}
+
+<p>
+So, if we modify slightly the two statements above and use the new notation for SVMs:
+</p>
+
+<ul>
+<li>
+If \(y^{(i)} = 1\), then we want \(w^T \cdot x + b &gt;&gt; 0\). 
+
+</li><li>
+If \(y^{(i)} = 0\), then we want \(w^T \cdot x + b &lt;&lt; 0\). 
+
+</li></ul>
+<p>
+The combination of these two declarations yields the definition of the functional margin. Why?, well:
+</p>
+
+<ul>
+<li>
+When \(y^{(i)}\) is positive, we want to have \(w^Tx^{(i)} + b &gt;&gt; 0\) by (1), so \(\hat{\gamma}^{(i)}\) will be large, because both values are positive
+
+</li><li>
+When \(y^{(i)}\) is negative, we want to have \(w^Tx^{(i)} + b &lt;&lt; 0\) by (2), so \(\hat{\gamma}^{(i)}\) will be large, because both values are negative
+
+</li></ul>
+<hr>
+
+<p>
+So, given an example \(x^{(i)}\), if \(\hat{\gamma}^{(i)} &gt; 0\) that means either
+</p>
+
+<ul>
+<li>
+\(y^{(i)} = 1\) and \(w^Tx + b &gt; 0\) or 
+
+</li><li>
+\(y^{(i)} = -1\) and \(w^Tx + b &lt; 0\)
+
+</li></ul>
+<p>
+which shows that the classification is correct.
+</p>
+
+<div id="Functional Margin-Evaluation"><h3 id="Evaluation" class="header"><a href="#Functional Margin-Evaluation">Evaluation</a></h3></div>
+
+<p>
+To evaluate the functional margin with respect to the training set we make use of the worst case notion:
+</p>
+
+\begin{align}
+\hat{\gamma} = \underset{i}{\min} \hat{\gamma}^{(i)} 
+\end{align}
+
+<p>
+That is, we evaluate how well we are doing in the worst example.
+</p>
+
+<div id="Functional Margin-Normalizing the Functional Margin"><h3 id="Normalizing the Functional Margin" class="header"><a href="#Functional Margin-Normalizing the Functional Margin">Normalizing the Functional Margin</a></h3></div>
+
+<p>
+Note that the functional margin is very easy to cheat (to increase its value with any meaningful change to the decision boundary). Given our definition for \(g\):
+</p>
+
+\begin{align}
+g = \begin{cases}
+1, &amp; \text{ if } z \geq 0 \\
+-1, &amp; \text{ otherwise }
+\end{cases}
+\end{align}
+
+<p>
+It follows that  \(h_{w,b}(x^{(i)}) = g(2w^Tx^{(i)} + 2b) = g(w^Tx^{(i)} + b)\), because what matters is the sign, not the magnitude.
+</p>
+
+<p>
+However, if you scale \(w\) and \(b\) by a factor of \(n\) where \(n\) is a positive number then \(\gamma \) increases because:
+</p>
+
+\begin{align}
+\hat{\gamma}^{(i)} = (w^Tx + b) 
+\end{align}
+
+<p>
+so,
+</p>
+
+\begin{align}
+n \cdot \hat{\gamma}^{(i)} = n \cdot (w^Tx + b) 
+\end{align}
+
+<p>
+where,
+</p>
+
+\begin{align}
+\hat{\gamma}^{(i)} &lt; n \cdot \hat{\gamma}^{(i)} 
+\end{align}
+
+<p>
+One way to avoid this is to normalize the length of the parameters, that is either:
+</p>
+
+<ul>
+<li>
+Add a constraint where \(||w|| = 1\) or
+
+</li><li>
+Set \((w, b)\) to be \((\frac{w}{||w||}, \frac{b}{||b||})\)
+
+</li></ul>
+<p>
+In both cases we are re-scaling the parameters.
+</p>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

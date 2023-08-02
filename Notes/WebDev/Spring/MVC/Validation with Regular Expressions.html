@@ -1,0 +1,202 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Validation with Regular Expressions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="Form Validation.html">Back</a>
+</p>
+
+<div id="Validation with Regular Expressions"><h1 id="Validation with Regular Expressions" class="header"><a href="#Validation with Regular Expressions">Validation with Regular Expressions</a></h1></div>
+
+<hr>
+
+<p>
+In this section we will show how to perform a validation with regular expressions.
+</p>
+
+<div id="Validation with Regular Expressions-Add Validation Rule to Bean"><h2 id="Add Validation Rule to Bean" class="header"><a href="#Validation with Regular Expressions-Add Validation Rule to Bean">Add Validation Rule to Bean</a></h2></div>
+
+<p>
+We create a <code>Customer</code> class, whose <code>freePasses</code> variable must be a number between 0 and 10.
+</p>
+
+<pre java="">public class Customer {
+
+	private String firstName;
+	
+	@NotNull(message="is required")
+	@Size(min=1, message="is required")
+	private String lastName;
+  
+	@Min(value=0, message="must be greater than or equal to zero")
+	@Max(value=10, message="must be less than or equal to 10")
+	private int freePasses;
+  
+  // Define the regular expression for the postalCode attribute
+  @Pattern(regexp="^[a-zA-Z0-9]{5}", message="only 5 chars/digits")
+	private String postalCode;
+	
+	...
+</pre>
+
+
+<div id="Validation with Regular Expressions-Perform Validation in the Controller"><h2 id="Perform Validation in the Controller" class="header"><a href="#Validation with Regular Expressions-Perform Validation in the Controller">Perform Validation in the Controller</a></h2></div>
+
+<p>
+We also 
+</p>
+
+<pre java="">package com.springdemo.mvc;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/customer")
+public class CustomerController {
+
+	// add an initbinder ... to convert trim input strings
+	// remove leading and trailing whitespace
+	// resolve issue for our validation
+	
+	@InitBinder
+	//@InitBinder annotation works as a pre-processor 
+	// It will pre-process each web request to our controller
+	public void initBinder(WebDataBinder dataBinder) {
+		
+		// Trim strings (true: empty strings to null)
+		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+	
+		// For every string class apply the trim editor
+		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+	}
+	
+	
+	@RequestMapping("/showForm")
+	public String showForm(Model theModel) {
+		
+		theModel.addAttribute("customer", new Customer());
+		
+		return "customer-form";
+	}
+	
+	@RequestMapping("/processForm")
+	// @Valid: Tells spring to perform validation on the customer object
+	// BindingResult: results of the validation will be placed in BindingResult
+	public String processForm(
+			@Valid @ModelAttribute("customer") Customer theCustomer,
+			BindingResult theBindingResult) {
+		
+		System.out.println("Last name: |" + theCustomer.getLastName() + "|");
+		
+		// Check if validation was sucessfull
+		if (theBindingResult.hasErrors()) {
+			// If not sucessfull send back
+			return "customer-form";
+		}
+		else {
+			// If sucessfull
+			return "customer-confirmation";
+		}
+	}
+}
+</pre>
+
+<p>
+When performing Spring MVC validation, the location of the BindingResult parameter is very important. In the method signature, the BindingResult parameter must appear immediately after the model attribute. 
+</p>
+
+<div id="Validation with Regular Expressions-Display error on HTML"><h2 id="Display error on HTML" class="header"><a href="#Validation with Regular Expressions-Display error on HTML">Display error on HTML</a></h2></div>
+
+<pre jsp="">&lt;%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+	&lt;title&gt;Customer Registration Form&lt;/title&gt;
+	
+	&lt;style&gt;
+		.error {color:red}
+	&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;i&gt;Fill out the form. Asterisk (*) means required.&lt;/i&gt;
+&lt;br&gt;&lt;br&gt;
+	&lt;form:form action="processForm" modelAttribute="customer"&gt;
+		First name: &lt;form:input path="firstName" /&gt;
+		&lt;br&gt;&lt;br&gt;
+		Last name (*): &lt;form:input path="lastName" /&gt;
+		&lt;form:errors path="lastName" cssClass="error" /&gt;
+		&lt;br&gt;&lt;br&gt;
+		Free passes: &lt;form:input path="freePasses" /&gt;
+		&lt;form:errors path="freePasses" cssClass="error" /&gt;
+    &lt;br&gt;&lt;br&gt;
+		Postal Code: &lt;form:input path="postalCode" /&gt;
+    &lt;!-- The message shown equals the messages from both of the validation annotations defined 
+    for the postalCode attribute in the Customer class --&gt;
+		&lt;form:errors path="postalCode" cssClass="error" /&gt;
+		&lt;br&gt;&lt;br&gt;
+		&lt;input type="submit" value="Submit" /&gt;
+	&lt;/form:form&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

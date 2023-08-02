@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Dispatch</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,53 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Dispatch"><h1 id="Dispatch" class="header"><a href="#Dispatch">Dispatch</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<p>
+In order to dispatch actions in our reducers we do as follows:
+</p>
 
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<pre javascript="">import React from "react";
+// Get dispatch hook
+import { useDispatch } from "react-redux";
+// Get actions
+import { login, logout } from "../features/user";
 
-</li></ul>
-<hr>
+function Login() {
+  // Initialize dispatch hook
+  const dispatch = useDispatch();
+
+  return (
+    &lt;div&gt;
+      &lt;button
+        onClick={() =&gt; {
+          // Dispatch login action
+          dispatch(login({ name: "Pedro", age: 20, email: "pedro@gmail.com" }));
+        }}
+      &gt;
+        Login
+      &lt;/button&gt;
+
+      &lt;button
+        onClick={() =&gt; {
+          // Dispatch logout action
+          dispatch(logout());
+        }}
+      &gt;
+        LOGOUT
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default Login;
+</pre>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

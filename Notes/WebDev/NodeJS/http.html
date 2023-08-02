@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>HTTP</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,42 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="HTTP"><h1 id="HTTP" class="header"><a href="#HTTP">HTTP</a></h1></div>
 
 <hr>
+
+<div id="HTTP-HTTP Messages"><h2 id="HTTP Messages" class="header"><a href="#HTTP-HTTP Messages">HTTP Messages</a></h2></div>
 
 <ul>
 <li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<span id="HTTP-HTTP Messages-Request Message"></span><strong id="Request Message">Request Message</strong>: what the user sends
 
 </li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<span id="HTTP-HTTP Messages-Response Message"></span><strong id="Response Message">Response Message</strong>: what the server sends
 
 </li></ul>
-<hr>
+<p>
+<img src="https://albamr09.github.io/assets/http_response_request.png">
+</p>
+
+<p>
+The messages have the following parts:
+</p>
+<ul>
+<li>
+<span id="HTTP-HTTP Messages-Info about the request"></span><strong id="Info about the request">Info about the request</strong>: Request URL, Request Method (GET is the default method), Status Code, etc.
+
+</li><li>
+<span id="HTTP-HTTP Messages-Headers"></span><strong id="Headers">Headers</strong>: meta information about the request/response, (e.g. "Content type: application/json" tells the browser that the body is <code>json</code>)
+
+</li><li>
+<span id="HTTP-HTTP Messages-Body"></span><strong id="Body">Body</strong>: which is the request payload, or the content of the response.
+
+</li></ul>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

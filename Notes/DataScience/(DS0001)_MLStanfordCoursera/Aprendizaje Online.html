@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Aprendizaje Online</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,48 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Aprendizaje Online"><h1 id="Aprendizaje Online" class="header"><a href="#Aprendizaje Online">Aprendizaje Online</a></h1></div>
 
 <hr>
+
+<p>
+En estos tipos de problemas se generan datos de forma continua, tal que para cada nuevo dato:
+</p>
 
 <ul>
 <li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+Obtenemos \((x, y)\)
 
 </li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+Actualizamos \(\theta\) utilizando el nuevo ejemplo:
+
+<ul>
+<li>
+\(\theta_j = \theta_j - \alpha (h_\theta(x) - y)x_j\)
 
 </li></ul>
-<hr>
+</li></ul>
+<div id="Aprendizaje Online-Ejemplo"><h2 id="Ejemplo" class="header"><a href="#Aprendizaje Online-Ejemplo">Ejemplo</a></h2></div>
+
+<p>
+<span id="Aprendizaje Online-Ejemplo-Aprender a buscar"></span><strong id="Aprender a buscar">Aprender a buscar</strong>. Supongamos que lo queremos aprender es aquellos resultados que le interesen más al usuario. Si tenemos los siguientes datos:
+</p>
+
+<ul>
+<li>
+\(X\): características del producto
+
+</li><li>
+\(y\): si el usuario hace click
+
+</li></ul>
+<p>
+Entonces, lo que queremos aprender es \(P(y= 1|x;\theta)\), tal que por ejemplo enseñemos los 10 productos cuya probabilidad es mayor.
+</p>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

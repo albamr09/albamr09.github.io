@@ -1,0 +1,143 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Request Params and Request Mappings</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Request Params and Request Mappings"><h1 id="Request Params and Request Mappings" class="header"><a href="#Request Params and Request Mappings">Request Params and Request Mappings</a></h1></div>
+
+<hr>
+
+<div id="Request Params and Request Mappings-Request Params"><h2 id="Request Params" class="header"><a href="#Request Params and Request Mappings-Request Params">Request Params</a></h2></div>
+
+<p>
+Spring provides for a specific annotation that allows you to retrieve request parameters directly without using the <code>HttpServletRequest</code> object. Given the <a href="Read HTML Form Data.html">form</a>:
+</p>
+
+<pre java="">package com.springdemo.mvc;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class HelloWorldController {
+
+	@RequestMapping("/processFormVersionThree")	
+	public String processFormVersionThree(
+      // We use the annotation to obtain the parameter
+			@RequestParam("studentName") String theName, 
+			Model model) {
+				
+		// convert the data to all caps
+		theName = theName.toUpperCase();
+		
+		// create the message
+		String result = "Hey My Friend from v3! " + theName;
+		
+		// add message to the model
+		model.addAttribute("message", result);
+				
+		return "helloworld";
+	}	
+}
+</pre>
+
+<div id="Request Params and Request Mappings-Controller Request Mappings"><h2 id="Controller Request Mappings" class="header"><a href="#Request Params and Request Mappings-Controller Request Mappings">Controller Request Mappings</a></h2></div>
+
+<ul>
+<li>
+They serve as a parent mapping for the controller
+
+</li><li>
+All request mappings on methods in the controller are relative 
+
+</li></ul>
+<p>
+For example:
+</p>
+
+<pre java="">package com.springdemo.mvc;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+// This is the request mapping for the controller
+@RequestMapping("/hello")
+public class HelloWorldController {
+
+	// Both of these request mappings are relative to the parent mapping
+	// that is the mapping translates to domain/hello/showForm
+	// need a controller method to show the initial HTML form
+	@RequestMapping("/showForm")
+	public String showForm() {
+		return "helloworld-form";
+	}
+		
+	// need a controller method to process the HTML form
+	@RequestMapping("/processForm")
+	public String processForm() {
+		return "helloworld";
+	}
+}
+</pre>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

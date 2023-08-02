@@ -1,0 +1,126 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Custom Hooks</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Custom Hooks"><h1 id="Custom Hooks" class="header"><a href="#Custom Hooks">Custom Hooks</a></h1></div>
+
+<hr>
+
+<p>
+Customs hooks allow us to avoid duplicating code that uses hooks and essentially in different places of your code. For example, the fetching function is very common, so we create a <code>useFetch</code> hook.
+</p>
+
+<p>
+When you define a custom hook, that is, if you define a function outside a component that uses hooks, you will have to name it <code>use&lt;FunctionName&gt;</code>, else you will get an error.
+</p>
+
+<pre javascript="">import React, { useState, useEffect } from 'react'
+
+// Import custom hook
+import { useFetch } from './2-useFetch'
+
+const url = 'https://course-api.com/javascript-store-products'
+
+const Example = () =&gt; {
+  // Values returned by useFetch
+  const { loading, products } = useFetch(url)
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;{loading ? 'loading...' : 'data'}&lt;/h2&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default Example
+</pre>
+
+<pre javascript="">import { useState, useEffect, useCallback } from 'react';
+
+export const useFetch = (url) =&gt; {
+  // State within the hook
+  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState([]);
+  
+  // Functionality of the hook
+  const getProducts = useCallback(async () =&gt; {
+    const response = await fetch(url);
+    const products = await response.json();
+    setProducts(products);
+    setLoading(false);
+  }, [url]);
+
+  // Run whenever the url or the getProducts function changes
+  useEffect(() =&gt; {
+    getProducts();
+  }, [url, getProducts]);
+  
+  // Values returned by the custom hook
+  return { loading, products };
+};
+</pre>
+
+<p>
+Note we are using the hook <code>useCallback</code> (refer to <a href="Performance Optimization.html">Performance Optimization</a>), we do this because we are specifying <code>getProducts</code> as a dependency for <code>useEffect</code>. However <code>getProducts</code> is created every time the state changes. 
+</p>
+
+<p>
+So when we call <code>useEffect</code>, we change the state, and therefore create the function <code>getProducts</code>, which triggers <code>useEffect</code>, thus the state changes, and we create <code>getProducts</code>, and so on and so forth.
+</p>
+
+<p>
+To avoid this, we use <code>useCallback</code>, which will create the function whenever any of the dependencies in the list change. So this means, now <code>getProducts</code> is only created when the <code>url</code> changes. This allows us to avoid the infinite loop we ran into before.
+</p>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

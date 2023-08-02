@@ -1,0 +1,197 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Text Fields</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="Form Tags.html">Back</a>
+</p>
+
+<div id="Text Fields"><h1 id="Text Fields" class="header"><a href="#Text Fields">Text Fields</a></h1></div>
+
+<hr>
+
+<p>
+To pass and bind data from input text fields to controllers an another views we use the <code>Form Tag</code> <code>form:input</code> along with <code>form:form</code>:
+</p>
+
+<div id="Text Fields-Controller"><h2 id="Controller" class="header"><a href="#Text Fields-Controller">Controller</a></h2></div>
+
+<ul>
+<li>
+Add a <code>Model</code> to the controller method for the form and create the model attribute, that holds the data and perfoms data binding
+<pre java="">package com.springdemo.mvc;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/student")
+public class StudentController {
+	
+	// Request to show the view that contains the form
+	@RequestMapping("/showForm")
+	public String showForm(Model theModel) {
+		
+		// create a student object
+		Student theStudent = new Student();
+		
+		// add student object to the model
+		theModel.addAttribute("student", theStudent);
+		
+		return "student-form";
+	}
+	
+	// Process the submit event on the form
+	@RequestMapping("/processForm")
+	// We obtain the model attribute with the following annotation
+	public String processForm(@ModelAttribute("student") Student theStudent) {
+		
+		// Now we can retrieve the updated information from the form
+		System.out.println("theStudent: " + theStudent.getFirstName()
+							+ " " + theStudent.getLastName());
+		
+		return "student-confirmation";
+	}
+}
+</pre>
+
+</li></ul>
+<div id="Text Fields-View"><h2 id="View" class="header"><a href="#Text Fields-View">View</a></h2></div>
+
+<ul>
+<li>
+Setting the <code>HTML</code> for data binding:
+
+<ul>
+<li>
+For <code>student-form.jsp</code>:
+<pre jsp="">&lt;%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;title&gt;Student Registration Form&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;!-- Note the modelAttribute equals the attribute we added to the model in the controller--&gt;
+	&lt;form:form action="processForm" modelAttribute="student"&gt;
+		&lt;!-- To retrieve the data this maps to student.getFirstName() --&gt;
+		First name: &lt;form:input path="firstName" /&gt;
+		&lt;br&gt;&lt;br&gt;
+		Last name: &lt;form:input path="lastName" /&gt;
+		&lt;br&gt;&lt;br&gt;
+		&lt;input type="submit" value="Submit" /&gt;
+	&lt;/form:form&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+
+</li></ul>
+</li></ul>
+<p>
+When we submit <code>Spring</code> will call <code>student.setFirstName()</code> and <code>student.setLastName()</code> to save the data in the <code>Student</code> object, so we can retrieve it from our controller method.
+</p>
+
+<ul>
+<li>
+For <code>student-confirmation.jsp</code>:
+<pre jsp="">&lt;%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;title&gt;Student Confirmation&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;!-- Obtain data from the model: note we use the attribute's name (i.e. student) to access the object --&gt;
+	The student is confirmed: ${student.firstName} ${student.lastName}
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</li></ul>
+<div id="Text Fields-Model"><h2 id="Model" class="header"><a href="#Text Fields-Model">Model</a></h2></div>
+
+<p>
+The model attribute "student" is populated with an instance of the following <code>Student</code> class:
+</p>
+
+<pre java="">package com.springdemo.mvc;
+
+import java.util.LinkedHashMap;
+
+public class Student {
+
+	private String firstName;
+	private String lastName;
+		
+	public Student() {}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+}
+</pre>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

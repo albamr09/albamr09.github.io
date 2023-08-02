@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Map Reduce</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,56 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Map Reduce"><h1 id="Map Reduce" class="header"><a href="#Map Reduce">Map Reduce</a></h1></div>
 
 <hr>
+
+<p>
+Map Reduce nos permite paralelizar los algoritmos. Por ejemplo, supongamos que:
+</p>
 
 <ul>
 <li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+Tenemos \(m = 400\) datos
 
 </li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+Utilizamos Batch Gradient Descent para resolver el problema de optimización
+
+</li><li>
+Tenemos un número de PC equivalente a 4
+
+</li><li>
+Sea \(i\) el índice de un PC
+
+<ul>
+<li>
+Este entrena sobre \(x^{(i)}, \cdots, x^{(i+100)}\)
+
+</li><li>
+Calculamos el coste parcial para este conjunto de datos como:
+
+<ul>
+<li>
+\(temp_j^{(k)} = \sum_{i}^{i+100} (h_\theta(x^{(i)}) - y^{(i)})x^{(i)}_j\)
 
 </li></ul>
-<hr>
+</li></ul>
+</li><li>
+Ahora, combinamos todos los pesos y aplicamos descenso gradiente:
+
+<ul>
+<li>
+\(\theta_j = \theta_j - \alpha \frac{1}{400} \left( \sum_{i}^k temp_j^{(i)}\right)\)
+
+</li></ul>
+</li></ul>
+<p>
+Este tipo de técnicas se utilizan si los algoritmos de entrenamiento pueden ser utilizamos como la suma de funciones, tanto el coste como el gradiente. También es aplicable a PCs con múltiples cores.
+</p>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

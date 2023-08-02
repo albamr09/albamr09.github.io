@@ -1,0 +1,296 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Drop Down Lists</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="Form Tags.html">Back</a>
+</p>
+
+<div id="Drop Down Lists"><h1 id="Drop Down Lists" class="header"><a href="#Drop Down Lists">Drop Down Lists</a></h1></div>
+
+<hr>
+
+<p>
+To pass and bind data from drop down lists to controllers an another views we use the <code>Form Tags</code> <code>form:select</code> that encloses a set of options represented with <code>form:option</code> tags. And all these are surrounded by a <code>form:form</code>:
+</p>
+
+<div id="Drop Down Lists-Controller"><h2 id="Controller" class="header"><a href="#Drop Down Lists-Controller">Controller</a></h2></div>
+
+<ul>
+<li>
+Add a <code>Model</code> to the controller method for the form and create the model attribute, that holds the data and performs data binding
+<pre java="">package com.springdemo.mvc;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/student")
+public class StudentController {
+	
+	// Request to show the view that contains the form
+	@RequestMapping("/showForm")
+	public String showForm(Model theModel) {
+		
+		// create a student object
+		Student theStudent = new Student();
+		
+		// add student object to the model
+		theModel.addAttribute("student", theStudent);
+		
+		return "student-form";
+	}
+	
+	// Process the submit event on the form
+	@RequestMapping("/processForm")
+	// We obtain the model attribute with the following annotation
+	public String processForm(@ModelAttribute("student") Student theStudent) {
+		
+		// Now we can retrieve the updated information from the form
+		System.out.println("theStudent: " + theStudent.getFirstName()
+							+ " " + theStudent.getLastName());
+		
+		return "student-confirmation";
+	}
+}
+</pre>
+
+</li></ul>
+<div id="Drop Down Lists-View"><h2 id="View" class="header"><a href="#Drop Down Lists-View">View</a></h2></div>
+
+<ul>
+<li>
+Setting the <code>HTML</code> for data binding:
+
+<ul>
+<li>
+For <code>student-form.jsp</code>:
+<pre jsp="">&lt;%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;title&gt;Student Registration Form&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+	&lt;form:form action="processForm" modelAttribute="student"&gt;
+		First name: &lt;form:input path="firstName" /&gt;
+		&lt;br&gt;&lt;br&gt;
+		Last name: &lt;form:input path="lastName" /&gt;
+		&lt;br&gt;&lt;br&gt;
+		Country:
+		&lt;!-- Drop down list of country options --&gt;
+		&lt;!-- We specify the variable where we store the selected value in the student object: which is country --&gt;
+		&lt;form:select path="country"&gt;
+			&lt;!-- This is a list that was populated when we created the student object --&gt;
+			&lt;!-- Remember Spring calls student.getCountryOptions() --&gt;
+			&lt;form:options items="${student.countryOptions}" /&gt;
+		&lt;/form:select&gt;
+		&lt;br&gt;&lt;br&gt;
+		&lt;input type="submit" value="Submit" /&gt;
+	&lt;/form:form&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+
+</li><li>
+For <code>student-confirmation.jsp</code>:
+<pre jsp="">&lt;%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;title&gt;Student Confirmation&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	The student is confirmed: ${student.firstName} ${student.lastName}
+	&lt;!-- Obtain the value saved in the coutry variable inside the student's object (corresponds to the selected value) --&gt;
+	Selected coutry: ${student.country} ${student.lastName}
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</li></ul>
+</li></ul>
+<div id="Drop Down Lists-Model"><h2 id="Model" class="header"><a href="#Drop Down Lists-Model">Model</a></h2></div>
+
+<p>
+The model attribute "student" is populated with an instance of the following <code>Student</code> class:
+</p>
+
+<pre java="">package com.springdemo.mvc;
+
+import java.util.LinkedHashMap;
+
+public class Student {
+
+	private String firstName;
+	private String lastName;
+	
+	private String country;
+	
+	private LinkedHashMap&lt;String, String&gt; countryOptions;
+	
+	public Student() {
+		
+		// populate country options: used ISO country code
+		countryOptions = new LinkedHashMap&lt;&gt;();
+		
+		countryOptions.put("BR", "Brazil");
+		countryOptions.put("FR", "France");
+		countryOptions.put("DE", "Germany");
+		countryOptions.put("IN", "India");
+		countryOptions.put("US", "United States of America");		
+
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	// Setter and getter handlers for the new binded attribute
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public LinkedHashMap&lt;String, String&gt; getCountryOptions() {
+		return countryOptions;
+	}
+}
+</pre>
+
+<div id="Drop Down Lists-Country options from a properties file"><h2 id="Country options from a properties file" class="header"><a href="#Drop Down Lists-Country options from a properties file">Country options from a properties file</a></h2></div>
+
+<ul>
+<li>
+We create <code>WEB-INF/countries.properties</code>:
+<pre properties="">BR=Brazil 
+FR=France 
+CO=Colombia 
+IN=India
+</pre>
+
+</li><li>
+Update configuration's file <code>spring-mvc-dmo-servlet.xml</code> header (to use a new set of Spring tags: utils):
+<pre xml="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans" 
+        xmlns:context="http://www.springframework.org/schema/context" 
+        xmlns:mvc="http://www.springframework.org/schema/mvc" 
+        xmlns:util="http://www.springframework.org/schema/util" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:schemaLocation="
+            http://www.springframework.org/schema/beans     
+            http://www.springframework.org/schema/beans/spring-beans.xsd     
+            http://www.springframework.org/schema/context     
+            http://www.springframework.org/schema/context/spring-context.xsd     
+            http://www.springframework.org/schema/mvc         
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+            http://www.springframework.org/schema/util     
+            http://www.springframework.org/schema/util/spring-util.xsd"&gt;
+</pre>
+
+</li><li>
+Load the country options properties file in the Spring configuration file, with a bean id equal to "countryOptions":
+<pre xml="">&lt;util:properties  id="countryOptions" location="classpath:../countries.properties" /&gt;
+</pre>
+
+</li><li>
+Inject properties inside our controller:
+<pre java="">@Value("#{countryOptions}") 
+private Map&lt;String, String&gt; countryOptions;
+</pre>
+
+</li><li>
+Add <code>countryOptions</code> as an attribute of the model inside the controller method:
+<pre java="">@RequestMapping("/showForm") 
+public String showForm(Model theModel) { 
+
+    // create a student object Student 
+    Student theStudent = new Student();
+ 
+    // add student object to the model 
+    theModel.addAttribute("student", theStudent); 
+
+    // add the country options to the model 
+    theModel.addAttribute("theCountryOptions", countryOptions); 
+
+    return "student-form"; 
+}
+</pre>
+
+</li><li>
+Update the view as follows:
+<pre java="">&lt;form:select path="country"&gt; 
+ &lt;form:options items="${theCountryOptions}" /&gt;
+&lt;/form:select&gt;
+</pre>
+
+</li></ul>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

@@ -1,0 +1,199 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Express</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Express"><h1 id="Express" class="header"><a href="#Express">Express</a></h1></div>
+
+<hr>
+
+<p>
+Express is a minimal and flexible <code>Node.js</code> web app framework that allows us to develop and design web sites and APIs much faster. To install:
+</p>
+
+<pre bash="">
+$ npm install express --save
+
+</pre>
+
+<p>
+They suggest including the flag <code>--save</code> because in earlier versions of <code>Express</code> if it was not specified the package would not be saved as a dependency on <code>package.json</code>.
+</p>
+
+<div id="Express-Initializing Express App"><h2 id="Initializing Express App" class="header"><a href="#Express-Initializing Express App">Initializing Express App</a></h2></div>
+
+<p>
+In order to do so we import the <code>express</code> module, and the we create the instance, more or less like we did with our HTTP servers:
+</p>
+
+<pre javascript="">
+const express = require('express')
+const app = express()
+
+</pre>
+
+<div id="Express-Initializing Express App-App Methods"><h3 id="App Methods" class="header"><a href="#Express-Initializing Express App-App Methods">App Methods</a></h3></div>
+
+<p>
+The <code>app</code> instance we just created has several methods, we now list the most common:
+</p>
+
+<ul>
+<li>
+<code>app.get</code>: HTTP method to read data.
+<pre javascript="">
+app.get('/', (req, res) =&gt; {
+  res.status(200).send('Home Page')
+})
+
+</pre>
+
+</li><li>
+<code>app.post</code>: HTTP method to insert data.
+
+</li><li>
+<code>app.put</code>: HTTP method to update data.
+
+</li><li>
+<code>app.delete</code>: HTTP method to delete data.
+
+</li><li>
+<code>app.all</code>: Usually used to respond when we cannot locate a resource on the server.
+<pre javascript="">
+app.all('*', (req, res) =&gt; {
+  res.status(404).send('&lt;h1&gt;resource not found&lt;/h1&gt;')
+})
+
+</pre>
+
+</li><li>
+<code>app.use</code>: It is responsible for the middleware.
+
+</li><li>
+<code>app.listen</code>: This method listens for any requests made to the server.
+<pre javascript="">
+app.listen(5000, () =&gt; {
+  console.log('server is listening on port 5000...')
+})
+
+</pre>
+
+</li></ul>
+<div id="Express-Initializing Express App-Send HTML files"><h3 id="Send HTML files" class="header"><a href="#Express-Initializing Express App-Send HTML files">Send HTML files</a></h3></div>
+
+<p>
+To send HTML files as a response instead of plain text we have to use the <code>sendFile</code> method:
+</p>
+
+<pre javascript="">
+const express = require('express')
+const path = require('path')
+
+const app = express()
+
+app.get('/', (req, res) =&gt; {
+  res.sendFile(path.resolve(__dirname, './index.html'))
+})
+
+app.listen(5000, () =&gt; {
+  console.log('server is listening on port 5000...')
+})
+
+</pre>
+
+<p>
+Now, we have to import the external resources needed by the HTML file:
+</p>
+
+<pre javascript="">
+const express = require('express')
+const path = require('path')
+
+const app = express()
+
+app.use(express.static('./public'))
+
+app.get('/', (req, res) =&gt; {
+  res.sendFile(path.resolve(__dirname, './index.html'))
+})
+
+app.listen(5000, () =&gt; {
+  console.log('server is listening on port 5000...')
+})
+
+</pre>
+
+<p>
+So we invoke <code>app.use</code> as to tell the server that there are static resources stored in the <code>public</code> folder. 
+</p>
+
+<p>
+However, because in this case <code>index.html</code> is also a static file we can remove the <code>sendFile</code> method if we store <code>index.html</code> inside the <code>public</code> folder:
+</p>
+
+<pre javascript="">
+const express = require('express')
+const path = require('path')
+
+const app = express()
+
+app.use(express.static('./public'))
+
+app.listen(5000, () =&gt; {
+  console.log('server is listening on port 5000...')
+})
+
+</pre>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Prop Drilling</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,77 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Prop Drilling"><h1 id="Prop Drilling" class="header"><a href="#Prop Drilling">Prop Drilling</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<p>
+Prop Drilling refers to the scenario where we have to pass <code>props</code> to anidated components recursively. Next up, we show and example
+</p>
 
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<pre javascript="">import React, { useState } from 'react';
 
-</li></ul>
-<hr>
+// Data
+import { data } from '../../../data';
+
+// Outer component
+const PropDrilling = () =&gt; {
+  // State passed as a prop
+  const [people, setPeople] = useState(data);
+ 
+  // Event handler passed as a prop
+  const removePerson = (id) =&gt; {
+    setPeople((people) =&gt; {
+      return people.filter((person) =&gt; person.id !== id);
+    });
+  };
+  return (
+    &lt;section&gt;
+      &lt;h3&gt;prop drilling&lt;/h3&gt;
+      {/* Pass props to the list elements */}
+      &lt;List people={people} removePerson={removePerson} /&gt;
+    &lt;/section&gt;
+  );
+};
+
+// Middle component
+const List = ({ people, removePerson }) =&gt; {
+  return (
+    &lt;&gt;
+      {people.map((person) =&gt; {
+        {/* Pass props to the SinglePerson elements */}
+        return (
+          &lt;SinglePerson
+            key={person.id}
+            {...person}
+            removePerson={removePerson}
+          /&gt;
+        );
+      })}
+    &lt;/&gt;
+  );
+};
+
+// Inner component
+const SinglePerson = ({ id, name, removePerson }) =&gt; {
+  return (
+    &lt;div className='item'&gt;
+      &lt;h4&gt;{name}&lt;/h4&gt;
+      &lt;button onClick={() =&gt; removePerson(id)}&gt;remove&lt;/button&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default PropDrilling;
+</pre>
+
+<p>
+In these cases we can use the <a href="Context API.html">Context API</a>
+</p>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

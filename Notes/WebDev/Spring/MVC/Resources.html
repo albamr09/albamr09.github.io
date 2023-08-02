@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Add CSS and JS</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,34 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Add CSS and JS"><h1 id="Add CSS and JS" class="header"><a href="#Add CSS and JS">Add CSS and JS</a></h1></div>
 
 <hr>
+
+<p>
+Here are the steps on how to access static resources in a Spring MVC. For example, you can use this to access images, css, JavaScript files etc.
+</p>
+
+<p>
+You can configure references to static resources in the spring-mvc-demo-servlet.xml.
+</p>
 
 <ul>
 <li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+Add the following entry to your Spring MVC configuration file: <code>spring-mvc-demo-servlet.xml</code>
+<pre xml="">&lt;mvc:resources mapping="/resources/**" location="/resources/"&gt;&lt;/mvc:resources&gt;
+</pre>
 
 </li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+Now in your view pages, you can access the static files using this syntax:
+<pre jsp="">&lt;img src="${pageContext.request.contextPath}/resources/images/spring-logo.png"&gt;
+</pre>
 
 </li></ul>
-<hr>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

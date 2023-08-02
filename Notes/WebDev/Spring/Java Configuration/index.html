@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Spring Configuration with Java</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,57 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="../index.html">Back</a>
+</p>
 
+<div id="Spring Configuration with Java"><h1 id="Spring Configuration with Java" class="header"><a href="#Spring Configuration with Java">Spring Configuration with Java</a></h1></div>
+
+<hr>
+
+<p>
+We are now going to use <code>Java</code> to configure our application instead of using <code>XML</code>, to do that we follow the next steps:
+</p>
+
+<ul>
+<li>
+Create a Java class and annotate as <code>@Configuration</code>
+
+</li><li>
+Add Component scanning support with <code>@ComponentScan</code> (optional), which is <code>XML</code> we did as:
+<pre xml="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+    ....&gt;
+	&lt;!-- add entry to enable component scanning --&gt;
+	&lt;context:component-scan base-package="com.springdemo" /&gt;
+
+&lt;/beans&gt;
+</pre>
+
+</li><li>
+In the main app read the Spring Java configuration class
+
+</li></ul>
 <hr>
 
 <ul>
 <li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
-
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<a href="Configuration With Java.html">Configuration With Java</a>
 
 </li></ul>
 <hr>
+ 
+<ul>
+<li>
+<a href="Inversion of Control.html">Inversion of Control</a>
+
+</li><li>
+<a href="Load Properties from File.html">Load Properties from File</a>
+
+</li><li>
+<a href="Dependency Injection.html">Dependency Injection</a>
+
+</li></ul>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

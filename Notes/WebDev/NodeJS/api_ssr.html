@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>API vs SSR</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,69 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="API vs SSR"><h1 id="API vs SSR" class="header"><a href="#API vs SSR">API vs SSR</a></h1></div>
+
 
 <hr>
 
-<ul>
-<li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<p>
+In <code>Express</code> when we talk about <code>API</code>s we are talking about <code>HTTP</code> interfaces to interact our data. 
+</p>
 
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<p>
+The main differences between <code>API</code>s and Server Side Rendering (<code>SSR</code>) are:
+</p>
 
-</li></ul>
-<hr>
+<table>
+<tbody><tr>
+<td>
+&nbsp;
+</td>
+<td>
+API
+</td>
+<td>
+SSR
+</td>
+</tr>
+<tr>
+<td>
+Content type
+</td>
+<td>
+JSON
+</td>
+<td>
+Template
+</td>
+</tr>
+<tr>
+<td>
+What is sent
+</td>
+<td>
+Send data
+</td>
+<td>
+Send template
+</td>
+</tr>
+<tr>
+<td>
+Method
+</td>
+<td>
+<code>res.json()</code>
+</td>
+<td>
+<code>res.render()</code>
+</td>
+</tr>
+</tbody></table>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

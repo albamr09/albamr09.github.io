@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>AfterThrowing Advice</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,60 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="AfterThrowing Advice"><h1 id="AfterThrowing Advice" class="header"><a href="#AfterThrowing Advice">AfterThrowing Advice</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<p>
+This advice is run whenever the target object throws and execption. For example:
+</p>
 
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
 
-</li></ul>
-<hr>
+<pre java="">package com.aopdemo.aspect;
+
+import java.util.List;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
+import com.luv2code.aopdemo.Account;
+
+@Aspect
+@Component
+@Order(2)
+public class MyDemoLoggingAspect {
+	
+	@AfterThrowing(
+			pointcut="execution(* com.aopdemo.dao.AccountDAO.findAccounts(..))",
+			// Define the name of the parameter that holds the exception object
+			throwing="theExc")
+	public void afterThrowingFindAccountsAdvice(
+					JoinPoint theJoinPoint, Throwable theExc) {
+		
+		// print out which method we are advising on
+		String method = theJoinPoint.getSignature().toShortString();
+		System.out.println("\n=====&gt;&gt;&gt; Executing @AfterThrowing on method: " + method);
+		
+		// log the exception
+		System.out.println("\n=====&gt;&gt;&gt; The exception is: " + theExc);
+	
+	}
+}
+</pre>
+
+<p>
+In this code sample we have the advice <code>afterThrowingFindAccountsAdvice</code> that is run whenever the method <code>findAccounts</code> inside <code>AccountDAO</code> throws an exception. We also make use of the <code>throwing</code> attribute that lets us map the exception object to a parameter inside our advice.
+</p>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

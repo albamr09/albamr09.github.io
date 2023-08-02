@@ -1,0 +1,191 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>HTTP Basics</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="HTTP Basics"><h1 id="HTTP Basics" class="header"><a href="#HTTP Basics">HTTP Basics</a></h1></div>
+
+<hr>
+
+<p>
+When answering to a request, node requires a method to signal to the server that all of the response headers and body have been sent, and so the server can consider the message complete. That method is <code>res.end()</code>
+</p>
+
+<pre javascript="">
+const http = require('http')
+
+const server = http.createServer((req, res) =&gt; {
+  res.end('Home page') 
+})
+
+server.listen(5000)
+
+</pre>
+
+<p>
+We create a server with <code>http.createServer</code>. This method takes a callback as an argument, which is called every time a user hits the server.
+</p>
+
+<p>
+Next we specify the port on which the server will be listening for requests. The value of this port is somewhat irrelevant in the development environment.
+</p>
+
+<div id="HTTP Basics-Headers"><h2 id="Headers" class="header"><a href="#HTTP Basics-Headers">Headers</a></h2></div>
+
+<p>
+If we want to provide the metadata about the response we have to provide headers:
+</p>
+
+<pre javascript="">
+const http = require('http')
+
+const server = http.createServer((req, res) =&gt; {
+  res.writeHead(200, { 'content-type': 'text/html' })
+  res.write('&lt;h1&gt;home page&lt;/h1&gt;')
+  res.end()
+})
+
+server.listen(5000)
+
+</pre>
+
+<p>
+With <code>writeHead</code> we specify the headers, in our case we specify the status code (<code>200: OK</code>) and the content type of the response (<code>text/html</code>). The later are called MIME-types or media types. 
+</p>
+
+<p>
+Then we specify the body of the response with <code>write</code> and finally we finalize the message with <code>end</code>.
+</p>
+
+<div id="HTTP Basics-Request Object"><h2 id="Request Object" class="header"><a href="#HTTP Basics-Request Object">Request Object</a></h2></div>
+
+<p>
+The request object that is an argument of the <code>createServer</code> method has several attributes:
+</p>
+
+<ul>
+<li>
+<code>req.method</code>: Allows you to obtain the method of the user's request, i.e. <code>GET</code>, <code>POST</code>, <code>PUT</code>, etc.
+
+</li><li>
+<code>req.url</code>: Contains the url of the user's request.
+
+</li></ul>
+<div id="HTTP Basics-HTML File"><h2 id="HTML File" class="header"><a href="#HTTP Basics-HTML File">HTML File</a></h2></div>
+
+<p>
+As we have seen the method <code>write</code> allows us to define the content of the body as HTML. However we do not need to write the HTML code inside the method we can also pass a file as input and the method will serve it's content to the response.
+</p>
+
+<pre javascript="">
+const http = require('http')
+const { readFileSync } = require('fs')
+
+const homePage = readFileSync('./index.html')
+
+const server = http.createServer((req, res) =&gt; {
+  res.writeHead(200, { 'content-type': 'text/html' })
+  res.write(homePage)
+  res.end()
+})
+
+server.listen(5000)
+
+</pre>
+
+<p>
+Observe that we user <code>readFileSync</code>, we do so because, for one this is an example, and also the file is only read once when the server is created, not every time the user hits the server.
+</p>
+
+<div id="HTTP Basics-HTML File-External resources"><h3 id="External resources" class="header"><a href="#HTTP Basics-HTML File-External resources">External resources</a></h3></div>
+
+<p>
+When adding external resources to a given HTML file we also need to handle the request to those resources in our server.
+</p>
+
+<pre javascript="">
+const http = require('http')
+const { readFileSync } = require('fs')
+
+const homePage = readFileSync('./index.html')
+const homeStyles = readFileSync('./styles.css')
+const homeImage = readFileSync('./logo.svg')
+
+const server = http.createServer((req, res) =&gt; {
+  // home page
+  if (url === '/') {
+    res.writeHead(200, { 'content-type': 'text/html' })
+    res.write(homePage)
+    res.end()
+  }
+	// styles
+  else if (url === '/styles.css') {
+    res.writeHead(200, { 'content-type': 'text/css' })
+    res.write(homeStyles)
+    res.end()
+  }
+	// image/logo
+  else if (url === '/logo.svg') {
+    res.writeHead(200, { 'content-type': 'image/svg+xml' })
+    res.write(homeImage)
+    res.end()
+  }
+})
+</pre>
+
+<p>
+Note that the content types differ every time, with css we use <code>text/css</code>, with images we use <code>image/svg+xml</code>.
+</p>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

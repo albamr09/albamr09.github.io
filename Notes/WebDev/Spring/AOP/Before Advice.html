@@ -1,0 +1,184 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Before Advice</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Before Advice"><h1 id="Before Advice" class="header"><a href="#Before Advice">Before Advice</a></h1></div>
+
+<hr>
+
+<p>
+We use the tag <code>@Before</code> to execute some code before we call the target object function:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/before_interaction.png" alt="Before Advice" style="width: 750px">
+</p>
+
+<div id="Before Advice-Add Dependencies"><h2 id="Add Dependencies" class="header"><a href="#Before Advice-Add Dependencies">Add Dependencies</a></h2></div>
+
+<ul>
+<li>
+We have to download the <code>AspectJ</code> jar file, because <code>Spring AOP</code> depends on some on their framework's classes 
+
+</li></ul>
+ 
+<div id="Before Advice-Create Target Object"><h2 id="Create Target Object" class="header"><a href="#Before Advice-Create Target Object">Create Target Object</a></h2></div>
+
+<p>
+We create a DAO object:
+</p>
+
+<pre java="">package com.aopdemo.dao;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class AccountDAO {
+	public void addAccount() {
+		System.out.println(
+			getClass() 
+			+ ": DOING MY DB WORK: ADDING AN ACCOUNT"
+		);
+	}
+}
+</pre>
+
+<div id="Before Advice-Spring Configuration"><h2 id="Spring Configuration" class="header"><a href="#Before Advice-Spring Configuration">Spring Configuration</a></h2></div>
+
+<p>
+We now have to enable <code>AOP</code> proxying in our app configuration:
+</p>
+
+<pre java="">package com.aopdemo;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
+@Configuration
+// Enable proxying to add before advice
+@EnableAspectJAutoProxy
+@ComponentScan("com.aopdemo")
+public class DemoConfig {
+
+}
+</pre>
+
+<div id="Before Advice-Create Aspect with @Before"><h2 id="Create Aspect with @Before" class="header"><a href="#Before Advice-Create Aspect with @Before">Create Aspect with @Before</a></h2></div>
+
+<p>
+Now it is time to create an aspect with <code>@Before</code> advice:
+</p>
+
+<pre java="">package com.aopdemo.aspect;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;
+
+@Aspect
+@Component
+public class MyDemoLoggingAspect {
+
+	// this is where we add all of our related advices for logging
+	// Here we specify we want to run this code before calling the 
+	// object method public void addAccount
+	@Before("execution(public void addAccount())")
+	public void beforeAddAccountAdvice() {
+		System.out.println("\n=====&gt;&gt;&gt; Executing @Before advice on addAccount()");
+	}
+}
+</pre>
+
+<div id="Before Advice-Main App"><h2 id="Main App" class="header"><a href="#Before Advice-Main App">Main App</a></h2></div>
+
+<p>
+We now create a demo app:
+</p>
+
+<pre java="">package com.aopdemo;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.aopdemo.dao.AccountDAO;
+
+public class MainDemoApp {
+
+	public static void main(String[] args) {
+
+		// read spring config java class
+		AnnotationConfigApplicationContext context =
+				new AnnotationConfigApplicationContext(DemoConfig.class);
+		
+		// get the bean from spring container
+		AccountDAO theAccountDAO = context.getBean("accountDAO", AccountDAO.class);
+		
+		// call the business method
+		theAccountDAO.addAccount();
+
+		// do it again!
+		System.out.println("\nlet's call it again!\n");
+		
+		// call the business method again
+		theAccountDAO.addAccount();
+				
+		// close the context
+		context.close();
+	}
+
+}
+</pre>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

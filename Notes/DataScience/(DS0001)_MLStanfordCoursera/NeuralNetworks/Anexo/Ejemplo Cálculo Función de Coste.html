@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Ejemplo Cálculo Función de Coste</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,87 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Ejemplo Cálculo Función de Coste"><h1 id="Ejemplo Cálculo Función de Coste" class="header"><a href="#Ejemplo Cálculo Función de Coste">Ejemplo Cálculo Función de Coste</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<p>
+Utilizamos como ejemplo la figura de multiclasificación donde tenemos que \(c=3\), y la hipótesis tiene los valores:
+</p>
 
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+\begin{align}
+h_\Theta(x_1) = 
+\begin{bmatrix}
+0.02 \\
+0.1 \\
+0.88 \\
+\end{bmatrix}
+\end{align}
 
-</li></ul>
-<hr>
+<p>
+y la salida real para el ejemplo \(x_1\) tiene los valores:
+</p>
+
+\begin{align}
+y_1 = 
+\begin{bmatrix}
+0 \\
+0 \\
+1 \\
+\end{bmatrix}
+\end{align}
+
+<p>
+Entonces la función de coste se calcularía como (observa que esto es sólo para un ejemplo, por lo que obviamos el primer sumatorio):
+</p>
+
+\begin{align}
+J(\Theta) = - \sum_{i=1}^c [y_{ij}\cdot \log(h_\Theta(x_j)_i)] + [(1-y_{ij})\cdot \log(1-(h_\Theta(x_j)_i))]
+\end{align}
+
+\begin{align}
+J(\Theta) = - \{[(y_{11}\cdot\log(h_\Theta(x_1)_{1})) + (1-y_{11})\cdot\log(1-h_\Theta(x_1)_{1})] +
+\end{align}
+
+\begin{align}
++ [(y_{21}\cdot\log(h_\Theta(x_1)_{2})) + (1-y_{21})\cdot\log(1-h_\Theta(x_1)_{2})] +
+\end{align}
+
+\begin{align}
++ [(y_{31}\cdot\log(h_\Theta(x_1)_{3})) + (1-y_{31})\cdot\log(1-h_\Theta(x_1)_{3})]\}
+\end{align}
+
+<p>
+Sustituimos los valores de cada vector:
+</p>
+
+\begin{align}
+J(\Theta) = - \{ [(0\cdot\log(0.02)) + (1-0)\cdot\log(1-0.02)] +
+\end{align}
+
+\begin{align}
++ [(0\cdot\log(0.1)) + (1-0)\cdot\log(1-0.1)] +
+\end{align}
+
+\begin{align}
++ [(1\cdot\log(0.88)) + (1-1)\cdot\log(1-0.88)] \} = 
+\end{align}
+
+<p>
+Calculamos los valores:
+</p>
+
+\begin{align}
+J(\Theta) = - (\log(0.98) + \log(0.9) + \log(0.88)) 
+\end{align}
+
+\begin{align}
+J(\Theta) = - (-0.009 - 0.046 -0.056) = - (-0.111) = 0.111
+\end{align}
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

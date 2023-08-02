@@ -1,0 +1,169 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Overview</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Overview"><h1 id="Overview" class="header"><a href="#Overview">Overview</a></h1></div>
+
+<hr>
+
+<p>
+Aspect-Oriented Programming is a programming technique based on the concept of an Aspect (that is something that encapsulated cross-cutting logic/functionality, which means logic that affect the project transversally like logging or security).
+</p>
+
+<p>
+What AOP does behind the scenes is call methods from the classes/aspects (like a logging class) whenever a method is called (this depends on the configuration):
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/aop_behind_scenes.png" alt="AOP Behind the Scenes" style="width:750px">
+</p>
+
+<div id="Overview-Advantages"><h2 id="Advantages" class="header"><a href="#Overview-Advantages">Advantages</a></h2></div>
+
+<ul>
+<li>
+Reusable modules
+
+</li><li>
+Resolve code tangling
+
+</li><li>
+Resolve code scatter
+
+</li><li>
+Applied selectively based on configuration
+
+</li></ul>
+<div id="Overview-Disadvantages"><h2 id="Disadvantages" class="header"><a href="#Overview-Disadvantages">Disadvantages</a></h2></div>
+
+<ul>
+<li>
+Too many aspects and app flow is hard to follow 
+
+</li><li>
+Minor performance cost for aspect execution
+
+</li></ul>
+<div id="Overview-Terminology"><h2 id="Terminology" class="header"><a href="#Overview-Terminology">Terminology</a></h2></div>
+
+<ul>
+<li>
+Aspect: module of code for a cross-cutting concern (logging, security...)
+
+</li><li>
+Advice: what action is takes and when it should be applied
+
+</li><li>
+Joint Point: when to apply code during program execution
+
+</li><li>
+Pointcut: a predicate expression for where advice should be applied
+
+</li></ul>
+<div id="Overview-Terminology-Advice Types"><h3 id="Advice Types" class="header"><a href="#Overview-Terminology-Advice Types">Advice Types</a></h3></div>
+
+<ul>
+<li>
+Before advice: run before the method
+
+</li><li>
+After finally advice: run after the method (like finally clause in try catch)
+
+</li><li>
+After returning advice: run after the method (success execution)
+
+</li><li>
+After throwing advice: run after the method (if exception if thrown)
+
+</li><li>
+Around advice: run before and after the method
+
+</li></ul>
+<div id="Overview-Terminology-Weaving"><h3 id="Weaving" class="header"><a href="#Overview-Terminology-Weaving">Weaving</a></h3></div>
+
+<p>
+It refers to the connection being made between aspects and target objects to create an advised object. There are different types:
+</p>
+
+<ul>
+<li>
+Compile-time
+
+</li><li>
+Load-time
+
+</li><li>
+Run-time
+
+</li></ul>
+<p>
+Note that the slowest is the run-time weaving
+</p>
+
+<div id="Overview-Best Practices"><h2 id="Best Practices" class="header"><a href="#Overview-Best Practices">Best Practices</a></h2></div>
+
+<ul>
+<li>
+Keep the code inside the advices small
+
+</li><li>
+Keep the code fast
+
+</li><li>
+Do not perform any expensive/slow operations
+
+</li></ul>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

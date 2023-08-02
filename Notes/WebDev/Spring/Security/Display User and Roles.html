@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Display User and Roles</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,67 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Display User and Roles"><h1 id="Display User and Roles" class="header"><a href="#Display User and Roles">Display User and Roles</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<p>
+In this section we are going to show how to display in our <code>jsp</code> files the user id and its role:
+</p>
 
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<div id="Display User and Roles-Add JSP Tag library as dependency"><h2 id="Add JSP Tag library as dependency" class="header"><a href="#Display User and Roles-Add JSP Tag library as dependency">Add JSP Tag library as dependency</a></h2></div>
 
-</li></ul>
-<hr>
+<p>
+First we add to our <code>pom.xml</code> file the JSP Tag Library:
+</p>
+
+<pre xml="">		&lt;!-- Add Spring Security Taglibs support --&gt;
+		&lt;dependency&gt;
+		    &lt;groupId&gt;org.springframework.security&lt;/groupId&gt;
+		    &lt;artifactId&gt;spring-security-taglibs&lt;/artifactId&gt;
+		    &lt;version&gt;${springsecurity.version}&lt;/version&gt;
+		&lt;/dependency&gt;	
+</pre>
+
+<div id="Display User and Roles-JSP page"><h2 id="JSP page" class="header"><a href="#Display User and Roles-JSP page">JSP page</a></h2></div>
+
+<p>
+Then add the tag library to the jsp page, and we use its tags to access the user id and its role:
+</p>
+
+<pre jsp="">&lt;%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %&gt;
+&lt;!-- Add tag library --&gt;
+&lt;%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;title&gt;luv2code Company Home Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;h2&gt;luv2code Company Home Page&lt;/h2&gt;
+	&lt;hr&gt;
+	&lt;p&gt;
+	Welcome to the luv2code company home page!
+	&lt;/p&gt;
+	&lt;hr&gt;
+	&lt;!-- display user name and role --&gt;
+	&lt;p&gt;
+		User: &lt;security:authentication property="principal.username" /&gt;
+		&lt;br&gt;&lt;br&gt;
+		Role(s): &lt;security:authentication property="principal.authorities" /&gt;
+	&lt;/p&gt;
+	&lt;hr&gt;
+	&lt;!-- Add a logout button --&gt;
+	&lt;form:form action="${pageContext.request.contextPath}/logout" 
+			   method="POST"&gt;
+		&lt;input type="submit" value="Logout" /&gt;
+	&lt;/form:form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

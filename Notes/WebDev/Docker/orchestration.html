@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Container Orchestration</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,54 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Container Orchestration"><h1 id="Container Orchestration" class="header"><a href="#Container Orchestration">Container Orchestration</a></h1></div>
 
 <hr>
+
+<p>
+When in production, it is often needed that several instances of containers are run (because of a heavy load on the application for example). So in these cases you need to monitor the instances as well as the host itself in case any of them crash.
+</p>
+
+<p>
+For that we use container orchestration that offers a set of tools and scripts that allow us to manage the hosts and containers. 
+</p>
+
+<p>
+The typical approach is to create several instances of containers in different hosts, so if one fails the application can still offer the service. For example:
+</p>
+
+<pre console="">
+$ docker service create --replicas=100 nodejs
+
+</pre>
+
+<p>
+Some solutions let us automatically scale the number of containers depending on the demand. Others can help in automatically adding new hosts to support the user load.
+</p>
+
+<p>
+They also provide complex networking between the containers as well as load balancing user requests across different hosts or sharing storage between the hosts, configuration management or security.
+</p>
+  
+<p>
+There are several solutions:
+</p>
 
 <ul>
 <li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<code>Docker Swarm</code> from <code>Docker</code>
 
 </li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<code>Kubernetes</code> from <code>Google</code>
+
+</li><li>
+<code>MESOS</code> from <code>Apache</code>.
 
 </li></ul>
-<hr>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

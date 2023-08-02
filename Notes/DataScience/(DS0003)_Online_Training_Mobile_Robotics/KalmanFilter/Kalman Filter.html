@@ -1,0 +1,470 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Kalman Filter</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Kalman Filter"><h1 id="Kalman Filter" class="header"><a href="#Kalman Filter">Kalman Filter</a></h1></div>
+
+<hr>
+
+<ol>
+<li>
+<a href="Kalman Filter.html#Kalman Filter-Introduction">Introduction</a>
+
+</li><li>
+<a href="Kalman Filter.html#Kalman Filter-Properties of Gaussian Distributions">Properties of Gaussian Distributions</a>
+
+</li><li>
+<a href="Kalman Filter.html#Kalman Filter-Linear Model">Linear Model</a>
+
+<ol>
+<li>
+<a href="Kalman Filter.html#Kalman Filter-Linear Model-Models">Models</a>
+
+</li><li>
+<a href="Kalman Filter.html#Kalman Filter-Linear Model-Linear Motion Model">Linear Motion Model</a>
+
+</li><li>
+<a href="Kalman Filter.html#Kalman Filter-Linear Model-Linear Observation Model">Linear Observation Model</a>
+
+</li></ol>
+</li><li>
+<a href="Kalman Filter.html#Kalman Filter-Gaussian World">Gaussian World</a>
+
+</li><li>
+<a href="Kalman Filter.html#Kalman Filter-Representing the Belief">Representing the Belief</a>
+
+</li><li>
+<a href="Kalman Filter.html#Kalman Filter-Algorithm">Algorithm</a>
+
+</li><li>
+<a href="Kalman Filter.html#Kalman Filter-Assumptions">Assumptions</a>
+
+</li></ol>
+<hr>
+
+<p>
+The Kalman Filter requires the world to be Gaussian, that is every probability distribution used must be Gaussian. This filter also assumes linear models.
+</p>
+ 
+<div id="Kalman Filter-Introduction"><h2 id="Introduction" class="header"><a href="#Kalman Filter-Introduction">Introduction</a></h2></div>
+
+<p>
+Suppose your position on a 2D plane is given by the black dot:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/intro_example_1.png" alt="Example" style="transform: translate(30vw,0)">
+</p>
+
+<p>
+Let's say you get your estimate as to where you are, inferred from a certain control command. For example if you are trying to move forward in the same direction you estimate your new position will be the cross:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/intro_example_2.png" alt="Example" style="transform: translate(30vw,0)">
+</p>
+
+<p>
+This is will be the prediction step. Now suppose you get an observation about the distance to the nearest lighthouse:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/intro_example_3.png" alt="Example" style="transform: translate(30vw,0)">
+</p>
+
+<p>
+So now we can perform our new state estimate by combining by the means of a weighted sum our prediction along with the measurement:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/intro_example_4.png" alt="Example" style="transform: translate(17vw,0)">
+<img src="https://albamr09.github.io/assets/intro_example_5.png" alt="Example" style="transform: translate(27vw,0)">
+</p>
+
+<p>
+This weighted sum is performed trading off how certain you are about your prediction and how certain you are about your observation.
+</p>
+
+<div id="Kalman Filter-Properties of Gaussian Distributions"><h2 id="Properties of Gaussian Distributions" class="header"><a href="#Kalman Filter-Properties of Gaussian Distributions">Properties of Gaussian Distributions</a></h2></div>
+
+<p>
+In order to derive and prove some parts of the Kalman Filter we exploit the following properties:
+</p>
+
+<ul>
+<li>
+The product of two Gaussian is a Gaussian.
+
+</li><li>
+A Gaussian stays Gaussian under linear transformations
+
+</li><li>
+The marginal and conditional distribution of a Gaussian is a Gaussian
+
+</li></ul>
+<div id="Kalman Filter-Linear Model"><h2 id="Linear Model" class="header"><a href="#Kalman Filter-Linear Model">Linear Model</a></h2></div>
+
+<p>
+What does it mean when we say the Kalman Filter uses linear models? This means that both the motion model and the observation model can be expressed through a linear function, that is:
+</p>
+
+\[
+f(x) = Ax + b
+\]
+
+<p>
+One important property is that if a Gaussian distribution is transformed through a linear function it stays Gaussian.
+</p>
+
+<p>
+Also, we introduce noise by using a zero mean Gaussian distribution.
+</p>
+
+<div id="Kalman Filter-Linear Model-Models"><h3 id="Models" class="header"><a href="#Kalman Filter-Linear Model-Models">Models</a></h3></div>
+
+<p>
+The motion model is defined as follows:
+</p>
+
+\[
+\overline{x}_t = A_t x_{t-1} + B_tu_t + \epsilon_t
+\]
+
+<p>
+Where \(x_{t-1}\) is the previous state estimate, \(u_t\) is the control command at time \(t\) and \(\epsilon_t\) is Gaussian noise. Let's dive a little deeper:
+</p>
+
+<ul>
+<li>
+\(A_t\) is a matrix \(n \times n\) (a mapping between the state space and the state space) which tells us how the state evolves from \(t-1\) to \(t\) without control commands or noise. We can use this matrix to encode information about velocity, acceleration, etc.
+
+</li><li>
+\(B_t\) is a matrix \(n \times l\) (a mapping between the control space and the state space) that describes how the control command \(u_t\) changes the state from \(t_1\) to \(t\).
+
+</li><li>
+\(\epsilon_t\) is a random variable that represents the motion noise with covariance \(R_t\).
+
+</li></ul>
+<p>
+The observation model is defined as follows:
+</p>
+
+\[
+z_t = C_t \overline{x}_t + \delta_t
+\]
+
+<p>
+Where \(\overline{x}_t\) is the estimated state and \(\delta_t\) is Gaussian noise.
+</p>
+
+<ul>
+<li>
+\(C_t\) is a matrix \(k \times n\) which describes a mapping between the state \(\overline{x}_t\) to an observation \(z_t\).
+
+</li><li>
+\(\delta_t\) is a random variable that represents the observation noise with covariance \(Q_t\).
+
+</li></ul>
+<div id="Kalman Filter-Linear Model-Linear Motion Model"><h3 id="Linear Motion Model" class="header"><a href="#Kalman Filter-Linear Model-Linear Motion Model">Linear Motion Model</a></h3></div>
+
+<p>
+Now that we have defined our linear models, we are going to show how to express the motion under a Gaussian:
+</p>
+
+\[
+p(x_t|x_{t-1}, u_t) = \det(2\pi R_t)^{-\frac{1}{2}} \exp(-\frac{1}{2}(x_t - A_tx_{t-1} - B_tu_t)^TR^{-1}_t(x_t - A_tx_{t-1} - B_tu_t))
+\]
+
+<p>
+Which means we are obtaining the value of a probability distribution that incorporates our linear model for the prediction:
+</p>
+
+\[
+p(x_t|x_{t-1}, u_t) \sim \mathcal{N}(A_tx_{t-1} + B_tu_t, R_t)
+\]
+
+<div id="Kalman Filter-Linear Model-Linear Observation Model"><h3 id="Linear Observation Model" class="header"><a href="#Kalman Filter-Linear Model-Linear Observation Model">Linear Observation Model</a></h3></div>
+
+<p>
+We will apply the same reasoning to obtain the observation model under a Gaussian:
+</p>
+
+\[
+p(z_t|x_t) = \det(2\pi Q_t)^{-\frac{1}{2}} \exp(-\frac{1}{2}(z_t - C_t\overline{x}_t)^TQ^{-1}_t(z_t - C_t\overline{x}_t))
+\]
+
+<p>
+Which means we are obtaining the difference between the observation \(z_t\) and what I expect to observe \(\overline{x}_{t}\) (\(z_t - C\overline{x}_t\)) while also taking the uncertainty into account \(Q_t^{-1}\). We compute this incorporating our linear model for the correction step:
+</p>
+
+\[
+p(z_t|x_t) \sim \mathcal{N}(C_t\overline{x}_t, Q_t)
+\]
+
+<div id="Kalman Filter-Gaussian World"><h2 id="Gaussian World" class="header"><a href="#Kalman Filter-Gaussian World">Gaussian World</a></h2></div>
+
+<p>
+As we have said, we are assuming everything is Gaussian. Up until now we have described our models by using Gaussian distributions, however we still have to make sure these are maintained when we are performing the prediction and the update. So, given the belief at time \(t\):
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/everythin_gaussian_1.png" alt="Gaussian World" style="transform:translate(30vw, 0)">
+</p>
+
+<p>
+If we suppose \(\overline{bel}(x_t)\) is Gaussian, then \(bel(x_t)\) is Gaussian because the product of Gaussian distribution is a Gaussian distribution. Therefore we need to show that \(\overline{bel}(x_t)\) is also Gaussian. That is:
+</p>
+
+\[
+\overline{bel}(x_t) = \int p(x_t|u_t,x_{t-1})bel(x_{t-1})dx_{t-1}
+\]
+
+<p>
+We know, by its definition, that \(p(x_t|u_t,x_{t-1})\) is Gaussian, and also we can prove by mathematical induction that \(bel(xx_{t-1})\) is Gaussian. Because if we start from a Gaussian distributed belief and everything stays Gaussian then the belief at time \(t-1\) will also be Gaussian.
+</p>
+
+<p>
+Noting that the convolution of two Gaussian stays Gaussian we conclude that \(\overline{bel}(x_t)\) is Gaussian and thus \(bel(t)\) is also Gaussian. Let's show however that the integral preserves the Gaussian. Note that we can express the predicted belief by using our linear models as follows:
+</p>
+
+\[
+\overline{bel}(x_t) = \int p(x_t|u_t,x_{t-1}) bel(x_{t-1})dx_{t-1} 
+\]
+
+\[
+= \int \det(2\pi R_t)^{-\frac{1}{2}} \exp(-\frac{1}{2}(x_t - A_tx_{t-1} - B_tu_t)^TR^{-1}_t(x_t - A_tx_{t-1} - B_tu_t))bel(x_{t-1})dx_{t-1}
+\]
+
+\[
+= \eta \int \exp(-\frac{1}{2}(x_t - A_tx_{t-1} - B_tu_t)^TR^{-1}_t(x_t - A_tx_{t-1} - B_tu_t))bel(x_{t-1})dx_{t-1}
+\]
+
+\[
+= \eta \int \exp(-\frac{1}{2}(x_t - A_tx_{t-1} - B_tu_t)^TR^{-1}_t(x_t - A_tx_{t-1} - B_tu_t)) exp(-\frac{1}{2}(x_{t-1} - \mu_{t-1})^T\Sigma_{t-1}^{-1}(x_{t-1} - \mu_{t-1}))
+\]
+
+<p>
+Where \(exp(-\frac{1}{2}(x_{t-1} - \mu_{t-1})^T\Sigma_{t-1}^{-1}(x_{t-1} - \mu_{t-1}))\) is the expected value of the Gaussian that describes our previous belief \(bel(x_{t-1})\).
+</p>
+
+<p>
+Now, we combine both exponentials, given \(exp(x) \cdot exp(y) = exp(x + y)\):
+</p>
+
+
+\[
+\overline{bel}(x_t) = \eta \int \exp(-L_t)dx_{t-1}
+\]
+
+<p>
+Given:
+</p>
+
+\[
+L_{t} = \frac{1}{2}(x_t - A_tx_{t-1} - B_tu_t)^TR^{-1}_t(x_t - A_tx_{t-1} - B_tu_t) 
+\]
+
+\[
++ \frac{1}{2}(x_{t-1} - \mu_{t-1})^T\Sigma_{t-1}^{-1}(x_{t-1} - \mu_{t-1})
+\]
+
+<p>
+We can split \(L_t\) up in a part that only depends on \(x_t\) and another part that depends on \(x_t, x_{t-1}\). Such that:
+</p>
+
+\[
+L_t = L_t(x_{t-1}, x_t) + L_t(x_t)
+\]
+
+<p>
+Thus:
+</p>
+
+\[
+\overline{bel}(x_t) = \eta \int \exp(-L_t(x_{t-1}, x_t) -L_t(x_t))dx_{t-1}
+\]
+
+\[
+\overline{bel}(x_t) = \eta \exp(-L_t(x_t)) \int \exp(-L_t(x_{t-1}, x_t) )dx_{t-1}
+\]
+
+<p>
+This way we have:
+</p>
+
+<ul>
+<li>
+\(\exp(-L_t(x_t))\): Gaussian distribution
+
+</li><li>
+\(\int \exp(-L_t(x_{t-1}, x_t) )dx_{t-1}\): this is the marginalization of a Gaussian of the variable \(x_{t-1}\), which happens to also be a Gaussian.
+
+</li></ul>
+<p>
+Therefore we have shown that everything stays Gaussian:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/all_gaussian.png" alt="Everything Stays Gaussian" style="transform:translate(30vw,0)">
+</p>
+
+<div id="Kalman Filter-Representing the Belief"><h2 id="Representing the Belief" class="header"><a href="#Kalman Filter-Representing the Belief">Representing the Belief</a></h2></div>
+
+<p>
+We have said that everything is Gaussian, which includes our belief. This belief will be represented, like any other Gaussian is, by its mean \(\mu\) and variance \(\Sigma\). So our belief at time \(t\) would be represented by \((\mu_t, \Sigma_t)\).
+</p>
+
+<div id="Kalman Filter-Algorithm"><h2 id="Algorithm" class="header"><a href="#Kalman Filter-Algorithm">Algorithm</a></h2></div>
+
+<p>
+The Kalman Filter algorithm is defined as follows:
+</p>
+
+<ul>
+<li>
+Inputs:
+
+<ul>
+<li>
+\(\mu_{t-1}\): previous mean that describes our belief at time \(t-1\)
+
+</li><li>
+\(\Sigma_{t-1}\): previous covariance that describes our uncertainty at time \(t-1\)
+
+</li><li>
+\(z_t\): the observation at time \(t\).
+
+</li><li>
+\(u_t\): the control command at time \(t\).
+
+</li></ul>
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/assets/kalman_filter_algorithm.png" alt="Kalman Filter Algorithm" style="transform:translate(30vw,0)">
+</p>
+
+<p>
+The algorithm is, as usual, divided into a prediction step and a correction step:
+</p>
+
+<p>
+In the prediction step we estimate our next belief, described by a Gaussian \(\overline{bel}(x_t) \sim \mathcal{N}(\overline{\mu_t}, \overline{\Sigma_t})\). 
+</p>
+
+<ul>
+<li>
+First we compute our new estimated mean \(\overline{\mu}_t\) by multiplying our transformation function \(A_t\) by the previous mean \(\mu_{t-1}\) which tells us how the state evolves generally without any motion added to it (i.e. velocity, acceleration, etc). To add the motion we add \(B_tu_{t}\).
+
+</li><li>
+Then we update our uncertainty. The estimate of the new covariance is derived from how a Gaussian changes through a linear transformation, thus we compute \(A_t \Sigma_{t-1} A_t^T\). We also add additional noise that the motion adds to the new belief by adding \(R_t\).
+
+</li></ul>
+<p>
+The we apply the correction step: what we mainly do is computing the weighted sum between two distributions
+</p>
+
+<ul>
+<li>
+First we obtain the weighting factor \(K_t\), also known as the Kalman Gain. This equals a ratio between the prediction and the observation.
+
+<ul>
+<li>
+Here we use \(C_t^T\) to map our uncertainty from the state space to the observation space.
+
+</li><li>
+On the denominator we map our uncertainty onto the observation space and we also add the measurement noise \(Q_t\)
+
+</li><li>
+Then we divide the two terms to obtain a factor that tells us if we trust more the prediction or the correction.
+
+</li></ul>
+</li><li>
+Then we modify our estimated mean \(\overline{\mu}_{t}\) with a weighted correction:
+
+<ul>
+<li>
+We compute the error between what we observed and what we predicted \(z_t - C_t \overline{\mu}_t\) (again \(C\) to map to the observation space).
+
+</li><li>
+Then we change the estimated state by this error pondered by \(K\).
+
+</li></ul>
+</li><li>
+We also update our uncertainty
+
+</li></ul>
+<div id="Kalman Filter-Assumptions"><h2 id="Assumptions" class="header"><a href="#Kalman Filter-Assumptions">Assumptions</a></h2></div>
+
+<p>
+We can apply the Kalman Filter as long as the two following assumptions hold:
+</p>
+
+<ul>
+<li>
+Everything is Gaussian
+
+</li><li>
+The motion and observation model are linear
+
+</li></ul>
+<p>
+However, what if this is not the case?
+</p>
+
+<p>
+<a href="Extended Kalman Filter.html">Extended Kalman Filter</a>
+</p>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

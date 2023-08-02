@@ -1,0 +1,226 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Bean Life Cycle</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="Bean Scopes and Life cycle.html">Back</a>
+</p>
+
+<div id="Bean Life Cycle"><h1 id="Bean Life Cycle" class="header"><a href="#Bean Life Cycle">Bean Life Cycle</a></h1></div>
+
+<hr>
+
+<p>
+The bean life cycle is as follows:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/bean_life_cycle.png" alt="Bean Life Cycle" style="width:700px;heigh:500px;">
+</p>
+
+<p>
+As you can see you can add method/hooks:
+</p>
+
+<ul>
+<li>
+Add custom code during bean initialization 
+
+<ul>
+<li>
+Calling business logic methods
+
+</li><li>
+Setting up handles to resources (db, sockets, etc)
+
+</li></ul>
+</li><li>
+Add custom code during bean destruction
+
+<ul>
+<li>
+Calling business logic methods
+
+</li><li>
+Clean up handles to resources (db, sockets, etc)
+
+</li></ul>
+</li></ul>
+<div id="Bean Life Cycle-Define Methods"><h2 id="Define Methods" class="header"><a href="#Bean Life Cycle-Define Methods">Define Methods</a></h2></div>
+
+<p>
+First of all we define the methods in our bean:
+</p>
+
+<pre java="">package com.springdemo;
+
+public class TrackCoach implements Coach {
+
+	private FortuneService fortuneService;
+
+	public TrackCoach() {
+		
+	}
+	
+	public TrackCoach(FortuneService fortuneService) {
+		this.fortuneService = fortuneService;
+	}
+
+	@Override
+	public String getDailyWorkout() {
+		return "Run a hard 5k";
+	}
+
+	@Override
+	public String getDailyFortune() {
+		return "Just Do It: " + fortuneService.getFortune();
+	}
+
+	// add an init method
+	public void doMyStartupStuff() {
+		System.out.println("TrackCoach: inside method doMyStartupStuff");
+	}
+	
+	// add a destroy method
+	public void doMyCleanupStuffYoYo() {
+		System.out.println("TrackCoach: inside method doMyCleanupStuffYoYo");		
+	}
+}
+
+</pre>
+
+<div id="Bean Life Cycle-Configure Hooks in the Configuration File"><h2 id="Configure Hooks in the Configuration File" class="header"><a href="#Bean Life Cycle-Configure Hooks in the Configuration File">Configure Hooks in the Configuration File</a></h2></div>
+
+<p>
+Once the initialization and clean-up methods have been defined, we configure them in our configuration file:
+</p>
+
+<pre xml="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd"&gt;
+
+	&lt;!-- Define your beans here --&gt;
+	
+	&lt;!-- define the dependency --&gt;
+	&lt;bean id="myFortuneService"
+	  class="com.springdemo.HappyFortuneService"&gt;
+	&lt;/bean&gt;
+	  
+	&lt;!-- Note the new tag "scope" --&gt;
+	&lt;bean id="myCoach"
+	class="com.springdemo.TrackCoach"
+		init-method="doMyStartupStuff"
+		destroy-method="doMyCleanupStuffYoYo"&gt;	
+		
+		&lt;!-- set up constructor injection --&gt;
+		&lt;constructor-arg ref="myFortuneService" /&gt;
+	&lt;/bean&gt;
+    
+&lt;/beans&gt;
+</pre>
+
+<div id="Bean Life Cycle-Main Method"><h2 id="Main Method" class="header"><a href="#Bean Life Cycle-Main Method">Main Method</a></h2></div>
+
+<p>
+Now in our App, we create the bean to check that our methods are being called:
+</p>
+
+<pre java="">package com.springdemo;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class BeanLifeCycleDemoApp {
+	
+	public static void main(String[] args) {
+
+		// load the spring configuration file
+		ClassPathXmlApplicationContext context =
+				new ClassPathXmlApplicationContext("beanLifeCycle-applicationContext.xml");
+				
+		// retrieve bean from spring container
+		Coach theCoach = context.getBean("myCoach", Coach.class);
+
+		System.out.println(theCoach.getDailyWorkout());
+		
+		// close the context
+		context.close();
+	}
+
+}
+</pre>
+
+<div id="Bean Life Cycle-Notes"><h2 id="Notes" class="header"><a href="#Bean Life Cycle-Notes">Notes</a></h2></div>
+
+<p>
+When using XML configuration, I want to provide additional details regarding the method signatures of the init-method  and destroy-method .
+</p>
+
+<ul>
+<li>
+Access modifier: The method can have any access modifier (public, protected, private)
+
+</li><li>
+Return type: The method can have any return type. However, "void' is most commonly used. If you give a return type just note that you will not be able to capture the return value. As a result, "void" is commonly used.
+
+</li><li>
+Method name: The method can have any method name.
+
+</li><li>
+Arguments: The method can not accept any arguments. The method should be no-arg.
+
+</li></ul>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

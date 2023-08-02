@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>MongoDB Commands</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,40 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
 
-<hr>
+<div id="MongoDB Commands"><h1 id="MongoDB Commands" class="header"><a href="#MongoDB Commands">MongoDB Commands</a></h1></div>
 
-<ul>
-<li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<p>
+To log into MongoDB with the created user and database:
+</p>
 
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<pre console="">
+$ mongo -u &lt;your username&gt; -p &lt;your password&gt; \\
+                --authenticationDatabase &lt;your database name&gt;
 
-</li></ul>
-<hr>
+</pre>
+
+<p>
+Or 
+</p>
+
+<pre console="">
+$ mongo -u &lt;your username&gt; \\ 
+        --authenticationDatabase &lt;your database name&gt;
+
+</pre>
+
+<p>
+To connect to the database use the following URI:
+</p>
+
+<pre>
+mongodb://YourUsername:YourPasswordHere@127.0.0.1:27017/your-database-name
+
+</pre>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

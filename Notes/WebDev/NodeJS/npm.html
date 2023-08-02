@@ -1,0 +1,276 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>NPM</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="NPM"><h1 id="NPM" class="header"><a href="#NPM">NPM</a></h1></div>
+
+<hr>
+
+<p>
+The <code>Node Package Manager</code> allows us to:
+</p>
+<ul>
+<li>
+Reuse our own code in other projects
+
+</li><li>
+Use code written by other developers and 
+
+</li><li>
+Share our own solutions. 
+
+</li></ul>
+<p>
+This tool is installed along node. Npm calls the reusable code a package (also modules or dependencies), that is basically a folder that contains some <code>js</code> code. Note that there is no quality control applied to the packages that are published, so it is the developer's responsibility to check whether the package is secure or not.
+</p>
+
+<div id="NPM-Installing packages"><h2 id="Installing packages" class="header"><a href="#NPM-Installing packages">Installing packages</a></h2></div>
+
+<p>
+You can install a package locally within your project as a local dependency:
+</p>
+
+<pre bash="">
+$ nmp i &lt;packageName&gt;
+
+</pre>
+
+<p>
+Or you can install the package globally, so it can be accessed from any project:
+</p>
+
+<pre sh="">
+$ npm install -g &lt;packageName&gt;
+
+</pre>
+
+<p>
+If you want to specify a version for the package:
+</p>
+
+<pre sh="">
+$ npm install &lt;packageName&gt;@1.0.0
+
+</pre>
+
+<div id="NPM-Installing packages-Package.json"><h3 id="Package.json" class="header"><a href="#NPM-Installing packages-Package.json">Package.json</a></h3></div>
+
+<p>
+This file stores important information about the project and the packages, it can be conceived as a manifest file. There are two ways to create it:
+</p>
+
+<ul>
+<li>
+Manually: create <code>package.json</code> in the root folder of the project and define the properties of the project/packages.
+
+</li><li>
+Using <code>npm</code> following the guide (add <code>-y</code> to skip the questions of the guide):
+
+</li></ul>
+	
+<pre>	
+$ npm init 
+	
+</pre>
+
+<p>
+When the project is initialized, the <code>package.json</code> file is as follows:
+</p>
+
+<pre json="">
+{
+  "name": "08_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
+</pre>
+
+<p>
+Where all those properties are set up during the guide of <code>npm init</code> or set as default with the flag <code>-y</code>.
+</p>
+
+<p>
+After installing a dependency
+</p>
+
+<pre>
+$ npm i lodash
+
+</pre>
+
+<p>
+The following property is added:
+</p>
+
+<pre json="">
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+
+</pre>
+
+<p>
+And <code>npm</code> creates the folder <code>node_modules</code>, if it does not already exist, which stores the dependencies code. Also, in case of wanting to install dependencies needed only during the development process:
+</p>
+
+<pre>
+$ npm i &lt;package&gt; -D
+$ npm i &lt;package&gt; --save-dev
+
+</pre>
+
+<p>
+And so, the property <code>devDependencies</code> is created in <code>pakage.json</code>.
+</p>
+
+<div id="NPM-Installing packages-Package.json-Scripts"><h4 id="Scripts" class="header"><a href="#NPM-Installing packages-Package.json-Scripts">Scripts</a></h4></div>
+
+<p>
+The object <code>scripts</code>, which is a property of <code>package.json</code>, can contain the definition of different actions, for example:
+</p>
+
+<pre json="">
+"scripts": {
+  "start": "node app.js"
+}
+
+</pre>
+
+<p>
+So when running <code>npm start</code> our <code>app.js</code> will be executed. For some commands you will need to specify <code>run</code> and the command name as follows:
+</p>
+
+<pre bash="">
+$ npm run dev
+
+</pre>
+
+<div id="NPM-Installing packages-Package.json-Scripts-Nodemon"><h5 id="Nodemon" class="header"><a href="#NPM-Installing packages-Package.json-Scripts-Nodemon">Nodemon</a></h5></div>
+
+<p>
+This is a package that lets you hot reload your project without having to execute your app constantly. For that, after installing <code>nodemon</code> as a local or global dependency, we specify on <code>package.json</code>:
+</p>
+
+<pre json="">
+"scripts": {
+  "dev": "nodemon app.js"
+}
+
+</pre>
+
+<p>
+If we want to run it:
+</p>
+
+<pre bash="">
+$ npm run dev
+
+</pre>
+
+<div id="NPM-Installing packages-Package-lock.json"><h3 id="Package-lock.json" class="header"><a href="#NPM-Installing packages-Package-lock.json">Package-lock.json</a></h3></div>
+
+<p>
+This file stores the dependencies version of the packages installed as dependencies, as to avoid installing newer version that can be the cause of bugs. Because within the <code>package.json</code> only our project's dependencies' versions are specified.
+</p>
+
+<div id="NPM-Uninstalling packages"><h2 id="Uninstalling packages" class="header"><a href="#NPM-Uninstalling packages">Uninstalling packages</a></h2></div>
+
+<p>
+In order to uninstall the package we have a command, that follows the syntax:
+</p>
+
+<pre bash="">
+$ npm uninstall &lt;package&gt;
+
+</pre>
+
+<p>
+We can also remove it from the <code>dependencies</code> object within <code>package.json</code>. So when you remove <code>package-lock.json</code> and the <code>node_modules</code> folder if you run
+</p>
+
+<pre>
+$ npm install
+
+</pre>
+
+<p>
+The package that was removed will not be installed.
+</p>
+
+
+<div id="NPM-Uninstalling packages-Git"><h3 id="Git" class="header"><a href="#NPM-Uninstalling packages-Git">Git</a></h3></div>
+
+<p>
+When using git or other version control tool, it is desirable to create a <code>.gitignore</code> and to specify to avoid the <code>node_modules</code> folder, since its size can get big very easily.
+</p>
+
+<p>
+So, by just pushing the source code, including <code>package.json</code>, if we want to install all of the project's dependencies' again, on the root folder we run:
+</p>
+
+<pre bash="">
+$ npm install
+
+</pre>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

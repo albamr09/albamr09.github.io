@@ -1,0 +1,172 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>POJOs as JSON</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="POJOs as JSON"><h1 id="POJOs as JSON" class="header"><a href="#POJOs as JSON">POJOs as JSON</a></h1></div>
+
+<hr>
+
+<p>
+To test converting POJOs to JSON we are going to create a service that allows us to retrieve a list of students:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/pojos_json.png" alt="List of Students Service" style="width: 700px">
+</p>
+
+<div id="POJOs as JSON-Create POJO"><h2 id="Create POJO" class="header"><a href="#POJOs as JSON-Create POJO">Create POJO</a></h2></div>
+
+<p>
+We are going to create the <code>Student</code> entity:
+</p>
+
+<pre java="">package com.springdemo.entity;
+
+public class Student {
+
+	private String firstName;
+	private String lastName;
+	
+	public Student() {
+		
+	}
+
+	public Student(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+}
+</pre>
+
+<div id="POJOs as JSON-Create Service"><h2 id="Create Service" class="header"><a href="#POJOs as JSON-Create Service">Create Service</a></h2></div>
+
+<p>
+We now code the logic that handles the controller.
+</p>
+
+<pre java="">package com.springdemo.rest;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.luv2code.springdemo.entity.Student;
+
+@RestController
+@RequestMapping("/api")
+public class StudentRestController {
+
+	private List&lt;Student&gt; theStudents;
+	
+	
+	// define @PostConstruct to load the student data ... only once!
+	@PostConstruct
+	public void loadData() {
+	
+		theStudents = new ArrayList&lt;&gt;();
+		
+		theStudents.add(new Student("Poornima", "Patel"));
+		theStudents.add(new Student("Mario", "Rossi"));
+		theStudents.add(new Student("Mary", "Smith"));		
+	}
+	
+	
+	
+	// define endpoint for "/students" - return list of students
+	@GetMapping("/students")
+	public List&lt;Student&gt; getStudents() {
+			
+		return theStudents;
+	}
+	
+	// define endpoint for "/students/{studentId}" - return student at index
+	@GetMapping("/students/{studentId}")
+	public Student getStudent(@PathVariable int studentId) {
+		
+		// just index into the list ... keep it simple for now
+		return theStudents.get(studentId);
+		
+	}
+}
+</pre>
+
+<p>
+Note that the endpoint <code>"/students/{studentId}"</code> has a path variable <code>studentId</code>
+</p>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

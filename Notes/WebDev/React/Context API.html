@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Context API</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,81 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Context API"><h1 id="Context API" class="header"><a href="#Context API">Context API</a></h1></div>
 
 <hr>
+
+<p>
+<code>Context API</code> and <code>useContext</code> allows us to resolve the issue of the <a href="Prop Drilling.html">prop drilling</a>. The context has two components:
+</p>
 
 <ul>
 <li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+The provider: works as a distributer
 
 </li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+The consumer
 
 </li></ul>
-<hr>
+<p>
+We use them as follows:
+</p>
+
+<pre javascript="">import React, { useState, useContext } from 'react';
+import { data } from '../../../data';
+
+// Create context object
+const PersonContext = React.createContext();
+
+const ContextAPI = () =&gt; {
+  // State saved in the context
+  const [people, setPeople] = useState(data);
+  // Event handler saved in the context
+  const removePerson = (id) =&gt; {
+    setPeople((people) =&gt; {
+      return people.filter((person) =&gt; person.id !== id);
+    });
+  };
+  
+  return (
+    {/*Wrap the components in the context provider, so all the nested components
+      have access to the variables defined in the context object*/}
+    &lt;PersonContext.Provider value={{ removePerson, people }}&gt;
+      &lt;h3&gt;Context API / useContext&lt;/h3&gt;
+      &lt;List /&gt;
+    &lt;/PersonContext.Provider&gt;
+  );
+};
+
+const List = () =&gt; {
+  // Obtain data from the context with the useContext hook
+  const mainData = useContext(PersonContext);
+  return (
+    &lt;&gt;
+      {mainData.people.map((person) =&gt; {
+        return &lt;SinglePerson key={person.id} {...person} /&gt;;
+      })}
+    &lt;/&gt;
+  );
+};
+
+const SinglePerson = ({ id, name }) =&gt; {
+  // Obtain data from the context with the useContext hook
+  const { removePerson } = useContext(PersonContext);
+  return (
+    &lt;div className='item'&gt;
+      &lt;h4&gt;{name}&lt;/h4&gt;
+      &lt;button onClick={() =&gt; removePerson(id)}&gt;remove&lt;/button&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default ContextAPI;
+</pre>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

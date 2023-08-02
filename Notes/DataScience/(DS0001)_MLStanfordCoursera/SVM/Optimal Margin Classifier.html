@@ -1,0 +1,246 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Optimal Margin Classifier</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="SVM.html">Back</a>
+</p>
+
+<div id="Optimal Margin Classifier"><h1 id="Optimal Margin Classifier" class="header"><a href="#Optimal Margin Classifier">Optimal Margin Classifier</a></h1></div>
+
+<hr>
+
+<p>
+We use this classifier to categorize datasets that are perfectly separable, that is to say, we use it over data that is linearly separable. This classifier will help us find the green line we saw in the geometric margin.
+</p>
+
+<p>
+What the optimal margin classifier does is choose the parameters \(w, b\) that maximize \(\gamma\)
+</p>
+
+<p>
+One way to solve this optimization problem is:
+</p>
+
+\begin{align}
+\underset{\gamma, w, b}{\max} \gamma
+\end{align}
+
+<p>
+subject to
+</p>
+
+\begin{align}
+\frac{y^{(i)}(w^Tx + b)}{||w||} \geq \gamma
+\end{align}
+
+<p>
+This will cause the maximization of the geometric margin with respect to the training set. The restriction means that we want to maximize \(\gamma\) while having every example have a geometric margin of at least \(\gamma\).
+</p>
+
+<hr>
+
+<p>
+Because this is a non-convex problem, we will transform it. Given \(\gamma = \frac{\hat{\gamma}}{||w||}\), then \(\gamma \cdot ||w|| = \hat{\gamma}\), and so if we multiply in the subject both sides by \(||w||\):
+</p>
+
+\begin{align}
+\frac{y^{(i)}(w^Tx + b)}{||w||} \cdot ||w|| \geq \gamma \cdot ||w|| \Leftrightarrow y^{(i)}(w^Tx + b) \geq \hat{\gamma}
+\end{align}
+
+<p>
+and the optimization problem can be re-written as:
+</p>
+
+\begin{align}
+\underset{\hat{\gamma}, w, b}{\max} \frac{\hat{\gamma}}{||w||}
+\end{align}
+
+<p>
+subject to
+</p>
+
+\begin{align}
+y^{(i)}(w^Tx + b) \geq \hat{\gamma}
+\end{align}
+
+<p>
+However, we are still stuck with a non-convex objective \(\frac{\hat{\gamma}}{||w||}\). Because, as we've said <a href="Functional Margin.html">previously</a> scaling the functional margin (changing the magnitude of \(w^Tx + b\)) does not change the decision boundary itself, we will add an scaling constraint that the functional margin of \(w, b\) with respect to the training set must be 1: \(\hat{\gamma} = 1\) 
+</p>
+
+<p>
+Observe, now, that maximizing \(\frac{\hat{\gamma}}{||w||} = \frac{1}{||w||}\) is like minimizing \(||w||^2\), we re-write the optimization problem as follows:
+</p>
+
+\begin{align}
+\underset{w, b}{\min} ||w||^2
+\end{align}
+
+<p>
+subject to
+</p>
+
+\begin{align}
+y^{(i)}(w^Tx + b) \geq 1
+\end{align}
+
+<hr>
+
+<p>
+We will revise once more the optimization problem for the Optimal Margin Classifier. First, we have to suppose two facts:
+</p>
+
+<ul>
+<li>
+By the representer theorem we can assume that \(w\) can be expressed as a linear combination of \(x\), that is:
+\begin{align}
+w = \sum_{i=1}^m \alpha_i x^{(i)}
+\end{align}
+
+</li></ul>
+<p>
+Let's review this claim with logistic regression. We know that we apply stochastic gradient descent (we update \(\Theta\) for every example, instead of summing all the examples) on \(\Theta\) as follows:
+</p>
+
+\begin{align}
+\Theta = \Theta - \alpha (h_\Theta(x^{(i)}) - y^{(i)})x^{(i)}
+\end{align}
+
+<p>
+Which means that in every interation we are updating \(\Theta\) by adding or substracting a factor \(\alpha_i\) multiplied by \(x^{(i)}\). Therefore we can show by mathematical induction that if we start with \(\theta_0 = c\), where \(c\) is a constant and go on adding and substracting \(Ax^{(i)}\), where \(A= \alpha (h_\Theta(x^{(i)}) - y^{(i)})\), then \(w\) can be expressed as a linear combination of \(x\).
+</p>
+
+<p>
+You can also derive the gradient descent expression in our optimization problem, and show that in this case \(w\) is also a linear combination of \(x\). We can rewrite \(w\) as follows:
+</p>
+
+\begin{align}
+w = \sum_{i=1}^m \alpha_i y^{(i)} x^{(i)}
+\end{align}
+
+<ul>
+<li>
+Given any decision boundary, the vector \(w\) is always orthogonal to the decision boundary:
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/assets/distance_geometric_margin.png" alt="w is orthogonal to the decision boundary" style="transform:translate(22vw,0);">
+</p>
+
+<hr>
+
+<p>
+Now, the optimization problem becomes (note \(w^2 = w^Tw\)):
+</p>
+
+\begin{align}
+\underset{w, b}{min} \frac{1}{2}||w||^2  = \underset{w, b}{min} \frac{1}{2} (\sum_{i=1}^m \alpha_i y^{(i)} x^{(i)})^T(\sum_{j=1}^m \alpha_j y^{(j)} x^{(j)}) = 
+\end{align}
+
+\begin{align}
+\underset{w, b}{min} \frac{1}{2} \sum_{i=1}^m\sum_{j=1}^m \alpha_i \alpha_j y^{(i)}y^{(j)}(x^{(i)})^Tx^{(j)}
+\end{align}
+
+<p>
+We now denote the inner product of \((x^{(i)})^T x^{(j)}\) as \(\langle x^{(i)}, x^{(j)} \rangle\), so:
+</p>
+
+\begin{align}
+\underset{w, b}{min} \frac{1}{2} \sum_{i=1}^m\sum_{j=1}^m \alpha_i \alpha_j y^{(i)}y^{(j)} \langle x^{(i)}, x^{(j)} \rangle
+\end{align}
+
+<p>
+And the restriction of the optimization becomes:
+</p>
+
+\begin{align}
+y^{(i)}(w^Tx^{(i)} + b) \geq 1 \rightarrow y^{(i)}((\sum_{j=1}^m \alpha_j y^{(j)}x^{(j)})^Tx^{(i)} + b) \geq 1 \rightarrow
+\end{align}
+
+\begin{align}
+y^{(i)}((\sum_{j=1}^m \alpha_j y^{(j)}(x^{(j)})^Tx^{(i)}) + b) \geq 1 \rightarrow y^{(i)}((\sum_{j=1}^m \alpha_j y^{(j)} \langle x^{(j)}, x^{(i)} \rangle) + b) \geq 1
+\end{align}
+
+<p>
+Applying convex optimization theory you can simplify this optimization problem further to:
+</p>
+
+\begin{align}
+\underset{\alpha}{max} \sum_{i=1}^m \alpha_i - \frac{1}{2} \sum_{i=1}^m\sum_{j=1}^m y^{(i)}y^{(j)}\alpha_i\alpha_j\langle x^{(i)}, x^{(j)}\rangle
+\end{align}
+
+<p>
+subject to
+</p>
+
+\begin{align}
+\alpha_i \geq 0
+\end{align}
+\begin{align}
+\sum_{i=1} y^{(i)}\alpha_i = 0, i=1, \cdots,m
+\end{align}
+<div id="Optimal Margin Classifier-Train the Classifier"><h3 id="Train the Classifier" class="header"><a href="#Optimal Margin Classifier-Train the Classifier">Train the Classifier</a></h3></div>
+
+<p>
+To train the <code>SVM</code> we have to solve the optimization problem for \(\alpha\)
+</p>
+
+<div id="Optimal Margin Classifier-Classify an example"><h3 id="Classify an example" class="header"><a href="#Optimal Margin Classifier-Classify an example">Classify an example</a></h3></div>
+
+<p>
+To predict an example \(x\): 
+</p>
+
+\begin{align}
+h_{w,b} = g(w^Tx + b) = g\left(\left(\sum_{i=1}^m \alpha_i y^{(i)}x^{(i)}\right)^Tx + b\right) = g\left(\left(\sum_{i=1}^m \alpha_i y^{(i)} \langle x^{(i)}, x^{(j)} \rangle\right) + b\right)
+\end{align}
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

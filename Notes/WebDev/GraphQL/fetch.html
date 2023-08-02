@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Fetch Data</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,116 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Fetch Data"><h1 id="Fetch Data" class="header"><a href="#Fetch Data">Fetch Data</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<p>
+You can start requesting data with <code>useQuery</code>. <code>useQuery</code> is a React hook that shares <code>GraphQL</code> data with your UI. So for example to fetch the image and the title of the cards:
+</p>
 
-</li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<pre javascript="">
+import { useQuery, gql } from '@apollo/client'
 
-</li></ul>
-<hr>
+const FETCH_DATA = gql`
+  {
+    mainCards {
+      image
+      title
+    }
+  }
+`
+
+function MainHero(){
+
+  const mainData = useQuery(FETCH_DATA)
+
+  return(&lt;div&gt;&lt;/div&gt;)
+
+}
+
+</pre>
+
+<p>
+Where <code>mainCards</code> is one of our resolvers, and we specify that we want to select the <code>image</code> and the <code>title</code>.
+</p>
+
+<p>
+So now, we can de-structure the different attributes offered by the <code>ApolloProvider</code>, namely <code>loading</code>, <code>error</code> and <code>data</code>. And therefore control the flow of our application by using them.
+</p>
+
+<pre javascript="">
+import { useQuery, gql } from '@apollo/client'
+
+const FETCH_DATA = gql`
+  {
+    mainCards {
+      image
+      title
+    }
+  }
+`
+
+function MainHero(){
+
+  const { loading, error, data } = useQuery(FETCH_DATA)
+
+  return(&lt;div&gt;&lt;/div&gt;)
+
+}
+
+</pre>
+
+<div id="Fetch Data-Variables"><h2 id="Variables" class="header"><a href="#Fetch Data-Variables">Variables</a></h2></div>
+
+<p>
+In order to make a query by passing parameters we do:
+</p>
+
+<pre javascript="">
+const ANIMAL_QUERY = gql`
+  query($slug: String!){
+    animal(slug: $slug){
+      title
+      image
+      stock
+      description
+      price
+    }
+  }
+`
+
+</pre>
+
+<p>
+Where <code>$string</code> is the variable we want to pass in, and we specify its type and the fact that it is required with <code>String!</code>.
+</p>
+
+<p>
+Now to make the query we do:
+</p>
+
+<pre javascript="">
+function AnimalPage() {
+  
+  const { slug } = useParameters()
+  
+  const { loading, data, error } = useQuery(
+    variables: {
+      slug: 'cat'
+    }
+  )
+}
+
+</pre>
+
+<p>
+With <code>variables</code> we pass in all of the parameters needed in the query.
+</p>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

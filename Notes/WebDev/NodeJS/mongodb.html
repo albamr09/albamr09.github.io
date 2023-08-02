@@ -1,0 +1,314 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>MongoDB</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="MongoDB"><h1 id="MongoDB" class="header"><a href="#MongoDB">MongoDB</a></h1></div>
+
+<hr>
+
+<div id="MongoDB-Intro"><h2 id="Intro" class="header"><a href="#MongoDB-Intro">Intro</a></h2></div>
+
+<p>
+It is a <code>NoSQL</code> which is structured in collections, where each collection would be used to store a particular type of data in the form of documents:
+</p>
+
+<table>
+<thead>
+<tr>
+<th>
+Blog Collection
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Blog document
+</td>
+</tr>
+<tr>
+<td>
+Blog document
+</td>
+</tr>
+<tr>
+<td>
+Blog document
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Here each document represent a single item of data, for example, each <code>Blog document</code> represents one blog. The data is contained inside the documents in a very similar fashion to <code>JSON</code> objects, so the documents consist of key-value pairs like so:
+</p>
+
+<pre json="">{
+"id": ObjectId(12345),
+"title": "Opening party",
+"snippet": "All about...",
+"body": "Lorem ipsum"
+}
+</pre>
+
+<div id="MongoDB-Set Up"><h2 id="Set Up" class="header"><a href="#MongoDB-Set Up">Set Up</a></h2></div>
+
+<p>
+We can either install <code>MongoDB</code> locally or we can use a cloud database which is already hosted for us. For the latter we will use <a href="https://www.mongodb.com/es/cloud/atlas">MongoDB Atlas</a>. 
+</p>
+
+<p>
+There we create a cluster and inside this new cluster we create a new collection called <code>Blog</code>.
+</p>
+
+<p>
+Then we create a user accessing the <code>Security -&gt; Database Access</code> section.
+</p>
+
+<p>
+Once we have our user created, we specify a way to connect to the database, by heading to <code>Clusters -&gt; Connect your application</code>. We then copy the <code>Connection String</code> that we will use as the database <code>URI</code>. Observe that this <code>URI</code> needs you to input your password.
+</p>
+
+<div id="MongoDB-Mongoose"><h2 id="Mongoose" class="header"><a href="#MongoDB-Mongoose">Mongoose</a></h2></div>
+
+<p>
+Now we need to actually connect to the database, we could use the <code>MongoDB API</code> package and use the <code>MongoDB API</code>, however we will use <code>Mongoose</code> that makes it easier to interact with the database.  
+</p>
+
+<p>
+<code>Mongoose</code> is a <code>ODM</code> (Object Document Mapping) library, which means that it maps the standard <code>MongoDB API</code> providing a much easier way to connect to and interact with the database.
+</p>
+
+<p>
+It does this by allowing us to create simple data models which have query methods to create, get, delete and update database documents. 
+</p>
+
+<p>
+For that we first have to create a <code>Schema</code> for the document which define the structure of a type of data or document. For example:
+</p>
+
+<pre>
+Blog Schema:
+    - title(string), required
+    - snippet(string), required
+    - body(string), required
+
+</pre>
+
+<p>
+Next, what we do is to create a <code>Model</code> based on that <code>Schema</code>, the <code>Model</code> is what actually allows us to communicate with a particular database collection. Each <code>Model</code> has static methods <code>get</code>, <code>save</code>, <code>delete</code>, etc, that allow us to manage the data.
+</p>
+
+<div id="MongoDB-Mongoose-Installing"><h3 id="Installing" class="header"><a href="#MongoDB-Mongoose-Installing">Installing</a></h3></div>
+
+<pre bash="">
+$ npm install mongoose
+
+</pre>
+
+<div id="MongoDB-Mongoose-Connect to `MongoDB`"><h3 id="Connect to `MongoDB`" class="header"><a href="#MongoDB-Mongoose-Connect to `MongoDB`">Connect to <code>MongoDB</code></a></h3></div>
+
+<p>
+So, now, we import the <code>Mongoose</code> package and we use our database <code>URI</code> to connect to it, remember to change <code>password</code> and <code>cluster_name</code> to the values you specified for your database.
+</p>
+
+<pre javascript="">
+const express = require('express');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+
+// express app
+const app = express();
+
+// connect to mongodb &amp; listen for requests
+const dbURI = "mongodb+srv://user:&lt;password&gt;@test.mongodb.net/&lt;cluster_name&gt;
+
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(result =&gt; app.listen(3000))
+  .catch(err =&gt; console.log(err));
+
+</pre>
+
+<p>
+The <code>connect</code> method is an asynchronous function, so it will execute a callback function when it finished connecting, or an error if the connection failed. In our case, we proceed to start our server when the database is ready.
+</p>
+
+<div id="MongoDB-Mongoose-Create Models &amp; Schemas"><h3 id="Create Models &amp; Schemas" class="header"><a href="#MongoDB-Mongoose-Create Models &amp; Schemas">Create Models &amp; Schemas</a></h3></div>
+
+<p>
+Once we have successfully connected to our database, we will create our <code>Blog Schema</code>. For that, we first create a folder called <code>models</code> and inside it we create <code>blog.js</code> that will contain the following code:
+</p>
+
+<pre javascript="">
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const blogSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  snippet: {
+    type: String,
+    required: true,
+  },
+  body: {
+    type: String,
+    required: true
+  },
+}, { timestamps: true });
+
+const Blog = mongoose.model('Blog', blogSchema);
+module.exports = Blog;
+
+</pre>
+
+<p>
+As you can see, we first import <code>mongoose</code> and the <code>Schema</code> object that we use to define the <code>Blog Schema</code>.
+</p>
+
+<p>
+In order to create a new <code>Blog Schema</code> we create a new <code>Schema</code> object and we specify the different properties and restrictions. We also set and object of options, where we specify that we want <code>MongoDB</code> to save the timestamps of updates, creations, etc.
+</p>
+
+<p>
+Next we created a model that is based in the <code>Schema</code> we just created with the function <code>model</code> and we pass it the <code>Model</code> name (this name is then pluralized, as to then look up the collection that matches it) and the <code>Schema</code> instance.
+</p>
+
+<div id="MongoDB-Getting/Saving Data"><h2 id="Getting/Saving Data" class="header"><a href="#MongoDB-Getting/Saving Data">Getting/Saving Data</a></h2></div>
+
+<p>
+In order to work we data, we must import the <code>Model</code> we just created.
+</p>
+
+<pre javascript="">
+const express = require('express');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const Blog = require('./models/blog');
+
+// express app
+const app = express();
+
+// connect to mongodb &amp; listen for requests
+const dbURI = "mongodb+srv://user:&lt;password&gt;@test.mongodb.net/&lt;cluster_name&gt;
+
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(result =&gt; app.listen(3000))
+  .catch(err =&gt; console.log(err));
+
+app.get('/blogs', (req, res) =&gt; {
+  Blog.find()
+    .then(result =&gt; {
+      res.send(result);
+    })
+    .catch(err =&gt; {
+      console.log(err);
+    });
+});
+
+app.get('/blogs/:id', (req, res) =&gt; {
+  const id = req.params.id;
+  Blog.findById(id)
+    .then(result =&gt; {
+      res.send(result);
+    })
+    .catch(err =&gt; {
+      console.log(err);
+    });
+});
+
+</pre>
+
+<p>
+Here we use the <code>find</code> and <code>findById</code> methods to interact with our database.
+</p>
+
+<p>
+In order to create or delete new <code>Blogs</code>:
+</p>
+
+<pre javascript="">
+app.post('/blogs', (req, res) =&gt; {
+  const blog = new Blog(req.body);
+
+  blog.save()
+    .then(result =&gt; {
+      res.redirect('/blogs');
+    })
+    .catch(err =&gt; {
+      console.log(err);
+    });
+});
+
+app.delete('/blogs/:id', (req, res) =&gt; {
+  const id = req.params.id;
+  
+  Blog.findByIdAndDelete(id)
+    .then(result =&gt; {
+      res.json({ redirect: '/blogs' });
+    })
+    .catch(err =&gt; {
+      console.log(err);
+    });
+});
+
+</pre>
+
+<p>
+In the <code>POST</code> method we create a new <code>Blog</code> object using the objects from the request body, and then we save it in our database. On the other hand, in order to delete a <code>Blog</code> we pass the <code>id</code> as a parameter, we search for it on the database and we delete it.
+</p>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

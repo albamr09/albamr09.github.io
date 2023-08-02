@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Ceiling Analysis</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,86 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Ceiling Analysis"><h1 id="Ceiling Analysis" class="header"><a href="#Ceiling Analysis">Ceiling Analysis</a></h1></div>
 
 <hr>
+
+<p>
+Supongamos que tenemos un pipeline que conforma todo nuestro sistema de aprendizaje automático y está formado por:
+</p>
 
 <ul>
 <li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+Obtención de la imagen
 
 </li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+Detección de texto
+
+</li><li>
+Segmentación de caracteres
+
+</li><li>
+Reconocimiento de caracteres
 
 </li></ul>
-<hr>
+<p>
+Lo que hacemos es determinar una o varias métricas de evaluación, por ejemplo nosotros utilizaremos la precisión. Entonces, ahora creamos una tabla indicando el valor de métrica para cada parte del sistema así como para el sitema completo:
+</p>
+
+<table>
+<thead>
+<tr>
+<th>
+Componente
+</th>
+<th>
+Precisión
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Detección del texto
+</td>
+<td>
+82%
+</td>
+</tr>
+<tr>
+<td>
+Segmentación de caracteres
+</td>
+<td>
+90%
+</td>
+</tr>
+<tr>
+<td>
+Reconocimiento de caracteres
+</td>
+<td>
+100%
+</td>
+</tr>
+<tr>
+<td>
+Total
+</td>
+<td>
+72%
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+A partir de esta tabla podemos comprobar que mejorar la Detección en el texto y la Segmentación de caracteres mejora el rendimiento del modelo.
+</p>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>useRef</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,61 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="useRef"><h1 id="useRef" class="header"><a href="#useRef">useRef</a></h1></div>
 
 <hr>
+
+<p>
+<code>useRef</code> returns a mutable ref object whose <code>.current</code> property is initialized to the passed argument. Some properties:
+</p>
 
 <ul>
 <li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+Preserves the value of the object
 
 </li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+Does not trigger re-render
+
+</li><li>
+Assigned to <code>DOM nodes/elements</code>
+<pre javascript="">import React, { useEffect, useRef } from 'react';
+
+const UseRefBasics = () =&gt; {
+  // Create the container
+  const refContainer = useRef(null);
+
+  const handleSubmit = (e) =&gt; {
+    e.preventDefault();
+    // Print the value inside the input
+    console.log(refContainer.current.value);
+  };
+  
+  useEffect(() =&gt; {
+    // Focus on the input element whenever we render the application
+    refContainer.current.focus();
+  });
+
+  return (
+    &lt;&gt;
+      &lt;form className='form' onSubmit={handleSubmit}&gt;
+        &lt;div&gt;
+          {/*The refContainer points to the input element*/}
+          &lt;input type='text' ref={refContainer} /&gt;
+        &lt;/div&gt;
+        &lt;button type='submit'&gt;submit&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/&gt;
+  );
+};
+
+export default UseRefBasics;
+</pre>
 
 </li></ul>
-<hr>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
     <!-- Styling for search -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
-    <title>Registry Index</title>
+    <title>Docker Compose Networks</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- For LaTeX -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -38,19 +38,87 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Docker Compose Networks"><h1 id="Docker Compose Networks" class="header"><a href="#Docker Compose Networks">Docker Compose Networks</a></h1></div>
 
 <hr>
+
+<p>
+Let's start with an example application, which is made up of five services:
+</p>
 
 <ul>
 <li>
-<a href="https://albamr09.github.io/Notes/">Notes</a>
+<code>voting-app</code>: a front-end application for the user to vote.
 
 </li><li>
-<a href="https://albamr09.github.io/Study/">Study</a>
+<code>redis</code>: and in-memory database to store the vote.
+
+</li><li>
+<code>worker</code>: application in the back-end that processes the vote and stores it in the database.
+
+</li><li>
+<code>db</code>: database in which the vote is stored.
+
+</li><li>
+<code>result-app</code>: front-end application that shows the voting results. 
 
 </li></ul>
-<hr>
+<p>
+In this architecture we have two networks:
+</p>
+
+<ul>
+<li>
+<code>front-end</code>: <code>voting-app</code> and <code>result-app</code>
+
+</li><li>
+<code>back-end</code>: all the services.
+
+</li></ul>
+<p>
+Therefore it is desirable to define two networks in our <code>docker-compose</code> and attach the networks to the services:
+</p>
+
+<pre yaml="">
+version: 2
+services:
+  redis:
+    image: redis
+    networks:
+      - back-end
+  db:
+    image: postgres
+    networks:
+      - front-end
+  vote:
+    image: voting-app
+    networks:
+      - front-end
+      - back-end
+  result:
+    image: result
+    networks:
+      - front-end
+      - back-end
+  worker:
+    image: worker
+    networks:
+      - front-end
+      - back-end
+
+networks:
+  - front-end:
+  - back-end:
+
+</pre>
+
+<p>
+As you can see we define two networks: <code>front-end</code> and <code>back-end</code> (note that we have omitted the configuration of the networks) and then for each service we specify the network to which the service has access (also, observe that the configuration of the services has been trimmed down for readability purposes). 
+</p>
 </div>
   
   <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>

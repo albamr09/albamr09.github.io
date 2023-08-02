@@ -1,0 +1,528 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>SVM</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="SVM"><h1 id="SVM" class="header"><a href="#SVM">SVM</a></h1></div>
+
+<hr>
+
+<ol>
+<li>
+<a href="SVM.html#SVM-Notation">Notation</a>
+
+</li><li>
+<a href="SVM.html#SVM-Functional Margin">Functional Margin</a>
+
+</li><li>
+<a href="SVM.html#SVM-Geometric Margin">Geometric Margin</a>
+
+</li><li>
+<a href="SVM.html#SVM-Relationship between Functional Margin and Geometric Margin">Functional and Geometric Margin</a>
+
+</li><li>
+<a href="SVM.html#SVM-Optimal Margin Classifier">Optimal Margin Classifier</a>
+
+</li><li>
+<a href="SVM.html#SVM-SVM">SVM</a>
+
+<ol>
+<li>
+<a href="SVM.html#SVM-SVM-Kernels">Kernels</a>
+
+<ol>
+<li>
+<a href="SVM.html#SVM-SVM-Kernels-Kernel Trick">The Kernel Trick</a>
+
+</li><li>
+<a href="SVM.html#SVM-SVM-Kernels-Applying Kernels">Applying Kernels</a>
+
+</li><li>
+<a href="SVM.html#SVM-SVM-Kernels-Validity of Kernels">Validity of Kernels</a>
+
+</li></ol>
+</li><li>
+<a href="SVM.html#SVM-SVM-Generality of the Kernel Trick">Generality of the Kernel Trick</a>
+
+</li></ol>
+</li><li>
+<a href="SVM.html#SVM-L1-Norm Soft Margin SVM">L1-Norm Soft Margin SVM</a>
+
+<ol>
+<li>
+<a href="SVM.html#SVM-L1-Norm Soft Margin SVM-Outliers">Outliers</a>
+
+</li><li>
+<a href="SVM.html#SVM-L1-Norm Soft Margin SVM-Optimization">Optimization</a>
+
+</li></ol>
+</li><li>
+<a href="SVM.html#SVM-Kernel Examples">Kernel Examples</a>
+
+</li></ol>
+<hr>
+
+<p>
+The <span id="SVM-Support Vector Machine"></span><strong id="Support Vector Machine">Support Vector Machine</strong> allows you to find potential non-linear decision boundaries:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/non_linear_boundary_SVM.png" alt="Non-Linear Boundary with SVM" style="transform: translate(28vw, 0%);">
+</p>
+
+<p>
+<span id="SVM-SVM"></span><strong id="SVM">SVM</strong> provides an algorithm that:
+</p>
+
+<ul>
+<li>
+Maps a vector of features to a vector of features of a much higher dimension (manually picking the new features is difficult, that is why we automate it with these types of algorithms)
+\begin{align}
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+\end{bmatrix} \rightarrow 
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_1^2 \\
+x_2^2 \\
+x_1\cdot x_2 \\
+\vdots
+\end{bmatrix}
+\end{align}
+
+</li><li>
+Applies a linear classifier over the high dimensional features (<em>Note</em>: if you apply logistic regression to high dimensional vectors then it can learn non-linear decision boundaries)
+
+</li></ul>
+<div id="SVM-Notation"><h2 id="Notation" class="header"><a href="#SVM-Notation">Notation</a></h2></div>
+
+<ul>
+<li>
+Labels: \(y^{(i)} \in \{-1, +1\}\)
+
+</li><li>
+Now the hypothesis outputs a \(1\) or a \(-1\), which means:
+\begin{align}
+g(z) = 
+\begin{cases}
+1, &amp; \text{ if } z \geq 0 \\
+0, &amp; \text{ otherwise } \\
+\end{cases}
+\end{align}
+
+</li></ul>
+<p>
+That is, now instead of a smooth transition of probabilities from zero to one, we have a hard transition between \(1\) and \(-1\).
+</p>
+
+<ul>
+<li>
+Weights: now the weights \(\Theta \in \mathbb{R}^{(n+1)}\), where \(\theta_0 = 1\) are divided into: \(w \in \mathbb{R}^{(n)}\) and \(b \in \mathbb{R}\). Thus we drop the convention of assigning \(x_0 = 1\).
+
+</li><li>
+Also now the hypothesis function is defined as: \(h_{w,b}(x) = g(w^Tx + b) = g((\sum_{i=1}^n w_i x) + b)\)
+
+</li></ul>
+<div id="SVM-Functional Margin"><h2 id="Functional Margin" class="header"><a href="#SVM-Functional Margin">Functional Margin</a></h2></div>
+
+<p>
+<a href="Functional Margin.html">Functional Margin</a>
+</p>
+
+
+<div id="SVM-Geometric Margin"><h2 id="Geometric Margin" class="header"><a href="#SVM-Geometric Margin">Geometric Margin</a></h2></div>
+
+<p>
+<a href="Geometric Margin.html">Geometric Margin</a>
+</p>
+
+
+<div id="SVM-Relationship between Functional Margin and Geometric Margin"><h2 id="Relationship between Functional Margin and Geometric Margin" class="header"><a href="#SVM-Relationship between Functional Margin and Geometric Margin">Relationship between Functional Margin and Geometric Margin</a></h2></div>
+
+<p>
+As you may have picked up we can stablish an equality between both margins:
+</p>
+
+\begin{align}
+\gamma^{(i)} = \frac{\hat{\gamma}^{(i)}}{||w||}
+\end{align}
+
+<div id="SVM-Optimal Margin Classifier"><h2 id="Optimal Margin Classifier" class="header"><a href="#SVM-Optimal Margin Classifier">Optimal Margin Classifier</a></h2></div>
+
+<p>
+<a href="Optimal Margin Classifier.html">Optimal Margin Classifier</a>
+</p>
+
+<div id="SVM-SVM"><h2 id="SVM" class="header"><a href="#SVM-SVM">SVM</a></h2></div>
+
+<div id="SVM-SVM-Kernels"><h3 id="Kernels" class="header"><a href="#SVM-SVM-Kernels">Kernels</a></h3></div>
+
+<div id="SVM-SVM-Kernels-Kernel Trick"><h4 id="Kernel Trick" class="header"><a href="#SVM-SVM-Kernels-Kernel Trick">Kernel Trick</a></h4></div>
+
+<p>
+To apply kernels first we will lay out the kernel trick:
+</p>
+
+<ul>
+<li>
+Write the algorithm in terms of the inner products of the training examples \(\langle x^{(i)}, x^{(j)} \rangle=(\langle x, z \rangle)\) 
+
+</li><li>
+Let there be a mapping \(x \rightarrow \phi(x)\), where \(\phi(x)\) is a high dimensional feature vector.
+
+</li><li>
+Find a way to compute \(K(x, z) = \phi(x)^T\phi(z)\), even if \(x, z\) are very high dimensional features vectors (which would be very computationally expensive). Where \(K(x, z)\) is denoted as the kernel function
+
+</li><li>
+Replace \(\langle x, z \rangle\) with \(K(x, z)\)
+
+</li></ul>
+<div id="SVM-SVM-Kernels-Applying Kernels"><h4 id="Applying Kernels" class="header"><a href="#SVM-SVM-Kernels-Applying Kernels">Applying Kernels</a></h4></div>
+
+<ul>
+<li>
+Given \(x, z \in \mathbb{R}^n\), where:
+\begin{align}
+x = \begin{bmatrix}
+x_1 \\
+\vdots \\ 
+x_n \\
+\end{bmatrix}
+\end{align}
+
+</li></ul>
+<p>
+We define the mapping \(\phi(x) \in \mathbb{R}^{n^2}\) as follows:
+</p>
+
+\begin{align}
+\phi(x) = \begin{bmatrix}
+x_ix_i \\
+\end{bmatrix}
+\end{align}
+
+<p>
+\(\forall i, j\) with \(1 \leq i,j \leq n\)
+</p>
+
+<p>
+So we have 
+</p>
+
+\begin{align}
+K(x, z) = \phi(x)^T \phi(z) = \sum_{i=1}^{n^2} \phi(x)_i \phi(z)_i = \sum_{i=1}^n \sum_{j=1}^n (x_ix_j) (z_iz_j)
+\end{align}
+
+<p>
+Which would take \(O(n^2)\) time to compute. But, observe that:
+</p>
+
+\begin{align}
+(x^Tz)^2 = (x^Tz)^T(x^Tz) = \sum_{i=1}^n\sum_{j=1}^n (x_iz_i)(x_jz_j) = \sum_{i=1}^n\sum_{j=1}^n (x_ix_j)(z_iz_j)
+\end{align}
+
+<p>
+whick takes \(O(n)\) time to compute.
+</p>
+
+<p>
+So we conclude that the kernel can be defined as \(K(x, z) = (x^Tz)^n\)
+</p>
+
+<hr>
+
+<ul>
+<li>
+Given \(x, z \in \mathbb{R}^n\)
+
+<ul>
+<li>
+\(K(x, z) = (x^Tz + c)^2\)
+
+</li><li>
+Where the mapping function \(\phi\) is defined as: given
+
+</li></ul>
+</li></ul>
+  
+\begin{align}
+x = \begin{bmatrix}
+x_1 \\
+x_2 \\
+\end{bmatrix}
+\end{align}
+
+<p>
+Then:
+</p>
+
+\begin{align}
+\phi(x) = \begin{bmatrix}
+x_1x_1 \\
+x_1x_2 \\
+x_2x_1 \\
+x_2x_2 \\
+\sqrt{2c}x_1 \\
+\sqrt{2c}x_2 \\
+\end{bmatrix}
+\end{align}
+
+<hr>
+
+<ul>
+<li>
+Given \(x, z \in \mathbb{R}^n\)
+
+<ul>
+<li>
+\(K(x, z) = (x^Tz+ c)^d\)
+
+</li><li>
+Where \(\phi(x)\) contains the \(\binom{n+d}{d}\) combinations of monomials of degree d. (Note: a monomial of degree 3 could be \(x_1x_2x_3\) or \(x_1x_2^2\), etc)
+
+</li></ul>
+</li></ul>
+<div id="SVM-SVM-Kernels-Validity of Kernels"><h4 id="Validity of Kernels" class="header"><a href="#SVM-SVM-Kernels-Validity of Kernels">Validity of Kernels</a></h4></div>
+
+<p>
+To test is a Kernel is valid we use Mercer's Theorem that says:
+</p>
+
+<p>
+K is a valid kernel function (i.e. \(\exists \phi\) such that \(K(x, z) = \phi(x)^T\phi(z)\)) if and only if for any \(d\) points \(\{x^{(1)}, \cdots , x^{(d)}\}\) the corresponding kernel matrix \(K\) is positive semi-definite, that is \(K \geq 0\)
+</p>
+  
+<p>
+We are going to prove the first part of this theorem:
+</p>
+  
+<p>
+Given examples \(\{x^{(1)}, \cdots , x^{(d)}\}\), let \(K \in \mathbb{R}^{d\times d}\), be the kernel matrix, such that 
+</p>
+<pre><code>
+</code></pre>
+\begin{align}
+K_{ij} = K(x^{(i)}, x^{(j)})
+\end{align}
+
+<p>
+Then, if \(K\) is a valid kernel:
+</p>
+
+\begin{align}
+z^TKz = \sum_{i=1}^d \sum_{j=1}^d z_i^T K_{ij} z_j = \sum_{i=1}^d \sum_{j=1}^d z_i^T \phi(x^{(i)})^T \phi(x^{(j)}) z_j =
+\end{align}
+
+<p>
+We expand \(\phi(x^{(i)})^T \phi(x^{(j)})\) as follows:
+</p>
+
+\begin{align}
+= \sum_{i=1}^d \sum_{j=1}^d z_i^T \left[\sum_{k=1}^d (\phi(x^{(i)}))_k (\phi(x^{(j)}))_k\right] z_j =
+\end{align}
+
+<p>
+Now, if we rearrange the sums:
+</p>
+
+\begin{align}
+= \sum_{k=1}^d \left[\sum_{i=1}^d z_i (\phi(x^{(i)}))_k\right]^2
+\end{align}
+
+<p>
+So, because the power of two of any real number is a positive number, and the sum of positive numbers is positive we derive:
+</p>
+
+\begin{align}
+\sum_{k=1}^d \left[\sum_{i=1}^d z_i (\phi(x^{(i)}))_k\right]^2 \geq 0
+\end{align}
+
+<p>
+Which means that \(K \geq 0\), hence \(K\) is a positive, semi-definite matrix
+</p>
+
+<div id="SVM-SVM-Generality of the Kernel Trick"><h3 id="Generality of the Kernel Trick" class="header"><a href="#SVM-SVM-Generality of the Kernel Trick">Generality of the Kernel Trick</a></h3></div>
+
+<p>
+The kernel trick can be applied to more algorithms, not only in <code>SVM</code>. Because, if you have any algorithm written in terms of \(\langle x^{(i)}, x^{(j)} \rangle\), you can apply the kernel trick to it. 
+</p>
+
+<p>
+Some of the algorithms that can be re-written like this are: 
+</p>
+
+<ul>
+<li>
+Lineal Regression
+
+</li><li>
+Logistic Regression
+
+</li><li>
+GDM
+
+</li><li>
+PCA
+
+</li><li>
+etc.
+
+</li></ul>
+<div id="SVM-L1-Norm Soft Margin SVM"><h2 id="L1-Norm Soft Margin SVM" class="header"><a href="#SVM-L1-Norm Soft Margin SVM">L1-Norm Soft Margin SVM</a></h2></div>
+
+<p>
+It may be the case where you map your data to a very high dimensional space, but it is still not linearly separable, or the decision boundary becomes too complex:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/complex_decision_boundary_svm.png" alt="Complex Desicion Boundary" style="transform:translate(22vw, 0)">
+</p>
+
+<p>
+In order to avoid this we will use a modification of the basic algorithm called <code>L1-Norm Soft Margin SVM</code>. With this new algorithm the optimization problem becomes
+</p>
+
+\begin{align}
+\underset{w,b,\xi_i}{min} \frac{1}{2}||w||^2 + C \sum_{i=1}^m \xi_i
+\end{align}
+
+<p>
+subject to
+</p>
+
+\begin{align}
+y^{(i)}(w^Tx^{(i)} + b) \geq 1 - \xi_i
+\end{align}
+\begin{align}
+\xi_i \geq 0, i = 1, \cdots, m
+\end{align}
+
+<p>
+Note that if \(x^{(i)}\) is classified correctly then \(y^{(i)}(w^Tx^{(i)} + b) \geq 0\) and therefore satisfies  \(y^{(i)}(w^Tx^{(i)} + b) \geq 1 - \xi_i\), because \(\xi_i \geq 0\)
+</p>
+
+<p>
+Before the modification, the restriction forced the functional margin to be at least 1, however after the modification, because \(\xi_i\) is positive we relax the restriction.
+</p>
+
+<p>
+Also, we do not want \(\xi_i\) to be too big, that is why it is added to the optimization objective as a cost.
+</p>
+
+<div id="SVM-L1-Norm Soft Margin SVM-Graphical representation"><h3 id="Graphical representation" class="header"><a href="#SVM-L1-Norm Soft Margin SVM-Graphical representation">Graphical representation</a></h3></div>
+
+<p>
+With the addition of \(\xi_i\) we are allowing some examples to have a functional margin less than 1, by setting \(\xi_i \geq 0\). For example look at the example \(x^{(i)}\) which has \(\xi_i = 0.5\)
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/soft_margin.svg" alt="Soft Margin Graphical Representation" style="witdth:500px; height:400px; transform: translate(22vw, 0)">
+</p>
+
+<div id="SVM-L1-Norm Soft Margin SVM-Outliers"><h3 id="Outliers" class="header"><a href="#SVM-L1-Norm Soft Margin SVM-Outliers">Outliers</a></h3></div>
+
+<p>
+This relaxation on the restriction upong the geometric margin also avoids the following problem. If you have a lot of data that is linearly separable, but you have one outlier the optimal margin classifier allows for the decision boundary to be drastically changed because its optimization is based on the word performing example (which would be the outlier in this case). Thus:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/assets/outlier_svm.svg" alt="Outlier SVM" style="width:500px;height:400px;transform:translate(22vw,0)">
+</p>
+
+<p>
+However, the <code>L1-Norm Soft Margin SVM</code> allows for this example to be classified incorrectly of be close to the decision boundary without changing the boundary which makes it more robuts to outliers.
+</p>
+
+<div id="SVM-L1-Norm Soft Margin SVM-Optimization"><h3 id="Optimization" class="header"><a href="#SVM-L1-Norm Soft Margin SVM-Optimization">Optimization</a></h3></div>
+
+<p>
+<a href="Optimal Margin Classifier.html">Picking up the Optimal Margin Classifier optimization problem</a>, after applying the insight derived from the representer theorem, we have that the only addition needed to implement this algorithm is:
+</p>
+
+\begin{align}
+\underset{\alpha}{max} \sum_{i=1}^m \alpha_i - \frac{1}{2} \sum_{i=1}^m\sum_{j=1}^m y^{(i)}y^{(j)}\alpha_i\alpha_j\langle x^{(i)}, x^{(j)}\rangle
+\end{align}
+
+<p>
+subject to
+</p>
+
+\begin{align}
+\sum_{i=1} y^{(i)}\alpha_i = 0
+\end{align}
+\begin{align}
+0 \leq \alpha_i \leq C, i = 1, \cdots , m
+\end{align}
+
+<p>
+The parameter \(C\) is a parameter your choose and it determines the level of strictness you want your model to have about some examples being misclassified.
+</p>
+
+<div id="SVM-Kernel Examples"><h2 id="Kernel Examples" class="header"><a href="#SVM-Kernel Examples">Kernel Examples</a></h2></div>
+
+<ul>
+<li>
+The Gaussian Kernel: \(K(x, z) = \exp\left(\frac{||x-z||^2}{2\sigma}\right)\)
+
+</li><li>
+Linear Kernel: \(K(x, z) = \phi(x)^T\phi(z)\), where \(\phi(x) = x\)
+
+</li><li>
+Polynomial Kernel: \(K(x, z) = (x^Tz)^d\)
+
+</li></ul>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

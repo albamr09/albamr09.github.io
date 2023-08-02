@@ -1,0 +1,160 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Configuration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Configuration"><h1 id="Configuration" class="header"><a href="#Configuration">Configuration</a></h1></div>
+
+<hr>
+
+<ol>
+<li>
+Add configurations to file: <code>WEB-INF/web.xml</code>
+
+<ol>
+<li>
+Configure Spring <code>MVC Dispatcher Servlet</code>
+
+</li><li>
+Set up URL mappings to Spring <code>MVC Dispatcher Servlet</code>
+
+</li></ol>
+</li><li>
+Add configurations to spring configuration file: <code>WEB-INF/spring-mvc-demo-servlet.xml</code>
+
+<ol>
+<li>
+Add support for Spring Component Scanning
+
+</li><li>
+Add support for conversion, formatting and validation
+
+</li><li>
+Configure Spring <code>MVC View Resolver</code>
+
+</li></ol>
+</li></ol>
+<hr>
+
+<div id="Configuration-Configuration on `web.xml`"><h2 id="Configuration on `web.xml`" class="header"><a href="#Configuration-Configuration on `web.xml`">Configuration on <code>web.xml</code></a></h2></div>
+
+<p>
+We have to add an entry for our Front Controller: <code>DispatcherServlet</code>
+</p>
+
+<pre xml="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1"&gt;
+
+	&lt;display-name&gt;spring-mvc-demo&lt;/display-name&gt;
+
+	&lt;absolute-ordering /&gt;
+
+	&lt;!-- Step 1: Configure Spring MVC Dispatcher Servlet --&gt;
+	&lt;servlet&gt;
+		&lt;!-- Name to reference this servlet --&gt;
+		&lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;
+		&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+		&lt;!-- File of configuration of spring application --&gt;
+		&lt;init-param&gt;
+			&lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+			&lt;param-value&gt;/WEB-INF/spring-mvc-demo-servlet.xml&lt;/param-value&gt;
+		&lt;/init-param&gt;
+		&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+	&lt;/servlet&gt;
+  
+	&lt;!-- Step 2: Set up URL mapping for Spring MVC Dispatcher Servlet --&gt;
+	&lt;servlet-mapping&gt;
+		&lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;
+		&lt;!-- For any url that comes in pass it to the "dispatcher" servlet --&gt;
+		&lt;url-pattern&gt;/&lt;/url-pattern&gt;
+	&lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</pre>
+
+<div id="Configuration-Configuration on `spring-mvc-demo-servlet.xml`"><h2 id="Configuration on `spring-mvc-demo-servlet.xml`" class="header"><a href="#Configuration-Configuration on `spring-mvc-demo-servlet.xml`">Configuration on <code>spring-mvc-demo-servlet.xml</code></a></h2></div>
+
+<pre xml="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+    	http://www.springframework.org/schema/beans/spring-beans.xsd
+    	http://www.springframework.org/schema/context
+    	http://www.springframework.org/schema/context/spring-context.xsd
+    	http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd"&gt;
+
+	&lt;!-- Step 3: Add support for component scanning --&gt;
+	&lt;context:component-scan base-package="com.springdemo" /&gt;
+
+	&lt;!-- Step 4: Add support for conversion, formatting and validation support --&gt;
+	&lt;mvc:annotation-driven/&gt;
+
+	&lt;!-- Step 5: Define Spring MVC view resolver --&gt;
+	&lt;bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt;
+		&lt;!-- Specify where to look for view files --&gt;
+		&lt;property name="prefix" value="/WEB-INF/view/" /&gt;
+		&lt;property name="suffix" value=".jsp" /&gt;
+	&lt;/bean&gt;
+
+&lt;/beans&gt;
+</pre>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>

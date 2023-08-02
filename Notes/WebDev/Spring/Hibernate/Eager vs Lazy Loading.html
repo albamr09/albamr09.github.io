@@ -1,0 +1,231 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <!-- Styling for search -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/search.css">
+    <title>Eager vs Lazy Loading</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- For LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Code Highlight -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/atom-one-light.min.css">
+    <!-- Page icon -->
+    <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/icon.svg">
+  </head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Eager vs Lazy Loading"><h1 id="Eager vs Lazy Loading" class="header"><a href="#Eager vs Lazy Loading">Eager vs Lazy Loading</a></h1></div>
+
+<hr>
+
+<ul>
+<li>
+Eager: fetches all data all at once (with dependencies of the entity)
+
+</li><li>
+Lazy: fetches required data only
+
+</li></ul>
+<p>
+Lazy loading is usually preferred, that is only load data when absolutely needed. 
+</p>
+
+<p>
+The flow of Lazy Loading is:
+</p>
+
+<ul>
+<li>
+Load the main entity first
+
+</li><li>
+Load dependent entities on demand
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/assets/eager_lazy_loading.png" alt="Lazy Loading" style="width: 850px">
+</p>
+
+<p>
+Note than when using Lazy Loading you need an open Hibernate session, else if you close the session and try to retrieve the data Hibernate will throw an exception.
+</p>
+
+<div id="Eager vs Lazy Loading-Default Fetch Types"><h2 id="Default Fetch Types" class="header"><a href="#Eager vs Lazy Loading-Default Fetch Types">Default Fetch Types</a></h2></div>
+
+<table>
+<thead>
+<tr>
+<th>
+Mapping
+</th>
+<th>
+Defaul Fetch Type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+@OneToOne
+</td>
+<td>
+FetchType.EAGER
+</td>
+</tr>
+<tr>
+<td>
+@OneToMany
+</td>
+<td>
+FetchType.LAZY
+</td>
+</tr>
+<tr>
+<td>
+@ManyToOne
+</td>
+<td>
+FetchType.EAGER
+</td>
+</tr>
+<tr>
+<td>
+@ManyToMany
+</td>
+<td>
+FetchType.LAZY
+</td>
+</tr>
+</tbody>
+</table>
+
+<div id="Eager vs Lazy Loading-Specify Fetch Type on Entity"><h2 id="Specify Fetch Type on Entity" class="header"><a href="#Eager vs Lazy Loading-Specify Fetch Type on Entity">Specify Fetch Type on Entity</a></h2></div>
+
+<p>
+We can specify the fetching type on the Entity as follows:
+</p>
+
+<pre java="">@Entity
+@Table(name="instructor")
+public class Instructor {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	private int id;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="instructor_detail_id")
+	private InstructorDetail instructorDetail;
+	
+  // Specify fetch type (only load the courses on demand, their retrieval
+  // is delayed)
+	@OneToMany(fetch=FetchType.LAZY,
+			   mappedBy="instructor",
+			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+						 CascadeType.DETACH, CascadeType.REFRESH})
+	private List&lt;Course&gt; courses;
+  
+  ...
+</pre>
+
+<div id="Eager vs Lazy Loading-Avoid Closed Session Exception"><h2 id="Avoid Closed Session Exception" class="header"><a href="#Eager vs Lazy Loading-Avoid Closed Session Exception">Avoid Closed Session Exception</a></h2></div>
+
+<p>
+To avoid the error we use the <code>JOIN FETCH</code> (we do override lazy loading with eager loading) of <code>HQL</code>:
+</p>
+
+<pre java="">public class FetchJoinDemo {
+  public static void main(String[] args) {
+  
+    // create session factory
+    SessionFactory factory = 
+    ...
+    // create session
+    Session session = factory.getCurrentSession();
+    
+    try {			
+      // start a transaction
+      session.beginTransaction();
+      
+      // Hibernate query with HQL to avoid exception of lazy loading when closing session
+      // get the instructor from db
+      int theId = 1;
+      Query&lt;Instructor&gt; query = 
+      		session.createQuery("select i from Instructor i "
+      						+ "JOIN FETCH i.courses "
+      						+ "where i.id=:theInstructorId", 
+      				Instructor.class);
+      
+      // set parameter on query
+      query.setParameter("theInstructorId", theId);
+      
+      // execute query and get instructor
+      Instructor tempInstructor = query.getSingleResult();
+      
+      System.out.println("luv2code: Instructor: " + tempInstructor);	
+      
+      // commit transaction
+      session.getTransaction().commit();
+      
+      // close the session
+      session.close();
+      
+      System.out.println("\nluv2code: The session is now closed!\n");
+      
+      // get courses for the instructor
+      System.out.println("luv2code: Courses: " + tempInstructor.getCourses());
+      
+      System.out.println("luv2code: Done!");
+    }
+    finally {
+      // add clean up code
+      session.close();
+      
+      factory.close();
+    }
+  }
+}
+</pre>
+</div>
+  
+  <script type="text/javascript" src="https://albamr09.github.io/highlight.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/zepto.min.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/flexsearch.bundle.js"></script>
+  <script type="text/javascript" src="https://albamr09.github.io/search.js"></script>
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+</body></html>
