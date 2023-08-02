@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Kubernetes</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,78 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
 
-<hr>
+<div id="Kubernetes"><h1 id="Kubernetes" class="header"><a href="#Kubernetes">Kubernetes</a></h1></div>
+
+<p>
+Some of its functionalities are:
+</p>
 
 <ul>
 <li>
-<a href="/src/Notes/index.html">Notes</a>
+Running several instances of a service.
 
 </li><li>
-<a href="/src/Study/index.html">Study</a>
+Scaling up or down the number of instances.
+
+</li><li>
+Rolling updates.
+
+</li><li>
+Rolling back from updates.
+
+</li><li>
+Supports many different network and storage renderers.
+
+</li><li>
+Provides autoscaling.
+
+</li><li>
+Helps you test new features of your application by only upgrading a percentage of the instances, which allows for doing AB testing.
 
 </li></ul>
-<hr>
+<div id="Kubernetes-Architecture"><h2 id="Architecture" class="header"><a href="#Kubernetes-Architecture">Architecture</a></h2></div>
+
+<p>
+A <code>kubernetes</code> cluster consists of several nodes, the worker nodes are where containers will be launched, so even if one node fails the application is still available.
+</p>
+
+<p>
+<code>Kubernetes</code> clusters are managed by the master, which is a node that watches over worker nodes and is responsible of the orchestration of containers in the worker nodes.
+</p>
+
+<div id="Kubernetes-Components"><h2 id="Components" class="header"><a href="#Kubernetes-Components">Components</a></h2></div>
+
+<p>
+When you install <code>Kubernetes</code> in your system you are actually installing:
+</p>
+
+<ul>
+<li>
+<code>API Server</code>: acts as the front-end for <code>Kubernetes</code>, so all of the programs talk to this server to interact with the <code>kubernetes</code> server.
+
+</li><li>
+<code>etcd</code>: it is the distributed reliable key value store to store all data to manage the cluster.
+
+</li><li>
+<code>Scheduler</code>: responsible for distributing work.
+
+</li><li>
+<code>Controller</code>: responsible for noticing/responding to nodes/containers going down.
+
+</li><li>
+<code>Container Runtime</code>: underline software used to run containers (e.g. <code>Docker</code>).
+
+</li><li>
+<code>kubelet</code>: is the agent that runs in each node in the cluster, and is responsible of making sure the containers are running on the nodes as expected.
+
+</li></ul>
+<p>
+One of the command line utilities used by <code>Kubernetes</code> is <code>kubectl</code>, that is the <code>Kubernetes CLI</code> and is used to deploy and manage applications on a <code>kubernetes</code> cluster.
+</p>
 </div>
   
   <script type="text/javascript">

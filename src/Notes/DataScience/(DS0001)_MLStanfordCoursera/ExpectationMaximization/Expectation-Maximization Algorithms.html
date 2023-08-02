@@ -1,0 +1,729 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Expectation Maximization</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Expectation Maximization"><h1 id="Expectation Maximization" class="header"><a href="#Expectation Maximization">Expectation Maximization</a></h1></div>
+
+<hr>
+
+<ol>
+<li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-Introduction">Introduction</a>
+
+</li><li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-Gaussian Mixture Models">Gaussian Mixture Models</a>
+
+</li><li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-EM Algorithm with GMM's">EM Algorithm with GMM's</a>
+
+<ol>
+<li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-EM Algorithm with GMM's-E-Step">E-Step</a>
+
+</li><li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-EM Algorithm with GMM's-M-Step">M-Step</a>
+
+<ol>
+<li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-EM Algorithm with GMM's-M-Step-Optimal Parameters of a GMM">Optimal Parameters of a GMM</a>
+
+</li></ol>
+</li><li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-EM Algorithm with GMM's-Iterative Process">Iterative Process</a>
+
+</li></ol>
+</li><li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-Recap: Anomaly Detection">Recap: Anomaly Detection</a>
+
+</li><li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-Generalized EM Algorithm">Generalized EM Algorithm</a>
+
+<ol>
+<li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-Generalized EM Algorithm-Jensen's Inequality">Jensen's Inequality</a>
+
+</li><li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-Generalized EM Algorithm-Motivation">Motivation</a>
+
+</li><li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-Generalized EM Algorithm-E-Step">E-Step</a>
+
+</li><li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-Generalized EM Algorithm-M-Step">M-Step</a>
+
+</li><li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-Generalized EM Algorithm-Putting Everything Together">Putting Everything Together</a>
+
+</li></ol>
+</li><li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-Derive EM for GMM from the Generalized Algorithm">Derive EM for GMM</a>
+
+<ol>
+<li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-Derive EM for GMM from the Generalized Algorithm-E-Step">E-Step</a>
+
+</li><li>
+<a href="Expectation-Maximization Algorithms.html#Expectation Maximization-Derive EM for GMM from the Generalized Algorithm-M-Step">M-Step</a>
+
+</li></ol>
+</li></ol>
+<hr>
+
+<div id="Expectation Maximization-Introduction"><h2 id="Introduction" class="header"><a href="#Expectation Maximization-Introduction">Introduction</a></h2></div>
+
+<p>
+This technique is employed in Density Estimation problems and Anomaly Detection. 
+</p>
+
+<p>
+Such problems aim to represent data in a compact form using a statistical distribution, e.g., Gaussian, Beta, or Gamma. You can think of those problems as a clustering task but from a probabilistic point of view. This is what makes the EM algorithm a probabilistic generative model. 
+</p>
+
+<p>
+Thus, if we are given \(n\) samples, we model them with \(P(x)\), such that if \(P(x) &lt; \epsilon\), where \(\epsilon\) is some threshold, then we detect an anomaly.
+</p>
+
+<p>
+However, you may expect that a single Gaussian with its mean and variance cannot map thousands of instances in a dataset into a set of \(K\) clusters accurately, so we may assume that there are \(K\) distributions that describe the data, hence we use <span id="Expectation Maximization-Introduction-Mixture Models"></span><strong id="Mixture Models">Mixture Models</strong>.
+</p>
+
+<p>
+For example, imagine you have the following dataset:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/anomaly_detection_data.png" alt="Dataset for Anomaly Detection" style="transform:translate(22vw,0)">
+</p>
+
+<p>
+It looks like the data comes from two different Gaussian distributions:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/anomaly_detection_multivariate_gaussian.png" alt="Multivariate Gaussian Distribution" style="transform:translate(30vw,0)">
+</p>
+
+<p>
+So to model this data we use a Mixture of Gaussian Models. 
+</p>
+
+<p>
+Note that if we knew by which distribution each sample was generated, we would simply use MLE, however we do not know this information, therefore we use the Expectation Maximization Algorithm and we introduce the latent variable \(z\) in place of the predicted output \(y\) we had in supervised learning algorithms.
+</p>
+
+<hr>
+
+<p>
+To model the data, first of all, we suppose that there is a latent (hidden/unobserved) random variable \(z\), and \(x^{(i)}, z^{(i)}\) are distributed (by a joint distribution) like so 
+</p>
+
+\begin{align}
+P(x^{(i)},z^{(i)}) = P(x^{(i)}|z^{(i)}) P(z^{(i)})
+\end{align}
+
+<p>
+Where \(z^{(i)} \sim Multinomial(\phi)\), that is \(z^{(i)}\) is distributed according to a multinomial distribution. This distribution models for each \(z^{(i)}\) the probability of it being equal to \(1, 2, ..., K\), where \(K\) is the number of clusters. This will denote the probability of a point \(x^{(i)}\) being drawn from each of the distributions.
+</p>
+
+<p>
+And \(P(x^{(i)}|z^{(i)}=j)\) is the probability of \(x^{(i)}\) being generated by the cluster \(j\). Where \(x^{(i)}|z^{(i)} = j\) is drawn from a normal distribution \(\mathcal{N}(\mu_j, \Sigma_j)\).
+</p>
+
+<div id="Expectation Maximization-Gaussian Mixture Models"><h2 id="Gaussian Mixture Models" class="header"><a href="#Expectation Maximization-Gaussian Mixture Models">Gaussian Mixture Models</a></h2></div>
+
+<p>
+To build a density estimator model, we cannot rely on a simple distribution. Mixture models try to tackle this limitation by combining a set of distributions to create a convex space where we can search for the optimal parameters for such distributions using Maximum Likelihood Estimation (MLE).
+</p>
+
+<p>
+A Mixture Model is expressed by the following equations:
+</p>
+
+\begin{align}
+p(x^{(i)}) = \sum_{j=1}^K \phi^{(i)}_j p_j(x^{(i)}) \tag{1}
+\end{align}
+
+\begin{align}
+0 \leq \phi^{(i)}_j \leq 1, \sum_{j=1}^K \phi^{(i)}_j = 1
+\end{align}
+
+<p>
+Where \(K\) is the number of mixture components (clusters), \(\phi^{(i)}_j\)'s are the mixture weights, and \(p_j(x^{(i)})\)'s are members of a family of distributions (Gaussian, Poisson, Bernoulli, etc). So for each example \(x^{(i)}\) and for each distribution \(j\), each weight \(\phi^{(i)}_j\) is between 0 and 1, and the sum over \(k\) of the weights \(\phi_j^{(i)}\) for every example \(x^{(i)}\) equals one.
+</p>
+
+<p>
+Consequently, a GMM is a Mixture Model where the \(p_j(x^{(i)})\) is a finite combination of Gaussian Distributions. Therefore, a GMM can be precisely defined by the following set of equations:
+</p>
+
+\begin{align}
+p(x^{(i)};\theta) = \sum_{j=1}^K \phi^{(i)}_j \mathcal{N}(x^{(i)};\mu_j,\,\Sigma_j)
+\end{align}
+
+\begin{align}
+0 \leq \phi^{(i)}_j \leq 1, \sum_{j=1}^K \phi^{(i)}_j = 1
+\end{align}
+
+<p>
+Where \(\theta\) is the collection of all the parameters of the model (mixture weights, means, and covariance matrices):
+</p>
+
+\begin{align}
+\theta = \{\phi_1, \cdots, \phi_K, \mu_1, \cdots, \mu_K, \Sigma_1, \cdots, \Sigma_K\}
+\end{align}
+
+<p>
+For example, the following plot shows what a GMM derived from 3 mixture components looks like:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/gmm_example.png" alt="GMM Example" style="transform:translate(10vw,0)">
+</p>
+
+<p>
+As a consequence, for each data point, \(x^{(i)}\) (in red), we can compute the probability that it belongs to each component (\(P(x^{(i)}|z^{(i)} = j)\), where \(j = 1, 2, 3\))(make a “soft” assignment). This quantity is called “responsibility”.
+</p>
+
+<div id="Expectation Maximization-EM Algorithm with GMM's"><h2 id="EM Algorithm with GMM's" class="header"><a href="#Expectation Maximization-EM Algorithm with GMM's">EM Algorithm with GMM's</a></h2></div>
+
+<p>
+The Expectation Maximization Algorithm is comprised of two steps:
+</p>
+
+<ol>
+<li>
+Guess the value of the responsibilities \(w^{(i)}_j\), that represent the "amount" of each \(x^{(i)}\) that was generated from the distribution \(j\) (or the probability that the \(j\)th distribution generated the point \(x^{(i)}\)).
+
+</li><li>
+Compute the values of the parameters of the distributions: \(\theta = \{\phi, \mu, \Sigma\}\) according to the \(MLE\) (Maximum Likelihood Estimation) with respect to the parameters. Thus, we want to maximize \(\mathcal{L}(\Phi, \mu, \Sigma)\).
+
+</li></ol>
+<div id="Expectation Maximization-EM Algorithm with GMM's-E-Step"><h3 id="E-Step" class="header"><a href="#Expectation Maximization-EM Algorithm with GMM's-E-Step">E-Step</a></h3></div>
+
+<p>
+In this step, as we have said, we will compute the value of the responsibilities with the given parameters \(\phi, \mu, \Sigma\). So for each example \(i\) and each component (distribution) \(j\), the amount of \(x^{(i)}\) that is generated by the component \(j\) is given by:
+</p>
+
+\begin{align}
+w^{(i)}_j = P(z^{(i)} = j | x^{(i)}; \phi_j, \mu_j, \Sigma_j)
+\end{align}
+
+<p>
+By Bayes' Rule, we can rewrite the equation as follows:
+</p>
+
+\begin{align}
+w^{(i)}_j = \frac{P(x^{(i)}|z^{(i)} = j)P(z^{(i)} = j)}{\sum_{l=1}^K \left[P(x^{(i)}|z^{(i)} = l)P(z^{(i)} = l)\right]}
+\end{align}
+
+<p>
+Note that the likelihood \(P(x^{(i)}|z^{(i)} = j)\) and each likelihood \(P(x^{(i)}|z^{(i)} = l)\) come from a Gaussian distribution, therefore:
+</p>
+
+\begin{align}
+P(x^{(i)}|z^{(i)} = j) = \frac{1}{(2\pi)^{\frac{n}{2}}|\Sigma_j|^{\frac{1}{2}}} \exp\left(-\frac{1}{2}(x^{(i)} - \mu_j)^T \Sigma_j^{-1} (x^{(i)} - \mu_j)\right) \tag{2}
+\end{align}
+
+<p>
+To simplify notation we will denote \(P(x^{(i)}|z^{(i)} = j)\) as \(\mathcal{N}(\mu_j, \Sigma_j)\). On the other hand, the prior \(P(z^{(i)} = j)\) comes from a Multinomial distribution, hence:
+</p>
+
+\begin{align}
+P(z^{(i)} = j) = \phi_j \tag{3}
+\end{align}
+
+<p>
+Combining all the expressions:
+</p>
+
+\begin{align}
+w^{(i)}_j = \frac{\phi_j\mathcal{N}(\mu_j, \Sigma_j)}{\sum_{l=1}^K \left[\phi_l\mathcal{N}(\mu_l, \Sigma_l)\right]} \tag{4}
+\end{align}
+
+<p>
+All that is left to do is plug all of the values into each equation \((2)\) and \((3)\) (this values are known, given the equations are written in terms of the distributions' parameters) and compute each \(w^{(i)}_j\) given \((4)\).
+</p>
+
+<div id="Expectation Maximization-EM Algorithm with GMM's-M-Step"><h3 id="M-Step" class="header"><a href="#Expectation Maximization-EM Algorithm with GMM's-M-Step">M-Step</a></h3></div>
+
+<p>
+In this step what we do is maximize the log likelihood of the distributions' parameters \(\theta\), that is we maximize \(\mathcal{L}(\phi, \mu, \sigma)\). But first, let us see how do we maximize the parameters in <code>GMM</code>.
+</p>
+
+<div id="Expectation Maximization-EM Algorithm with GMM's-M-Step-Optimal Parameters of a GMM"><h4 id="Optimal Parameters of a GMM" class="header"><a href="#Expectation Maximization-EM Algorithm with GMM's-M-Step-Optimal Parameters of a GMM">Optimal Parameters of a GMM</a></h4></div>
+
+<p>
+We are going to show how to maximize the log likelihood of the parameters of a Gaussian Mixture Model. The goal of the GMM is to represent the distribution of the data as accurately as possible using a linear combination of Gaussian Distributions.
+</p>
+
+<p>
+Given a dataset \(X\) of \(m\) data points, we assume they are i.i.d (independent and identically distributed), therefore the maximum likelihood estimator over \(X\) can be expressed as the product of the individual likelihoods. To simplify the equations, we are going to directly apply the logarithm to the MLE function:
+</p>
+
+\begin{align}
+\log \mathcal{L}(X|\theta) = \log p(X|\theta) = \log \prod_{i=1}^m p(x^{(i)}|\theta) = \sum_{i=1}^m \log p(x^{(i)}|\theta)
+\end{align}
+
+<p>
+By \((1)\) we know that \(p(x^{(i)}|\theta)\) is a linear combination of Gaussian distributions, therefore:
+</p>
+
+\begin{align}
+\log \mathcal{L}(X|\theta) = \sum_{i=1}^n \log \sum_{j=1}^K \phi_j^{(i)}\mathcal{N}(x^{(i)}|\mu_j, \Sigma_j)
+\end{align}
+
+<p>
+This equation is not tractable, so we won't get an analytical solution by just taking the its derivative with respect to \(\theta\) and setting it to 0. The following set of equations outline how we would evaluate it:
+</p>
+
+\begin{align}
+\frac{\delta \mathcal{L}}{\delta \mu_j} \sum_{i=1}^m \frac{\delta \log p(x^{(i)}|\theta)}{\delta \mu_j} = 0^T
+\end{align}
+
+\begin{align}
+\frac{\delta \mathcal{L}}{\delta \Sigma_j} \sum_{i=1}^m \frac{\delta \log p(x^{(i)}|\theta)}{\delta \Sigma_j} = 0
+\end{align}
+
+\begin{align}
+\frac{\delta \mathcal{L}}{\delta \phi_j} \sum_{i=1}^m \frac{\delta \log p(x^{(i)}|\theta)}{\delta \phi_j} = 0
+\end{align}
+
+<p>
+Observe that the computation of each parameter from \(\theta (\mu, \Sigma, \phi)\) depends on the other parameters in a complex way. To solve those equations, we can use the strategy of optimizing some parameters while keeping the others fixed.
+</p>
+
+<hr>
+
+<p>
+Going back to the Expectation Maximization Algorithm, there is a way of updating the individual parameters of a GMM given prior (initialized at random) parameters \(\mu, \Sigma, \phi\). This approach works by updating some parameters while keeping the others fixed. So, by solving the derivatives presented above we derive the three following updating rules:
+</p>
+
+\begin{align}
+\hat{\mu}_j = \frac{\sum_{i=1}^m w^{(i)}_jx^{(i)}}{\sum_{l=1}^m w^{(l)}_j}
+\end{align}
+
+\begin{align}
+\hat{\Sigma}_j = \frac{\sum_{i=1}^m w^{(i)}_j (x^{(i)} - \hat{\mu}_j)(x^{(i)} - \hat{\mu}_j)^T}{\sum_{l=1}^m w^{(l)}_j}
+\end{align}
+
+\begin{align}
+\hat{\phi}_j = \frac{1}{m} \sum_{i=1}^m w^{(i)}_j
+\end{align}
+
+<p>
+To simplify a bit the notation, if \(N_j = \sum_{l=1}^m w^{(i)}_l\):
+</p>
+
+\begin{align}
+\hat{\mu}_j = \frac{1}{N_j} \sum_{i=1}^m w^{(i)}_jx^{(i)}
+\end{align}
+
+\begin{align}
+\hat{\Sigma}_j = \frac{1}{N_j}\sum_{i=1}^m w^{(i)}_j (x^{(i)} - \hat{\mu}_j)(x^{(i)} - \hat{\mu}_j)^T
+\end{align}
+
+\begin{align}
+\hat{\phi}_j = \frac{N_j}{m}
+\end{align}
+
+<p>
+Note that the update of \(\mu, \Sigma, \phi\), all depend on the responsibilities (\(w^{(i)}_j\)), which by its turn, depends on \(\mu, \Sigma, \phi\). That’s why there's not a closed-form solution to equations.
+</p>
+
+<p>
+Furthermore these equations do not aim to precisely maximize over \(\theta\) the actual log likelihood. Instead they maximize a proxy function of the log-likelihood over \(\theta\), namely, the expected log-likelihood, which can be derived from the log-likelihood using Jensen's Inequality as follows:
+</p>
+
+\begin{align}
+\hat{\mathcal{L}}(X|\theta) = \sum_{i=1}^m\sum_{j=1}^K w^{(i)}_j \log \left( \frac{\phi_j \mathcal{N}(x^{(i)} | \mu_j, \Sigma_j)}{w^{(i)}_j} \right) \tag{5}
+\end{align}
+
+<div id="Expectation Maximization-EM Algorithm with GMM's-Iterative Process"><h3 id="Iterative Process" class="header"><a href="#Expectation Maximization-EM Algorithm with GMM's-Iterative Process">Iterative Process</a></h3></div>
+
+<p>
+The process consists of an iterative process that alternates between two steps. The first step is to compute the responsibilities (E step) of each mixture component for each data point using the current parameters (\(\mu, \Sigma, \phi\)). The second step consists of updating the parameters (M step) in order to maximize the expected log-likelihood given by \((5)\)
+</p>
+ 
+<p>
+The E and M steps are repeated until there is no significant progress in the proxy function of the log-likelihood computed after the M step.
+</p>
+
+<hr>
+
+<div id="Expectation Maximization-Recap: Anomaly Detection"><h2 id="Recap: Anomaly Detection" class="header"><a href="#Expectation Maximization-Recap: Anomaly Detection">Recap: Anomaly Detection</a></h2></div>
+
+<p>
+Thus, when the parameters \(\theta\) are optimized, we can compute \(P(x) = \sum_{j=1}^K P(x|z = j)\) and if \(P(x) &lt; \epsilon\) you can flag \(x\) as an anomaly.
+</p>
+
+<hr>
+
+<div id="Expectation Maximization-Generalized EM Algorithm"><h2 id="Generalized EM Algorithm" class="header"><a href="#Expectation Maximization-Generalized EM Algorithm">Generalized EM Algorithm</a></h2></div>
+
+<div id="Expectation Maximization-Generalized EM Algorithm-Jensen's Inequality"><h3 id="Jensen's Inequality" class="header"><a href="#Expectation Maximization-Generalized EM Algorithm-Jensen's Inequality">Jensen's Inequality</a></h3></div>
+
+<div id="Expectation Maximization-Generalized EM Algorithm-Jensen's Inequality-Convex function"><h4 id="Convex function" class="header"><a href="#Expectation Maximization-Generalized EM Algorithm-Jensen's Inequality-Convex function">Convex function</a></h4></div>
+
+<p>
+We are going to show what Jensen's Inequality is about. So:
+</p>
+
+<ul>
+<li>
+Let \(f\) be a convex function (e.g. \(f''(x) &gt; 0\)) and
+
+</li><li>
+Let \(x\) be a random variable, then
+\begin{align}
+f(E[x]) \leq E[f(x)]
+\end{align}
+
+</li></ul>
+<p>
+where \(E\) is the expected value.
+</p>
+
+<p>
+Further, if \(f''(x) &gt; 0\) (we say f is strictly convex, that is f is not a straight line), then:
+</p>
+
+\begin{align}
+E[f(x)] = f(E[x]) \leftrightarrow \text{ x is a constant, more formally } X = E[X] \text{ with probability 1}
+\end{align}
+
+<div id="Expectation Maximization-Generalized EM Algorithm-Jensen's Inequality-Concave function"><h4 id="Concave function" class="header"><a href="#Expectation Maximization-Generalized EM Algorithm-Jensen's Inequality-Concave function">Concave function</a></h4></div>
+
+<p>
+We are going to apply the same arguments with a concave function. Note that a concave function equals the negative of a convex function, thus:
+</p>
+
+<ul>
+<li>
+Let \(f\) be a concave function (e.g. \(f''(x) &lt; 0\)) and
+
+</li><li>
+Let \(x\) be a random variable, then
+\begin{align}
+f(E[x]) \geq E[f(x)]
+\end{align}
+
+</li></ul>
+<p>
+where \(E\) is the expected value.
+</p>
+
+<p>
+Further, if \(f''(x) &lt; 0\) (we say f is strictly concave), then:
+</p>
+
+\begin{align}
+E[f(x)] = f(E[x]) \leftrightarrow \text{ x is a constant, more formally } X = E[X] \text{ with probability 1}
+\end{align}
+
+<div id="Expectation Maximization-Generalized EM Algorithm-Jensen's Inequality-Some Intuition"><h4 id="Some Intuition" class="header"><a href="#Expectation Maximization-Generalized EM Algorithm-Jensen's Inequality-Some Intuition">Some Intuition</a></h4></div>
+
+<p>
+Given any convex function (the inverse also applies to concave functions), if we draw a chord between any two points, its middle point (that is the expected value of the function or \(E[f(x)]\)) is always above that the value of the expected value under the function (that is \(f(E[x])\)). Graphically:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/jensen_inequality.svg" alt="Jensen's Inequality" style="transform:translate(22vw, 0)">
+</p>
+
+<div id="Expectation Maximization-Generalized EM Algorithm-Motivation"><h3 id="Motivation" class="header"><a href="#Expectation Maximization-Generalized EM Algorithm-Motivation">Motivation</a></h3></div>
+
+<p>
+Given a model for \(P(x, z , \theta)\) where \(\theta\) are the parameters of the model. We only observe \(X = \{x^{(1)}, \cdots, x^{(m)}\}\).
+</p>
+
+<p>
+The goal is to obtain by the <span id="Expectation Maximization-Generalized EM Algorithm-Motivation-Maximum Likelihood Estimation"></span><strong id="Maximum Likelihood Estimation">Maximum Likelihood Estimation</strong> the value of \(\theta\) that maximizes the log likelihood, defined as:
+</p>
+
+\begin{align}
+\theta = \underset{\theta}{\arg \max{l(\theta)} }  = \sum_{i=1}^m \log (P(x^{(i)}; \theta))
+\end{align}
+
+<p>
+If we marginalize \(z^{(i)}\):
+</p>
+
+\begin{align}
+\theta = \underset{\theta}{\arg \max{l(\theta)} } = \sum_{i=1}^m \log \sum_{z^{(i)}} (P(x^{(i)}, z^{(i)}; \theta))
+\end{align}
+
+<div id="Expectation Maximization-Generalized EM Algorithm-E-Step"><h3 id="E-Step" class="header"><a href="#Expectation Maximization-Generalized EM Algorithm-E-Step">E-Step</a></h3></div>
+
+<p>
+In the <code>E-Step</code> we construct a lower bound from a given <code>theta</code>: so, let's say \(l(\theta)\) is the log likelihood.
+</p>
+
+<p>
+On the first iteration, the graph would be as follows:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/e_step_1.svg" alt="First iteration E-Step">
+</p>
+
+<p>
+And on the second iteration:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/e_step_2.svg" alt="Second iteration E-Step" style="transform: translate(12vw, 0)">
+</p>
+
+<p>
+We iterate until there are no significant changes in the lower bound, that is the algorithm converges to a local optimum (it should be noted the optimum is local not absolute, and it depends on the initialization of the distributions' parameters).
+</p>
+
+<div id="Expectation Maximization-Generalized EM Algorithm-M-Step"><h3 id="M-Step" class="header"><a href="#Expectation Maximization-Generalized EM Algorithm-M-Step">M-Step</a></h3></div>
+
+<p>
+Now, in the M-Step we maximize the log likelihood as follows:
+</p>
+
+\begin{align}
+\underset{\theta}{\max{ }} \sum_{i=1}^m \log P(x^{(i)}; \theta)
+\end{align}
+
+<p>
+By marginalizing \(z^{(i)}\):
+</p>
+
+\begin{align}
+\underset{\theta}{\max{ }} \sum_{i=1}^m \log \sum_{z^{(i)}} P(x^{(i)}, z^{(i)}; \theta)
+\end{align}
+
+<p>
+We now introduce a probability distribution over \(z^{(i)}\) (thus \(\sum_{z^{(i)}}Q(z^{(i)}) = 1\)), and we multiply by \(\frac{Q(z^{(i)})}{Q(z^{(i)})}\):
+</p>
+
+\begin{align}
+\underset{\theta}{\max{ }} \sum_{i=1}^m \log \sum_{z^{(i)}} Q(z^{(i)}) \frac{P(x^{(i)}, z^{(i)}; \theta)}{Q(z^{(i)})}
+\end{align}
+
+<p>
+Now, by the definition of expected value (Given a sequence of real values \(a_1, \cdots, a_n\) with probabilities \(p_1, \cdots, p_n\), the expected value is defined as: \(e = \sum_{i=1}^n p_i a_i\)), if \(p_i = Q(z^{(i)})\) and \(a_i = \frac{P(x^{(i)}, z^{(i)}; \theta)}{Q(z^{(i)})}\)
+</p>
+
+\begin{align}
+\underset{\theta}{\max{ }} \sum_{i=1}^m \log E_{z^{(i)}\sim Q} \left[\frac{P(x^{(i)}, z^{(i)}; \theta)}{Q(z^{(i)})}\right]
+\end{align}
+
+<p>
+If we apply the concave version of Jensen's Inequality we obtain a lower bound of the form:
+</p>
+
+\begin{align}
+\sum_{i=1}^m \log E_{z^{(i)}\sim Q} \left[\frac{P(x^{(i)}, z^{(i)}; \theta)}{Q(z^{(i)})}\right] \geq \sum_{i=1}^m E_{z^{(i)} \sim Q} \left[\log \frac{P(x^{(i)}, z^{(i)}; \theta)}{Q(z^{(i)})}  \right]
+\end{align}
+
+<p>
+If \(\log (x) = f(x)\), then this equation can be mapped to the inequality:
+</p>
+
+\begin{align}
+f(E[x]) \geq E[f(x)]
+\end{align}
+
+<p>
+Note that \(log\) is a concave function. If we "unpack" the expected value:
+</p>
+
+\begin{align}
+\sum_{i=1}^m E_{z^{(i)} \sim Q} \left[\log \frac{P(x^{(i)}, z^{(i)}; \theta)}{Q(z^{(i)})}  \right] = \sum_{i=1}^m \sum_{z^{(i)}} \log Q(z^{(i)}) \left[\frac{P(x^{(i)}, z^{(i)}; \theta)}{Q(z^{(i)})}\right]
+\end{align}
+
+<div id="Expectation Maximization-Generalized EM Algorithm-Make Log Likelihood and Lower Bound Equal on Theta"><h3 id="Make Log Likelihood and Lower Bound Equal on Theta" class="header"><a href="#Expectation Maximization-Generalized EM Algorithm-Make Log Likelihood and Lower Bound Equal on Theta">Make Log Likelihood and Lower Bound Equal on Theta</a></h3></div>
+
+<p>
+For each \(\theta\) on the E-Step you wan the value of \(\theta\) under the lower bound function to be equal to \(l(\theta)\), which is what guarantees that when you optimize the lower bound you optimize \(l(\theta)\).
+</p>
+
+<p>
+So, for a given iteration the current value of \(\theta\), denoted by \(\hat{\theta}\), we want:
+</p>
+
+\begin{align}
+\sum_{i=1}^m \log E_{z^{(i)}\sim Q} \left[\frac{P(x^{(i)}, z^{(i)}; \hat{\theta})}{Q(z^{(i)})}\right] = \sum_{i=1}^m E_{z^{(i)} \sim Q} \left[\log \frac{P(x^{(i)}, z^{(i)}; \hat{\theta})}{Q(z^{(i)})}  \right]
+\end{align}
+
+<p>
+Remember, by the extension on Jensen's Inequality we know that \(E[f(x)] = f(E[x])\) if and only if \(x\) is a constant. In this case 
+</p>
+
+\begin{align}
+x = \frac{P(x^{(i)}, z^{(i)}; \hat{\theta})}{Q(z^{(i)})} = constant
+\end{align}
+
+<p>
+For this to hold, we need \(Q(z^{(i)})\) to be directly proportional to \(P(x^{(i)}, z^{(i)}; \hat{\theta})\) (so when one is bigger the other is bigger and vice versa, so the ratio between the two remains constant). So:
+</p>
+
+\begin{align}
+Q(z^{(i)}) \propto P(x^{(i)}, z^{(i)}; \hat{\theta})
+\end{align}
+
+<p>
+Because \(\sum_{z^{(i)}}Q(z^{(i)}) = 1\), a way to ensure this is to set each \(Q^{(i)} = P(x^{(i)}, z^{(i)}; \hat{\theta})\) and then normalize it to make sure the sum of \(Q\) over \(z^{(i)}\) equals one. Hence:
+</p>
+
+\begin{align}
+Q(z^{(i)}) = \frac{P(x^{(i)}, z^{(i)}; \hat{\theta})}{\sum_{z^{(i)}} P(x^{(i)}, z^{(i)}; \hat{\theta})}
+\end{align}
+
+<p>
+It turns out you can further derive this equation to be:
+</p>
+
+\begin{align}
+Q(z^{(i)}) = P(z^{(i)}|x^{(i)}; \hat{\theta})
+\end{align}
+
+<div id="Expectation Maximization-Generalized EM Algorithm-Putting Everything Together"><h3 id="Putting Everything Together" class="header"><a href="#Expectation Maximization-Generalized EM Algorithm-Putting Everything Together">Putting Everything Together</a></h3></div>
+
+<p>
+So, after everything we have seen, we can summarize the EM generalized algorithm as follows: If \(\theta\) is the value of the parameters in the current iteration:
+</p>
+
+<ul>
+<li>
+<em>E-Step</em>: set 
+\begin{align}
+Q_i(z^{(i)}) = P(z^{(i)}|x^{(i)}; \theta)
+\end{align}
+
+</li><li>
+<em>M-Step</em>: set 
+\begin{align}
+\theta := \underset{\theta}{\arg \max} \sum_{i=1}^m \sum_{z^{(i)}} Q_i(z^{(i)}) \log \left[\frac{P(x^{(i)}, z^{(i)};\theta)}{Q_i(z^{(i)})}\right]
+\end{align}
+
+</li></ul>
+<div id="Expectation Maximization-Derive EM for GMM from the Generalized Algorithm"><h2 id="Derive EM for GMM from the Generalized Algorithm" class="header"><a href="#Expectation Maximization-Derive EM for GMM from the Generalized Algorithm">Derive EM for GMM from the Generalized Algorithm</a></h2></div>
+
+<p>
+Given a model described by:
+</p>
+
+<ul>
+<li>
+\(P(x^{(i)}, z^{(i)}) = P(x^{(i)}|z^{(i)}) P(z^{(i)})\)
+
+</li><li>
+where \(z^{(i)} \sim Multinomial(\phi)\) (which means \(P(z^{(i)} = j) = \phi_j\))
+
+</li><li>
+and \(x^{(i)} | z^{(i)} \sim \mathcal{N}(\mu_j, \Sigma_j)\)
+
+</li></ul>
+<div id="Expectation Maximization-Derive EM for GMM from the Generalized Algorithm-E-Step"><h3 id="E-Step" class="header"><a href="#Expectation Maximization-Derive EM for GMM from the Generalized Algorithm-E-Step">E-Step</a></h3></div>
+
+<p>
+On the <code>E-Step</code> we compute:
+</p>
+
+<p>
+\(Q_i(z^{(i)}) P(z^{(i)} = j | x^{(i)}; \phi, \mu, \Sigma)\)
+</p>
+
+<p>
+If we look at <a href="Expectation-Maximization Algorithms.html#Expectation Maximization-EM Algorithm with GMM's-E-Step">E-Step from GMM's</a> we can see that the expression above equals \(w^{(i)}_j\).
+</p>
+
+<div id="Expectation Maximization-Derive EM for GMM from the Generalized Algorithm-M-Step"><h3 id="M-Step" class="header"><a href="#Expectation Maximization-Derive EM for GMM from the Generalized Algorithm-M-Step">M-Step</a></h3></div>
+
+<p>
+Now on the <code>M-Step</code> what we do is maximize the lower bound we have constructed in the <code>E-Step</code>. For that we need to compute the value of the parameters \(\phi, \mu, \Sigma\) that maximize this function, that is:
+</p>
+
+\begin{align}
+\underset{\phi, \mu, \Sigma}{\max} \sum_{i=1}^m \sum_{z^{(i)}} Q_i(z^{(i)}) \log \left( \frac{P(x^{(i)}, z^{(i)}; \phi, \mu, \Sigma)}{Q_i(z^{(i)})} \right) =
+\end{align}
+
+<p>
+As we know \(Q_i(z^{(i)}) = w^{(i)}_j\) and \(P(x^{(i)}, z^{(i)}) = P(x^{(i)}|z^{(i)}) P(z^{(i)})\), thus:
+</p>
+
+\begin{align}
+= \sum_{i=1}^m \sum_{j}^K w^{(i)}_j \log \left( \frac{P(x^{(i)}|z^{(i)} = j, \mu_j, \Sigma_j) P(z^{(i)} = j)}{w^{(i)}_j} \right)
+\end{align}
+
+<p>
+We also know that \(P(z^{(i)} = j) = \phi_j\) and \(x^{(i)} | z^{(i)} \sim \mathcal{N}(\mu_j, \Sigma_j)\), therefore:
+</p>
+
+\begin{align}
+= \sum_{i=1}^m \sum_{j}^K w^{(i)}_j \log \left( \frac{\mathcal{N}(x^{(i)}; \mu_j, \Sigma_j) \phi_j}{w^{(i)}_j} \right)
+\end{align}
+
+<p>
+Where:
+</p>
+
+\begin{align}
+\mathcal{N}(x^{(i)}; \mu_j, \Sigma_j) = \frac{1}{(2\pi)^{1/2}|\Sigma_j|^{1/2}} \exp \left( -\frac{1}{2}(x^{(i)} - \mu_j)^T \Sigma_j^{-1}(x^{(i)} - \mu_j)\right)
+\end{align}
+
+<hr>
+
+<p>
+From now on we denote \(\sum_{i=1}^m \sum_{j}^K w^{(i)}_j \log \left( \frac{\mathcal{N}(x^{(i)}; \mu_j, \Sigma_j) \phi_j}{w^{(i)}_j} \right)\) as \(\mathcal{L}(\phi, \mu, \Sigma)\):
+</p>
+
+<p>
+To maximize this formula over \(\phi, \mu\) and \(\Sigma\) you have to compute the derivatie of the function with respect to each parameter, such that:
+</p>
+
+<ol>
+<li>
+\(\Delta_{\mu_j} (\mathcal{L}(\phi, \mu, \Sigma)) = 0\), then: \(\mu_j = \sum_{i}^m \frac{w^{(i)}_j x^{(i)}_j}{w^{(i)}_j}\) (same as in <a href="Expectation-Maximization Algorithms.html#Expectation Maximization-EM Algorithm with GMM's-M-Step">M-Step in GMM's</a>)
+
+</li><li>
+\(\Delta_{\Sigma_j} (\mathcal{L}(\phi, \mu, \Sigma)) = 0\) and
+
+</li><li>
+\(\Delta_{\phi_j} (\mathcal{L}(\phi, \mu, \Sigma)) = 0\)
+
+</li></ol>
+</div>
+  
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+<script src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script></body></html>

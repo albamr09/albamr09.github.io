@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>JSON Web Tokens</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,108 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="JSON Web Tokens"><h1 id="JSON Web Tokens" class="header"><a href="#JSON Web Tokens">JSON Web Tokens</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="/src/Notes/index.html">Notes</a>
+<div id="JSON Web Tokens-Installation"><h2 id="Installation" class="header"><a href="#JSON Web Tokens-Installation">Installation</a></h2></div>
 
-</li><li>
-<a href="/src/Study/index.html">Study</a>
+<pre bash="">
+$ npm install jsonwebtoken
 
-</li></ul>
-<hr>
+</pre>
+
+<div id="JSON Web Tokens-Example of Usage"><h2 id="Example of Usage" class="header"><a href="#JSON Web Tokens-Example of Usage">Example of Usage</a></h2></div>
+
+<p>
+We first create our <code>Express</code> application and so, we import <code>express</code> and <code>jsonwebtoken</code>. And then we start the server.
+</p>
+
+<pre javascript="">
+const express = require("express");
+const jwt = require("jsonwebtoken");
+
+const app = express();
+
+app.listen(3000, () =&gt; {
+    console.log("nodejs app running...");
+});
+
+</pre>
+
+<p>
+Now, we define two new endpoints: <code>/api</code> and <code>/api/login</code>.
+</p>
+
+<pre javascript="">
+app.get("/api", (req , res) =&gt; {
+    res.json({
+        mensaje: "Nodejs and JWT"
+    });
+});
+
+app.post("/api/login", (req , res) =&gt; {
+    const user = {
+        id: 1,
+        nombre : "Henry",
+        email: "henry@email.com"
+    }
+
+    jwt.sign({user}, 'secretkey', {expiresIn: '32s'}, (err, token) =&gt; {
+        res.json({
+            token
+        });
+    });
+
+});
+
+</pre>
+
+<p>
+Where we use the <code>sign</code> method to create a new token.
+</p>
+
+<p>
+So, if we want to define an endpoint that requires authentication we do:
+</p>
+
+<pre javascript="">
+// Middleware
+function verifyToken(req, res, next){
+     const bearerHeader =  req.headers['authorization'];
+
+     if(typeof bearerHeader !== 'undefined'){
+          const bearerToken = bearerHeader.split(" ")[1];
+          req.token  = bearerToken;
+          next();
+     }else{
+         res.sendStatus(403);
+     }
+}
+
+app.post("/api/posts", verifyToken, (req , res) =&gt; {
+
+    jwt.verify(req.token, 'secretkey', (error, authData) =&gt; {
+        if(error){
+            res.sendStatus(403);
+        }else{
+            res.json({
+                    mensaje: "Post fue creado",
+                    authData
+                });
+        }
+    });
+});
+
+</pre>
+
+<p>
+Where <code>verifyToken</code> is a middleware function that gets the token from the header, and then we use the <code>verify</code> method to check if the token is valid.
+</p>
 </div>
   
   <script type="text/javascript">

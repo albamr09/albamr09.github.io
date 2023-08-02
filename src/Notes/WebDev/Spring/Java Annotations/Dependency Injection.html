@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Dependency Injection</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,62 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
 
+<div id="Dependency Injection"><h1 id="Dependency Injection" class="header"><a href="#Dependency Injection">Dependency Injection</a></h1></div>
+
+<hr>
+
+<p>
+We will introduce dependency injection with annotation using autowiring:
+</p>
+
+<ul>
+<li>
+Spring looks for a class that matches the attribute type (call or interface) (i.e. FortuneService)
+
+</li><li>
+Spring will inject it automatically
+
+</li><li>
+If there are multiple implementations: tell Spring which specific bean to use with the <code>Qualifier</code> annotation
+
+</li></ul>
 <hr>
 
 <ul>
 <li>
-<a href="/src/Notes/index.html">Notes</a>
+<a href="Constructor Injection.html">Constructor Injection</a>
 
 </li><li>
-<a href="/src/Study/index.html">Study</a>
+<a href="Setter Injection.html">Setter Injection</a>
+
+</li><li>
+<a href="Method Injection.html">Method Injection</a>
+
+</li><li>
+<a href="Field Injection.html">Field Injection</a>
+
+</li><li>
+<a href="Inject using Properties File.html">Inject using Properties File</a>
 
 </li></ul>
 <hr>
+
+<ul>
+<li>
+<a href="Qualifier Annotation.html">Qualifier Annotation</a>
+
+</li></ul>
+<hr>
+
+<div id="Dependency Injection-Which dependency to use"><h3 id="Which dependency to use" class="header"><a href="#Dependency Injection-Which dependency to use">Which dependency to use</a></h3></div>
+
+<p>
+Choose a style and stay consistent in your project. You get the same functionality regardless of the type of dependency injection you use.
+</p>
 </div>
   
   <script type="text/javascript">

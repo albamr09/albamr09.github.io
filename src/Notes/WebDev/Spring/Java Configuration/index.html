@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Spring Configuration with Java</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,57 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="../index.html">Back</a>
+</p>
 
+<div id="Spring Configuration with Java"><h1 id="Spring Configuration with Java" class="header"><a href="#Spring Configuration with Java">Spring Configuration with Java</a></h1></div>
+
+<hr>
+
+<p>
+We are now going to use <code>Java</code> to configure our application instead of using <code>XML</code>, to do that we follow the next steps:
+</p>
+
+<ul>
+<li>
+Create a Java class and annotate as <code>@Configuration</code>
+
+</li><li>
+Add Component scanning support with <code>@ComponentScan</code> (optional), which is <code>XML</code> we did as:
+<pre xml="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+    ....&gt;
+	&lt;!-- add entry to enable component scanning --&gt;
+	&lt;context:component-scan base-package="com.springdemo" /&gt;
+
+&lt;/beans&gt;
+</pre>
+
+</li><li>
+In the main app read the Spring Java configuration class
+
+</li></ul>
 <hr>
 
 <ul>
 <li>
-<a href="/src/Notes/index.html">Notes</a>
-
-</li><li>
-<a href="/src/Study/index.html">Study</a>
+<a href="Configuration With Java.html">Configuration With Java</a>
 
 </li></ul>
 <hr>
+ 
+<ul>
+<li>
+<a href="Inversion of Control.html">Inversion of Control</a>
+
+</li><li>
+<a href="Load Properties from File.html">Load Properties from File</a>
+
+</li><li>
+<a href="Dependency Injection.html">Dependency Injection</a>
+
+</li></ul>
 </div>
   
   <script type="text/javascript">

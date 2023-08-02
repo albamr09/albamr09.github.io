@@ -1,0 +1,129 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Search</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Search"><h1 id="Search" class="header"><a href="#Search">Search</a></h1></div>
+
+<hr>
+
+<p>
+The process of finding a path from a starting point to the goal location is called Robot Motion Planning or simply Planning. 
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/planning.png" alt="Robot Motion Planning" style="transform: translate(50%, 0)">
+</p>
+
+<p>
+Then given:
+</p>
+
+<ul>
+<li>
+Map
+
+</li><li>
+Starting Location
+
+</li><li>
+Goal Location
+
+</li><li>
+Cost Function
+
+</li></ul>
+<p>
+The goal is to find the minimum cost path between the start and the goal.
+</p>
+
+<div id="Search-A*"><h2 id="A*" class="header"><a href="#Search-A*">A*</a></h2></div>
+
+<p>
+Consider a square grid having many obstacles and we are given a starting cell and a target cell. We want to reach the target cell (if possible) from the starting cell as quickly as possible.
+</p>
+
+<p>
+What A* Search Algorithm does is that at each step it picks the node according to a value \(f = g + h(x,y)\), where \(g\) is the current cost and \(h(x,y)\) is the value of the heuristic function in cell \((x,y)\). That is h is the estimated movement cost to move from that given square on the grid to the final destination. This is often referred to as the heuristic, which is nothing but a kind of smart guess. 
+</p>
+
+<div id="Search-A*-Algorithm"><h3 id="Algorithm" class="header"><a href="#Search-A*-Algorithm">Algorithm</a></h3></div>
+
+<pre markdown="">1.  let openList equal empty list of nodes
+2.  let closedList equal empty list of nodes
+3.  put startNode on the openList (leave it's f at zero)
+4.  while openList is not empty
+5.      let currentNode equal the node with the least f value
+6.      remove currentNode from the openList
+7.      add currentNode to the closedList
+8.      if currentNode is the goal
+9.          You've found the exit!
+10.      let children of the currentNode equal the adjacent nodes
+11.      for each child in the children
+12.          if child is in the closedList
+13.              continue to beginning of for loop
+14.          child.g = currentNode.g + distance b/w child and current
+15.          child.h = distance from child to end
+16.          child.f = child.g + child.h
+17.          if child.position is in the openList's nodes positions
+18.              if child.g is higher than the openList node's g
+19.                  continue to beginning of for loop
+20.          add the child to the openList
+</pre>
+
+<div id="Search-Dynamic Programming"><h2 id="Dynamic Programming" class="header"><a href="#Search-Dynamic Programming">Dynamic Programming</a></h2></div>
+
+<p>
+Given a grid and a goal position, dynammic programming gives you the optimal action for each cell. Where the optimal action is to move to the direction that offers the lower distance to the goal.
+</p>
+
+<p>
+To compute this distance we calculate:
+</p>
+
+\begin{align}
+f(x,y) = g = min_{x',y'} f(x', y') + 1
+\end{align}
+
+<p>
+That is, we obtain recursively the distance of each neighbour to the goal and we add one.
+</p>
+</div>
+  
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+<script src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script></body></html>

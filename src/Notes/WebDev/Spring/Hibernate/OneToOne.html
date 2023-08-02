@@ -1,0 +1,329 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>One To One Relationship</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="One To One Relationship"><h1 id="One To One Relationship" class="header"><a href="#One To One Relationship">One To One Relationship</a></h1></div>
+
+<hr>
+
+<ol>
+<li>
+<a href="OneToOne.html#One To One Relationship-Unidirectional">Unidirectional</a>
+
+</li><li>
+<a href="OneToOne.html#One To One Relationship-Bidirectional">Bidirectional</a>
+
+</li></ol>
+<hr>
+
+<div id="One To One Relationship-Unidirectional"><h2 id="Unidirectional" class="header"><a href="#One To One Relationship-Unidirectional">Unidirectional</a></h2></div>
+
+<p>
+Here we demonstrate how to implement a unidirectional one to one relationship between two entities:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/uni_one_to_one.png" alt="Unidirectional One To One Relationship">
+</p>
+
+<p>
+Well, first of all you have to define the two database tables corresponding to these two entities.
+</p>
+
+<div id="One To One Relationship-Unidirectional-Entities"><h3 id="Entities" class="header"><a href="#One To One Relationship-Unidirectional-Entities">Entities</a></h3></div>
+
+<p>
+We now code the two entities:
+</p>
+
+<pre java="">package com.hibernate.demo.entity;
+/* annotate the class as an entity and map to db table */
+@Entity
+@Table(name="instructor")
+public class Instructor {
+  // define the fields and annotate the fields 
+  // with db column names
+  @Id
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @Column(name="id")
+  private int id;
+  
+  @Column(name="first_name")
+  private String firstName;
+  
+  @Column(name="last_name")
+  private String lastName;
+  
+  @Column(name="email")
+  private String email;
+  
+  // Set up mapping to InstructorDetail entity
+  // Note the cascade type
+  @OneToOne(cascade=CascadeType.ALL)
+  // Define the foreign key
+  @JoinColumn(name="instructor_detail_id")
+  private InstructorDetail instructorDetail;
+  
+  public Instructor() {
+  	
+  }
+  ...
+  // Setters and getters 
+}
+</pre>
+
+<p>
+Note the specification of the <a href="Concepts.html">Cascade Type</a>. And now the <code>InstructorDetail</code>:
+</p>
+
+<pre java="">package com.hibernate.demo.entity;
+// annotate the class as an entity and map to db table
+@Entity
+@Table(name="instructor_detail")
+public class InstructorDetail {
+	// define the fields
+	// annotate the fields with db column names
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	private int id;
+	
+	@Column(name="youtube_channel")
+	private String youtubeChannel;
+	
+	@Column(name="hobby")
+	private String hobby;
+	
+	public InstructorDetail() {
+  }		
+  
+  ...
+  // Setters and getters
+}
+
+</pre>
+
+<div id="One To One Relationship-Unidirectional-Main App"><h3 id="Main App" class="header"><a href="#One To One Relationship-Unidirectional-Main App">Main App</a></h3></div>
+
+<p>
+To test our code, we are going to create an <code>Instructor</code> object and an <code>InstructorDetail</code> object and save them. The test main app is the following:
+</p>
+
+<pre java="">package com.hibernate.demo;
+public class CreateDemo {
+  public static void main(String[] args) {
+  
+    // create session factory
+    // ...
+    
+    // create session
+    Session session = factory.getCurrentSession();
+    
+    try {			
+    
+      // create the objects
+      Instructor tempInstructor = 
+      		new Instructor("Madhu", "Patel", "madhu@mail.com");
+      
+      InstructorDetail tempInstructorDetail =
+      		new InstructorDetail(
+      				"http://www.youtube.com",
+      				"Guitar");		
+      
+      // associate the objects
+      tempInstructor.setInstructorDetail(tempInstructorDetail);
+      
+      // start a transaction
+      session.beginTransaction();
+      
+      // save the instructor
+      //
+      // Note: this will ALSO save the details object
+      // because of CascadeType.ALL
+      //
+      session.save(tempInstructor);					
+      
+      // commit transaction
+      session.getTransaction().commit();
+    }
+    finally {
+    	factory.close();
+    }
+  }
+}
+</pre>
+
+<div id="One To One Relationship-Bidirectional"><h2 id="Bidirectional" class="header"><a href="#One To One Relationship-Bidirectional">Bidirectional</a></h2></div>
+
+<p>
+Now we will define the following Bidirectional One To One relationship:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/bi_one_to_one.png" alt="Bidirectional One To One Relationship">
+</p>
+
+<p>
+Let's now see how to code a bidirectional relationship:
+</p>
+
+<div id="One To One Relationship-Bidirectional-Entities"><h3 id="Entities" class="header"><a href="#One To One Relationship-Bidirectional-Entities">Entities</a></h3></div>
+
+<pre java="">package com.hibernate.demo.entity;
+
+/* annotate the class as an entity and map to db table */
+@Entity
+@Table(name="instructor")
+public class Instructor {
+  // define the fields and annotate the fields 
+  // with db column names
+  @Id
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @Column(name="id")
+  private int id;
+  
+  @Column(name="first_name")
+  private String firstName;
+  
+  @Column(name="last_name")
+  private String lastName;
+  
+  @Column(name="email")
+  private String email;
+  
+  // Set up mapping to InstructorDetail entity
+  // Note the cascade type
+  @OneToOne(cascade=CascadeType.ALL)
+  // Define the foreign key
+  @JoinColumn(name="instructor_detail_id")
+  private InstructorDetail instructorDetail;
+  
+  public Instructor() {
+  	
+  }
+  ...
+  // Setters and getters 
+</pre>
+
+<p>
+And now the <code>InstructorDetail</code>:
+</p>
+
+<pre java="">package com.hibernate.demo.entity;
+// annotate the class as an entity and map to db table
+@Entity
+@Table(name="instructor_detail")
+public class InstructorDetail {
+  // define the fields
+  // annotate the fields with db column names
+  @Id
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @Column(name="id")
+  private int id;
+  
+  @Column(name="youtube_channel")
+  private String youtubeChannel;
+  
+  @Column(name="hobby")
+  private String hobby;
+	
+  // add @OneToOne annotation
+  // mappedBy refers to the instructorDetail property
+  // in the Instructor class
+  // This uses the information from the Instructor class in @JoinColumn
+  // to define the mapping
+  @OneToOne(mappedBy="instructorDetail", 
+            // Different cascade types
+            cascade={
+            CascadeType.DETACH, 
+            CascadeType.MERGE, 
+            CascadeType.PERSIST,
+            CascadeType.REFRESH})
+  private Instructor instructor;
+  
+  public InstructorDetail() {
+  }		
+  
+  ...
+  // Setters and getters
+}
+
+</pre>
+
+<div id="One To One Relationship-Bidirectional-Main App"><h3 id="Main App" class="header"><a href="#One To One Relationship-Bidirectional-Main App">Main App</a></h3></div>
+
+<p>
+In our test main app we are going to search for an <code>InstructorDetail</code> object, and we are going to retrieve the related <code>Instructor</code> object:
+</p>
+
+<pre java="">package com.hibernate.demo;
+public class GetInstructorDetailDemo {
+	public static void main(String[] args) {
+    session = factory.getCurrentSession();
+    try {
+      // start a transaction
+      session.beginTransaction();
+      
+      // get the instructor detail object
+      int theId = 2999;
+      InstructorDetail tempInstructorDetail = 
+      		session.get(InstructorDetail.class, theId);
+      			
+      // print  the associated instructor
+      System.out.println("the associated instructor: " + 
+      					tempInstructorDetail.getInstructor());
+      
+      // commit transaction
+      session.getTransaction().commit();
+    } catch(Exception exc){
+      exc.printStackTrace();
+    } finally {
+      // Finish session
+			session.close();
+		  // Remove factory	
+			factory.close();
+    }
+  }
+}
+</pre>
+</div>
+  
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+<script src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script></body></html>

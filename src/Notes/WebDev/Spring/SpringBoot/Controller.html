@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Rest Controller</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,76 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Rest Controller"><h1 id="Rest Controller" class="header"><a href="#Rest Controller">Rest Controller</a></h1></div>
 
 <hr>
 
+<p>
+In this section we are going to show how to create a REST controller in a Spring Boot application:
+</p>
+
+<div id="Rest Controller-Create Controller"><h2 id="Create Controller" class="header"><a href="#Rest Controller-Create Controller">Create Controller</a></h2></div>
+
+<p>
+The controller is the same as in Spring REST:
+</p>
+
+<pre java="">package com.springboot.demo.mycoolapp.rest;
+
+import java.time.LocalDateTime;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class FunRestController {
+		
+	// expose "/" that return "Hello World"
+	
+	@GetMapping("/")
+	public String sayHello() {
+		return "Hello World! Time on server is " + LocalDateTime.now();
+	}
+	
+
+</pre>
+
+<div id="Rest Controller-Main App"><h2 id="Main App" class="header"><a href="#Rest Controller-Main App">Main App</a></h2></div>
+
+<p>
+The <code>SpringBootApplication</code> is made up of three annotations:
+</p>
 <ul>
 <li>
-<a href="/src/Notes/index.html">Notes</a>
+Auto configuration (<code>@EnableAutoConfiguration</code>)
 
 </li><li>
-<a href="/src/Study/index.html">Study</a>
+Component scanning (<code>@ComponentScan</code>)
+
+</li><li>
+Additional configuration (<code>@Configuration</code>)
+<pre java="">package com.springboot.demo.mycoolapp;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+// Annotation to tell Spring this is an spring application
+@SpringBootApplication
+public class MycoolappApplication {
+
+	public static void main(String[] args) {
+		// Boostrap spring boot application
+		SpringApplication.run(MycoolappApplication.class, args);
+	}
+}
+</pre>
 
 </li></ul>
-<hr>
 </div>
   
   <script type="text/javascript">

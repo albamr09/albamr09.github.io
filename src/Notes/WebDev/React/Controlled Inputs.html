@@ -1,0 +1,209 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Controlled Inputs</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Controlled Inputs"><h1 id="Controlled Inputs" class="header"><a href="#Controlled Inputs">Controlled Inputs</a></h1></div>
+
+<hr>
+
+<p>
+Let's see how to handle inputs in a form using <code>React</code>:
+</p>
+
+<pre javascript="">import React, { useState } from 'react';
+
+const ControlledInputs = () =&gt; {
+  const [firstName, setFirstName] = useState('');
+  const [people, setPeople] = useState([]);
+
+  const handleSubmit = (e) =&gt; {
+    // Avoid the default behaviour in submit which re-renders the page
+    e.preventDefault();
+    // Our own logic for the submit action
+    if (firstName) {
+      // Create new person object
+      const person = { id: new Date().getTime().toString(), firstName };
+      // Update our state (remember you need to spred the people state variable we have before, else the you would 
+      // override the people state variable and it would be assigned to only the person object)
+      setPeople((people) =&gt; {
+        return [...people, person];
+      });
+      // Set to empty, so the value of the input is the empty string
+      setFirstName('');
+    } else {
+      // No values to create new person
+      console.log('empty values');
+    }
+  };
+  return (
+    &lt;&gt;
+      &lt;article&gt;
+        {/*Event handler for the submit event*/}
+        &lt;form onSubmit={handleSubmit}&gt;
+          &lt;div &gt;
+            &lt;label htmlFor='firstName'&gt;Name : &lt;/label&gt;
+            &lt;input
+              type='text'
+              id='firstName'
+              name='firstName'
+              {/*Set the value of the input, it updates every time we change the input*/}
+              value={firstName}
+              {/*Event handler for the change event: use a lambda function to pass the event e and get the value in the input*/}
+              onChange={(e) =&gt; setFirstName(e.target.value)}
+            /&gt;
+          &lt;/div&gt;
+          &lt;button type='submit'&gt;add person&lt;/button&gt;
+        &lt;/form&gt;
+        {/*Show each person in the people array */}
+        {people.map((person, index) =&gt; {
+          const { id, firstName } = person;
+          return (
+            &lt;div className='item' key={id}&gt;
+              &lt;h4&gt;{firstName}&lt;/h4&gt;
+            &lt;/div&gt;
+          );
+        })}
+      &lt;/article&gt;
+    &lt;/&gt;
+  );
+};
+
+export default ControlledInputs;
+</pre>
+
+
+<div id="Controlled Inputs-Multiple inputs"><h3 id="Multiple inputs" class="header"><a href="#Controlled Inputs-Multiple inputs">Multiple inputs</a></h3></div>
+
+<p>
+How can we define an event handler for the <code>OnChange</code> event that is generic, instead of defining one for each input? To showcase this scenario, we will use the same code as before, but with two new inputs. All of the inputs have the same <code>OnChange</code> event handler.
+</p>
+
+<pre javascript="">import React, { useState } from 'react';
+
+const ControlledInputs = () =&gt; {
+  // Create a new state variable person, that holds the properties of the person we are currently creating
+  const [person, setPerson] = useState({ firstName: '', email: '', age: '' });
+  // Array of people we have already created
+  const [people, setPeople] = useState([]);
+  
+  // Generic event handler
+  const handleChange = (e) =&gt; {
+    // Obtain the name of the input/state variable
+    const name = e.target.name;
+    // Obtain the new value for the input
+    const value = e.target.value;
+    // Update the value of the property for the current person
+    setPerson({ ...person, [name]: value });
+  };
+  
+  const handleSubmit = (e) =&gt; {
+    e.preventDefault();
+    if (person.firstName &amp;&amp; person.email &amp;&amp; person.age) {
+      const newPerson = { ...person, id: new Date().getTime().toString() };
+      setPeople([...people, newPerson]);
+      setPerson({ firstName: '', email: '', age: '' });
+    }
+  };
+  return (
+    &lt;&gt;
+      &lt;article className='form'&gt;
+        &lt;form&gt;
+          &lt;div className='form-control'&gt;
+            &lt;label htmlFor='firstName'&gt;Name : &lt;/label&gt;
+            &lt;input
+              type='text'
+              id='firstName'
+              name='firstName'
+              // Access the firstName of the person object
+              value={person.firstName}
+              // Generic event handler
+              onChange={handleChange}
+            /&gt;
+          &lt;/div&gt;
+          &lt;div className='form-control'&gt;
+            &lt;label htmlFor='email'&gt;Email : &lt;/label&gt;
+            &lt;input
+              type='email'
+              id='email'
+              name='email'
+              // Access the email of the person object
+              value={person.email}
+              // Generic event handler
+              onChange={handleChange}
+            /&gt;
+          &lt;/div&gt;
+          &lt;div className='form-control'&gt;
+            &lt;label htmlFor='age'&gt;Age : &lt;/label&gt;
+            &lt;input
+              type='number'
+              id='age'
+              name='age'
+              // Access the age of the person object
+              value={person.age}
+              // Generic event handler
+              onChange={handleChange}
+            /&gt;
+          &lt;/div&gt;
+          &lt;button type='submit' className='btn' onClick={handleSubmit}&gt;
+            add person
+          &lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/article&gt;
+      &lt;article&gt;
+        {people.map((person) =&gt; {
+          const { id, firstName, email, age } = person;
+          return (
+            &lt;div key={id} className='item'&gt;
+              &lt;h4&gt;{firstName}&lt;/h4&gt;
+              &lt;p&gt;{email}&lt;/p&gt;
+              &lt;p&gt;{age}&lt;/p&gt;
+            &lt;/div&gt;
+          );
+        })}
+      &lt;/article&gt;
+    &lt;/&gt;
+  );
+};
+
+export default ControlledInputs;
+</pre>
+</div>
+  
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+<script src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script></body></html>

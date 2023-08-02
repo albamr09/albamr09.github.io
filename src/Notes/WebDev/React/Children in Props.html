@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Children in Props</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,58 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Children in Props"><h1 id="Children in Props" class="header"><a href="#Children in Props">Children in Props</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="/src/Notes/index.html">Notes</a>
+<p>
+You can nest content inside your component. If we have the following:
+</p>
 
-</li><li>
-<a href="/src/Study/index.html">Study</a>
+<pre javascript="">import React from 'react';
+import ReactDom from 'react-dom';
 
-</li></ul>
-<hr>
+// CSS
+import './index.css';
+
+import Book from './Book'
+
+const singleBook = {
+  title: 'Book title',
+  author: 'Book author'
+}
+
+ReactDom.render(
+  &lt;Book {...singleBook}&gt;
+    &lt;p&gt; I am nested!&lt;/p&gt;
+  &lt;/Book&gt;, 
+  document.getElementById('root')
+);
+</pre>
+
+<p>
+You can access the nested object from your component:
+</p>
+
+<pre javascript="">import React from 'react'
+
+// De-structure the children prop
+const Book = ({ title, author, children }) =&gt; {
+ return (
+  &lt;article className='book'&gt;
+   &lt;h1&gt;{title}&lt;/h1&gt;
+   &lt;h4&gt;{author}&lt;/h4&gt;
+   {children}
+  &lt;/article&gt;
+ );
+};
+
+export default Book
+</pre>
 </div>
   
   <script type="text/javascript">

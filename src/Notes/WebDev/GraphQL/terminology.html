@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Terminology</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,57 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Terminology"><h1 id="Terminology" class="header"><a href="#Terminology">Terminology</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="/src/Notes/index.html">Notes</a>
+<div id="Terminology-Schema"><h2 id="Schema" class="header"><a href="#Terminology-Schema">Schema</a></h2></div>
 
-</li><li>
-<a href="/src/Study/index.html">Study</a>
+<p>
+It defines the data associated with an Entity:
+</p>
 
-</li></ul>
-<hr>
+<pre>
+type Person {
+  id: ID!
+  name: String!
+  email: String!
+  age: Int!
+  phone: String
+  gender: Boolean!
+}
+
+</pre>
+
+<p>
+That is to say, it defines the type definitions of the data that conforms a given Entity.
+</p>
+
+<div id="Terminology-Resolver"><h2 id="Resolver" class="header"><a href="#Terminology-Resolver">Resolver</a></h2></div>
+
+<p>
+The data that we get back is dependent on the resolvers. They are functions that return data that follow a certain schema, it does not need to follow the schema, but then when querying it, it may throw and error.
+</p>
+
+<pre>
+people(parent, args, ctx, info){
+  return[
+    {
+      id: "1",
+      name: "Laith",
+      email: "email@email.com",
+      age: 23,
+      phone: "623198135",
+      gender: true
+    }
+  ]
+}
+
+</pre>
 </div>
   
   <script type="text/javascript">

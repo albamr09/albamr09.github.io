@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Load Properties from File</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,81 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
 
-<hr>
+<div id="Load Properties from File"><h1 id="Load Properties from File" class="header"><a href="#Load Properties from File">Load Properties from File</a></h1></div>
 
-<ul>
-<li>
-<a href="/src/Notes/index.html">Notes</a>
+<p>
+In order to inject values read from a properties file we do the following:
+</p>
 
-</li><li>
-<a href="/src/Study/index.html">Study</a>
+<div id="Load Properties from File-Create the File"><h2 id="Create the File" class="header"><a href="#Load Properties from File-Create the File">Create the File</a></h2></div>
 
-</li></ul>
-<hr>
+<p>
+First, we create the file <code>sport.properties</code>
+</p>
+
+<pre json="">foo.email=myeasycoach@luv2code.com
+foo.team=Awesome Java Coders
+</pre>
+
+<div id="Load Properties from File-Load the File"><h2 id="Load the File" class="header"><a href="#Load Properties from File-Load the File">Load the File</a></h2></div>
+
+<p>
+Now, we load the file from our <code>Configuration</code> class:
+</p>
+
+<pre java="">package com.springdemo;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+
+@Configuration
+@PropertySource("classpath:sport.properties")
+public class SportConfig {
+	
+	// define bean for our sad fortune service
+	@Bean
+	public FortuneService sadFortuneService() {
+		return new SadFortuneService();
+	}
+	
+	// define bean for our swim coach AND inject dependency
+	@Bean
+	public Coach swimCoach() {
+		SwimCoach mySwimCoach = new SwimCoach(sadFortuneService());
+		
+		return mySwimCoach;
+	}
+	
+}
+</pre>
+
+<div id="Load Properties from File-Inject Values"><h2 id="Inject Values" class="header"><a href="#Load Properties from File-Inject Values">Inject Values</a></h2></div>
+
+<p>
+We inject the values at field level in our Bean:
+</p>
+
+<pre java="">package com.springdemo;
+
+import org.springframework.beans.factory.annotation.Value;
+
+public class SwimCoach implements Coach {
+
+	private FortuneService fortuneService;
+
+	@Value("${foo.email}")
+	private String email;
+	
+	@Value("${foo.team}")
+	private String team;
+  ...
+</pre>
 </div>
   
   <script type="text/javascript">

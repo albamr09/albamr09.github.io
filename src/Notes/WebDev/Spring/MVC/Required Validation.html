@@ -1,0 +1,200 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Required Validation</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="Form Validation.html">Back</a>
+</p>
+
+<div id="Required Validation"><h1 id="Required Validation" class="header"><a href="#Required Validation">Required Validation</a></h1></div>
+
+<hr>
+
+<p>
+In this section we will show how to perform a <code>required</code> validation.
+</p>
+
+<div id="Required Validation-Add Validation Rule to Bean"><h2 id="Add Validation Rule to Bean" class="header"><a href="#Required Validation-Add Validation Rule to Bean">Add Validation Rule to Bean</a></h2></div>
+
+<p>
+We create a <code>Customer</code> class, whose <code>lastName</code> attribute must be non-null, that is, <code>lastName</code> is a required attribute:
+</p>
+
+<pre java="">package com.springdemo.mvc;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+public class Customer {
+
+	private String firstName;
+	
+  // Validation annotation
+	@NotNull(message="is required")
+	@Size(min=1, message="is required")
+	private String lastName;
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+}
+</pre>
+
+<p>
+Note that if we wanted to make an integer required, we must use the wrapper java classes (i.e. Integer), that will be able to handle empty strings as inputs and nulls. The primitive types will throw an exception.
+</p>
+
+
+<div id="Required Validation-Perform Validation in the Controller"><h2 id="Perform Validation in the Controller" class="header"><a href="#Required Validation-Perform Validation in the Controller">Perform Validation in the Controller</a></h2></div>
+
+<p>
+We also 
+</p>
+
+<pre java="">package com.springdemo.mvc;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/customer")
+public class CustomerController {
+
+	// add an initbinder ... to convert trim input strings
+	// remove leading and trailing whitespace
+	// resolve issue for our validation
+	
+	@InitBinder
+	//@InitBinder annotation works as a pre-processor 
+	// It will pre-process each web request to our controller
+	public void initBinder(WebDataBinder dataBinder) {
+		
+		// Trim strings (true: empty strings to null)
+		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+	
+		// For every string class apply the trim editor
+		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+	}
+	
+	
+	@RequestMapping("/showForm")
+	public String showForm(Model theModel) {
+		
+		theModel.addAttribute("customer", new Customer());
+		
+		return "customer-form";
+	}
+	
+	@RequestMapping("/processForm")
+	// @Valid: Tells spring to perform validation on the customer object
+	// BindingResult: results of the validation will be placed in BindingResult
+	public String processForm(
+			@Valid @ModelAttribute("customer") Customer theCustomer,
+			BindingResult theBindingResult) {
+		
+		System.out.println("Last name: |" + theCustomer.getLastName() + "|");
+		
+		// Check if validation was sucessfull
+		if (theBindingResult.hasErrors()) {
+			// If not sucessfull send back
+			return "customer-form";
+		}
+		else {
+			// If sucessfull
+			return "customer-confirmation";
+		}
+	}
+}
+</pre>
+
+<p>
+When performing Spring MVC validation, the location of the BindingResult parameter is very important. In the method signature, the BindingResult parameter must appear immediately after the model attribute. 
+</p>
+
+<div id="Required Validation-Display error on HTML"><h2 id="Display error on HTML" class="header"><a href="#Required Validation-Display error on HTML">Display error on HTML</a></h2></div>
+
+<pre jsp="">&lt;%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+	&lt;title&gt;Customer Registration Form&lt;/title&gt;
+	
+	&lt;style&gt;
+		.error {color:red}
+	&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;i&gt;Fill out the form. Asterisk (*) means required.&lt;/i&gt;
+&lt;br&gt;&lt;br&gt;
+	&lt;form:form action="processForm" modelAttribute="customer"&gt;
+		First name: &lt;form:input path="firstName" /&gt;
+		&lt;br&gt;&lt;br&gt;
+		Last name (*): &lt;form:input path="lastName" /&gt;
+    &lt;!-- We use the error form tag to display an error when the input is not valid --&gt;
+    &lt;!-- The message shown equals the messages from both of the validation annotations defined 
+    for the lastName attribute in the Customer class --&gt;
+		&lt;form:errors path="lastName" cssClass="error" /&gt;
+		&lt;br&gt;&lt;br&gt;
+		&lt;input type="submit" value="Submit" /&gt;
+	&lt;/form:form&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+</div>
+  
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+<script src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script></body></html>

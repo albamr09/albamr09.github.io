@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Props</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,97 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Props"><h1 id="Props" class="header"><a href="#Props">Props</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="/src/Notes/index.html">Notes</a>
+<p>
+In <code>React</code> to define parameters in our components, we do as follows:
+</p>
 
-</li><li>
-<a href="/src/Study/index.html">Study</a>
 
-</li></ul>
-<hr>
+<pre javascript="">import React from 'react'
+
+// This are the props
+const Book = (props) =&gt; {
+ return (
+  &lt;article className='book'&gt;
+   &lt;img src={props.img} alt='' /&gt;
+   &lt;h1&gt;{props.title}&lt;/h1&gt;
+   &lt;h4&gt;{props.author}&lt;/h4&gt;
+  &lt;/article&gt;
+ );
+};
+
+export default Book
+</pre>
+
+<p>
+Another way (more readable), is to spread the object:
+</p>
+
+<pre javascript="">import React from 'react'
+
+// This are the props
+const Book = ({ title, author }) =&gt; {
+ return (
+  &lt;article className='book'&gt;
+   &lt;h1&gt;{title}&lt;/h1&gt;
+   &lt;h4&gt;{author}&lt;/h4&gt;
+  &lt;/article&gt;
+ );
+};
+
+export default Book
+</pre>
+
+<p>
+Now, to pass these props we do:
+</p>
+
+<pre javascript="">import React from 'react';
+import ReactDom from 'react-dom';
+
+// CSS
+import './index.css';
+
+import Book from './Book'
+
+ReactDom.render(
+  &lt;Book title='Book title' author='Book author'/&gt;, 
+  document.getElementById('root')
+);
+</pre>
+
+<div id="Props-Spread operator"><h2 id="Spread operator" class="header"><a href="#Props-Spread operator">Spread operator</a></h2></div>
+
+<p>
+Let's define an object <code>singleBook</code> that contains all of the book's properties and pass it to the <code>Book</code> component:
+</p>
+
+<pre javascript="">import React from 'react';
+import ReactDom from 'react-dom';
+
+// CSS
+import './index.css';
+
+import Book from './Book'
+
+const singleBook = {
+  title: 'Book title',
+  author: 'Book author'
+}
+
+ReactDom.render(
+  // Use the spread operator
+  &lt;Book {...singleBook}/&gt;, 
+  document.getElementById('root')
+);
+</pre>
 </div>
   
   <script type="text/javascript">

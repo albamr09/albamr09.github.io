@@ -1,0 +1,133 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Inject Values from the Properties Files</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="Dependency Injection.html">Back</a>
+</p>
+
+<div id="Inject Values from the Properties Files"><h1 id="Inject Values from the Properties Files" class="header"><a href="#Inject Values from the Properties Files">Inject Values from the Properties Files</a></h1></div>
+
+<hr>
+
+<div id="Inject Values from the Properties Files-Create the properties file"><h3 id="Create the properties file" class="header"><a href="#Inject Values from the Properties Files-Create the properties file">Create the properties file</a></h3></div>
+
+<p>
+Let's define our properties inside a properties file <code>sport.properties</code>:
+</p>
+
+<pre json="">foo.email=myeasycoach@email.com
+foo.team=Royal Challengers Bangalore
+</pre>
+
+
+<div id="Inject Values from the Properties Files-Load the properties file"><h3 id="Load the properties file" class="header"><a href="#Inject Values from the Properties Files-Load the properties file">Load the properties file</a></h3></div>
+
+<p>
+Now we load the properties file using the <code>context</code> tag inside our config file:
+</p>
+
+<pre xml="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd"&gt;
+    
+  &lt;!-- load the properties file: sport.properties --&gt;
+  &lt;context:property-placeholder location="classpath:sport.properties"/&gt;
+    
+  &lt;!-- Define your beans here --&gt;
+  &lt;!-- define the dependency --&gt;
+  &lt;bean id="myFortuneService" class="com.springdemo.HappyFortuneService"&gt;
+  &lt;/bean&gt;
+  
+  &lt;bean id="myCoach"
+  	class="com.springdemo.TrackCoach"&gt;	
+  	&lt;!-- set up constructor injection --&gt;
+  	&lt;constructor-arg ref="myFortuneService" /&gt;
+  &lt;/bean&gt;
+  
+  &lt;bean id="myCricketCoach" class="com.springdemo.CricketCoach"&gt; 
+    &lt;!-- set up setter injection --&gt;
+    &lt;!-- ref: references the id of the bean we define previously --&gt;
+    &lt;!-- name: name of the setter method set&lt;name&gt;, where the first 
+    letter of the name is capitalized --&gt;
+    &lt;property name="fortuneService" ref="myFortuneService" /&gt;
+    &lt;!-- inject literal values, where name is the name of the attribute in the bean
+    and value is the value to set the value to --&gt;
+    &lt;!-- Note that we are now referencing the values from the properties file --&gt;
+    &lt;property name="emailAddress" value="${foo.email})" /&gt;
+    &lt;property name="team" value="${foo.team}" /&gt;
+  &lt;/bean&gt;
+    
+&lt;/beans&gt;
+</pre>
+
+<div id="Inject Values from the Properties Files-Main Method"><h3 id="Main Method" class="header"><a href="#Inject Values from the Properties Files-Main Method">Main Method</a></h3></div>
+
+<p>
+In the main method, we create our object as usual, and if we invoke the <code>getter</code> methods, we retrieve the values passed in the property file:
+</p>
+
+<pre java="">package com.springdemo;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class SetterDemoApp {
+
+	public static void main(String[] args) {
+
+		// load the spring configuration file
+		ClassPathXmlApplicationContext context = 
+				new ClassPathXmlApplicationContext("applicationContext.xml");
+		
+		// retrieve bean from spring container
+		CricketCoach theCoach = context.getBean("myCricketCoach", CricketCoach.class);
+		
+		// retrieve attribute values from property file
+		System.out.println(theCoach.getTeam());
+		System.out.println(theCoach.getEmailAddress());
+						
+		// close the context
+		context.close();
+	}
+}
+</pre>
+</div>
+  
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+<script src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script></body></html>

@@ -1,0 +1,224 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>useEffect</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="useEffect"><h1 id="useEffect" class="header"><a href="#useEffect">useEffect</a></h1></div>
+
+<hr>
+
+<p>
+This <code>hook</code> is used for any work needed to be made outside of the component: fetch data, changing the document title, signing up for a subscription, setting up an event listener.
+</p>
+
+<ul>
+<li>
+Runs after every re-render
+
+</li><li>
+Cleanup function
+
+</li><li>
+Second parameter
+<pre javascript="">import React, { useState, useEffect } from 'react';
+
+const UseEffectBasics = () =&gt; {
+
+  // Callback called whenever the component is rendered
+  useEffect(() =&gt; {
+    document.title = `New Messages(${value})`;
+  });
+  
+  return (
+    &lt;&gt;
+      &lt;h1&gt;{value}&lt;/h1&gt;
+      &lt;button className='btn'}&gt;
+        click me
+      &lt;/button&gt;
+    &lt;/&gt;
+  );
+};
+
+export default UseEffectBasics;
+</pre>
+
+</li></ul>
+<div id="useEffect-Dependencies"><h3 id="Dependencies" class="header"><a href="#useEffect-Dependencies">Dependencies</a></h3></div>
+
+<p>
+The <code>useEffect</code> definition allows you to pass an array of dependencies:
+</p>
+
+<ul>
+<li>
+If it is specified as <code>[]</code>: <code>useEffect</code> will only be triggered in the first render
+
+</li><li>
+If it is an array of state variables: it will be triggered every time the state variable is updated.
+<pre javascript="">import React, { useState, useEffect } from 'react';
+
+const UseEffectBasics = () =&gt; {
+
+  const [value, setValue] = useState(0);
+  // Only trigger on first render
+  // useEffect(() =&gt; {
+  //   document.title = `New Messages(${value})`;
+  // }, []);
+  // Call whenever value is updated
+  useEffect(() =&gt; {
+    document.title = `New Messages(${value})`;
+  }, [value]);
+  
+  return (
+    &lt;&gt;
+      &lt;h1&gt;{value}&lt;/h1&gt;
+      &lt;button className='btn'}&gt;
+        click me
+      &lt;/button&gt;
+    &lt;/&gt;
+  );
+};
+
+export default UseEffectBasics;
+</pre>
+
+</li></ul>
+<div id="useEffect-Clean up Function"><h3 id="Clean up Function" class="header"><a href="#useEffect-Clean up Function">Clean up Function</a></h3></div>
+
+<p>
+<code>useEffect</code> lets us define a function that is invoked once we exit the function:
+</p>
+
+<pre javascript="">import React, { useState, useEffect } from 'react';
+
+const UseEffectCleanup = () =&gt; {
+  const [size, setSize] = useState(window.innerWidth);
+
+  const checkSize = () =&gt; {
+    setSize(window.innerWidth);
+  };
+
+  useEffect(() =&gt; {
+    console.log('useEffect');
+    window.addEventListener('resize', checkSize);
+    // Clean up function
+    return () =&gt; {
+      console.log('cleanup');
+      window.removeEventListener('resize', checkSize);
+    };
+  }, []);
+  console.log('render');
+  return (
+    &lt;&gt;
+      &lt;h1&gt;window&lt;/h1&gt;
+      &lt;h2&gt;{size} PX&lt;/h2&gt;
+    &lt;/&gt;
+  );
+};
+
+export default UseEffectCleanup;
+</pre>
+
+<div id="useEffect-Fetch Data"><h3 id="Fetch Data" class="header"><a href="#useEffect-Fetch Data">Fetch Data</a></h3></div>
+
+<p>
+Up next we will show how to get data using <code>useEffect</code>.
+</p>
+
+<p>
+Note, if we do not specify the restriction of only triggering on the first render:
+</p>
+<ol>
+<li>
+<code>useEffect</code> calls getUsers
+
+</li><li>
+<code>getUsers</code> updates the state, and so the component re-renders
+
+</li><li>
+Because there is a re-render, <code>useEffect</code> is called again
+
+</li></ol>
+<p>
+Thus, we end in an infinite loop
+</p>
+
+<pre javascript="">import React, { useState, useEffect } from 'react';
+
+const url = 'https://api.github.com/users';
+
+const UseEffectFetchData = () =&gt; {
+  const [users, setUsers] = useState([]);
+
+  const getUsers = async () =&gt; {
+    const response = await fetch(url);
+    const users = await response.json();
+    setUsers(users);
+  };
+
+  useEffect(() =&gt; {
+    getUsers();
+    // Specify [] so we only run useEffect on the first render.
+  }, []);
+  return (
+    &lt;&gt;
+      &lt;h3&gt;github users&lt;/h3&gt;
+      &lt;ul className='users'&gt;
+        {users.map((user) =&gt; {
+          const { id, login, avatar_url, html_url } = user;
+          return (
+            &lt;li key={id}&gt;
+              &lt;img src={avatar_url} alt={login} /&gt;
+              &lt;div&gt;
+                &lt;h4&gt;{login}&lt;/h4&gt;
+                &lt;a href={html_url}&gt;profile&lt;/a&gt;
+              &lt;/div&gt;
+            &lt;/li&gt;
+          );
+        })}
+      &lt;/ul&gt;
+    &lt;/&gt;
+  );
+};
+
+export default UseEffectFetchData;
+</pre>
+</div>
+  
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+<script src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script></body></html>

@@ -1,0 +1,148 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Log Out</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Log Out"><h1 id="Log Out" class="header"><a href="#Log Out">Log Out</a></h1></div>
+
+<hr>
+
+<p>
+We are going to show in this section how to add the logout functionality to our Spring application.
+</p>
+
+<div id="Log Out-Configuration"><h2 id="Configuration" class="header"><a href="#Log Out-Configuration">Configuration</a></h2></div>
+
+<p>
+To our <a href="Custom Login Form.html">existing configuration</a> we add:
+</p>
+
+<pre java="">package com.springsecurity.demo.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.User.UserBuilder;
+
+@Configuration
+@EnableWebSecurity
+public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+		// add our users for in memory authentication
+		UserBuilder users = User.withDefaultPasswordEncoder();
+		
+		auth.inMemoryAuthentication()
+			.withUser(users.username("john").password("test123").roles("EMPLOYEE"))
+			.withUser(users.username("mary").password("test123").roles("MANAGER"))
+			.withUser(users.username("susan").password("test123").roles("ADMIN"));
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+          // Here is the control of the access to web path
+          http.authorizeRequests()
+          // Require authentication for every request
+            .anyRequest().authenticated()
+            .and()
+            .formLogin()
+            .loginPage("/showMyLoginPage")
+            .loginProcessingUrl("/authenticateTheUser")
+            .permitAll();
+            // Add logout functionality
+            .and()
+            .logout().permitAll()
+		
+	}
+}
+</pre>
+
+<p>
+The default url for logging out is <code>/logout</code>.
+</p>
+
+<div id="Log Out-Log Out Button"><h2 id="Log Out Button" class="header"><a href="#Log Out-Log Out Button">Log Out Button</a></h2></div>
+
+<p>
+Now we create the logout button in our home page:
+</p>
+
+<pre jsp="">&lt;%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;title&gt;luv2code Company Home Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;h2&gt;luv2code Company Home Page&lt;/h2&gt;
+	&lt;hr&gt;
+	&lt;p&gt;
+	Welcome to the luv2code company home page!
+	&lt;/p&gt;
+	&lt;!-- Add a logout button: it point to "/logout" endpoint --&gt;
+	&lt;form:form action="${pageContext.request.contextPath}/logout" 
+			   method="POST"&gt;
+		&lt;input type="submit" value="Logout" /&gt;
+	&lt;/form:form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>
+Note that the logout logic is handled directly by spring, what it does is:
+</p>
+
+<ul>
+<li>
+Invalidate the user's HTTP session and remove cookies, etc.
+
+</li><li>
+Sends the user back to the login page
+
+</li><li>
+Appends a logout parameter: <code>?logout</code>
+
+</li></ul>
+</div>
+  
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+<script src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script></body></html>

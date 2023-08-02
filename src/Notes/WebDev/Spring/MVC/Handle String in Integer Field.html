@@ -1,0 +1,97 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Handle String Input in Integer Field</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="Form Validation.html">Back</a>
+</p>
+
+<div id="Handle String Input in Integer Field"><h1 id="Handle String Input in Integer Field" class="header"><a href="#Handle String Input in Integer Field">Handle String Input in Integer Field</a></h1></div>
+
+<hr>
+
+<p>
+If we want to avoid the trace returned by errors like inputting the wrong data type (string instead of int), we can define a custom message that will override those messages.
+</p>
+
+<div id="Handle String Input in Integer Field-Create a custom message"><h2 id="Create a custom message" class="header"><a href="#Handle String Input in Integer Field-Create a custom message">Create a custom message</a></h2></div>
+
+<p>
+Create a properties file in <code>resources/messages.properties</code>
+</p>
+
+<pre properties="">// ErrorType.SpringModelAttributeName.FieldName
+typeMismatch.customer.freePasses=Invalid number
+</pre>
+
+<div id="Handle String Input in Integer Field-Specify Properties file in Configuration"><h2 id="Specify Properties file in Configuration" class="header"><a href="#Handle String Input in Integer Field-Specify Properties file in Configuration">Specify Properties file in Configuration</a></h2></div>
+
+<p>
+We add the following in our configuration file <code>spring-mvc-demo-servlet.xml</code>
+</p>
+
+<pre xml="">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+    	http://www.springframework.org/schema/beans/spring-beans.xsd
+    	http://www.springframework.org/schema/context
+    	http://www.springframework.org/schema/context/spring-context.xsd
+    	http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd"&gt;
+
+	&lt;context:component-scan base-package="com.luv2code.springdemo" /&gt;
+	&lt;mvc:annotation-driven/&gt;
+	&lt;bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt;
+		&lt;property name="prefix" value="/WEB-INF/view/" /&gt;
+		&lt;property name="suffix" value=".jsp" /&gt;
+	&lt;/bean&gt;
+
+	  &lt;!-- Load custom message resources --&gt;
+    &lt;bean id="messageSource" 
+          class="org.springframework.context.support.ResourceBundleMessageSource"&gt;
+				&lt;!-- Path where the properties file is stored --&gt;
+        &lt;property name="basenames" value="resources/messages" /&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+</div>
+  
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+<script src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script></body></html>

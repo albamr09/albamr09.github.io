@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>useRef</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,61 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="useRef"><h1 id="useRef" class="header"><a href="#useRef">useRef</a></h1></div>
 
 <hr>
+
+<p>
+<code>useRef</code> returns a mutable ref object whose <code>.current</code> property is initialized to the passed argument. Some properties:
+</p>
 
 <ul>
 <li>
-<a href="/src/Notes/index.html">Notes</a>
+Preserves the value of the object
 
 </li><li>
-<a href="/src/Study/index.html">Study</a>
+Does not trigger re-render
+
+</li><li>
+Assigned to <code>DOM nodes/elements</code>
+<pre javascript="">import React, { useEffect, useRef } from 'react';
+
+const UseRefBasics = () =&gt; {
+  // Create the container
+  const refContainer = useRef(null);
+
+  const handleSubmit = (e) =&gt; {
+    e.preventDefault();
+    // Print the value inside the input
+    console.log(refContainer.current.value);
+  };
+  
+  useEffect(() =&gt; {
+    // Focus on the input element whenever we render the application
+    refContainer.current.focus();
+  });
+
+  return (
+    &lt;&gt;
+      &lt;form className='form' onSubmit={handleSubmit}&gt;
+        &lt;div&gt;
+          {/*The refContainer points to the input element*/}
+          &lt;input type='text' ref={refContainer} /&gt;
+        &lt;/div&gt;
+        &lt;button type='submit'&gt;submit&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/&gt;
+  );
+};
+
+export default UseRefBasics;
+</pre>
 
 </li></ul>
-<hr>
 </div>
   
   <script type="text/javascript">

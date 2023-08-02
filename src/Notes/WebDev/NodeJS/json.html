@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>JSON</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,69 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="JSON"><h1 id="JSON" class="header"><a href="#JSON">JSON</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="/src/Notes/index.html">Notes</a>
+<p>
+The method <code>res.json()</code> allows us to return a array of objects as the body of the <code>HTTP</code> response:
+</p>
 
-</li><li>
-<a href="/src/Study/index.html">Study</a>
+<pre javascript="">
+const express = require('express')
+const app = express()
 
-</li></ul>
-<hr>
+app.get('/', (req, res) =&gt; {
+  res.json([{name: 'john'}, {name: 'susan'}])
+})
+
+app.listen(5000, () =&gt; {
+  console.log('Server is listening on port 5000....')
+})
+
+</pre>
+
+<p>
+We can also pass a <code>JSON</code> file to <code>res.json()</code>:
+</p>
+
+<pre javascript="">
+const express = require('express')
+const app = express()
+const { products } = require('./data')
+
+app.get('/', (req, res) =&gt; {
+  res.json(products)
+})
+
+app.listen(5000, () =&gt; {
+  console.log('Server is listening on port 5000....')
+})
+
+</pre>
+
+<p>
+Where <code>data.js</code> contains:
+</p>
+
+<pre javascript="">
+const products = [
+  {
+    id: 1,
+    name: 'albany sofa',
+    image:
+      'product-3.jpg',
+    price: 39.95,
+    desc: `I'm baby direct trade farm-to-table hell of`,
+  }]
+
+module.exports = products
+
+</pre>
 </div>
   
   <script type="text/javascript">

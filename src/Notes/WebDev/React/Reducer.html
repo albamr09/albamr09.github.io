@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Reducers and Actions</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,51 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Reducers and Actions"><h1 id="Reducers and Actions" class="header"><a href="#Reducers and Actions">Reducers and Actions</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="/src/Notes/index.html">Notes</a>
+<p>
+Let's now see an example of a <code>reducer</code>, more concretely the <code>reducer</code> of the <code>user</code> slice we defined <a href="Index.html">previously</a>:
+</p>
 
-</li><li>
-<a href="/src/Study/index.html">Study</a>
+<pre javascript="">// Use create slice to define the slice
+import { createSlice } from "@reduxjs/toolkit";
 
-</li></ul>
-<hr>
+// Define initial state
+const initialStateValue = { name: "", age: 0, email: "" };
+
+export const userSlice = createSlice({
+  // Name of slice
+  name: "user",
+  // Initial state of reducer
+  initialState: { value: initialStateValue },
+  // Possible reducers
+  reducers: {
+    login: (state, action) =&gt; {
+      state.value = action.payload;
+    },
+
+    logout: (state) =&gt; {
+      state.value = initialStateValue;
+    },
+  },
+});
+
+// De-structure actions
+export const { login, logout } = userSlice.actions;
+
+// Export reducer
+export default userSlice.reducer;
+</pre>
+
+<p>
+We now 
+</p>
 </div>
   
   <script type="text/javascript">

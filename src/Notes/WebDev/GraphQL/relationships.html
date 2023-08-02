@@ -1,0 +1,169 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Relationships</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.wiki .html">Back</a>
+</p>
+
+<div id="Relationships"><h1 id="Relationships" class="header"><a href="#Relationships">Relationships</a></h1></div>
+
+<hr>
+
+<div id="Relationships-One To Many"><h2 id="One To Many" class="header"><a href="#Relationships-One To Many">One To Many</a></h2></div>
+
+<p>
+We are now going to illustrate the situation where an animal belongs to only one category whilst a category contains several animals:
+</p>
+
+<pre>
+type Animal {
+  id: ID!
+  category: Category!
+  name: String!
+  parameter: String!
+}
+
+type Category {
+  id: ID!
+  name: String!
+  animals: [Animal!]!
+  parameter: String!
+}
+
+</pre>
+
+<p>
+Where we have stored in our database the id of the category as a foreign key of the <code>Animal</code> entity.
+</p>
+
+<p>
+In order to query for animals from a category we create a new resolver: 
+</p>
+
+<pre>
+const resolvers = {
+  Query: {
+    animals: () =&gt; animals,
+    animal: (parent, args, ctx) =&gt; {
+      let animal = animals.find((animal) =&gt; {
+        return animal.paramenter === args.id
+      })
+      return animal
+    }
+  }
+  Category: {
+    animals: (parent, args, ctx) =&gt; {
+      return animals.filter((animal) &gt;= {
+        return animal.category == parent.id
+      }) 
+    }
+  }
+}
+
+
+</pre>
+
+<p>
+So if we query for:
+</p>
+
+
+<pre>
+{
+  category(parameter: "mammal"){
+    category 
+    animals {
+      name
+    }
+  }
+}
+
+</pre>
+
+<p>
+We get all the names of the animals that are mammals.
+</p>
+
+<p>
+The <code>parent</code> object symbolizes the object resulting from <code>category(parameter: "mammal")</code>, this object will be a <code>Category</code> object and will have an <code>id</code>, that we will use in our resolver to filter the animals.
+</p>
+
+<p>
+Observe that the animals have a attribute called <code>category</code>, which is *<span id="Relationships-One To Many-not"></span><strong id="not">not</strong>* the same as the type definition we have made for our <code>Animal</code> object, this attribute is defined on the database.
+</p>
+
+<p>
+Note that we have created a <code>Category</code> resolver that acts as the query resolver but for queries within the <code>category</code> object.
+</p>
+
+<p>
+We, now, do the same for the animals, meaning we want to get the <code>Category</code> object that we specified in the <code>Animal</code> object, for that we create a new resolver:
+</p>
+
+
+<pre>
+Animal: {
+  category: (parent, args, ctx) =&gt; {
+    return categories.find((category) =&gt; {
+      return category.id === parent.category
+    })
+  }
+}
+
+</pre>
+
+<p>
+So what we do is go through all of the categories until we find the one that has the same id.
+</p>
+
+<pre>
+{
+  animal(parameter: "cat"){
+    name 
+    category {
+      name
+    }
+}
+
+</pre>
+
+<p>
+And with this query we retrieve the name and the category name of a cat.
+</p>
+</div>
+  
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+<script src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script></body></html>

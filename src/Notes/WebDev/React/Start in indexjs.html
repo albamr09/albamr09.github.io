@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Start in index.js</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,77 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Start in index.js"><h1 id="Start in index.js" class="header"><a href="#Start in index.js">Start in index.js</a></h1></div>
 
 <hr>
+
+<p>
+Keep in mind, <code>index.js</code> is the entry point:
+</p>
+
+<p>
+First of all refer to <a href="File Structure.html">File Structure</a>, and then basically remove everything from <code>index.js</code>, and replace it for:
+</p>
+
+<pre javascript="">
+import React from 'react';
+import ReactDom from 'react-dom';
+
+// CSS
+import './index.css';
+
+</pre>
+
 
 <ul>
 <li>
-<a href="/src/Notes/index.html">Notes</a>
-
-</li><li>
-<a href="/src/Study/index.html">Study</a>
+We use the <code>ReactDom</code> module to make use of the <code>React DOM API</code>, which let's us render components, etc.
 
 </li></ul>
-<hr>
+<p>
+Next we call <code>ReactDom.render()</code> to output our <code>HTML</code>:
+</p>
+
+<pre javascript="">
+import React from 'react';
+import ReactDom from 'react-dom';
+
+// CSS
+import './index.css';
+
+function Component() {
+  return (
+    &lt;h4&gt; HI! &lt;/h4&gt;
+  );
+}
+
+ReactDom.render(
+  &lt;Component/&gt;,
+  document.getElementbyId("root")
+)
+
+</pre>
+
+
+<p>
+Note 
+</p>
+
+<ul>
+<li>
+The function must start with a capital letter
+
+</li><li>
+The tag that encloses the component must be closed, so either: <code>&lt;Component/&gt;</code> or <code>&lt;Component&gt;&lt;/ Component&gt;</code>
+
+</li><li>
+We use <code>document.getElementbyId("root")</code>, this tells <code>React</code> where to place the component inside the <code>HTML</code>
+
+</li></ul>
 </div>
   
   <script type="text/javascript">

@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Docker Engine</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,60 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Docker Engine"><h1 id="Docker Engine" class="header"><a href="#Docker Engine">Docker Engine</a></h1></div>
 
 <hr>
+
+<p>
+When you install <code>Docker</code> on your <code>Linux</code> system you are installing:
+</p>
 
 <ul>
 <li>
-<a href="/src/Notes/index.html">Notes</a>
+<code>Docker daemon</code>: this is the background process that manages docker objects (i.e. images, containers, volumes and networks).
 
 </li><li>
-<a href="/src/Study/index.html">Study</a>
+<code>REST API</code>: it is the interface programs can access to provide instructions to the daemon.
+
+</li><li>
+<code>Docker CLI</code>: command line interface to manage our docker objects. This uses the <code>REST API</code> to interact with the docker daemon.
 
 </li></ul>
-<hr>
+<p>
+Note that the <code>Docker CLI</code> can be run from a remote machine, that is to say the <code>REST API</code> and the <code>Docker daemon</code> are running on a different machine. So, in order to interact with the <code>API</code> we use the <code>-H</code> flag, indicating the IP where the <code>API</code> and the daemon reside with the <code>2375</code> port.
+</p>
+
+<pre console="">
+$ docker -H=10.123.2.1:2375 &lt;docker-command&gt;
+$ docker -H=10.123.2.1:2375 run nginx
+
+</pre>
+
+<div id="Docker Engine-Containerization"><h2 id="Containerization" class="header"><a href="#Docker Engine-Containerization">Containerization</a></h2></div>
+
+<p>
+As we have seen all of our containers run on top of the same operative system, so it is a given that the processes will be handled by the same kernel. This means that the processes of our containers are run along with the rest of processes in the host machine, in other words the <code>PIDs</code> of all the processes must be different. 
+</p>
+
+<p>
+What <code>Docker</code> does to isolate these processes is the container is using namespaces and maps the process id to another process id within the container, and that is visible only on this container.
+</p>
+
+<div id="Docker Engine-cgroups"><h2 id="cgroups" class="header"><a href="#Docker Engine-cgroups">cgroups</a></h2></div>
+
+<p>
+Because all docker containers share the hosts resources it could be possible that a container takes up all of the machine's resources. So, to restrict the amount of resources used by a container <code>Docker</code> uses <code>cgroups</code>. You can specify the amount of CPU or RAM that the container is allowed to have:
+</p>
+
+<pre>
+$ docker run --cpus=.5 ubuntu
+$ docker run --memory=100m ubuntu
+
+</pre>
 </div>
   
   <script type="text/javascript">

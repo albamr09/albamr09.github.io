@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Maven</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,53 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Maven"><h1 id="Maven" class="header"><a href="#Maven">Maven</a></h1></div>
 
 <hr>
 
-<ul>
+<p>
+Maven is a project management tool. The most popular use of Maven is for build management and dependencies.
+</p>
+
+<p>
+Behind the scenes what Maven does is:
+</p>
+
+<ol>
 <li>
-<a href="/src/Notes/index.html">Notes</a>
+Reads the configuration file of our application: <code>pom.xml</code>
 
 </li><li>
-<a href="/src/Study/index.html">Study</a>
+Checks on the local repository if the library is already stored (like a cache)
 
-</li></ul>
-<hr>
+</li><li>
+If not, it goes to the remote repository and searches for it
+
+</li><li>
+Then it saves it to the local repository
+
+</li><li>
+Finally it uses the downloaded library to build and run the application
+
+</li></ol>
+<p>
+<img src="https://albamr09.github.io/public/assets/maven_flow.png" alt="Maven Behind the Scenes" style="width: 750px">
+</p>
+
+<p>
+Maven also downloads the libraries' dependencies. And when you build and run your application, maven will handle the class/build path for you, based on the configuration file.
+</p>
+
+
+<div id="Maven-Standard Directory Structure"><h2 id="Standard Directory Structure" class="header"><a href="#Maven-Standard Directory Structure">Standard Directory Structure</a></h2></div>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/maven_standard_directory.png" alt="Standard Directory Structure" style="width:750px">
+</p>
 </div>
   
   <script type="text/javascript">

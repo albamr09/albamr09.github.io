@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Container Orchestration</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,54 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Container Orchestration"><h1 id="Container Orchestration" class="header"><a href="#Container Orchestration">Container Orchestration</a></h1></div>
 
 <hr>
+
+<p>
+When in production, it is often needed that several instances of containers are run (because of a heavy load on the application for example). So in these cases you need to monitor the instances as well as the host itself in case any of them crash.
+</p>
+
+<p>
+For that we use container orchestration that offers a set of tools and scripts that allow us to manage the hosts and containers. 
+</p>
+
+<p>
+The typical approach is to create several instances of containers in different hosts, so if one fails the application can still offer the service. For example:
+</p>
+
+<pre console="">
+$ docker service create --replicas=100 nodejs
+
+</pre>
+
+<p>
+Some solutions let us automatically scale the number of containers depending on the demand. Others can help in automatically adding new hosts to support the user load.
+</p>
+
+<p>
+They also provide complex networking between the containers as well as load balancing user requests across different hosts or sharing storage between the hosts, configuration management or security.
+</p>
+  
+<p>
+There are several solutions:
+</p>
 
 <ul>
 <li>
-<a href="/src/Notes/index.html">Notes</a>
+<code>Docker Swarm</code> from <code>Docker</code>
 
 </li><li>
-<a href="/src/Study/index.html">Study</a>
+<code>Kubernetes</code> from <code>Google</code>
+
+</li><li>
+<code>MESOS</code> from <code>Apache</code>.
 
 </li></ul>
-<hr>
 </div>
   
   <script type="text/javascript">

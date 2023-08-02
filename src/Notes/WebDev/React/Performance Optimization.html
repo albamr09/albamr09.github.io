@@ -1,0 +1,302 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Performance Optimization</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Performance Optimization"><h1 id="Performance Optimization" class="header"><a href="#Performance Optimization">Performance Optimization</a></h1></div>
+
+<hr>
+
+<p>
+Even though <code>React</code> is fast by default (you do not need to use it), we can use different optimization techniques (mind, they do add their own cost):
+</p>
+
+<div id="Performance Optimization-React.memo"><h2 id="React.memo" class="header"><a href="#Performance Optimization-React.memo">React.memo</a></h2></div>
+
+<p>
+<code>React.memo</code> stores a component, and only re-renders if the <code>props</code> of the component change (it <code>memoizes</code> the component). In the next example, that means that we only re-render <code>BigList</code> if <code>products</code> change, thus, we do not re-render any <code>SingleProduct</code> component unless <code>products</code> change.
+</p>
+
+<pre javascript="">import React, { useState, useCallback, useMemo } from 'react'
+
+// Custom hook
+import { useFetch } from 'useFetch'
+
+const url = 'https://course-api.com/javascript-store-products'
+
+const Index = () =&gt; {
+  const { products } = useFetch(url)
+  const [count, setCount] = useState(0)
+
+  return (
+    &lt;&gt;
+      &lt;h1&gt;Count : {count}&lt;/h1&gt;
+      &lt;button className='btn' onClick={() =&gt; setCount(count + 1)}&gt;
+        click me
+      &lt;/button&gt;
+      &lt;BigList products={products} /&gt;
+    &lt;/&gt;
+  )
+}
+
+
+// Each time a prop or the state changes, the component re-renders, so all
+// the elements of the list are processed again.
+// However if we use React.memo we only re-render the component if products change 
+
+const BigList = React.memo(({ products }) =&gt; {
+
+  return (
+    &lt;section className='products'&gt;
+      {products.map((product) =&gt; {
+        return (
+          &lt;SingleProduct
+            key={product.id}
+            {...product}
+          &gt;&lt;/SingleProduct&gt;
+        )
+      })}
+    &lt;/section&gt;
+  )
+})
+
+const SingleProduct = ({ fields }) =&gt; {
+  let { name, price } = fields
+  price = price / 100
+  const image = fields.image[0].url
+
+  return (
+    &lt;article className='product'&gt;
+      &lt;img src={image} alt={name} /&gt;
+      &lt;h4&gt;{name}&lt;/h4&gt;
+      &lt;p&gt;${price}&lt;/p&gt;
+    &lt;/article&gt;
+  )
+}
+
+export default Index
+</pre>
+
+<div id="Performance Optimization-useCallback"><h2 id="useCallback" class="header"><a href="#Performance Optimization-useCallback">useCallback</a></h2></div>
+
+<p>
+What happens if we pass a function to <code>BigList</code>, well if the state changes (whichever variable of the state) then the function is created again, and so the function is different. Which means the <code>props</code> of <code>BigList</code> list changes, and causes <code>React.memo</code> to re-render the entire component. That is why we use <code>useCallback</code>.
+</p>
+
+<p>
+<code>useCallback</code> allows us to define when to create a function, by specifying the dependencies like we did with <code>useEffect</code>:
+</p>
+
+<ul>
+<li>
+If the dependency is <code>[]</code>: then only create in the first render
+
+</li><li>
+If there are variables in the <code>[]</code>: create whenever those variables change
+
+</li><li>
+If there is nothing: create always.
+
+</li></ul>
+<p>
+Refer to <a href="Custom Hooks.html">Customs Hooks</a> for an use case of <code>useCallback</code> inside the custom hook <code>useFetch</code>.
+</p>
+
+<pre javascript="">import React, { useState, useCallback, useMemo } from 'react'
+
+// Custom hook
+import { useFetch } from 'useFetch'
+
+const url = 'https://course-api.com/javascript-store-products'
+
+const Index = () =&gt; {
+  const { products } = useFetch(url);
+  const [count, setCount] = useState(0);
+  const [cart, setCart] = useState(0);
+  
+  // We only create this function when we update the cart value
+  // That is we memoize the function
+  const addToCart = useCallback(() =&gt; {
+    setCart(cart + 1)
+  }, [cart])
+
+  return (
+    &lt;&gt;
+      &lt;h1&gt;Count : {count}&lt;/h1&gt;
+      &lt;button className='btn' onClick={() =&gt; setCount(count + 1)}&gt;
+        click me
+      &lt;/button&gt;
+      &lt;BigList products={products} addToCart={addToCart}/&gt;
+    &lt;/&gt;
+  )
+}
+
+
+// Each time a prop or the state changes, the component re-renders. Because now 
+// addToCart is define with useCallback, the re-render is not triggered
+
+const BigList = React.memo(({ products, addToCart }) =&gt; {
+
+  return (
+    &lt;section className='products'&gt;
+      {products.map((product) =&gt; {
+        return (
+          &lt;SingleProduct
+            key={product.id}
+            {...product}
+            addToCart={addToCart}
+          &gt;&lt;/SingleProduct&gt;
+        )
+      })}
+    &lt;/section&gt;
+  )
+})
+
+const SingleProduct = ({ fields, addToCart }) =&gt; {
+  let { name, price } = fields
+  price = price / 100
+  const image = fields.image[0].url
+
+  return (
+    &lt;article className='product'&gt;
+      &lt;img src={image} alt={name} /&gt;
+      &lt;h4&gt;{name}&lt;/h4&gt;
+      &lt;p&gt;${price}&lt;/p&gt;
+      &lt;button onClick={addToCart}&gt;add to cart&lt;/button&gt;
+    &lt;/article&gt;
+  )
+}
+
+export default Index;
+</pre>
+
+<div id="Performance Optimization-useMemo"><h2 id="useMemo" class="header"><a href="#Performance Optimization-useMemo">useMemo</a></h2></div>
+
+<p>
+Note that this <code>hook</code> deals with values (which is the traditional functionality of the idea of memoizing), whilst <code>React.memo</code> look for changes in the <code>props</code>. 
+</p>
+
+<p>
+In the next example we create a function that returns a value, and we memoize the function, so it only computes the value whenever the products change (the argument of the function), else it returns the value stored before:
+</p>
+
+<pre javascript="">import React, { useState, useCallback, useMemo } from 'react'
+
+// Custom hook
+import { useFetch } from 'useFetch'
+
+const url = 'https://course-api.com/javascript-store-products'
+
+// Define the function we are going to memoize
+const calculateMostExpensive = (data) =&gt; {
+  return (
+    data.reduce((total, item) =&gt; {
+      const price = item.fields.price
+      if (price &gt;= total) {
+        total = price
+      }
+      return total
+    }, 0) / 100
+  )
+}
+
+const Index = () =&gt; {
+  const { products } = useFetch(url);
+  const [count, setCount] = useState(0);
+  const [cart, setCart] = useState(0);
+  
+  const addToCart = useCallback(() =&gt; {
+    setCart(cart + 1)
+  }, [cart])
+  
+  // Memoize the function with useMemo
+  const mostExpensive = useMemo(() =&gt; calculateMostExpensive(products), [
+    products,
+  ])
+
+  return (
+    &lt;&gt;
+      &lt;h1&gt;Count : {count}&lt;/h1&gt;
+      &lt;button className='btn' onClick={() =&gt; setCount(count + 1)}&gt;
+        click me
+      &lt;/button&gt;
+      &lt;!-- Show most expensive product --&gt;
+      &lt;h1&gt;Most Expensive : ${mostExpensive}&lt;/h1&gt;
+      &lt;BigList products={products} addToCart={addToCart}/&gt;
+    &lt;/&gt;
+  )
+}
+
+const BigList = React.memo(({ products, addToCart }) =&gt; {
+
+  return (
+    &lt;section className='products'&gt;
+      {products.map((product) =&gt; {
+        return (
+          &lt;SingleProduct
+            key={product.id}
+            {...product}
+            addToCart={addToCart}
+          &gt;&lt;/SingleProduct&gt;
+        )
+      })}
+    &lt;/section&gt;
+  )
+})
+
+const SingleProduct = ({ fields, addToCart }) =&gt; {
+  let { name, price } = fields
+  price = price / 100
+  const image = fields.image[0].url
+
+  return (
+    &lt;article className='product'&gt;
+      &lt;img src={image} alt={name} /&gt;
+      &lt;h4&gt;{name}&lt;/h4&gt;
+      &lt;p&gt;${price}&lt;/p&gt;
+      &lt;button onClick={addToCart}&gt;add to cart&lt;/button&gt;
+    &lt;/article&gt;
+  )
+}
+
+export default Index;
+</pre>
+</div>
+  
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+<script src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script></body></html>

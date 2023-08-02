@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Docker Compose</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,79 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Docker Compose"><h1 id="Docker Compose" class="header"><a href="#Docker Compose">Docker Compose</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="/src/Notes/index.html">Notes</a>
+<p>
+It is used to set up a complex application running multiple services.
+</p>
 
-</li><li>
-<a href="/src/Study/index.html">Study</a>
+<p>
+<code>Docker</code> commands map to <code>Docker Compose</code> as follows:
+</p>
 
-</li></ul>
-<hr>
+<p>
+<img src="https://albamr09.github.io/public/assets/docker_compose.png" alt="Docker Compose" style="width:600px;height:400px;">
+</p>
+
+<p>
+To start the application we run:
+</p>
+
+<pre console="">
+$ docker-compose up
+
+</pre>
+
+<div id="Docker Compose-Build"><h2 id="Build" class="header"><a href="#Docker Compose-Build">Build</a></h2></div>
+
+<p>
+If we would like to tell <code>Docker Compose</code> to build a <code>Docker</code> build instead of pulling an image we use the <code>build</code> keyword inside a service instead of the <code>image</code> keyword. And we specify the location of the directory which contains the application code and a <code>Dockerfile</code>.
+</p>
+
+<pre yaml="">
+vote:
+  build: ./vote
+  ports:
+    - 5000:80
+  links:
+    - redis
+
+</pre>
+
+<div id="Docker Compose-Versions"><h2 id="Versions" class="header"><a href="#Docker Compose-Versions">Versions</a></h2></div>
+
+<p>
+Different <code>Docker Compose</code> versions have different formats and functionality.
+</p>
+
+<div id="Docker Compose-Versions-Version 2"><h3 id="Version 2" class="header"><a href="#Docker Compose-Versions-Version 2">Version 2</a></h3></div>
+
+<p>
+From version 2 on, you must specify the <code>Docker Compose</code> version by adding to the top of the file:
+</p>
+
+<pre yaml="">
+version: 2
+
+</pre>
+
+<p>
+Also, all of the different containers should be listed under a <code>sevices</code> section. 
+</p>
+
+<p>
+And now, <code>links</code> are no longer needed as <code>Docker</code> creates a virtual network and attaches all of the services to this network with the name of the service.
+</p>
+
+<p>
+Finally, a <code>depends_on</code> keyword is introduced to force a order of startup.
+</p>
 </div>
   
   <script type="text/javascript">

@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Sessions</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,57 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Sessions"><h1 id="Sessions" class="header"><a href="#Sessions">Sessions</a></h1></div>
 
 <hr>
+
+<p>
+There are two key components when it comes to session handling:
+</p>
 
 <ul>
 <li>
-<a href="/src/Notes/index.html">Notes</a>
+<code>SessionFactory</code>: reads the hibernate configuration file, creates sessions objects, and is created only once in the application and reused over and over again
 
 </li><li>
-<a href="/src/Study/index.html">Study</a>
+<code>Session</code>: is a wrapper around a <code>JDBC</code> connection, which is the main object used to save/retrieve objects. This object is created multiple times.
 
 </li></ul>
-<hr>
+<p>
+So to create a <code>SessionFactory</code> and then create <code>Session</code> from it:
+</p>
+
+<pre java="">public class Demo {
+  public static void main(String[] args) {
+  
+    // create session factory
+    SessionFactory factory = new Configuration()
+                              // configuration file in src/ (if it is not specified, hibernate will look for a file named hibernate.cfg.xml)
+                              .configure("hibernate.cfg.xml")
+                              // Class that was annotated to be mapped
+                              .addAnnotatedClass(Student.class)
+                              // You can add multiple classes
+                              .addAnnotatedClass(...)
+                              // Create the factory
+                              .buildSessionFactory();
+    
+    // create session
+    Session session = factory.getCurrentSession();
+    
+    try {			
+      // Use session object to perform CRUD operations	
+    }
+    finally {
+      // Delete session factory
+      factory.close();
+    }
+  }
+}
+</pre>
 </div>
   
   <script type="text/javascript">

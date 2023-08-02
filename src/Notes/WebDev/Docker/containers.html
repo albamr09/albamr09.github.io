@@ -1,0 +1,284 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Container</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Container"><h1 id="Container" class="header"><a href="#Container">Container</a></h1></div>
+
+<hr>
+
+<div id="Container-RUN"><h2 id="RUN" class="header"><a href="#Container-RUN">RUN</a></h2></div>
+
+<div id="Container-RUN-Basics"><h3 id="Basics" class="header"><a href="#Container-RUN-Basics">Basics</a></h3></div>
+
+<ul>
+<li>
+<span id="Container-RUN-Basics-Run a container"></span><strong id="Run a container">Run a container</strong> from an image, the attached way, (i.e. it is not run on the background).
+<pre console="">
+$ docker run nginx 
+
+</pre>
+
+</li></ul>
+<p>
+If the image is not present on the host it will be downloaded from <code>Docker Hub</code>. 
+</p>
+
+<p>
+When it is downloaded it runs and exits right away, because there is not application running in the container.
+</p>
+
+<p>
+To run the container in the <code>detach mode</code>, so it run on the background:
+</p>
+
+<pre console="">
+$ docker run -d nginx
+
+</pre>
+
+<p>
+To bring the container to the foreground:
+</p>
+
+<pre console="">
+$ docker attach ( container_id | container_name )
+
+</pre>
+
+<hr>
+
+<ul>
+<li>
+Run a container with a specific <code>tag</code>:
+<pre console="">
+$ docker run redis:4.0
+
+</pre>
+
+</li></ul>
+<p>
+This way we run the <code>redis</code> image where <code>redis</code>'s version is <code>4.0</code>. 
+</p>
+
+<hr>
+
+<ul>
+<li>
+<span id="Container-RUN-Basics-Run"></span><strong id="Run">Run</strong> a container listening to the <span id="Container-RUN-Basics-standard input"></span><strong id="standard input">standard input</strong> (because by default <code>Docker</code> does not listen for input):
+<pre console="">
+$ docker run -i &lt;image_name&gt;
+
+</pre>
+
+</li></ul>
+<p>
+This way we are running our container in interactive mode.
+</p>
+
+<p>
+In order to attach a terminal:
+</p>
+
+<pre console="">
+$ docker run -it &lt;image_name&gt;
+
+</pre>
+
+<hr>
+
+<div id="Container-RUN-Port Mapping"><h3 id="Port Mapping" class="header"><a href="#Container-RUN-Port Mapping">Port Mapping</a></h3></div>
+
+<p>
+Each container is assigned a port (e.g. <code>5000</code>) and an internal IP by default (e.g. <code>127.17.0.2</code>) but this IP is only accessible from the host. So to access it from outside, we would use our host's IP (e.g. <code>192.168.1.5</code>), however we still need to map our container's port to a free port in our host.
+</p>
+
+<p>
+So to map, for example, the port <code>5000</code> of our <code>Docker</code> container to the port <code>80</code> of our host:
+</p>
+
+
+<pre console="">
+$ docker run -p 80:5000 &lt;image_name&gt;
+
+</pre>
+
+<p>
+And now, we can access the service running in our <code>Docker</code> container by heading to <code>192.168.1.5:80</code>. This way all traffic in this specific URL will be routed to the port <code>5000</code> in our <code>Docker</code> container.
+</p>
+
+<div id="Container-RUN-Volume Mapping"><h3 id="Volume Mapping" class="header"><a href="#Container-RUN-Volume Mapping">Volume Mapping</a></h3></div>
+
+<p>
+Our container has its own file system, so the changes made to data stored in it are only made in the container.
+</p>
+
+<p>
+If you want certain data to persist (because when removing the <code>Docker</code> container the files stored within are also removed) you use the flag <code>-v</code> to map a certain file/folder in the container to a certain file/folder in our host:
+</p>
+
+<pre console="">
+$ docker run -v /opt/datadir:/var/lib/mysql mysql
+
+</pre>
+
+<p>
+In this particular example we store the data we saved in our <code>MySQL</code> database in a directory in our container (<code>/var/lib/mysql</code>), and we map this directory to a directory in our host (<code>/opt/datadir</code>) This way <code>Docker</code> mounts implicitly the folder in our host to the folder in the container.
+</p>
+
+<div id="Container-RUN-Linking"><h3 id="Linking" class="header"><a href="#Container-RUN-Linking">Linking</a></h3></div>
+
+<p>
+If we have a web application that connects to a <code>redis</code> instance, we need to tell the web app's container which <code>redis</code> instance to wait for (because there may be multiple). So, first we start the <code>redis</code> container:
+</p>
+
+<pre console="">
+$ docker run -d --name=redis redis
+
+</pre>
+
+<p>
+And now we start our web app's container and we link it with the <code>redis</code> container:
+</p>
+
+
+<pre console="">
+$ docker run -d --name=vote -p 5000:80 --link redis:redis voting-app
+
+</pre>
+
+<p>
+The <code>redis</code> before the colon is the name of our <code>redis</code> container, and the <code>redis</code> after the name is the name used in the web app container.
+</p>
+
+<p>
+This option is soon to be deprecated because new concepts are technologies are being introduced.
+</p>
+
+<div id="Container-Information of a Container"><h2 id="Information of a Container" class="header"><a href="#Container-Information of a Container">Information of a Container</a></h2></div>
+
+<p>
+In order to get more detailed information about a certain container:
+</p>
+
+<pre console="">
+$ docker inspect ( container_name | container_id )
+
+</pre>
+
+<div id="Container-Logs"><h2 id="Logs" class="header"><a href="#Container-Logs">Logs</a></h2></div>
+
+<p>
+To see the logs of a container (usually printed to the <code>stdout</code>):
+</p>
+
+<pre console="">
+$ docker log ( container_name | container_id )
+
+</pre>
+
+<div id="Container-LIST"><h2 id="LIST" class="header"><a href="#Container-LIST">LIST</a></h2></div>
+
+<ul>
+<li>
+<span id="Container-LIST-Lists"></span><strong id="Lists">Lists</strong> all running containers and some information about it.
+<pre console="">
+$ docker ps
+
+</pre>
+
+</li></ul>
+<p>
+To see all containers, even if they are not currently running:
+</p>
+
+<pre console="">
+$ docker ps -a
+
+</pre>
+
+<div id="Container-STOP"><h2 id="STOP" class="header"><a href="#Container-STOP">STOP</a></h2></div>
+
+<ul>
+<li>
+<span id="Container-STOP-Stop running a container"></span><strong id="Stop running a container">Stop running a container</strong> who matches the <code>id</code> or the name provided:
+<pre console="">
+docker stop ( container_id | container_name )
+
+</pre>
+
+</li></ul>
+<div id="Container-REMOVE"><h2 id="REMOVE" class="header"><a href="#Container-REMOVE">REMOVE</a></h2></div>
+
+<ul>
+<li>
+<span id="Container-REMOVE-Removes"></span><strong id="Removes">Removes</strong> a container permanently
+<pre console="">
+docker rm ( container_id | container_name )
+
+</pre>
+
+</li></ul>
+<div id="Container-Execute commands"><h2 id="Execute commands" class="header"><a href="#Container-Execute commands">Execute commands</a></h2></div>
+
+<ul>
+<li>
+To <span id="Container-Execute commands-execute a command"></span><strong id="execute a command">execute a command</strong> after creating a new container:
+<pre console="">
+$ docker run ubuntu sleep 5
+
+</pre>
+
+</li></ul>
+<p>
+This commands starts the container and run the command <code>sleep 5</code> and then exits.
+</p><hr>
+<p></p>
+<ul>
+<li>
+To <span id="Container-Execute commands-execute a command"></span><strong id="execute a command">execute a command</strong> in a currently <span id="Container-Execute commands-running container"></span><strong id="running container">running container</strong>:
+<pre console="">
+$ docker exec ( container_id | container_name ) cat /etc/hosts
+
+</pre>
+
+</li></ul>
+</div>
+  
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+<script src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script></body></html>

@@ -1,0 +1,350 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Java JSON Data Binding</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Java JSON Data Binding"><h1 id="Java JSON Data Binding" class="header"><a href="#Java JSON Data Binding">Java JSON Data Binding</a></h1></div>
+
+<hr>
+
+<p>
+Data binding is the process of converting JSON data to a Java POJO (the conversion goes both ways)
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/json_data_binding.png" alt="JSON Data Binding">
+</p>
+
+<p>
+Data binding is the same as Serialization/Deserialization and Marshalling/Unmarshalling.
+</p>
+
+<p>
+Spring uses the Jackson Project behind the scenes which handles data binding between JSON and Java POJOs. For conversion we use <code>Object Mapper</code>
+</p>
+
+<p>
+By default Jackson will call appropiate getter and setter methods to populate a POJO from a JSON or to create a JSON object from a POJO.
+</p>
+
+<ul>
+<li>
+To convert from JSON to Java, Jackson calls the setter methods
+
+</li><li>
+To convert from Java to JSON, Jackson calls the getter methods
+
+</li></ul>
+<div id="Java JSON Data Binding-Set Up"><h2 id="Set Up" class="header"><a href="#Java JSON Data Binding-Set Up">Set Up</a></h2></div>
+
+<p>
+Add Jackson Project as a dependency in the maven file:
+</p>
+
+<pre xml="">	&lt;dependencies&gt;
+
+		&lt;!-- TODO: Add your dependency here --&gt;
+
+		&lt;dependency&gt;
+			&lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+			&lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+			&lt;version&gt;2.10.0.pr1&lt;/version&gt;
+		&lt;/dependency&gt;	
+			
+	&lt;/dependencies&gt;
+</pre>
+
+<div id="Java JSON Data Binding-Create POJO Class"><h2 id="Create POJO Class" class="header"><a href="#Java JSON Data Binding-Create POJO Class">Create POJO Class</a></h2></div>
+
+<p>
+We now create the class we are going to convert to JSON (Serialize):
+</p>
+
+<pre java="">package com.jackson.json.demo;
+
+public class Student {
+
+	private int id;
+	private String firstName;
+	private String lastName;
+	private boolean active;
+	
+	public Student() {
+		
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	public boolean isActive() {
+		return active;
+	}
+	
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	
+}
+</pre>
+
+<div id="Java JSON Data Binding-Main App"><h2 id="Main App" class="header"><a href="#Java JSON Data Binding-Main App">Main App</a></h2></div>
+
+<p>
+Now, to test it we are going to create a <code>Student</code> object by reading from a <code>JSON</code> object:
+</p>
+
+<pre java="">package com.jackson.json.demo;
+import java.io.File;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class Driver {
+
+	public static void main(String[] args) {
+		
+		try {
+			// create object mapper
+			ObjectMapper mapper = new ObjectMapper();
+			
+			// read JSON  file and map/convert to Java POJO: 
+			// data/sample-lite.json
+			
+			Student theStudent = mapper.readValue(
+						new File("data/sample-lite.json"), Student.class);
+		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}
+	}
+}
+</pre>
+
+<div id="Java JSON Data Binding-Nested Objects"><h2 id="Nested Objects" class="header"><a href="#Java JSON Data Binding-Nested Objects">Nested Objects</a></h2></div>
+
+<p>
+But, how can we read nested properties inside a json file, like the following:
+</p>
+
+<pre json="">{
+	"id": 14,
+	"firstName": "Mario",
+	"lastName": "Rossi",
+	"active": true,
+	"address": {
+		"street": "100 Main St",
+		"city": "Philadelphia",
+		"state": "Pennsylvania",
+		"zip": "19103",
+		"country": "USA"
+	},
+	"languages" : ["Java", "C#", "Python", "Javascript"]
+}
+</pre>
+
+<p>
+As you can see the <code>address</code> property has properties inside it. What we are going to do is create a new attribute <code>address</code> inside the <code>Student</code> object, which will be a POJO object in itself.
+</p>
+
+
+<pre java="">package com.jackson.json.demo;
+
+public class Student {
+
+	private int id;
+	private String firstName;
+	private String lastName;
+	private boolean active;
+	
+	private Address address;
+	
+	private String[] languages;
+	
+	public Student() {
+		
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	public boolean isActive() {
+		return active;
+	}
+	
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public String[] getLanguages() {
+		return languages;
+	}
+
+	public void setLanguages(String[] languages) {
+		this.languages = languages;
+	}
+	
+}
+</pre>
+
+<p>
+We also need to create the <code>Address</code> class:
+</p>
+
+<pre java="">package com.jackson.json.demo;
+
+public class Address {
+
+	private String street;
+	private String city;
+	private String state;
+	private String zip;
+	private String country;
+	
+	public Address() {
+		
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+}
+</pre>
+
+<div id="Java JSON Data Binding-Ignore Unknwon Properties"><h2 id="Ignore Unknwon Properties" class="header"><a href="#Java JSON Data Binding-Ignore Unknwon Properties">Ignore Unknwon Properties</a></h2></div>
+
+<p>
+To ignore properties from the JSON file that cannot be mapped to an attribute in the POJO we use the annotation:
+</p>
+
+
+<pre java="">package com.jackson.json.demo;
+
+@JsonIgnoreProperties(ignoreUnkown=true)
+public class Student {
+
+	private int id;
+	private String firstName;
+</pre>
+</div>
+  
+  <script type="text/javascript">
+    $("pre").each(function (index, item) {
+      $(item).html("<code>" + $(item).html() + "</code>");
+    });
+    hljs.initHighlightingOnLoad();
+  </script>
+
+<script src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script></body></html>

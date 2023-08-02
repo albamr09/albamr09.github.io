@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Ceiling Analysis</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,86 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Ceiling Analysis"><h1 id="Ceiling Analysis" class="header"><a href="#Ceiling Analysis">Ceiling Analysis</a></h1></div>
 
 <hr>
+
+<p>
+Supongamos que tenemos un pipeline que conforma todo nuestro sistema de aprendizaje automático y está formado por:
+</p>
 
 <ul>
 <li>
-<a href="/src/Notes/index.html">Notes</a>
+Obtención de la imagen
 
 </li><li>
-<a href="/src/Study/index.html">Study</a>
+Detección de texto
+
+</li><li>
+Segmentación de caracteres
+
+</li><li>
+Reconocimiento de caracteres
 
 </li></ul>
-<hr>
+<p>
+Lo que hacemos es determinar una o varias métricas de evaluación, por ejemplo nosotros utilizaremos la precisión. Entonces, ahora creamos una tabla indicando el valor de métrica para cada parte del sistema así como para el sitema completo:
+</p>
+
+<table>
+<thead>
+<tr>
+<th>
+Componente
+</th>
+<th>
+Precisión
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Detección del texto
+</td>
+<td>
+82%
+</td>
+</tr>
+<tr>
+<td>
+Segmentación de caracteres
+</td>
+<td>
+90%
+</td>
+</tr>
+<tr>
+<td>
+Reconocimiento de caracteres
+</td>
+<td>
+100%
+</td>
+</tr>
+<tr>
+<td>
+Total
+</td>
+<td>
+72%
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+A partir de esta tabla podemos comprobar que mejorar la Detección en el texto y la Segmentación de caracteres mejora el rendimiento del modelo.
+</p>
 </div>
   
   <script type="text/javascript">

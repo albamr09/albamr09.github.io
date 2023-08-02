@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Grandes Datasets</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,73 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Grandes Datasets"><h1 id="Grandes Datasets" class="header"><a href="#Grandes Datasets">Grandes Datasets</a></h1></div>
 
 <hr>
+
+<p>
+Cuando los conjuntos de datos son muy grandes los algoritmos son computacionalmente más caros:
+</p>
 
 <ul>
 <li>
-<a href="/src/Notes/index.html">Notes</a>
+Varianza elevada: se obtiene mejor rendimiento con más ejemplos.
 
 </li><li>
-<a href="/src/Study/index.html">Study</a>
+Sesgo/bias elevado: se obtiene mejor rendimiento con más características.
 
 </li></ul>
-<hr>
+<div id="Grandes Datasets-Stochastic Gradient Descent"><h2 id="Stochastic Gradient Descent" class="header"><a href="#Grandes Datasets-Stochastic Gradient Descent">Stochastic Gradient Descent</a></h2></div>
+
+<p>
+El algoritmo de Stochastic Gradient Descent es el siguiente:
+</p>
+
+<ol>
+<li>
+Reordenar aleatoriamente el conjunto de datos
+
+</li><li>
+Para cada ejemplo \(i\) y cada característica \(j\):
+
+<ul>
+<li>
+\(\theta_j = \theta_j - \alpha (h_\theta(x^{(i)}) - y^{(i)})x^{(i)}_j\)
+
+</li><li>
+Es decir, se ajusta \(\theta\) para cada ejemplo, en lugar de hacer el cálculo sobre todo el conjunto de datos
+
+</li><li>
+Cada iteración es más rápida
+
+</li><li>
+No converge como Batch Gradient Descent, llega a una aproximación.
+
+</li></ul>
+</li></ol>
+<div id="Grandes Datasets-Mini Batch Gradient Descent"><h2 id="Mini Batch Gradient Descent" class="header"><a href="#Grandes Datasets-Mini Batch Gradient Descent">Mini Batch Gradient Descent</a></h2></div>
+
+<p>
+Esta técnica lo que hace el utilizar \(b\) ejemplos para calcular el gradiente:
+</p>
+ 
+<ol>
+<li>
+Para cada \(b\) ejemplos y cada característica \(j\):
+
+<ul>
+<li>
+\(\theta_j = \theta_j - \alpha \frac{1}{b}(h_\theta(x^{(i)}) - y^{(i)})x^{(i)}_j\)
+
+</li><li>
+Permite vectorización
+
+</li></ul>
+</li></ol>
 </div>
   
   <script type="text/javascript">

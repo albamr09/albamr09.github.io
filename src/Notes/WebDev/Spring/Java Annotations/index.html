@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Registry Index</title>
+    <title>Java Annotations</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -28,19 +28,54 @@
     </div>
     <hr>
     <div class="content">
-<div id="Registry Index"><h1 id="Registry Index" class="header"><a href="#Registry Index">Registry Index</a></h1></div>
+<p>
+<a href="../index.html">Back</a>
+</p>
 
+<div id="Java Annotations"><h1 id="Java Annotations" class="header"><a href="#Java Annotations">Java Annotations</a></h1></div>
+
+<hr>
+
+<p>
+Java Annotations are special labels added to classes. They provide metadata about the class, and can be processed at compile time or run-time for special processing.
+</p>
+
+<p>
+We use annotations to minimize the <code>XML</code> configuration.
+</p>
+
+<p>
+Spring scans the classes to find <code>Beans</code> and configure them internally (as we have done with the <code>XML</code> configuration).
+</p>
+
+<p>
+In order to use this approach we need to:
+</p>
+
+<ol>
+<li>
+Enable component scanning in our Spring configuration file and
+
+</li><li>
+Add the <code>@Component</code> annotation to our class
+
+</li></ol>
 <hr>
 
 <ul>
 <li>
-<a href="/src/Notes/index.html">Notes</a>
+<a href="Inversion of Control.html">Inversion of Control</a>
 
 </li><li>
-<a href="/src/Study/index.html">Study</a>
+<a href="Dependency Injection.html">Dependency Injection</a>
+
+</li><li>
+<a href="Scopes.html">Scopes</a>
+
+</li><li>
+<a href="Life Cycles.html">Life Cycles</a>
 
 </li></ul>
-<hr>
 </div>
   
   <script type="text/javascript">
