@@ -1,0 +1,81 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Solutions of Linear Systems in Three Variables</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Solutions of Linear Systems in Three Variables"><h1 id="Solutions of Linear Systems in Three Variables" class="header"><a href="#Solutions of Linear Systems in Three Variables">Solutions of Linear Systems in Three Variables</a></h1></div>
+
+<hr>
+
+<p>
+We can extend the ideas of systems of equations in two variables to linear equations of the form:
+</p>
+
+\begin{align}
+Ax + By + Cz = D
+\end{align}
+
+<p>
+Considering the possible intersections of the planes representing three equations in three unknowns shows that the solution set of such a system may be either a <span id="Solutions of Linear Systems in Three Variables-single ordered triple"></span><strong id="single ordered triple">single ordered triple</strong> \((x, y, z)\), an <span id="Solutions of Linear Systems in Three Variables-infinite set of ordered triples"></span><strong id="infinite set of ordered triples">infinite set of ordered triples</strong> (dependent equations), or the <span id="Solutions of Linear Systems in Three Variables-empty set"></span><strong id="empty set">empty set</strong> (an inconsistent system).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/three_var_system_solutions.png" alt="Three Variable Linear System Solution" style="width:500px;height:350px">
+</p>
+
+<p>
+The following steps can be used to solve a linear system with three variables.
+</p>
+
+<ol>
+<li>
+Eliminate a variable from any two of the equations.
+
+</li><li>
+Eliminate the <span id="Solutions of Linear Systems in Three Variables-same variable"></span><strong id="same variable">same variable</strong> from a different pair of equations.
+
+</li><li>
+Eliminate a second variable using the resulting two equations in two variables to get an equation with just one variable.
+
+</li><li>
+Find the values of the remaining variables by substitution.
+
+</li></ol>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
