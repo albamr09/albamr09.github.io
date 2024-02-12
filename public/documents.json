@@ -507,7 +507,7 @@
   {
     "id": "https://albamr09.github.io/src/Notes/index.html",
     "title": "Notes",
-    "body": " index search search back notes math web development pre-calculus a graphical approach to algebra and trigonometry frameworks front react back node.js django spring technologies docker graphql db mongodb data science google data analyst machine learning stanford coursera artificial intelligence in robotics online training mobile robotics standalone topics rices arch linux installation other vimwiki macos vm $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
+    "body": " index search search back notes math pre-calculus a graphical approach to algebra and trigonometry web development frameworks front react back node.js django spring technologies docker graphql db mongodb data science google data analyst machine learning stanford coursera artificial intelligence in robotics online training mobile robotics standalone topics rices arch linux installation other vimwiki macos vm $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
   },
   {
     "id": "https://albamr09.github.io/src/Notes/Other/VimWiki/index.html",
