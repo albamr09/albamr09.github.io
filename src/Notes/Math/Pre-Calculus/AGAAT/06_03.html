@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>A Graphical Approach to Algebra and Trigonometry</title>
+    <title>Solution of Linear Systems by Row Transformations</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -29,28 +29,52 @@
     <hr>
     <div class="content">
 <p>
-<a href="../../../index.html">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="A Graphical Approach to Algebra and Trigonometry"><h1 id="A Graphical Approach to Algebra and Trigonometry" class="header"><a href="#A Graphical Approach to Algebra and Trigonometry">A Graphical Approach to Algebra and Trigonometry</a></h1></div>
+<div id="Solution of Linear Systems by Row Transformations"><h1 id="Solution of Linear Systems by Row Transformations" class="header"><a href="#Solution of Linear Systems by Row Transformations">Solution of Linear Systems by Row Transformations</a></h1></div>
 
 <hr>
 
-<ol>
-<li>
-Systems and Matrices
+<p>
+Solving linear systems of equations can be streamlined by using matrices. Consider a system of three equations and three unknowns.
+</p>
+
+\begin{align}
+a_1 x + b_1y + c_1z = d_1
+a_2 x + b_2y + c_2z = d_2
+a_3 x + b_3y + c_3z = d_3
+\end{align}
+
+<p>
+can be written as the following <span id="Solution of Linear Systems by Row Transformations-augmented matrix"></span><strong id="augmented matrix">augmented matrix</strong>:
+</p>
+
+\begin{align}
+\begin{bmatrix}
+a_1 &amp; b_1 &amp; c_1 &amp; d_1 \\
+a_2 &amp; b_2 &amp; c_2 &amp; d_2 \\
+a_3 &amp; b_3 &amp; c_3 &amp; d_3 \\
+\end{bmatrix}
+\end{align}
+
+<div id="Solution of Linear Systems by Row Transformations-Matrix Row Transformations"><h2 id="Matrix Row Transformations" class="header"><a href="#Solution of Linear Systems by Row Transformations-Matrix Row Transformations">Matrix Row Transformations</a></h2></div>
+
+<p>
+For any augmented matrix of a system of linear equations, the following row
+transformations will result in the matrix of an equivalent system.
+</p>
 
 <ol>
 <li>
-Systems of Equations
+Any two rows may be interchanged.
 
 </li><li>
-<a href="06_02.html">Solutions of Linear Systems in Three Variables</a>
+The elements of any row may be multiplied by a nonzero real number.
 
 </li><li>
-<a href="06_03.html">Solution of Linear Systems by Row Transformations</a>
+Any row may be changed by adding to its elements a multiple of the corresponding elements of another row.
 
-</li></ol>
 </li></ol>
 </div>
   

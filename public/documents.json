@@ -1435,9 +1435,14 @@
     "body": " index search search back solutions of linear systems in three variables we can extend the ideas of systems of equations in two variables to linear equations of the form: \\begin{align} ax + by + cz = d \\end{align} considering the possible intersections of the planes representing three equations in three unknowns shows that the solution set of such a system may be either a single ordered triple \\((x, y, z)\\), an infinite set of ordered triples (dependent equations), or the empty set (an inconsistent system). the following steps can be used to solve a linear system with three variables. eliminate a variable from any two of the equations. eliminate the same variable from a different pair of equations. eliminate a second variable using the resulting two equations in two variables to get an equation with just one variable. find the values of the remaining variables by substitution. $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
   },
   {
+    "id": "https://albamr09.github.io/src/Notes/Math/Pre-Calculus/AGAAT/06_03.html",
+    "title": "Solution of Linear Systems by Row Transformations",
+    "body": " index search search back solution of linear systems by row transformations solving linear systems of equations can be streamlined by using matrices. consider a system of three equations and three unknowns. \\begin{align} a_1 x + b_1y + c_1z = d_1 a_2 x + b_2y + c_2z = d_2 a_3 x + b_3y + c_3z = d_3 \\end{align} can be written as the following augmented matrix: \\begin{align} \\begin{bmatrix} a_1 & b_1 & c_1 & d_1 \\\\ a_2 & b_2 & c_2 & d_2 \\\\ a_3 & b_3 & c_3 & d_3 \\\\ \\end{bmatrix} \\end{align} matrix row transformations for any augmented matrix of a system of linear equations, the following row transformations will result in the matrix of an equivalent system. any two rows may be interchanged. the elements of any row may be multiplied by a nonzero real number. any row may be changed by adding to its elements a multiple of the corresponding elements of another row. $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
+  },
+  {
     "id": "https://albamr09.github.io/src/Notes/Math/Pre-Calculus/AGAAT/index.html",
     "title": "A Graphical Approach to Algebra and Trigonometry",
-    "body": " index search search back a graphical approach to algebra and trigonometry systems and matrices systems of equations solutions of linear systems in three variables $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
+    "body": " index search search back a graphical approach to algebra and trigonometry systems and matrices systems of equations solutions of linear systems in three variables solution of linear systems by row transformations $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
   },
   {
     "id": "https://albamr09.github.io/src/Study/DataScience/google-analytics.html",
