@@ -42,7 +42,13 @@ Solving linear systems of equations can be streamlined by using matrices. Consid
 
 \begin{align}
 a_1 x + b_1y + c_1z = d_1
+\end{align}
+
+\begin{align}
 a_2 x + b_2y + c_2z = d_2
+\end{align}
+
+\begin{align}
 a_3 x + b_3y + c_3z = d_3
 \end{align}
 
@@ -51,11 +57,11 @@ can be written as the following <span id="Solution of Linear Systems by Row Tran
 </p>
 
 \begin{align}
-\begin{bmatrix}
+\begin{pmatrix}[ccc|c]
 a_1 &amp; b_1 &amp; c_1 &amp; d_1 \\
 a_2 &amp; b_2 &amp; c_2 &amp; d_2 \\
 a_3 &amp; b_3 &amp; c_3 &amp; d_3 \\
-\end{bmatrix}
+\end{pmatrix}
 \end{align}
 
 <div id="Solution of Linear Systems by Row Transformations-Matrix Row Transformations"><h2 id="Matrix Row Transformations" class="header"><a href="#Solution of Linear Systems by Row Transformations-Matrix Row Transformations">Matrix Row Transformations</a></h2></div>
@@ -76,6 +82,99 @@ The elements of any row may be multiplied by a nonzero real number.
 Any row may be changed by adding to its elements a multiple of the corresponding elements of another row.
 
 </li></ol>
+<div id="Solution of Linear Systems by Row Transformations-Row Echelon Method"><h2 id="Row Echelon Method" class="header"><a href="#Solution of Linear Systems by Row Transformations-Row Echelon Method">Row Echelon Method</a></h2></div>
+
+<p>
+The <span id="Solution of Linear Systems by Row Transformations-Row Echelon Method-echelon (triangular) form"></span><strong id="echelon (triangular) form">echelon (triangular) form</strong> of an augmented matrix has <span id="Solution of Linear Systems by Row Transformations-Row Echelon Method-1s down the diagonal"></span><strong id="1s down the diagonal">1s down the diagonal</strong> from upper left to lower right and <span id="Solution of Linear Systems by Row Transformations-Row Echelon Method-0s below"></span><strong id="0s below">0s below</strong> each 1. 
+</p>
+
+<p>
+Once a system of linear equations is in echelon form, back-substitution can be used to find the solution set. The <span id="Solution of Linear Systems by Row Transformations-Row Echelon Method-row echelon method"></span><strong id="row echelon method">row echelon method</strong>
+uses matrices to solve a system of linear equations. 
+</p>
+
+<ul>
+<li>
+Start by obtaining a 1 as the first entry in the first column and then transform all entries below it to a 0. 
+
+</li><li>
+Continue through the columns obtaining a 1 as the second entry in the second column (zeros below), the third entry in the third column (zeros below), and so on. 
+
+</li><li>
+Repeat this process to row echelon form.
+
+</li></ul>
+<p>
+The following matrix is an augmented matrix in row echelon form:
+</p>
+
+\begin{align}
+\begin{pmatrix}[ccc|c]
+  1 &amp; 2 &amp; 3 &amp; 4\\
+  0 &amp; 5 &amp; 6 &amp; 7\\
+  0 &amp; 0 &amp; 0 &amp; 9\\
+\end{pmatrix}
+\end{align}
+
+<div id="Solution of Linear Systems by Row Transformations-Reduced Row Echelon Method"><h2 id="Reduced Row Echelon Method" class="header"><a href="#Solution of Linear Systems by Row Transformations-Reduced Row Echelon Method">Reduced Row Echelon Method</a></h2></div>
+
+<p>
+The reduced row echelon form has 1s along the main diagonal and 0s both below and above. For example
+</p>
+
+\begin{align}
+\begin{pmatrix}[ccc|c]
+  1 &amp; 1 &amp; 1 &amp; 6\\
+  2 &amp; -1 &amp; 1 &amp; 5\\
+  3 &amp; 1 &amp; -1 &amp; 9\\
+\end{pmatrix}
+\end{align}
+
+<p>
+By using row transformations, this augmented matrix can be transformed to
+</p>
+
+\begin{align}
+\begin{pmatrix}[ccc|c]
+  1 &amp; 0 &amp; 0 &amp; 3\\
+  0 &amp; 1 &amp; 0 &amp; 2\\
+  0 &amp; 0 &amp; 1 &amp; 1\\
+\end{pmatrix}
+\end{align}
+
+<p>
+Which represents \(x = 3, y = 2, z = 1\). There is no need for back-substitution with reduced row echelon form.
+</p>
+
+<div id="Solution of Linear Systems by Row Transformations-Special Cases"><h2 id="Special Cases" class="header"><a href="#Solution of Linear Systems by Row Transformations-Special Cases">Special Cases</a></h2></div>
+
+<p>
+Whenever a row of the augmented matrix is of the form
+</p>
+
+\begin{align}
+\begin{pmatrix}[ccc|c]
+  0 &amp; 0 &amp; \cdots &amp; a\\
+\end{pmatrix}
+\end{align}
+
+<p>
+where \(a \neq 0\) the system is inconsistent and there will be no solution.
+</p>
+
+<p>
+A row of the matrix of a linear system in the form:
+</p>
+
+\begin{align}
+\begin{pmatrix}[ccc|c]
+  0 &amp; 0 &amp; \cdots &amp; 0\\
+\end{pmatrix}
+\end{align}
+
+<p>
+indicates that the equations of the system are dependent.
+</p>
 </div>
   
 
