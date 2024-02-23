@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>A Graphical Approach to Algebra and Trigonometry</title>
+    <title>Determinants and Cramer's Rule</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -29,35 +29,84 @@
     <hr>
     <div class="content">
 <p>
-<a href="../../../index.html">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="A Graphical Approach to Algebra and Trigonometry"><h1 id="A Graphical Approach to Algebra and Trigonometry" class="header"><a href="#A Graphical Approach to Algebra and Trigonometry">A Graphical Approach to Algebra and Trigonometry</a></h1></div>
+<div id="Determinants and Cramer's Rule"><h1 id="Determinants and Cramer's Rule" class="header"><a href="#Determinants and Cramer's Rule">Determinants and Cramer's Rule</a></h1></div>
 
 <hr>
 
-<ol>
-<li>
-Systems and Matrices
+<div id="Determinants and Cramer's Rule-Determinants of $2 \times 2$ matrices"><h2 id="Determinants of $2 \times 2$ matrices" class="header"><a href="#Determinants and Cramer's Rule-Determinants of $2 \times 2$ matrices">Determinants of \(2 \times 2\) matrices</a></h2></div>
 
-<ol>
-<li>
-Systems of Equations
+<p>
+The determinant of a \(2 \times 2\) matrix \(A\) is a real number defined as \(det(A) = a_{11} a_{22}− a_{21} a_{12}\).
+</p>
 
-</li><li>
-<a href="06_02.html">Solutions of Linear Systems in Three Variables</a>
+<div id="Determinants and Cramer's Rule-Determinants of $3 \times 3$ matrices"><h2 id="Determinants of $3 \times 3$ matrices" class="header"><a href="#Determinants and Cramer's Rule-Determinants of $3 \times 3$ matrices">Determinants of \(3 \times 3\) matrices</a></h2></div>
 
-</li><li>
-<a href="06_03.html">Solution of Linear Systems by Row Transformations</a>
+<p>
+The determinant of a \(3 \times 3\) matrix \(A\) is a real number defined as $det(A) = (a_{11}a_
+22}a_{33} + a_{12} a_{23} a_{31} + a_{13} a_{21}a_{32}) − (a_{31}a_{22}a_{13} + a_{32} a_{23} a_{11} + a_{33} a_{21}a_{12})$.
+</p>
 
-</li><li>
-<a href="06_04.html">Matrix Properties and Operations</a>
+<div id="Determinants and Cramer's Rule-Cofactor"><h2 id="Cofactor" class="header"><a href="#Determinants and Cramer's Rule-Cofactor">Cofactor</a></h2></div>
 
-</li><li>
-<a href="06_05.html">Determinants and Cramer's Rule</a>
+<p>
+Let \(M_{ij}\) be the <span id="Determinants and Cramer's Rule-Cofactor-minor"></span><strong id="minor">minor</strong> for element \(a_{ij}\) in an \(n \times n\) matrix. The cofactor of \(a_{ij}, written \)A_{ij}$, is defined as follows.
+</p>
 
-</li></ol>
-</li></ol>
+\begin{align}
+A_{ij} = (-1)^{i + j} \cdot M_{ij}
+\end{align}
+
+<div id="Determinants and Cramer's Rule-Cramer's Rule for $2 \times 2$ Systems"><h2 id="Cramer's Rule for $2 \times 2$ Systems" class="header"><a href="#Determinants and Cramer's Rule-Cramer's Rule for $2 \times 2$ Systems">Cramer's Rule for \(2 \times 2\) Systems</a></h2></div>
+
+<p>
+The solution of the system:
+</p>
+
+\begin{align}
+a_1x + b_1y = c_1
+\end{align}
+\begin{align}
+a_2x + b_2y = c_2
+\end{align}
+
+<p>
+is given by:
+</p>
+
+\begin{align}
+x = \frac{D_x}{D}, y = \frac{D_y}{D}
+\end{align}
+
+<p>
+where:
+</p>
+
+\begin{align}
+D_x = det(
+\begin{bmatrix}
+c_1 &amp; b_1 \\
+c_2 &amp; b_2 \\
+\end{bmatrix})
+\end{align}
+
+\begin{align}
+D_y = det(
+\begin{bmatrix}
+a_1 &amp; c_1 \\
+a_2 &amp; c_2 \\
+\end{bmatrix})
+\end{align}
+
+\begin{align}
+D = det(
+\begin{bmatrix}
+a_1 &amp; b_1 \\
+a_2 &amp; b_2 \\
+\end{bmatrix}) \neq 0
+\end{align}
 </div>
   
 
