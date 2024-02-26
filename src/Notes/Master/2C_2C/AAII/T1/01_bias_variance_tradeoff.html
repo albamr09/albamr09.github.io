@@ -136,15 +136,15 @@ The <span id="Bias/Variance Tradeoff-overall expected test MSE"></span><strong i
 </p>
 
 <p>
-The previous equation tells us that in order to minimize the expected test error, we need to select a statistical learning method that simultaneously achieves <span id="Bias/Variance Tradeoff-low variance"></span><strong id="low variance">low variance</strong> and <span id="Bias/Variance Tradeoff-low bias"></span><strong id="low bias">low bias</strong>. Note that variance is inherently a nonnegative quantity, and squared bias is also nonnegative. Hence, we see that *the expected test MSE can never lie below \(\mathbb{V}[\epsilon]\), the irreducible error*.
+The previous equation tells us that in order to minimize the expected test error, we need to select a statistical learning method that simultaneously achieves <span id="Bias/Variance Tradeoff-low variance"></span><strong id="low variance">low variance</strong> and <span id="Bias/Variance Tradeoff-low bias"></span><strong id="low bias">low bias</strong>. Note that variance is inherently a nonnegative quantity, and squared bias is also nonnegative. Hence, we see that <span id="Bias/Variance Tradeoff-the expected test MSE can never lie below"></span><strong id="the expected test MSE can never lie below">the expected test MSE can never lie below</strong> \(\mathbb{V}[\epsilon]\)<span id="Bias/Variance Tradeoff-, the irreducible error"></span><strong id=", the irreducible error">, the irreducible error</strong>.
 </p>
 
 <p>
-The <span id="Bias/Variance Tradeoff-variance of the error terms"></span><strong id="variance of the error terms">variance of the error terms</strong>, \(\mathbb{V}[\epsilon]\), is the variance of the target around its true mean \(f(x_0)\), and <span id="Bias/Variance Tradeoff-cannot be avoided"></span><strong id="cannot be avoided">cannot be avoided</strong> no matter how well we estimate \(f(x_0)\), , unless \(\sigma^2 = 0\).
+The <span id="Bias/Variance Tradeoff-variance of the error terms"></span><strong id="variance of the error terms">variance of the error terms</strong>, \(\mathbb{V}[\epsilon]\), is the variance of the target around its true mean \(f(x_0)\), and <span id="Bias/Variance Tradeoff-cannot be avoided"></span><strong id="cannot be avoided">cannot be avoided</strong> no matter how well we estimate \(f(x_0)\), unless \(\sigma^2 = 0\).
 </p>
 
 <p>
-<span id="Bias/Variance Tradeoff-Variance"></span><strong id="Variance">Variance</strong> refers to the amount by which \(\hat{f}\) would change if we estimated it using a different training data set. Ideally the estimate for f should not vary too much between training sets. This is computed as the expected squared deviation of \(f^(x_0)\) around its mean. 
+<span id="Bias/Variance Tradeoff-Variance"></span><strong id="Variance">Variance</strong> refers to the amount by which \(\hat{f}\) would change if we estimated it using a different training data set. Ideally the estimate for \(f\) should not vary too much between training sets. This is computed as the expected squared deviation of \(\hat{f}(x_0)\) around its mean. 
 </p>
 
 <p>
