@@ -1,0 +1,136 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Bagging</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Bagging"><h1 id="Bagging" class="header"><a href="#Bagging">Bagging</a></h1></div>
+
+<hr>
+
+<div id="Bagging-Introduction"><h2 id="Introduction" class="header"><a href="#Bagging-Introduction">Introduction</a></h2></div>
+
+<p>
+The decision trees discussed suffer from <span id="Bagging-Introduction-high variance"></span><strong id="high variance">high variance</strong>. In contrast, a procedure with <span id="Bagging-Introduction-low variance"></span><strong id="low variance">low variance</strong> will yield <span id="Bagging-Introduction-similar results"></span><strong id="similar results">similar results</strong> if applied repeatedly to <span id="Bagging-Introduction-distinct data sets"></span><strong id="distinct data sets">distinct data sets</strong>.
+</p>
+
+<p>
+<span id="Bagging-Introduction-Bootstrap aggregation"></span><strong id="Bootstrap aggregation">Bootstrap aggregation</strong>, or <span id="Bagging-Introduction-bagging"></span><strong id="bagging">bagging</strong>, is a procedure for reducing the <span id="Bagging-Introduction-variance"></span><strong id="variance">variance</strong> of a <span id="Bagging-Introduction-statistical learning method"></span><strong id="statistical learning method">statistical learning method</strong>.
+</p>
+
+<p>
+Recall that given a set of \(n\) independent observations \(Z_1, \cdots, Z_n\) each with variance \(\sigma^2\), the variance of the mean \(\overline{Z}\) of the observations is given by \(\frac{\sigma^2}{n}\).
+</p>
+
+<p>
+So, <span id="Bagging-Introduction-averaging"></span><strong id="averaging">averaging</strong> a set of observations <span id="Bagging-Introduction-reduces variance"></span><strong id="reduces variance">reduces variance</strong>. Thus, to <span id="Bagging-Introduction-reduce the variance"></span><strong id="reduce the variance">reduce the variance</strong> and <span id="Bagging-Introduction-increase the prediction accuracy"></span><strong id="increase the prediction accuracy">increase the prediction accuracy</strong> of a statistical learning method is to take many training sets from the population, build a separate prediction model using each training set, and <span id="Bagging-Introduction-average the resulting predictions"></span><strong id="average the resulting predictions">average the resulting predictions</strong>. 
+</p>
+
+<p>
+Using \(B\) separate <span id="Bagging-Introduction-training sets"></span><strong id="training sets">training sets</strong>, and average them in order to obtain a <span id="Bagging-Introduction-single low-variance statistical learning model"></span><strong id="single low-variance statistical learning model">single low-variance statistical learning model</strong>, given by:
+</p>
+
+\begin{align}
+\hat{f}_{avg}(x) = \frac{1}{B}\sum_{b=1}^B \hat{f}^b(x)
+\end{align}
+
+<p>
+For each bootstrap sample \(Z^{*b}, b = 1, 2, \cdots, B\), we fit our model, giving prediction \(\hat{f}^{*b}(x)\). The bagging estimate is defined by:
+</p>
+
+\begin{align}
+\hat{f}_{bag}(x) = \frac{1}{B}\sum_{b=1}^B \hat{f}^{*b}(x)
+\end{align}
+
+<div id="Bagging-Bagging on Regression Trees"><h2 id="Bagging on Regression Trees" class="header"><a href="#Bagging-Bagging on Regression Trees">Bagging on Regression Trees</a></h2></div>
+
+<p>
+To apply bagging to regression trees, we simply construct \(B\) regression trees using \(B\) bootstrapped training sets, and average the resulting predictions. 
+</p>
+
+<p>
+These trees are grown <span id="Bagging-Bagging on Regression Trees-deep"></span><strong id="deep">deep</strong>, and are <span id="Bagging-Bagging on Regression Trees-not pruned"></span><strong id="not pruned">not pruned</strong>. Hence each <span id="Bagging-Bagging on Regression Trees-individual tree has high variance, but low bias"></span><strong id="individual tree has high variance, but low bias">individual tree has high variance, but low bias</strong>. <span id="Bagging-Bagging on Regression Trees-Averaging"></span><strong id="Averaging">Averaging</strong> these B trees <span id="Bagging-Bagging on Regression Trees-reduces the variance"></span><strong id="reduces the variance">reduces the variance</strong>.
+</p>
+
+<div id="Bagging-Bagging on Decision Trees"><h2 id="Bagging on Decision Trees" class="header"><a href="#Bagging-Bagging on Decision Trees">Bagging on Decision Trees</a></h2></div>
+
+<p>
+How can bagging be extended to a classification problem where Y is qualitative? For a given test observation, we can record the class predicted by each of the \(B\) trees, and take a <span id="Bagging-Bagging on Decision Trees-majority vote"></span><strong id="majority vote">majority vote</strong>.
+</p>
+
+<p>
+Suppose our tree produces a classifier \(\hat{G}(x)\) for a \(K\)-class response. Then the bagged estimate \(\hat{f}_{bag}(x)\) is a \(K\)-vector \([p_1(x), p_2(x), \cdots, p_K(x)]\), with \(p_k(x)\) equal to the proportion of trees predicting class \(k\) at \(x\).
+</p>
+
+<p>
+The bagged classifier selects the class with the most votes from the \(B\) trees, \(\hat{G}_{bag}(x) = \arg \max_k \hat{f}_{bag}(x)\).
+</p>
+
+<p>
+Often we require the <span id="Bagging-Bagging on Decision Trees-class-probability"></span><strong id="class-probability">class-probability</strong> estimates at \(x\). For many classifiers \(\hat{G}(x)\) there is already an underlying function \(f^(x)\) that <span id="Bagging-Bagging on Decision Trees-estimates the class probabilities at"></span><strong id="estimates the class probabilities at">estimates the class probabilities at</strong> \(x\) (for trees, the class proportions in the terminal node). An alternative bagging strategy is to <span id="Bagging-Bagging on Decision Trees-average these"></span><strong id="average these">average these</strong> instead.
+</p>
+
+<p>
+The <span id="Bagging-Bagging on Decision Trees-number of trees"></span><strong id="number of trees">number of trees</strong> \(B\) is <span id="Bagging-Bagging on Decision Trees-not a critical parameter"></span><strong id="not a critical parameter">not a critical parameter</strong> with bagging; using a very <span id="Bagging-Bagging on Decision Trees-large value"></span><strong id="large value">large value</strong> of \(B\) will <span id="Bagging-Bagging on Decision Trees-not lead to overfitting"></span><strong id="not lead to overfitting">not lead to overfitting</strong>. In practice we use a value of \(B\) sufficiently large that the <span id="Bagging-Bagging on Decision Trees-error has settled down"></span><strong id="error has settled down">error has settled down</strong>.
+</p>
+
+<p>
+<span id="Bagging-Bagging on Decision Trees-Note that bagging a good classifier can make it better, but bagging a bad classifier can make it worse."></span><strong id="Note that bagging a good classifier can make it better, but bagging a bad classifier can make it worse.">Note that bagging a good classifier can make it better, but bagging a bad classifier can make it worse.</strong>
+</p>
+
+<div id="Bagging-Out-of-Bag Error Estimation"><h2 id="Out-of-Bag Error Estimation" class="header"><a href="#Bagging-Out-of-Bag Error Estimation">Out-of-Bag Error Estimation</a></h2></div>
+
+<p>
+There is a very straightforward way to estimate the test error of a bagged model
+</p>
+
+<p>
+One can show that on average, <span id="Bagging-Out-of-Bag Error Estimation-each bagged tree makes use of around two-thirds of the observations"></span><strong id="each bagged tree makes use of around two-thirds of the observations">each bagged tree makes use of around two-thirds of the observations</strong>. The observations not used to fit a given bagged tree are referred to as the <span id="Bagging-Out-of-Bag Error Estimation-out-of-bag (OOB) observations"></span><strong id="out-of-bag (OOB) observations">out-of-bag (OOB) observations</strong>.
+</p>
+
+<p>
+An <span id="Bagging-Out-of-Bag Error Estimation-OOB prediction"></span><strong id="OOB prediction">OOB prediction</strong> can be obtained for each of the \(n\) observations on the OOB observation set, from which the overall <span id="Bagging-Out-of-Bag Error Estimation-OOB MSE"></span><strong id="OOB MSE">OOB MSE</strong> (for a regression problem) or classification error (for a classification problem) can be computed. 
+</p>
+
+<p>
+The resulting <span id="Bagging-Out-of-Bag Error Estimation-OOB error"></span><strong id="OOB error">OOB error</strong> is a valid <span id="Bagging-Out-of-Bag Error Estimation-estimate"></span><strong id="estimate">estimate</strong> of the <span id="Bagging-Out-of-Bag Error Estimation-test error"></span><strong id="test error">test error</strong> for the bagged model.
+</p>
+
+<div id="Bagging-Variable Importance Measures"><h2 id="Variable Importance Measures" class="header"><a href="#Bagging-Variable Importance Measures">Variable Importance Measures</a></h2></div>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
