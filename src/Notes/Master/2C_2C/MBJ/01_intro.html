@@ -59,10 +59,10 @@ We distinguish between two kinds of estimands
 
 <ul>
 <li>
-Quantities that are not directly observable: quantities that are not directly observable (parameters that govern the hypothetical process leading to the observed data). For which statistical inferences are made.
+Quantities that are <span id="T1. Introduccion a la Inferencia Bayesiana-The three steps of Bayesian data analysis-not directly observable"></span><strong id="not directly observable">not directly observable</strong>: for example, parameters that govern the hypothetical process leading to the observed data, for which statistical inferences are made.
 
 </li><li>
-Potentially observable quantities (such as future observations of a process, or the outcome under the treatment not received)
+Potentially <span id="T1. Introduccion a la Inferencia Bayesiana-The three steps of Bayesian data analysis-observable quantities"></span><strong id="observable quantities">observable quantities</strong> (such as future observations of a process, or the outcome under the treatment not received)
 
 </li></ul>
 <div id="T1. Introduccion a la Inferencia Bayesiana-Notation"><h2 id="Notation" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Notation">Notation</a></h2></div>
@@ -81,7 +81,7 @@ Potentially observable quantities (such as future observations of a process, or 
 <div id="T1. Introduccion a la Inferencia Bayesiana-Notation-Exchangeability"><h3 id="Exchangeability" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Notation-Exchangeability">Exchangeability</a></h3></div>
 
 <p>
-We assume assume that the \(n\) values \(y_i\) may be regarded as exchangeable.
+We assume assume that the \(n\) values \(y_i\) may be regarded as <span id="T1. Introduccion a la Inferencia Bayesiana-Notation-Exchangeability-exchangeable"></span><strong id="exchangeable">exchangeable</strong>.
 </p>
 
 <p>
@@ -89,7 +89,7 @@ We express uncertainty as a joint probability density \(p(y_1, \cdots, y_n)\) th
 </p>
 
 <p>
-We commonly model data from an exchangeable distribution as independently and identically distributed (iid).
+We commonly model data from an exchangeable distribution as <span id="T1. Introduccion a la Inferencia Bayesiana-Notation-Exchangeability-independently and identically distributed (iid)"></span><strong id="independently and identically distributed (iid)">independently and identically distributed (iid)</strong>.
 </p>
 
 <div id="T1. Introduccion a la Inferencia Bayesiana-Notation-Explanatory variables"><h3 id="Explanatory variables" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Notation-Explanatory variables">Explanatory variables</a></h3></div>
@@ -107,15 +107,7 @@ Hierarchical models (also called <span id="T1. Introduccion a la Inferencia Baye
 <div id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference"><h2 id="Bayesian inference" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Bayesian inference">Bayesian inference</a></h2></div>
 
 <p>
-The <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-prior distribution"></span><strong id="prior distribution">prior distribution</strong> \(p(\theta)\), given by the conditional probability:
-</p>
-
-\begin{align}
-p(\theta)
-\end{align}
-
-<p>
-The <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-sampling distribution"></span><strong id="sampling distribution">sampling distribution</strong> (or <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-data distribution"></span><strong id="data distribution">data distribution</strong>) \(p(y|\theta)\):
+The <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-prior distribution"></span><strong id="prior distribution">prior distribution</strong> \(p(\theta)\), given by \(p(\theta)\), and the <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-sampling distribution"></span><strong id="sampling distribution">sampling distribution</strong> (or <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-data distribution"></span><strong id="data distribution">data distribution</strong>) is given by \(p(y|\theta)\), such that the joint probability distribution for \(\theta\) and \(y\) is obtained as follows:
 </p>
 
 \begin{align}
@@ -246,7 +238,7 @@ The variance for a discrete random variable \(u\) is given by:
 <div id="T1. Introduccion a la Inferencia Bayesiana-Probability theory-Means and variances of conditional distributions"><h3 id="Means and variances of conditional distributions" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Probability theory-Means and variances of conditional distributions">Means and variances of conditional distributions</a></h3></div>
 
 <p>
-Given two continuous random variables \(u\) and \(y\), the mean of \(u\) can be obtained by averaging the conditional mean over the marginal distribution of \(v\):
+Given two continuous random variables \(u\) and \(y\), the mean of \(u\) can be obtained by <span id="T1. Introduccion a la Inferencia Bayesiana-Probability theory-Means and variances of conditional distributions-averaging the conditional mean over the marginal distribution of"></span><strong id="averaging the conditional mean over the marginal distribution of">averaging the conditional mean over the marginal distribution of</strong> \(v\):
 </p>
 
 \begin{align}
@@ -284,7 +276,7 @@ p_v(v) = |J| p_u(f^{-1}(v))
 \end{align}
 
 <p>
-where \(|J|\) is the absolute value of the determinant of the Jacobian of the transformation \(u = f^{−1}(v) as a function of \)v$.
+where \(|J|\) is the absolute value of the determinant of the Jacobian of the transformation \(u = f^{−1}(v)\) as a function of \(v\).
 </p>
 </div>
   
