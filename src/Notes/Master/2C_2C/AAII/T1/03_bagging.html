@@ -125,6 +125,18 @@ The resulting <span id="Bagging-Out-of-Bag Error Estimation-OOB error"></span><s
 </p>
 
 <div id="Bagging-Variable Importance Measures"><h2 id="Variable Importance Measures" class="header"><a href="#Bagging-Variable Importance Measures">Variable Importance Measures</a></h2></div>
+
+<p>
+Although the collection of bagged trees is much more difficult to interpret than a single tree, one can obtain an overall <span id="Bagging-Variable Importance Measures-summary of the importance of each predictor"></span><strong id="summary of the importance of each predictor">summary of the importance of each predictor</strong> using the <span id="Bagging-Variable Importance Measures-RSS"></span><strong id="RSS">RSS</strong> (for bagging regression trees) or the <span id="Bagging-Variable Importance Measures-Gini index"></span><strong id="Gini index">Gini index</strong> (for bagging classification trees)
+</p>
+
+<p>
+In the case of bagging regression trees, we can record the total amount that the <span id="Bagging-Variable Importance Measures-RSS is decreased due to splits over a given predictor"></span><strong id="RSS is decreased due to splits over a given predictor">RSS is decreased due to splits over a given predictor</strong>, averaged over all \(B\) trees.
+</p>
+
+<p>
+For classification trees, we can add up the total amount that the \(Gini index\) is decreased by splits over a given predictor, averaged over all \(B\) trees.
+</p>
 </div>
   
 
