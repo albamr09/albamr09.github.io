@@ -107,7 +107,7 @@ Hierarchical models (also called <span id="T1. Introduccion a la Inferencia Baye
 <div id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference"><h2 id="Bayesian inference" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Bayesian inference">Bayesian inference</a></h2></div>
 
 <p>
-The <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-prior distribution"></span><strong id="prior distribution">prior distribution</strong> \(p(\theta)\), given by \(p(\theta)\), and the <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-sampling distribution"></span><strong id="sampling distribution">sampling distribution</strong> (or <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-data distribution"></span><strong id="data distribution">data distribution</strong>) is given by \(p(y|\theta)\), such that the joint probability distribution for \(\theta\) and \(y\) is obtained as follows:
+We define a <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-prior distribution"></span><strong id="prior distribution">prior distribution</strong> \(p(\theta)\), and a <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-sampling distribution"></span><strong id="sampling distribution">sampling distribution</strong> (or <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-data distribution"></span><strong id="data distribution">data distribution</strong>) is given by \(p(y|\theta)\), such that the joint probability distribution for \(\theta\) and \(y\) is obtained as follows:
 </p>
 
 \begin{align}
@@ -131,7 +131,7 @@ An equivalent form is omitting the factor \(p(y)\), yielding the <span id="T1. I
 </p>
 
 \begin{align}
-p(\theta|y) \approx p(y|\theta)p(\theta)
+p(\theta|y) \propto p(y|\theta)p(\theta)
 \end{align}
 
 
@@ -216,7 +216,7 @@ The variance for a continuous random variable \(u\) is given by:
 </p>
 
 \begin{align}
-\mathbb{E}[u] = \int (u - \mathbb{E}[u]) p(u)du
+\mathbb{E}[u] = \int (u - \mathbb{E}[u])^2 p(u)du
 \end{align}
 
 <p>
@@ -232,7 +232,7 @@ The variance for a discrete random variable \(u\) is given by:
 </p>
 
 \begin{align}
-\mathbb{E}[u] = \sum (u - \mathbb{E}[u]) p(u)
+\mathbb{E}[u] = \sum (u - \mathbb{E}[u])^2 p(u)
 \end{align}
 
 <div id="T1. Introduccion a la Inferencia Bayesiana-Probability theory-Means and variances of conditional distributions"><h3 id="Means and variances of conditional distributions" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Probability theory-Means and variances of conditional distributions">Means and variances of conditional distributions</a></h3></div>
@@ -242,11 +242,11 @@ Given two continuous random variables \(u\) and \(y\), the mean of \(u\) can be 
 </p>
 
 \begin{align}
-\mathbb{E}(u) = \int u p(u) du = \int u (\int p(u, v)) dv du
+\mathbb{E}(u) = \int u p(u) du = \int u \left(\int p(u, v)\right) dv du
 \end{align}
 
 \begin{align}
-= \int (\int u p(u|v) du) p(v) dv = \int \mathbb{E}_u[u|v] p(v) dv = \mathbb{E}_v[\mathbb{E}_u[u|v]]
+= \int \left(\int u p(u|v) du \right) p(v) dv = \int \mathbb{E}_u[u|v] p(v) dv = \mathbb{E}_v[\mathbb{E}_u[u|v]]
 \end{align}
 
 <p>
