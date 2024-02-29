@@ -1,0 +1,162 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>T1. Fundamentos de las Redes Neuronales Profundas</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="T1. Fundamentos de las Redes Neuronales Profundas"><h1 id="T1. Fundamentos de las Redes Neuronales Profundas" class="header"><a href="#T1. Fundamentos de las Redes Neuronales Profundas">T1. Fundamentos de las Redes Neuronales Profundas</a></h1></div>
+
+<hr>
+
+<div id="T1. Fundamentos de las Redes Neuronales Profundas-Deep networks"><h2 id="Deep networks" class="header"><a href="#T1. Fundamentos de las Redes Neuronales Profundas-Deep networks">Deep networks</a></h2></div>
+
+<p>
+We could define deep learning as a class of <span id="T1. Fundamentos de las Redes Neuronales Profundas-Deep networks-machine learning techniques"></span><strong id="machine learning techniques">machine learning techniques</strong>, where <span id="T1. Fundamentos de las Redes Neuronales Profundas-Deep networks-information is processed"></span><strong id="information is processed">information is processed</strong> in hierarchical layers to understand representations and features from data in increasing levels of complexity. 
+</p>
+
+<p>
+In practice, all deep learning algorithms are neural networks.
+</p>
+
+<p>
+With that in mind, let's look at the main classes of neural networks. The following list is not exhaustive, but it represents the vast majority of algorithms in use today:
+</p>
+
+<ul>
+<li>
+Multi-layer perceptrons (MLPs)
+
+</li><li>
+Convolutional neural networks (CNNs)
+
+</li><li>
+Recurrent networks 
+
+</li><li>
+Autoencoders
+
+</li></ul>
+<div id="T1. Fundamentos de las Redes Neuronales Profundas-Training deep networks"><h2 id="Training deep networks" class="header"><a href="#T1. Fundamentos de las Redes Neuronales Profundas-Training deep networks">Training deep networks</a></h2></div>
+
+<p>
+We can use different algorithms to train a neural network. But in practice, we almost always use <span id="T1. Fundamentos de las Redes Neuronales Profundas-Training deep networks-Stochastic Gradient Descent (SGD) and backpropagation"></span><strong id="Stochastic Gradient Descent (SGD) and backpropagation">Stochastic Gradient Descent (SGD) and backpropagation</strong>.
+</p>
+
+<p>
+In the following section, we'll introduce <span id="T1. Fundamentos de las Redes Neuronales Profundas-Training deep networks-momentum"></span><strong id="momentum">momentum</strong>, the weight update rule is defined as follows:
+</p>
+
+\begin{align}
+w \rightarrow w - \lambda \nabla (J(w))$, where $\lambda$ is the learning rate.
+\end{align}
+
+<p>
+First we calculate the weight update value
+</p>
+
+\begin{align}
+\Delta w \rightarrow \mu\Delta w - \lambda (\nabla J(w))
+\end{align}
+
+<p>
+We see that the first component, \(\mu\Delta w\), is the momentum. The \(\Delta w\) represents the previous value of the weight update and \(\mu\) is the coefficient, which wil  determine how much the new value depends on the previous ones. 
+</p>
+
+<p>
+Then we update the weight:
+</p>
+
+\begin{align}
+w \rightarrow w + \Delta w
+\end{align}
+
+<p>
+You may encounter other gradient descent optimizations, such as:
+</p>
+
+<ol>
+<li>
+Nesterov momentum
+
+</li><li>
+ADADELTA
+
+</li><li>
+RMSProps
+
+</li><li>
+Adam
+
+</li></ol>
+<div id="T1. Fundamentos de las Redes Neuronales Profundas-The reasons for deep learning's popularity"><h2 id="The reasons for deep learning's popularity" class="header"><a href="#T1. Fundamentos de las Redes Neuronales Profundas-The reasons for deep learning's popularity">The reasons for deep learning's popularity</a></h2></div>
+
+<p>
+The first reason is, today, we have a <span id="T1. Fundamentos de las Redes Neuronales Profundas-The reasons for deep learning's popularity-lot more data"></span><strong id="lot more data">lot more data</strong> than in the past.
+</p>
+
+<p>
+The second reason is the <span id="T1. Fundamentos de las Redes Neuronales Profundas-The reasons for deep learning's popularity-increased computing power"></span><strong id="increased computing power">increased computing power</strong>. This is most visible in the drastically increased processing capacity of <span id="T1. Fundamentos de las Redes Neuronales Profundas-The reasons for deep learning's popularity-Graphical Processing Units"></span><strong id="Graphical Processing Units">Graphical Processing Units</strong> (GPUs). Neural networks are organized in such a way as to take advantage of the GPU's parallel architecture.
+</p>
+
+<div id="T1. Fundamentos de las Redes Neuronales Profundas-Introducing popular open source libraries"><h2 id="Introducing popular open source libraries" class="header"><a href="#T1. Fundamentos de las Redes Neuronales Profundas-Introducing popular open source libraries">Introducing popular open source libraries</a></h2></div>
+
+<p>
+The basic unit for data storage is the tensor. A tensor is a generalization of a matrix to higher dimensions.
+</p>
+
+<p>
+Neural networks are represented as a <span id="T1. Fundamentos de las Redes Neuronales Profundas-Introducing popular open source libraries-computational graph of operations"></span><strong id="computational graph of operations">computational graph of operations</strong>. The <span id="T1. Fundamentos de las Redes Neuronales Profundas-Introducing popular open source libraries-nodes"></span><strong id="nodes">nodes</strong> of the graph represent the <span id="T1. Fundamentos de las Redes Neuronales Profundas-Introducing popular open source libraries-operations"></span><strong id="operations">operations</strong> (weighted sum, activation function, and so on). The <span id="T1. Fundamentos de las Redes Neuronales Profundas-Introducing popular open source libraries-edges represent the flow of data"></span><strong id="edges represent the flow of data">edges represent the flow of data</strong>.
+</p>
+
+<p>
+Some common libraries:
+</p>
+
+<ul>
+<li>
+<span id="T1. Fundamentos de las Redes Neuronales Profundas-Introducing popular open source libraries-Tensorflow"></span><strong id="Tensorflow">Tensorflow</strong>
+
+</li><li>
+<span id="T1. Fundamentos de las Redes Neuronales Profundas-Introducing popular open source libraries-Keras"></span><strong id="Keras">Keras</strong>: is a high-level neural net Python library that runs on top of TensorFlow, CNTK or Theano. 
+
+</li><li>
+<span id="T1. Fundamentos de las Redes Neuronales Profundas-Introducing popular open source libraries-Pytorch"></span><strong id="Pytorch">Pytorch</strong>: is a deep learning library based on Torch.
+
+</li></ul>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
