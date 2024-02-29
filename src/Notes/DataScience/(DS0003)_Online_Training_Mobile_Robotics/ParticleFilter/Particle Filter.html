@@ -111,7 +111,7 @@ So, we are going to leave behind Gaussian distributions to describe the estimate
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/gaussian_filters.png" alt="Gaussian Filters" style="transform:translate(50%,0)">
+<img src="https://albamr09.github.io/assets/gaussian_filters.png" alt="Gaussian Filters" style="transform:translate(50%,0)">
 </p>
 
 
@@ -120,7 +120,7 @@ And we are going to model our estimate using an arbitrary distribution:
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/flexible_distribution.png" alt="Flexible Distribution" style="transform:translate(50%,0)">
+<img src="https://albamr09.github.io/assets/flexible_distribution.png" alt="Flexible Distribution" style="transform:translate(50%,0)">
 </p>
 
 <p>
@@ -128,7 +128,7 @@ It turns out that we can describe this kind of distribution using samples:
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/flexible_distribution_with_samples.png" alt="Describe Distribution with Samples" style="transform:translate(50%, 0)">
+<img src="https://albamr09.github.io/assets/flexible_distribution_with_samples.png" alt="Describe Distribution with Samples" style="transform:translate(50%, 0)">
 </p>
 
 <p>
@@ -144,7 +144,7 @@ Also, we can weight our samples, so the larger the weight the larger the probabi
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/weighted_samples.png" alt="Weigting the samples" style="transform:translate(50%,0)">
+<img src="https://albamr09.github.io/assets/weighted_samples.png" alt="Weigting the samples" style="transform:translate(50%,0)">
 </p>
 
 <p>
@@ -152,7 +152,7 @@ Note that by using samples we are computing an approximation of the probability 
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/particle_approximation.png" alt="Examples of particle approximation" style="transform:translate(50%, 0)">
+<img src="https://albamr09.github.io/assets/particle_approximation.png" alt="Examples of particle approximation" style="transform:translate(50%, 0)">
 </p>
 
 <p>
@@ -205,7 +205,7 @@ Note that closed form sampling is only possible for a few distributions, for exa
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/sample_gaussian.png" alt="Gaussian Closed Form Samping" style="transform:translate(50%,0)">
+<img src="https://albamr09.github.io/assets/sample_gaussian.png" alt="Gaussian Closed Form Samping" style="transform:translate(50%,0)">
 </p>
 
 <p>
@@ -230,7 +230,7 @@ We need to assert the following pre-condition: \(f(x) &gt; 0 \rightarrow \pi(x) 
 
 </li></ul>
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/importance_sampling_principle.png" alt="Importance Sampling Principle" style="transform:translate(50%,0)">
+<img src="https://albamr09.github.io/assets/importance_sampling_principle.png" alt="Importance Sampling Principle" style="transform:translate(50%,0)">
 </p>
 
 <p>
@@ -291,7 +291,7 @@ We do this because we work with a finite number of samples, so it could be the c
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/particle_filter_algorithm.png" alt="Particle Filter Algorithm" style="transform:translate(50%,0)">
+<img src="https://albamr09.github.io/assets/particle_filter_algorithm.png" alt="Particle Filter Algorithm" style="transform:translate(50%,0)">
 </p>
 
 <ul>
@@ -355,7 +355,7 @@ For example:
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/localization_with_particle_filter.png" alt="Example of Monte Carlo Localization" style="transform:translate(50%,0)">
+<img src="https://albamr09.github.io/assets/localization_with_particle_filter.png" alt="Example of Monte Carlo Localization" style="transform:translate(50%,0)">
 </p>
 
 <p>
@@ -375,7 +375,7 @@ Eventually the system converges and you end up with a unimodal distribution that
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/example_monte_carlo_map.png" alt="Another Monte Carlo Localization Example" style="transform:translate(50%,0)">
+<img src="https://albamr09.github.io/assets/example_monte_carlo_map.png" alt="Another Monte Carlo Localization Example" style="transform:translate(50%,0)">
 </p>
 
 <div id="Particle Filter-Monte Carlo Localization-Structure"><h3 id="Structure" class="header"><a href="#Particle Filter-Monte Carlo Localization-Structure">Structure</a></h3></div>
@@ -404,7 +404,7 @@ We modify slightly our particle filter algorithm to use it for localization:
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/particle_filter_algorithm_localization.png" alt="Particle Filter Algorithm for Localization" style="transform:translate(50%,0)">
+<img src="https://albamr09.github.io/assets/particle_filter_algorithm_localization.png" alt="Particle Filter Algorithm for Localization" style="transform:translate(50%,0)">
 </p>
 
 <ul>
@@ -422,7 +422,7 @@ First we start with a uniform distribution, and we sample from that distribution
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/monte_carlo_localization_prediction.png" alt="Prediction step" style="transform:translate(50%,0)">
+<img src="https://albamr09.github.io/assets/monte_carlo_localization_prediction.png" alt="Prediction step" style="transform:translate(50%,0)">
 </p>
 
 <p>
@@ -430,7 +430,7 @@ Then we obtain an observation, and in the weighting step we increase the weight 
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/monte_carlo_localization_correction.png" alt="Correction step" style="transform:translate(50%,0)">
+<img src="https://albamr09.github.io/assets/monte_carlo_localization_correction.png" alt="Correction step" style="transform:translate(50%,0)">
 </p>
 
 <p>
@@ -438,7 +438,7 @@ Then we apply resampling to replace weight by frequencies (the probability mass 
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/monte_carlo_resampling.png" alt="Resampling step" style="transform:translate(50%,0)">
+<img src="https://albamr09.github.io/assets/monte_carlo_resampling.png" alt="Resampling step" style="transform:translate(50%,0)">
 </p>
 
 <p>
@@ -446,7 +446,7 @@ Because the prediction/motion was already performed before, now we obtain anothe
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/monte_carlo_second_correction.png" alt="Second Correction Step" style="transform:translate(50%,0)">
+<img src="https://albamr09.github.io/assets/monte_carlo_second_correction.png" alt="Second Correction Step" style="transform:translate(50%,0)">
 </p>
 
 <p>
@@ -454,7 +454,7 @@ When we obtain the weights, two things happen. First, and as before, the particl
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/monte_carlo_second_resampling.png" alt="Second Resampling Step" style="transform:translate(50%,0)">
+<img src="https://albamr09.github.io/assets/monte_carlo_second_resampling.png" alt="Second Resampling Step" style="transform:translate(50%,0)">
 </p>
 
 <div id="Particle Filter-Resampling Techniques"><h2 id="Resampling Techniques" class="header"><a href="#Particle Filter-Resampling Techniques">Resampling Techniques</a></h2></div>
@@ -466,7 +466,7 @@ First we create a roulette wheel where each field represents a particle, and the
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/wheel_roulette.png" alt="Wheel Roulette" style="transform:translate(30vw,0)">
+<img src="https://albamr09.github.io/assets/wheel_roulette.png" alt="Wheel Roulette" style="transform:translate(30vw,0)">
 </p>
 
 <p>
@@ -474,8 +474,8 @@ The idea is that, we normalize the weights, and each time we draw a number betwe
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/wheen_resampling.png" alt="Wheel Resampling" style="transform:translate(20vw,0)">
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/wheel_resampling_1.png" alt="Wheel Resampling" style="transform:translate(30vw,0)">
+<img src="https://albamr09.github.io/assets/wheen_resampling.png" alt="Wheel Resampling" style="transform:translate(20vw,0)">
+<img src="https://albamr09.github.io/assets/wheel_resampling_1.png" alt="Wheel Resampling" style="transform:translate(30vw,0)">
 </p>
 
 <p>
@@ -493,7 +493,7 @@ Here, the idea is using \(J\) arrows instead of only one, where the arrows are a
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/low_variance_resampling.png" alt="Low Variance Resampling" style="transform:translate(30vw,0)">
+<img src="https://albamr09.github.io/assets/low_variance_resampling.png" alt="Low Variance Resampling" style="transform:translate(30vw,0)">
 </p>
 
 <p>
@@ -511,7 +511,7 @@ Then we pick \(J-1\) particles by advancing in the array in steps of \(\frac{1}{
 
 </li></ul>
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/low_variance_resampling_array.png" alt="Low Variance Resampling" style="transform:translate(25vw,0)">
+<img src="https://albamr09.github.io/assets/low_variance_resampling_array.png" alt="Low Variance Resampling" style="transform:translate(25vw,0)">
 </p>
 
 <p>
@@ -519,7 +519,7 @@ To efficiently implement this what we do is, in each element of the array we sto
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/low_variance_resampling_cummulative.png" alt="Low Variance Resampling" style="transform:translate(25vw,0)">
+<img src="https://albamr09.github.io/assets/low_variance_resampling_cummulative.png" alt="Low Variance Resampling" style="transform:translate(25vw,0)">
 </p>
 
 <p>
@@ -527,7 +527,7 @@ So, we draw a random number between \(0\) and \(\frac{1}{J}\), if that number is
 </p>
 
 <p>
-<img src="/home/alba/Documents/repos/NoteWorld/VimWiki/public/assets/low_variance_resampling_algorithm.png" alt="Low Variance Resampling Algorithm" style="transform:translate(25vw,0)">
+<img src="https://albamr09.github.io/assets/low_variance_resampling_algorithm.png" alt="Low Variance Resampling Algorithm" style="transform:translate(25vw,0)">
 </p>
 </div>
   
