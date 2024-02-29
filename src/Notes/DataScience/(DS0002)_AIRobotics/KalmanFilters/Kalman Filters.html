@@ -97,7 +97,7 @@ What we did is we divided the continuous space into a finite number of cells, th
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/monte_carlo_histogram.png" alt="Map in Histogram Locations">
+<img src="https://albamr09.github.io/public/assets/monte_carlo_histogram.png" alt="Map in Histogram Locations">
 </p>
 
 <p>
@@ -111,7 +111,7 @@ A Gaussian Distribution is a continuous function which is described in \(\mathbb
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/gaussian_distribution.png" alt="Gaussian Distribution">
+<img src="https://albamr09.github.io/public/assets/gaussian_distribution.png" alt="Gaussian Distribution">
 </p>
 
 <p>
@@ -137,7 +137,7 @@ Like with localization Kalman Filters operate within a cycle, that is, it iterat
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/measurement_motion_cycle.png" alt="Measurement-Motion Cycle">
+<img src="https://albamr09.github.io/public/assets/measurement_motion_cycle.png" alt="Measurement-Motion Cycle">
 </p>
 
 <ol>
@@ -153,7 +153,7 @@ This is illustrated in the following image:
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/combine_distributions.png" alt="Combine prediction and measurement">
+<img src="https://albamr09.github.io/public/assets/combine_distributions.png" alt="Combine prediction and measurement">
 </p>
 
 <p>
@@ -167,7 +167,7 @@ Suppose, at moment \(t\), your location is represented as follows:
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/motion_updat.png" alt="Motion Update">
+<img src="https://albamr09.github.io/public/assets/motion_updat.png" alt="Motion Update">
 </p>
 
 <p>
@@ -225,7 +225,7 @@ We are going to show how to the mean is computed when multiplying two distributi
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/prior_distribution.png" alt="Prior Distribution">
+<img src="https://albamr09.github.io/public/assets/prior_distribution.png" alt="Prior Distribution">
 </p>
 
 <p>
@@ -233,7 +233,7 @@ Where the covariance is very large, so we are very uncertain about a location. A
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/measurement.png" alt="Measurement of Location">
+<img src="https://albamr09.github.io/public/assets/measurement.png" alt="Measurement of Location">
 </p>
 
 <p>
@@ -241,7 +241,7 @@ Which is much more certain about the location. Then the mean will shift accordin
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/shift_mean.png" alt="Shifting the Mean">
+<img src="https://albamr09.github.io/public/assets/shift_mean.png" alt="Shifting the Mean">
 </p>
 
 <div id="Kalman Filters-Measurement Step-Updating the Variance"><h3 id="Updating the Variance" class="header"><a href="#Kalman Filters-Measurement Step-Updating the Variance">Updating the Variance</a></h3></div>
@@ -251,7 +251,7 @@ We are going to show how to the variance is computed when multiplying two distri
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/posterior_gaussian.png" alt="Gaussian after measurement">
+<img src="https://albamr09.github.io/public/assets/posterior_gaussian.png" alt="Gaussian after measurement">
 </p>
 
 <p>
@@ -259,7 +259,7 @@ Why does this happen? Well, given these two distributions:
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/prior_likelihood.png" alt="Prior and Likelihood distributions">
+<img src="https://albamr09.github.io/public/assets/prior_likelihood.png" alt="Prior and Likelihood distributions">
 </p>
 
 <p>
@@ -283,7 +283,7 @@ Thus, the updated covariance is not affected by the means and will always be sma
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/distrubtion_after_update.png" alt="Gaussian Distribution after update">
+<img src="https://albamr09.github.io/public/assets/distrubtion_after_update.png" alt="Gaussian Distribution after update">
 </p>
 
 <p>
@@ -324,7 +324,7 @@ Given the following graph:
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/multivariate_gaussian_velocity.png" alt="Correlation of velocity and Location">
+<img src="https://albamr09.github.io/public/assets/multivariate_gaussian_velocity.png" alt="Correlation of velocity and Location">
 </p>
 
 <p>
@@ -332,7 +332,7 @@ Where \(\hat{x}\) represents the velocity and \(x\) represents the location. In 
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/correlation_location_velocity.png" alt="Correlation between location and velocity">
+<img src="https://albamr09.github.io/public/assets/correlation_location_velocity.png" alt="Correlation between location and velocity">
 </p>
 
 <p>
@@ -340,7 +340,7 @@ Suppose we take a new measurement (a second observation) represeted by the green
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/second_observation.png" alt="Second observation">
+<img src="https://albamr09.github.io/public/assets/second_observation.png" alt="Second observation">
 </p>
 
 <p>
@@ -348,7 +348,7 @@ Multiply the prior (the red Gaussian) and the measurement (the green Gaussian) t
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/gaussian_velocity_localization.png" alt="New Gaussian that estimates velocity and localization">
+<img src="https://albamr09.github.io/public/assets/gaussian_velocity_localization.png" alt="New Gaussian that estimates velocity and localization">
 </p>
 
 <p>
@@ -395,7 +395,7 @@ At a given time \(k-1\), we have the following prediction:
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/prediction_before_move.png" alt="Prediction before Motion">
+<img src="https://albamr09.github.io/public/assets/prediction_before_move.png" alt="Prediction before Motion">
 </p>
 
 <p>
@@ -403,7 +403,7 @@ We use a motion model (in our case a gaussian that represents the movement) to u
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/prediction_after_motion.png" alt="Prediction after Motion">
+<img src="https://albamr09.github.io/public/assets/prediction_after_motion.png" alt="Prediction after Motion">
 </p>
 
 <p>
@@ -433,7 +433,7 @@ Then, we use the following observation model:
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/measurement_by_observation_model.png" alt="Observation Model">
+<img src="https://albamr09.github.io/public/assets/measurement_by_observation_model.png" alt="Observation Model">
 </p>
 
 <p>
@@ -441,7 +441,7 @@ We correct our prediction with this observation model as follows:
 </p>
 
 <p>
-<img src="https://albamr09.github.io/assets/correction.png" alt="Combine both models">
+<img src="https://albamr09.github.io/public/assets/correction.png" alt="Combine both models">
 </p>
 
 <p>
