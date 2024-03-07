@@ -1,0 +1,197 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Partial Fractions</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Partial Fractions"><h1 id="Partial Fractions" class="header"><a href="#Partial Fractions">Partial Fractions</a></h1></div>
+
+<hr>
+
+<div id="Partial Fractions-Decomposition of Rational Expressions"><h2 id="Decomposition of Rational Expressions" class="header"><a href="#Partial Fractions-Decomposition of Rational Expressions">Decomposition of Rational Expressions</a></h2></div>
+
+
+<div id="Partial Fractions-Decomposition of Rational Expressions-Partial Fraction Decomposition of $\frac{f(x)}{g(x)}$"><h3 id="Partial Fraction Decomposition of $\frac{f(x)}{g(x)}$" class="header"><a href="#Partial Fractions-Decomposition of Rational Expressions-Partial Fraction Decomposition of $\frac{f(x)}{g(x)}$">Partial Fraction Decomposition of \(\frac{f(x)}{g(x)}\)</a></h3></div>
+
+
+<ul>
+<li>
+If \(\frac{f(x)}{g(x)}\) is not a <span id="Partial Fractions-Decomposition of Rational Expressions-Partial Fraction Decomposition of \(\frac{f(x)}{g(x)}\)-proper fraction"></span><strong id="proper fraction">proper fraction</strong> (a fraction whose numerator is lesser degree than it denominator) divide \(f(x)\) by \(g(x)\). For example 
+\begin{align}
+\frac{x^4 - 3x^3 + x^2 + 5x}{x^2 + 3} = x^2 - 3x - 2 + \frac{14x + 6}{x^2 + 3}
+\end{align}
+
+</li></ul>
+<p>
+Then appy the following steps to the <span id="Partial Fractions-Decomposition of Rational Expressions-Partial Fraction Decomposition of \(\frac{f(x)}{g(x)}\)-remainder"></span><strong id="remainder">remainder</strong>.
+</p>
+
+<ul>
+<li>
+Factor the denominator \(g(x)\) into factors of the form \((ax + b)^m\) or \((cx^2 + dx + e)^n\).
+
+</li><li>
+For each distinct linear factor \((ax + b)\), the decomposition must include the term \frac{A}{ax + b}.
+
+</li><li>
+For each repeated linear factor \((ax + b)^m\), the decomposition must include the terms:
+\begin{align}
+\frac{A_1}{(ax + b)} + \frac{A_2}{(ax + b)^2} + \cdots + \frac{A_m}{(ax + b)^m} 
+\end{align}
+
+</li><li>
+For each distinct quadratic factor \((cx^2 + dx + e)\), the decomposition must include the term \(\frac{Bx + C}{cx2 + dx + e}\)
+
+</li><li>
+For each repeated quadratic factor \((cx^2 + dx + e)^n\), the decomposition must include the terms:
+\begin{align}
+\frac{B_1x + C_1}{(cx^2 + dx + e)} + \frac{B_2x + C_2}{(cx^2 + dx + e)^2} + \cdots + \frac{B_nx + C_n}{(cx^2 + dx + e)^n} 
+\end{align}
+
+</li></ul>
+ 
+<ul>
+<li>
+Use algebraic techniques to solve for the constants in the numerators of the decomposition.
+
+</li></ul>
+<div id="Partial Fractions-Techniques for Decomposition into Partial Fractions"><h2 id="Techniques for Decomposition into Partial Fractions" class="header"><a href="#Partial Fractions-Techniques for Decomposition into Partial Fractions">Techniques for Decomposition into Partial Fractions</a></h2></div>
+
+<div id="Partial Fractions-Techniques for Decomposition into Partial Fractions-For Linear Factors"><h3 id="For Linear Factors" class="header"><a href="#Partial Fractions-Techniques for Decomposition into Partial Fractions-For Linear Factors">For Linear Factors</a></h3></div>
+
+<ol>
+<li>
+Multiply each side of the resulting rational equation by the common denominator.
+
+</li><li>
+Substitute the zero of each factor into the resulting equation. For repeated linear factors, substitute as many other numbers as is necessary to find all the constants in the numerators. The number of substitutions required will equal the number of constants \(A, B, \cdots\). 
+
+</li></ol>
+<p>
+For example:
+</p>
+
+\begin{align}
+\frac{f(x)}{(x-1)(x-2)} = \frac{A}{(x-1)} + \frac{B}{(x - 2)} = \frac{A(x-2) + B(x-1)}{(x-2)(x-1)}
+\end{align}
+
+<p>
+Multiply both sides by \((x-1)(x-2)\):
+</p>
+
+\begin{align}
+f(x) = A(x-2) + B(x-1)
+\end{align}
+
+<p>
+Solve for \(x = 2\):
+</p>
+
+\begin{align}
+f(2) = A(0) + B(1)
+\end{align}
+
+<p>
+And then solve for \(x = 1\):
+</p>
+
+\begin{align}
+f(1) = A(-1) + B(0)
+\end{align}
+
+<div id="Partial Fractions-Techniques for Decomposition into Partial Fractions-For Quadratic Factors"><h3 id="For Quadratic Factors" class="header"><a href="#Partial Fractions-Techniques for Decomposition into Partial Fractions-For Quadratic Factors">For Quadratic Factors</a></h3></div>
+
+<ol>
+<li>
+Multiply each side of the resulting rational equation by the common denominator.
+
+</li><li>
+Collect terms on the right side of the equation.
+
+</li><li>
+Equate the coefficients of like terms to get a system of equations.
+
+</li><li>
+Solve the system to find the constants in the numerators.
+
+</li></ol>
+<p>
+For example:
+</p>
+
+\begin{align}
+\frac{x^2 + 3x - 1}{(x + 1)(x^2 + 2)} = \frac{A}{(x + 1)} + \frac{Bx + C}{(x^2 + 2)}
+\end{align}
+
+<p>
+Multiply each side by \((x + 1)(x^2 + 2)\):
+</p>
+
+\begin{align}
+x^2 + 3x - 1 = A(x^2 + 2) + (Bx + C)(x + 1)
+\end{align}
+
+<p>
+Collect the terms on each side of the equation:
+</p>
+
+\begin{align}
+x^2 + 3x - 1 = Ax^2 + A2 + Bx^2 + Bx + Cx + C = x^2 (A + B) + x (B + C) + 2A + C
+\end{align}
+
+<p>
+Equate the coefficients of like terms to get a system of equations:
+</p>
+
+\begin{align}
+(A + B) = 1
+\end{align}
+
+\begin{align}
+(B + C) = 3
+\end{align}
+
+\begin{align}
+2A + C = -1
+\end{align}
+
+<p>
+Solving this system for \(A\), \(B\), and \(C\) would give the partial fraction decomposition.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
