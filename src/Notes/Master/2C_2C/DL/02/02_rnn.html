@@ -240,7 +240,7 @@ Also, \(i\), \(f\), and \(o\) are the input, forget, and output gates.
 </p>
 
 <p>
-The forget gate defines how much of the previous state $h_{t-1} you want to allow to pass through.
+The forget gate defines how much of the previous state \(h_{t-1}\) you want to allow to pass through.
 </p>
 
 <p>
@@ -252,7 +252,7 @@ The output gate defines how much of the internal state you want to expose to the
 </p>
 
 <p>
-The internal hidden state g is computed based on the current input xt and the previous hidden state h_{t-1}.
+The internal hidden state \(g\) is computed based on the current input \(x_t\) and the previous hidden state \(h_{t-1}\).
 </p>
 
 <p>
@@ -313,7 +313,7 @@ r = \sigma(W_rh_{t-1} + U_r x_t)
 \end{align}
 
 \begin{align}
-c = tanh(W_c(h_{t-1} \otimes r) + U_cx_t)
+c_t = tanh(W_c(h_{t-1} \otimes r) + U_cx_t)
 \end{align}
 
 \begin{align}
