@@ -131,7 +131,7 @@ Let us now look at what happens to the gradient of the loss at the last time ste
 </p>
 
 \begin{align}
-\frac{\delta L_3}{\delta W} = \frac{\delta L_3}{\delta_y_3} \frac{\delta y_3}{\delta_h_2} \frac{\delta h_2}{\delta_W}
+\frac{\delta L_3}{\delta W} = \frac{\delta L_3}{\delta y_3} \frac{\delta y_3}{\delta_h_2} \frac{\delta h_2}{\delta_W}
 \end{align}
 
 <p>
@@ -154,7 +154,7 @@ The gradient of the hidden state \(h_2\) with respect to \(W\) can be further de
 </p>
 
 \begin{align}
-\frac{\delta L_3}{\delta W} = \sum_{t=0}^2 \frac{\delta L_3}{\delta_y_3} \frac{\delta y_3}{\delta_h_2} \frac{\delta h_2}{\delta h_t}\frac{\delta h_t}{\delta_W}
+\frac{\delta L_3}{\delta W} = \sum_{t=0}^2 \frac{\delta L_3}{\delta y_3} \frac{\delta y_3}{\delta_h_2} \frac{\delta h_2}{\delta h_t}\frac{\delta h_t}{\delta_W}
 \end{align}
 
 <p>
@@ -162,7 +162,7 @@ Finally, each gradient of the hidden state with respect to the previous one can 
 </p>
 
 \begin{align}
-\frac{\delta L_3}{\delta W} = \sum_{t=0}^2 \frac{\delta L_3}{\delta_y_3} \frac{\delta y_3}{\delta_h_2} \left(\prod_{j=t+1}^2 \frac{\delta h_j}{\delta h_j-1}\right)\frac{\delta h_t}{\delta_W}
+\frac{\delta L_3}{\delta W} = \sum_{t=0}^2 \frac{\delta L_3}{\delta y_3} \frac{\delta y_3}{\delta_h_2} \left(\prod_{j=t+1}^2 \frac{\delta h_j}{\delta h_j-1}\right)\frac{\delta h_t}{\delta_W}
 \end{align}
 
 <p>
@@ -170,11 +170,11 @@ For example for \(t = 3\):
 </p>
 
 \begin{align}
-\frac{\delta L_4}{\delta W} = \frac{\delta L_4}{\delta_y_4} \frac{\delta y_4}{\delta_h_3} \left(\prod_{j=4}^2 \frac{\delta h_j}{\delta h_j-1}\right)\frac{\delta h_4}{\delta_W}
+\frac{\delta L_4}{\delta W} = \frac{\delta L_4}{\delta y_4} \frac{\delta y_4}{\delta_h_3} \left(\prod_{j=4}^2 \frac{\delta h_j}{\delta h_j-1}\right)\frac{\delta h_4}{\delta_W}
 \end{align}
 
 \begin{align}
-\frac{\delta L_4}{\delta W} = \frac{\delta L_4}{\delta_y_4} \frac{\delta y_4}{\delta_h_3} \left(\frac{\delta h_4}{\delta h_3}\frac{\delta h_3}{\delta h_2}\frac{\delta h_2}{\delta h_1}\right)\frac{\delta h_4}{\delta_W}
+\frac{\delta L_4}{\delta W} = \frac{\delta L_4}{\delta y_4} \frac{\delta y_4}{\delta_h_3} \left(\frac{\delta h_4}{\delta h_3}\frac{\delta h_3}{\delta h_2}\frac{\delta h_2}{\delta h_1}\right)\frac{\delta h_4}{\delta_W}
 \end{align}
 
 <p>
