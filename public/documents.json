@@ -557,7 +557,7 @@
   {
     "id": "https://albamr09.github.io/src/Notes/Master/2C_2C/DL/02/index.html",
     "title": "T2. Tipologías de las redes neuronales profundas",
-    "body": " index search search back t2. tipologías de las redes neuronales profundas convolutional nets recurrent neural networks $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
+    "body": " index search search back t2. tipologías de las redes neuronales profundas convolutional nets recurrent neural networks boltzmann based networks $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
   },
   {
     "id": "https://albamr09.github.io/src/Notes/Master/2C_2C/DL/02/03_boltzmann.html",
