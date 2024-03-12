@@ -137,6 +137,91 @@ In the case of bagging regression trees, we can record the total amount that the
 <p>
 For classification trees, we can add up the total amount that the Gini index is decreased by splits over a given predictor, averaged over all \(B\) trees.
 </p>
+
+<div id="Bagging-Advantages of ensemble models"><h2 id="Advantages of ensemble models" class="header"><a href="#Bagging-Advantages of ensemble models">Advantages of ensemble models</a></h2></div>
+
+<ul>
+<li>
+<span id="Bagging-Advantages of ensemble models-Performance"></span><strong id="Performance">Performance</strong>: it improves single models' perfomance.
+
+</li><li>
+<span id="Bagging-Advantages of ensemble models-Robustness"></span><strong id="Robustness">Robustness</strong>: reduces predictions' variance.
+
+</li></ul>
+<p>
+So it also improves the equilibrium between bias and variance.
+</p>
+
+<div id="Bagging-How to generate diversity"><h2 id="How to generate diversity" class="header"><a href="#Bagging-How to generate diversity">How to generate diversity</a></h2></div>
+
+<ul>
+<li>
+Manipulating <span id="Bagging-How to generate diversity-instances"></span><strong id="instances">instances</strong>: selecting a different subset of instances for each model.
+
+</li><li>
+Manipulating <span id="Bagging-How to generate diversity-features"></span><strong id="features">features</strong>: selecting a different subset of features for each model.
+
+</li><li>
+Manipulating <span id="Bagging-How to generate diversity-models' definition"></span><strong id="models' definition">models' definition</strong>: selecting different hyperparameters, optimization algorithm for ach model.
+
+</li></ul>
+<p>
+<span id="Bagging-How to generate diversity-Hybridation"></span><strong id="Hybridation">Hybridation</strong>: Mix any of the previous practices. 
+</p>
+
+<div id="Bagging-Ensemble algorithms"><h2 id="Ensemble algorithms" class="header"><a href="#Bagging-Ensemble algorithms">Ensemble algorithms</a></h2></div>
+
+<div id="Bagging-Ensemble algorithms-Bagging"><h3 id="Bagging" class="header"><a href="#Bagging-Ensemble algorithms-Bagging">Bagging</a></h3></div>
+
+<p>
+Models are trained concurrently with different data sets generated using bootstrapping.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/bagging.png" alt="Bagging" style="width:500px;height:350px">
+</p>
+
+<div id="Bagging-Ensemble algorithms-Boosting"><h3 id="Boosting" class="header"><a href="#Bagging-Ensemble algorithms-Boosting">Boosting</a></h3></div>
+
+<p>
+Construye múltiples modelos (típicamente modelos del mismo tipo) secuenciales, cada uno de los cuales aprende a corregir los errores de predicción de un modelo anterior en la cadena.
+</p>
+
+<p>
+El objetivo es desarrollar un modelo fuerte a partir de muchos <span id="Bagging-Ensemble algorithms-Boosting-modelos débiles"></span><strong id="modelos débiles">modelos débiles</strong> especialmente diseñados que se combinan mediante votación simple o promediando.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/bootstrapping.png" alt="Bootstrapping" style="width:350px;height:500px">
+</p>
+
+<div id="Bagging-Ensemble algorithms-Staking"><h3 id="Staking" class="header"><a href="#Bagging-Ensemble algorithms-Staking">Staking</a></h3></div>
+
+<p>
+Construye múltiples modelos <span id="Bagging-Ensemble algorithms-Staking-sobre el mismo conjunto de datos"></span><strong id="sobre el mismo conjunto de datos">sobre el mismo conjunto de datos</strong>, típicamente modelos de diferentes tipos (modelos de nivel 0); y un modelo supervisado o meta modelo (modelo de nivel 1) que aprende cómo combinar mejor las predicciones de los modelos primarios.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/stacking.png" alt="Stacking" style="width:500px;height:350px">
+</p>
+
+<div id="Bagging-Model of Experts"><h2 id="Model of Experts" class="header"><a href="#Bagging-Model of Experts">Model of Experts</a></h2></div>
+
+<p>
+Podemos dividir el espacio de características de entrada en subespacios según algún conocimiento de dominio del problema.
+</p>
+
+<p>
+Luego se puede entrenar un modelo en cada subespacio del problema, convirtiéndose de hecho en un experto en el subproblema específico.
+</p>
+
+<p>
+Luego, un modelo aprende a qué experto recurrir para predecir nuevos ejemplos en el futuro.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/model_of_experts.png" alt="Model Of Experts" style="width:450px;height:350px">
+</p>
 </div>
   
 
