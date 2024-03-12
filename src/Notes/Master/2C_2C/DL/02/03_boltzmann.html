@@ -107,7 +107,7 @@ And, for example, the probability distribution of visible units is obtained by m
 </p>
 
 \begin{aligned}
-p(v,h) = \frac{\sum_h e^{-E(v,h)}}{\sum_{m, n} e^{-E(m, n)}}
+p(v) = \frac{\sum_h e^{-E(v,h)}}{\sum_{m, n} e^{-E(m, n)}}
 \end{aligned}
 
 <p>
@@ -139,11 +139,89 @@ Take the derivative of the log likelihood function as a function of \(w\):
 \begin{align}
 = -\sum_h \frac{e^{-E_{v,h}}}{\sum_h e^{-E_{v, h}}} \frac{\delta E_{v,h}}{\delta w} + \sum_{m,n} \frac{e^{E_{m,m}}}{\sum_{m,n} e^{-E_{m, n}}} \frac{\delta E_{m,m}}{\delta w}
 \end{align}
-\begin{align}
-= -\sum_h \frac{e^{-E_{v,h}}}{\sum_h e^{-E_{v, h}}} \frac{\delta E_{v,h}}{\delta w} + \sum_{m,n} p(m,n) \frac{\delta E_{m,m}}{\delta w}
-\end{align}
 
 </li></ul>
+<p>
+We know that:
+</p>
+
+\begin{align}
+p(h|v) = \frac{p(v, h)}{p(v)} = \frac{\frac{e^{-E_{v, h}}}{\sum_{m,n} e^{-E_{m, n}}}}{\frac{\sum_h e^{-E_{v, h}}}{\sum_{m,n} e^{-E_{m, n}}}}
+\end{align}
+
+<p>
+By removing both \(\sum_{m,n} e^{-E_{m, n}}\), we obtain:
+</p>
+
+\begin{align}
+ = \frac{e^{-E_{v, h}}}{\sum_h e^{-E_{v, h}}}
+\end{align}
+
+<p>
+Such that:
+</p>
+
+\begin{align}
+= -\sum_h p(h|v) \frac{\delta E_{v,h}}{\delta w} + \sum_{m,n} p(m,n) \frac{\delta E_{m,m}}{\delta w}
+\end{align}
+
+<p>
+And by de definition of the expected value \(\mathbb{E}(x) = \sum_x x p(x)\):
+</p>
+
+\begin{align}
+= - \mathbb{E}_{p(h|v)}[\frac{\delta E_{v,h}}{\delta w}] + \mathbb{E}_̣{p(m,n)}[\frac{\delta E_{m,m}}{\delta w}] 
+\end{align}
+
+<p>
+Computing these expectations is in general an <span id="Boltzmann Based Networks-Boltzmann Machines-intractable problem"></span><strong id="intractable problem">intractable problem</strong>. he general approach for solving this problem is to use <a href="https://towardsdatascience.com/monte-carlo-methods-and-simulations-explained-in-real-life-modeling-insomnia-f49685b321d0">Markov chain Monte Carlo</a> (MCMC) to approximate these quantities:
+</p>
+
+\begin{align}
+\frac{\delta l(v|w)}{\delta w} = - &lt;s_i, s_j&gt;_{p(h_{data}|v_{data})} + &lt;s_i, s_j&gt;_{p(h_{model}|v_{model})}
+\end{align}
+
+<p>
+Here \(&lt;\cdot, \cdot&gt;\) denotes the expectation.
+</p>
+
+<div id="Boltzmann Based Networks-Restricted Boltzmann Machines"><h2 id="Restricted Boltzmann Machines" class="header"><a href="#Boltzmann Based Networks-Restricted Boltzmann Machines">Restricted Boltzmann Machines</a></h2></div>
+
+<p>
+An RBM is a Boltzmann machine that only has connections between visible and hidden units.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/rbm_structure.png" alt="Restricted Boltzmann Machine" style="width:650px;height:350px">
+</p>
+
+<p>
+The energy function of the RBM is defined as follows:
+</p>
+
+\begin{align}
+E(v, h) = - \sum_i v_ib_i - \sum_k h_kb_k - \sum_{i,k} v_i h_k w_{i,k}
+\end{align}
+
+<div id="Boltzmann Based Networks-Restricted Boltzmann Machines-Contrastive Divergence"><h3 id="Contrastive Divergence" class="header"><a href="#Boltzmann Based Networks-Restricted Boltzmann Machines-Contrastive Divergence">Contrastive Divergence</a></h3></div>
+
+<p>
+This is a very efficient training algorithm for Boltzmann machines. Here is how it works:
+</p>
+
+<ol>
+<li>
+For each training instance \(x\), the algorithm starts by feeding it to the network by setting
+
+</li></ol>
+<p>
+the state of the visible units to \(x_1, \cdots, x_n\).
+</p>
+<ol>
+<li>
+Compute the state of the hidden units by applying. 
+
+</li></ol>
 </div>
   
 
