@@ -1,0 +1,388 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Ellipses and Hyperbolas</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Ellipses and Hyperbolas"><h1 id="Ellipses and Hyperbolas" class="header"><a href="#Ellipses and Hyperbolas">Ellipses and Hyperbolas</a></h1></div>
+
+<hr>
+
+<div id="Ellipses and Hyperbolas-Ellipse"><h2 id="Ellipse" class="header"><a href="#Ellipses and Hyperbolas-Ellipse">Ellipse</a></h2></div>
+
+<p>
+An <span id="Ellipses and Hyperbolas-Ellipse-ellipse"></span><strong id="ellipse">ellipse</strong> is the set of all points in a plane, the sum of whose distances from two fixed points is constant. Each fixed point is called a <span id="Ellipses and Hyperbolas-Ellipse-focus"></span><strong id="focus">focus</strong> (plural, foci) of the ellipse.
+</p>
+
+
+<p>
+<img src="https://albamr09.github.io/public/assets/ellipse.png" alt="Ellipse" style="width:300px;height:300px">
+</p>
+
+<p>
+An ellipse has two axes of symmetry: the <span id="Ellipses and Hyperbolas-Ellipse-major axis"></span><strong id="major axis">major axis</strong> (the longer one) and the <span id="Ellipses and Hyperbolas-Ellipse-minor axis"></span><strong id="minor axis">minor axis</strong> (the shorter one). <span id="Ellipses and Hyperbolas-Ellipse-The foci are always located on the major axis"></span><strong id="The foci are always located on the major axis">The foci are always located on the major axis</strong>. The midpoint of the major axis is the <span id="Ellipses and Hyperbolas-Ellipse-center"></span><strong id="center">center</strong> of the ellipse, and the endpoints of the major axis are the <span id="Ellipses and Hyperbolas-Ellipse-vertices"></span><strong id="vertices">vertices</strong> of the ellipse.
+</p>
+
+<p>
+A chord through a focus and perpendicular to the major axis is called a <span id="Ellipses and Hyperbolas-Ellipse-latus rectum"></span><strong id="latus rectum">latus rectum</strong>. <span id="Ellipses and Hyperbolas-Ellipse-The graph of an ellipse is not the graph of a function."></span><strong id="The graph of an ellipse is not the graph of a function.">The graph of an ellipse is not the graph of a function.</strong>
+</p>
+
+<p>
+Given an ellipse with center at the origin, foci \(F(c, 0)\) and \(F′(-c, 0)\), and vertices \(V(a, 0)\) and \(V′(-a, 0)\). From the previous image we know that the distance from \(V\) to \(F\) is \(a - c\) and the distance from \(V\) to \(F′\) is \(a + c\). The sum of these distances is \(2a\). Since \(V\) is on the ellipse, all othe points must satisfy this distance, such that for any point \(P(x, y)\) on the ellipse:
+</p>
+
+\begin{align}
+d(P, F) + d(P, F') = 2a
+\end{align}
+
+\begin{align}
+\sqrt{(x - c)^2 + y^2} + \sqrt{(x + c)^2 + y^2} = 2a
+\end{align}
+
+\begin{align}
+\sqrt{(x - c)^2 + y^2}  = 2a - \sqrt{(x + c)^2 + y^2}
+\end{align}
+
+<p>
+We now square each side:
+</p>
+
+\begin{align}
+(x - c)^2 + y^2  = 4a^2 - 4a\sqrt{(x + c)^2 + y^2} + (x + c)^2 + y^2
+\end{align}
+
+\begin{align}
+x^2 + c^2 - 2xc + y^2  = 4a^2 - 4a\sqrt{(x + c)^2 + y^2} + x^2 + c^2 + 2xc + y^2
+\end{align}
+
+\begin{align}
+- 4xc = 4a^2 - 4a\sqrt{(x + c)^2 + y^2} 
+\end{align}
+
+\begin{align}
+- xc = a^2 - a\sqrt{(x + c)^2 + y^2} 
+\end{align}
+
+\begin{align}
+xc + a^2 = a\sqrt{(x + c)^2 + y^2} 
+\end{align}
+
+<p>
+We square both sides again:
+</p>
+
+\begin{align}
+(xc + a^2)^2 = a^2\left((x + c)^2 + y^2\right) 
+\end{align}
+
+\begin{align}
+x^2c^2 + a^4 + 2xca^2 = a^2\left(x^2 + c^2 + 2xc + y^2\right) 
+\end{align}
+
+\begin{align}
+x^2c^2 + a^4 + 2xca^2 = a^2x^2 + a^2c^2 + 2xca^2 + a^2y^2
+\end{align}
+
+\begin{align}
+x^2c^2 + a^4 = a^2x^2 + a^2c^2 + a^2y^2
+\end{align}
+
+\begin{align}
+x^2c^2 - a^2x^2 - a^2y^2 = - a^4 + a^2c^2
+\end{align}
+
+\begin{align}
+x^2(c^2 - a^2)- a^2y^2 = a^2 (-a^2 + c^2)
+\end{align}
+
+<p>
+We multiply both sides by \(-1\):
+</p>
+
+\begin{align}
+x^2(a^2 - c^2) + a^2y^2 = a^2 (a^2 - c^2)
+\end{align}
+
+<p>
+We divide both sides by \(a^2(a^2 - c^2)\):
+</p>
+
+\begin{align}
+\frac{x^2}{a^2} + \frac{y^2}{(a^2 - c^2)} = 1
+\end{align}
+
+<p>
+Which gives us the standard form equation for the ellipse with center on the origin, vertices \((\pm a, 0)\) and foci \((\pm c, 0)\).
+</p>
+
+<p>
+Since \(B(0, b)\) is on the ellipse, then:
+</p>
+
+\begin{align}
+d(B, F) + d(B + F') = 2a
+\end{align}
+
+\begin{align}
+\sqrt{(-c)^2 + b^2} + \sqrt{c^2 + b^2} = 2a
+\end{align}
+
+\begin{align}
+2\sqrt{c^2 + b^2} = 2a
+\end{align}
+
+<p>
+We square  both sides
+</p>
+
+\begin{align}
+4(c^2 + b^2) = 4a^2
+\end{align}
+
+\begin{align}
+c^2 + b^2 = a^2
+\end{align}
+
+\begin{align}
+b^2 = a^2 - c^2
+\end{align}
+
+<p>
+Therefore, by sustuting on the ellipse formula we obtain:
+</p>
+
+\begin{align}
+\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1
+\end{align}
+
+<div id="Ellipses and Hyperbolas-Ellipse-Standard Forms of Equations for Ellipses"><h3 id="Standard Forms of Equations for Ellipses" class="header"><a href="#Ellipses and Hyperbolas-Ellipse-Standard Forms of Equations for Ellipses">Standard Forms of Equations for Ellipses</a></h3></div>
+
+<p>
+The ellipse with center at the origin and equation:
+</p>
+
+\begin{align}
+\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1, (a &gt; b &gt; 0)
+\end{align}
+
+<p>
+<img src="https://albamr09.github.io/public/assets/ellipsis_major_axis_x.png" alt="Ellipse Major Axis X" style="width:300px;height:300px">
+</p>
+
+<p>
+has vertices \((\pm a, 0)\), endpoints of the minor axis \((0, \pm b)\) and foci \((\pm c, 0)\) where \(c^2 = a^2 - b^\)
+</p>
+
+<p>
+The ellipse with center at the origin and equation
+</p>
+
+\begin{align}
+\frac{x^2}{b^2} + \frac{y^2}{a^2} = 1, (a &gt; b &gt; 0)
+\end{align}
+
+<p>
+<img src="https://albamr09.github.io/public/assets/ellipsis_major_axis_y.png" alt="Ellipse Major Axis Y" style="width:300px;height:300px">
+</p>
+
+<p>
+has vertices \((0, \pm a)\), endpoints of the minor axis \((\pm b, 0)\) and foci \((0, \pm c)\) where \(c^2 = a^2 - b^\)
+</p>
+
+<div id="Ellipses and Hyperbolas-Ellipse-Translations of Ellipses"><h3 id="Translations of Ellipses" class="header"><a href="#Ellipses and Hyperbolas-Ellipse-Translations of Ellipses">Translations of Ellipses</a></h3></div>
+
+<p>
+An ellipse with center at \((h, k)\) where \(b^2 = a^2 - c^2\) with \(a &gt; b &gt; 0\) and \(c &gt; 0\) satisfies one of the following equations:
+</p>
+
+<ul>
+<li>
+Major axis: horizontal, foci \((h \pm c, k)\) and vertices \((h \pm a, k)\):
+\begin{align}
+\frac{(x - h)^2}{a^2} + \frac{(y - k)^2}{b^2} = 1
+\end{align}
+
+</li><li>
+Major axis: vertical, foci \((h, k \pm c)\) and vertices \((h, k \pm a)\):
+\begin{align}
+\frac{(x - h)^2}{b^2} + \frac{(y - k)^2}{a^2} = 1
+\end{align}
+
+</li></ul>
+<div id="Ellipses and Hyperbolas-Hyperbola"><h2 id="Hyperbola" class="header"><a href="#Ellipses and Hyperbolas-Hyperbola">Hyperbola</a></h2></div>
+
+<p>
+A <span id="Ellipses and Hyperbolas-Hyperbola-hyperbola"></span><strong id="hyperbola">hyperbola</strong> is the set of all points in a plane such that the absolute value of the difference of the distances from two fixed points is constant. The two fixed points are called the <span id="Ellipses and Hyperbolas-Hyperbola-foci"></span><strong id="foci">foci</strong> of the hyperbola.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/hyperbola.png" alt="Hyperbola" style="width:300px;height:300px">
+</p>
+
+<p>
+Suppose a hyperbola has center at the origin and foci at \(F'(- c, 0)\) and \(F(c, 0)\). The midpoint of the segment \(F′F\) is the center of the hyperbola, and the points \(V'(- a, 0)\) and \(V(a, 0)\) are the <span id="Ellipses and Hyperbolas-Hyperbola-vertices"></span><strong id="vertices">vertices</strong> of the hyperbola. The line segment <span id="Ellipses and Hyperbolas-Hyperbola-V'V"></span><strong id="V'V">V'V</strong> is the <span id="Ellipses and Hyperbolas-Hyperbola-transverse axis"></span><strong id="transverse axis">transverse axis</strong> of the hyperbola.
+</p>
+
+<p>
+A chord through a focus and perpendicular to an extension of the transverse axis is a <span id="Ellipses and Hyperbolas-Hyperbola-latus rectum"></span><strong id="latus rectum">latus rectum</strong>.
+</p>
+
+<div id="Ellipses and Hyperbolas-Hyperbola-Standard Forms of Equations for Hyperbolas"><h3 id="Standard Forms of Equations for Hyperbolas" class="header"><a href="#Ellipses and Hyperbolas-Hyperbola-Standard Forms of Equations for Hyperbolas">Standard Forms of Equations for Hyperbolas</a></h3></div>
+
+<p>
+The hyperbola with center at the origin and equation
+</p>
+
+\begin{align}
+\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1
+\end{align}
+
+<p>
+<img src="https://albamr09.github.io/public/assets/hyperbola_traverse_axis_x.png" alt="Hyperbola Traverse Axis X" style="width:300px;height:300px">
+</p>
+
+<p>
+has vertices \((\pm a, 0)\), asymptotes \(y = \pm \frac{b}{a}x\) and foci \((\pm c, 0)\) where \(c^2 = a^2 + b^2\).
+</p>
+
+<p>
+The hyperbola with center at the origin and equation
+</p>
+
+\begin{align}
+\frac{y^2}{a^2} - \frac{x^2}{b^2} = 1
+\end{align}
+
+<p>
+<img src="https://albamr09.github.io/public/assets/hyperbola_traverse_axis_y.png" alt="Hyperbola Traverse Axis Y" style="width:300px;height:300px">
+</p>
+
+<p>
+has vertices \((0, \pm a)\), asymptotes \(y = \pm \frac{a}{b}x\) and foci \((0, \pm c)\) where \(c^2 = a^2 + b^2\).
+</p>
+
+<p>
+To explain the concept of asymptotes, we can start with the first equation for a hyperbola, where the foci are on the x-axis, and solve for \(y\):
+</p>
+
+\begin{align}
+\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1
+\end{align}
+
+\begin{align}
+\frac{y^2}{b^2} = \frac{x^2}{a^2} - 1
+\end{align}
+
+\begin{align}
+\frac{y^2}{b^2} = \frac{x^2 - a^2}{a^2}
+\end{align}
+
+\begin{align}
+\frac{y}{b} = \pm \frac{1}{a} \sqrt{x^2 - a^2}
+\end{align}
+
+\begin{align}
+y = \pm \frac{b}{a} \sqrt{x^2 - a^2}
+\end{align}
+
+\begin{align}
+y = \pm \frac{b}{a} \frac{x}{x} \sqrt{x^2 - a^2}
+\end{align}
+
+\begin{align}
+y = \pm \frac{b}{a} x \sqrt{\frac{x^2 - a^2}{x^2}}
+\end{align}
+
+\begin{align}
+y = \pm \frac{b}{a} x \sqrt{\frac{x^2}{x^2} - \frac{a^2}{x^2}}
+\end{align}
+
+\begin{align}
+y = \pm \frac{b}{a} x \sqrt{1 - \frac{a^2}{x^2}}
+\end{align}
+
+<p>
+So when \(x \rightarrow \ifty\) we know that \(\frac{a^2}{x^2} \rightarrow 0\) and thus:
+</p>
+
+\begin{align}
+y = \pm \frac{b}{a} x \sqrt{1}
+\end{align}
+
+\begin{align}
+y = \pm \frac{b}{a} x
+\end{align}
+
+<p>
+Which defines the asymptotes of the hyperbola. The lines are the extended diagonals of the rectangle whose vertices are \((a, b)\), \((- a, b)\), \((a, - b)\), and \((- a, - b)\). This rectangle is called the <span id="Ellipses and Hyperbolas-Hyperbola-Standard Forms of Equations for Hyperbolas-fundamental rectangle"></span><strong id="fundamental rectangle">fundamental rectangle</strong> of the hyperbola.
+</p>
+
+<p>
+If the foci are on the y-axis the hyperbola is defined as follows:
+</p>
+
+\begin{align}
+y = \pm \frac{a}{b} x
+\end{align}
+
+<div id="Ellipses and Hyperbolas-Hyperbola-Translations of Hyperbolas"><h3 id="Translations of Hyperbolas" class="header"><a href="#Ellipses and Hyperbolas-Hyperbola-Translations of Hyperbolas">Translations of Hyperbolas</a></h3></div>
+
+<p>
+A hyperbola with center \((h, k)\), where \(c^2 = a^2 + b^2\) is defined in one of two ways:
+</p>
+
+<ul>
+<li>
+Traverse axis is horizontal, vertices are \((h \pm a, k)\), foci are \((h \pm c, k)\) and asymptotes are \(y = \pm \frac{b}{a}(x - h) + k\)
+\begin{align}
+\frac{(x - h)^2}{a^2} - \frac{(y - k)^2}{b^2}  = 1
+\end{align}
+
+</li></ul>
+ 
+<ul>
+<li>
+Traverse axis is verticsl, vertices are \((k, h \pm a)\), foci are \((k, h \pm c)\) and asymptotes are \(y = \pm \frac{a}{b}(x - h) + k\)
+
+</li></ul>
+ 
+\begin{align}
+\frac{(y - k)^2}{a^2} - \frac{(x - h)^2}{b^2}  = 1
+\end{align}
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
