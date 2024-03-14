@@ -211,17 +211,104 @@ This is a very efficient training algorithm for Boltzmann machines. Here is how 
 
 <ol>
 <li>
-For each training instance \(x\), the algorithm starts by feeding it to the network by setting
+For each training instance \(x\), the algorithm starts by feeding it to the network by setting the state of the visible units to \(x_1, \cdots, x_n\).
+
+</li><li>
+Compute the state of the hidden units by applying the output formula for a hidden neuron (see ), which gives us the vector \(h\), where \(h_i\) is the output of the ith neuron.
+
+</li><li>
+Next you compute the state of the visible units, by applying the same stochastic equation, which gives you vector \(x'\).
+
+</li><li>
+Once again you compute the state of the hidden units, which gives you a vector \(h'\).
 
 </li></ol>
 <p>
-the state of the visible units to \(x_1, \cdots, x_n\).
+Now you can update each connection weight by applying:
 </p>
+
+\begin{align}
+w_{i, j} = w_{i, j} + \eta (xh^T - x'h'^T)
+\end{align}
+
+<p>
+The great benefit of this algorithm is that it does not require waiting for the network to reach thermal equilibrium.
+</p>
+
+<div id="Boltzmann Based Networks-Deep Belief Nets"><h2 id="Deep Belief Nets" class="header"><a href="#Boltzmann Based Networks-Deep Belief Nets">Deep Belief Nets</a></h2></div>
+
+<p>
+A Deep Belief Net is an RBM where several layers of RBMs can be stacked. Such that the hidden units of the first-level RBM serve as the visible units for the second-layer RBM. 
+</p>
+
+<p>
+You can train DBNs one layer at a time using Contrastive Divergence, starting with the lower layers.
+</p>
+
+<p>
+Their lower layers learn low-level features in the input data, while higher layers learn high-level features. Thus it learns information in a hierarchical way.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/deep_belief_nets.png" alt="Deep Belief Network" style="width:550px;height:300px">
+</p>
+
+<p>
+Just like RBMs, DBNs are fundamentally unsupervised, but you can also train them in a semi-supervised manner by adding some visible units to represent the labels.
+</p>
+
+<p>
+The following describes the training process:
+</p>
+
 <ol>
 <li>
-Compute the state of the hidden units by applying. 
+RBM 1 is trained without supervision.
+
+</li><li>
+RBM 2 is trained with RBM 1’s hidden units as inputs without supervision
+
+</li><li>
+RBM 3 is trained using RBM 2’s hidden units as inputs, as well as extra visible units used to represent the target labels
 
 </li></ol>
+<p>
+One advantage of this semisupervised approach is that you don't need much labeled training data.
+</p>
+
+<p>
+DBNs can also work in reverse. If you activate one of the label units, the signal will propagate up to the hidden units of RBM 3, then down to RBM 2, and then RBM 1, and a new instance will be output by the visible units of RBM 1.
+</p>
+
+<p>
+This <span id="Boltzmann Based Networks-Deep Belief Nets-generative capability"></span><strong id="generative capability">generative capability</strong> of DBNs is quite powerful. For example, it has been used to automatically generate captions for images, and vice versa: first a DBN is trained (without supervision) to learn features in images, and another DBN is trained (again without supervision) to learn features in sets of captions (e.g., "car" often comes with "automobile"). Then an RBM is stacked on top of both DBNs and trained with a set of images along with their captions; it learns to associate high-level features in images with high-level features in captions. Next, if you feed the image DBN an image of a car, the signal will propagate through the network, up to the top-level RBM, and back down to the bottom of the caption DBN, producing a caption. Due to the stochastic nature of RBMs and DBNs, the caption will keep changing randomly
+</p>
+
+<p>
+A DBN, however, suffers from the following problems:
+</p>
+
+<ul>
+<li>
+Inference in DBNs is a problem because of the "explaining away" effect
+
+</li><li>
+A DBN can only use greedy retraining and no joint optimization over all layers
+
+</li></ul>
+<div id="Boltzmann Based Networks-Deep Belief Nets-Deep Boltzmann Machines"><h3 id="Deep Boltzmann Machines" class="header"><a href="#Boltzmann Based Networks-Deep Belief Nets-Deep Boltzmann Machines">Deep Boltzmann Machines</a></h3></div>
+
+<p>
+The distinction between DBM and DBN from the previous section is that DBM information flows on bidirectional connections in the bottom layers.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/deep_boltzmann_machines.png" alt="Deep Boltzmann Machine" style="width:550px;height:300px">
+</p>
+
+<p>
+You can also train a DBM using contrastive divergence.
+</p>
 </div>
   
 
