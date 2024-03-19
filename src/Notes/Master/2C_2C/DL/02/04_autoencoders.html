@@ -1,0 +1,180 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Autoencoders</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Autoencoders"><h1 id="Autoencoders" class="header"><a href="#Autoencoders">Autoencoders</a></h1></div>
+
+<hr>
+
+<div id="Autoencoders-Autoencoders"><h2 id="Autoencoders" class="header"><a href="#Autoencoders-Autoencoders">Autoencoders</a></h2></div>
+
+<p>
+An autoencoder is a type of artificial neural network used to learn efficient codings of unlabeled data (unsupervised learning).
+</p>
+
+<p>
+An autoencoder learns two functions: 
+</p>
+
+<ul>
+<li>
+An <span id="Autoencoders-Autoencoders-encoding function"></span><strong id="encoding function">encoding function</strong> that transforms the input data
+
+</li><li>
+A <span id="Autoencoders-Autoencoders-decoding function"></span><strong id="decoding function">decoding function</strong> that recreates the input data from the encoded representation.
+
+</li></ul>
+<p>
+The autoencoder learns dense representations (encoding) for a set of data.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/autoencoder.png" alt="Autoencoder" style="width:800px;height:400px;">
+</p>
+
+<p>
+We can force the network to learn useful features adding different types of constraints, for example:
+</p>
+
+<ul>
+<li>
+Defining the dense representation such that is has a lower dimensionality than the input data.
+
+</li><li>
+Adding noise to the input data (<a href="04_autoencoders.html#Autoencoders-Autoencoders-Denoising Autoencoders">Denoising Autoencoders</a>).
+
+</li></ul>
+<p>
+<em>The number of neurons in the output layer must be equal to the number of inputs.</em>
+</p>
+
+<p>
+The outputs are often called the <span id="Autoencoders-Autoencoders-reconstructions"></span><strong id="reconstructions">reconstructions</strong> because 
+The cost function contains a <span id="Autoencoders-Autoencoders-reconstruction loss"></span><strong id="reconstruction loss">reconstruction loss</strong> that penalizes the model when the reconstructions are different from the inputs.
+</p>
+
+<p>
+<span id="Autoencoders-Autoencoders-Undercomplete autoencoder"></span><strong id="Undercomplete autoencoder">Undercomplete autoencoder</strong>: the internal representation has a lower dimensionality than the input data.
+<span id="Autoencoders-Autoencoders-Overcomplete autoencoder"></span><strong id="Overcomplete autoencoder">Overcomplete autoencoder</strong>: the internal representation has a higher dimensionality than the input data.
+</p>
+
+<div id="Autoencoders-Autoencoders-Stacked Autoencoders"><h3 id="Stacked Autoencoders" class="header"><a href="#Autoencoders-Autoencoders-Stacked Autoencoders">Stacked Autoencoders</a></h3></div>
+
+<p>
+<span id="Autoencoders-Autoencoders-Stacked Autoencoders-Stacked autoencoders"></span><strong id="Stacked autoencoders">Stacked autoencoders</strong> are said to be autoencoders that have multiple hidden layers.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/stacked_autoencoder.png" alt="Stacked Autoencoder" style="width:800px;height:400px;">
+</p>
+
+<div id="Autoencoders-Autoencoders-Tying weights"><h3 id="Tying weights" class="header"><a href="#Autoencoders-Autoencoders-Tying weights">Tying weights</a></h3></div>
+
+<p>
+An autoencoder with <span id="Autoencoders-Autoencoders-Tying weights-tied weights"></span><strong id="tied weights">tied weights</strong> has decoder weights that are the transpose of the encoder weights
+</p>
+
+<p>
+This reduces the number of parameters of the model, thus speeds up training and limits the risk of overfitting.
+</p>
+
+<div id="Autoencoders-Autoencoders-Convolutional Autoencoders"><h3 id="Convolutional Autoencoders" class="header"><a href="#Autoencoders-Autoencoders-Convolutional Autoencoders">Convolutional Autoencoders</a></h3></div>
+
+<p>
+Used with image data.
+</p>
+
+<ul>
+<li>
+The encoder is a regular CNN composed of convolutional layers and pooling layers. It reduces the spatial dimensionality of the inputs (i.e., height and width) while increasing the depth (i.e., the number of feature maps). 
+
+</li></ul>
+<p>
+The decoder must do the reverse (upscale the image and reduce its depth back to the original dimensions).
+</p>
+
+<div id="Autoencoders-Autoencoders-Recurrent Autoencoders"><h3 id="Recurrent Autoencoders" class="header"><a href="#Autoencoders-Autoencoders-Recurrent Autoencoders">Recurrent Autoencoders</a></h3></div>
+
+<p>
+Used with sequential data.
+</p>
+
+<ul>
+<li>
+The <span id="Autoencoders-Autoencoders-Recurrent Autoencoders-encoder"></span><strong id="encoder">encoder</strong> is typically a sequence-to-vector RNN, which compresses the input sequence down to a single vector. 
+
+</li><li>
+The <span id="Autoencoders-Autoencoders-Recurrent Autoencoders-decoder"></span><strong id="decoder">decoder</strong> is a vector-to-sequence RNN that does the reverse
+
+</li></ul>
+<div id="Autoencoders-Autoencoders-Denoising Autoencoders"><h3 id="Denoising Autoencoders" class="header"><a href="#Autoencoders-Autoencoders-Denoising Autoencoders">Denoising Autoencoders</a></h3></div>
+
+<p>
+We want to add noise to the input data, and then train the network to be able to recover the original noise-free inputs.
+</p>
+
+<p>
+The noise can be pure Gaussian noise added to the inputs, or it can be randomly switched-off inputs, just like in dropout.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/denoising_autoencoders.png" alt="Denoising Autoencoders" style="width:800px;height:400px;">
+</p>
+<div id="Autoencoders-Autoencoders-Sparse Autoencoders"><h3 id="Sparse Autoencoders" class="header"><a href="#Autoencoders-Autoencoders-Sparse Autoencoders">Sparse Autoencoders</a></h3></div>
+
+<div id="Autoencoders-Generative Adversarial Networks"><h2 id="Generative Adversarial Networks" class="header"><a href="#Autoencoders-Generative Adversarial Networks">Generative Adversarial Networks</a></h2></div>
+
+<p>
+GANs are composed of two neural networks: 
+</p>
+
+<ul>
+<li>
+A <span id="Autoencoders-Generative Adversarial Networks-generator"></span><strong id="generator">generator</strong> that tries to generate data that looks similar to the training data
+
+</li><li>
+A <span id="Autoencoders-Generative Adversarial Networks-discriminator"></span><strong id="discriminator">discriminator</strong> that tries to tell real data from fake data.
+
+</li></ul>
+<p>
+The generator and the discriminator compete against each other during training.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
