@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>Aprendizaje Automático II</title>
+    <title>Boosting</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -29,36 +29,77 @@
     <hr>
     <div class="content">
 <p>
-<a href="../../index.html">Back</a>
+<a href="../index.html">Back</a>
 </p>
 
-<div id="Aprendizaje Automático II"><h1 id="Aprendizaje Automático II" class="header"><a href="#Aprendizaje Automático II">Aprendizaje Automático II</a></h1></div>
+<div id="Boosting"><h1 id="Boosting" class="header"><a href="#Boosting">Boosting</a></h1></div>
 
 <hr>
 
-<div id="Aprendizaje Automático II-Tema 1. Random Forests"><h2 id="Tema 1. Random Forests" class="header"><a href="#Aprendizaje Automático II-Tema 1. Random Forests">Tema 1. Random Forests</a></h2></div>
+<p>
+In machine learning, boosting is an ensemble meta-algorithm for primarily reducing bias, variance in supervised learning.
+</p>
+
+<p>
+A <span id="Boosting-weak learner"></span><strong id="weak learner">weak learner</strong> is defined to be a classifier that is only slightly correlated with the true classification (it can label examples better than random guessing). In contrast, a <span id="Boosting-strong learner"></span><strong id="strong learner">strong learner</strong> is a classifier that is arbitrarily well-correlated with the true classification.
+</p>
 
 <ol>
 <li>
-<a href="T1/01_bias_variance_tradeoff.html">Bias/Variance Tradeoff</a>
+Before training each weak classifier, the data is sampled based on a distribution. This distribution initially assigns equal weight to each training example.
 
 </li><li>
-<a href="T1/02_bootstrapping.html">Bootstrapping</a>
+After training, the weak classifier's accuracy on the training data is evaluated.
 
 </li><li>
-<a href="T1/03_bagging.html">Bagging</a>
+The accuracy of the weak classifier determines its importance in the final model. Higher accuracy leads to greater influence.
 
 </li><li>
-<a href="T1/04_random_forests.html">Random Forests</a>
+<span id="Boosting-Re-weighting"></span><strong id="Re-weighting">Re-weighting</strong>: After adding a weak learner, the data weights are adjusted, giving more weight to misclassified examples and reducing the weight of correctly classified ones. 
 
 </li></ol>
-<div id="Aprendizaje Automático II-Tema 2. Intensificación (boosting)"><h2 id="Tema 2. Intensificación (boosting)" class="header"><a href="#Aprendizaje Automático II-Tema 2. Intensificación (boosting)">Tema 2. Intensificación (boosting)</a></h2></div>
+<p>
+Re-weighting helps subsequent weak learners to focus more on the examples that previous weak learners struggled with.
+</p>
 
-<ol>
+<div id="Boosting-Regression Trees"><h2 id="Regression Trees" class="header"><a href="#Boosting-Regression Trees">Regression Trees</a></h2></div>
+
+<p>
+Boosting regression trees, often referred to as gradient boosting machines:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/boosting_regression_trees.png" alt="Boosting on Regression Trees" style="width:400px;height:300px">
+What is the idea behind this procedure? Given the current model, we fit a decision tree to the residuals \(r_i\) from the model rather than the outcome \(Y\).
+</p>
+
+<p>
+Each of these trees can be rather small, with just a few terminal nodes, determined by the parameter \(d\).
+</p>
+
+<p>
+By fitting small trees to the residuals, we slowly improve \(\hat{f}\) in areas where it does not perform well. 
+</p>
+
+<p>
+The shrinkage parameter \(\lambda\) slows the process down even further.
+</p>
+
+<p>
+Boosting has three tuning parameters:
+</p>
+
+<ul>
 <li>
-<a href="T2/01_boosting.html">Boosting</a>
+The number of trees \(B\): boosting can overfit if \(B\) is too large.
 
-</li></ol>
+</li><li>
+The shrinkage parameter \(\lambda\): this controls the rate at which boosting learns.
+
+</li><li>
+The number \(d\) of splits in each tree, which controls the complexity of the ensemble.
+
+</li></ul>
 </div>
   
 
