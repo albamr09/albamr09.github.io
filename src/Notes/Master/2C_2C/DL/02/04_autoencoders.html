@@ -95,7 +95,7 @@ The cost function contains a <span id="Autoencoders-Autoencoders-reconstruction 
 </p>
 
 <p>
-<img src="https://albamr09.github.io/public/assets/stacked_autoencoder.png" alt="Stacked Autoencoder" style="width:800px;height:400px;">
+<img src="https://albamr09.github.io/public/assets/stacked_autoencoder.png" alt="Stacked Autoencoder" style="width:600px;height:400px;">
 </p>
 
 <div id="Autoencoders-Autoencoders-Tying weights"><h3 id="Tying weights" class="header"><a href="#Autoencoders-Autoencoders-Tying weights">Tying weights</a></h3></div>
@@ -148,9 +148,40 @@ The noise can be pure Gaussian noise added to the inputs, or it can be randomly 
 </p>
 
 <p>
-<img src="https://albamr09.github.io/public/assets/denoising_autoencoders.png" alt="Denoising Autoencoders" style="width:800px;height:400px;">
+<img src="https://albamr09.github.io/public/assets/denoising_autoencoders.png" alt="Denoising Autoencoders" style="width:600px;height:400px;">
 </p>
+
 <div id="Autoencoders-Autoencoders-Sparse Autoencoders"><h3 id="Sparse Autoencoders" class="header"><a href="#Autoencoders-Autoencoders-Sparse Autoencoders">Sparse Autoencoders</a></h3></div>
+
+<p>
+A sparse autoencoder is an autoencoder whose training criterion involves a sparsity penalty.
+</p>
+
+<p>
+In most cases, we would construct our loss function by penalizing activations of hidden layers so that only a few nodes are encouraged to activate when a single sample is fed into the network.
+</p>
+
+<div id="Autoencoders-Autoencoders-Variational Autoencoders"><h3 id="Variational Autoencoders" class="header"><a href="#Autoencoders-Autoencoders-Variational Autoencoders">Variational Autoencoders</a></h3></div>
+
+<p>
+They are probabilistic autoencoders as well as generative models.
+</p>
+
+<ol>
+<li>
+Instead of directly producing a coding for a given input, the encoder produces a mean coding \(\mu\) and a standard deviation \(\sigma\). 
+
+</li><li>
+The actual coding is then sampled randomly from a Gaussian distribution with mean \(\mu\) and standard deviation \(\sigma\). 
+
+</li><li>
+After that the decoder decodes the sampled coding normally.
+
+</li></ol>
+ 
+<p>
+<img src="https://albamr09.github.io/public/assets/variational_autoencoder.png" alt="Variational Autoencoder" style="width:600px;height:400px;">
+</p>
 
 <div id="Autoencoders-Generative Adversarial Networks"><h2 id="Generative Adversarial Networks" class="header"><a href="#Autoencoders-Generative Adversarial Networks">Generative Adversarial Networks</a></h2></div>
 
@@ -163,11 +194,112 @@ GANs are composed of two neural networks:
 A <span id="Autoencoders-Generative Adversarial Networks-generator"></span><strong id="generator">generator</strong> that tries to generate data that looks similar to the training data
 
 </li><li>
-A <span id="Autoencoders-Generative Adversarial Networks-discriminator"></span><strong id="discriminator">discriminator</strong> that tries to tell real data from fake data.
+A <span id="Autoencoders-Generative Adversarial Networks-discriminator"></span><strong id="discriminator">discriminator</strong> that tries to tell real data from fake data. Takes either a fake image from the generator or a real image from the training set as input, and <span id="Autoencoders-Generative Adversarial Networks-must guess whether the input image is fake or real"></span><strong id="must guess whether the input image is fake or real">must guess whether the input image is fake or real</strong>.
 
 </li></ul>
 <p>
+Each training iteration is divided into two phases:
+</p>
+
+<ol>
+<li>
+We train the discriminator. A batch of data where half are real real images and the other half are fake images produced by the generator. The labels are set to \(0\) for fake images and \(1\) for real images, and the discriminator is trained on this labeled batch for one step. Backpropagation only optimizes the weights of the discriminator.
+
+</li><li>
+We train the generator: we only add fake images to the data, and all the labels are set to \(1\) (real). We want the generator to produce images that the discriminator will believe to be real. Backpropagation only affects the weights of the generator.
+
+</li></ol>
+<p>
 The generator and the discriminator compete against each other during training.
+</p>
+
+<div id="Autoencoders-Generative Adversarial Networks-The Difficulties of Traning GANs"><h3 id="The Difficulties of Traning GANs" class="header"><a href="#Autoencoders-Generative Adversarial Networks-The Difficulties of Traning GANs">The Difficulties of Traning GANs</a></h3></div>
+
+<p>
+It has been demonstrated that a GAN can only reach a single <a href="https://en.wikipedia.org/wiki/Nash_equilibrium">Nash equilibrium</a> (we assume the training process to be finished): that’s when the generator produces perfectly realistic images, and the discriminator is forced to guess (\(50\%\) real, \(50\%\) fake). Nothing guarantees that the equilibrium will ever be reached.
+</p>
+
+<p>
+The biggest difficulty is called <span id="Autoencoders-Generative Adversarial Networks-The Difficulties of Traning GANs-mode collapse"></span><strong id="mode collapse">mode collapse</strong>: this is when the generator’s outputs gradually become less diverse. Such that the generator gets very good at generating data of a concrete kind, good enough to fool the discriminator, however it progressively start representing data of another kind and then forgets about the previous class of data.
+</p>
+
+<p>
+Moreover, because the generator and the discriminator are constantly pushing against each other, their parameters may end up <span id="Autoencoders-Generative Adversarial Networks-The Difficulties of Traning GANs-oscillating"></span><strong id="oscillating">oscillating</strong> and becoming unstable. And since many factors affect these complex dynamics, GANs are very <span id="Autoencoders-Generative Adversarial Networks-The Difficulties of Traning GANs-sensitive to the hyperparameters"></span><strong id="sensitive to the hyperparameters">sensitive to the hyperparameters</strong>.
+</p>
+
+<p>
+There are some techniques that aim to avoid this behaviour like: experience replay and mini-batch discrimination.
+</p>
+
+<ul>
+<li>
+<span id="Autoencoders-Generative Adversarial Networks-The Difficulties of Traning GANs-Experience replay"></span><strong id="Experience replay">Experience replay</strong>: stores images on a buffer and the discriminator uses the images on this buffer as input for fake images. Old images are then progressively replaces by newer images.
+
+</li><li>
+<span id="Autoencoders-Generative Adversarial Networks-The Difficulties of Traning GANs-Mini-batch discrimination"></span><strong id="Mini-batch discrimination">Mini-batch discrimination</strong>: it measures how similar are images on the batch, the discriminator uses this statistic to decide whether to reject the whole batch or not.
+
+</li></ul>
+<div id="Autoencoders-Generative Adversarial Networks-Deep Convolutional GANs"><h3 id="Deep Convolutional GANs" class="header"><a href="#Autoencoders-Generative Adversarial Networks-Deep Convolutional GANs">Deep Convolutional GANs</a></h3></div>
+
+<p>
+These are GANs <span id="Autoencoders-Generative Adversarial Networks-Deep Convolutional GANs-based on deeper convolutional"></span><strong id="based on deeper convolutional">based on deeper convolutional</strong> nets for larger images.
+</p>
+
+<div id="Autoencoders-Generative Adversarial Networks-Progressive Growing of GANs"><h3 id="Progressive Growing of GANs" class="header"><a href="#Autoencoders-Generative Adversarial Networks-Progressive Growing of GANs">Progressive Growing of GANs</a></h3></div>
+
+<ul>
+<li>
+It begins by generating images at low resolution, such as \(4 \times 4\) pixels.
+
+</li><li>
+The model is first trained on low-resolution images. Once training stabilizes at this resolution, additional layers are added to the generator and discriminator to allow for the generation of higher-resolution images.
+
+</li><li>
+With the addition of extra layers, the generator can produce higher-resolution images, such as \(8 \times 8\) pixels.
+
+</li><li>
+After adding new layers, there is usually a transition phase where the model is trained on a mixture of images at the old and new resolutions. This gradual transition allows the model to adapt to the increased resolution without destabilizing the training process.
+
+</li><li>
+Once the training stabilizes at the new resolution, the transition phase ends, and the model continues to train exclusively on images at the higher resolution.
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/assets/progressive_growing_gans.png" alt="Progressive Growing of GANs" style="width:600px;height:400px;">
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/progressive_growing_gans_transition.png" alt="Transition on Progressive Growing of GANs" style="width:600px;height:400px;">
+</p>
+
+<p>
+Increasing the resolution progressively allows the model to learn to capture both global and local features of the images more effectively.
+</p>
+
+<div id="Autoencoders-Generative Adversarial Networks-Style GANs"><h3 id="Style GANs" class="header"><a href="#Autoencoders-Generative Adversarial Networks-Style GANs">Style GANs</a></h3></div>
+
+<p>
+What sets StyleGANs apart is the introduction of "style" into the generation process. In traditional GANs, the generator takes random noise as input and directly generates images. In StyleGANs, the generator learns to separate the "content" of the image (e.g., facial features) from the "style" (e.g., lighting, color, texture). This allows for more fine-grained control over the generated images.
+</p>
+
+<p>
+The StyleGAN generator and discriminator models are trained using the progressive growing GAN training method.
+</p>
+
+<p>
+StyleGANs consist of two main components: a mapping network and a synthesis network. 
+</p>
+
+<ul>
+<li>
+The <span id="Autoencoders-Generative Adversarial Networks-Style GANs-mapping network"></span><strong id="mapping network">mapping network</strong> takes as input a latent vector (random noise) and maps it to an intermediate latent space, which controls the style of the generated image. 
+
+</li><li>
+The <span id="Autoencoders-Generative Adversarial Networks-Style GANs-synthesis network"></span><strong id="synthesis network">synthesis network</strong> then takes the intermediate latent representation and generates the final image.
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/assets/style_gans.png" alt="Style GANs" style="width:600px;height:600px;">
 </p>
 </div>
   

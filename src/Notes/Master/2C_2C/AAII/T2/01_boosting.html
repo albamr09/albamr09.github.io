@@ -41,7 +41,11 @@ In machine learning, boosting is an ensemble meta-algorithm for primarily reduci
 </p>
 
 <p>
-A <span id="Boosting-weak learner"></span><strong id="weak learner">weak learner</strong> is defined to be a classifier that is only slightly correlated with the true classification (it can label examples better than random guessing). In contrast, a <span id="Boosting-strong learner"></span><strong id="strong learner">strong learner</strong> is a classifier that is arbitrarily well-correlated with the true classification.
+A <span id="Boosting-weak learner"></span><strong id="weak learner">weak learner</strong> is defined to be a classifier that is only slightly correlated with the true classification (it can label examples better than random guessing). 
+</p>
+
+<p>
+In contrast, a <span id="Boosting-strong learner"></span><strong id="strong learner">strong learner</strong> is a classifier that is arbitrarily well-correlated with the true classification.
 </p>
 
 <ol>
@@ -70,6 +74,9 @@ Boosting regression trees, often referred to as gradient boosting machines:
 
 <p>
 <img src="https://albamr09.github.io/public/assets/boosting_regression_trees.png" alt="Boosting on Regression Trees" style="width:400px;height:300px">
+</p>
+
+<p>
 What is the idea behind this procedure? Given the current model, we fit a decision tree to the residuals \(r_i\) from the model rather than the outcome \(Y\).
 </p>
 
