@@ -255,9 +255,6 @@ It begins by generating images at low resolution, such as \(4 \times 4\) pixels.
 The model is first trained on low-resolution images. Once training stabilizes at this resolution, additional layers are added to the generator and discriminator to allow for the generation of higher-resolution images.
 
 </li><li>
-With the addition of extra layers, the generator can produce higher-resolution images, such as \(8 \times 8\) pixels.
-
-</li><li>
 After adding new layers, there is usually a transition phase where the model is trained on a mixture of images at the old and new resolutions. This gradual transition allows the model to adapt to the increased resolution without destabilizing the training process.
 
 </li><li>

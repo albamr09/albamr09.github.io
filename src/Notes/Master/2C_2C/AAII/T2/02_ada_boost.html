@@ -1,0 +1,150 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Ada Boost</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Ada Boost"><h1 id="Ada Boost" class="header"><a href="#Ada Boost">Ada Boost</a></h1></div>
+
+<hr>
+
+<div id="Ada Boost-Definition"><h2 id="Definition" class="header"><a href="#Ada Boost-Definition">Definition</a></h2></div>
+
+<p>
+AdaBoost, also known as Adaptive Boosting, is a machine learning algorithm that combines multiple weak classifiers to create a strong classifier. Let's break down the AdaBoost algorithm using the pseudocode shown in:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/ada_boost_algorithm.png" alt="Ada Boost Algorithm" style="width:600px;height:600px">
+</p>
+
+<ol>
+<li>
+<span id="Ada Boost-Definition-Initialization"></span><strong id="Initialization">Initialization</strong>: AdaBoost starts by initializing the weights of all training examples equally \(D_1(i) = \frac{1}{N}\) for \(i = 1, 2, \cdots, N\).
+
+</li><li>
+<span id="Ada Boost-Definition-Iterative Process"></span><strong id="Iterative Process">Iterative Process</strong> for \(t = 1, \cdots, T\):
+
+<ol>
+<li>
+AdaBoost iterates through rounds, where each round involves training a weak classifier \(h_t: \mathcal{X} \rightarrow \{-1, +1\}\) on the data \(D_t\).
+
+</li><li>
+The algorithm adjusts the weights of the training examples based on the performance of the weak classifier: \(D_{t+1} = \frac{D_t(i) \cdot e^{-\alpha_ty_th_t(x_t)}}{Z_t}\), where \(Z_t\) is a regularization term and \(\alpha_t\) is the weight of \(h_t\) on the final ensemble model based on its accuracy.
+
+</li></ol>
+</li><li>
+<span id="Ada Boost-Definition-Combining Classifiers"></span><strong id="Combining Classifiers">Combining Classifiers</strong>:
+
+<ol>
+<li>
+After multiple rounds, AdaBoost combines all the weak classifiers into a final strong classifier.
+
+</li><li>
+The final classifier makes predictions based on a weighted voting system using the predictions of the individual weak classifiers: \(H(x) = sign(\sum_{t=1}^T \alpha_t h_t(x))\)
+
+</li></ol>
+</li><li>
+<span id="Ada Boost-Definition-Predictions"></span><strong id="Predictions">Predictions</strong>: When making predictions on new data, AdaBoost uses the combined classifier to predict the class label based on the weighted votes of the weak classifiers
+
+</li></ol>
+<div id="Ada Boost-Characteristics"><h2 id="Characteristics" class="header"><a href="#Ada Boost-Characteristics">Characteristics</a></h2></div>
+
+<p>
+The weak learning assumption means that we assume each weak classifier makes errors that are not too close to random guessing. So the the error \(\epsilon_t\) is at most \(\frac{1}{2} - \gamma\) for some small positive constant \(\gamma\).
+</p>
+
+<p>
+It can be proven that the training error of the c ombined classifier drops exponentially fas as a function of the number of weak classifiers combined, but it says nothing about the behaviour of its generalization error computed over the test data.
+</p>
+
+<div id="Ada Boost-Toy Example"><h2 id="Toy Example" class="header"><a href="#Ada Boost-Toy Example">Toy Example</a></h2></div>
+
+<p>
+To illustrate how AdaBoost works, let us look at the tiny toy learning problem shown in the following picture:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/ada_boost_example.png" alt="Ada Boost Example" style="width:600px;height:800px">
+</p>
+
+<div id="Ada Boost-Toy Example-Round 1"><h4 id="Round 1" class="header"><a href="#Ada Boost-Toy Example-Round 1">Round 1</a></h4></div>
+
+<p>
+On round \(1\), we assign equal weights to all the examples. So \(D1_(i) = \frac{1}{n} = \frac{1}{10}\).
+</p>
+
+<p>
+The hypothesis \(h_1\) classifies incorrectly three points, so its error is \(\epsilon_1 = 0.3\), so it follows that the weight assigned to this first model is \(\alpha_1 = 0.42\).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/ada_boost_example_1.png" alt="Ada Boost Example" style="width:850px;height:450px">
+</p>
+
+<div id="Ada Boost-Toy Example-Round 2"><h4 id="Round 2" class="header"><a href="#Ada Boost-Toy Example-Round 2">Round 2</a></h4></div>
+
+<p>
+When constructing \(D_2\) we increment the weight of the three points misclassified by \(h_1\). And we define a new hypothesis \(h_2\) over this data, where we can see that it classifies correctly the three points misclassified by \(h_1\) however it still classifies incorrectly three other points.
+</p>
+
+<p>
+The error of this model is \(\epsilon_2 = 0.21\) and thus the weight of this model is defined as \(\alpha_2 = 0.65\).
+</p>
+
+<div id="Ada Boost-Toy Example-Round 3"><h4 id="Round 3" class="header"><a href="#Ada Boost-Toy Example-Round 3">Round 3</a></h4></div>
+
+<p>
+We modify the weights of the data taking into account the three points previously misclassified, augmenting their weight and decresing the weight of those correctly classified.
+</p>
+
+<p>
+This classifier misses none of the points misclassified by \(h_1\) and \(h_2\).
+</p>
+
+<div id="Ada Boost-Toy Example-Final Round"><h4 id="Final Round" class="header"><a href="#Ada Boost-Toy Example-Final Round">Final Round</a></h4></div>
+
+<p>
+The combined classifier \(H\) is defiend as a weigthed vote between \(h_1\), \(h_2\) and \(h_3\) where the weights are given by \(\alpha_1\), \(\alpha_2\) and \(\alpha_3\).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/ada_boost_example_2.png" alt="Ada Boost Example" style="width:700px;height:450px">
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
