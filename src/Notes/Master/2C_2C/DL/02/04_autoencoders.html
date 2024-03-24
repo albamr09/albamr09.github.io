@@ -83,11 +83,14 @@ The outputs are often called the <span id="Autoencoders-Autoencoders-reconstruct
 The cost function contains a <span id="Autoencoders-Autoencoders-reconstruction loss"></span><strong id="reconstruction loss">reconstruction loss</strong> that penalizes the model when the reconstructions are different from the inputs.
 </p>
 
-<p>
+<ul>
+<li>
 <span id="Autoencoders-Autoencoders-Undercomplete autoencoder"></span><strong id="Undercomplete autoencoder">Undercomplete autoencoder</strong>: the internal representation has a lower dimensionality than the input data.
-<span id="Autoencoders-Autoencoders-Overcomplete autoencoder"></span><strong id="Overcomplete autoencoder">Overcomplete autoencoder</strong>: the internal representation has a higher dimensionality than the input data.
-</p>
 
+</li><li>
+<span id="Autoencoders-Autoencoders-Overcomplete autoencoder"></span><strong id="Overcomplete autoencoder">Overcomplete autoencoder</strong>: the internal representation has a higher dimensionality than the input data.
+
+</li></ul>
 <div id="Autoencoders-Autoencoders-Stacked Autoencoders"><h3 id="Stacked Autoencoders" class="header"><a href="#Autoencoders-Autoencoders-Stacked Autoencoders">Stacked Autoencoders</a></h3></div>
 
 <p>
@@ -118,11 +121,10 @@ Used with image data.
 <li>
 The encoder is a regular CNN composed of convolutional layers and pooling layers. It reduces the spatial dimensionality of the inputs (i.e., height and width) while increasing the depth (i.e., the number of feature maps). 
 
-</li></ul>
-<p>
+</li><li>
 The decoder must do the reverse (upscale the image and reduce its depth back to the original dimensions).
-</p>
 
+</li></ul>
 <div id="Autoencoders-Autoencoders-Recurrent Autoencoders"><h3 id="Recurrent Autoencoders" class="header"><a href="#Autoencoders-Autoencoders-Recurrent Autoencoders">Recurrent Autoencoders</a></h3></div>
 
 <p>
