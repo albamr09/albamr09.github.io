@@ -1,7 +1,7 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
-    <title>A Graphical Approach to Algebra and Trigonometry</title>
+    <title>Parametric Equations</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -29,76 +29,176 @@
     <hr>
     <div class="content">
 <p>
-<a href="../../../index.html">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="A Graphical Approach to Algebra and Trigonometry"><h1 id="A Graphical Approach to Algebra and Trigonometry" class="header"><a href="#A Graphical Approach to Algebra and Trigonometry">A Graphical Approach to Algebra and Trigonometry</a></h1></div>
+<div id="Parametric Equations"><h1 id="Parametric Equations" class="header"><a href="#Parametric Equations">Parametric Equations</a></h1></div>
 
 <hr>
 
-<ol>
-<li>
-Linear Functions, Equations and Inequalities
+<p>
+A plane curve is a set of points \((x, y)\) such taht \(x= f(t)\), \(y = g(t)\) and \(f\) and \(g\) are both continuous on an interval \(I\).
+</p>
 
-</li><li>
-Analysis of Graphs of Functions
+<p>
+The equations \(x = f(t)\) and \(y = g(t)\) are parametric equations with parameter \(t\).
+</p>
 
-</li><li>
-Polynomial Functions
+<div id="Parametric Equations-Graphing a Parabola Defined Parametrically"><h2 id="Graphing a Parabola Defined Parametrically" class="header"><a href="#Parametric Equations-Graphing a Parabola Defined Parametrically">Graphing a Parabola Defined Parametrically</a></h2></div>
 
-</li><li>
-Rational, Power and Root Functions
+<p>
+Graph the plane curve \(x = t^2, y = 2t + 3\) for \(t \in [-3, 3]\).
+</p>
 
-</li><li>
-Inverse, Exponential and Logarithmic Functions
+<p>
+Make a table of corresponding values of \(t\), \(x\), and \(y\) over the domain of \(t\).
+</p>
 
-</li><li>
-Systems and Matrices
+<table>
+<tbody><tr>
+<td>
+\(t\)
+</td>
+<td>
+\(x\)
+</td>
+<td>
+\(y\)
+</td>
+</tr>
+<tr>
+<td>
+---
+</td>
+<td>
+---
+</td>
+<td>
+---
+</td>
+</tr>
+<tr>
+<td>
+\(-3\)
+</td>
+<td>
+\(9\)
+</td>
+<td>
+\(-3\)
+</td>
+</tr>
+<tr>
+<td>
+\(-2\)
+</td>
+<td>
+\(4\)
+</td>
+<td>
+\(-1\)
+</td>
+</tr>
+<tr>
+<td>
+\(-1\)
+</td>
+<td>
+\(1\)
+</td>
+<td>
+\(1\)
+</td>
+</tr>
+<tr>
+<td>
+\(0\)
+</td>
+<td>
+\(0\)
+</td>
+<td>
+\(3\)
+</td>
+</tr>
+<tr>
+<td>
+\(1\)
+</td>
+<td>
+\(1\)
+</td>
+<td>
+\(5\)
+</td>
+</tr>
+<tr>
+<td>
+\(2\)
+</td>
+<td>
+\(4\)
+</td>
+<td>
+\(7\)
+</td>
+</tr>
+<tr>
+<td>
+\(3\)
+</td>
+<td>
+\(9\)
+</td>
+<td>
+\(9\)
+</td>
+</tr>
+</tbody></table>
 
-<ol>
-<li>
-Systems of Equations
+<p>
+Then plot the points.
+</p>
 
-</li><li>
-<a href="06_02.html">Solutions of Linear Systems in Three Variables</a>
+<p>
+<img src="https://albamr09.github.io/public/assets/parametric_graph_example.png" alt="Parametric Graph Example" style="width:400px;height:350px">
+</p>
 
-</li><li>
-<a href="06_03.html">Solution of Linear Systems by Row Transformations</a>
+<p>
+To find an equivalent rectangular equation, we eliminate the parameter \(t\).
+</p>
 
-</li><li>
-<a href="06_04.html">Matrix Properties and Operations</a>
+\begin{align}
+y = 2t + 3
+\end{align}
 
-</li><li>
-<a href="06_05.html">Determinants and Cramer's Rule</a>
+\begin{align}
+y - 3 = 2t
+\end{align}
 
-</li><li>
-<a href="06_06.html">Solution of Linear Systems by Matrix Inverses</a>
+\begin{align}
+\frac{y - 3}{2} = t
+\end{align}
 
-</li><li>
-<a href="06_07.html">Systems of Inequalities and Linear Programming</a>
+<p>
+Now we substitute the result in the first equation \(x = t^2\):
+</p>
 
-</li><li>
-<a href="06_08.html">Partial Fractions</a>
+\begin{align}
+x = t^2 = \left(\frac{y - 3}{2}\right)^2 = \frac{(y - 3)^2}{4} = \frac{1}{4}(y-3)^2
+\end{align}
 
-</li></ol>
-</li><li>
-Analytic Geometry and Nonlinear Systems
+<p>
+This is indeed an equation of a horizontal parabola that opens to the right.
+</p>
 
-<ol>
-<li>
-<a href="07_01.html">Circles and Parabolas</a>
+<p>
+Because \(t\) is in \([3, -3]\), \(x\) is in \([3, 0]\), and \(y\) is in \([-3, 9]\). The rectangular equation must be given with its restricted domain as:
+</p>
 
-</li><li>
-<a href="07_02.html">Ellipses and Hyperbolas</a>
-
-</li><li>
-<a href="07_03.html">The Conic Sections and Nonlinear Systems</a>
-
-</li><li>
-<a href="07_04.html">Parametric Equations</a>
-
-</li></ol>
-</li></ol>
+\begin{align}
+x = \frac{1}{4}(y-3)^2, \text{ for } x \in [0, 9]
+\end{align}
 </div>
   
 
