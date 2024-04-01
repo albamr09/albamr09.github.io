@@ -113,7 +113,7 @@ The components of the gradient \(g_m\) are defined as follows:
 </p>
 
 \begin{align}
-g_{im} = \left[\frac{\delta L(y_i, f(x_i))}{\delta f(x_i)}\right]_{f_m(x_i) = f_{m_1}(x_i)}
+g_{im} = \left[\frac{\delta L(y_i, f(x_i))}{\delta f(x_i)}\right]_{f_m(x_i) = f_{m-1}(x_i)}
 \end{align}
 
 <p>
@@ -134,6 +134,110 @@ f_m = f_{m - 1} - \rho_m g_m \in \mathbb{R}^N
 
 <p>
 This updates \(f_m\) towards the direction of maximum descent at \(L(f_{m-1})\), which is why this is often interpreted as a greedy algorithm. 
+</p>
+
+<div id="Gradient Boosting-Gradient Boosting"><h2 id="Gradient Boosting" class="header"><a href="#Gradient Boosting-Gradient Boosting">Gradient Boosting</a></h2></div>
+
+<p>
+Gradient Boosting aims to create a strong predictive model by combining multiple weak models. It starts with a simple model and gradually enhances it to minimize errors.
+</p>
+
+<p>
+At each iteration, a new tree model is fit to the negative gradient of the loss function. The predictions from these trees guide the model towards better predictions. Using squared error to measure closeness, this leads us to:
+</p>
+
+\begin{align}
+\tilde{\Theta}_m = \arg \min_{\Theta} \sum_{i=1}^N (-g_{im} - T(x_i; \Theta))^2
+\end{align}
+
+<p>
+This measures how close each prediction \(T(x_i; \Theta)\) is to the gradient \(-g_{im}\).
+</p>
+
+<p>
+The negative gradient of the loss function represents the direction in which the model's predictions need to be adjusted to reduce errors. By fitting a new tree to this negative gradient, the model learns how to correct its predictions to move closer to the actual target values. That is at each iteration, the new tree model focuses on capturing the errors or residuals of the current ensemble model. 
+</p>
+
+<p>
+While the exact regions where the new tree makes corrections may not match perfectly with the original model's regions, they are close enough to serve the same purpose of improving the model's accuracy. Here the original model is the ensemble model. 
+</p>
+
+<p>
+The following figure summarizes the gradients for commonly used loss functions:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/gradients_gradient_boosting.png" alt="Common Gradients" style="width:650px;height:300px">
+</p>
+
+<div id="Gradient Boosting-Implementations of Gradient Boosting"><h2 id="Implementations of Gradient Boosting" class="header"><a href="#Gradient Boosting-Implementations of Gradient Boosting">Implementations of Gradient Boosting</a></h2></div>
+
+<p>
+Algorithm \(10.3\) presents the generic gradient tree-boosting algorithm for regression. Specific algorithms are obtained by inserting different loss criteria \(L(y,f(x))\).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/gradient_boosting_algorithms.png" alt="Gradient Boosting Algorithm" style="width:650px;height:500px">
+</p>
+
+<ul>
+<li>
+Start with an initial model \(f_0(x)\) that minimizes the loss function \(L(y, f(x))\).
+
+</li><li>
+For each boosting round \(m = 1, \cdots, M\):
+
+<ul>
+<li>
+Calculate the negative gradient for each data point 
+\begin{align}
+r_{im} = -left[\frac{\delta L(y_i, f(x_i))}{\delta f(x_i)}\right]_{f(x_i) = f_{m-1}(x_i)}
+\end{align}
+
+</li><li>
+Fit a regression tree to the gradients \(r_{im}\), which gives us the regions \(R_{jm}, j = 1, 2, \cdots, J_m\)
+
+</li><li>
+The step length \(\gamma\) is determined by minimizing the loss:
+\begin{align}
+\gamma_{jm} = \arg \min_{\gamma} \sum_{x_i \in R_{jm}} L(y_i, f_{m-1}(x_i) + \gamma)
+\end{align}
+
+</li><li>
+Update the model by adding a new tree to the ensemble \(f_m(x) = f_{m-1}(x) + \gamma T(x; \Theta_m)\), where \(T(x; \Theta)\) is the new tree model with parameters \(\Theta_m\) that corrects the errors in the previous model.
+
+</li></ul>
+</li><li>
+The output of the ensemble model is defined as \(\hat{f}(x) = f_M(x)\), that is as the sum of the weaker models.
+
+</li></ul>
+<div id="Gradient Boosting-Implementations of Gradient Boosting-Step Length"><h3 id="Step Length" class="header"><a href="#Gradient Boosting-Implementations of Gradient Boosting-Step Length">Step Length</a></h3></div>
+
+<p>
+The step length \(\gamma\) is crucial in determining how much each new tree should contribute to the ensemble model. It controls the impact of the new tree on the overall model's predictions.
+</p>
+
+<p>
+The line search aims to find the value of γ that minimizes the loss function:
+</p>
+
+\begin{align}
+L(f_{m-1} - \gamma g_m)
+\end{align}
+
+<p>
+This means finding the optimal step length that results in the smallest possible loss when updating the model with the new tree. By minimizing the loss function with respect to \(\gamma\), the algorithm is essentially performing a form of gradient descent.
+</p>
+
+<div id="Gradient Boosting-Implementations of Gradient Boosting-Characteristics"><h3 id="Characteristics" class="header"><a href="#Gradient Boosting-Implementations of Gradient Boosting-Characteristics">Characteristics</a></h3></div>
+
+<p>
+Two basic tuning parameters are the number of iterations \(M\) and the sizes of each of the constituent trees
+\(J_m, m = 1, 2, \cdots, M\).
+</p>
+
+<p>
+The original implementation of this algorithm was called MART for "multiple additive regression trees".
 </p>
 </div>
   
