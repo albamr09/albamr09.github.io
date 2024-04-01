@@ -106,7 +106,7 @@ The boosted tree model is an additive model, where each tree is added sequential
 </p>
 
 \begin{align}
-$f_m(x) = \sum_{m=1}^M T(x; \Theta_m)
+f_M(x) = \sum_{m=1}^M T(x; \Theta_m)
 \end{align}
 
 <p>
@@ -126,11 +126,11 @@ The goal is to minimize the empirical risk:
 </p>
 
 \begin{align}
-\hat{\Theta} arg \min_{\Theta} \sum_{x \in R_j} L(y_i, \gamma_j)
+\hat{\Theta} = arg \min_{\Theta} \sum_{x \in R_j} L(y_i, \gamma_j)
 \end{align}
 
 <p>
-Where \(L(y_i, \gamma_i)\) represents the loss incurred for pedicting the target value \(y_i\) with tconstant \(\gamma_j\) in region \(R_j\).
+Where \(L(y_i, \gamma_i)\) represents the loss incurred for pedicting the target value \(y_i\) with constant \(\gamma_j\) in region \(R_j\).
 </p>
 
 <div id="Boosting Trees-Boosting Trees-Optimization Problem-Finding Optimal Consants"><h4 id="Finding Optimal Consants" class="header"><a href="#Boosting Trees-Boosting Trees-Optimization Problem-Finding Optimal Consants">Finding Optimal Consants</a></h4></div>
@@ -141,6 +141,10 @@ Given the regions \(R_{jm}\)  finding the optimal constant in \(\gamma_j\) in ea
 
 \begin{align}
 \hat{\gamma}_{jm} = arg \min_{\gamma_{jm}} \sum_{x \in R_{jm}} L(y_i, f_{m - 1}(x_i) + \gamma_{jm})
+\end{align}
+
+\begin{align}
+\hat{\gamma}_{jm} = arg \min_{\gamma_{jm}} \sum_{x \in R_{jm}} L(y_i, f_{m - 1}(x_i) + T(x_i; \Theta_m))
 \end{align}
 
 <p>
