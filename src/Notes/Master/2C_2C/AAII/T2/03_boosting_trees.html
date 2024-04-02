@@ -50,7 +50,7 @@ Partitioning the predictor variable space into regions in boosting trees involve
 Decision Making: At each step, a decision tree algorithm finds the best split based on a predictor variable \(x_j\) and a split point \(s\) that minimizes a certain criterion.  This split divides region \(R_j\) into two subregions \(R_{left}\) and \(R_{right}\).
 
 </li><li>
-<span id="Boosting Trees-Variable Space Partitioning-Splitting Criteria"></span><strong id="Splitting Criteria">Splitting Criteria</strong>: it can be represented as \((j, s) = arg \min_{j, s} [\sum_{i \in R_{left}} L(y_i, f(x_i)) + \sum_{i \in R_{right}}]\)
+<span id="Boosting Trees-Variable Space Partitioning-Splitting Criteria"></span><strong id="Splitting Criteria">Splitting Criteria</strong>: it can be represented as \((j, s) = arg \min_{j, s} [\sum_{x_i \in R_{left}} L(y_i, f(x_i)) + \sum_{x_i \in R_{right}} L(y_i, f(x_i)]\)
 
 </li><li>
 <span id="Boosting Trees-Variable Space Partitioning-Recursive Process"></span><strong id="Recursive Process">Recursive Process</strong>: This process is repeated recursively for each resulting subregion until a stopping criterion is met.
@@ -80,7 +80,7 @@ So as we have seen the optimization problem is defined, on a simplified manner, 
 </p>
 
 \begin{align}
-\hat{\Theta} = \arg \min_{\Theta} \sum_{j=1}^J \sum_{x \in R_j} L(y_i, \gamma_j)
+\hat{\Theta} = \arg \min_{\Theta} \sum_{j=1}^J \sum_{x_i \in R_j} L(y_i, \gamma_j)
 \end{align}
 
 <p>
@@ -98,7 +98,7 @@ Finding \(R_j\): this is the difficult part. We usually resort to a greedy, top-
 <div id="Boosting Trees-Boosting Trees"><h2 id="Boosting Trees" class="header"><a href="#Boosting Trees-Boosting Trees">Boosting Trees</a></h2></div>
 
 <p>
-In boosting trees, terminal-node trees refer to the individual decision trees that make up the ensemble model. Each terminal-node tree is denoted as \(T(x; \Theta_m)\) where \(\Theta_m = \{R_{jm}, \gamma_{jm}\}\).
+In boosting trees, terminal-node trees refer to the individual decision trees that make up the ensemble model. Each terminal-node tree is denoted as \(T(x; \Theta_m)\) where \(\Theta_m = \{R_{jm}, \gamma_{jm}\}_1^{J_m}\).
 </p>
 
 <p>
@@ -126,7 +126,7 @@ The goal is to minimize the empirical risk:
 </p>
 
 \begin{align}
-\hat{\Theta} = arg \min_{\Theta} \sum_{x \in R_j} L(y_i, \gamma_j)
+\hat{\Theta} = arg \min_{\Theta} \sum_{x_i \in R_j} L(y_i, \gamma_j)
 \end{align}
 
 <p>
@@ -140,7 +140,7 @@ Given the regions \(R_{jm}\)  finding the optimal constant in \(\gamma_j\) in ea
 </p>
 
 \begin{align}
-\hat{\gamma}_{jm} = arg \min_{\gamma_{jm}} \sum_{x \in R_{jm}} L(y_i, f_{m - 1}(x_i) + \gamma_{jm})
+\hat{\gamma}_{jm} = arg \min_{\gamma_{jm}} \sum_{x_i \in R_{jm}} L(y_i, f_{m - 1}(x_i) + \gamma_{jm})
 \end{align}
 
 \begin{align}
