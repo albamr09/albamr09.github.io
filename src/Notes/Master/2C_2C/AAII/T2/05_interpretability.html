@@ -1,0 +1,140 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Interpretability</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Interpretability"><h1 id="Interpretability" class="header"><a href="#Interpretability">Interpretability</a></h1></div>
+
+<hr>
+
+<div id="Interpretability-Importance of Predictor Variables"><h2 id="Importance of Predictor Variables" class="header"><a href="#Interpretability-Importance of Predictor Variables">Importance of Predictor Variables</a></h2></div>
+
+<p>
+We attempt to discuss the relevance of predictor variables in a statistical modeling technique called boosting.
+</p>
+
+<div id="Interpretability-Importance of Predictor Variables-Decision Trees"><h3 id="Decision Trees" class="header"><a href="#Interpretability-Importance of Predictor Variables-Decision Trees">Decision Trees</a></h3></div>
+
+<p>
+We define the following as a measure of relevance for each predictor variable \(X_{\mathcal{l}}\):
+</p>
+
+\begin{align}
+I_{\mathcal{l}}^2(T) = \sum_{t = 1}^{J - 1} \hat{i}^2_t I(v(t) = \mathcal{l})
+\end{align}
+
+<p>
+This equation calculates the relevance of each predictor variable based on the squared improvements in error risk within the internal nodes of the tree. Let's split each part of the equation:
+</p>
+
+<ul>
+<li>
+The term \(\hat{i}^2_t\) represents the squared improvement in error risk at node \(t\) when splitting on the \(X_{\mathcal{l}}\) predictor variable.
+
+</li><li>
+The variable \(v(t)\) indicates which predictor variable is used for the split at node \(t\).
+
+</li><li>
+Each improvement is weighted by the indicator function \(I(v(t) = \mathcal{l})\), which checks if the splitting variable at node \(t\) is the predictor variable of interest \(X_{\mathcal{l}}\). This weighting ensures that only the improvements related to the predictor variable \(X_{\mathcal{l}}\) are considered in the calculation.
+
+</li><li>
+We sum these improvements over the \(J - 1\) internal nodes on the tree, which are not terminal nodes.
+
+</li><li>
+
+
+</li></ul>
+<div id="Interpretability-Importance of Predictor Variables-Additive Models"><h3 id="Additive Models" class="header"><a href="#Interpretability-Importance of Predictor Variables-Additive Models">Additive Models</a></h3></div>
+
+<p>
+This importance measure is easily generalized to additive tree expansions:
+</p>
+
+\begin{align}
+I_{\mathcal{l}}^2 = \frac{1}{M}\sum_{m = 1}^{M} I_{\mathcal{l}}^2(T_m)
+\end{align}
+
+<p>
+Due to the stabilizing effect of averaging, this measure turns out to be more reliable than the measure computed only over one tree.
+</p>
+
+<div id="Interpretability-Partial Dependence Plots"><h2 id="Partial Dependence Plots" class="header"><a href="#Interpretability-Partial Dependence Plots">Partial Dependence Plots</a></h2></div>
+
+<p>
+Partial dependence functions, by isolating the effects of selected variables, provides an interpretable analysis of their impact on the model's predictions, overcoming the challenges of information overload in high-dimensional spaces. Let's define the partial dependency of \(f(X)\) on \(X_S\), 
+</p>
+
+\begin{align}
+f_S(X_S) = E_{X_C}[f(X_S, X_C)]
+\end{align}
+
+<p>
+where:
+</p>
+
+<ul>
+<li>
+\(X_S\) is the subset of variables we want to study.
+
+</li><li>
+\(X_C\) is the complement set, that is the rest of variables.
+
+</li><li>
+\(E_{X_C}\) denotes the expectation operator with respect to the variables in the complement set \(X_C\). It averages the model's output over the variables in the complement set.
+
+</li><li>
+\(f\) represents the model.
+
+</li><li>
+\(f_S(X_S)\) represents the relationship between the subset of variables \(X_S\) and the model's output.
+
+</li></ul>
+<p>
+The avergage can be estimated as follows:
+</p>
+
+\begin{align}
+\overline{f}_S(X_S) = \frac{1}{N} \sum_{i=1}^N f(X_S, x_{i\mathcal{C}})
+\end{align}
+
+<p>
+We simply iterate over every data point on the training set, such that \(x_{i\mathcal{C}}\) refers to the values of the variables in the complement set \(X_C\) for the \(i\)th data point.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
