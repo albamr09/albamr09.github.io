@@ -94,7 +94,7 @@ Partial dependence functions, by isolating the effects of selected variables, pr
 </p>
 
 \begin{align}
-f_S(X_S) = E_{X_C}[f(X_S, X_C)]
+f_S(X_S) = \mathbb{E}_{X_C}[f(X_S, X_C)]
 \end{align}
 
 <p>
@@ -128,6 +128,46 @@ The avergage can be estimated as follows:
 
 <p>
 We simply iterate over every data point on the training set, such that \(x_{i\mathcal{C}}\) refers to the values of the variables in the complement set \(X_C\) for the \(i\)th data point.
+</p>
+
+<p>
+Previously we measured the effects of \(X_S\) after accounting for the effects of the other variables \(X_C\) on \(F(X)\), they were <span id="Interpretability-Partial Dependence Plots-not"></span><strong id="not">not</strong> the effect of \(X_S\) on \(f(X)\) ignoring the effects of \(X_C\), that is given by:
+</p>
+
+\begin{align}
+\tilde{f}_S(X_S) = \mathbb{E}(f(X_S, X_C)|X_S)
+\end{align}
+
+<p>
+Thus \(\tilde{f}_S(X_S) = \overline{f}_S(X_S)\) only if \(X_S\) and \(X_C\) are independent.
+</p>
+
+<div id="Interpretability-Partial Dependence Plots-Example"><h3 id="Example" class="header"><a href="#Interpretability-Partial Dependence Plots-Example">Example</a></h3></div>
+
+<p>
+If we assume a purely additive effect, where the overall prediction is the sum of two components:
+</p>
+
+\begin{align}
+f(X) = h_1(X_S) + h_2(X_C)
+\end{align}
+
+<p>
+This implies that the effect of \(X_S\) on the prediction is independent of the other variables in \(X_C\). However if the prediction is defined as:
+</p>
+
+\begin{align}
+f(X) = h_1(X_S) \cdot h_2(X_C)
+\end{align}
+
+<p>
+Then this implies that the effect of \(X_S\) on the prediction is dependent on the values of the variables in \(X_C\).
+</p>
+
+<div id="Interpretability-Partial Dependence Plots-Representation"><h3 id="Representation" class="header"><a href="#Interpretability-Partial Dependence Plots-Representation">Representation</a></h3></div>
+
+<p>
+Owing to the limitations of computer graphics, and human perception, the size of the subsets \(X_S\) must be small (\(l \approx 1, 2, 3\)).
 </p>
 </div>
   
