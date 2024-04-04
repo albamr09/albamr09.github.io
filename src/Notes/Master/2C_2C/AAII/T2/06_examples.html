@@ -1,0 +1,146 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Examples</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Examples"><h1 id="Examples" class="header"><a href="#Examples">Examples</a></h1></div>
+
+<hr>
+
+<div id="Examples-California Housing"><h2 id="California Housing" class="header"><a href="#Examples-California Housing">California Housing</a></h2></div>
+
+<p>
+The dataset consists of information from \(20,460\) neighborhoods in California. The target variable (\(Y\)) is the median house value in each neighborhood.
+</p>
+
+<p>
+Predictor variables include demographic factors like median income (MedInc), housing density (House), average occupancy (AveOccup), location coordinates (longitude and latitude), and house attributes like average number of rooms (AveRooms) and bedrooms (AveBedrms). There are thus a total of eight predictors, all numeric.
+</p>
+
+<p>
+We fit a gradient boosting model using the MART procedure, with \(J = 6\) terminal nodes.
+</p>
+
+<p>
+The test error is seen to decrease monotonically with increasing \(M\), more rapidly during the early stages and then leveling off to being nearly constant as iterations increase. Thus, the choice of a particular value of \(M\) is not critical, as long as it is not too small.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/example_gradient_boosting_error.png" alt="Gradient Boost Error" style="width:500px;height:350px">
+</p>
+
+<p>
+The next figure displays the relative variable importances for each of the eight predictor variables.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/example_gradient_boosting_var_importance.png" alt="Gradient Boost Variable Importance" style="width:500px;height:350px">
+</p>
+
+<p>
+Not surprisingly, median income in the neighborhood is the most relevant predictor. Longitude, latitude, and average occupancy all have roughly half the relevance of income, whereas the others are somewhat less influential
+</p>
+
+<p>
+On the following graphs we show single-variable partial dependence plots on the most relevant nonlocation predictors. 
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/example_gradient_boosting_dependency_plots.png" alt="Gradient Boost Depedency Plots" style="width:700px;height:550px">
+</p>
+
+<p>
+Note that the plots are not strictly smooth as a consequence of using tree-based models.
+</p>
+
+<p>
+The hash marks at the base of each plot delineate the deciles of the data distribution of the corresponding variables. So for example, \(90%\) of the data have a <code>MedInc</code> value of less than \(6\).
+</p>
+
+<p>
+The partial dependence of median house value on median income is monotonic increasing. House value is generally monotonic decreasing with increasing average occupancy, except perhaps for average occupancy rates less than one.
+</p>
+
+<p>
+Median house value is seen to have a very weak partial dependence on house age that is inconsistent with its importance ranking. This suggests that this weak main effect may be masking stronger interaction effects with other variables.
+</p>
+
+<p>
+The next graph shows the two-variable partial dependence of the fitted model on joint values of longitude and latitude:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/example_gradient_boosting_dependency_plots_lat_lng.png" alt="Gradient Boost Depedency Plots for Latitude and Longitude" style="width:700px;height:650px">
+</p>
+
+<p>
+There is a very strong dependence of median house value on the neighborhood location in California. It can be viewed as representing an extra premium one pays for location. This premium is seen to be relatively large near the Pacific coast especially in the Bay Area and Los Angeles–San Diego. In the northern, central valley, and southeastern desert regions of California, location costs considerably less.
+</p>
+
+<div id="Examples-New Zealand Fish"><h2 id="New Zealand Fish" class="header"><a href="#Examples-New Zealand Fish">New Zealand Fish</a></h2></div>
+
+<p>
+Plant and animal ecologists use regression models to predict species presence, abundance and richness as a function of environmental variables. Here we model the presence and abundance of the Black Oreo Dory, a marine fish found in the oceanic waters around New Zealand.
+</p>
+
+<p>
+The next image shows the locations of \(17,000\) trawls (deep-water net fishing, with a maximum depth of \(2\)km), and the red points indicate those \(2353\) trawls for which the Black Oreo was present.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/example_new_zealand_fish_presence.png" alt="Fish Presence" style="width:500px;height:650px">
+</p>
+
+<p>
+For each trawl, data on species catch size in kilograms, environmental measurements (such as average depth, temperature, salinity), and derived variables like TempResid, SalResid, SSTGrad, Chla, and SusPartMatter are available.
+</p>
+
+<p>
+The goal of this analysis is to estimate the probability of finding Black Oreo in a trawl, as well as the expected catch size, to estimate the probability of the catch size we model it as follows:
+</p>
+
+\begin{align}
+\mathbb{E}[Y|X] = \mathbb{E}(Y|Y &gt; 0, X) \cdot Pr(Y &gt; 0|X)
+\end{align}
+
+<p>
+where \(Y\) is the catch size. The second term is estimated by the logistic regression, and the first term can be estimated using only the \(2353\) trawls with a positive catch.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
