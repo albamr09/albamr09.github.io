@@ -105,36 +105,6 @@ The next graph shows the two-variable partial dependence of the fitted model on 
 <p>
 There is a very strong dependence of median house value on the neighborhood location in California. It can be viewed as representing an extra premium one pays for location. This premium is seen to be relatively large near the Pacific coast especially in the Bay Area and Los Angeles–San Diego. In the northern, central valley, and southeastern desert regions of California, location costs considerably less.
 </p>
-
-<div id="Examples-New Zealand Fish"><h2 id="New Zealand Fish" class="header"><a href="#Examples-New Zealand Fish">New Zealand Fish</a></h2></div>
-
-<p>
-Plant and animal ecologists use regression models to predict species presence, abundance and richness as a function of environmental variables. Here we model the presence and abundance of the Black Oreo Dory, a marine fish found in the oceanic waters around New Zealand.
-</p>
-
-<p>
-The next image shows the locations of \(17,000\) trawls (deep-water net fishing, with a maximum depth of \(2\)km), and the red points indicate those \(2353\) trawls for which the Black Oreo was present.
-</p>
-
-<p>
-<img src="https://albamr09.github.io/public/assets/example_new_zealand_fish_presence.png" alt="Fish Presence" style="width:500px;height:650px">
-</p>
-
-<p>
-For each trawl, data on species catch size in kilograms, environmental measurements (such as average depth, temperature, salinity), and derived variables like TempResid, SalResid, SSTGrad, Chla, and SusPartMatter are available.
-</p>
-
-<p>
-The goal of this analysis is to estimate the probability of finding Black Oreo in a trawl, as well as the expected catch size, to estimate the probability of the catch size we model it as follows:
-</p>
-
-\begin{align}
-\mathbb{E}[Y|X] = \mathbb{E}(Y|Y &gt; 0, X) \cdot Pr(Y &gt; 0|X)
-\end{align}
-
-<p>
-where \(Y\) is the catch size. The second term is estimated by the logistic regression, and the first term can be estimated using only the \(2353\) trawls with a positive catch.
-</p>
 </div>
   
 
