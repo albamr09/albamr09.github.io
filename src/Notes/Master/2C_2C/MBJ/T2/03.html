@@ -156,7 +156,7 @@ p(x = k|n, p) \propto p^k (1 - p)^{n - k}
 \end{align}
 
 <p>
-For \(j = 1, \cdots, J\) i.i.d \(y_j \sim \Bin(n_j, \theta_j)\):
+For \(j = 1, \cdots, J\) i.i.d \(y_j \sim Bin(n_j, \theta_j)\):
 </p>
 
 \begin{align}
@@ -168,7 +168,7 @@ Therefore we obtain:
 </p>
 
 \begin{align}
-\propto p(\alpha, \beta) \left(\prod_{j=1}^J \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) + \Gamma(\beta)}\theta_j^{\alpha - 1}(1 - \theta_j)^{\beta - 1}\right) \left(\prod_{j=1}^J \theta_j^{y_j}(1 - \theta_j)^{n_j - y_j}\right)
+\propto p(\alpha, \beta) \left(\prod_{j=1}^J \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta_j^{\alpha - 1}(1 - \theta_j)^{\beta - 1}\right) \left(\prod_{j=1}^J \theta_j^{y_j}(1 - \theta_j)^{n_j - y_j}\right)
 \end{align}
 
 <p>
@@ -220,19 +220,31 @@ p(\alpha, \beta|y) = \frac{p(\theta, \alpha, \beta|y)}{p(\theta|\alpha, \beta, y
 \end{align}
 
 \begin{align}
-= \frac{p(\alpha, \beta) \left(\prod_{j=1}^J \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) + \Gamma(\beta)}\theta_j^{\alpha - 1}(1 - \theta_j)^{\beta - 1}\right) \left(\prod_{j=1}^J \theta_j^{y_j}(1 - \theta_j)^{n_j - y_j}\right)}{\prod_{j=1}^J \frac{\Gamma(\alpha + \beta + n_j)}{\Gamma(\alpha + y_j)\Gamma(\beta + n_j - y_j)}\theta_j^{\alpha + y_j - 1}(1-\theta_j)^{\beta + n_j - y_j - 1}}
+\propto \frac{p(\alpha, \beta) \left(\prod_{j=1}^J \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta_j^{\alpha - 1}(1 - \theta_j)^{\beta - 1}\right) \left(\prod_{j=1}^J \theta_j^{y_j}(1 - \theta_j)^{n_j - y_j}\right)}{\prod_{j=1}^J \frac{\Gamma(\alpha + \beta + n_j)}{\Gamma(\alpha + y_j)\Gamma(\beta + n_j - y_j)}\theta_j^{\alpha + y_j - 1}(1-\theta_j)^{\beta + n_j - y_j - 1}}
 \end{align}
 
 \begin{align}
-= p(\alpha, \beta) \frac{\prod_{j=1}^J \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) + \Gamma(\beta)}\theta_j^{\alpha - 1}(1 - \theta_j)^{\beta - 1} \theta_j^{y_j}(1 - \theta_j)^{n_j - y_j}}{\prod_{j=1}^J \frac{\Gamma(\alpha + \beta + n_j)}{\Gamma(\alpha + y_j)\Gamma(\beta + n_j - y_j)}\theta_j^{\alpha + y_j - 1}(1-\theta_j)^{\beta + n_j - y_j - 1}}
+\propto p(\alpha, \beta) \frac{\prod_{j=1}^J \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta_j^{\alpha - 1}(1 - \theta_j)^{\beta - 1} \theta_j^{y_j}(1 - \theta_j)^{n_j - y_j}}{\prod_{j=1}^J \frac{\Gamma(\alpha + \beta + n_j)}{\Gamma(\alpha + y_j)\Gamma(\beta + n_j - y_j)}\theta_j^{\alpha + y_j - 1}(1-\theta_j)^{\beta + n_j - y_j - 1}}
 \end{align}
 
 \begin{align}
-= p(\alpha, \beta) \prod_{j=1}^J \frac{\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) + \Gamma(\beta)}\theta_j^{\alpha - 1}(1 - \theta_j)^{\beta - 1} \theta_j^{y_j}(1 - \theta_j)^{n_j - y_j}}{\frac{\Gamma(\alpha + \beta + n_j)}{\Gamma(\alpha + y_j)\Gamma(\beta + n_j - y_j)}\theta_j^{\alpha + y_j - 1}(1-\theta_j)^{\beta + n_j - y_j - 1}}
+\propto p(\alpha, \beta) \prod_{j=1}^J \frac{\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}\theta_j^{\alpha - 1}(1 - \theta_j)^{\beta - 1} \theta_j^{y_j}(1 - \theta_j)^{n_j - y_j}}{\frac{\Gamma(\alpha + \beta + n_j)}{\Gamma(\alpha + y_j)\Gamma(\beta + n_j - y_j)}\theta_j^{\alpha + y_j - 1}(1-\theta_j)^{\beta + n_j - y_j - 1}}
 \end{align}
 
 \begin{align}
-= p(\alpha, \beta) \prod_{j=1}^J \left(\frac{\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) + \Gamma(\beta)}}{\frac{\Gamma(\alpha + \beta + n_j)}{\Gamma(\alpha + y_j)\Gamma(\beta + n_j - y_j)}}\frac{\theta_j^{\alpha - 1}(1 - \theta_j)^{\beta - 1} \theta_j^{y_j}(1 - \theta_j)^{n_j - y_j}}{\theta_j^{\alpha + y_j - 1}(1-\theta_j)^{\beta + n_j - y_j - 1}}\right)
+\propto p(\alpha, \beta) \prod_{j=1}^J \left(\frac{\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}}{\frac{\Gamma(\alpha + \beta + n_j)}{\Gamma(\alpha + y_j)\Gamma(\beta + n_j - y_j)}}\frac{\theta_j^{\alpha - 1}(1 - \theta_j)^{\beta - 1} \theta_j^{y_j}(1 - \theta_j)^{n_j - y_j}}{\theta_j^{\alpha + y_j - 1}(1-\theta_j)^{\beta + n_j - y_j - 1}}\right)
+\end{align}
+
+\begin{align}
+\propto p(\alpha, \beta) \prod_{j=1}^J \left(\frac{\Gamma(\alpha + \beta)\Gamma(\alpha + y_j)\Gamma(\beta + n_j - y_j)}{\Gamma(\alpha)\Gamma(\beta)\Gamma(\alpha + \beta + n_j)}\theta_j^{\alpha - 1 + y_j - \alpha - y_j + 1}(1-\theta_j)^{\beta - 1 + n_j - y_j - \beta - n_j + y_j + 1}\right)
+\end{align}
+
+\begin{align}
+\propto p(\alpha, \beta) \prod_{j=1}^J \left(\frac{\Gamma(\alpha + \beta)\Gamma(\alpha + y_j)\Gamma(\beta + n_j - y_j)}{\Gamma(\alpha)\Gamma(\beta)\Gamma(\alpha + \beta + n_j)}\theta_j^{0}(1-\theta_j)^{0}\right)
+\end{align}
+
+\begin{align}
+\propto p(\alpha, \beta) \prod_{j=1}^J \left(\frac{\Gamma(\alpha + \beta)\Gamma(\alpha + y_j)\Gamma(\beta + n_j - y_j)}{\Gamma(\alpha)\Gamma(\beta)\Gamma(\alpha + \beta + n_j)}
 \end{align}
 </div>
   
