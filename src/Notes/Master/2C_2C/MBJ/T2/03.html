@@ -244,7 +244,7 @@ p(\alpha, \beta|y) = \frac{p(\theta, \alpha, \beta|y)}{p(\theta|\alpha, \beta, y
 \end{align}
 
 \begin{align}
-\propto p(\alpha, \beta) \prod_{j=1}^J \left(\frac{\Gamma(\alpha + \beta)\Gamma(\alpha + y_j)\Gamma(\beta + n_j - y_j)}{\Gamma(\alpha)\Gamma(\beta)\Gamma(\alpha + \beta + n_j)}
+\propto p(\alpha, \beta) \prod_{j=1}^J \frac{\Gamma(\alpha + \beta)\Gamma(\alpha + y_j)\Gamma(\beta + n_j - y_j)}{\Gamma(\alpha)\Gamma(\beta)\Gamma(\alpha + \beta + n_j)}
 \end{align}
 </div>
   
