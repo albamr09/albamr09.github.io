@@ -144,11 +144,7 @@ Fifty trees were made, each of depth \(5\). On cross-validation data, the MSE (m
 </p>
 
 <p>
-<<<<<<< HEAD
 <img src="https://albamr09.github.io/public/assets/GBM_variable_importance.png" alt="GBM Varible Importance" style="width:750px;height:300px;">
-=======
-<img src="https://albamr09.github.io/public/assets/GBM_variable_importance.png" alt="GBM Varible Importance" style="width:550px;height:300px;">
->>>>>>> 534eeccd67925879f99afc107296dfe5a12563f7
 </p>
 
 <p>
@@ -185,7 +181,6 @@ What about ntrees? Instead of trying to tune it, we set it high (\(1000\)) and u
 <p>
 More model results just confirmed the first impression: <code>min_rows</code> of \(1\) (or \(2\)) is effective with max_depth of \(5\), but really poor with higher values. <code>min_rows</code> of \(10\) is effective with any value of <code>max_depth</code>, but possibly \(10\) to \(20\) is best. Curiously <code>min_rows</code> of \(5\) is mediocre. A <code>sample_rate</code> of \(0.9\) or \(0.95\) looks best, while there is still no clarity for <code>col_sample_rate</code> or <code>nbins</code>.
 </p>
-<<<<<<< HEAD
 
 <p>
 Let's see how it does on the test data, we obtain a MSE of \(1.640\). This is way better than the default GBM’s
@@ -271,8 +266,6 @@ There was not that much clarity in the parameters, but the best two had <code>co
 <p>
 As a final step, we ran the chosen model on the test data and got an error rate of \(2.33\%\). This compares to \(4.44\%\) with the default settings.
 </p>
-=======
->>>>>>> 534eeccd67925879f99afc107296dfe5a12563f7
 </div>
   
 
