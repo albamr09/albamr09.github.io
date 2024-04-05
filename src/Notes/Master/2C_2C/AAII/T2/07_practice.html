@@ -1,0 +1,277 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Practice</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Practice"><h1 id="Practice" class="header"><a href="#Practice">Practice</a></h1></div>
+
+<hr>
+
+<div id="Practice-Boosting"><h2 id="Boosting" class="header"><a href="#Practice-Boosting">Boosting</a></h2></div>
+
+<p>
+Just like random forest, GBM is an ensemble method.
+</p>
+
+<p>
+Imagine a data set just \(10\) examples and two numeric predictor variables, and we are trying to learn to distinguish between two possible classes: circle or cross.
+</p>
+
+<p>
+The very simplest decision tree we can make has just one node; I will represent it with a straight line in the following diagrams.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/simple_decision_tree_example.png" alt="Decision Tree" style="width:550px;height:400px;">
+</p>
+
+<p>
+It scored \(60\%\): six right, four wrong.
+</p>
+
+<p>
+What we do now is train another very simple tree, but first we modify the training data to give the four rows it got wrong a higher weight. How much of a higher weight? That is where the "gradient" bit of GBM comes in.
+</p>
+
+<p>
+In the next figure the circles and crosses for the wrong items are bigger, and our next tree pays more attention to them.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/simple_decision_tree_2_example.png" alt="Decision Tree" style="width:550px;height:400px;">
+</p>
+
+<p>
+It got a different three items wrong so it still scores \(60\%\).
+</p>
+
+<p>
+So, for our third tree, we tell it those four are more important; the one it has got wrong twice in a row is the biggest of all.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/simple_decision_tree_3_example.png" alt="Decision Tree" style="width:550px;height:400px;">
+</p>
+
+<p>
+If we stop training here, we end up with three weak models that scored \(60\%\), \(60\%\), and \(80\%\), respectively. However, at least one of each of those three trees got every training row correct. You can see how they can work together to cover each other's weaknesses.
+</p>
+
+<p>
+GBM naturally focuses attention on the difficult rows in your training data, the ones that are hard to learn. That is good, but it can also be bad. If there is one outlier that each tree keeps getting wrong it is going to get boosted and boosted until it is bigger than the whole universe. This is bad when the data is a mistake instead of an outlier, as it distorts the model's accuracy.
+</p>
+
+<p>
+The mysterious? Well, unlike (simple) decision trees, which can be really good at explaining their thinking, it becomes a bit of a black box.
+</p>
+
+<div id="Practice-Parameters"><h2 id="Parameters" class="header"><a href="#Practice-Parameters">Parameters</a></h2></div>
+
+<ul>
+<li>
+<code>n_trees</code>: how many trees to make.
+
+</li><li>
+<code>max_depth</code>: how deep are the trees allowed to be.
+
+</li><li>
+<code>learn_rate</code>: controls the speed at which the model learns
+
+</li><li>
+<code>learn_rate_annealing</code>: allows you to have the learn_rate start high, then gradually get lower as trees are added.
+
+</li><li>
+<code>min_rows</code>: how many examples are needed to make a leaf node. Low number might lead to overfitting.
+
+</li><li>
+<code>min_split_improvement</code>: controls how much error improvement must be to perform a split.
+
+</li><li>
+<code>histogram_type</code>: what type of histogram to use for finding optimal split points.
+
+</li><li>
+<code>nbins</code>: For numerical columns, build a histogram of (at least) this many bins, then split at the best point.
+
+</li><li>
+<code>nbins_cat</code>: For categorical columns, build a histogram of (at most) this many bins, then split at the best point.
+
+</li><li>
+<code>build_tree_one_node</code>: Run on one node only.
+
+</li></ul>
+<div id="Practice-Building Energy Efficiency: Default GBM"><h2 id="Building Energy Efficiency: Default GBM" class="header"><a href="#Practice-Building Energy Efficiency: Default GBM">Building Energy Efficiency: Default GBM</a></h2></div>
+
+<p>
+This data set deals with the heating/cooling costs of various house designs.
+</p>
+
+<pre python="">from h2o.estimators.gbm import H2OGradientBoostingEstimator
+m = H2OGradientBoostingEstimator(model_id="GBM_defaults", nfolds=10)
+m.train(x, y, train)
+</pre>
+
+<p>
+Fifty trees were made, each of depth \(5\). On cross-validation data, the MSE (mean squared error) is \(2.462\), and \(R^2\) is \(0.962\). Under “Variable Importances” (shown next), which can be seen with <code>h2o.varimp(m)</code> you will see it is giving <code>X5</code> way more importance than any of the others; this is typical for GBM models.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/GBM_variable_importance.png" alt="GBM Varible Importance" style="width:750px;height:300px;">
+</p>
+
+<p>
+How about on the unseen data? <code>m.model_performance(test)</code> is saying MSE is \(2.318\), better than on the training data.
+</p>
+
+<div id="Practice-Building Energy Efficiency: Tuned GBM"><h2 id="Building Energy Efficiency: Tuned GBM" class="header"><a href="#Practice-Building Energy Efficiency: Tuned GBM">Building Energy Efficiency: Tuned GBM</a></h2></div>
+
+<p>
+I decided to start, this time, with a big random grid search. The hyperparameters tuned are the following:
+</p>
+
+<ul>
+<li>
+<code>max_depth</code>: The default is \(5\), and we tried \(5,10,15,20,25,30,40,50,60,75,90\). The ninth best model was <code>max_depth=75</code>, so high values may not be bad, as such, but they don’t appear to help.
+
+</li><li>
+<code>min_rows</code>
+
+</li><li>
+<code>sample_rate</code>
+
+</li><li>
+<code>col_sample_rate</code>
+
+</li><li>
+<code>nbins</code>
+
+</li></ul>
+<p>
+What about ntrees? Instead of trying to tune it, we set it high (\(1000\)) and used early stopping.
+</p>
+
+<p>
+More model results just confirmed the first impression: <code>min_rows</code> of \(1\) (or \(2\)) is effective with max_depth of \(5\), but really poor with higher values. <code>min_rows</code> of \(10\) is effective with any value of <code>max_depth</code>, but possibly \(10\) to \(20\) is best. Curiously <code>min_rows</code> of \(5\) is mediocre. A <code>sample_rate</code> of \(0.9\) or \(0.95\) looks best, while there is still no clarity for <code>col_sample_rate</code> or <code>nbins</code>.
+</p>
+
+<p>
+Let's see how it does on the test data, we obtain a MSE of \(1.640\). This is way better than the default GBM’s
+2.462, and also way better than the best tuned random forest model from the previous chapter.
+</p>
+
+<div id="Practice-MNIST: Default GBM"><h2 id="MNIST: Default GBM" class="header"><a href="#Practice-MNIST: Default GBM">MNIST: Default GBM</a></h2></div>
+
+<p>
+It is a multinomial classification, trying to look at the \(784\) pixels of a handwritten digit, and say which of \(0\) to \(9\) it is.
+</p>
+
+<pre python="">m = h2o.estimators.H2OGradientBoostingEstimator(model_id="GBM_defaults")
+m.train(x, y, train, validation_frame=valid)
+</pre>
+
+<p>
+The confusion matrix on the training data (h2o.confusionMatrix(m)) shows an error rate of \(2.08\%\), while on the validation data it is a bit higher at \(4.82\%\). MSE is \(0.028\) and \(0.044\), respectively. So we have a bit of overfitting on the training data, but not too much.
+</p>
+
+<p>
+On the test data the error this time is \(4.44\%\) (MSE is \(0.048\)); in other words, the validation and test sets are giving us similar numbers, which is good.
+</p>
+
+<div id="Practice-MNIST: Tuned GBM"><h2 id="MNIST: Tuned GBM" class="header"><a href="#Practice-MNIST: Tuned GBM">MNIST: Tuned GBM</a></h2></div>
+
+<p>
+As usual, the first thing I want to do is switch to using early stopping, so I can then give it lots of trees to work with, with the following parameters:
+</p>
+
+<pre>stopping_tolerance = 0.001,
+stopping_rounds = 3,
+score_tree_interval = 10,
+ntrees = 400
+</pre>
+
+<p>
+Just using this, with all other default settings, had some interesting properties
+</p>
+
+<ul>
+<li>
+Training classification score was perfect after 140 trees.
+
+</li><li>
+Validation score was down to \(2.83\%\).
+
+</li><li>
+The MSE and logloss of both the training data and validation data continued to fall, and so did the validation classification score.
+
+</li><li>
+Relative runtime kept increasing. That is, each new tree is taking longer.
+
+</li></ul>
+<p>
+It finished up with 360 trees, with a very respectable \(2.17\%\) error on the validation data.
+</p>
+
+<p>
+How can we improve that further? We know there is a lot of examples and variables, so we expect that lower sample ratios will be more effective. 
+</p>
+
+<p>
+In terms of the <code>learn_rate</code> we know low is slower, but better… and we have a lot of data. So we use a high (quick) <code>learn_rate</code> for the first grid or two, then lower it later on, once we start to home in on the best parameters.
+</p>
+
+<p>
+This is going to be a random grid search, because we are going to use a lot of parameters.
+</p>
+
+<p>
+The first discovery was that a high <code>max_depth</code> was very slow and no better than a shallow one. Also <code>min_rows=1</code> seemed poor. We also found that <code>max_depth=20</code> was distinctly worse than <code>max_depth=5</code>. We also noticed that <code>min_rows=10</code> seemed to be doing best, though it was less clear. Reducing the three sample rates to \(1\) did seem to help, though there was not enough data to draw a confident conclusion.
+</p>
+
+<p>
+So, another try. We'll leave <code>max_depth</code> and <code>min_rows</code> at their defaults, and just concentrate on testing sampling rates.
+</p>
+
+<p>
+There was not that much clarity in the parameters, but the best two had <code>col_sample_rate</code> of \(0.8\) and <code>sample_rate</code> of \(0.95\), whereas <code>sample_rate=0.5</code> was only chosen once, but was the worst of the nine. The default model with just early stopping added, would have come second best in the grid measured on classification error, but fourth on MSE, and seventh on logloss, whereas the “tuned” model is top on all metrics, so we have more confidence in selecting it.
+</p>
+
+<p>
+As a final step, we ran the chosen model on the test data and got an error rate of \(2.33\%\). This compares to \(4.44\%\) with the default settings.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
