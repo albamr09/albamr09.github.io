@@ -1,0 +1,192 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style.css">
+    <title>Estrategias para la combinación de clasificadores</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Estrategias para la combinación de clasificadores"><h1 id="Estrategias para la combinación de clasificadores" class="header"><a href="#Estrategias para la combinación de clasificadores">Estrategias para la combinación de clasificadores</a></h1></div>
+
+<hr>
+
+<p>
+This section provides a detailed review of classifiers combination techniques First, we discuss the different levels at which combination is performed: sensors, features and decisions. We then expand on the concept of soft vs. hard combination techniques. Finally, we discuss how the combination techniques can be grouped as either adaptive or non-adaptive.
+</p>
+
+<div id="Estrategias para la combinación de clasificadores-Levels of Classifiers Combination"><h2 id="Levels of Classifiers Combination" class="header"><a href="#Estrategias para la combinación de clasificadores-Levels of Classifiers Combination">Levels of Classifiers Combination</a></h2></div>
+
+<p>
+Classifiers combination can be carried out at three different levels:
+</p>
+
+<ul>
+<li>
+<span id="Estrategias para la combinación de clasificadores-Levels of Classifiers Combination-Early combination at sensor data level"></span><strong id="Early combination at sensor data level">Early combination at sensor data level</strong>: combination of data collected from two or more sensors before feature selection technique is applied.
+
+</li><li>
+<span id="Estrategias para la combinación de clasificadores-Levels of Classifiers Combination-Combination at feature level"></span><strong id="Combination at feature level">Combination at feature level</strong>: it may simply involve basic concatenation of feature vectors with equal or different weights (might result in high dimensonal vectors, whose dimension has to be reduced).
+
+</li><li>
+<span id="Estrategias para la combinación de clasificadores-Levels of Classifiers Combination-Late combination at the decision level"></span><strong id="Late combination at the decision level">Late combination at the decision level</strong>: they are based on one of three approaches: abstract, rank, and score:
+
+<ul>
+<li>
+<span id="Estrategias para la combinación de clasificadores-Levels of Classifiers Combination-Abstract-based"></span><strong id="Abstract-based">Abstract-based</strong>: a single output label from each individual classifier is used as input to the combination scheme.
+
+</li><li>
+<span id="Estrategias para la combinación de clasificadores-Levels of Classifiers Combination-Rank-based"></span><strong id="Rank-based">Rank-based</strong>: each classifier yields several labels ranked from the most likely to the least likely. This information is then used by the combination scheme to reach the final decision. 
+
+</li><li>
+<span id="Estrategias para la combinación de clasificadores-Levels of Classifiers Combination-Score-based"></span><strong id="Score-based">Score-based</strong>: each classifier outputs the \(n\) best labels together with their confidence scores. The combination can be <span id="Estrategias para la combinación de clasificadores-Levels of Classifiers Combination-density-based"></span><strong id="density-based">density-based</strong>, <span id="Estrategias para la combinación de clasificadores-Levels of Classifiers Combination-transformation-based"></span><strong id="transformation-based">transformation-based</strong> or <span id="Estrategias para la combinación de clasificadores-Levels of Classifiers Combination-classifier-based"></span><strong id="classifier-based">classifier-based</strong> score fusion.
+
+</li></ul>
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/assets/classifier_combination_levels.png" alt="Classifier Combination Levels" style="width:700px;height:350px">
+</p>
+
+<div id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination"><h2 id="Hard and Soft Level Classifier Combination" class="header"><a href="#Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination">Hard and Soft Level Classifier Combination</a></h2></div>
+
+<p>
+Another way to categorize combination algorithms is whether hard thresholding or soft scoring is used with each of the classifiers.
+</p>
+
+<ul>
+<li>
+<span id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Hard-level combination"></span><strong id="Hard-level combination">Hard-level combination</strong>: uses the output of the classifier after it is hard thresholded.
+
+</li><li>
+<span id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Soft-level combination"></span><strong id="Soft-level combination">Soft-level combination</strong>: uses estimates of the aposteriori probability of the class.
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/assets/classifier_hard_soft_combination.png" alt="Classifier Hard/Soft Combination" style="width:800px;height:150px">
+The sum, product, max, min rules, etc., fall under the soft level combiners as they use the output aposteriori probability of the classifier or a score.
+</p>
+
+<p>
+Majority voting is a typical example of hard-level combiners and has found widespread use in the literature. There are three different versions of voting:
+</p>
+
+<ul>
+<li>
+Unanimous voting.
+
+</li><li>
+More than half voting.
+
+</li><li>
+Highest number of votes.
+
+</li></ul>
+<p>
+Considering the output label vector of the \(i\)th classifier as:
+</p>
+
+\begin{align}
+[d_{i, 1}, \cdots, d_{i, N}]^T \in [0, 1]^N
+\end{align}
+
+<p>
+where \(i = 1, 2, \cdots, M\) and \(d_{i, j} = 1\) if the classifier \(D_i\) labels the \(i\)th instance as class \(\omega_j\) and \(0\) otherwise. The majority vote results in a decision for class \(\omega_k\) if:
+</p>
+
+\begin{align}
+\sum_{i = 1}^M d_{i, k} = \max_{j = 1}^N \sum_{i = 1}^M d_{i, j}
+\end{align}
+
+<p>
+Where \(M\) is the total number of classifiers and \(N\) is total number of classes. Such that class \(\omega_k\) is the most "selected" on all the classifier.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/classifier_combination_majority_voting.png" alt="Majority Voting" style="width:500px;height:350px">
+</p>
+
+<p>
+The accuracy of the combination scheme is given as:
+</p>
+
+\begin{align}
+P_{maj} = \sum_{m = \frac{M}{2} + 1}^M \binom{M}{m} p^m (1-p)^{M - m}
+\end{align}
+
+<p>
+where \(p\) is the probability of correct classification.
+</p>
+
+<p>
+Majority voting provides an accurate class label when at least \(\frac{M}{2} + 1\) classifiers give correct classifications, it also requires participating classifiers to have comparable accuracies.
+</p>
+
+<div id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Weighted Majority Voting"><h3 id="Weighted Majority Voting" class="header"><a href="#Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Weighted Majority Voting">Weighted Majority Voting</a></h3></div>
+
+<p>
+Weighted majority voting is used when the classifiers' accuracies are not similar, so it is reasonable to assign more weight to the most accurate classifier. Now the decision rule becomes:
+</p>
+
+\begin{align}
+\sum_{i = 1}^M b_i d_{i, k} = \max_{j = 1}^N \sum_{i = 1}^M b_i d_{i, j}
+\end{align}
+
+<p>
+where \(b_i\) is the weight associated with classifier \(D_i\). For the sake of convenience, it is a good practice to normalize the weights such that the sum is one.
+</p>
+
+<p>
+The weight selection is very important in determining the overall accuracy of the classifier combinations. Therefore, to minimize the classification error of the combination, the weights are assigned as follows:
+</p>
+
+\begin{align}
+b_i \propto \log\left(\frac{p_i}{1 - p_i}\right)
+\end{align}
+
+<p>
+where \(p_i, \cdots, p_M\) are the individual accuracies for each independent classifier.
+</p>
+
+<div id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Dynamic Weighted Consult-and-vote"><h3 id="Dynamic Weighted Consult-and-vote" class="header"><a href="#Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Dynamic Weighted Consult-and-vote">Dynamic Weighted Consult-and-vote</a></h3></div>
+
+<p>
+Voting weights are determined by relative performance of each classifier on the training data. The approach learns a new class by allowing individual classifiers to consult with each other to determine their voting weights for each of the test instances. 
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/dynamic_weighted_consult_and_vote.png" alt="Dynamic Weighted Consult and Vote" style="width:650px;height:450px">
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
