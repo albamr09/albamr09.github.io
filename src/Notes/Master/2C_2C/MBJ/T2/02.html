@@ -239,10 +239,10 @@ There are two posterior predictive distributions that might be of interest:
 
 <ul>
 <li>
-The distribution of future observations \(\tilde{y}\) corresponding to an existing \(\theta_j\).
+The distribution of future observations \(\tilde{y}\) corresponding to an existing \(j\) "group" described by \(\theta_j\).
 
 </li><li>
-The distribution of future observations \(\tilde{y}\) corresponding to future \(\theta_j\) or \(\tilde{\theta}\) drawn from the same superpopulation.
+The distribution of future observations \(\tilde{y}\) corresponding to future \(\theta_j\) (a "new group"), denoted by \(\tilde{\theta}\), drawn from the superpopulation \(p(\theta|\phi)\).
 
 </li></ul>
 <p>
@@ -251,7 +251,7 @@ For (1) the posterior predictive draws \(\tilde{y}\) are based on the posterior 
 </p>
 
 <p>
-For (2) one must first draw \(\tilde{\theta}\) for the new experiment from the population distribution, given the posterior draws of \(\phi\), and then draw \(\tilde{y}\) given the simulated \(\tilde{theta}\).
+For (2) one must first draw \(\tilde{\theta}\) for the new experiment from the population distribution, given the posterior draws of \(\phi\), and then draw \(\tilde{y}\) given the simulated \(\tilde{\theta}\).
 </p>
 </div>
   
