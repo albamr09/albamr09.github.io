@@ -56,41 +56,25 @@ p(x_k|\omega_n)
 while the prior probability of the occurrence of the class is denoted by \(p(\omega_n)\). The Bayesian framework aims to determine the class label for the pattern \(Z\) by considering the information provided by all \(M\) classifiers. The final decision is based on the aposteriori probability, which is the probability of the pattern belonging to a specific class \(j\) given the measurement vectors from all classifiers \(x_1, x_2, \cdots, x_M\).
 </p>
 
-<p>
-So the pattern \(Z\) is assigned to class \(\omega_j\) which produces the maximum a posterior probability, that is:
-</p>
-
 \begin{align}
-\theta = w_j
+p(\theta = \omega_j|x_1, x_2, \cdots, x_M) = \max_{k} p(\theta = \omega_k | x_1, x_2, \cdots, x_M)
 \end{align}
 
 <p>
-si 
-</p>
-
-\begin{align}
-p(\theta = \omega_j|x_1, x_2, \cdots, x_M) = max_{k} p(\theta = \omega_k | x_1, x_2, \cdots, x_M)
-\end{align}
-
-<p>
-where the aposteriori distribution is computed as follows:
-</p>
-
-\begin{align}
-p(\theta = \omega_k | x_1, x_2, \cdots, x_M) = \frac{p(x_1, x_2, \cdots, x_M|\theta = \omega_k)p(\theta=\omega_k)}{p(x_1, x_2, \cdots, x_M)}
-\end{align}
-
-<p>
-Thus, it is necessary to compute the aposteriori probability of various hypotheses by considering all input observations to the classifiers concurrently. This requires the knowledge of the joint pdf, \(p(x_1, \cdots, x_M|\theta = \omega_k)\) for all of the \(M\) classifiers which is obviously impractical.
-</p>
-
-<p>
-To simplify the above expression, it can be assumed that each classifier provides independently a decision support obtained from \(x_k\).
+So the pattern \(Z\) is assigned to class \(\omega_j\) which produces the maximum a posterior probability. Where the aposteriori distribution is computed as follows:
 </p>
 
 \begin{align}
 p(\theta = \omega_j|x_1, x_2, \cdots, x_M) = \frac{p(x_1, x_2, \cdots, x_M|\theta = \omega_j)p(\theta=\omega_j)}{p(x_1, x_2, \cdots, x_M)}
 \end{align}
+
+<p>
+Provided that each classifier provides independently a decision support obtained from \(x_k\), where \(p(x_1, x_2, \cdots, x_M)\) is the joint pdf of the observations independently of class label.
+</p>
+
+<p>
+The important issue is that the individual classifiers should not make identical erroneous decisions on the same observation instances, they should provide complementary information.
+</p>
 </div>
   
 
