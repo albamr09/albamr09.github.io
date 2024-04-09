@@ -177,11 +177,196 @@ where \(p_i, \cdots, p_M\) are the individual accuracies for each independent cl
 <div id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Dynamic Weighted Consult-and-vote"><h3 id="Dynamic Weighted Consult-and-vote" class="header"><a href="#Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Dynamic Weighted Consult-and-vote">Dynamic Weighted Consult-and-vote</a></h3></div>
 
 <p>
-Voting weights are determined by relative performance of each classifier on the training data. The approach learns a new class by allowing individual classifiers to consult with each other to determine their voting weights for each of the test instances. 
+In [30], Muhlbaier et al. proposed a method for combining ensembles of classifiers using dynamic weighted consult-andvote. Voting weights are determined by relative performance of each classifier on the training data. The approach learns a new class by allowing individual classifiers to consult with each other to determine their voting weights for each of the test instances. The following figure, shows the dynamic weighted consult-and-vote approach:
 </p>
 
 <p>
 <img src="https://albamr09.github.io/public/assets/dynamic_weighted_consult_and_vote.png" alt="Dynamic Weighted Consult and Vote" style="width:650px;height:450px">
+</p>
+
+<p>
+Classifiers examine each other's decision, cross referencing their decisions with the list of class labels on which they were initially trained, then update the weights.
+</p>
+
+<div id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Divide and Conquer"><h3 id="Divide and Conquer" class="header"><a href="#Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Divide and Conquer">Divide and Conquer</a></h3></div>
+
+<p>
+Another modification of majority voting is to complement it with a divide and conquer technique [31].It divides the classification task into a set of smaller and simpler problems, then solving each of problem separately, followed by a majority voting scheme.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/classifier_divide_and_conquer.png" alt="Divide and Conquer" style="width:550px;height:350px">
+</p>
+<div id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Quality Based Combination Techniques"><h3 id="Quality Based Combination Techniques" class="header"><a href="#Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Quality Based Combination Techniques">Quality Based Combination Techniques</a></h3></div>
+
+<p>
+Other recent approaches include quality-based combination [32] which gives higher weights to the more reliable classifiers under some given conditions (i.e. better quality).
+</p>
+
+<div id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Critic Classifier"><h3 id="Critic Classifier" class="header"><a href="#Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Critic Classifier">Critic Classifier</a></h3></div>
+
+<p>
+The authors introduced a critic associated with each classifier whose purpose is to predict the error of the classifier [34]. The approach is based on classical standard voting techniques for classifiers combination. However, it performed best on two-class problem.
+</p>
+
+<div id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Adaptative Voting Technique"><h3 id="Adaptative Voting Technique" class="header"><a href="#Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Adaptative Voting Technique">Adaptative Voting Technique</a></h3></div>
+
+<p>
+The adaptative Voting Technique [35] involves the weighting of classifiers based on their estimated recognition performance. The authors applied "Simultaneous Truth and Performance Level Evaluation" (STAPLE).
+</p>
+
+<div id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Dynamic Entropy Based Combination Technique"><h3 id="Dynamic Entropy Based Combination Technique" class="header"><a href="#Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Dynamic Entropy Based Combination Technique">Dynamic Entropy Based Combination Technique</a></h3></div>
+
+<p>
+The idea of this combination scheme [37] lies in assigning large weights to classifiers that are very confident in their decisions, and small weights to classifiers that are less confident. 
+</p>
+
+<div id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Assuming Linear Dependency Between Predictors"><h3 id="Assuming Linear Dependency Between Predictors" class="header"><a href="#Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Assuming Linear Dependency Between Predictors">Assuming Linear Dependency Between Predictors</a></h3></div>
+
+<p>
+In [40], the authors considered linear dependency of both classifiers and features. Two models, Linear Classifier Dependency Modelling (LCDM) and Linear Feature Dependency Modelling (LFDM) were developed. They showed it outperformed existing classifier and feature level combination methods under non-Gaussian distribution. However the LFDM technique takes longer to train.
+</p>
+
+<div id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Fixed Rule Based Combination Techniques"><h3 id="Fixed Rule Based Combination Techniques" class="header"><a href="#Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Fixed Rule Based Combination Techniques">Fixed Rule Based Combination Techniques</a></h3></div>
+
+<p>
+They use class labels, distances, or confidences from the individual classifiers without the need for a training stage. According to [44], fixed rule techniques are only efficient under strict conditions such as availability of large training sets, generation of reliable confidences from base classifiers, and training of the base classifiers on different feature spaces.
+</p>
+
+<div id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Runtime Weighted Opinion Pool"><h3 id="Runtime Weighted Opinion Pool" class="header"><a href="#Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Runtime Weighted Opinion Pool">Runtime Weighted Opinion Pool</a></h3></div>
+
+<p>
+In [45], the approach, Runtime Weighted Opinion Pool (RWOP), dynamically assigns weights to the classifiers during runtime and the final combination is weighted according to the local performance of the classifiers. Unlike other weighted sum based approaches, this technique determines the weights with an intuitive runtime strategy. It achieves enhanced performance and reduces the relative error rate significantly.
+</p>
+
+<div id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Other Experiments"><h3 id="Other Experiments" class="header"><a href="#Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Other Experiments">Other Experiments</a></h3></div>
+
+<p>
+In [33], an effective approach for decision level combination based on spectral reflectance and its higher order derivatives to classify hyperspectral land images was proposed. Their study was carried out under two scenarios: LDA (Linear Discriminant Analysis) based dimensionality reduction followed by a single maximum likelihood classifier, and multiple classifiers decision fusion (MCDF).
+</p>
+
+<p>
+In [36], three different classifiers (Naive Bayes, J48 Decision tree, and Decision table) were combined using simple, weighted, and probability-based voting. Weighted and probability voting techniques outperformed simple voting and single classifiers.
+</p>
+
+<p>
+In [39], an approach which combines ANN and KNN based classifiers using majority voting was discussed. This approach was applied to improve accuracy when sensor data is subjected to drift. Two sets of classifiers were implemented (BP-ANN and KNN). For classifiers combination, a simple median voting was applied for ANN based combination and majority voting for the case of KNN. The authors showed a substantial improvement in performance.
+</p>
+
+<p>
+In [43], an approach based on majority voting was proposed. Unequal weights are assigned to the base classifiers according to their performance. Voting was found to be the best combination rule for the dataset used.
+</p>
+
+<p>
+In [46], the authors proposed a new approach for classifiers combination which strictly work with HMM based-classifiers.
+</p>
+
+<p>
+In [12], a new weighted majority voting approach was proposed. It assigns weights to the different classes rather than the different base classifiers. Such weights were computed by estimating the joint probability distribution of each class with the scores provided by all classifiers in the combining pool. The major drawback of this approach lies on the statistical independence assumption of variables.
+</p>
+
+<div id="Estrategias para la combinación de clasificadores-Adaptative and Non-Adaptative Combiners"><h2 id="Adaptative and Non-Adaptative Combiners" class="header"><a href="#Estrategias para la combinación de clasificadores-Adaptative and Non-Adaptative Combiners">Adaptative and Non-Adaptative Combiners</a></h2></div>
+
+<p>
+Adaptive techniques for classifiers combination are mainly based on evolution or artificial intelligence algorithms. They include neural networks combination strategies and genetic algorithms as well as fuzzy set theory. Techniques under these categories are summarized on the following figure:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/adaptative_non_adaptative_combiners.png" alt="Adaptative and Non-Adaptative Combiners" style="width:700px;height:200px">
+</p>
+
+<p>
+Artificial Neural Networks are usually used as a base classifier [29], however, it has also found wide use in combination of classifiers.
+</p>
+
+<p>
+In [48], the author proposed two new approaches for robust and fault-tolerant classifiers combination: Attractor dynamics (AD) algorithm and classifier masking (CM) algorithm. The authors show that proposed combination algorithms result in improved robustness and fault tolerance compared with individual classifiers. The developed approaches outperformed the performance of classifiers combination based on averaging and majority voting because the AD and CM algorithms discard corrupted classifier outputs.
+</p>
+
+<p>
+In [49], the authors compared the performance of combining the outputs of an ensemble of ANNs with that of SVM classifiers for remotely sensed data.
+</p>
+
+<p>
+In [50], the authors used the ANN, itself, as a model for classifiers combination. A three-layer ANN (see Fig 9) was used where the different classifiers represent the units of the hidden layer. Results obtained show improved performance over individual classifiers, however, the approach was not compared against other classical classifiers combination techniques.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/nn_based_classifier.png" alt="NN Based Classifier" style="width:500px;height:400px">
+</p>
+
+<p>
+In [51], the authors investigated the role of apriori knowledge using existing classifiers combination techniques, namely the Behavior Knowledge space and the D-S theory. The approach performs well when strongly correlated classifiers are combined. 
+</p>
+
+<div id="References"><h1 id="References" class="header"><a href="#References">References</a></h1></div>
+
+<p>
+[12] C. De Stefano, F. Fontanella, and A. S. di Freca, "A Novel Naive Bayes Voting Strategy for Combining Classifiers.," in ICFHR, 2012, pp. 467–472.
+</p>
+
+<p>
+[29] L. I. Kuncheva, Combining pattern classifiers: methods and algorithms. John Wiley &amp; Sons, 2004.
+</p>
+
+<p>
+[32] N. Poh and J. Kittler, "A unified framework for biometric expert fusion incorporating quality measures," Pattern Anal. Mach. Intell. IEEE Trans., vol. 34, no. 1, pp. 3–18, 2012.
+</p>
+
+<p>
+[33] H. R. Kalluri, S. Prasad, and L. M. Bruce, "Decision-level fusion of spectral reflectance and derivative information for robust hyperspectral land cover classification," Geosci. Remote Sensing, IEEE Trans., vol. 48, no. 11, pp. 4047–4058, 2010.
+</p>
+
+<p>
+[34] D. J. Miller and L. Yan, "Ensemble classification by critic-driven combining," in Acoustics, Speech, and Signal Processing, 1999. Proceedings., 1999 IEEE International Conference on, 1999, vol. 2, pp. 1029–1032
+</p>
+
+<p>
+[35] F. Mattern, T. Rohlfing, and J. Denzler, "Adaptive performancebased classifier combination for generic object recognition," in Proc. of International Fall Workshop Vision, Modeling and Visualization (VMV), 2005, pp. 139–146
+</p>
+
+<p>
+[36] G. Jain, A. Ginwala, and Y. A. Aslandogan, "An approach to text classification using dimensionality reduction and combination of classifiers," in Information Reuse and Integration, 2004. IRI 2004. Proceedings of the 2004 IEEE International Conference on, 2004, pp. 564–569.
+</p>
+
+<p>
+[37] M. Magimai-Doss, D. Hakkani-Tur, O. Cetin, E. Shriberg, J. Fung, and N. Mirghafori, "Entropy based classifier combination for sentence segmentation," in Acoustics, Speech and Signal Processing, 2007. ICASSP 2007. IEEE International Conference on, 2007, vol. 4, p. IV--189
+</p>
+
+<p>
+[39] S. Adhikari and S. Saha, "Multiple classifier combination technique for sensor drift compensation using ANN &amp; KNN," in Advance Computing Conference (IACC), 2014 IEEE International, 2014, pp. 1184–1189.
+</p>
+
+<p>
+[40] A. J. Ma, P. C. Yuen, and J.-H. Lai, "Linear dependency modeling for classifier fusion and feature combination," Pattern Anal. Mach. Intell. IEEE Trans., vol. 35, no. 5, pp. 1135–1148, 2013.
+</p>
+
+<p>
+[43] Z. Wu, C.-H. Li, and V. Cheng, "Large margin maximum entropy machines for classifier combination," in Wavelet Analysis and Pattern Recognition, 2008. ICWAPR’08. International Conference on, 2008, vol. 1, pp. 378–383
+</p>
+
+<p>
+[44] R. P. W. Duin, "The combining classifier: to train or not to train?," in Pattern Recognition, 2002. Proceedings. 16th International Conference on, 2002, vol. 2, pp. 765–770.
+</p>
+
+<p>
+[45] W. Wang, A. Brakensiek, and G. Rigoll, "Combination of multiple classifiers for handwritten word recognition," in Frontiers in Handwriting Recognition, 2002. Proceedings. Eighth International Workshop on, 2002, pp. 117–122.
+</p>
+
+<p>
+[48] A. V Bogdanov, "Neuroinspired architecture for robust classifier fusion of multisensor imagery," Geosci. Remote Sensing, IEEE Trans., vol. 46, no. 5, pp. 1467–1487, 2008.
+</p>
+
+<p>
+[49] G. Pasquariello, N. Ancona, P. Blonda, C. Tarantino, G. Satalino, and A. D’Addabbo, "Neural network ensemble and support vector machine classifiers for the analysis of remotely sensed data: a comparison," in Geoscience and Remote Sensing Symposium, 2002. IGARSS’02. 2002 IEEE International, 2002, vol. 1, pp. 509–511.
+</p>
+
+<p>
+[50] Y.-D. Lan and L. Gao, "A New Model of Combining Multiple Classifiers Based on Neural Network," in Emerging Intelligent Data and Web Technologies (EIDWT), 2013 Fourth International Conference on, 2013, pp. 154–159.
+</p>
+
+<p>
+[51] V. Di Lecce, G. Dimauro, A. Guerriero, S. Impedovo, G. Pirlo, and A. Salzo, "Knowledge-based methods for classifier combination: an experimental investigation," in Image Analysis and Processing, 1999. Proceedings. International Conference on, 1999, pp. 562–565.
 </p>
 </div>
   

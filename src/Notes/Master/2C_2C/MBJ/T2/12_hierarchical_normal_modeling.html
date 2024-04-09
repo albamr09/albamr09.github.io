@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
-    <title>T2. Modelos Jerarquicos</title>
+    <title>Hierarchical Normal Modeling</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,37 +31,40 @@
     <hr>
     <div class="content">
 <p>
-<a href="../index.html">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="T2. Modelos Jerarquicos"><h1 id="T2. Modelos Jerarquicos" class="header"><a href="#T2. Modelos Jerarquicos">T2. Modelos Jerarquicos</a></h1></div>
+<div id="Hierarchical Normal Modeling"><h1 id="Hierarchical Normal Modeling" class="header"><a href="#Hierarchical Normal Modeling">Hierarchical Normal Modeling</a></h1></div>
 
 <hr>
 
-<ol>
-<li>
-<a href="01.html">Constructing a parametrized prior distribution</a>
+<div id="Hierarchical Normal Modeling-Example: ratings of animation movies"><h2 id="Example: ratings of animation movies" class="header"><a href="#Hierarchical Normal Modeling-Example: ratings of animation movies">Example: ratings of animation movies</a></h2></div>
 
-</li><li>
-<a href="02.html">Exchangeability and hierarchical models</a>
+<p>
+MovieLens is a website which provides personalized movie recommendations from users who create accounts and rate movies that they have seen. Based on such information, MovieLens works to build a custom preference profile for each user and provide movie recommendations.
+</p>
 
-</li><li>
-<a href="03.html">Bayesian analysis of conjugate hierarchical models</a>
+<div id="Hierarchical Normal Modeling-A hierarchical Normal model with random $\sigma$"><h2 id="A hierarchical Normal model with random $\sigma$" class="header"><a href="#Hierarchical Normal Modeling-A hierarchical Normal model with random $\sigma$">A hierarchical Normal model with random \(\sigma\)</a></h2></div>
 
-</li><li>
-<a href="04_normal_model.html">Normal model with exchangeable parameters</a>
+<p>
+In this situation it is reasonable to develop a model for the movie ratings where the grouping variable is the movie title. We index a rating by two subscripts, where \(Y_{ij}\) denotes the \(i\)th rating for the \(j\)th movie title, with \(j = 1, \cdots, 8\).
+</p>
 
-</li></ol>
-<div id="T2. Modelos Jerarquicos-Appendix"><h2 id="Appendix" class="header"><a href="#T2. Modelos Jerarquicos-Appendix">Appendix</a></h2></div>
+<p>
+Since the ratings are continuous, it is reasonable to use the Normal data model. For simplicity and ease of illustration, a common and shared unknown standard deviation \(\sigma\) is assumed for all Normal models (however it could also be modeled). Therefore we define the sampling distribution as:
+</p>
 
-<ul>
-<li>
-<a href="11_introduction.html">Introduction</a>
+\begin{align}
+Y_{ij} | \mu_j, \sigma \sim \text{Normal}(\mu_j, \sigma)
+\end{align}
 
-</li><li>
-<a href="12_hierarchical_normal_modeling.html">Hierarchical Normal Modeling</a>
+<p>
+Since these movies are all animations, it is reasonable to believe that the mean ratings are similar across movies. So one assigns each mean rating the same Normal prior distribution at the first stage:
+</p>
 
-</li></ul>
+\begin{align}
+\mu_j | \mu, \tau \sim \text{Normal}(\mu, \tau)
+\end{align}
 </div>
   
 
