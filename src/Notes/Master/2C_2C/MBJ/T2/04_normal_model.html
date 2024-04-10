@@ -37,6 +37,100 @@
 <div id="Normal model with exchangeable parameters"><h1 id="Normal model with exchangeable parameters" class="header"><a href="#Normal model with exchangeable parameters">Normal model with exchangeable parameters</a></h1></div>
 
 <hr>
+
+<p>
+We now present a full treatment of a simple hierarchical model based on the normal distribution, with different means for each "group" but with known observation variance and a normal population distribution for the group means.
+</p>
+
+<p>
+Consider \(J\) independent experiments:
+</p>
+
+\begin{align}
+y_{ij} | \theta_j \sim \text{N}(\theta_j, \sigma^2), \text{ for } i = 1, \cdots, n_j; j = 1, \cdots, J.
+\end{align}
+
+<p>
+We label the sample mean of each group \(j\) as:
+</p>
+
+\begin{align}
+\overline{y}_j = \frac{1}{n_j} \sum_{i = 1}^{n_j} y_{ij}
+\end{align}
+
+<p>
+with sampling variance:
+</p>
+
+\begin{align}
+\sigma^2_j = \frac{\sigma^2}{n_j}
+\end{align}
+
+<p>
+We can then write the likelihood for each \(\theta_j\) using the sufficient statistics, \(\overline{y}_j\):
+</p>
+
+<div id="Normal model with exchangeable parameters-Constructing a prior distribution"><h2 id="Constructing a prior distribution" class="header"><a href="#Normal model with exchangeable parameters-Constructing a prior distribution">Constructing a prior distribution</a></h2></div>
+
+<div id="Normal model with exchangeable parameters-The hierarchical model"><h2 id="The hierarchical model" class="header"><a href="#Normal model with exchangeable parameters-The hierarchical model">The hierarchical model</a></h2></div>
+
+<p>
+For the convenience of conjugacy, we assume that the parameters \(\theta_j\) are drawn from a normal distribution with hyperparameters \((\mu, \tau)\), such that:
+</p>
+
+\begin{align}
+p(\theta_1, \cdots, \theta_J|\mu, \tau) = \prod_{j=1}^J \text{N}(\theta_j|\mu, \tau^2)
+\end{align}
+
+<p>
+and by process of marginalization:
+</p>
+
+\begin{align}
+p(\theta_1, \cdots, \theta_J) = \int \left[\prod_{j=1}^J \text{N}(\theta_j|\mu, \tau^2)\right]p(\mu, \tau) d(\mu, \tau)
+\end{align}
+
+<p>
+That is we assume \(\theta_j\)'s are conditionally independent given \((\mu, \tau)\). The hierarchical model also permits the interpretation of the \(\theta_j\)'s as a random sample from a shared population distribution
+</p>
+
+<p>
+We assign a noninformative uniform hyperprior distribution to \(\mu\), given \(\tau\):
+</p>
+
+\begin{align}
+p(\mu, \tau) = p(\mu|\tau)p(\tau) \propto p(\tau)
+\end{align}
+
+<p>
+The uniform prior density for \(\mu\) is generally reasonable for this problem; because the combined data from all \(J\) experiments are generally highly informative about \(\mu\), we can afford to be vague about its prior distribution.
+</p>
+
+<div id="Normal model with exchangeable parameters-The joint posterior distribution"><h2 id="The joint posterior distribution" class="header"><a href="#Normal model with exchangeable parameters-The joint posterior distribution">The joint posterior distribution</a></h2></div>
+
+<p>
+We can express the joint posterior distribution in terms of the sufficient statistics \(\overline{y}_j\):
+</p>
+
+\begin{align}
+p(\theta, \mu, \tau|y) \propto p(\mu, \tau) p(\theta|\mu, \tau)p(y|\theta)
+\end{align}
+
+<p>
+Because \(\theta_j\)'s are conditionally independent:
+</p>
+
+\begin{align}
+\propto p(\mu, \tau) \prod_{j=1}^J \text{N}(\theta_j|\mu, \tau^2) p(y|\theta)
+\end{align}
+
+\begin{align}
+= p(\mu, \tau) \prod_{j=1}^J \text{N}(\theta_j|\mu, \tau^2) \prod_{j=1}^J \text{N}(\overline{y}_j|\theta_j, \sigma_j^2)
+\end{align}
+
+<p>
+where we can ignore factors that depend only on \(y\) and the parameters \(\sigma_j\), which are assumed known for this analysis.
+</p>
 </div>
   
 
