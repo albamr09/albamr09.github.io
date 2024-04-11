@@ -38,20 +38,22 @@
 
 <hr>
 
+<div id="Normal model with exchangeable parameters-Model definition"><h2 id="Model definition" class="header"><a href="#Normal model with exchangeable parameters-Model definition">Model definition</a></h2></div>
+
 <p>
 We now present a full treatment of a simple hierarchical model based on the normal distribution, with different means for each "group" but with known observation variance and a normal population distribution for the group means.
 </p>
 
-<p>
-Consider \(J\) independent experiments:
-</p>
-
+<ul>
+<li>
+Consider \(J\) independent experiments. The <span id="Normal model with exchangeable parameters-Model definition-likelihood (sampling distribution)"></span><strong id="likelihood (sampling distribution)">likelihood (sampling distribution)</strong> is defined as:
 \begin{align}
 y_{ij} | \theta_j \sim \text{N}(\theta_j, \sigma^2), \text{ for } i = 1, \cdots, n_j; j = 1, \cdots, J.
 \end{align}
 
+</li></ul>
 <p>
-We label the sample mean of each group \(j\) as:
+where we label the sample mean of each group \(j\) as:
 </p>
 
 \begin{align}
@@ -59,7 +61,7 @@ We label the sample mean of each group \(j\) as:
 \end{align}
 
 <p>
-with sampling variance:
+and the sampling variance as:
 </p>
 
 \begin{align}
@@ -67,15 +69,31 @@ with sampling variance:
 \end{align}
 
 <p>
+Here we assume that \(\sigma\) is a know value.
+</p>
+
+<p>
 We can then write the likelihood for each \(\theta_j\) using the sufficient statistics, \(\overline{y}_j\):
 </p>
 
-<div id="Normal model with exchangeable parameters-Constructing a prior distribution"><h2 id="Constructing a prior distribution" class="header"><a href="#Normal model with exchangeable parameters-Constructing a prior distribution">Constructing a prior distribution</a></h2></div>
-
-<div id="Normal model with exchangeable parameters-The hierarchical model"><h2 id="The hierarchical model" class="header"><a href="#Normal model with exchangeable parameters-The hierarchical model">The hierarchical model</a></h2></div>
+\begin{align}
+\overline{y}_j | \theta_j \sim \text{N}(\theta_j, \sigma_j^2)
+\end{align}
 
 <p>
-For the convenience of conjugacy, we assume that the parameters \(\theta_j\) are drawn from a normal distribution with hyperparameters \((\mu, \tau)\), such that:
+Sufficient statistics are summary statistics of the data that capture all the information about the parameter of interest. In this case, the sufficient statistic \(\overline{y}_j\) represents the data summary for experiment \(j\) that is used to estimate the parameter \(\theta_j\). By using the sufficient statistic \(\overline{y}_j\), the likelihood function for each \(\theta_j\) is constructed based on the observed data in experiment \(j\).
+</p>
+
+<ul>
+<li>
+The <span id="Normal model with exchangeable parameters-Model definition-prior distribution"></span><strong id="prior distribution">prior distribution</strong> over \(\theta_j\), assuming the prior to be normal for the sake of conjugacy is defined as:
+\begin{align}
+\theta_j|\mu, \tau \sim \text{N}(\theta_j|\mu, \tau^2)
+\end{align}
+
+</li></ul>
+<p>
+Assuming each \(\theta_j\) to be independent we obtain the following joint distribution:
 </p>
 
 \begin{align}
@@ -90,46 +108,108 @@ and by process of marginalization:
 p(\theta_1, \cdots, \theta_J) = \int \left[\prod_{j=1}^J \text{N}(\theta_j|\mu, \tau^2)\right]p(\mu, \tau) d(\mu, \tau)
 \end{align}
 
-<p>
-That is we assume \(\theta_j\)'s are conditionally independent given \((\mu, \tau)\). The hierarchical model also permits the interpretation of the \(\theta_j\)'s as a random sample from a shared population distribution
-</p>
-
-<p>
-We assign a noninformative uniform hyperprior distribution to \(\mu\), given \(\tau\):
-</p>
-
+<ul>
+<li>
+The <span id="Normal model with exchangeable parameters-Model definition-hyperprior over the parameters"></span><strong id="hyperprior over the parameters">hyperprior over the parameters</strong> \(\mu\) and \(\tau\) is defined as a non-informative distribution (i.e. uniform density), such that:
 \begin{align}
 p(\mu, \tau) = p(\mu|\tau)p(\tau) \propto p(\tau)
 \end{align}
 
-<p>
-The uniform prior density for \(\mu\) is generally reasonable for this problem; because the combined data from all \(J\) experiments are generally highly informative about \(\mu\), we can afford to be vague about its prior distribution.
-</p>
+</li></ul>
+<div id="Normal model with exchangeable parameters-Inference"><h2 id="Inference" class="header"><a href="#Normal model with exchangeable parameters-Inference">Inference</a></h2></div>
 
-<div id="Normal model with exchangeable parameters-The joint posterior distribution"><h2 id="The joint posterior distribution" class="header"><a href="#Normal model with exchangeable parameters-The joint posterior distribution">The joint posterior distribution</a></h2></div>
+<div id="Normal model with exchangeable parameters-Inference-Joint posterior distribution"><h3 id="Joint posterior distribution" class="header"><a href="#Normal model with exchangeable parameters-Inference-Joint posterior distribution">Joint posterior distribution</a></h3></div>
 
 <p>
-We can express the joint posterior distribution in terms of the sufficient statistics \(\overline{y}_j\):
+This distribution combines prior information (hyperprior distribution \(p(\mu, \tau)\))  the population distribution \(p(\theta_j|\mu, \tau)\) and the likelihood function \(p(y_{ij}|\theta_j)\). We define it as follows:
 </p>
 
 \begin{align}
-p(\theta, \mu, \tau|y) \propto p(\mu, \tau) p(\theta|\mu, \tau)p(y|\theta)
+p(\theta, \mu, \tau|y)
 \end{align}
 
 <p>
-Because \(\theta_j\)'s are conditionally independent:
+By Bayes Theorem (ignoring the normalization term):
 </p>
 
 \begin{align}
-\propto p(\mu, \tau) \prod_{j=1}^J \text{N}(\theta_j|\mu, \tau^2) p(y|\theta)
+\propto p(y|\theta) p(\theta|\mu, \tau) p(\mu, \tau)
 \end{align}
 
+<p>
+Here \(p(y|\theta)\) is the likelihood function previously defined in terms of the sufficient statistics \(\overline{y}_j\)
+</p>
+
 \begin{align}
-= p(\mu, \tau) \prod_{j=1}^J \text{N}(\theta_j|\mu, \tau^2) \prod_{j=1}^J \text{N}(\overline{y}_j|\theta_j, \sigma_j^2)
+\propto \left[\prod_{j=1}^J \text{N}(\overline{y}_j|\theta_j, \sigma_j^2)\right] p(\theta|\mu, \tau) p(\mu, \tau)
+\end{align}
+
+<p>
+and \(p(\theta|\mu, \tau)\) is the prior, also previouly defined, such that:
+</p>
+
+\begin{align}
+\propto \left[\prod_{j=1}^J \text{N}(\overline{y}_j|\theta_j, \sigma_j^2)\right] \left[\prod_{j=1}^J \text{N}(\theta_j|\mu, \tau^2) p(y|\theta)\right] p(\mu, \tau)
 \end{align}
 
 <p>
 where we can ignore factors that depend only on \(y\) and the parameters \(\sigma_j\), which are assumed known for this analysis.
+</p>
+
+<div id="Normal model with exchangeable parameters-Inference-The conditional posterior distribution"><h3 id="The conditional posterior distribution" class="header"><a href="#Normal model with exchangeable parameters-Inference-The conditional posterior distribution">The conditional posterior distribution</a></h3></div>
+
+<p>
+The conditional posterior distribution calculates the posterior distribution of \(\theta_j\) given the hyperparameters \(\mu, \tau\). It allows us to understand how parameters intereact and influence each other. We define them for each \(\theta_j\) as follows:
+</p>
+
+\begin{align}
+\theta_j | \mu, \tau, y \sim \text{N}(\hat{\theta}_j, V_j)
+\end{align}
+
+<p>
+where:
+</p>
+
+\begin{align}
+\hat{\theta}_j = \frac{\frac{1}{\sigma_j^2}\overline{y}_j + \frac{1}{\tau^2}\mu}{\frac{1}{\sigma_j^2} + \frac{1}{\tau^2}}
+\end{align}
+
+<p>
+and:
+</p>
+
+\begin{align}
+V_j = \frac{1}{\frac{1}{\sigma_j^2} + \frac{1}{\tau^2}}
+\end{align}
+
+<div id="Normal model with exchangeable parameters-Inference-The marginal posterior distribution"><h3 id="The marginal posterior distribution" class="header"><a href="#Normal model with exchangeable parameters-Inference-The marginal posterior distribution">The marginal posterior distribution</a></h3></div>
+
+<p>
+This distribution allows us to estimate the hyperparameters \(\mu\) and \(\tau\) through the Bayesian paradigm. By the conditional rule we obtain:
+</p>
+
+\begin{align}
+p(\mu, \tau|y) \propto p(\mu, \tau)p(y|\mu, \tau)
+\end{align}
+
+<p>
+where:
+</p>
+
+\begin{align}
+\overline{y}_j | \mu, \tau \sim \text{N}(\mu, \sigma_j^2 + \tau^2)
+\end{align}
+
+<p>
+such that:
+</p>
+
+\begin{align}
+p(\mu, \tau|y) \propto p(\mu, \tau) \prod_{j=1}^J \text{N}(\overline{y}_j|\mu, \sigma^2_j + \tau^2)
+\end{align}
+
+<p>
+For the normal model, however, we can further simplify by integrating over \(\mu\), leaving a simple univariate numerical computation of \(p(\tau|y)\). We factor the marginal posterior density of the hyperparameters as we did the prior density:
 </p>
 </div>
   
