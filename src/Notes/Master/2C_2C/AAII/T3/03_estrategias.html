@@ -388,27 +388,11 @@ In [51], the authors delved into the significance of leveraging a priori knowled
 </p>
 
 <p>
-In [16], the proposed method combines results from multiple classifiers using a hierarchical architecture, called Fuzzy Stacked Generalization (FSG). The authors used satellite images segmented and preprocessed to extract different sets of features. Each set is then used with one of \(K\) different classifiers.
+In the study referenced as [16], the authors introduced a novel approach known as Fuzzy Stacked Generalization (FSG) to combine the outputs of multiple classifiers. FSG operates within a hierarchical framework where multiple base-layer classifiers are utilized to make individual predictions on the input data. In FSG, the decisions made by the base-layer classifiers are aggregated to form a decision vector. This decision vector is then fed into a meta-layer classifier, which combines the outputs of the base-layer classifiers to make the final decision.
 </p>
 
 <p>
 <img src="https://albamr09.github.io/public/assets/fsg_classifier.png" alt="FSG Classifier" style="width:600px;height:400px">
-</p>
-
-<p>
-Decisions from base-layer classifiers were aggregated to form a decision vector which is then fed to a meta-layer classifier to make the final decision. 
-</p>
-
-<p>
-In [22], the authors considered an approach which involves simultaneous extraction and selection of features/classifiers. While GA was used to simultaneously select features/classifiers, the D-S theory was used to combine the outputs of selected classifiers. The following picture describes the system:
-</p>
-
-<p>
-<img src="https://albamr09.github.io/public/assets/ga_classifier.png" alt="GA Classifier" style="width:400px;height:400px">
-</p>
-
-<p>
-With D-S fusion, classification accuracy reached \(93\%\) when five different classifiers were combined. An improved performance accuracy of \(7.5\%\) over the individual classifiers.
 </p>
 
 <div id="Estrategias para la combinación de clasificadores-Adaptative and Non-Adaptative Combiners-Adaptative Combiners-Combining Combination Strategies Dynamically"><h4 id="Combining Combination Strategies Dynamically" class="header"><a href="#Estrategias para la combinación de clasificadores-Adaptative and Non-Adaptative Combiners-Adaptative Combiners-Combining Combination Strategies Dynamically">Combining Combination Strategies Dynamically</a></h4></div>
@@ -424,6 +408,18 @@ In [58] the authors introduced various modifications to the traditional majority
 </p>
 
 <div id="Estrategias para la combinación de clasificadores-Adaptative and Non-Adaptative Combiners-Adaptative Combiners-Based on Genetic Theory"><h4 id="Based on Genetic Theory" class="header"><a href="#Estrategias para la combinación de clasificadores-Adaptative and Non-Adaptative Combiners-Adaptative Combiners-Based on Genetic Theory">Based on Genetic Theory</a></h4></div>
+
+<p>
+In the study referenced as [22], the authors introduced an innovative approach that involved the simultaneous extraction and selection of features and classifiers to improve the performance of gender and age classification using speech signals collected from a typical Korean home environment.
+</p>
+
+<p>
+The authors employed a Genetic Algorithm to simultaneously select features and classifiers. GA is a metaheuristic optimization technique inspired by the process of natural selection and genetics, used to search for the optimal combination of features and classifiers for the classification task. The outputs of the selected classifiers were combined using the Dempster-Shafer theory, a mathematical theory for combining evidence from different sources to make decisions under uncertainty.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/ga_classifier.png" alt="GA Classifier" style="width:400px;height:400px">
+</p>
 
 <p>
 In [59] a novel approach based on Genetic Algorithm (GA) with self-configuration capabilities was developed for classifier combination. The researchers employed a pool of twelve expert classifiers that were already trained on the task of character recognition, including both printed and handwritten characters. These expert classifiers likely had different strengths and weaknesses, making them suitable candidates for ensemble learning. The GA was integrated into the system to optimize the combination of outputs from the expert classifiers. By using the evolutionary principles of genetic algorithms, the system could iteratively adjust the weights assigned to each classifier in the ensemble to maximize the overall accuracy of the system.
