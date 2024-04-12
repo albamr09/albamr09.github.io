@@ -96,6 +96,21 @@ Another way to categorize combination algorithms is whether hard thresholding or
 The sum, product, max, min rules, etc., fall under the soft level combiners as they use the output aposteriori probability of the classifier or a score.
 </p>
 
+<ul>
+<li>
+<span id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Sum rule"></span><strong id="Sum rule">Sum rule</strong>: The class with the highest sum of probabilities is chosen as the final prediction.
+
+</li><li>
+<span id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Product rule"></span><strong id="Product rule">Product rule</strong>: The class with the highest product of probabilities is chosen as the final prediction.
+
+</li><li>
+<span id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Max rule"></span><strong id="Max rule">Max rule</strong>: the class with the highest posterior probability among all classifications made by individual classifiers is selected as the final prediction.
+
+</li><li>
+<span id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Min rule"></span><strong id="Min rule">Min rule</strong>: the class with the lowest posterior probability among all classifications made by individual classifiers is selected as the final prediction.
+
+</li></ul>
+ 
 <p>
 Majority voting is a typical example of hard-level combiners and has found widespread use in the literature. There are three different versions of voting:
 </p>
@@ -232,7 +247,7 @@ The challenge of increasing dimensionality resulting from the simple combination
 <div id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Critic Classifier"><h4 id="Critic Classifier" class="header"><a href="#Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Critic Classifier">Critic Classifier</a></h4></div>
 
 <p>
-In the study referenced as [34], the authors introduced an innovative approach that focuses specifically on addressing two-class classification problems. The key feature of this approach is the incorporation of a classifier critic associated with each individual classifier, aimed at predicting the error rate of the classifier. The role of the classifier critic is to forecast the potential error or misclassification rate of its associated classifier. The approach relies on classical standard voting techniques for combining the outputs of multiple classifiers. By aggregating the predictions of individual classifiers through a voting mechanism,
+In the study referenced as [34], the authors introduced an innovative approach that focuses specifically on addressing two-class classification problems. The key feature of this approach is the incorporation of a classifier critic associated with each individual classifier, aimed at predicting the error rate of the classifier. The role of the classifier critic is to forecast the potential error or misclassification rate of its associated classifier. The approach relies on classical standard voting techniques for combining the outputs of multiple classifiers. 
 </p>
 
 <div id="Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Adaptative Voting Technique"><h4 id="Adaptative Voting Technique" class="header"><a href="#Estrategias para la combinación de clasificadores-Hard and Soft Level Classifier Combination-Adaptative Voting Technique">Adaptative Voting Technique</a></h4></div>
@@ -322,7 +337,7 @@ Majority Voting: The experimental results indicated that the majority voting app
 <div id="Estrategias para la combinación de clasificadores-Combination Rules-Assesment"><h4 id="Assesment" class="header"><a href="#Estrategias para la combinación de clasificadores-Combination Rules-Assesment">Assesment</a></h4></div>
 
 <p>
-Fixed rule-based combination techniques in the context of multiple classifiers do not require a training stage and rely on class labels, distances, or confidences provided by individual classifiersCommon fixed rules include product rule (multiplication of outputs), min rule (selecting the minimum output), sum rule (adding outputs), max rule (choosing the maximum output), and median rule (selecting the median output). The efficiency of fixed rule techniques is influenced by various factors, as discussed in reference [44].
+Fixed rule-based combination techniques in the context of multiple classifiers do not require a training stage and rely on class labels, distances, or confidences provided by individual classifiers. The efficiency of fixed rule techniques is influenced by various factors, as discussed in reference [44].
 </p>
 
 <p>
@@ -378,21 +393,13 @@ In [50], the authors proposed a novel approach where they utilized an Artificial
 </p>
 
 <p>
-<img src="https://albamr09.github.io/public/assets/nn_based_classifier.png" alt="NN Based Classifier" style="width:500px;height:400px">
+<img src="https://albamr09.github.io/public/assets/nn_based_classifier.png" alt="NN Based Classifier" style="width:600px;height:400px">
 </p>
 
 <div id="Estrategias para la combinación de clasificadores-Adaptative and Non-Adaptative Combiners-Adaptative Combiners-Incorporating A Priori Knowledge"><h4 id="Incorporating A Priori Knowledge" class="header"><a href="#Estrategias para la combinación de clasificadores-Adaptative and Non-Adaptative Combiners-Adaptative Combiners-Incorporating A Priori Knowledge">Incorporating A Priori Knowledge</a></h4></div>
 
 <p>
 In [51], the authors delved into the significance of leveraging a priori knowledge within existing classifiers combination techniques, specifically exploring the application of the Behavior Knowledge Space and the Dempster-Shafer (D-S) theory. This investigation aimed to elucidate how incorporating prior knowledge can enhance the performance of classifiers combination, particularly when dealing with strongly correlated classifiers. The study also highlighted the utilization of adaptive combiners, encompassing strategies such as adaptive weighting, associative switching, Mixture of Local Experts (MLE), and Hierarchical MLE
-</p>
-
-<p>
-In the study referenced as [16], the authors introduced a novel approach known as Fuzzy Stacked Generalization (FSG) to combine the outputs of multiple classifiers. FSG operates within a hierarchical framework where multiple base-layer classifiers are utilized to make individual predictions on the input data. In FSG, the decisions made by the base-layer classifiers are aggregated to form a decision vector. This decision vector is then fed into a meta-layer classifier, which combines the outputs of the base-layer classifiers to make the final decision.
-</p>
-
-<p>
-<img src="https://albamr09.github.io/public/assets/fsg_classifier.png" alt="FSG Classifier" style="width:600px;height:400px">
 </p>
 
 <div id="Estrategias para la combinación de clasificadores-Adaptative and Non-Adaptative Combiners-Adaptative Combiners-Combining Combination Strategies Dynamically"><h4 id="Combining Combination Strategies Dynamically" class="header"><a href="#Estrategias para la combinación de clasificadores-Adaptative and Non-Adaptative Combiners-Adaptative Combiners-Combining Combination Strategies Dynamically">Combining Combination Strategies Dynamically</a></h4></div>
@@ -426,6 +433,14 @@ In [59] a novel approach based on Genetic Algorithm (GA) with self-configuration
 </p>
 
 <div id="Estrategias para la combinación de clasificadores-Adaptative and Non-Adaptative Combiners-Adaptative Combiners-Fuzzy Based"><h4 id="Fuzzy Based" class="header"><a href="#Estrategias para la combinación de clasificadores-Adaptative and Non-Adaptative Combiners-Adaptative Combiners-Fuzzy Based">Fuzzy Based</a></h4></div>
+
+<p>
+In the study referenced as [16], the authors introduced a novel approach known as Fuzzy Stacked Generalization (FSG) to combine the outputs of multiple classifiers. FSG operates within a hierarchical framework where multiple base-layer classifiers are utilized to make individual predictions on the input data. In FSG, the decisions made by the base-layer classifiers are aggregated to form a decision vector. This decision vector is then fed into a meta-layer classifier, which combines the outputs of the base-layer classifiers to make the final decision.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/fsg_classifier.png" alt="FSG Classifier" style="width:600px;height:400px">
+</p>
 
 <p>
 In [53], the authors proposed a classifiers combination technique using fuzzy templates (FT). An object is labeled with the class whose fuzzy template is closest to the objects' decision profile. the authors obtained an improved performance over majority, min, max and product rules, and unweighted average combination techniques
