@@ -116,6 +116,11 @@ p(\mu, \tau) = p(\mu|\tau)p(\tau) \propto p(\tau)
 \end{align}
 
 </li></ul>
+<p>
+We define a prior distribution over \(\tau\). For our illustrative analysis, we use the uniform prior distribution \(p(\tau) \propto 1\). Once an initial analysis is performed using the noninformative
+'uniform' prior density, a sensitivity analysis with a more realistic prior distribution is often desirable.
+</p>
+
 <div id="Normal model with exchangeable parameters-Inference"><h2 id="Inference" class="header"><a href="#Normal model with exchangeable parameters-Inference">Inference</a></h2></div>
 
 <div id="Normal model with exchangeable parameters-Inference-Joint posterior distribution"><h3 id="Joint posterior distribution" class="header"><a href="#Normal model with exchangeable parameters-Inference-Joint posterior distribution">Joint posterior distribution</a></h3></div>
@@ -208,9 +213,109 @@ such that:
 p(\mu, \tau|y) \propto p(\mu, \tau) \prod_{j=1}^J \text{N}(\overline{y}_j|\mu, \sigma^2_j + \tau^2)
 \end{align}
 
+<div id="Normal model with exchangeable parameters-Inference-The marginal posterior distribution-Posterior distribution of $\mu$ given $\tau$"><h5 id="Posterior distribution of $\mu$ given $\tau$" class="header"><a href="#Normal model with exchangeable parameters-Inference-The marginal posterior distribution-Posterior distribution of $\mu$ given $\tau$">Posterior distribution of \(\mu\) given \(\tau\)</a></h5></div>
+
 <p>
-For the normal model, however, we can further simplify by integrating over \(\mu\), leaving a simple univariate numerical computation of \(p(\tau|y)\). We factor the marginal posterior density of the hyperparameters as we did the prior density:
+We can further simplify by integrating over \(\mu\), leaving a simple univariate numerical computation of \(p(\tau|y)\), by the conditional rule:
 </p>
+
+\begin{align}
+p(\mu, \tau|y) = p(\mu | \tau, y) p(\tau|y)
+\end{align}
+
+<p>
+where:
+</p>
+
+\begin{align}
+\mu | \tau, y \sim \text{N}(\hat{\mu}, V_\mu)
+\end{align}
+
+<p>
+with:
+</p>
+
+\begin{align}
+\hat{\mu} = \frac{\sum_{j=1}^J \frac{1}{\sigma_j^2 + \tau^2}\overline{y}_j}{\sum_{j=1}^J \frac{1}{\sigma_j^2 + \tau^2}}
+\end{align}
+
+<p>
+and
+</p>
+
+\begin{align}
+V_{\mu}^{-1} = \sum_{j=1}^J \frac{1}{\sigma_j^2 + \tau^2}
+\end{align}
+
+<div id="Normal model with exchangeable parameters-Inference-The marginal posterior distribution-Posterior distribution $\tau$"><h5 id="Posterior distribution $\tau$" class="header"><a href="#Normal model with exchangeable parameters-Inference-The marginal posterior distribution-Posterior distribution $\tau$">Posterior distribution \(\tau\)</a></h5></div>
+
+<p>
+We know from the previous section that:
+</p>
+
+\begin{align}
+p(\mu, \tau|y) = p(\mu | \tau, y) p(\tau|y)
+\end{align}
+
+<p>
+such that:
+</p>
+
+\begin{align}
+p(\tau|y) = \frac{p(\mu, \tau|y)}{p(\mu | \tau, y)}
+\end{align}
+
+<p>
+We previously defined \(\mu | \tau, y \sim \text{N}(\hat{\mu}, V_\mu)\), therefore:
+</p>
+
+\begin{align}
+p(\tau|y) = \frac{p(\mu, \tau|y)}{\text{N}(\hat{\mu}, V_\mu)}
+\end{align}
+
+<p>
+We also defined \(p(\mu, \tau|y) \propto p(\mu, \tau) \prod_{j=1}^J \text{N}(\overline{y}_j|\mu, \sigma^2_j + \tau^2)\):
+</p>
+
+\begin{align}
+\propto \frac{p(\tau) \prod_{j=1}^J \text{N}(\overline{y}_j|\mu, \sigma^2_j + \tau^2)}{\text{N}(\hat{\mu}, V_\mu)}
+\end{align}
+
+<div id="Normal model with exchangeable parameters-Simulation"><h2 id="Simulation" class="header"><a href="#Normal model with exchangeable parameters-Simulation">Simulation</a></h2></div>
+
+<p>
+For this model, computation of the posterior distribution of θ is most conveniently performed via simulation, following the factorization:
+</p>
+
+\begin{align}
+p(\theta, \mu, \tau|y) = p(\theta|\mu, \tau, y) p(\mu|\tau, y) p(\tau, y)
+\end{align}
+
+<div id="Normal model with exchangeable parameters-Posterior predictive distributions"><h2 id="Posterior predictive distributions" class="header"><a href="#Normal model with exchangeable parameters-Posterior predictive distributions">Posterior predictive distributions</a></h2></div>
+
+<p>
+To obtain a draw from the posterior predictive distribution of new data \(\tilde{y}\) from the current batch of parameters, \(\theta\), first obtain a draw from \(p(\theta, \mu, \tau|y)\) and then draw the predictive data \(\tilde{y}\) from the sampling distribution:
+</p>
+
+\begin{align}
+y_{ij} | \theta_j \sim \text{N}(\theta_j, \sigma^2), \text{ for } i = 1, \cdots, n_j; j = 1, \cdots, J.
+\end{align}
+
+<p>
+To obtain posterior predictive simulations of new data \(\tilde{y}\) for \(\tilde{J}\) new groups, perform the following three steps:
+</p>
+
+<ul>
+<li>
+Draw \((\mu, \tau)\) from their posterior distribution \(p(\mu, \tau|y)\)
+
+</li><li>
+Draw \(\tilde{J}\) new parameters \(\tilde{\theta} = \tilde{\theta}_1, \cdots, \tilde{\theta}_{\tilde{J}}\) from the population distribution \(p(\tilde{\theta}|\mu, tau)\).
+
+</li><li>
+Draw \(\tilde{y}\) given \(\tilde{\theta}\) from the sampling distribution.
+
+</li></ul>
 </div>
   
 
