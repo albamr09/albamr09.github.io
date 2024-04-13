@@ -1,0 +1,132 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Computación Acelerada</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Computación Acelerada"><h1 id="Computación Acelerada" class="header"><a href="#Computación Acelerada">Computación Acelerada</a></h1></div>
+
+<hr>
+
+<div id="Computación Acelerada-Diferencias CPU/GPU"><h2 id="Diferencias CPU/GPU" class="header"><a href="#Computación Acelerada-Diferencias CPU/GPU">Diferencias CPU/GPU</a></h2></div>
+
+<ul>
+<li>
+Una CPU tiene un número limitado de cores, mientras que una GPU tiene un número muy elevado de cores.
+
+</li><li>
+Una GPU tiene procesadores menos potentes (menos operaciones por ciclo), sin embargo tiene muchas más unidades lógicas-aritméticas (ALU), por lo que tiene más capacidad de cálculo a coste de tener menos capacidad de manejo de almacenamiento.
+
+</li></ul>
+<div id="Computación Acelerada-Proveedores"><h2 id="Proveedores" class="header"><a href="#Computación Acelerada-Proveedores">Proveedores</a></h2></div>
+
+<ul>
+<li>
+Nvidia: se basa en la arquitecture Compute Unified Device Architecture (CUDA).
+
+</li><li>
+AMD: se basa en una arquitectura más abierta, Heterogeneous System Architecture (HSA), que es multiplataforma. Su arquitectura se puede utilizar con distintos proveedores, p.ej. Nvidia.
+
+</li></ul>
+<div id="Computación Acelerada-Proveedores-Flujo de Procesamiento en CUDA"><h3 id="Flujo de Procesamiento en CUDA" class="header"><a href="#Computación Acelerada-Proveedores-Flujo de Procesamiento en CUDA">Flujo de Procesamiento en CUDA</a></h3></div>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/CUDA_processing_flow.png" alt="CUDA Processing Flow" style="width:500px;height:400px">
+</p>
+
+<div id="Computación Acelerada-Proveedores-Plataformas"><h3 id="Plataformas" class="header"><a href="#Computación Acelerada-Proveedores-Plataformas">Plataformas</a></h3></div>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/CUDA_platforms.png" alt="CUDA Platfroms" style="width:700px;height:400px">
+</p>
+
+<div id="Computación Acelerada-TPU"><h2 id="TPU" class="header"><a href="#Computación Acelerada-TPU">TPU</a></h2></div>
+
+<p>
+Diseñado por Google especialmente diseñado para operaciones matriciales y tensores. Su uso fundamental es en el entrenamiento de redes neuronales y la inferencia.
+</p>
+
+<div id="Computación Acelerada-TPU-Por qué utilizar TPUs?"><h3 id="Por qué utilizar TPUs?" class="header"><a href="#Computación Acelerada-TPU-Por qué utilizar TPUs?">Por qué utilizar TPUs?</a></h3></div>
+
+<p>
+Según Google:
+</p>
+
+<ul>
+<li>
+Son 30x más rápidos que GPUs y CPUs.
+
+</li><li>
+Presentan una gran eficiencia energética.
+
+</li><li>
+Las NN desarrolladas con Tensorflow requieren muy pocas líneas de código.
+
+</li><li>
+Requieren menos tiempo -&gt; menos dinero.
+
+</li></ul>
+<div id="Computación Acelerada-TPU-Cuándo deberíamos utilizar una TPU?"><h3 id="Cuándo deberíamos utilizar una TPU?" class="header"><a href="#Computación Acelerada-TPU-Cuándo deberíamos utilizar una TPU?">Cuándo deberíamos utilizar una TPU?</a></h3></div>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/TPU_usage_recommendation.png" alt="TPU Usage Recommendation" style="width:900px;height:300px">
+</p>
+
+<div id="Computación Acelerada-TPU-Versiones"><h3 id="Versiones" class="header"><a href="#Computación Acelerada-TPU-Versiones">Versiones</a></h3></div>
+
+<p>
+Hay dos versiones:
+</p>
+
+<ul>
+<li>
+V2: HBM de 8 GB/TPU core. 1MXU (128x128) por core. TPU pod, hasta 512 cores (4TB de memoria)
+
+</li><li>
+V3: HBM de 16 GB/TPU core. 2 MXU (128x128) por core. TPU pod, hasta 2048 cores (32 TB de memoria)
+
+</li></ul>
+<div id="Computación Acelerada-TPU-Flujo de Ejecución de TPUs"><h3 id="Flujo de Ejecución de TPUs" class="header"><a href="#Computación Acelerada-TPU-Flujo de Ejecución de TPUs">Flujo de Ejecución de TPUs</a></h3></div>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/TPU_execution_flow.png" alt="TPU Execution Flow" style="width:400px;height:600px">
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

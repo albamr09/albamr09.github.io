@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
-    <title>T3. Herramientas y frameworks para Deep Learning</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Frameworks para Deep Learning</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,10 +31,10 @@
     <hr>
     <div class="content">
 <p>
-<a href="index.html">Back</a>
+<a href="../index.html">Back</a>
 </p>
 
-<div id="T3. Herramientas y frameworks para Deep Learning"><h1 id="T3. Herramientas y frameworks para Deep Learning" class="header"><a href="#T3. Herramientas y frameworks para Deep Learning">T3. Herramientas y frameworks para Deep Learning</a></h1></div>
+<div id="Frameworks para Deep Learning"><h1 id="Frameworks para Deep Learning" class="header"><a href="#Frameworks para Deep Learning">Frameworks para Deep Learning</a></h1></div>
 
 <hr>
 
@@ -71,9 +71,9 @@ A través de ficheros de configuración (Caffe, DistBelief, CNTK)
 A través de código (Torch/Pytoch, Theano, Tensorflow)
 
 </li></ul>
-<div id="T3. Herramientas y frameworks para Deep Learning-Tensorflow"><h2 id="Tensorflow" class="header"><a href="#T3. Herramientas y frameworks para Deep Learning-Tensorflow">Tensorflow</a></h2></div>
+<div id="Frameworks para Deep Learning-Tensorflow"><h2 id="Tensorflow" class="header"><a href="#Frameworks para Deep Learning-Tensorflow">Tensorflow</a></h2></div>
 
-<div id="T3. Herramientas y frameworks para Deep Learning-Tensorflow-Arquitectura Tensorflow"><h3 id="Arquitectura Tensorflow" class="header"><a href="#T3. Herramientas y frameworks para Deep Learning-Tensorflow-Arquitectura Tensorflow">Arquitectura Tensorflow</a></h3></div>
+<div id="Frameworks para Deep Learning-Tensorflow-Arquitectura Tensorflow"><h3 id="Arquitectura Tensorflow" class="header"><a href="#Frameworks para Deep Learning-Tensorflow-Arquitectura Tensorflow">Arquitectura Tensorflow</a></h3></div>
 
 <p>
 Presenta un núcleo de bajo nivel (C++/CUDA). Además se define un API Python sencillo para definir el gráfico computacional, así como APIs de alto nivel (TF-Learn, Keras, etc)
@@ -83,7 +83,7 @@ Presenta un núcleo de bajo nivel (C++/CUDA). Además se define un API Python se
 <img src="https://albamr09.github.io/public/assets/tensorflow_architecture.png" alt="Tensorflow Architecture" style="width:600px;height:200px">
 </p>
 
-<div id="T3. Herramientas y frameworks para Deep Learning-Tensorflow-Tensorflow vs Numpy"><h3 id="Tensorflow vs Numpy" class="header"><a href="#T3. Herramientas y frameworks para Deep Learning-Tensorflow-Tensorflow vs Numpy">Tensorflow vs Numpy</a></h3></div>
+<div id="Frameworks para Deep Learning-Tensorflow-Tensorflow vs Numpy"><h3 id="Tensorflow vs Numpy" class="header"><a href="#Frameworks para Deep Learning-Tensorflow-Tensorflow vs Numpy">Tensorflow vs Numpy</a></h3></div>
 
 <ul>
 <li>
@@ -93,7 +93,7 @@ Numpy no dispone de funciones/métodos para la creación de funciones de tensore
 NumPy no tiene soporte para GPU.
 
 </li></ul>
-<div id="T3. Herramientas y frameworks para Deep Learning-Tensorflow-Modelo Computacional de Tensorflow"><h3 id="Modelo Computacional de Tensorflow" class="header"><a href="#T3. Herramientas y frameworks para Deep Learning-Tensorflow-Modelo Computacional de Tensorflow">Modelo Computacional de Tensorflow</a></h3></div>
+<div id="Frameworks para Deep Learning-Tensorflow-Modelo Computacional de Tensorflow"><h3 id="Modelo Computacional de Tensorflow" class="header"><a href="#Frameworks para Deep Learning-Tensorflow-Modelo Computacional de Tensorflow">Modelo Computacional de Tensorflow</a></h3></div>
 
 <p>
 Tensorflow construye grafos donde cada nodo es un tensor y cada arista es una operación entre los tensores. De tal manera que, como vemos en la figura inferior, se pueden repartir las computaciones entre distintas GPUs.
@@ -103,19 +103,19 @@ Tensorflow construye grafos donde cada nodo es un tensor y cada arista es una op
 <img src="https://albamr09.github.io/public/assets/tensorflow_computational_graph.png" alt="Tensorflow Computational Graph" style="width:600px;height:400px">
 </p>
 
-<div id="T3. Herramientas y frameworks para Deep Learning-Tensorflow-Modelo Computacional de Tensorflow-Lazy Evaluation"><h4 id="Lazy Evaluation" class="header"><a href="#T3. Herramientas y frameworks para Deep Learning-Tensorflow-Modelo Computacional de Tensorflow-Lazy Evaluation">Lazy Evaluation</a></h4></div>
+<div id="Frameworks para Deep Learning-Tensorflow-Modelo Computacional de Tensorflow-Lazy Evaluation"><h4 id="Lazy Evaluation" class="header"><a href="#Frameworks para Deep Learning-Tensorflow-Modelo Computacional de Tensorflow-Lazy Evaluation">Lazy Evaluation</a></h4></div>
 
 <p>
 Este grafo sólo encompasa la definición de las operaciones, de tal manera que no requiere de su ejecución. Si no que la ejecución sólo se produce durante el entrenamiento.
 </p>
 
-<div id="T3. Herramientas y frameworks para Deep Learning-Tensorflow-Tensorflow Hub"><h3 id="Tensorflow Hub" class="header"><a href="#T3. Herramientas y frameworks para Deep Learning-Tensorflow-Tensorflow Hub">Tensorflow Hub</a></h3></div>
+<div id="Frameworks para Deep Learning-Tensorflow-Tensorflow Hub"><h3 id="Tensorflow Hub" class="header"><a href="#Frameworks para Deep Learning-Tensorflow-Tensorflow Hub">Tensorflow Hub</a></h3></div>
 
 <p>
 Se trata de un repositorio de modelo pre-entrenados.
 </p>
 
-<div id="T3. Herramientas y frameworks para Deep Learning-Tensorflow-Operaciones"><h3 id="Operaciones" class="header"><a href="#T3. Herramientas y frameworks para Deep Learning-Tensorflow-Operaciones">Operaciones</a></h3></div>
+<div id="Frameworks para Deep Learning-Tensorflow-Operaciones"><h3 id="Operaciones" class="header"><a href="#Frameworks para Deep Learning-Tensorflow-Operaciones">Operaciones</a></h3></div>
 
 <p>
 A continuación mostramos una serie de operaciones soportadas por Tensorflow:
@@ -125,7 +125,7 @@ A continuación mostramos una serie de operaciones soportadas por Tensorflow:
 <img src="https://albamr09.github.io/public/assets/tensorflow_operations.png" alt="Tensorflow Operations" style="width:800px;height:250px">
 </p>
 
-<div id="T3. Herramientas y frameworks para Deep Learning-Theano"><h2 id="Theano" class="header"><a href="#T3. Herramientas y frameworks para Deep Learning-Theano">Theano</a></h2></div>
+<div id="Frameworks para Deep Learning-Theano"><h2 id="Theano" class="header"><a href="#Frameworks para Deep Learning-Theano">Theano</a></h2></div>
 
 <p>
 Se trata de otro framework, pionero en el uso de grafos computacionales. Es una herramienta generalista, tal que podemos implementar cualquier tipo de algoirtmo sobre el framework. Además se puede especificar como backend a utilizar en Keras, en lugar de Tensorflow.
@@ -176,7 +176,7 @@ Da soporte para GPU's.
 Permite la diferenciación simbólica.
 
 </li></ul>
-<div id="T3. Herramientas y frameworks para Deep Learning-Keras"><h2 id="Keras" class="header"><a href="#T3. Herramientas y frameworks para Deep Learning-Keras">Keras</a></h2></div>
+<div id="Frameworks para Deep Learning-Keras"><h2 id="Keras" class="header"><a href="#Frameworks para Deep Learning-Keras">Keras</a></h2></div>
 
 <p>
 Keras puede ser utilizado con tensorflow o también como una librería adicional. Además presenta las siguientes ventajas:
@@ -233,6 +233,92 @@ Crear la última capa (layer) para manejar el tensor de salida (targets)
 
 </li><li>
 Construir virtualmente cualquier modelo entre estas dos capas (hidden layers)
+
+</li></ul>
+<p>
+Las definiciones de los modelos pueden ser guardados y recuperados en formato <code>json</code> y en formato <code>yaml</code>. Los parámetros también pueden ser guardados y recuperados en formato <code>h5</code>.
+</p>
+
+<div id="Frameworks para Deep Learning-Keras-Tipos de Modelos"><h3 id="Tipos de Modelos" class="header"><a href="#Frameworks para Deep Learning-Keras-Tipos de Modelos">Tipos de Modelos</a></h3></div>
+
+<p>
+Keras soporta dos tipos de modelos:
+</p>
+
+<ul>
+<li>
+Modelo Secuencial
+
+</li><li>
+API funcional: Se usa para definir modelos complejos: modelos multi-output, grafos acíclicos dirigidos (graph) o modelos con capa compartidas
+
+</li><li>
+Grafo (deprecado)
+
+</li></ul>
+<div id="Frameworks para Deep Learning-Caffe"><h2 id="Caffe" class="header"><a href="#Frameworks para Deep Learning-Caffe">Caffe</a></h2></div>
+
+<ul>
+<li>
+Construido sobre C++, CUDA.
+
+</li><li>
+Presenta una gran cantidad de modelos pre-entrenados
+
+</li></ul>
+<p>
+La definición de modelos de hace de forma declarativa:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/caffe_declarative_models.png" alt="Caffe Declarative Models" style="width:600px;height:300px">
+</p>
+
+<p>
+Cuáles son sus aplicaciones?
+</p>
+
+<ul>
+<li>
+Object Detection
+
+</li><li>
+Pixelwise Prediction
+
+</li></ul>
+<div id="Frameworks para Deep Learning-Torch"><h2 id="Torch" class="header"><a href="#Frameworks para Deep Learning-Torch">Torch</a></h2></div>
+
+<ul>
+<li>
+Su backend está basado en C y en CUDA.
+
+</li><li>
+Su frontend está escrito sobre Lua.
+
+</li></ul>
+<div id="Frameworks para Deep Learning-PyTorch"><h2 id="PyTorch" class="header"><a href="#Frameworks para Deep Learning-PyTorch">PyTorch</a></h2></div>
+
+<p>
+Torch en python.
+</p>
+
+<div id="Frameworks para Deep Learning-Fast.AI"><h2 id="Fast.AI" class="header"><a href="#Frameworks para Deep Learning-Fast.AI">Fast.AI</a></h2></div>
+
+<p>
+Es muy similar a Keras, Fast.AI permite generar herramientas y modelos pre-entranados de manera muy sencilla.
+</p>
+
+<div id="Frameworks para Deep Learning-Aplicaciones de DL"><h2 id="Aplicaciones de DL" class="header"><a href="#Frameworks para Deep Learning-Aplicaciones de DL">Aplicaciones de DL</a></h2></div>
+
+<ul>
+<li>
+Visión
+
+</li><li>
+Speech Recognition
+
+</li><li>
+NLP
 
 </li></ul>
 </div>
