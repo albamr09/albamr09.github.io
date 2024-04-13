@@ -1,0 +1,195 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/custom.css">
+    <title>Bias/Variance Tradeoff</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Bias/Variance Tradeoff"><h1 id="Bias/Variance Tradeoff" class="header"><a href="#Bias/Variance Tradeoff">Bias/Variance Tradeoff</a></h1></div>
+
+<hr>
+
+<p>
+Test error, also referred to as <span id="Bias/Variance Tradeoff-generalization error"></span><strong id="generalization error">generalization error</strong>, is the prediction error over an independent test sample:
+</p>
+
+\begin{align}
+Err_{\mathcal{T}} = \mathbb{E}[L(Y | \hat{f}(X)) | \mathcal{T}]
+\end{align}
+
+<p>
+Where \(L\) is the loss function. A related quantity is the <span id="Bias/Variance Tradeoff-expected prediction error"></span><strong id="expected prediction error">expected prediction error</strong> (or <span id="Bias/Variance Tradeoff-expected test error"></span><strong id="expected test error">expected test error</strong>):
+</p>
+
+\begin{align}
+Err = \mathbb{E}[Err_{\mathcal{T}}]
+\end{align}
+
+<p>
+where \(Err_{\mathcal{T}}\) is the test error.
+</p>
+
+<p>
+The error can always be decomposed into the sum of three fundamental quantities: 
+</p>
+
+<ol>
+<li>
+The variance of \(\hat{f}(x_0)\)
+
+</li><li>
+The squared bias of \(\hat{f}(x_0)\) 
+
+</li><li>
+The variance of the error terms \(\epsilon\). 
+
+</li></ol>
+<p>
+That is,
+</p>
+
+\begin{align}
+\mathbb{E}[\left(y_0 - \hat{f}(x_0)\right)^2] = \mathbb{V}[\hat{f}(x_0)] + [Bias(\hat{f}(x_0))]^2 + \mathbb{V}[\epsilon]
+\end{align}
+
+<p>
+This amount is derived from:
+</p>
+
+\begin{align}
+Err(x_0) = \mathbb{E}[(Y - \hat{f}(x_0))^2] = \mathbb{E}[Y^2 + \hat{f}(x_0)^2 - 2Y\hat{f}(x_0)]
+\end{align}
+
+\begin{align}
+= \mathbb{E}[Y^2] + \mathbb{E}[\hat{f}(x_0)^2] -2\mathbb{E}[Y]\mathbb{E}[\hat{f}(x_0)]
+\end{align}
+
+<p>
+We know that \(\mathbb{V}[X] = \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - \mathbb{E}[X]^2\), such that:
+</p>
+
+\begin{align}
+= \mathbb{V}[Y] + \mathbb{E}[Y]^2 + \mathbb{V}[\hat{f}(x_0)] + \mathbb{E}[\hat{f}(x_0)]^2 -2\mathbb{E}[Y]\mathbb{E}[\hat{f}(x_0)]
+\end{align}
+
+\begin{align}
+= \mathbb{E}[(Y - \mathbb{E}[Y])^2] + \mathbb{E}[Y]^2 + \mathbb{E}[(\hat{f}(x_0) - \mathbb{E}[\hat{f}(x_0)])^2] + \mathbb{E}[\hat{f}(x_0)]^2 -2\mathbb{E}[Y]\mathbb{E}[\hat{f}(x_0)]
+\end{align}
+
+<p>
+Note that, \(Y = f(x_0) + \epsilon[/\)], donde [\(]\mathbb{E}[\epsilon] = 0\), thus it follows:
+</p>
+
+\begin{align}
+= \mathbb{E}[(Y - \mathbb{E}[Y])^2] + (\mathbb{E}[f(x_0)] + \mathbb{E}[\epsilon])^2 + \mathbb{E}[(\hat{f}(x_0) - \mathbb{E}[\hat{f}(x_0)])^2] + \mathbb{E}[\hat{f}(x_0)]^2 -2(\mathbb{E}[f(x_0)] + \mathbb{E}[\epsilon])\mathbb{E}[\hat{f}(x_0)]
+\end{align}
+
+\begin{align}
+= \mathbb{E}[(Y - \mathbb{E}[Y])^2] + \mathbb{E}[f(x_0)]^2 + \mathbb{E}[(\hat{f}(x_0) - \mathbb{E}[\hat{f}(x_0)])^2] + \mathbb{E}[\hat{f}(x_0)]^2 -2\mathbb{E}[f(x_0)]\mathbb{E}[\hat{f}(x_0)]
+\end{align}
+
+<p>
+We know that \((a + b)^2 = a^2 + b^2 + 2ab\) and that \(\mathbb{E}[f(x_0)] = f(x_0)\), such that:
+</p>
+
+\begin{align}
+= \mathbb{E}[(Y - \mathbb{E}[Y])^2] + \mathbb{E}[(\hat{f}(x_0) - \mathbb{E}[\hat{f}(x_0)])^2] + f(x_0)^2 + \mathbb{E}[\hat{f}(x_0)]^2 -2f(x_0)\mathbb{E}[\hat{f}(x_0)]
+\end{align}
+
+\begin{align}
+= \mathbb{E}[(Y - \mathbb{E}[Y])^2] + \mathbb{E}[(\hat{f}(x_0) - \mathbb{E}[\hat{f}(x_0)])^2] + \left(\mathbb{E}[\hat{f}(x_0)] - f(x_0)\right)^2
+\end{align}
+
+<p>
+Here the notation \(\mathbb{E}[\left(y_0 - \hat{f}(x_0)\right)^2]\) defines the <span id="Bias/Variance Tradeoff-expected test MSE"></span><strong id="expected test MSE">expected test MSE</strong>, and refers expected to the average test MSE that we would obtain if we repeatedly \(f\) using a large number of training sets, and tested each at \(x_0\).
+</p>
+
+<p>
+The <span id="Bias/Variance Tradeoff-overall expected test MSE"></span><strong id="overall expected test MSE">overall expected test MSE</strong> can be computed by averaging \(\mathbb{E}[\left(y_0 - \hat{f}(x_0)\right)^2]\) over all possible values of \(x_0\) in the test set.
+</p>
+
+<p>
+The previous equation tells us that in order to minimize the expected test error, we need to select a statistical learning method that simultaneously achieves <span id="Bias/Variance Tradeoff-low variance"></span><strong id="low variance">low variance</strong> and <span id="Bias/Variance Tradeoff-low bias"></span><strong id="low bias">low bias</strong>. Note that variance is inherently a nonnegative quantity, and squared bias is also nonnegative. Hence, we see that <span id="Bias/Variance Tradeoff-the expected test MSE can never lie below"></span><strong id="the expected test MSE can never lie below">the expected test MSE can never lie below</strong> \(\mathbb{V}[\epsilon]\)<span id="Bias/Variance Tradeoff-, the irreducible error"></span><strong id=", the irreducible error">, the irreducible error</strong>.
+</p>
+
+<p>
+The <span id="Bias/Variance Tradeoff-variance of the error terms"></span><strong id="variance of the error terms">variance of the error terms</strong>, \(\mathbb{V}[\epsilon]\), is the variance of the target around its true mean \(f(x_0)\), and <span id="Bias/Variance Tradeoff-cannot be avoided"></span><strong id="cannot be avoided">cannot be avoided</strong> no matter how well we estimate \(f(x_0)\), unless \(\sigma^2 = 0\).
+</p>
+
+<p>
+<span id="Bias/Variance Tradeoff-Variance"></span><strong id="Variance">Variance</strong> refers to the amount by which \(\hat{f}\) would change if we estimated it using a different training data set. Ideally the estimate for \(f\) should not vary too much between training sets. This is computed as the expected squared deviation of \(\hat{f}(x_0)\) around its mean. 
+</p>
+
+<p>
+<span id="Bias/Variance Tradeoff-Bias"></span><strong id="Bias">Bias</strong> refers to the error that is introduced by approximating a real-life problem by a simpler model. This quentifies the amount by which the average of our estimate differs from the true mean.
+</p>
+
+<p>
+As a general rule, as we use <span id="Bias/Variance Tradeoff-more flexible methods"></span><strong id="more flexible methods">more flexible methods</strong>, the <span id="Bias/Variance Tradeoff-variance will increase and the bias will decrease"></span><strong id="variance will increase and the bias will decrease">variance will increase and the bias will decrease</strong>.
+</p>
+
+<p>
+As we <span id="Bias/Variance Tradeoff-increase the flexibility"></span><strong id="increase the flexibility">increase the flexibility</strong>, the <span id="Bias/Variance Tradeoff-bias"></span><strong id="bias">bias</strong> tends to initially <span id="Bias/Variance Tradeoff-decrease faster"></span><strong id="decrease faster">decrease faster</strong> than the variance increases. Consequently, the <span id="Bias/Variance Tradeoff-expected test MSE declines"></span><strong id="expected test MSE declines">expected test MSE declines</strong>. At some point <span id="Bias/Variance Tradeoff-increasing flexibility"></span><strong id="increasing flexibility">increasing flexibility</strong> has little impact on the bias but starts to <span id="Bias/Variance Tradeoff-significantly increase the variance"></span><strong id="significantly increase the variance">significantly increase the variance</strong>.
+</p>
+
+<p>
+In a real-life situation in which \(f\) is unobserved, it is <span id="Bias/Variance Tradeoff-generally not possible to explicitly compute the test MSE, bias, or variance for a statistical learning method"></span><strong id="generally not possible to explicitly compute the test MSE, bias, or variance for a statistical learning method">generally not possible to explicitly compute the test MSE, bias, or variance for a statistical learning method</strong>.
+</p>
+
+<p>
+<span id="Bias/Variance Tradeoff-Training error"></span><strong id="Training error">Training error</strong> consistently <span id="Bias/Variance Tradeoff-decreases"></span><strong id="decreases">decreases</strong> with model complexity, typically <span id="Bias/Variance Tradeoff-dropping to zero"></span><strong id="dropping to zero">dropping to zero</strong> if we increase the model complexity enough. A model with <span id="Bias/Variance Tradeoff-zero training error is overfit"></span><strong id="zero training error is overfit">zero training error is overfit</strong> to the training dat and will typically <span id="Bias/Variance Tradeoff-generalize poorly"></span><strong id="generalize poorly">generalize poorly</strong>.
+</p>
+
+<p>
+It is important to note that there are in fact two separate goals:
+</p>
+
+<ol>
+<li>
+<span id="Bias/Variance Tradeoff-Model selection"></span><strong id="Model selection">Model selection</strong>: <span id="Bias/Variance Tradeoff-estimating the performance"></span><strong id="estimating the performance">estimating the performance</strong> of different models in order to <span id="Bias/Variance Tradeoff-choose the best model"></span><strong id="choose the best model">choose the best model</strong>.
+
+</li><li>
+<span id="Bias/Variance Tradeoff-Model assessment"></span><strong id="Model assessment">Model assessment</strong>: having chosen a <span id="Bias/Variance Tradeoff-final model"></span><strong id="final model">final model</strong>, estimating its prediction error (<span id="Bias/Variance Tradeoff-generalization error"></span><strong id="generalization error">generalization error</strong>) on new data.
+
+</li></ol>
+<p>
+The <span id="Bias/Variance Tradeoff-training set"></span><strong id="training set">training set</strong> is used to fit the models. The <span id="Bias/Variance Tradeoff-validation set"></span><strong id="validation set">validation set</strong> is used to estimate prediction error for model selection. The <span id="Bias/Variance Tradeoff-test set"></span><strong id="test set">test set</strong> is used for assessment of the generalization error
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

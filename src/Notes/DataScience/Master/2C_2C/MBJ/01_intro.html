@@ -1,0 +1,291 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>T1. Introduccion a la Inferencia Bayesiana</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="T1. Introduccion a la Inferencia Bayesiana"><h1 id="T1. Introduccion a la Inferencia Bayesiana" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana">T1. Introduccion a la Inferencia Bayesiana</a></h1></div>
+
+<hr>
+
+<div id="T1. Introduccion a la Inferencia Bayesiana-The three steps of Bayesian data analysis"><h2 id="The three steps of Bayesian data analysis" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-The three steps of Bayesian data analysis">The three steps of Bayesian data analysis</a></h2></div>
+
+<p>
+The process of Bayesian data analysis can be idealized by dividing it into the following three steps:
+</p>
+
+<ol>
+<li>
+Setting up a <span id="T1. Introduccion a la Inferencia Bayesiana-The three steps of Bayesian data analysis-full probability model"></span><strong id="full probability model">full probability model</strong>: a joint probability distribution for all observable and unobservable quantities in a problem.
+
+</li><li>
+<span id="T1. Introduccion a la Inferencia Bayesiana-The three steps of Bayesian data analysis-Conditioning on observed data"></span><strong id="Conditioning on observed data">Conditioning on observed data</strong>: calculating and interpreting the appropriate posterior distribution.
+
+</li><li>
+<span id="T1. Introduccion a la Inferencia Bayesiana-The three steps of Bayesian data analysis-Evaluating the fit of the model"></span><strong id="Evaluating the fit of the model">Evaluating the fit of the model</strong> and the implications of the resulting posterior distribution
+
+</li></ol>
+<p>
+We distinguish between two kinds of estimands
+</p>
+
+<ul>
+<li>
+Quantities that are <span id="T1. Introduccion a la Inferencia Bayesiana-The three steps of Bayesian data analysis-not directly observable"></span><strong id="not directly observable">not directly observable</strong>: for example, parameters that govern the hypothetical process leading to the observed data, for which statistical inferences are made.
+
+</li><li>
+Potentially <span id="T1. Introduccion a la Inferencia Bayesiana-The three steps of Bayesian data analysis-observable quantities"></span><strong id="observable quantities">observable quantities</strong> (such as future observations of a process, or the outcome under the treatment not received)
+
+</li></ul>
+<div id="T1. Introduccion a la Inferencia Bayesiana-Notation"><h2 id="Notation" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Notation">Notation</a></h2></div>
+
+<ul>
+<li>
+\(\theta\): Unobservable vector quantities or population parameters.
+
+</li><li>
+\(y\): Observed data
+
+</li><li>
+\(\tilde{y}\): Unknown, but potentially observable, quantities.
+
+</li></ul>
+<div id="T1. Introduccion a la Inferencia Bayesiana-Notation-Exchangeability"><h3 id="Exchangeability" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Notation-Exchangeability">Exchangeability</a></h3></div>
+
+<p>
+We assume assume that the \(n\) values \(y_i\) may be regarded as <span id="T1. Introduccion a la Inferencia Bayesiana-Notation-Exchangeability-exchangeable"></span><strong id="exchangeable">exchangeable</strong>.
+</p>
+
+<p>
+We express uncertainty as a joint probability density \(p(y_1, \cdots, y_n)\) that is invariant to permutations of the indexes.
+</p>
+
+<p>
+We commonly model data from an exchangeable distribution as <span id="T1. Introduccion a la Inferencia Bayesiana-Notation-Exchangeability-independently and identically distributed (iid)"></span><strong id="independently and identically distributed (iid)">independently and identically distributed (iid)</strong>.
+</p>
+
+<div id="T1. Introduccion a la Inferencia Bayesiana-Notation-Explanatory variables"><h3 id="Explanatory variables" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Notation-Explanatory variables">Explanatory variables</a></h3></div>
+
+<p>
+Observations on each unit that we do not model as random.
+</p>
+
+<div id="T1. Introduccion a la Inferencia Bayesiana-Notation-Hierarchical modeling"><h3 id="Hierarchical modeling" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Notation-Hierarchical modeling">Hierarchical modeling</a></h3></div>
+
+<p>
+Hierarchical models (also called <span id="T1. Introduccion a la Inferencia Bayesiana-Notation-Hierarchical modeling-multilevel models"></span><strong id="multilevel models">multilevel models</strong>), which are used when information is available on several different levels of observational units. 
+</p>
+
+<div id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference"><h2 id="Bayesian inference" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Bayesian inference">Bayesian inference</a></h2></div>
+
+<p>
+We define a <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-prior distribution"></span><strong id="prior distribution">prior distribution</strong> \(p(\theta)\), and a <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-sampling distribution"></span><strong id="sampling distribution">sampling distribution</strong> (or <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-data distribution"></span><strong id="data distribution">data distribution</strong>) is given by \(p(y|\theta)\), such that the joint probability distribution for \(\theta\) and \(y\) is obtained as follows:
+</p>
+
+\begin{align}
+p(\theta,y) = p(\theta|y)p(y)
+\end{align}
+
+<p>
+By Baye's rule:
+</p>
+
+\begin{align}
+p(\theta|y) = \frac{p(\theta, y)}{p(y)} = \frac{p(y|\theta)p(\theta)}{p(y)}
+\end{align}
+
+<p>
+where \(p(y) = \sum_y p(y, \theta) = \sum_y p(y|\theta) p(y) = \int_y p(y|\theta) p(y) dy\)
+</p>
+
+<p>
+An equivalent form is omitting the factor \(p(y)\), yielding the <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-unnormalized posterior density"></span><strong id="unnormalized posterior density">unnormalized posterior density</strong>:
+</p>
+
+\begin{align}
+p(\theta|y) \propto p(y|\theta)p(\theta)
+\end{align}
+
+
+<div id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-Prediction"><h3 id="Prediction" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-Prediction">Prediction</a></h3></div>
+
+<p>
+The <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-Prediction-marginal distribution"></span><strong id="marginal distribution">marginal distribution</strong> of \(y\) or <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-Prediction-prior predictive distribution"></span><strong id="prior predictive distribution">prior predictive distribution</strong> is given by:
+</p>
+
+\begin{align}
+p(y) = \int p(y, \theta) dy = \int p(y|\theta) p(\theta) d\theta
+\end{align}
+
+<p>
+The distribution of \(\tilde{y}\) is called the <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-Prediction-posterior predictive distribution"></span><strong id="posterior predictive distribution">posterior predictive distribution</strong>, posterior because it is conditional on the observed \(y\) and predictive because it is a prediction for an observable \(\tilde{y}\). It is defined as the marginalization of \(\tilde{y}\) over \(y\).
+</p>
+
+\begin{align}
+p(\tilde{y}|y) = \int p(\tilde{y}, \theta|y)d\theta
+\end{align}
+
+<p>
+We note that the statistical process is also conditioned on the unobservable data \(\theta\). Por la propiedad \(P(X, Y|Z) = P(X|Y, Z)P(Z)\):
+</p>
+
+\begin{align}
+= \int p(\tilde{y}|y, \theta)p(\theta|y) d\theta
+\end{align}
+
+<p>
+Asumimos independencia condicional entre \(y\) y \(\tilde{y}\):
+</p>
+
+\begin{align}
+= \int p(\tilde{y}|\theta)p(\theta|y) d\theta
+\end{align}
+
+<div id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-Likelikhood"><h3 id="Likelikhood" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-Likelikhood">Likelikhood</a></h3></div>
+
+<p>
+When regarded as a function of \(\theta\), for fixed y \(p(y|\theta)\) is the <span id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-Likelikhood-likelihood function"></span><strong id="likelihood function">likelihood function</strong>.
+</p>
+
+<div id="T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-Likelihood and odds ratios"><h3 id="Likelihood and odds ratios" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Bayesian inference-Likelihood and odds ratios">Likelihood and odds ratios</a></h3></div>
+
+<p>
+Odds a posteriori:
+</p>
+
+\begin{align}
+\frac{p(\theta_1|y)}{p(\theta_2|y)} = \frac{\frac{p(y|\theta_1)p(\theta_1)}{p(y)}}{\frac{p(y|\theta_2)p(\theta_2)}{p(y)}} = \frac{p(y|\theta_1)p(\theta_1)}{p(y|\theta_2)p(\theta_2)}
+\end{align}
+
+<p>
+Odds a priori:
+</p>
+
+\begin{align}
+\frac{p(\theta_1)}{p(\theta_2)}
+\end{align}
+
+<p>
+Likelihood ratio:
+</p>
+
+\begin{align}
+\frac{p(\theta_1|y)}{p(\theta_2|y)}
+\end{align}
+
+<div id="T1. Introduccion a la Inferencia Bayesiana-Probability theory"><h2 id="Probability theory" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Probability theory">Probability theory</a></h2></div>
+
+<p>
+The expected value of a continuous random variable \(u\) is given by:
+</p>
+
+\begin{align}
+\mathbb{E}[u] = \int u p(u)du
+\end{align}
+
+<p>
+The variance for a continuous random variable \(u\) is given by:
+</p>
+
+\begin{align}
+\mathbb{E}[u] = \int (u - \mathbb{E}[u])^2 p(u)du
+\end{align}
+
+<p>
+The expected value of a discrete random variable \(u\) is given by:
+</p>
+
+\begin{align}
+\mathbb{E}[u] = \sum u p(u)
+\end{align}
+
+<p>
+The variance for a discrete random variable \(u\) is given by:
+</p>
+
+\begin{align}
+\mathbb{E}[u] = \sum (u - \mathbb{E}[u])^2 p(u)
+\end{align}
+
+<div id="T1. Introduccion a la Inferencia Bayesiana-Probability theory-Means and variances of conditional distributions"><h3 id="Means and variances of conditional distributions" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Probability theory-Means and variances of conditional distributions">Means and variances of conditional distributions</a></h3></div>
+
+<p>
+Given two continuous random variables \(u\) and \(y\), the mean of \(u\) can be obtained by <span id="T1. Introduccion a la Inferencia Bayesiana-Probability theory-Means and variances of conditional distributions-averaging the conditional mean over the marginal distribution of"></span><strong id="averaging the conditional mean over the marginal distribution of">averaging the conditional mean over the marginal distribution of</strong> \(v\):
+</p>
+
+\begin{align}
+\mathbb{E}(u) = \int u p(u) du = \int u \left(\int p(u, v)\right) dv du
+\end{align}
+
+\begin{align}
+= \int \left(\int u p(u|v) du \right) p(v) dv = \int \mathbb{E}_u[u|v] p(v) dv = \mathbb{E}_v[\mathbb{E}_u[u|v]]
+\end{align}
+
+<p>
+The corresponding result for the variance:
+</p>
+
+\begin{align}
+\mathbb{V}[u] = \mathbb{E}[\mathbb{V}[u|v]] - \mathbb{V}[\mathbb{E}[u|v]]
+\end{align}
+
+<div id="T1. Introduccion a la Inferencia Bayesiana-Probability theory-Transformation of variables"><h3 id="Transformation of variables" class="header"><a href="#T1. Introduccion a la Inferencia Bayesiana-Probability theory-Transformation of variables">Transformation of variables</a></h3></div>
+
+<p>
+Suppose \(p_u(u)\) is the density of the vector \(u\), and we transform to \(v = f(u)\), where \(v\) has the same number of components as \(u\). If \(p_u\) is a discrete distribution, and \(f\) is a one-to-one function, then the density of \(v\) is given by:
+</p>
+
+\begin{align}
+p_v(v) = p_u(f^{-1}(v))
+\end{align}
+
+<p>
+If \(p_u\) is a continuous distribution, and \(v = f(u)\) is a one-to-one transformation, then the joint density of the transformed vector is:
+</p>
+
+\begin{align}
+p_v(v) = |J| p_u(f^{-1}(v))
+\end{align}
+
+<p>
+where \(|J|\) is the absolute value of the determinant of the Jacobian of the transformation \(u = f^{−1}(v)\) as a function of \(v\).
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

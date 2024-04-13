@@ -1,0 +1,327 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/custom.css">
+    <title>Normal model with exchangeable parameters</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Normal model with exchangeable parameters"><h1 id="Normal model with exchangeable parameters" class="header"><a href="#Normal model with exchangeable parameters">Normal model with exchangeable parameters</a></h1></div>
+
+<hr>
+
+<div id="Normal model with exchangeable parameters-Model definition"><h2 id="Model definition" class="header"><a href="#Normal model with exchangeable parameters-Model definition">Model definition</a></h2></div>
+
+<p>
+We now present a full treatment of a simple hierarchical model based on the normal distribution, with different means for each "group" but with known observation variance and a normal population distribution for the group means.
+</p>
+
+<ul>
+<li>
+Consider \(J\) independent experiments. The <span id="Normal model with exchangeable parameters-Model definition-likelihood (sampling distribution)"></span><strong id="likelihood (sampling distribution)">likelihood (sampling distribution)</strong> is defined as:
+\begin{align}
+y_{ij} | \theta_j \sim \text{N}(\theta_j, \sigma^2), \text{ for } i = 1, \cdots, n_j; j = 1, \cdots, J.
+\end{align}
+
+</li></ul>
+<p>
+where we label the sample mean of each group \(j\) as:
+</p>
+
+\begin{align}
+\overline{y}_j = \frac{1}{n_j} \sum_{i = 1}^{n_j} y_{ij}
+\end{align}
+
+<p>
+and the sampling variance as:
+</p>
+
+\begin{align}
+\sigma^2_j = \frac{\sigma^2}{n_j}
+\end{align}
+
+<p>
+Here we assume that \(\sigma\) is a know value.
+</p>
+
+<p>
+We can then write the likelihood for each \(\theta_j\) using the sufficient statistics, \(\overline{y}_j\):
+</p>
+
+\begin{align}
+\overline{y}_j | \theta_j \sim \text{N}(\theta_j, \sigma_j^2)
+\end{align}
+
+<p>
+Sufficient statistics are summary statistics of the data that capture all the information about the parameter of interest. In this case, the sufficient statistic \(\overline{y}_j\) represents the data summary for experiment \(j\) that is used to estimate the parameter \(\theta_j\). By using the sufficient statistic \(\overline{y}_j\), the likelihood function for each \(\theta_j\) is constructed based on the observed data in experiment \(j\).
+</p>
+
+<ul>
+<li>
+The <span id="Normal model with exchangeable parameters-Model definition-prior distribution"></span><strong id="prior distribution">prior distribution</strong> over \(\theta_j\), assuming the prior to be normal for the sake of conjugacy is defined as:
+\begin{align}
+\theta_j|\mu, \tau \sim \text{N}(\theta_j|\mu, \tau^2)
+\end{align}
+
+</li></ul>
+<p>
+Assuming each \(\theta_j\) to be independent we obtain the following joint distribution:
+</p>
+
+\begin{align}
+p(\theta_1, \cdots, \theta_J|\mu, \tau) = \prod_{j=1}^J \text{N}(\theta_j|\mu, \tau^2)
+\end{align}
+
+<p>
+and by process of marginalization:
+</p>
+
+\begin{align}
+p(\theta_1, \cdots, \theta_J) = \int \left[\prod_{j=1}^J \text{N}(\theta_j|\mu, \tau^2)\right]p(\mu, \tau) d(\mu, \tau)
+\end{align}
+
+<ul>
+<li>
+The <span id="Normal model with exchangeable parameters-Model definition-hyperprior over the parameters"></span><strong id="hyperprior over the parameters">hyperprior over the parameters</strong> \(\mu\) and \(\tau\) is defined as a non-informative distribution (i.e. uniform density), such that:
+\begin{align}
+p(\mu, \tau) = p(\mu|\tau)p(\tau) \propto p(\tau)
+\end{align}
+
+</li></ul>
+<p>
+We define a prior distribution over \(\tau\). For our illustrative analysis, we use the uniform prior distribution \(p(\tau) \propto 1\). Once an initial analysis is performed using the noninformative
+'uniform' prior density, a sensitivity analysis with a more realistic prior distribution is often desirable.
+</p>
+
+<div id="Normal model with exchangeable parameters-Inference"><h2 id="Inference" class="header"><a href="#Normal model with exchangeable parameters-Inference">Inference</a></h2></div>
+
+<div id="Normal model with exchangeable parameters-Inference-Joint posterior distribution"><h3 id="Joint posterior distribution" class="header"><a href="#Normal model with exchangeable parameters-Inference-Joint posterior distribution">Joint posterior distribution</a></h3></div>
+
+<p>
+This distribution combines prior information (hyperprior distribution \(p(\mu, \tau)\))  the population distribution \(p(\theta_j|\mu, \tau)\) and the likelihood function \(p(y_{ij}|\theta_j)\). We define it as follows:
+</p>
+
+\begin{align}
+p(\theta, \mu, \tau|y)
+\end{align}
+
+<p>
+By Bayes Theorem (ignoring the normalization term):
+</p>
+
+\begin{align}
+\propto p(y|\theta) p(\theta|\mu, \tau) p(\mu, \tau)
+\end{align}
+
+<p>
+Here \(p(y|\theta)\) is the likelihood function previously defined in terms of the sufficient statistics \(\overline{y}_j\)
+</p>
+
+\begin{align}
+\propto \left[\prod_{j=1}^J \text{N}(\overline{y}_j|\theta_j, \sigma_j^2)\right] p(\theta|\mu, \tau) p(\mu, \tau)
+\end{align}
+
+<p>
+and \(p(\theta|\mu, \tau)\) is the prior, also previouly defined, such that:
+</p>
+
+\begin{align}
+\propto \left[\prod_{j=1}^J \text{N}(\overline{y}_j|\theta_j, \sigma_j^2)\right] \left[\prod_{j=1}^J \text{N}(\theta_j|\mu, \tau^2) p(y|\theta)\right] p(\mu, \tau)
+\end{align}
+
+<p>
+where we can ignore factors that depend only on \(y\) and the parameters \(\sigma_j\), which are assumed known for this analysis.
+</p>
+
+<div id="Normal model with exchangeable parameters-Inference-The conditional posterior distribution"><h3 id="The conditional posterior distribution" class="header"><a href="#Normal model with exchangeable parameters-Inference-The conditional posterior distribution">The conditional posterior distribution</a></h3></div>
+
+<p>
+The conditional posterior distribution calculates the posterior distribution of \(\theta_j\) given the hyperparameters \(\mu, \tau\). It allows us to understand how parameters intereact and influence each other. We define them for each \(\theta_j\) as follows:
+</p>
+
+\begin{align}
+\theta_j | \mu, \tau, y \sim \text{N}(\hat{\theta}_j, V_j)
+\end{align}
+
+<p>
+where:
+</p>
+
+\begin{align}
+\hat{\theta}_j = \frac{\frac{1}{\sigma_j^2}\overline{y}_j + \frac{1}{\tau^2}\mu}{\frac{1}{\sigma_j^2} + \frac{1}{\tau^2}}
+\end{align}
+
+<p>
+and:
+</p>
+
+\begin{align}
+V_j = \frac{1}{\frac{1}{\sigma_j^2} + \frac{1}{\tau^2}}
+\end{align}
+
+<div id="Normal model with exchangeable parameters-Inference-The marginal posterior distribution"><h3 id="The marginal posterior distribution" class="header"><a href="#Normal model with exchangeable parameters-Inference-The marginal posterior distribution">The marginal posterior distribution</a></h3></div>
+
+<p>
+This distribution allows us to estimate the hyperparameters \(\mu\) and \(\tau\) through the Bayesian paradigm. By the conditional rule we obtain:
+</p>
+
+\begin{align}
+p(\mu, \tau|y) \propto p(\mu, \tau)p(y|\mu, \tau)
+\end{align}
+
+<p>
+where:
+</p>
+
+\begin{align}
+\overline{y}_j | \mu, \tau \sim \text{N}(\mu, \sigma_j^2 + \tau^2)
+\end{align}
+
+<p>
+such that:
+</p>
+
+\begin{align}
+p(\mu, \tau|y) \propto p(\mu, \tau) \prod_{j=1}^J \text{N}(\overline{y}_j|\mu, \sigma^2_j + \tau^2)
+\end{align}
+
+<div id="Normal model with exchangeable parameters-Inference-The marginal posterior distribution-Posterior distribution of $\mu$ given $\tau$"><h5 id="Posterior distribution of $\mu$ given $\tau$" class="header"><a href="#Normal model with exchangeable parameters-Inference-The marginal posterior distribution-Posterior distribution of $\mu$ given $\tau$">Posterior distribution of \(\mu\) given \(\tau\)</a></h5></div>
+
+<p>
+We can further simplify by integrating over \(\mu\), leaving a simple univariate numerical computation of \(p(\tau|y)\), by the conditional rule:
+</p>
+
+\begin{align}
+p(\mu, \tau|y) = p(\mu | \tau, y) p(\tau|y)
+\end{align}
+
+<p>
+where:
+</p>
+
+\begin{align}
+\mu | \tau, y \sim \text{N}(\hat{\mu}, V_\mu)
+\end{align}
+
+<p>
+with:
+</p>
+
+\begin{align}
+\hat{\mu} = \frac{\sum_{j=1}^J \frac{1}{\sigma_j^2 + \tau^2}\overline{y}_j}{\sum_{j=1}^J \frac{1}{\sigma_j^2 + \tau^2}}
+\end{align}
+
+<p>
+and
+</p>
+
+\begin{align}
+V_{\mu}^{-1} = \sum_{j=1}^J \frac{1}{\sigma_j^2 + \tau^2}
+\end{align}
+
+<div id="Normal model with exchangeable parameters-Inference-The marginal posterior distribution-Posterior distribution $\tau$"><h5 id="Posterior distribution $\tau$" class="header"><a href="#Normal model with exchangeable parameters-Inference-The marginal posterior distribution-Posterior distribution $\tau$">Posterior distribution \(\tau\)</a></h5></div>
+
+<p>
+We know from the previous section that:
+</p>
+
+\begin{align}
+p(\mu, \tau|y) = p(\mu | \tau, y) p(\tau|y)
+\end{align}
+
+<p>
+such that:
+</p>
+
+\begin{align}
+p(\tau|y) = \frac{p(\mu, \tau|y)}{p(\mu | \tau, y)}
+\end{align}
+
+<p>
+We previously defined \(\mu | \tau, y \sim \text{N}(\hat{\mu}, V_\mu)\), therefore:
+</p>
+
+\begin{align}
+p(\tau|y) = \frac{p(\mu, \tau|y)}{\text{N}(\hat{\mu}, V_\mu)}
+\end{align}
+
+<p>
+We also defined \(p(\mu, \tau|y) \propto p(\mu, \tau) \prod_{j=1}^J \text{N}(\overline{y}_j|\mu, \sigma^2_j + \tau^2)\):
+</p>
+
+\begin{align}
+\propto \frac{p(\tau) \prod_{j=1}^J \text{N}(\overline{y}_j|\mu, \sigma^2_j + \tau^2)}{\text{N}(\hat{\mu}, V_\mu)}
+\end{align}
+
+<div id="Normal model with exchangeable parameters-Simulation"><h2 id="Simulation" class="header"><a href="#Normal model with exchangeable parameters-Simulation">Simulation</a></h2></div>
+
+<p>
+For this model, computation of the posterior distribution of θ is most conveniently performed via simulation, following the factorization:
+</p>
+
+\begin{align}
+p(\theta, \mu, \tau|y) = p(\theta|\mu, \tau, y) p(\mu|\tau, y) p(\tau, y)
+\end{align}
+
+<div id="Normal model with exchangeable parameters-Posterior predictive distributions"><h2 id="Posterior predictive distributions" class="header"><a href="#Normal model with exchangeable parameters-Posterior predictive distributions">Posterior predictive distributions</a></h2></div>
+
+<p>
+To obtain a draw from the posterior predictive distribution of new data \(\tilde{y}\) from the current batch of parameters, \(\theta\), first obtain a draw from \(p(\theta, \mu, \tau|y)\) and then draw the predictive data \(\tilde{y}\) from the sampling distribution:
+</p>
+
+\begin{align}
+y_{ij} | \theta_j \sim \text{N}(\theta_j, \sigma^2), \text{ for } i = 1, \cdots, n_j; j = 1, \cdots, J.
+\end{align}
+
+<p>
+To obtain posterior predictive simulations of new data \(\tilde{y}\) for \(\tilde{J}\) new groups, perform the following three steps:
+</p>
+
+<ul>
+<li>
+Draw \((\mu, \tau)\) from their posterior distribution \(p(\mu, \tau|y)\)
+
+</li><li>
+Draw \(\tilde{J}\) new parameters \(\tilde{\theta} = \tilde{\theta}_1, \cdots, \tilde{\theta}_{\tilde{J}}\) from the population distribution \(p(\tilde{\theta}|\mu, tau)\).
+
+</li><li>
+Draw \(\tilde{y}\) given \(\tilde{\theta}\) from the sampling distribution.
+
+</li></ul>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

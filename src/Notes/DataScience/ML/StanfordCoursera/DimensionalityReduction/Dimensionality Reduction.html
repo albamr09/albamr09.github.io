@@ -1,0 +1,517 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Dimensionality Reduction</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Dimensionality Reduction"><h1 id="Dimensionality Reduction" class="header"><a href="#Dimensionality Reduction">Dimensionality Reduction</a></h1></div>
+
+<hr>
+
+<ol>
+<li>
+<a href="Dimensionality Reduction.html#Dimensionality Reduction-Standardize Data">Standardize Data</a>
+
+</li><li>
+<a href="Dimensionality Reduction.html#Dimensionality Reduction-PCA">PCA</a>
+
+<ol>
+<li>
+<a href="Dimensionality Reduction.html#Dimensionality Reduction-PCA-Find Underlying Space">Find Underlying Space</a>
+
+</li><li>
+<a href="Dimensionality Reduction.html#Dimensionality Reduction-PCA-Represent the Subspace">Represent the Subspace</a>
+
+</li><li>
+<a href="Dimensionality Reduction.html#Dimensionality Reduction-PCA-Algorithm Layout">Algorithm Layout</a>
+
+</li><li>
+<a href="Dimensionality Reduction.html#Dimensionality Reduction-PCA-Performing Eigen-decomposition">Performing Eigen Decomposition</a>
+
+</li></ol>
+</li><li>
+<a href="Dimensionality Reduction.html#Dimensionality Reduction-ICA">ICA</a>
+
+<ol>
+<li>
+<a href="Dimensionality Reduction.html#Dimensionality Reduction-ICA-Intuition">Intuition</a>
+
+</li><li>
+<a href="Dimensionality Reduction.html#Dimensionality Reduction-ICA-Solution">Solution</a>
+
+</li></ol>
+</li></ol>
+<hr>
+
+<p>
+Given examples \(\{x^{(i)}\}_{i=1}^n\) where \(x^{(i)} \in \mathbb{R}^d\), we want to find out if our data lives is a low dimensional space. Look at the next example:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/dimensionality_reduction.png" alt="Dimensionality Reduction" style="transform:translate(22vw, 0)">
+</p>
+
+<p>
+We can see that the two features are correlated, and we can project the points onto a line, reducing the space from two dimensions to one.
+</p>
+
+<p>
+So it might be the case that some features are highly correlated, and so de d-dimensional space can be as a k-dimensional space where \(0 &lt; k &lt; d\):
+</p>
+
+\begin{align}
+\begin{bmatrix}
+x_{11} &amp; \cdots &amp; x_{1d} \\
+\vdots &amp; \ddots &amp; \vdots \\
+x_{n1} &amp; \cdots &amp; x_{nd} \\
+\end{bmatrix} \rightarrow
+\begin{bmatrix}
+x_{11} &amp; \cdots &amp; x_{1k} \\
+\vdots &amp; \ddots &amp; \vdots \\
+x_{n1} &amp; \cdots &amp; x_{nk} \\
+\end{bmatrix}
+\end{align}
+
+<div id="Dimensionality Reduction-Standardize Data"><h2 id="Standardize Data" class="header"><a href="#Dimensionality Reduction-Standardize Data">Standardize Data</a></h2></div>
+
+<p>
+A lot of the times the units of each feature in the data make the values in one column (feature) be much bigger than the values in another column. Thus, the first step is to standardize your data:
+</p>
+
+<ul>
+<li>
+Center data
+
+</li><li>
+Have it have variance equal to one 
+
+</li></ul>
+  
+<p>
+So we transform our data as follows:
+</p>
+
+\begin{align}
+x_j^{(i)} = \frac{x_j^{(i)} - \mu_j}{\sigma_j}
+\end{align}
+
+<p>
+Where:
+</p>
+
+<ul>
+<li>
+\(u_j\) is the mean of the feature \(j\) over the \(n\) examples, such that \(u_j = \frac{1}{n}\sum_{i=1}^nx^{(i)}_j\)
+
+</li><li>
+\(\sigma_j\) is the standard deviation of the feature \(j\) over the \(n\) examples, where \(\sigma_j^2 = \frac{1}{n}\sum_{i=1}^n(x^{(i)}_j - \mu_j)^2\)
+
+</li></ul>
+<div id="Dimensionality Reduction-PCA"><h2 id="PCA" class="header"><a href="#Dimensionality Reduction-PCA">PCA</a></h2></div>
+
+<div id="Dimensionality Reduction-PCA-Find Underlying Space"><h3 id="Find Underlying Space" class="header"><a href="#Dimensionality Reduction-PCA-Find Underlying Space">Find Underlying Space</a></h3></div>
+
+<p>
+To reduce the dimensionality of our data we first define a subspace and then we project each point onto the subspace. 
+</p>
+
+<p>
+This projection is the closes point in the subspace to the point we are trying to project, this has as a consequence that the "line" connecting the point to its projection is always perpendicular to the subspace:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/pca_projection.png" alt="Projection Onto Subspace" style="transform:translate(22vw, 0)">
+</p>
+
+<p>
+The goal is to choose the subspace that maximizes the variance of the projected points, to retain the maximum possible variance of the data. As you can see if we choose the blue line as the subspace the variance 
+is much bigger that if we choose the red line:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/larger_variance_projection.svg" alt="Larger Variance Projection" style="transform:translate(22vw,0)">
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/smaller_variance_projection.svg" alt="Smaller Variance Projection" style="transform:translate(22vw,0)">
+</p>
+
+<div id="Dimensionality Reduction-PCA-Represent the Subspace"><h3 id="Represent the Subspace" class="header"><a href="#Dimensionality Reduction-PCA-Represent the Subspace">Represent the Subspace</a></h3></div>
+
+<p>
+Let us suppose the subspace is defined by a basis vector \(u \in \mathbb{R}^d\) where \(u\) is a unit vector, then projection of \(\overrightarrow{x^{(i)}}\) on to the space spanned by \(u\) will be:
+</p>
+
+\begin{align}
+Proj(u)\overrightarrow{x^{(i)}}
+\end{align}
+
+<p>
+Where \(Proj(u)\) is the projection matrix and \(x^{(i)} \in \mathbb{R}^d\). So, because \(Proj(u) = \frac{uu^T}{u^Tu}\), then the projected point is defined as:
+</p>
+
+\begin{align}
+Proj(u)\overrightarrow{x^{(i)}} = \frac{uu^T}{u^Tu} \overrightarrow{x^{(i)}} = ((x^{(i)})^Tu)u
+\end{align}
+
+<p>
+Where \(((x^{(i)})^Tu)\) is an scalar. 
+</p>
+
+<p>
+So, now our goal is to find a \(u\) that maximizes the variance across the \(n\) examples. That is, we want to maximize the sum of the square of the norms of the projected points:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/projection_norm.svg" alt="Norm of the Projection" style="transform:translate(22vw, 0)">
+</p>
+
+<p>
+More formally:
+</p>
+
+\begin{align}
+u = \underset{u}{\arg \max} \frac{1}{n}\sum_{i=1}^n ||Proj(u)x^{(i)}||^2 = \frac{1}{n}\sum_{i=1}^n ||((x^{(i)})^Tu)u||^2
+\end{align}
+
+<p>
+Because the norm of a unit vector multiplied by a scalar is just the square of the scalar (for \(3 \cdot \begin{pmatrix} 1 &amp; 0 &amp; 0 \end{pmatrix}\): \(||\begin{pmatrix} 3 &amp; 0 &amp; 0 \end{pmatrix}|| = (\sqrt{3^2 + 0^2 + 0^2})^2 = 3^2\)):
+</p>
+
+\begin{align}
+u = \underset{u}{\arg \max} \frac{1}{n}\sum_{i=1}^n ((x^{(i)})^Tu)^2 = \frac{1}{n}\sum_{i=1}^n ((x^{(i)})^Tu)^T((x^{(i)})^Tu) = \frac{1}{n}\sum_{i=1}^n u^T x^{(i)} (x^{(i)})^T u
+\end{align}
+
+<p>
+Because \(u, u^T\) are a common factor in the sum:
+</p>
+
+\begin{align}
+u = \underset{u}{\arg \max} \left[u^T \left(\frac{1}{n}\sum_{i=1}^n x^{(i)} (x^{(i)})^T \right) u\right]
+\end{align}
+
+<hr>
+
+<p>
+Now, we know that given the optimization problem of the form \(\underset{u}{\arg \max} \left[u^T A u\right]\), the solution \(u\) is the eigenvector corresponding to the largest eigenvalue of \(A\).
+</p>
+
+<p>
+In this scenario, \(A = \left(\frac{1}{n}\sum_{i=1}^n x^{(i)} (x^{(i)})^T \right)\), which equals the sample covariance matrix, which is defined as:
+</p>
+
+\begin{align}
+\frac{1}{n} \sum_{i=1}^n (x^{(i)} - \mu)^T (x^{(i)} - \mu) = \frac{1}{n} \sum_{i=1}^n (x^{(i)} - 0)^T (x^{(i)} - 0) = \frac{1}{n} \sum_{i=1}^n (x^{(i)})^T x^{(i)}
+\end{align}
+
+<p>
+Note that, because our data is now centered after standardizing it, the mean \(\mu\) equals zero.
+</p>
+
+<p>
+Hence, we want to calculate the eigenvectors of the sample covariance matrix of x.
+</p>
+
+<p>
+Mind you, we have derived this solution for a space defined by only one vector \(u\). However given basis vectors \((u_1, \cdots, u_k)\) the optimization problem holds and the solution are the \(k\) eigenvectors corresponding to the \(k\) largest eigenvalues of \(A\).
+</p>
+
+<div id="Dimensionality Reduction-PCA-Algorithm Layout"><h3 id="Algorithm Layout" class="header"><a href="#Dimensionality Reduction-PCA-Algorithm Layout">Algorithm Layout</a></h3></div>
+
+<p>
+The steps of <code>PCA</code> are the following:
+</p>
+
+<ul>
+<li>
+Calculate the sample covariance matrix as \(x^Tx\)
+
+</li><li>
+Calculate the eigenvector and eigenvalues of \(x^Tx\), such that:
+\begin{align}
+\begin{matrix}
+(\lambda_1, u_1) \\
+(\lambda_2, u_2) \\
+\vdots \\
+(\lambda_d, u_d) \\
+\end{matrix}
+\end{align}
+
+</li></ul>
+<p>
+Are the \(d\) eigenvectors (\(u_i\)) and eigenvalues (\(\lambda_i\)). We assume the tuples are ordered in decreasing order with respect to the eigenvalues, such that if \(i &gt; j\) then \(\lambda_i &gt; \lambda_j\).
+</p>
+
+<ul>
+<li>
+Find \(k\) such that we satisfy a confidence level with respect to the variance, i.e. suppose you want to preserve 95% of the variance of the original data then:
+\begin{align}
+\frac{\sum_{i=1}^k \lambda_i}{\sum_{j=1}^d \lambda_j} = 95\%
+\end{align}
+
+</li><li>
+Choose the \(k\) eigenvectors with the largest corresponding eigenvalues.
+
+</li></ul>
+<div id="Dimensionality Reduction-PCA-Performing Eigen-decomposition"><h3 id="Performing Eigen-decomposition" class="header"><a href="#Dimensionality Reduction-PCA-Performing Eigen-decomposition">Performing Eigen-decomposition</a></h3></div>
+
+<p>
+First of all, let us present two properties regarding eigen-decompositions of a matrix \(X\):
+</p>
+
+<ul>
+<li>
+If \(X\) is a square matrix and symmetric then \(X\) has orthogonal eigenvectors and real eigenvalues.
+
+</li><li>
+If \(X\) is also positive semi-definite then the eigenvalues are positive.
+
+</li></ul>
+<p>
+In our case, the eigen-decomposition is done over \(x^Tx\), therefore this matrix is guaranteed to be a square matrix, symmetric and positive semi-definite.
+</p>
+
+<p>
+Then, performing the eigen decomposition of \(x^Tx\) is equivalent to performing singular value decomposition (<code>SVD</code>) over \(x\), such that the single values equal the square root of the eigenvalues.
+</p>
+
+<div id="Dimensionality Reduction-PCA-Performing Eigen-decomposition-Large Datasets"><h4 id="Large Datasets" class="header"><a href="#Dimensionality Reduction-PCA-Performing Eigen-decomposition-Large Datasets">Large Datasets</a></h4></div>
+
+<p>
+To perform <code>PCA</code> on large datasets we use a technique called <em>Power Iteration</em>, which consists on:
+</p>
+
+<ul>
+<li>
+For \(i=0\), initialize \(U^{(i)}\) to random values other than zero
+
+</li><li>
+Set \(i = i+1\), and \(U^{(i)} = (X^TX)U^{(i-1)}\)
+
+</li><li>
+Re-scale \(U^{(i)}\) to have unit length such that: \(U^{(i)}=\frac{(X^TX)U^{(i-1)}}{||(X^TX)U^{(i-1)}||}\)
+
+</li><li>
+Go to step 2.
+
+</li></ul>
+<p>
+Eventually it will converge to the largest eigenvector.
+</p>
+
+<div id="Dimensionality Reduction-PCA-Rephrasing PCA"><h3 id="Rephrasing PCA" class="header"><a href="#Dimensionality Reduction-PCA-Rephrasing PCA">Rephrasing PCA</a></h3></div>
+
+<p>
+Another way to describe the problem solved by <code>PCA</code>, equivalent to the maximization variance perspective, is:
+</p>
+
+<p>
+Find a subspace such that the projection of the points are as close to the original data as possible, that is minimize the sum of the distances between the projected points and the original points.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/minimize_projection_distance.svg" alt="Minimize projection distances" style="transform:translate(22vw,0)">
+</p>
+
+<div id="Dimensionality Reduction-ICA"><h2 id="ICA" class="header"><a href="#Dimensionality Reduction-ICA">ICA</a></h2></div>
+
+<p>
+This algorithm pretends to solve what is commonly known as the source separation problem, where we are given a dataset \(X\) that is a mixture of some source data \(S\). We then use these mixed sources \(X\) to construct a unmixing matrix \(W\) to recover the source \(S\). 
+</p>
+
+<div id="Dimensionality Reduction-ICA-Intuition"><h3 id="Intuition" class="header"><a href="#Dimensionality Reduction-ICA-Intuition">Intuition</a></h3></div>
+
+<p>
+Imagine there are \(d\) speakers and \(d\) microphones randomly distributed in a room, such that:
+</p>
+
+<ul>
+<li>
+\(s \in \mathbb{R}^d\) is the representation of what a speaker says. So \(S_j^{(i)}\) is what the \(j\) speaker said in moment \(i\).
+
+</li><li>
+\(x \in \mathbb{R}^d\) is the representation of what a microphone records. So \(x_j^{(i)}\) is what the \(j\) microphone recorded in moment \(i\).
+
+</li></ul>
+<p>
+For example, given two speaker, what they say is represented as follows:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/intuition_speaker.svg" alt="Speaker wavepenghts">
+</p>
+
+<p>
+Meanwhile the recordings of the microphones are the following:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/intuition_microphone.svg" alt="Microphone wavepenghts">
+</p>
+
+<p>
+We are only given \(X\), and the goal is to recover the original speech signal spoken by each speaker. We assume that \(X\) is a linear combination of what each speaker says, thus \(X = AS\), where \(A\) is a quare matrix \(d \times d\) and is called the mixing matrix. 
+</p>
+
+<p>
+What we want to do is to compute the inverse of \(A\), \(W\) such that \(W = A^{-1}\), where \(W\) is called the unmixing matrix.
+</p>
+
+<p>
+Then:
+</p>
+
+\begin{align}
+A^{-1}X = A^{-1}AS \rightarrow A^{-1}X = S \rightarrow WX = S \rightarrow S = WX
+\end{align}
+
+<div id="Dimensionality Reduction-ICA-Solution"><h3 id="Solution" class="header"><a href="#Dimensionality Reduction-ICA-Solution">Solution</a></h3></div>
+
+<p>
+To solve this problem we make the following assumptions:
+</p>
+
+<ol>
+<li>
+The number of sources \(S\) are equal to the number of "examples" in the mixed dataset \(X\)
+
+</li><li>
+\(X\) is a linear combination of \(S\), such that \(S = WX\)
+
+</li><li>
+\(S_j\) is independent of \(S_k\), whenever \(j \neq k\). That is to say, each belongs to a different probability distribution, and are two independent random variables.
+
+</li><li>
+Each \(S_j\) is not Gaussian.
+
+</li></ol>
+<hr>
+
+<div id="Dimensionality Reduction-ICA-Solution-Intuition"><h4 id="Intuition" class="header"><a href="#Dimensionality Reduction-ICA-Solution-Intuition">Intuition</a></h4></div>
+
+<p>
+Suppose we are given a random variable \(X\) such that \(X ~ Unif [0,1]\), then the probability density function is:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/pdf_uniform.svg" alt="Probability Density Function for Unirform Distribution">
+</p>
+
+<p>
+Let us define a new distribution as follows \(y=2x\), then the probability density function is:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/half_pdf_uniform.svg" alt="Probability Density Function for Scaled Unirform Distribution">
+</p>
+
+<p>
+Note, that the function is "stretched" as to always satisfy the condition that the integral of \(PDF\) must equal 1, which is the same as saying the area under the function is 1. So now, \(P_y (y) = P_x(x) \cdot \frac{1}{2} = P_x(\frac{y}{2})\cdot\frac{1}{2}\), because \(x = \frac{y}{2}\).
+</p>
+
+<p>
+But what happens in a higher dimension? That is, what happens when we multiply \(x \in \mathbb{R}^d\) by a mixing matrix \(W \in \mathbb{R}^{d \times d}\). Well, given \(y \in \mathbb{R}^{d \times d}\), such that \(y=WX\), then to perform a change of random variable we use the Jacobian:
+</p>
+
+\begin{align}
+P_y(y) = P_x(X)\frac{1}{|W|} = P_x(W^{-1}Y)\frac{1}{|W|}
+\end{align}
+
+<p>
+Where \(|W|\) is the determinant of \(W\).
+</p>
+
+<hr>
+
+<p>
+First of all we define the distribution of the mixed dataset as follows:
+</p>
+
+\begin{align}
+P_X(x) = \prod_{j=1}^d P_S (S_j) |W| = \prod_{j=1}^d P_S (W_j^TX) |W|
+\end{align}
+
+<p>
+Note that \(S_j=(W_j)^TX\). 
+</p>
+
+<p>
+We also assume that \(P_S\) is distributed according to a logistic distribution, thus:
+</p>
+
+<ul>
+<li>
+Cumulative Distribution Function (CDF): \(\frac{1}{1+e^{-x}} = \sigma(x)\)
+
+</li><li>
+Probability Density Function (pdf): \(\sigma(x)\sigma(1-x)\)
+
+</li></ul>
+<p>
+So, we obtain the likelihood of \(W\) as follows:
+</p>
+
+\begin{align}
+l(W) = \sum_{i=1}^n \left[\left(\sum_{j=1}^d \log[\sigma(x^{(i)})(1-\sigma(x^{(i)}))]\right) + \log{|W|}\right]
+\end{align}
+
+<p>
+Where \(W\) is the parameter we are trying to obtain. So, to solve the optimization problem:
+</p>
+
+<ul>
+<li>
+We define the maximization of the likelihood as the objective
+
+</li><li>
+We compute the derivative of \(l(W)\) and perform gradient descent, such that the update step is as follows:
+\begin{align}
+W = W - \alpha \left\{\begin{bmatrix}
+(1- 2\sigma(W_1^Tx^{(i)})) \\
+(1- 2\sigma(W_2^Tx^{(i)})) \\
+\vdots \\
+(1- 2\sigma(W_d^Tx^{(i)})) \\
+\end{bmatrix} (x^{(i)})^T + (W^T)^{-1}
+\right\}
+\end{align}
+
+</li></ul>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

@@ -1,0 +1,230 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>PID Control</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="PID Control"><h1 id="PID Control" class="header"><a href="#PID Control">PID Control</a></h1></div>
+
+<hr>
+
+<p>
+Up until now we have created paths that connect dots with straight lines. However this tend to become unnefficient, as you can smooth them to reduce the distance and also to represent the motion of an object is a more realistic way.
+</p>
+
+<div id="PID Control-Smoothing Algorithm"><h2 id="Smoothing Algorithm" class="header"><a href="#PID Control-Smoothing Algorithm">Smoothing Algorithm</a></h2></div>
+
+<ul>
+<li>
+Initilize \(y_i\) to the non-smooth locations \(x_i\): \(y_i = x_i\)
+
+</li><li>
+Optimize two criteria:
+
+<ul>
+<li>
+First minimize the distance between the non-smooth point and the smooth point 
+
+</li></ul>
+</li></ul>
+  
+\begin{align}
+\min_i (x_i - y_i)^2
+\end{align}
+
+<ul>
+<li>
+Then minimize the distance between two consecutive smooth points 
+\begin{align}
+\min_i (y_i - y_{i+1})^2
+\end{align}
+
+</li></ul>
+  
+<ul>
+<li>
+To optimize both, we include a parameter \(\alpha\), to minimize the weigthed sum:
+\begin{align}
+\min (x_i - y_i)^2 + \alpha (y_i - y_{i+1})^2
+\end{align}
+
+</li><li>
+We optimize both, because they are in conflict with each other:
+
+<ul>
+<li>
+If we only optimize the first one, we obtain the same path as the original non-smoothed path
+
+</li><li>
+If we only optimize the second one, we obtain no path
+
+</li></ul>
+</li></ul>
+<div id="PID Control-PID Control"><h2 id="PID Control" class="header"><a href="#PID Control-PID Control">PID Control</a></h2></div>
+
+<p>
+If we have a car that has a steering angle \(\alpha\), how would we go about defining this parameter?
+</p>
+
+<div id="PID Control-PID Control-P Controller"><h3 id="P Controller" class="header"><a href="#PID Control-PID Control-P Controller">P Controller</a></h3></div>
+
+<p>
+We set this angle proportional by some factor of \(\tau\) to the crosstrack error. Where the crosstrack error refers to the lateral error between the vehicle and the reference trajectory. Thus:
+</p>
+
+\begin{align}
+\alpha = \tau CTE
+\end{align}
+
+<p>
+Note that with this approach we will eventually overshoot when reaching for the reference trajectory. That is because the car it not oriented the same as the trajectory, therefore it needs to reposition once it reaches the trajectory:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/overshoot_trajectory.png" alt="Robot overshoots trajectory">
+</p>
+
+<div id="PID Control-PD Control"><h2 id="PD Control" class="header"><a href="#PID Control-PD Control">PD Control</a></h2></div>
+
+<p>
+Here the steering angle does no only take into account the \(CTE\), but it also uses the derivative of CTE. The latter will compute how much we are reducing the error in each moment \(t\), and use this value to counter steer this angle (reduce the angle):
+</p>
+
+\begin{align}
+\alpha = - \tau_p CTE - \tau \frac{\delta}{\delta t} CTE
+\end{align}
+
+<p>
+Where:
+</p>
+
+\begin{align}
+\frac{\delta}{\delta t} CTE = \frac{CTE_t - CTE_{t-1}}{\Delta t}
+\end{align}
+
+<div id="PID Control-Systematic Bias"><h2 id="Systematic Bias" class="header"><a href="#PID Control-Systematic Bias">Systematic Bias</a></h2></div>
+
+<p>
+In real life there is usually some noise when it comes to the angle of the wheels, and we refer to that as systematic bias. For example the wheels might be deviated a certain angle without us knowing.
+</p>
+
+<div id="PID Control-PID Control"><h2 id="PID Control" class="header"><a href="#PID Control-PID Control">PID Control</a></h2></div>
+
+<p>
+Because of this systematic bias, the error with respect to the reference trajectory is very large. Therefore if we sum it over time we obtain larger and larger values. So, if we sum this CTE error weighted by a factor \(\tau_I\), we can correct this error by counter steering:
+</p>
+
+\begin{align}
+\alpha = - \tau_P CTE - \tau_D \frac{\delta}{\delta t} CTE - \tau_I \sum CTE
+\end{align}
+
+<p>
+Where \(\sum CTE\) equals the sum of the \(CTE\) error overtime. Note:
+</p>
+
+<ul>
+<li>
+\(- \tau_P CTE\): represents the proportional error
+
+</li><li>
+\(- \tau_D \frac{\delta}{\delta t}\): represents the differential error
+
+</li><li>
+\(- \tau_I \sum CTE\): represents the integral error
+
+</li></ul>
+<div id="PID Control-Twiddle"><h2 id="Twiddle" class="header"><a href="#PID Control-Twiddle">Twiddle</a></h2></div>
+
+<p>
+We use Twiddle to optimize a set of parameters. In our case what we do is optimize, that is minimize, the average CTE.
+</p>
+
+<p>
+So, given a parameters vector \(p = [0, 0, 0]\) and a vector of potential changes \(dp = [1, 1, 1]\) we:
+</p>
+
+<ol>
+<li>
+Execute <code>run()</code> which computes the "optimal" steering angle and moves the robot accordingly. It also stores this motion as a trajectory. This function will return a "goodness" metric, that will signify the CTE.
+
+</li><li>
+So, after executing <code>run()</code> we get the best error so far.
+
+</li><li>
+We modify <code>p</code> to make our error smaller, to make this modification we use Twiddle. The algorithm is as follows:
+<pre python=""># Compute initial error
+best_error = run(p)
+# While the sum of the potential changes is bigger than a tolerance parameter
+while sum(dp) &lt; tolerance:
+  # Iterate over every parameter
+  for i in range(len(p)):
+    # Update the parameter value by the value of the corresponding potential change
+    p[i] += dp[i]
+    # Compute the new error for this change
+    err = run(p)
+    # Does this better the previous error?
+    err &lt; best_error:
+      # Make the change bigger
+      dp[i] *= 1.1
+    # If the error is worse
+    else:
+      # We try updating the parameter by subtracting (by two because we added before)
+      p[i] -= 2*dp[i]
+      err = run(p)
+      # Does this better the previous error?
+      err &lt; best_error:
+        # Make the change bigger
+        dp[i] *= 1.1
+      # If substracting does not make the error better
+      else:
+        # We decrease the change
+        dp[i] *= 0.9
+</pre>
+
+</li></ol>
+<p>
+Basically Twiddle decreases/increases the parameters first a little bit, and for each time we make the error better we augment the increase or decrease.
+</p>
+
+<p>
+And we stop when there are no major changes being made to the parameters, that is <code>sum(dp) &lt; tolerance</code>.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

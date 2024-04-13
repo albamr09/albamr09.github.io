@@ -1,0 +1,166 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/custom.css">
+    <title>Cluster Analysis</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">../index.wiki</a>
+</p>
+
+<div id="Cluster Analysis"><h1 id="Cluster Analysis" class="header"><a href="#Cluster Analysis">Cluster Analysis</a></h1></div>
+
+<hr>
+
+<p>
+Cluster analysis, also called data segmentation, has a variety of goals. All relate to grouping or segmenting a collection of objects into subsets or "clusters", such that those within each cluster are more closely related to one another than objects assigned to different clusters. The method we use to group these objects depends on what we consider to be similar, and that decision usually comes from what we know about the subject we're studying.
+</p>
+
+<p>
+An object can be described by a set of measurements, or by its relation to other objects.
+</p>
+
+<div id="Cluster Analysis-Proximity Matrices"><h2 id="Proximity Matrices" class="header"><a href="#Cluster Analysis-Proximity Matrices">Proximity Matrices</a></h2></div>
+
+<p>
+Sometimes the data is represented directly in terms of the proximity (alikeness or affinity) between pairs of objects. This type of data can be represented by an \(N \times N\) matrix \(D\), where \(N\) is the number of objects, and each element \(d_{ij}\) records the proximity between the \(j\)th and \(j\)th objects. This matrix is then provided as input to the clustering algorithm.
+</p>
+
+<p>
+Most algorithms assume symmetric dissimilarity matrices, so if the original matrix \(D\) is not symmetric it must be replaced by \(\frac{(D + D^T)}{2}\).
+</p>
+
+<div id="Cluster Analysis-Dissimilarities Based on Attributes"><h2 id="Dissimilarities Based on Attributes" class="header"><a href="#Cluster Analysis-Dissimilarities Based on Attributes">Dissimilarities Based on Attributes</a></h2></div>
+
+<p>
+Since most of the popular clustering algorithms take a dissimilarity matrix as their input, we must first construct pairwise dissimilarities between the observations. By far the most common
+choice is squared distance:
+</p>
+
+\begin{align}
+d_j(x_{ij}, x_{i'j}) = (x_{ij} - x_{i'j})^2
+\end{align}
+
+<p>
+where \(j\) denotes the attribute and \(i, i'\) denotes the instance.
+</p>
+
+<p>
+We first discuss alternatives in terms of the attribute type:
+</p>
+
+<div id="Cluster Analysis-Dissimilarities Based on Attributes-Quantitative variables"><h3 id="Quantitative variables" class="header"><a href="#Cluster Analysis-Dissimilarities Based on Attributes-Quantitative variables">Quantitative variables</a></h3></div>
+
+<p>
+Measurements of this type of variable or attribute are represented by continuous real-valued numbers. One way to do this is by looking at the absolute difference between them:
+</p>
+
+\begin{align}
+d(x_i, x_{i'}) = l(|x_i - x_{i'}|)
+\end{align}
+
+<p>
+Alternatively, clustering can be based on the correlation
+</p>
+
+\begin{align}
+\rho (x_i, x_{i'}) = \frac{\sum_{j} (x_{ij} - \overline{x}_i)(x_{ij} - \overline{x}_i)}{\sqrt{\sum_{j} (x_{ij} - \overline{x}_i)^2 \sum_j(x_{ij} - \overline{x}_i)^2}}
+\end{align}
+
+<div id="Cluster Analysis-Dissimilarities Based on Attributes-Ordinal Variables"><h3 id="Ordinal Variables" class="header"><a href="#Cluster Analysis-Dissimilarities Based on Attributes-Ordinal Variables">Ordinal Variables</a></h3></div>
+
+<p>
+Error measures for ordinal variables are generally defined by replacing their \(M\) original values with:
+</p>
+
+\begin{align}
+\frac{i - \frac{1}{2}}{M}, i = 1, \cdots, M
+\end{align}
+
+<p>
+in the prescribed order of their original values. They are then treated as quantitative variables on this scale.
+</p>
+
+<div id="Cluster Analysis-Dissimilarities Based on Attributes-Categorical variables"><h3 id="Categorical variables" class="header"><a href="#Cluster Analysis-Dissimilarities Based on Attributes-Categorical variables">Categorical variables</a></h3></div>
+
+<p>
+If the variable assumes \(M\) distinct values, these can be arranged in a symmetric \(M \times M\) matrix with elements:
+</p>
+
+\begin{align}
+m_{ij} = \begin{cases}
+0 &amp; x_{i} = x_{j} \\
+1 &amp; x_{i} \neq x_{j} \\
+\end{cases}
+\end{align}
+
+<div id="Cluster Analysis-Object Dissimilarity"><h2 id="Object Dissimilarity" class="header"><a href="#Cluster Analysis-Object Dissimilarity">Object Dissimilarity</a></h2></div>
+
+<p>
+Next we define a procedure for combining the \(p\)-individual attribute dissimilarities $d_j(x_{ij
+,x_{i'j}), j = 1,2, \cdots, p\( into a single overall measure of dissimilarity \)D(x_i, x_i')$.
+</p>
+
+<p>
+This is nearly always done by means of a weighted average:
+</p>
+
+\begin{align}
+D(x_i, x_{i'}) = \sum_{j=1}^p w_j d_j(x_{ij}, x_{i'j})
+\end{align}
+
+<p>
+where:
+</p>
+
+\begin{align}
+\sum_{j=1}^p w_j = 1
+\end{align}
+
+<p>
+Here \(w_j\) is a weight assigned to the \(j\)th attribute regulating the relative influence of that variable in determining the overall dissimilarity between objects. 
+</p>
+
+<p>
+If the goal is to discover natural groupings in the data, some attributes may exhibit more of a grouping tendency than others. Variables that are more relevant in separating the groups should be assigned a higher influence in defining object dissimilarity. Giving all attributes equal influence
+in this case will tend to obscure the groups to the point where a clustering algorithm cannot uncover them.
+</p>
+
+<p>
+Specifying an appropriate dissimilarity measure is far more important in obtaining success with clustering than choice of clustering algorithm.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

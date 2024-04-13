@@ -1,0 +1,439 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Regresión Logística</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Regresión Logística"><h1 id="Regresión Logística" class="header"><a href="#Regresión Logística">Regresión Logística</a></h1></div>
+
+<hr>
+
+<ol>
+<li>
+<a href="Regresión Logística.html#Regresión Logística-Descripción de los datos">Descripción de los datos</a>
+
+</li><li>
+<a href="Regresión Logística.html#Regresión Logística-Hipótesis">Hipótesis</a>
+
+</li><li>
+<a href="Regresión Logística.html#Regresión Logística-Funcion de coste">Funcion de coste</a>
+
+</li><li>
+<a href="Regresión Logística.html#Regresión Logística-Descenso gradiente">Descenso gradiente</a>
+
+</li></ol>
+<hr>
+
+<div id="Regresión Logística-Descripción de los datos"><h2 id="Descripción de los datos" class="header"><a href="#Regresión Logística-Descripción de los datos">Descripción de los datos</a></h2></div>
+
+<ul>
+<li>
+\(X = (x_{ij})\) una matriz \(n \times m\) donde cada \(x_{ij}\) es la característica \(i\) del ejemplo \(j\), tal que 
+\begin{align}
+X = 
+\begin{bmatrix}
+x_{11} &amp; \cdots &amp; x_{1m} \\
+\cdots &amp; \ddots &amp; \cdots \\
+x_{n1} &amp; \cdots &amp; x_{nm} \\
+\end{bmatrix} 
+\end{align}
+
+</li></ul>
+<p>
+<em>Cada columna es un ejemplo</em>
+</p>
+
+<p>
+<em>En cada fila están los valores de una característica</em>
+</p>
+
+<ul>
+<li>
+\(\Theta = (\theta_i)\) es un vector fila \(1\times n\) donde cada \(\theta_i\) es el peso de la característica \(i\), tal que:
+\begin{align}
+\Theta = \begin{bmatrix} \theta_1 &amp; \cdots &amp; \theta_n\end{bmatrix} 
+\end{align}
+
+</li><li>
+\(Y = (y_j)\) es un vector fila \(1\times m\) donde cada \(y_j\) es la salida real para el ejemplo \(j\), tal que:
+\begin{align}
+Y = \begin{bmatrix} y_1 &amp; \cdots &amp; y_m\end{bmatrix} 
+\end{align}
+
+</li></ul>
+<p>
+Donde cada salida \(y_j\), para un clasificador de dos clases sólo puede tener los valores \(0\) o \(1\).
+</p>
+
+<div id="Regresión Logística-Hipótesis"><h2 id="Hipótesis" class="header"><a href="#Regresión Logística-Hipótesis">Hipótesis</a></h2></div>
+
+<ul>
+<li>
+Para un valor \(z\), la función sigmoide \(g\) se define como:
+\begin{align}
+g(z) = \frac{e^z}{(1+e^z)} = \frac{1}{(1 + e^{-z})}
+\end{align}
+
+</li><li>
+Sea \(g\) la función sigmoide. Dado un ejemplo, es decir un vector columna \(x\), de dimensiones \(n \times 1\), la hipótesis se define como:
+\begin{align}
+h_\Theta(x) = g\left(\sum_{i=1}^n \theta_i \cdot x_i\right) =
+\begin{cases}
+0, &amp; h_\Theta(x) &lt; 0.5 \\
+1, &amp; h_\Theta(x) \geq 0.5 \\
+\end{cases}
+\end{align}
+
+</li></ul>
+<pre><code>
+</code></pre>
+<ul>
+<li>
+Dado un conjunto de \(m\) datos, es decir matrix \(X\), de dimensiones \(n \times m\), la hipótesis se define como:
+\begin{align}
+h_\Theta(x) = \Theta\cdot X = \begin{bmatrix}g(\sum_{i=1}^n \theta_i \cdot x_{i1}) &amp; \cdots &amp; g(\sum_{i=1}^n \theta_i \cdot x_{im})\end{bmatrix}
+\end{align}
+
+</li></ul>
+<p>
+El resultado es un vector fila \(1 \times m\), es decir como el vector de salidas \(Y\)
+</p>
+<pre><code>
+</code></pre>
+<div id="Regresión Logística-Funcion de coste"><h2 id="Funcion de coste" class="header"><a href="#Regresión Logística-Funcion de coste">Funcion de coste</a></h2></div>
+
+<p>
+Se define la función de coste, \(J(\Theta)\) como:
+</p>
+
+\begin{align}
+J(\Theta) = \frac{1}{m}\sum_{j=1}^m \text{coste}(h_\Theta(x_j))
+\end{align}
+
+<p>
+Donde \(\text{coste}\) es una función definida como sigue:
+</p>
+
+\begin{align}
+\text{coste}(h_\Theta(x_j)) = [-y_j \log(h_\Theta(x_j))] - [(1-y_j)\log(1-h_\Theta(x_j))]
+\end{align}
+<pre><code>
+</code></pre>
+<div id="Regresión Logística-Funcion de coste-Regularización"><h4 id="Regularización" class="header"><a href="#Regresión Logística-Funcion de coste-Regularización">Regularización</a></h4></div>
+
+<p>
+Con regularización, se define la función de coste, \(J(\Theta)\) como:
+</p>
+
+\begin{align}
+J(\Theta) = -\frac{1}{m}\sum_{j=1}^m [y_j \log(h_\Theta(x_j))] + [(1-y_j)\log(1-h_\Theta(x_j))] + \frac{1}{2m} \lambda \sum_{i=1}^n \theta_i^2
+\end{align}
+
+<div id="Regresión Logística-Descenso gradiente"><h2 id="Descenso gradiente" class="header"><a href="#Regresión Logística-Descenso gradiente">Descenso gradiente</a></h2></div>
+
+<p>
+Para actualizar el vector de pesos \(\Theta\) aplicamos el descenso gradiente. Para cada peso \(\theta_i\):
+</p>
+
+\begin{align}
+\theta_i = \theta_i - \alpha \left( \frac{\delta J(\Theta)}{\delta \theta_i}\right)
+\end{align}
+
+<hr>
+
+<p>
+La derivada del coste en función del peso \(\theta_i\) se calcula como sigue:
+</p>
+
+<p>
+<em>Sustituimos la función de coste</em>
+</p>
+
+\begin{align}
+\frac{\delta J(\Theta)}{\delta \theta_i} = \frac{\delta}{\delta \theta_i} \left(-\frac{1}{m}\sum_{j=1}^m [y_j \log(h_\Theta(x_j))] + [(1-y_j)\log(1-h_\Theta(x_j))]\right) =
+\end{align}
+
+<p>
+Sacamos el factor constante \(\frac{1}{m}\) y aplicamos la propiedad "La derivada de una suma equivale a la suma de las derivadas", tal que:
+</p>
+
+\begin{align}
+\frac{\delta J(\Theta)}{\delta \theta_i} = -\frac{1}{m}\sum_{j=1}^m \frac{\delta}{\delta \theta_i} \left([y_j \log(h_\Theta(x_j))] + [(1-y_j)\log(1-h_\Theta(x_j))]\right) =
+\end{align}
+
+\begin{align}
+\frac{\delta J(\Theta)}{\delta \theta_i} = -\frac{1}{m}\sum_{j=1}^m  \left(\frac{\delta}{\delta \theta_i} [y_j \log(h_\Theta(x_j))]\right) + \left(\frac{\delta}{\delta \theta_i}[(1-y_j)\log(1-h_\Theta(x_j))]\right) =
+\end{align}
+
+<p>
+Sacamos los factores constantes \(y_j\) y \(1-y_j\) y aplicamos la regla de la cadena:
+</p>
+
+\begin{align}
+\frac{\delta J(\Theta)}{\delta \theta_i} = -\frac{1}{m}\sum_{j=1}^m  \left(y_j\frac{\delta\log(h_\Theta(x_j))}{\delta h_\Theta(x_j)} \frac{\delta h_\Theta(x_j)}{\delta \theta_i}\right) + \left((1-y_j)\frac{\delta\log(1-h_\Theta(x_j))}{\delta (1- h_\Theta(x_j))}\frac{\delta (1- h_\Theta(x_j))}{\delta \theta_i}\right) =
+\end{align}
+
+<p>
+Tenemos que, para el último término:
+</p>
+
+\begin{align}
+\frac{\delta (1- h_\Theta(x_j))}{\delta \theta_i} = \frac{\delta(1)}{\delta \theta_i} - \frac{\delta h_\Theta(x_j)}{\delta \theta_i} = - \frac{\delta h_\Theta(x_j)}{\delta \theta_i}
+\end{align}
+
+<p>
+Por lo tanto, si sustituimos:
+</p>
+
+\begin{align}
+\frac{\delta J(\Theta)}{\delta \theta_i} = -\frac{1}{m}\sum_{j=1}^m  \left(y_j\frac{\delta\log(h_\Theta(x_j))}{\delta h_\Theta(x_j)} \frac{\delta h_\Theta(x_j)}{\delta \theta_i}\right) + \left((1-y_j)\frac{\delta\log(1-h_\Theta(x_j))}{\delta (1- h_\Theta(x_j))}(-1)\frac{\delta h_\Theta(x_j)}{\delta \theta_i}\right) =
+\end{align}
+
+<p>
+Aplicamos la regla \(\frac{\delta \log(x)}{\delta x} = \frac{1}{x}\), sacamos la expresión \(\frac{\delta h_\Theta(x_j)}{\delta \theta_i}\) como factor común y hacemos negativo el segundo término:
+</p>
+
+
+\begin{align}
+\frac{\delta J(\Theta)}{\delta \theta_i} = -\frac{1}{m}\sum_{j=1}^m  \left(\frac{y_j}{h_\Theta(x_j)} \right) - \left(\frac{(1 - y_j)}{1-h_\Theta(x_j)}\right) \frac{\delta h_\Theta(x_j)}{\delta \theta_i} =
+\end{align}
+
+<p>
+Aplicamos operationes aritméticas:
+</p>
+
+\begin{align}
+\frac{\delta J(\Theta)}{\delta \theta_i} = -\frac{1}{m}\sum_{j=1}^m  \left(\frac{(y_j)(1-h_\Theta(x_j)) - (1-y_j)(h_\Theta(x_j))}{h_\Theta(x_j)(1-h_\Theta(x_j))} \right)\frac{\delta h_\Theta(x_j)}{\delta \theta_i} =
+\end{align}
+
+<hr>
+
+<p>
+Centrémonos ahora en \(\frac{\delta h_\Theta(x_j)}{\delta \theta_i}\). Para calcular esta derivada, primero expresamos la hipótesis utilizando la función sigmoide:
+</p>
+
+
+\begin{align}
+\frac{\delta h_\Theta(x_j)}{\delta \theta_i} = \frac{\delta}{\delta \theta_i} g(\Theta x_j) 
+\end{align}
+
+<p>
+Aplicamos la regla de la cadena
+</p>
+
+\begin{align}
+\frac{\delta h_\Theta(x_j)}{\delta \theta_i} = \frac{\delta g(\Theta x_j)}{\delta \Theta x_j} \frac{\delta \Theta x_j}{\delta \theta_i}
+\end{align}
+
+<p>
+Sabemos que la derivada del segundo término \(\frac{\delta \Theta x_j}{\delta \theta_i}\) equivale a \(x_{ij}\), por lo tanto, calcularemos sólo \(\frac{\delta g(\Theta x_j)}{\delta \Theta x_j}\)
+</p>
+
+<hr>
+
+<p>
+Sea:
+</p>
+
+\begin{align}
+g(\Theta x_j) = \frac{1}{1 + e^{-\Theta x_j}} = (1 + e^{-\Theta x_j})^{-1}
+\end{align}
+
+<p>
+Aplicamos la regla de la cadena
+</p>
+
+\begin{align}
+\frac{\delta g(\Theta x_j)}{\delta \Theta x_j} = \frac{\delta(1 + e^{-\Theta x_j})^{-1}}{\delta(1+e^{-\Theta x_j})}\frac{\delta(1+e^{-\Theta x_j})}{\delta \Theta x_j}
+\end{align}
+
+<p>
+Resolvemos la primera derivada aplicando las propiedades de las derivadas sobre los polinomios y volvemos a aplicar la propiedad de que la derivada de una suma equivale a la suma de las derivadas en el segundo término:
+</p>
+
+\begin{align}
+\frac{\delta g(\Theta x_j)}{\delta \Theta x_j} = (-1)(1 + e^{-\Theta x_j})^{-2}\left[\frac{\delta (1)}{\delta \Theta x_j} + \frac{\delta e^{-\Theta x_j}}{\delta \Theta x_j} \right]
+\end{align}
+
+<p>
+Como \(\frac{\delta (1)}{\delta \Theta x_j}\) equivale a cero:
+</p>
+
+\begin{align}
+\frac{\delta g(\Theta x_j)}{\delta \Theta x_j} = (-1)(1 + e^{-\Theta x_j})^{-2} \frac{\delta e^{-\Theta x_j}}{\delta \Theta x_j}
+\end{align}
+
+<p>
+Resolvemos la última derivada, sabiendo que \(\frac{\delta e^x}{\delta x} = e^x\)
+</p>
+
+\begin{align}
+\frac{\delta g(\Theta x_j)}{\delta \Theta x_j} = (-1)(1 + e^{-\Theta x_j})^{-2} (-1) e^{-\Theta x_j} = (1 + e^{-\Theta x_j})^{-2} e^{-\Theta x_j} = \frac{e^{-\Theta x_j}}{(1 + e^{-\Theta x_j})^2}
+\end{align}
+
+<p>
+Como \(\frac{e^{-\Theta x_j}}{(1 + e^{-\Theta x_j})^2} = \left(\frac{1}{1+e^{-\Theta x_j}}\right)\left(1 - \frac{1}{1 + e^{-\Theta x_j}}\right)\), entonces:
+</p>
+
+\begin{align}
+\frac{\delta g(\Theta x_j)}{\delta \Theta x_j} = \frac{e^{-\Theta x_j}}{(1 + e^{-\Theta x_j})^2} = \left(\frac{1}{1+e^{-\Theta x_j}}\right)\left(1 - \frac{1}{1 + e^{-\Theta x_j}}\right) = h_\Theta(x_j) (1- h_\Theta(x_j))
+\end{align}
+
+<p>
+Ya que según la definición de la hipótesis \(h_\Theta(x_j) = \frac{1}{1 + e^{-\Theta x_j}}\)
+</p>
+
+<hr>
+
+<p>
+Por lo tanto, juntado los resultados, tenemos que:
+</p>
+
+\begin{align}
+\frac{\delta h_\Theta(x_j)}{\delta \theta_i} = \frac{\delta g(\Theta x_j)}{\delta \Theta x_j} \frac{\delta \Theta x_j}{\delta \theta_i} = h_\Theta(x_j) (1- h_\Theta(x_j)) x_{ij}
+\end{align}
+
+<p>
+Volvemos, entonces, a la derivada de la función de coste y sustituimos \(\frac{\delta h_\Theta(x_j)}{\delta \theta_i}\)
+</p>
+
+\begin{align}
+\frac{\delta J(\Theta)}{\delta \theta_i} = -\frac{1}{m}\sum_{j=1}^m  \left(\frac{(y_j)(1-h_\Theta(x_j)) - (1-y_j)(h_\Theta(x_j))}{h_\Theta(x_j)(1-h_\Theta(x_j))} \right) h_\Theta(x_j) (1- h_\Theta(x_j)) x_{ij} =
+\end{align}
+
+<p>
+Los términos \(h_\Theta(x_j) (1- h_\Theta(x_j))\) se cancelan tal que:
+</p>
+
+\begin{align}
+\frac{\delta J(\Theta)}{\delta \theta_i} = -\frac{1}{m}\sum_{j=1}^m  \left((y_j)(1-h_\Theta(x_j)) - (1-y_j)(h_\Theta(x_j)) \right) x_{ij} =
+\end{align}
+
+<p>
+Aplicamos operaciones aritméticas:
+</p>
+
+\begin{align}
+\frac{\delta J(\Theta)}{\delta \theta_i} = -\frac{1}{m}\sum_{j=1}^m (y_j - y_jh_\Theta(x_j) - h_\Theta(x_j) + y_jh_\Theta(x_j)) x_{ij}
+\end{align}
+
+<p>
+El término \(y_jh_\Theta(x_j)\) se cancela, tal que:
+</p>
+
+\begin{align}
+\frac{\delta J(\Theta)}{\delta \theta_i} = -\frac{1}{m}\sum_{j=1}^m (y_j - h_\Theta(x_j)) x_{ij}
+\end{align}
+
+<p>
+Finalmente movemos el \((-1)\) dentro del sumatorio:
+</p>
+
+\begin{align}
+\frac{\delta J(\Theta)}{\delta \theta_i} = \frac{1}{m}\sum_{j=1}^m (h_\Theta(x_j)-y_j) x_{ij}
+\end{align}
+
+<hr>
+
+<p>
+Por lo tanto la función del descenso gradiente equivale a:
+</p>
+
+\begin{align}
+\theta_i = \theta_i - \alpha \left( \frac{\delta J(\Theta)}{\delta \theta_i}\right) = \theta_i - \alpha \left[\frac{1}{m} \left(\sum_{j=1}^m (h_\Theta(x_j) - y_j) \cdot x_{ij}\right) \right]
+\end{align}
+
+<p>
+<span id="Regresión Logística-Descenso gradiente-Observa que tiene la misma forma que para la regresión lineal, pero la hipótesis para la regresión logística está definida en términos de la función sigmoide"></span><strong id="Observa que tiene la misma forma que para la regresión lineal, pero la hipótesis para la regresión logística está definida en términos de la función sigmoide">Observa que tiene la misma forma que para la regresión lineal, pero la hipótesis para la regresión logística está definida en términos de la función sigmoide</strong>
+</p>
+
+<div id="Regresión Logística-Descenso gradiente-Regularización"><h4 id="Regularización" class="header"><a href="#Regresión Logística-Descenso gradiente-Regularización">Regularización</a></h4></div>
+
+<p>
+Con regularización debemos derivar la función de coste que incluye el parámetro de regularización:
+</p>
+
+\begin{align}
+\theta_i = \theta_i - \alpha \left( \frac{\delta J(\Theta)}{\delta \theta_i}\right) + \frac{\lambda}{2m} \sum_{k=1}^n \theta_k^2
+\end{align}
+
+<p>
+El primer término ya lo hemos derivado, por lo tanto procedemos a derivar el segundo término:
+</p>
+
+\begin{align}
+\frac{\delta}{\delta \theta_i} \left(\frac{\lambda}{2m} \sum_{k=1}^n \theta_k^2\right) = \frac{\lambda}{2m} \left(\sum_{k=1}^n \frac{\delta}{\delta \theta_i} \theta_k^2\right)
+\end{align}
+
+<p>
+Donde 
+</p>
+
+\begin{align}
+\frac{\delta}{\delta \theta_i} \theta_k^2 =
+\begin{cases}
+2 \theta_k, &amp; k = i \\
+0, &amp; k \neq i
+\end{cases}
+\end{align}
+
+<p>
+Como para todo \(k\), con \(1 \leq k \leq n\) sólo hay un \(k\), tal que \(k = i\), entonces:
+</p>
+
+\begin{align}
+\frac{\delta}{\delta \theta_i} \left(\frac{\lambda}{2m} \sum_{k=1}^n \theta_k^2\right) = \frac{\lambda}{2m} 2\theta_i = \frac{\lambda}{m} \theta_i
+\end{align}
+
+<hr>
+
+<p>
+Por lo tanto la función del descenso gradiente equivale a:
+</p>
+
+\begin{align}
+\theta_i = \theta_i - \alpha \left( \frac{\delta J(\Theta)}{\delta \theta_i}\right) = \theta_i - \alpha \left[\frac{1}{m} \left(\sum_{j=1}^m (h_\Theta(x_j) - y_j) \cdot x_{ij}\right) + \frac{\lambda}{m}\theta_i\right]
+\end{align}
+
+<p>
+<span id="Regresión Logística-Descenso gradiente-Regularización-Al igual que antes, observa que tiene la misma forma que para la regresión lineal, pero la hipótesis para la regresión logística está definida en términos de la función sigmoide"></span><strong id="Al igual que antes, observa que tiene la misma forma que para la regresión lineal, pero la hipótesis para la regresión logística está definida en términos de la función sigmoide">Al igual que antes, observa que tiene la misma forma que para la regresión lineal, pero la hipótesis para la regresión logística está definida en términos de la función sigmoide</strong>
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

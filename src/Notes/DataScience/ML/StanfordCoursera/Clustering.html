@@ -1,0 +1,181 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Clustering</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Clustering"><h1 id="Clustering" class="header"><a href="#Clustering">Clustering</a></h1></div>
+
+<hr>
+
+<div id="Clustering-K-Means"><h2 id="K-Means" class="header"><a href="#Clustering-K-Means">K-Means</a></h2></div>
+
+<ol>
+<li>
+Escogemos e inicializamos \(K\) centroides que servirán para hacer de clústers.
+
+</li><li>
+Para cada ejemplo \(j\): asignamos el centroide más cercano
+
+</li><li>
+Una vez asignados todos los ejemplos, resituamos cada centroide en función de los ejemplos asignados al mismo.
+
+</li><li>
+Volvemos al paso 2.
+
+</li></ol>
+<div id="Clustering-Algoritmo"><h2 id="Algoritmo" class="header"><a href="#Clustering-Algoritmo">Algoritmo</a></h2></div>
+
+<p>
+Entrada:
+</p>
+
+<ul>
+<li>
+Número de clústers \(K\)
+
+</li><li>
+Conjunto de entrenamiento: \(\{x^{(0)}, \cdots, x^{(m)}\}\), con \(x^{(i)} \in \mathbb{R}^n\)
+
+</li><li>
+Inicializamos los \(K\) centroides \((\mu_1, \cdots, \mu_k) \in \mathbb{R}^n\) de forma aleatoria.
+
+</li><li>
+Repetimos:
+
+<ol>
+<li>
+Para cada ejemplo \(x^{(j)}\), \(C^{(j)}\) es el índice del centroide más cercano a \(x^{(j)}\): \(\underset{i}{min}||x^{(j)} - \mu_i||\)
+
+</li><li>
+Para cada clúster:
+
+<ol>
+<li>
+\(\mu_i\) es la media de los puntos \(x^{(j)}\) asignados al centroide \(i\): \(\mu_i = \frac{1}{t} \left[\sum_{j=1}^t x^{(j)} \text{ donde } C^{(j)} = i\right]\), donde \(t\) es el número de ejemplos asignados al centroide \(i\).
+
+</li><li>
+Si el centroide no tiene puntos, se elimina o se vuelve a inicializar de forma aleatoria.
+
+</li></ol>
+</li></ol>
+</li></ul>
+<div id="Clustering-Clústers no claramente separables"><h2 id="Clústers no claramente separables" class="header"><a href="#Clustering-Clústers no claramente separables">Clústers no claramente separables</a></h2></div>
+
+<p>
+Cuando los datos contienen mucho ruido lo que se hace es resolver el siguiente problema de optimización:
+</p>
+
+\begin{align}
+\underset{C^{(1)}, \cdots, C^{(m)}, \mu_1, \cdots, \mu_k}{min} J(C^{(1)}, \cdots, C^{(m)}, \mu_1, \cdots, \mu_k)
+\end{align}
+
+<p>
+Donde la función de coste \(J\) se define como:
+</p>
+
+\begin{align}
+J(C^{(i)}, \mu_i) = \frac{1}{m} \sum_{i=1}^m ||x^{(i)} - \mu_{C^{(i)}}||^2
+\end{align}
+
+<p>
+Es decir, el coste es equivalente a la suma de la distancia entre el ejemplo \(x^{(i)}\) y su clúster asignado \(\mu_{C^{(i)}}\), para cada ejemplo.
+</p>
+
+<p>
+El algoritmo de optimización lo que hace es:
+</p>
+
+<ol>
+<li>
+Minimiza el coste con respecto a \(C\)
+
+</li><li>
+Minimiza el coste con respecto a \(\mu\)
+
+</li></ol>
+<div id="Clustering-Inicialización aleatoria"><h2 id="Inicialización aleatoria" class="header"><a href="#Clustering-Inicialización aleatoria">Inicialización aleatoria</a></h2></div>
+
+<ol>
+<li>
+Debemos escoger un número de centroides \(K\) menor que el número de ejemplos \(m\).
+
+</li><li>
+Inicializamos cada centroide equivalente a un ejemplo aleatorio del conjunto de entrenamiento: \(\mu_i = x^{(j)}\)
+
+</li></ol>
+<p>
+Hay que tener en cuenta que, en función de la inicialización de los centroides, se pueden obtener distintos resultados en el problema de optimización, por ello lo que se hace es:
+</p>
+
+<ol>
+<li>
+Aplicar el algoritmo muchas veces
+
+</li><li>
+Escoger el modelo que obtuvo menor coste
+
+</li></ol>
+<p>
+Este proceso es viable si el número de clústers es pequeño.
+</p>
+
+<div id="Clustering-Parametrización de Clústering"><h2 id="Parametrización de Clústering" class="header"><a href="#Clustering-Parametrización de Clústering">Parametrización de Clústering</a></h2></div>
+
+<p>
+Una forma de escoger el número de clústers \(K\) es utilizando el método del codo:
+</p>
+
+<ol>
+<li>
+Se aplica el modelo con un número distinto de clústers
+
+</li><li>
+Se evalúa con alguna métrica el rendimiento (coste) del modelo y 
+
+</li><li>
+Se elige el ofrece una mayor mejora con respecto a un número de clústers menor
+
+</li></ol>
+<p>
+<img src="https://albamr09.github.io/public/assets/elbow_method.png" alt="Método del codo" style="transform:translate(22vw,0)">
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
