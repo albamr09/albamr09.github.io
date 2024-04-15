@@ -1,0 +1,296 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/custom.css">
+    <title>Cluster Analysis</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Cluster Analysis"><h1 id="Cluster Analysis" class="header"><a href="#Cluster Analysis">Cluster Analysis</a></h1></div>
+
+<hr>
+
+<p>
+Cluster analysis, also called data segmentation, has a variety of goals. All relate to grouping or segmenting a collection of objects into subsets or "clusters", such that those within each cluster are more closely related to one another than objects assigned to different clusters. The method we use to group these objects depends on what we consider to be similar, and that decision usually comes from what we know about the subject we're studying.
+</p>
+
+<p>
+An object can be described by a set of measurements, or by its relation to other objects.
+</p>
+
+<div id="Cluster Analysis-Proximity Matrices"><h2 id="Proximity Matrices" class="header"><a href="#Cluster Analysis-Proximity Matrices">Proximity Matrices</a></h2></div>
+
+<p>
+Sometimes the data is represented directly in terms of the proximity (alikeness or affinity) between pairs of objects. This type of data can be represented by an \(N \times N\) matrix \(D\), where \(N\) is the number of objects, and each element \(d_{ij}\) records the proximity between the \(j\)th and \(j\)th objects. This matrix is then provided as input to the clustering algorithm.
+</p>
+
+<p>
+Most algorithms assume symmetric dissimilarity matrices, so if the original matrix \(D\) is not symmetric it must be replaced by \(\frac{(D + D^T)}{2}\).
+</p>
+
+<div id="Cluster Analysis-Dissimilarities Based on Attributes"><h2 id="Dissimilarities Based on Attributes" class="header"><a href="#Cluster Analysis-Dissimilarities Based on Attributes">Dissimilarities Based on Attributes</a></h2></div>
+
+<p>
+Since most of the popular clustering algorithms take a dissimilarity matrix as their input, we must first construct pairwise dissimilarities between the observations. By far the most common
+choice is squared distance:
+</p>
+
+\begin{align}
+d_j(x_{ij}, x_{i'j}) = (x_{ij} - x_{i'j})^2
+\end{align}
+
+<p>
+where \(j\) denotes the attribute and \(i, i'\) denotes the instance.
+</p>
+
+<p>
+We first discuss alternatives in terms of the attribute type:
+</p>
+
+<div id="Cluster Analysis-Dissimilarities Based on Attributes-Quantitative variables"><h3 id="Quantitative variables" class="header"><a href="#Cluster Analysis-Dissimilarities Based on Attributes-Quantitative variables">Quantitative variables</a></h3></div>
+
+<p>
+Measurements of this type of variable or attribute are represented by continuous real-valued numbers. One way to do this is by looking at the absolute difference between them:
+</p>
+
+\begin{align}
+d(x_i, x_{i'}) = l(|x_i - x_{i'}|)
+\end{align}
+
+<p>
+Alternatively, clustering can be based on the correlation
+</p>
+
+\begin{align}
+\rho (x_i, x_{i'}) = \frac{\sum_{j} (x_{ij} - \overline{x}_i)(x_{ij} - \overline{x}_i)}{\sqrt{\sum_{j} (x_{ij} - \overline{x}_i)^2 \sum_j(x_{ij} - \overline{x}_i)^2}}
+\end{align}
+
+<div id="Cluster Analysis-Dissimilarities Based on Attributes-Ordinal Variables"><h3 id="Ordinal Variables" class="header"><a href="#Cluster Analysis-Dissimilarities Based on Attributes-Ordinal Variables">Ordinal Variables</a></h3></div>
+
+<p>
+Error measures for ordinal variables are generally defined by replacing their \(M\) original values with:
+</p>
+
+\begin{align}
+\frac{i - \frac{1}{2}}{M}, i = 1, \cdots, M
+\end{align}
+
+<p>
+in the prescribed order of their original values. They are then treated as quantitative variables on this scale.
+</p>
+
+<div id="Cluster Analysis-Dissimilarities Based on Attributes-Categorical variables"><h3 id="Categorical variables" class="header"><a href="#Cluster Analysis-Dissimilarities Based on Attributes-Categorical variables">Categorical variables</a></h3></div>
+
+<p>
+If the variable assumes \(M\) distinct values, these can be arranged in a symmetric \(M \times M\) matrix with elements:
+</p>
+
+\begin{align}
+m_{ij} = \begin{cases}
+0 &amp; x_{i} = x_{j} \\
+1 &amp; x_{i} \neq x_{j} \\
+\end{cases}
+\end{align}
+
+<div id="Cluster Analysis-Object Dissimilarity"><h2 id="Object Dissimilarity" class="header"><a href="#Cluster Analysis-Object Dissimilarity">Object Dissimilarity</a></h2></div>
+
+<p>
+Next we define a procedure for combining the \(p\)-individual attribute dissimilarities \(d_j(x_{ij},x_{i'j}), j = 1,2, \cdots, p\) into a single overall measure of dissimilarity \(D(x_i, x_i')\).
+</p>
+
+<p>
+This is nearly always done by means of a weighted average:
+</p>
+
+\begin{align}
+D(x_i, x_{i'}) = \sum_{j=1}^p w_j d_j(x_{ij}, x_{i'j})
+\end{align}
+
+<p>
+where:
+</p>
+
+\begin{align}
+\sum_{j=1}^p w_j = 1
+\end{align}
+
+<p>
+Here \(w_j\) is a weight assigned to the \(j\)th attribute regulating the relative influence of that variable in determining the overall dissimilarity between objects. 
+</p>
+
+<p>
+If the goal is to discover natural groupings in the data, some attributes may exhibit more of a grouping tendency than others. Variables that are more relevant in separating the groups should be assigned a higher influence in defining object dissimilarity. Giving all attributes equal influence
+in this case will tend to obscure the groups to the point where a clustering algorithm cannot uncover them.
+</p>
+
+<p>
+Specifying an appropriate dissimilarity measure is far more important in obtaining success with clustering than choice of clustering algorithm.
+</p>
+
+<div id="Cluster Analysis-Clustering Algorithms"><h2 id="Clustering Algorithms" class="header"><a href="#Cluster Analysis-Clustering Algorithms">Clustering Algorithms</a></h2></div>
+
+<p>
+Clustering algorithms fall into three distinct types: 
+</p>
+
+<ul>
+<li>
+<span id="Cluster Analysis-Clustering Algorithms-Combinatorial algorithms"></span><strong id="Combinatorial algorithms">Combinatorial algorithms</strong>: work directly on the observed data with no direct reference to an underlying probability model.
+
+</li><li>
+<span id="Cluster Analysis-Clustering Algorithms-Mixture modeling"></span><strong id="Mixture modeling">Mixture modeling</strong>: supposes that the data is an i.i.d sample from some population described by a probability density function.
+
+</li><li>
+<span id="Cluster Analysis-Clustering Algorithms-Mode seeking"></span><strong id="Mode seeking">Mode seeking</strong>: take a nonparametric perspective, attempting to directly estimate distinct modes of the probability density function
+
+</li></ul>
+<div id="Cluster Analysis-Clustering Algorithms-Combinatorial Algorithms"><h3 id="Combinatorial Algorithms" class="header"><a href="#Cluster Analysis-Clustering Algorithms-Combinatorial Algorithms">Combinatorial Algorithms</a></h3></div>
+
+<p>
+Each observation is uniquely labeled by an integer \(i \in {1, \cdots, N}\). One seeks the particular encoder \(C^*(i)\) that assigns the \(i\)th observation to the \(k\)th cluster that satisfies the required goal based on the dissimilarities \(d(x_i, x_{i'})\). The "parameters" of the procedure are the individual cluster assignments for each of the \(N\) observations. These are adjusted so as to minimize a "loss" function.
+</p>
+
+<p>
+Since the goal is to assign close points to the same cluster, a natural loss function would be:
+</p>
+
+\begin{align}
+W(C) = \frac{1}{2} \sum_{k=1}^K \sum_{C(i) = k}\sum_{C(i') = k} d(x_i, d_{i'})
+\end{align}
+
+<p>
+This measure tells us how close together the things in the same group are. It is sometimes referred to as the "within cluster" point scatter. The total point scatter is given by:
+</p>
+
+\begin{align}
+T = \frac{1}{2} \sum_{i=1}^N\sum_{i'=1}^N d_{ii'} = \frac{1}{2}\sum_{k=1}^K\sum_{C(i) = k} \left(\sum_{C(i') = k} d_{ii'} +  \sum_{C(i') \neq k} d_{ii'}\right)
+\end{align}
+
+<p>
+This basically divides, for each \(i\)th instance on cluster \(k\), so \(C(i) = k\), the distances into two categories, distances to instances on the same cluster \(\sum_{C(i') = k} d_{ii'}\), and distances to instances on a different cluster \(\sum_{C(i') \neq k} d_{ii'}\). That is:
+</p>
+
+\begin{align}
+T = W(C) + B(C)
+\end{align}
+
+<p>
+where \(B(C)\) is the between-cluster point scatter:
+</p>
+
+\begin{align}
+B(C) = \frac{1}{2} \sum_{k=1}^K \sum_{C(i) = k} \sum_{C(i')\neq k} d_{ii'}
+\end{align}
+
+<p>
+So, minimizing \(W(C)\) is equivalent to maximizing \(B(C)\) given \(W(C) = T - B(C)\).
+</p>
+
+<p>
+Cluster analysis by combinatorial optimization is straightforward in principle. One simply minimizes \(W\) or equivalently maximizes \(B\) over all possible assignments of the \(N\) data points to \(K\) clusters. Unfortunately, such optimization by complete enumeration is feasible only for very small data sets.
+</p>
+
+<p>
+For this reason, practical clustering algorithms are able to examine only a very small fraction of all possible encoders \(k = C(i)\). The goal is to identify a small subset that is likely to contain the optimal one, or at least a good suboptimal partition. Such feasible strategies are based on iterative greedy descent. An initial partition is specified. At each iterative step, the cluster assignments are changed in such a way that the value of the criterion is improved from its previous value. Clustering algorithms of this type differ in their prescriptions for modifying the cluster assignments at each iteration. When the prescription is unable to provide an improvement, the algorithm terminates with the current assignments as its solution. However, these algorithms converge to local optima which may be highly suboptimal when compared to the global optimum.
+</p>
+
+<div id="Cluster Analysis-Clustering Algorithms-K-Means"><h3 id="K-Means" class="header"><a href="#Cluster Analysis-Clustering Algorithms-K-Means">K-Means</a></h3></div>
+
+<p>
+The K-means algorithm is one of the most popular iterative descent clustering methods, which uses the squared Euclidean distance. So the within point-scatter can be written as:
+</p>
+
+\begin{align}
+W(C) = \frac{1}{2} \sum_{k=1}^K\sum_{C(i) = k}\sum_{C(i')=k} ||x_i - x_{i'}||^2
+\end{align}
+
+\begin{align}
+= \sum_{k=1}^K N_k \sum_{C(i) = k} ||x_i - \overline{x}_k||^2
+\end{align}
+
+<p>
+where \(\overline{x}_k\) is the mean vector associated with the \(k\)th cluster and \(N_k = \sum_{i=1}^N I(C(i) = k)\) is the number of instances on the \(k\)th cluster. Therefore the goal is to group the \(N\) observations into \(K\) clusters in a way that minimizes the average difference between each observation and the mean of its cluster.
+</p>
+
+\begin{align}
+C^* \min_{C} \sum_{k=1}^K N_k \sum_{C(i) = k} ||x_i - \overline{x}_k||^2
+\end{align}
+
+<p>
+can be obtained by noting that for any set of observations \(S\):
+</p>
+
+\begin{align}
+\overline{x}_S = \arg \min_{m} \sum_{i \in S} ||x_i - m||^2
+\end{align}
+
+<p>
+That is we defined the centroid for \(S\) as the point \(m\) that minimizes the sum of distances for each instance on \(S\). Hence we can obtain \(C^*\) by solving the enlarged optimization problem:
+</p>
+
+\begin{align}
+\min_{C, m_k}^K_1 \sum_{k=1}^K N_k \sum_{C(i) = k} ||x_i - m_k||^2
+\end{align}
+
+<p>
+Where for each cluster \(k\), we search for the encoder \(C\) and the optimal centroid \(m_k\). Thus the optmimization process can be performed in two steps as seen in Algorithm 14.1. On (1) we obtain the optimal centroids \(m_i, i = 1, \cdots, K\), and on (2) we try to find the best encoder \(C\) given the set of centroids \(\{m_1, \cdots, m_K\}\).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/k_means_algorithm.png" alt="KMeans Algorithm" style="witdth:500px; height:200px">
+</p>
+
+<div id="Cluster Analysis-Clustering Algorithms-Gaussian Mixtures as Soft K-means Clustering"><h3 id="Gaussian Mixtures as Soft K-means Clustering" class="header"><a href="#Cluster Analysis-Clustering Algorithms-Gaussian Mixtures as Soft K-means Clustering">Gaussian Mixtures as Soft K-means Clustering</a></h3></div>
+
+<p>
+The K-means clustering procedure is closely related to the EM algorithm for estimating a certain Gaussian mixture model.
+</p>
+
+<p>
+The E-step of the EM algorithm assigns "responsibilities" for each data point based in its relative density under each mixture component (cluster). While the M-step recomputes the component density parameters based on the current responsibilities. Where the relative density is a monotone function of the euclidean distance between the data point and the mixture center. Hence in this setup EM is a "soft" version of K-means clustering, making probabilistic (rather than deterministic) assignments of points to cluster centers.
+</p>
+
+<p>
+As \(\sigma^2\) tends to \(1\), these probabilities become \(0\) and \(1\), and the two methods coincide:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/k_means_vs_gaussian_mixtures.png" alt="KMeans and Gaussian Mixtures" style="height:500px">
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

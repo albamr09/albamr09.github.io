@@ -1,0 +1,111 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/custom.css">
+    <title>Constructing a parametrized prior distribution</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Constructing a parametrized prior distribution"><h1 id="Constructing a parametrized prior distribution" class="header"><a href="#Constructing a parametrized prior distribution">Constructing a parametrized prior distribution</a></h1></div>
+
+<hr>
+
+<p>
+To begin our description of hierarchical models, we consider the problem of estimating a parameter \(\theta\) using data from a small experiment and a prior distribution constructed from similar previous experiments.
+</p>
+
+<div id="Constructing a parametrized prior distribution-Example"><h2 id="Example" class="header"><a href="#Constructing a parametrized prior distribution-Example">Example</a></h2></div>
+
+<p>
+Suppose the aim is to estimate \(\theta\), the probability of tumor in a population of female laboratory rats of type "F344" that receive a zero dose of the drug (control group).
+</p>
+
+<p>
+It is natural to assume a <a href="01.html#T2. Modelos Jerárquicos-Appendix">binomial model</a> for the number of tumors, given \(\theta\). For convenience, we select a prior distribution for \(\theta\) from the conjugate family, \(\theta \sim Beta(\alpha, \beta)\)
+</p>
+
+<div id="Constructing a parametrized prior distribution-Analysis with a fixed prior distribution"><h2 id="Analysis with a fixed prior distribution" class="header"><a href="#Constructing a parametrized prior distribution-Analysis with a fixed prior distribution">Analysis with a fixed prior distribution</a></h2></div>
+
+<p>
+From historical data, suppose we knew that the tumor probabilities \(\theta\) among groups of female lab rats of type "F344" follow an approximate beta distribution, with known mean and standard deviation.
+</p>
+
+<p>
+The use of a fixed prior distribution from historical data allows for the construction of a parameterized prior distribution, which in turn influences the posterior distribution for the current experiment.
+</p>
+
+<p>
+Then, assuming a \(Beta(\alpha, \beta)\) prior distribution for \(\theta\) yields a \(Beta(\alpha + 4, \beta + 10)\) posterior distribution for \(\theta\).
+</p>
+
+<div id="Constructing a parametrized prior distribution-Approximate estimate of the population distribution using the historical data"><h2 id="Approximate estimate of the population distribution using the historical data" class="header"><a href="#Constructing a parametrized prior distribution-Approximate estimate of the population distribution using the historical data">Approximate estimate of the population distribution using the historical data</a></h2></div>
+
+<p>
+Contrary to last section, typically, the mean and standard deviation of underlying tumor risks are not available, rather historical data is available from previous experiments on similar conditions.
+</p>
+
+<p>
+In the \(j\)th historical experiment, let the number of rats with tumors be \(y_j\) and the total number of rats be \(n_j\). We model the \(y_j\)'s (probability that \(p\) rats have tumor given a total of \(n\) rats) as independent binomial data, given sample sizes \(n_j\) and study-specific means \(\theta_j\).
+</p>
+
+<p>
+We can display the hierarchical model schematically as follows:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/rat_hierarchical_model.png" alt="Rat Hierarchical Model" style="width:700px;height:300px">
+</p>
+
+<p>
+The observed sample mean and standard deviation of the 70 values \(y_j\), \(n_j\) are \(0.136\) and \(0.103\). If we set the mean and standard deviation of the population distribution to these values we can solve for \(\theta\) and \(\beta\).
+</p>
+
+<p>
+The resulting estimate for \((\alpha, \beta)\) is \((1.4, 8.6)\). <span id="Constructing a parametrized prior distribution-Approximate estimate of the population distribution using the historical data-This is not a Bayesian calculation because it is not based on any specified full probability model."></span><strong id="This is not a Bayesian calculation because it is not based on any specified full probability model.">This is not a Bayesian calculation because it is not based on any specified full probability model.</strong>
+</p>
+
+
+<div id="Constructing a parametrized prior distribution-Appendix"><h2 id="Appendix" class="header"><a href="#Constructing a parametrized prior distribution-Appendix">Appendix</a></h2></div>
+
+<ul>
+<li>
+<span id="Constructing a parametrized prior distribution-Appendix-Binomial model"></span><strong id="Binomial model">Binomial model</strong>: In probability theory and statistics, the binomial distribution with parameters \(n\) and \(p\) is the discrete probability distribution of the number of successes in a sequence of \(n\) independent experiments (<a href="https://en.wikipedia.org/wiki/Binomial_distribution">Binomial Distribution</a>)
+
+</li></ul>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

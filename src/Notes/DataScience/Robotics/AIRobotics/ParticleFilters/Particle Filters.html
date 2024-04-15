@@ -1,0 +1,333 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Particle Filters</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Particle Filters"><h1 id="Particle Filters" class="header"><a href="#Particle Filters">Particle Filters</a></h1></div>
+
+<hr>
+
+<ol>
+<li>
+<a href="Particle Filters.html#Particle Filters-Properties">Properties</a>
+
+</li><li>
+<a href="Particle Filters.html#Particle Filters-Introduction">Introduction</a>
+
+</li><li>
+<a href="Particle Filters.html#Particle Filters-Initial Probability">Initial Probability</a>
+
+</li><li>
+<a href="Particle Filters.html#Particle Filters-Resampling">Resampling</a>
+
+</li><li>
+<a href="Particle Filters.html#Particle Filters-Motion">Motion</a>
+
+</li><li>
+<a href="Particle Filters.html#Particle Filters-Algorithm">Algorithm</a>
+
+</li><li>
+<a href="Particle Filters.html#Particle Filters-Resampling Example">Resampling Example</a>
+
+</li></ol>
+<hr>
+
+<div id="Particle Filters-Properties"><h2 id="Properties" class="header"><a href="#Particle Filters-Properties">Properties</a></h2></div>
+
+<table>
+<thead>
+<tr>
+<th>
+State Space
+</th>
+<th>
+Belief
+</th>
+<th>
+Efficiency
+</th>
+<th>
+Accuracy
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Continuous
+</td>
+<td>
+Multimodal
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+Approximate
+</td>
+</tr>
+</tbody>
+</table>
+
+<div id="Particle Filters-Introduction"><h2 id="Introduction" class="header"><a href="#Particle Filters-Introduction">Introduction</a></h2></div>
+
+<p>
+So, in a first instance, given a floor plan the robot has to perform global localization. That is, it does not know where it is, and it has to find out based on sensor measurements:
+</p>
+
+
+<p>
+<img src="https://albamr09.github.io/public/assets/particle_filter_1.png" alt="Initial State in Particle Filter">
+</p>
+
+<p>
+The robot has range sensors (blue lines), which use sonar sensors (basically sound) to obtain the distance between the robot and the obstacles around it. It uses this sensors to determine a posterior distribution that models its position at a given time.
+</p>
+
+<p>
+Each particle (dot) is a discrete guess whether the robot might be, and it holds the following information: x coordinate, y coordinate, and heading direction. Then, the comprise of multiple of these guesses make up the representation for the posterior of the robot's location.
+</p>
+
+<p>
+So, initially the robot is completely uncertain as to where it is, which derives into a uniform distribution as to where it may be, and thus the particles are scattered all over the floor plan. However as time passes, the particle filter makes them survive according to how consistent these particles are compared to the sensor measurements:
+</p>
+
+
+<p>
+<img src="https://albamr09.github.io/public/assets/particle_filter_2.png" alt="Update State in Particle Filter" style="width: 500px">
+<img src="https://albamr09.github.io/public/assets/particle_filter_3.png" alt="Update State in Particle Filter" style="width: 500px">
+<img src="https://albamr09.github.io/public/assets/particle_filter_4.png" alt="Update State in Particle Filter" style="width: 500px">
+</p>
+
+<p>
+In summary, the particles guess where the robot might be moving and then the filter makes them "survive" (it does not discard them) using survival of the fittest. This latter statement means that those particles that are more consistent with the measurements are more likely to survive.
+</p>
+
+<div id="Particle Filters-Initial Probability"><h2 id="Initial Probability" class="header"><a href="#Particle Filters-Initial Probability">Initial Probability</a></h2></div>
+
+<p>
+At the start the robot only has the map of the room and no other knowledge, therefore there is equal probability that the robot is at any position in the map. Hence, we create a set of \(N\) particles modeled after a uniform distribution. Which means each particle is as likely to be chosen as any other. 
+</p>
+
+<div id="Particle Filters-Resampling"><h2 id="Resampling" class="header"><a href="#Particle Filters-Resampling">Resampling</a></h2></div>
+
+<p>
+At first, we have \(N\) particles scattered all over the map and most of them are wrong. So now, we can start removing some of the wrong guesses using measurements of the environment. And we do this by resampling \(N\) particles. This translates into, we choose \(N\) particles that represent the place we believe the robot is in.
+</p>
+
+<p>
+So, now the filter can go through each of our particles and determine what the measurement would be if our robot was in the position indicated by the particle. In other words, each particle has assigned an importance weight \(w\) that determines how likely the measurement \(Z\) is given a concrete particle \(p_i\), (\(P(Z|p_i)\)).
+</p>
+
+<p>
+So, given a total of \(N\) particles:
+</p>
+
+\begin{align}
+N 
+\begin{cases}
+p_1 &amp; \rightarrow w_1\\
+p_2 &amp; \rightarrow w_2\\
+\vdots\\
+p_N &amp; \rightarrow w_N\\
+\end{cases}
+\end{align}
+
+<p>
+Let \(W = \sum_i w_i\) be the sum of all the weights. We introduce a new variable \(\alpha\) which represents the normalized weights:
+</p>
+
+\begin{align}
+N 
+\begin{cases}
+p_1 &amp; \rightarrow w_1 &amp; \rightarrow \alpha_1 = \frac{w_1}{W}\\
+p_2 &amp; \rightarrow w_2 &amp; \rightarrow \alpha_2 = \frac{w_2}{W}\\
+\vdots\\
+p_N &amp; \rightarrow w_N &amp; \rightarrow \alpha_N = \frac{w_N}{W}\\
+\end{cases}
+\end{align}
+
+<p>
+Hence, \(\sum_i \alpha_i = 1.0\). So we have now defined a new probability distribution that describes more clearly the position of our robot because it takes into account our measurement.
+</p>
+
+<p>
+So, it's time for the resampling. We have to choose \(N\) particles from the overall set, where each particle \(p_i\) is chosen with probability \(\alpha_i\):
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/resampling_1.png" alt="Resampling">
+</p>
+
+<p>
+Note we allow replacement, so we can draw multiple copies of the same particle \(p_i\). So what will happen is, the higher \(\alpha_i\) the more likely it is that particle \(p_i\) is chosen multiple times, meanwhile the lower \(\alpha_i\) is the more likely it is that it will not be chosen, and therefore simply removed from the set of particles.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/resampling_2.png" alt="Resampling" style="height: 400px;">
+</p>
+<pre><code>As you can see in the previous image, we have drawn three times \(p_2\), probably because the associated \(\alpha_2\) was larger than the rest of the \(\alpha\). 
+</code></pre>
+<p>
+Therefore, the particles with a low importance weight will survive with a much lower rate than the ones with a higher importance weight. 
+</p>
+
+<div id="Particle Filters-Motion"><h2 id="Motion" class="header"><a href="#Particle Filters-Motion">Motion</a></h2></div>
+
+<p>
+We also have to take into account that our particles cannot be static, but have to move with our robot. So whichever motion is applied to the robot should be applied to every single particle. Once the motion is applied we obtain a measurement and perform resampling to choose those particles that are more likely to describe the real position of the robot.
+</p>
+
+<p>
+Note that the motion will most probably contain noise, so we do not want to propagate the motion equally to each particle. What we would want is to add some gaussian noise to the particles to represent somewhat this uncertainty about the motion.
+</p>
+
+<div id="Particle Filters-Algorithm"><h2 id="Algorithm" class="header"><a href="#Particle Filters-Algorithm">Algorithm</a></h2></div>
+
+<div id="Particle Filters-Algorithm-Measurement Updates"><h3 id="Measurement Updates" class="header"><a href="#Particle Filters-Algorithm-Measurement Updates">Measurement Updates</a></h3></div>
+
+<p>
+We compute the posterior over state distribution:
+</p>
+
+\begin{align}
+P(X|Z) \propto P(Z|X)P(X)
+\end{align}
+
+<p>
+Here:
+</p>
+
+<ul>
+<li>
+\(P(X)\) is the distribution over the set of particles.
+
+</li><li>
+\(P(Z|X)\) is the distribution that models the importance weights.
+
+</li></ul>
+<p>
+And by resampling we obtain \(P(X|Z)\), because we draw with probability equal to the importance weight a given particle.
+</p>
+
+<div id="Particle Filters-Algorithm-Motion Updates"><h3 id="Motion Updates" class="header"><a href="#Particle Filters-Algorithm-Motion Updates">Motion Updates</a></h3></div>
+
+<p>
+We compute the posterior over distribution one step later (after movement):
+</p>
+
+\begin{align}
+P(X^t) = \sum P(X^t|X)P(X)
+\end{align}
+
+<p>
+Where:
+</p>
+
+<ul>
+<li>
+\(P(X)\) is the distribution over the set of particles.
+
+</li></ul>
+<p>
+And then, we sample from the sum. That is we generate a random particle \(X^t\) by applying the motion model \(P(X^t|X)\) to the particles \(P(X)\).
+</p>
+
+<hr>
+
+<div id="Particle Filters-Resampling Example"><h2 id="Resampling Example" class="header"><a href="#Particle Filters-Resampling Example">Resampling Example</a></h2></div>
+
+<p>
+Suppose we have the following data:
+</p>
+
+\begin{align}
+N 
+\begin{cases}
+p_1 &amp; \rightarrow w_1 = 0.6 &amp; \rightarrow \alpha_1 = \frac{w_1}{W} = \frac{0.6}{6.0} = 0.1\\
+p_2 &amp; \rightarrow w_2 = 1.2 &amp; \rightarrow \alpha_2 = \frac{w_2}{W} = \frac{1.2}{6.0} = 0.2\\
+p_3 &amp; \rightarrow w_3 = 2.4 &amp; \rightarrow \alpha_3 = \frac{w_3}{W} = \frac{2.4}{6.0} = 0.4\\
+p_4 &amp; \rightarrow w_4 = 0.6 &amp; \rightarrow \alpha_4 = \frac{w_4}{W} = \frac{0.6}{6.0} = 0.1\\
+p_5 &amp; \rightarrow w_2 = 1.2 &amp; \rightarrow \alpha_5 = \frac{w_5}{W} = \frac{1.2}{6.0} = 0.2\\
+\end{cases}
+\end{align}
+
+<p>
+Then, the probability of never sampling \(p_3\) is given by the multiplication rule of probability:
+</p>
+
+<p>
+On the first draw:
+</p>
+
+\begin{align}
+P(\bar{p_3}) = P(p_1) + P(p_2) + P(p_4) + P(p_5) = 0.6
+\end{align}
+
+<p>
+Because we allow for resampling, on the second draw:
+</p>
+
+\begin{align}
+0.6 \cdot P(\bar{p_3}) = 0.6 \cdot (P(p_1) + P(p_2) + P(p_4) + P(p_5)) = 0.6^2
+\end{align}
+
+<p>
+Thus, on the fifth and final draw:
+</p>
+
+\begin{align}
+0.6^4 \cdot P(\bar{p_3}) = 0.6^4 \cdot (P(p_1) + P(p_2) + P(p_4) + P(p_5)) = 0.6^5 = 0.0777
+\end{align}
+
+<p>
+However, the probabily of never drawing \(p_1\) equals:
+</p>
+
+\begin{align}
+P(\bar{p_1}) = 0.9 ^ 5 = 0.59
+\end{align}
+
+<p>
+Therefore, the particles with a low importance weight will survive with a much lower rate than the ones with a higher importance weight.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
