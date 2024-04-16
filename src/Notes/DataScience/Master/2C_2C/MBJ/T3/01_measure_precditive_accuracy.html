@@ -121,22 +121,22 @@ By the definition of the expected value for a random variable:
 where \(p_{\text{post}}(\tilde{y}_i)\) is the predictive density for \(\tilde{y}_i\) induced by the posterior distribution \(p_{\text{post}}(\theta)\).
 </p>
 
+<p>
+Note that we use \(p_{\text{post}}\) and \(\mathbb{E}_{\text{post}}\) to denote any probability or expectation that averages over the posterior distribution of \(\theta\).
+</p>
+
 <div id="Measures of Predictive Accuracy-Averaging over the distribution of future data"><h2 id="Averaging over the distribution of future data" class="header"><a href="#Measures of Predictive Accuracy-Averaging over the distribution of future data">Averaging over the distribution of future data</a></h2></div>
 
 <p>
-The future data \(\tilde{y}_i\) are themselves unknown and thus we define the expected out-of-sample log predictive density. By the definition of expected value of the function \(\log (x)\) over \(\tilde{y}\) with respect to a function \(f\) that describes the distribution of the data:
+The future data \(\tilde{y}_i\) are themselves unknown and thus we define the expected out-of-sample log predictive density. By the definition of expected value of the function \(\log (x)\) over \(\tilde{y}\) with respect to a function \(f\) that describes the distribution of the data, we compute the <span id="Measures of Predictive Accuracy-Averaging over the distribution of future data-expected log predictive density"></span><strong id="expected log predictive density">expected log predictive density</strong> or elpd for a new data point as follows:
 </p>
 
 \begin{align}
-\mathbb{E}_f[\log p_{\text{post}}(\tilde{y}_i)] = \int \left(\log p_{\text{post}}(\tilde{y}_i) f(\tilde{y}_i)\right) d\tilde{y}
+\mathbb{E}_f[\log p_{\text{post}}(\tilde{y}_i)] = \int \log (p_{\text{post}}(\tilde{y}_i)) f(\tilde{y}_i) d\tilde{y}
 \end{align}
 
 <p>
-In general we do not know the data distribution \(f\). A natural way to estimate the expected out-of-sample log predictive density would be to plug in an estimate for \(f\), but this will tend to imply too good a fit. For now we consider the estimation of predictive accuracy in a Bayesian context.
-</p>
-
-<p>
-One can define a measure of predictive accuracy for the n data points taken one at a time:
+In general we do not know the data distribution \(f\). A natural way to estimate the expected out-of-sample log predictive density would be to plug in an estimate for \(f\), but this will tend to imply too good a fit. For now we consider the estimation of predictive accuracy in a Bayesian context. One can define a measure of predictive accuracy for the \(n\) data points taken one at a time:
 </p>
 
 \begin{align}
@@ -144,11 +144,15 @@ One can define a measure of predictive accuracy for the n data points taken one 
 \end{align}
 
 <p>
+This gives us the <span id="Measures of Predictive Accuracy-Averaging over the distribution of future data-expected log pointwise predictive density"></span><strong id="expected log pointwise predictive density">expected log pointwise predictive density</strong> for a new dataset.
+</p>
+
+<p>
 Using a single-point measure instead of dealing with the entire set of predictions (the joint distribution \(p_{\text{post}}(\tilde{y})\)) allows us to connect it to cross-validation, which helps us approximate how well our model performs on new data based on the data we already have.
 </p>
 
 <p>
-It is sometimes useful to consider predictive accuracy given a point estimate \(\theta(\tilde{y})\):
+It is sometimes useful to consider predictive accuracy given a point estimate \(\theta(\tilde{y})\) (sampled data point given the parameter \(\theta\)?). This gives us the <span id="Measures of Predictive Accuracy-Averaging over the distribution of future data-expected log predictive density"></span><strong id="expected log predictive density">expected log predictive density</strong> given \(\hat{\theta}\):
 </p>
 
 \begin{align}
@@ -158,7 +162,27 @@ It is sometimes useful to consider predictive accuracy given a point estimate \(
 <div id="Measures of Predictive Accuracy-Evaluating predictive accuracy for a fitted model"><h2 id="Evaluating predictive accuracy for a fitted model" class="header"><a href="#Measures of Predictive Accuracy-Evaluating predictive accuracy for a fitted model">Evaluating predictive accuracy for a fitted model</a></h2></div>
 
 <p>
-In practice the parameter θ is not known, so we cannot know the log predictive density \(\log p(y|\theta)\).
+In practice the parameter \(\theta\) is not known, so we cannot know the log predictive density \(\log p(y|\theta)\), which tells us how well our model predicts new data based on \(\theta\). So, instead of using \(\theta\) directly, we use something called the posterior distribution, denoted as \(p_{\text{post}}(\theta) = p(\theta|y)\). This distribution gives us a range of possible values for \(\theta\) based on the data we have. From this distribution, we can summarize how accurately our model predicts new data. So we define the <span id="Measures of Predictive Accuracy-Evaluating predictive accuracy for a fitted model-log pointwise predictive density"></span><strong id="log pointwise predictive density">log pointwise predictive density</strong> or lppd as:
+</p>
+
+\begin{align}
+\log \prod_{i=1}^n p_{\text{post}}(y_i) = \sum_{i=1}^n \log \int p(y_i|\theta)p_{\text{post}}(\theta)d\theta
+\end{align}
+
+<p>
+To calculate this predictive density, we can use samples drawn from the posterior distribution \(p_{\text{post}}(\theta)\) using simulation. These samples are labeled as \(\theta_s\), where \(s\) ranges from \(1\) to \(S\). So we define the <span id="Measures of Predictive Accuracy-Evaluating predictive accuracy for a fitted model-computed log pointwise predictive density"></span><strong id="computed log pointwise predictive density">computed log pointwise predictive density</strong> or computed lppd as:
+</p>
+
+\begin{align}
+\sum_{i=1}^n \log \left(\frac{1}{S}\sum_{s=1}^S p(y_i|\theta^s)\right)
+\end{align}
+
+<p>
+We basically compute the sample mean of the likelihood \(p(y_i|\theta)\) for over all the \(\{\theta^s\}_{s=1}^S\) We typically assume that the number of simulation draws \(S\) is large enough to fully capture the posterior distribution.
+</p>
+
+<p>
+The lppd of observed data y is an overestimate of the elppd for future data. Hence the plan is to start with lppd and then apply some sort of bias correction to get a reasonable estimate of elppd.
 </p>
 </div>
   

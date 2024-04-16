@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
-    <title>Modelos Bayesianos Jerárquicos</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/custom.css">
+    <title>Information criteria and cross-validation</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,78 +31,38 @@
     <hr>
     <div class="content">
 <p>
-<a href="../../index.html">Back</a>
+<a href="../index.html">Back</a>
 </p>
 
-<div id="Modelos Bayesianos Jerárquicos"><h1 id="Modelos Bayesianos Jerárquicos" class="header"><a href="#Modelos Bayesianos Jerárquicos">Modelos Bayesianos Jerárquicos</a></h1></div>
+<div id="Information criteria and cross-validation"><h1 id="Information criteria and cross-validation" class="header"><a href="#Information criteria and cross-validation">Information criteria and cross-validation</a></h1></div>
 
 <hr>
 
-<ol>
-<li>
-<a href="01_intro.html">Introduccion a la Inferencia Bayesiana</a>
-
-</li><li>
-Modelos Jerarquicos
-
-<ol>
-<li>
-<a href="T2/01.html">Constructing a parametrized prior distribution</a>
-
-</li><li>
-<a href="T2/02.html">Exchangeability and hierarchical models</a>
-
-</li><li>
-<a href="T2/03.html">Bayesian analysis of conjugate hierarchical models</a>
-
-</li><li>
-<a href="T2/04_normal_model.html">Normal model with exchangeable parameters</a>
-
-</li><li>
-<a href="T2/05_example_normal.html">Example: parallel experiments in eight schools</a>
-
-</li><li>
-<a href="T2/06_hierarchical_meta_analysis.html">Hierarchical modeling applied to meta-analysis</a>
-
-</li><li>
-<a href="T2/07_weakly_informative_priors.html">Weakly Informative Priors</a>
-
-</li></ol>
-</li><li>
-Evaluación y Comparación de Modelos
-
-<ol>
-<li>
-<a href="T3/01_measure_precditive_accuracy.html">Measures of predictive accuracy</a>
-
-</li><li>
-<a href="T3/02_information_criteria_and_crossvalidation.html">Information criteria and cross-validation</a>
-
-</li></ol>
-</li></ol>
-<div id="Modelos Bayesianos Jerárquicos-Appendix"><h2 id="Appendix" class="header"><a href="#Modelos Bayesianos Jerárquicos-Appendix">Appendix</a></h2></div>
-
-<div id="Modelos Bayesianos Jerárquicos-Appendix-T2"><h3 id="T2" class="header"><a href="#Modelos Bayesianos Jerárquicos-Appendix-T2">T2</a></h3></div>
-
 <p>
-Thanks to how little I understand this book i will use other sources in order to properly understand Bayesian Hierarchical Modeling, the contents on the following chapter explains how hierarchical Bayesian models came to be and its appeal. Then on section 2 it lays out Hierarchical Nolmal Modeling followed by an explanation on hierarchical Beta-Binomial modeling on section 3.
+For historical reasons, measures of predictive accuracy are referred to as <span id="Information criteria and cross-validation-information criteria"></span><strong id="information criteria">information criteria</strong>. These criteria are usually based on something called deviance that it's calculated by taking the negative two times the logarithm of the likelihood of the data given a point estimate of the model, \(-2 \log p(y|\hat{\theta}))\).
 </p>
 
 <p>
-<a href="https://bayesball.github.io/BOOK/bayesian-hierarchical-modeling.html">Bayesian Hierarchical Modeling</a>
+When we make predictions about new data that the model hasn't seen before, these predictions are usually less accurate than what we'd expect based on how well the model fits the data it was trained on. even if the family of models being fit happens to include the true data-generating process, and even if the parameters in the model happen to be sampled exactly from the specified prior distribution.
 </p>
 
-<ul>
+<p>
+We are interested in prediction accuracy for two reasons: 
+</p>
+
+<ol>
 <li>
-<a href="T2/11_introduction.html">Introduction</a>
+To measure the performance of a model.
 
 </li><li>
-<a href="T2/12_hierarchical_normal_modeling.html">Hierarchical Normal Modeling</a>
+To compare models.
 
-</li><li>
-<a href="T2/13_hierarchical_beta_binomial_modeling.html">Hierarchical Beta-Binomial Modeling</a>
+</li></ol>
+<p>
+When comparing models with the same number of parameters, we can directly compare their best-fit log predictive densities. But when comparing models of different sizes or complexities we need to adjust for the fact that larger models can sometimes fit data better just by chance.
+</p>
 
-</li></ul>
+<div id="Information criteria and cross-validation-Estimating out-of-sample predictive accuracy using available data"><h2 id="Estimating out-of-sample predictive accuracy using available data" class="header"><a href="#Information criteria and cross-validation-Estimating out-of-sample predictive accuracy using available data">Estimating out-of-sample predictive accuracy using available data</a></h2></div>
 </div>
   
 
