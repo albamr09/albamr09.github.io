@@ -1,0 +1,171 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/custom.css">
+    <title>Measures of Predictive Accuracy</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Measures of Predictive Accuracy"><h1 id="Measures of Predictive Accuracy" class="header"><a href="#Measures of Predictive Accuracy">Measures of Predictive Accuracy</a></h1></div>
+
+<hr>
+
+<p>
+We begin by considering different ways of defining the accuracy or error of a model’s predictions then discuss methods for estimating predictive accuracy or error from data. Preferably, the measure of predictive accuracy is specifically tailored for the application at hand, and it measures as correctly as possible the benefit (or cost) of predicting future data with the model. 
+</p>
+
+<div id="Measures of Predictive Accuracy-Point Prediction"><h3 id="Point Prediction" class="header"><a href="#Measures of Predictive Accuracy-Point Prediction">Point Prediction</a></h3></div>
+
+<p>
+In <span id="Measures of Predictive Accuracy-Point Prediction-point prediction"></span><strong id="point prediction">point prediction</strong> (predictive point estimation or point forecasting) a single value is reported as a prediction of the unknown future observation. Measures of predictive accuracy for point prediction are called <span id="Measures of Predictive Accuracy-Point Prediction-scoring functions"></span><strong id="scoring functions">scoring functions</strong>. 
+</p>
+
+<p>
+For example, the <span id="Measures of Predictive Accuracy-Point Prediction-mean squared error"></span><strong id="mean squared error">mean squared error</strong>:
+</p>
+
+\begin{align}
+\frac{1}{n} \sum_{i=1}^n (y_i - \mathbb{E}[y_i|\theta])^2
+\end{align}
+
+<p>
+or its weighted version:
+</p>
+
+\begin{align}
+\frac{1}{n} \sum_{i=1}^n \frac{(y_i - \mathbb{E}[y_i|\theta])^2}{\mathbb{V}[y_i|\theta]} 
+\end{align}
+
+<p>
+These are easy to compute but they are less appropiated for models that are far from the normal distribution.
+</p>
+
+<div id="Measures of Predictive Accuracy-Probabilistic Prediction"><h3 id="Probabilistic Prediction" class="header"><a href="#Measures of Predictive Accuracy-Probabilistic Prediction">Probabilistic Prediction</a></h3></div>
+
+<p>
+In <span id="Measures of Predictive Accuracy-Probabilistic Prediction-probabilistic prediction"></span><strong id="probabilistic prediction">probabilistic prediction</strong> (probabilistic forecasting) the aim is to report inferences about
+\(\hat{y}\) in such a way that the full uncertainty over \(\hat{y}\) is taken into account. These are called <span id="Measures of Predictive Accuracy-Probabilistic Prediction-scoring rules"></span><strong id="scoring rules">scoring rules</strong>. Examples include the quadratic, logarithmic, and zero-one scores
+</p>
+
+<p>
+Good scoring rules for prediction are:
+</p>
+
+<ul>
+<li>
+Proper: the scoring rule encourages the decision maker to be honest when reporting their beliefs.
+
+</li><li>
+Local: the scoring rule takes into account the fact that some predictions may be worse than others, and it adjusts accordingly.
+
+</li></ul>
+<p>
+For example the <span id="Measures of Predictive Accuracy-Probabilistic Prediction-log predictive density"></span><strong id="log predictive density">log predictive density</strong> or <span id="Measures of Predictive Accuracy-Probabilistic Prediction-log-likelihood"></span><strong id="log-likelihood">log-likelihood</strong>, \(p(y|\theta)\), which is proportional to the mean squared error if the model is normal with constant variance.
+</p>
+
+<p>
+Why not use the log posterior? The answer is that we are interested here in summarizing the fit of model to data, and for this purpose the prior is relevant in estimating the parameters but not inassessing a model's accuracy. We are not saying that the prior cannot be used in assessing a model's fit to data; rather we say that the prior density is not relevant in computing predictive accuracy.
+</p>
+
+<div id="Measures of Predictive Accuracy-Predictive accuracy for a single data point"><h2 id="Predictive accuracy for a single data point" class="header"><a href="#Measures of Predictive Accuracy-Predictive accuracy for a single data point">Predictive accuracy for a single data point</a></h2></div>
+
+<p>
+The best way to measure how well a model fits is by seeing how accurately it predicts outcomes in new data that it hasn't seen before (out-of-sample predictive performance), but that comes from the same process as the original data.
+</p>
+
+<p>
+We label \(f\) as the true model, \(y\) as the observed data and \(\tilde{y}\) as future data. The out-of-sample predictive fit for a new data point \(\tilde{y}_i\) using logarithmic score is:
+</p>
+
+\begin{align}
+\log p_{\text{post}}(\tilde{y}_i) = \log \mathbb{E}_{\text{post}}[p(\tilde{y}_i|\theta)] = 
+\end{align}
+
+<p>
+By the definition of the expected value for a random variable:
+</p>
+
+\begin{align}
+= \log \int p(\tilde{y}_i|\theta) p_{\text{post}}(\theta)d\theta
+\end{align}
+
+<p>
+where \(p_{\text{post}}(\tilde{y}_i)\) is the predictive density for \(\tilde{y}_i\) induced by the posterior distribution \(p_{\text{post}}(\theta)\).
+</p>
+
+<div id="Measures of Predictive Accuracy-Averaging over the distribution of future data"><h2 id="Averaging over the distribution of future data" class="header"><a href="#Measures of Predictive Accuracy-Averaging over the distribution of future data">Averaging over the distribution of future data</a></h2></div>
+
+<p>
+The future data \(\tilde{y}_i\) are themselves unknown and thus we define the expected out-of-sample log predictive density. By the definition of expected value of the function \(\log (x)\) over \(\tilde{y}\) with respect to a function \(f\) that describes the distribution of the data:
+</p>
+
+\begin{align}
+\mathbb{E}_f[\log p_{\text{post}}(\tilde{y}_i)] = \int \left(\log p_{\text{post}}(\tilde{y}_i) f(\tilde{y}_i)\right) d\tilde{y}
+\end{align}
+
+<p>
+In general we do not know the data distribution \(f\). A natural way to estimate the expected out-of-sample log predictive density would be to plug in an estimate for \(f\), but this will tend to imply too good a fit. For now we consider the estimation of predictive accuracy in a Bayesian context.
+</p>
+
+<p>
+One can define a measure of predictive accuracy for the n data points taken one at a time:
+</p>
+
+\begin{align}
+\sum_{i=1}^n \mathbb{E}_f[\log(p_{\text{post}}(\tilde{y}_i))]
+\end{align}
+
+<p>
+Using a single-point measure instead of dealing with the entire set of predictions (the joint distribution \(p_{\text{post}}(\tilde{y})\)) allows us to connect it to cross-validation, which helps us approximate how well our model performs on new data based on the data we already have.
+</p>
+
+<p>
+It is sometimes useful to consider predictive accuracy given a point estimate \(\theta(\tilde{y})\):
+</p>
+
+\begin{align}
+\mathbb{E}_f[\log(p(\tilde{y}|\theta))]
+\end{align}
+
+<div id="Measures of Predictive Accuracy-Evaluating predictive accuracy for a fitted model"><h2 id="Evaluating predictive accuracy for a fitted model" class="header"><a href="#Measures of Predictive Accuracy-Evaluating predictive accuracy for a fitted model">Evaluating predictive accuracy for a fitted model</a></h2></div>
+
+<p>
+In practice the parameter θ is not known, so we cannot know the log predictive density \(\log p(y|\theta)\).
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
