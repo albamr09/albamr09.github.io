@@ -257,7 +257,7 @@ That is we defined the centroid for \(S\) as the point \(m\) that minimizes the 
 </p>
 
 \begin{align}
-\min_{C, m_k}^K_1 \sum_{k=1}^K N_k \sum_{C(i) = k} ||x_i - m_k||^2
+\min_{\{C, m_k\}^K_1} \sum_{k=1}^K N_k \sum_{C(i) = k} ||x_i - m_k||^2
 \end{align}
 
 <p>
@@ -284,6 +284,86 @@ As \(\sigma^2\) tends to \(1\), these probabilities become \(0\) and \(1\), and 
 
 <p>
 <img src="https://albamr09.github.io/public/assets/k_means_vs_gaussian_mixtures.png" alt="KMeans and Gaussian Mixtures" style="height:500px">
+</p>
+
+<div id="Cluster Analysis-Clustering Algorithms-Vector Quantization"><h3 id="Vector Quantization" class="header"><a href="#Cluster Analysis-Clustering Algorithms-Vector Quantization">Vector Quantization</a></h3></div>
+
+<p>
+Vector quantization (VQ) is a technique used in data compression, particularly in the compression of digital signals or images. It involves representing a large set of data points (vectors) by a smaller set of representative values, called codewords or centroids. These centroids are selected from the original data set and are used to approximate the original data. By replacing groups of similar data points with these representative values, vector quantization can significantly reduce the amount of data needed to represent the information while minimizing the loss of quality.
+</p>
+
+<p>
+In this example of vector quantization, given an image of \(1024\times 1024\) pixels we start by dividing the image into small blocks of \(2\times 2\). Each block, which contains four pixels, is treated like a tiny picture of its own. Each of the \(512 \times 512\) blocks of four numbers is regarded as vector in \(\mathbb{R}^4\). Then, using  K-means clustering, we group these blocks together based on their similarity.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/vector_quantization.png" alt="Vector Quantization Example" style="height:300px">
+</p>
+
+<p>
+The clustering process is called the <span id="Cluster Analysis-Clustering Algorithms-Vector Quantization-encoding step"></span><strong id="encoding step">encoding step</strong>, and the collection of centroids is called the <span id="Cluster Analysis-Clustering Algorithms-Vector Quantization-codebook"></span><strong id="codebook">codebook</strong>. Why do we expect VQ to work at all? The reason is that for typical everyday images like photographs, many of the blocks look the same. What we have described is known as lossy compression, since our images are degraded versions of the original.
+</p>
+
+<div id="Cluster Analysis-Clustering Algorithms-K-Medoids"><h3 id="K-Medoids" class="header"><a href="#Cluster Analysis-Clustering Algorithms-K-Medoids">K-Medoids</a></h3></div>
+
+<p>
+The K-Means algorithm can be generalized for use with arbitrarily defined dissimilarities \(D(x_i, x_{i'})\).  The process of finding the centers of the clusters stays similar, but the way we measure similarity can change. This makes the algorithm versatile and applicable to various types of data. This gives way to the K-medoids algorithm:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/k_medoids_algorithm.png" alt="K Medoids Algorithm" style="height:300px">
+</p>
+
+<div id="Cluster Analysis-Clustering Algorithms-Practical Issues"><h3 id="Practical Issues" class="header"><a href="#Cluster Analysis-Clustering Algorithms-Practical Issues">Practical Issues</a></h3></div>
+
+<p>
+In order to apply K-means or K-medoids one must select the number of clusters \(K^*\) and an initialization.
+</p>
+
+<p>
+The latter can be defined by specifying an initial set of centers \(\{m_1,\cdots,m_K\}\) or \(\{i_1, \cdots,i_K\}\) or an initial encoder \(C(i)\). A choice for the number of clusters \(K\) depends on the goal. For data segmentation \(K\) is usually defined as part of the problem.
+</p>
+
+<p>
+Data-based methods for estimating \(K^*\) typically examine the withincluster dissimilarity \(W_K\) as a function of the number of clusters \(K\). The corresponding values generally decrease with increasing \(K\). Thus cross-validation techniques, so useful for model selection in supervised learning, cannot be utilized in this context.
+</p>
+
+<p>
+As we increase the number of clusters, the solution quality will improve because more natural groups will be captured separately. So, if we keep adding more clusters beyond the true number (\(K &gt; K^*\)), some estimated clusters will start to split the real groups. However, splitting a group that's already close together won't improve the solution as much as properly separating two distinct groups.
+</p>
+
+<p>
+To the extent this scenario is realized, there will be a sharp decrease in successive differences in criterion value, \(W_K − W_{K+1}\), at \(K = K^*\). That is, \(\{W_K − W_{K+1} |K &lt; K^*} \geq {W_K − W_{K+1} |K \geq K^*}\). An estimate \(\hat{K}*\) for \(K^*\) is then obtained by identifying a “kink” in the plot of \(W_K\) as a function of \(K\).
+</p>
+
+<p>
+The recently proposed Gap statistic compares the shape of a curve based on our data to a curve we'd get if the data were spread out evenly. We're looking for a point where there's a big gap between these two curves. This point tells us the best number of clusters for our data. If \(G(K)\) is the Gap curve at \(K\) clusters, the formal rule for estimating \(K^*\) is:
+</p>
+
+\begin{align}
+K^* = \text{argmin}_{K} \{K | G(K) \geq G(K + 1 - s'_{K + 1}) \}
+\end{align}
+
+<p>
+where \(s_K\) is the standard deviation. The following figure shows and example on how to choose the optimal number of clusters:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/gap_statistic.png" alt="Gap Statistic" style="height:400px">
+</p>
+
+<div id="Cluster Analysis-Clustering Algorithms-Hierarchical Clustering"><h3 id="Hierarchical Clustering" class="header"><a href="#Cluster Analysis-Clustering Algorithms-Hierarchical Clustering">Hierarchical Clustering</a></h3></div>
+
+<p>
+As the name suggests, they produce hierarchical representations in which the clusters at each level of the hierarchy are created by merging clusters at the next lower level. At the lowest level, each cluster contains a single observation. At the highest level there is only one cluster containing all of the data.
+</p>
+
+<p>
+Strategies for hierarchical clustering divide into two basic paradigms: agglomerative (bottom-up) and divisive (top-down). Each level of the hierarchy represents a particular grouping of the data into disjoint clusters of observations. The entire hierarchy represents an ordered sequence of such groupings. It is up to the user to decide which level (if any) actually represents a "natural" clustering 
+</p>
+
+<p>
+A dendrogram provides a highly interpretable complete description of the hierarchical clustering in a graphical format. Cutting the dendrogram horizontally at a particular height partitions the data into disjoint clusters represented by the vertical lines that intersect it. 
 </p>
 </div>
   
