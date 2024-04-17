@@ -63,6 +63,23 @@ When comparing models with the same number of parameters, we can directly compar
 </p>
 
 <div id="Information criteria and cross-validation-Estimating out-of-sample predictive accuracy using available data"><h2 id="Estimating out-of-sample predictive accuracy using available data" class="header"><a href="#Information criteria and cross-validation-Estimating out-of-sample predictive accuracy using available data">Estimating out-of-sample predictive accuracy using available data</a></h2></div>
+
+<p>
+Several methods are available to estimate the expected predictive accuracy without waiting for out-of-sample data.
+</p>
+
+<ul>
+<li>
+<span id="Information criteria and cross-validation-Estimating out-of-sample predictive accuracy using available data-Within-sample predictive accuracy"></span><strong id="Within-sample predictive accuracy">Within-sample predictive accuracy</strong>: A naive estimate of the expected log predictive density for new data is the log predictive density for existing data using the computed lppd. This summary is in general an overestimate of elppd because it is evaluated on the data from which the model was fit.
+
+</li><li>
+<span id="Information criteria and cross-validation-Estimating out-of-sample predictive accuracy using available data-Adjusted within-sample predictive accuracy"></span><strong id="Adjusted within-sample predictive accuracy">Adjusted within-sample predictive accuracy</strong>: Given that lppd is a biased estimate of elppd, the next logical step is to correct that bias. Formulas such as AIC, DIC, and WAIC (all discussed below) give approximately unbiased estimates of elppd.
+
+</li><li>
+<span id="Information criteria and cross-validation-Estimating out-of-sample predictive accuracy using available data-Cross-validation"></span><strong id="Cross-validation">Cross-validation</strong>: One can attempt to capture out-of-sample prediction error by fitting the model to training data and then evaluating this predictive accuracy on a holdout set. Cross-validation can be computationally expensive.
+
+</li></ul>
+<div id="Information criteria and cross-validation-Akaike information criterion (AIC)"><h2 id="Akaike information criterion (AIC)" class="header"><a href="#Information criteria and cross-validation-Akaike information criterion (AIC)">Akaike information criterion (AIC)</a></h2></div>
 </div>
   
 
