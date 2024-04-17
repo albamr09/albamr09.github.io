@@ -333,7 +333,7 @@ As we increase the number of clusters, the solution quality will improve because
 </p>
 
 <p>
-To the extent this scenario is realized, there will be a sharp decrease in successive differences in criterion value, \(W_K − W_{K+1}\), at \(K = K^*\). That is, \(\{W_K − W_{K+1} |K &lt; K^*} \geq {W_K − W_{K+1} |K \geq K^*}\). An estimate \(\hat{K}*\) for \(K^*\) is then obtained by identifying a “kink” in the plot of \(W_K\) as a function of \(K\).
+To the extent this scenario is realized, there will be a sharp decrease in successive differences in criterion value, \(W_K − W_{K+1}\), at \(K = K^*\). That is, \(\{W_K − W_{K+1} |K &lt; K^*} \geq {W_K − W_{K+1} |K \geq K^*\}\). An estimate \(\hat{K}*\) for \(K^*\) is then obtained by identifying a “kink” in the plot of \(W_K\) as a function of \(K\).
 </p>
 
 <p>
@@ -363,7 +363,97 @@ Strategies for hierarchical clustering divide into two basic paradigms: agglomer
 </p>
 
 <p>
-A dendrogram provides a highly interpretable complete description of the hierarchical clustering in a graphical format. Cutting the dendrogram horizontally at a particular height partitions the data into disjoint clusters represented by the vertical lines that intersect it. 
+A dendrogram provides a highly interpretable complete description of the hierarchical clustering in a graphical format. Cutting the dendrogram horizontally at a particular height partitions the data into disjoint clusters represented by the vertical lines that intersect it. The height at which we cut represents the level of similarity required to form a cluster. Generally, groups that merge at higher levels in the dendrogram are considered more significant clusters. However, it's essential to be cautious when interpreting dendrograms because different clustering methods or slight changes in the data can lead to different dendrogram structures. 
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/dendogram_example.png" alt="Dendogram Example" style="height:500px">
+</p>
+
+<p>
+Also, dendrogram interpretations are only valid if the data truly exhibits the hierarchical structure imposed by the clustering algorithm. This can be assesed using the <em>cophenetic correlation coefficient</em>, it measures the correlation between the <em>cophenetic dissimilarities</em> \(C_{ii'}\) and the distances between observations in the original data \(d_{ii'}\). The <em>cophenetic dissimilarity</em> \(C_{ii'}\) between two observations \((i, i')\) is the intergroup dissimilarity at which observations \(i\) and \(i'\) are first joined together in the same cluster.
+</p>
+
+<div id="Cluster Analysis-Clustering Algorithms-Hierarchical Clustering-Agglomerative Clustering"><h4 id="Agglomerative Clustering" class="header"><a href="#Cluster Analysis-Clustering Algorithms-Hierarchical Clustering-Agglomerative Clustering">Agglomerative Clustering</a></h4></div>
+
+<p>
+Agglomerative clustering starts with each observation as its own cluster. Then, at each step, it merges the two closest clusters together until there's only one big cluster left. To measure dissimilarity between two clusters, let's call them \(G\) and \(H\). We look at all the pairs of observations, one from G and one from H, and find the dissimilarity between them.
+</p>
+
+<p>
+<em>Single linkage</em> (SL) or nearest neighbour agglomerative clustering chooses the closest pair of observations between the two clusters as the measure of dissimilarity between the clusters:
+</p>
+
+\begin{align}
+d_{SL}(G, H) = \min_{i \in G, h' \in H} d_{ii'}
+\end{align}
+
+<p>
+<em>Complete linkage</em> (CL) or furthest-neighbor technique agglomerative clustering measures the dissimilarity between two clusters as the distance the pair of observations that are the farthest apart.
+</p>
+
+\begin{align}
+d_{CL}(G, H) = \max_{i \in G, h' \in H} d_{ii'}
+\end{align}
+
+<p>
+<em>Group average</em> (GA) clustering uses the average dissimilarity between the groups:
+</p>
+
+\begin{align}
+d_{GA}(G, H) = \frac{1}{N_G N_H} \sum_{i \in G} \sum_{i \in H} d_{ii'}
+\end{align}
+
+<p>
+where \(N_G\) and \(N_H\) are the respective number of observations in each group.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/agglomerative_clustering_dissimilarity_comparison.png" alt="Agglomerative Clustering Dissimilarity Comparison" style="height:500px">
+</p>
+
+<p>
+If the data shows clear clusters that are close together and distinct from each other, all three methods—single linkage, complete linkage, and average linkage—will give similar results. However, if the data doesn't exhibit this pattern, the results of the three methods will differ. Single linkage tends to join clusters even if just one pair of observations is close together, which can lead to long chains of connections between clusters. This phenomenon is known as <em>chaining</em>.
+</p>
+
+<p>
+Complete linkage will tend to produce compact clusters with small diameters because it considers two groups close only if all the observations in their combined set are similar. Sometimes it may violate the rule that observations within a cluster should be closer to each other than to observations in other clusters.
+</p>
+
+<p>
+Group average clustering strikes a balance between single and complete linkage. It tries to make clusters compact while keeping them relatively far apart. However, its outcome can be affected by how the dissimilarities between observations are measured. Changing the measurement scale can change the clustering result. In contrast, single and complete linkage methods are not affected by such changes in scale.
+</p>
+
+<div id="Cluster Analysis-Clustering Algorithms-Hierarchical Clustering-Divisive Clustering"><h4 id="Divisive Clustering" class="header"><a href="#Cluster Analysis-Clustering Algorithms-Hierarchical Clustering-Divisive Clustering">Divisive Clustering</a></h4></div>
+
+<p>
+Divisive clustering starts with the entire dataset as one cluster and then splits it into smaller clusters step by step. This method isn't as widely studied as agglomerative clustering, but it has been explored, especially in engineering contexts like compression.
+</p>
+
+<p>
+One potential advantage of divisive clustering is when you want to divide the data into only a few clusters. Divisive methods can be used recursively with techniques like K-means or K-medoids to split clusters into smaller ones. However the way you begin the splitting process at each step can influence the final outcome.
+</p>
+
+<p>
+A method has been developed to overcome this limitations. The divisive algorithm, proposed by Macnaughton Smith et al. (1965), is defined as: 
+</p>
+
+<ol>
+<li>
+Puts all observations in one big cluster called \(G\).
+
+</li><li>
+It picks the observation that's farthest on average from all the others and makes it the first member of a new cluster called \(H\).
+
+</li><li>
+At each successive step that observation in \(G\) whose average distance from those in \(H\), minus that for the remaining observations in \(G\) is largest, is transferred to \(H\).
+
+</li><li>
+This continues until there are no more observations in \(G\) that are closer to those in \(H\).
+
+</li></ol>
+<p>
+This splitting procedure is repeated for each new cluster formed at the previous level, creating a hierarchical structure. Kaufman and Rousseeuw (1990) suggest choosing the cluster with the largest diameter for splitting at each level, but another option is to pick the one with the largest average dissimilarity among its members.
 </p>
 </div>
   
