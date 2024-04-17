@@ -1,0 +1,287 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Redes Neuronales Recurrentes</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Redes Neuronales Recurrentes"><h1 id="Redes Neuronales Recurrentes" class="header"><a href="#Redes Neuronales Recurrentes">Redes Neuronales Recurrentes</a></h1></div>
+
+<hr>
+
+<div id="Redes Neuronales Recurrentes-Introducción a las aplicaciones del Deep Learning para el NLP"><h2 id="Introducción a las aplicaciones del Deep Learning para el NLP" class="header"><a href="#Redes Neuronales Recurrentes-Introducción a las aplicaciones del Deep Learning para el NLP">Introducción a las aplicaciones del Deep Learning para el NLP</a></h2></div>
+
+<div id="Redes Neuronales Recurrentes-Introducción a las aplicaciones del Deep Learning para el NLP-Comparación entre enfoques clásico y de Deep Learning"><h3 id="Comparación entre enfoques clásico y de Deep Learning" class="header"><a href="#Redes Neuronales Recurrentes-Introducción a las aplicaciones del Deep Learning para el NLP-Comparación entre enfoques clásico y de Deep Learning">Comparación entre enfoques clásico y de Deep Learning</a></h3></div>
+
+<div id="Redes Neuronales Recurrentes-Introducción a las aplicaciones del Deep Learning para el NLP-Comparación entre enfoques clásico y de Deep Learning-Enfoque Clásico"><h4 id="Enfoque Clásico" class="header"><a href="#Redes Neuronales Recurrentes-Introducción a las aplicaciones del Deep Learning para el NLP-Comparación entre enfoques clásico y de Deep Learning-Enfoque Clásico">Enfoque Clásico</a></h4></div>
+
+<p>
+El enfoque clásico se compone de los siguientes pasos:
+</p>
+
+<ol>
+<li>
+Detección de idioma
+
+</li><li>
+Pre-procesado
+
+<ul>
+<li>
+Tokenizado
+
+</li><li>
+Etiquetado gramatical (POS)
+
+</li><li>
+Eliminación de stop-words
+
+</li><li>
+etc.
+
+</li></ul>
+</li><li>
+Modelado
+
+<ul>
+<li>
+Extracción de características (entidades (NER), categorías (POS) ...)
+
+</li><li>
+Aplicación de algoritmos de ML
+
+</li><li>
+etc.
+
+</li></ul>
+</li><li>
+Salida
+
+<ul>
+<li>
+Análisis de sentimientos
+
+</li><li>
+Clasificación de textos
+
+</li><li>
+Traducción
+
+</li><li>
+etc
+
+</li></ul>
+</li></ol>
+<div id="Redes Neuronales Recurrentes-Introducción a las aplicaciones del Deep Learning para el NLP-Comparación entre enfoques clásico y de Deep Learning-Enfoque Deep Learning"><h4 id="Enfoque Deep Learning" class="header"><a href="#Redes Neuronales Recurrentes-Introducción a las aplicaciones del Deep Learning para el NLP-Comparación entre enfoques clásico y de Deep Learning-Enfoque Deep Learning">Enfoque Deep Learning</a></h4></div>
+
+<p>
+Mientas que el enfoque clásico se compone de los siguientes pasos:
+</p>
+
+<ol>
+<li>
+Pre-procesado
+
+<ul>
+<li>
+Tokenizado
+
+</li><li>
+Etiquetado gramatical (POS)
+
+</li><li>
+Eliminación de stop-words
+
+</li><li>
+etc.
+
+</li></ul>
+</li><li>
+Representaciones distribuidas (word embeddings): transformación de palabras/secuencias en vectores que es la entrada que aceptan las redes neuronales. Para ello se distinguen métodos como: word2vec, Glove, etc.
+
+</li><li>
+Procesamiento en capas ocultas: no permite generar representación comprimida de la entradas.
+
+</li><li>
+Capa de salida
+
+<ul>
+<li>
+Análisis de sentimientos
+
+</li><li>
+Clasificación de textos
+
+</li><li>
+Traducción
+
+</li><li>
+etc
+
+</li></ul>
+</li></ol>
+<p>
+<img src="https://albamr09.github.io/public/assets/NLP_pipeline_comparation.png" alt="NLP Pipeline Comparation" style="height:500px">
+</p>
+
+<div id="Redes Neuronales Recurrentes-Introducción a las aplicaciones del Deep Learning para el NLP-Arquitecturas"><h3 id="Arquitecturas" class="header"><a href="#Redes Neuronales Recurrentes-Introducción a las aplicaciones del Deep Learning para el NLP-Arquitecturas">Arquitecturas</a></h3></div>
+
+<p>
+Para llevar a cabo Natural Languague Processing (NLP) con Deep Learning podemos utilizar las siguientes arquitecturas:
+</p>
+
+<ul>
+<li>
+Redes recurrentes (RNN)
+
+<ul>
+<li>
+LSTM (Long Short Term Memory)
+
+</li><li>
+GRU (Gated Recurrent Units)
+
+</li></ul>
+</li><li>
+Redes convolucionales (CNN)
+
+</li><li>
+Autoencoders
+
+</li><li>
+
+
+</li></ul>
+<div id="Redes Neuronales Recurrentes-Ejemplos de Deep Learning para Natural Language Processing"><h2 id="Ejemplos de Deep Learning para Natural Language Processing" class="header"><a href="#Redes Neuronales Recurrentes-Ejemplos de Deep Learning para Natural Language Processing">Ejemplos de Deep Learning para Natural Language Processing</a></h2></div>
+
+<div id="Redes Neuronales Recurrentes-Ejemplos de Deep Learning para Natural Language Processing-Clasificación de Textos"><h3 id="Clasificación de Textos" class="header"><a href="#Redes Neuronales Recurrentes-Ejemplos de Deep Learning para Natural Language Processing-Clasificación de Textos">Clasificación de Textos</a></h3></div>
+
+<p>
+Para la clasificación de texto se definen la siguiente estructuras:
+</p>
+
+<ul>
+<li>
+Capa de embedding: que transforma la secuencia de palabras en una talba de vectores capturando la semántica de las mismas.
+
+</li><li>
+Componente de representación profunda: se utiliza RNN o CNN para obtener una representación comprimida de la entrada.
+
+</li><li>
+Parte totalmente conectada: transforma la representación comprimida en clases o puntuaciones para cada clase.
+
+</li></ul>
+<p>
+Ver el capítulo Text Classification Using LSTM de Hands-On Natural Language Processing with Python.
+</p>
+
+<div id="Redes Neuronales Recurrentes-Ejemplos de Deep Learning para Natural Language Processing-Generación de Textos"><h3 id="Generación de Textos" class="header"><a href="#Redes Neuronales Recurrentes-Ejemplos de Deep Learning para Natural Language Processing-Generación de Textos">Generación de Textos</a></h3></div>
+
+<p>
+Se utilizan RNNs para crear modelos generativos, tal que la generación se puede llevar a cabo en base a caracteres o a palabras. Estas son capaces de aprender dependencias a largo plazo.
+</p>
+
+<p>
+Ver el capítulo Text Generation and Summarization Using GRUs de Hands-On Natural Language Processing with Python.
+</p>
+
+<div id="Redes Neuronales Recurrentes-Ejemplos de Deep Learning para Natural Language Processing-Resumen de Textos"><h3 id="Resumen de Textos" class="header"><a href="#Redes Neuronales Recurrentes-Ejemplos de Deep Learning para Natural Language Processing-Resumen de Textos">Resumen de Textos</a></h3></div>
+
+<p>
+Distinguimos entre dos tipos:
+</p>
+
+<ul>
+<li>
+<span id="Redes Neuronales Recurrentes-Ejemplos de Deep Learning para Natural Language Processing-Resumen de Textos-Extractivos"></span><strong id="Extractivos">Extractivos</strong>: se extraen frases o palabras clave. Son simples y robustos y no permiten la paráfrasis.
+
+</li><li>
+<span id="Redes Neuronales Recurrentes-Ejemplos de Deep Learning para Natural Language Processing-Resumen de Textos-Abstractivos"></span><strong id="Abstractivos">Abstractivos</strong>:  la salida contiene texto no contenido en el original manteniendo el significado.
+
+</li></ul>
+<p>
+Ver el cap. Text Generation and Summarization Using GRUs de Hands-On Natural Language Processing with Python.
+</p>
+
+<div id="Redes Neuronales Recurrentes-Traducción"><h2 id="Traducción" class="header"><a href="#Redes Neuronales Recurrentes-Traducción">Traducción</a></h2></div>
+
+<p>
+Distinguimos distintos sistemas que efectúan la traducción automática:
+</p>
+
+<ul>
+<li>
+<span id="Redes Neuronales Recurrentes-Traducción-Sistemas expertos"></span><strong id="Sistemas expertos">Sistemas expertos</strong>: se definen reglas lingüísticas y sintácticas.
+
+</li><li>
+<span id="Redes Neuronales Recurrentes-Traducción-Traducción estadística"></span><strong id="Traducción estadística">Traducción estadística</strong>: se aprenden reglas estadśiticamente a partir de un gran conjunto de datos bilingüe. Tal que define un modelo de traducción que mapea textos de un lenguaje a otro. Solo funciona bien traduciendo textos similares a los de entrenamiento y necesita gran cantidad de datos
+
+</li><li>
+<span id="Redes Neuronales Recurrentes-Traducción-Traducción con redes neuronales"></span><strong id="Traducción con redes neuronales">Traducción con redes neuronales</strong>: utilizan un sólo modelo que trabaja sobre segmentos de texto, so sólo sobre palabras o frases.
+
+</li></ul>
+<p>
+Ver el cap. Machine Translation Using the Attention-Based Model de Hands-On Natural Language Processing with Python.
+</p>
+
+<div id="Redes Neuronales Recurrentes-Búsqueda y Eliminación de Duplicados"><h2 id="Búsqueda y Eliminación de Duplicados" class="header"><a href="#Redes Neuronales Recurrentes-Búsqueda y Eliminación de Duplicados">Búsqueda y Eliminación de Duplicados</a></h2></div>
+
+<p>
+Se puede conseguir utilizando una CNN basada en caracteres, que proporciona la flexibilidad para entrenar modelos con caracteres desconocidos y ofrece mayor capacidad de generalición que los embeddings a nivel de palabra.
+</p>
+
+<p>
+Ver el capítulo Searching and DeDuplicating Using CNNs de Hands-On Natural Language Processing with Python.
+</p>
+
+<div id="Redes Neuronales Recurrentes-Otras Aplicaciones"><h2 id="Otras Aplicaciones" class="header"><a href="#Redes Neuronales Recurrentes-Otras Aplicaciones">Otras Aplicaciones</a></h2></div>
+
+<ul>
+<li>
+Preguntas-respuestas y chatbots
+
+</li><li>
+Reconocimiento de voz
+
+</li><li>
+Texto a voz
+
+</li></ul>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

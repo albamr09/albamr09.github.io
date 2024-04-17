@@ -80,6 +80,79 @@ Several methods are available to estimate the expected predictive accuracy witho
 
 </li></ul>
 <div id="Information criteria and cross-validation-Akaike information criterion (AIC)"><h2 id="Akaike information criterion (AIC)" class="header"><a href="#Information criteria and cross-validation-Akaike information criterion (AIC)">Akaike information criterion (AIC)</a></h2></div>
+
+<p>
+In much of the statistical literature on predictive accuracy, inference for \(\theta\) is summarized not by a posterior distribution \(p_{\text{post}}\) but by a point estimate \(\hat{\theta}\), typically the maximum
+likelihood estimate. Out-of-sample predictive accuracy is then defined not by the expected log posterior predictive density (elppd) but by \(elpd_{\hat{\theta}} = \mathbb{E}_f[\log p(\tilde{y}|\tilde{\theta}(y))]\).
+</p>
+
+<p>
+Let \(k\) be the number of parameters estimated in the model. AIC is defined as follows:
+</p>
+
+\begin{align}
+\hat{\text{elpd}}_{\text{AIC}} = -2 \log p(y|\hat{\theta}_{\text{mle}}) + 2k
+\end{align}
+
+<p>
+Subtracting \(k\) from the log predictive density given the maximum likelihood estimate \(\theta_{\text{mle}}\) is a correction to account for how much the fitting of \(k\) parameters will increase predictive accuracy, purely by chance.
+</p>
+
+<p>
+When we move beyond linear models with simple priors, just adding the number of fitted parameters \(k\) to adjust the deviance isn't accurate. Informative priors and hierarchical structures typically decrease overfitting compared to simple estimation methods like least squares or maximum likelihood. In models with informative priors or hierarchical setups, the actual number of parameters depends heavily on the variance of the group-level parameter.
+</p>
+
+<div id="Information criteria and cross-validation-Deviance Information Criterion (DIC) and Effective Number of Parameters"><h2 id="Deviance Information Criterion (DIC) and Effective Number of Parameters" class="header"><a href="#Information criteria and cross-validation-Deviance Information Criterion (DIC) and Effective Number of Parameters">Deviance Information Criterion (DIC) and Effective Number of Parameters</a></h2></div>
+
+<p>
+DIC is a somewhat Bayesian version of AIC making two changes, replacing the maximum likelihood estimate with the posterior mean \(\hat{\theta}_{\text{Bayes}} = \mathbb{E}[\theta|y]\) and replacing \(k\) with a data-based bias correction. The new measure of predictive accuracy is:
+</p>
+
+\begin{align}
+\hat{\text{elpd}}_{DIC} = \log p(y|\hat{\theta}_{\text{Bayes}}) - p_{\text{DIC}}
+\end{align}
+
+<p>
+where \(p_{\text{DIC}}\) is the effective number of parameters, defined as:
+</p>
+
+\begin{align}
+p_{\text{DIC}} = 2 \left(\log p(y|\hat{\theta}_{\text{Bayes}}) - \mathbb{E}_{post}[\log p(y|\theta)]\right)
+\end{align}
+
+<p>
+where \(\mathbb{E}_{post}[\log p(y|\theta)]\) is an average of θ over its posterior distribution. This is computed using simulation \(\theta^s, s= 1, \cdots, S\) as:
+</p>
+
+\begin{align}
+\text{computed} p_{\text{DIC}} = 2 \left(\log p(y|\hat{\theta}_{\text{Bayes}}) - \frac{1}{S} \sum_{s=1}^S \log p(y|\theta^s)\right)
+\end{align}
+
+<p>
+When the average value of \(\theta\) in the posterior distribution matches the highest point (mode), it leads to the maximum log predictive density.  However, if the average value is significantly different from the mode, it can result in a negative value for \(p_{\text{DIC}}\).
+</p>
+
+<p>
+An alternative version of DIC uses a slightly different effective number of parameters:
+</p>
+
+\begin{align}
+p_{\text{DIC}}_{\text{alt}} = 2 \mathbb{V}_{\text{post}}[\log p(y|\theta)]
+\end{align}
+
+<p>
+Of these two measures, \(p_{\text{DIC}}\) is more numerically stable but \(p_{\text{DIC}_{\text{alt}}}\) has the advantage of always being positive. The actual quantity called DIC is defined in terms of the deviance rather than the log predictive density; thus:
+</p>
+
+\begin{align}
+\text{DIC} = -2 \log p(y|\hat{\theta}_{\text{Bayes}}) + 2p_{DIC}
+\end{align}
+
+<div id="Information criteria and cross-validation-Watanabe-Akaike or Widely Applicable Information Criterion (WAIC)"><h2 id="Watanabe-Akaike or Widely Applicable Information Criterion (WAIC)" class="header"><a href="#Information criteria and cross-validation-Watanabe-Akaike or Widely Applicable Information Criterion (WAIC)">Watanabe-Akaike or Widely Applicable Information Criterion (WAIC)</a></h2></div>
+
+<p>
+<span id="Information criteria and cross-validation-Watanabe-Akaike or Widely Applicable Information Criterion (WAIC)-WAIC"></span><strong id="WAIC">WAIC</strong> is a more fully Bayesian approach for estimating the out-of-sample expectation. Starting with the computed lppd and then adding a correction for effective number of parameters to adjust for overfitting. Two adjustments have been proposed:
+</p>
 </div>
   
 
