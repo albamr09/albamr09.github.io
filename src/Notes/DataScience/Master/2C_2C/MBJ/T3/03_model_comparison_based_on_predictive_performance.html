@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
-    <title>Modelos Bayesianos Jerárquicos</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/custom.css">
+    <title>Model Comparison Based on Predictive Performance</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,81 +31,24 @@
     <hr>
     <div class="content">
 <p>
-<a href="../../index.html">Back</a>
+<a href="../index.html">Back</a>
 </p>
 
-<div id="Modelos Bayesianos Jerárquicos"><h1 id="Modelos Bayesianos Jerárquicos" class="header"><a href="#Modelos Bayesianos Jerárquicos">Modelos Bayesianos Jerárquicos</a></h1></div>
+<div id="Model Comparison Based on Predictive Performance"><h1 id="Model Comparison Based on Predictive Performance" class="header"><a href="#Model Comparison Based on Predictive Performance">Model Comparison Based on Predictive Performance</a></h1></div>
 
 <hr>
 
-<ol>
-<li>
-<a href="01_intro.html">Introduccion a la Inferencia Bayesiana</a>
-
-</li><li>
-Modelos Jerarquicos
-
-<ol>
-<li>
-<a href="T2/01.html">Constructing a Parametrized Prior Distribution</a>
-
-</li><li>
-<a href="T2/02.html">Exchangeability and Hierarchical Models</a>
-
-</li><li>
-<a href="T2/03.html">Bayesian Analysis of Conjugate Hierarchical Models</a>
-
-</li><li>
-<a href="T2/04_normal_model.html">Normal Model with Exchangeable Parameters</a>
-
-</li><li>
-<a href="T2/05_example_normal.html">Example: Parallel Experiments in Eight Schools</a>
-
-</li><li>
-<a href="T2/06_hierarchical_meta_analysis.html">Hierarchical Modeling Applied to Meta-analysis</a>
-
-</li><li>
-<a href="T2/07_weakly_informative_priors.html">Weakly Informative Priors</a>
-
-</li></ol>
-</li><li>
-Evaluación y Comparación de Modelos
-
-<ol>
-<li>
-<a href="T3/01_measure_precditive_accuracy.html">Measures of Predictive Accuracy</a>
-
-</li><li>
-<a href="T3/02_information_criteria_and_crossvalidation.html">Information Criteria and Cross-validation</a>
-
-</li><li>
-<a href="T3/03_model_comparison_based_on_predictive_performance.html">Model Comparison Based on Predictive Performance</a>
-
-</li></ol>
-</li></ol>
-<div id="Modelos Bayesianos Jerárquicos-Appendix"><h2 id="Appendix" class="header"><a href="#Modelos Bayesianos Jerárquicos-Appendix">Appendix</a></h2></div>
-
-<div id="Modelos Bayesianos Jerárquicos-Appendix-T2"><h3 id="T2" class="header"><a href="#Modelos Bayesianos Jerárquicos-Appendix-T2">T2</a></h3></div>
-
 <p>
-Thanks to how little I understand this book i will use other sources in order to properly understand Bayesian Hierarchical Modeling, the contents on the following chapter explains how hierarchical Bayesian models came to be and its appeal. Then on section 2 it lays out Hierarchical Nolmal Modeling followed by an explanation on hierarchical Beta-Binomial modeling on section 3.
+There are two common scenarios where we compare models. First, when we expand a model, we naturally want to compare the simpler version to the more complex one. We want to see if adding complexity improves the model's performance. Conversely, if we simplify a model, we want to understand what information we might be losing. In essence, we're trying to figure out how much complexity is necessary to accurately represent the data.
 </p>
 
 <p>
-<a href="https://bayesball.github.io/BOOK/bayesian-hierarchical-modeling.html">Bayesian Hierarchical Modeling</a>
+When comparing nested models, the bigger model usually fits the data better but can be more complex and harder to understand. So, we need to ask two main questions: (1) Does the better fit of the larger model justify its added complexity? and (2) Are the extra parameters in the larger model reasonable based on our prior knowledge?
 </p>
 
-<ul>
-<li>
-<a href="T2/11_introduction.html">Introduction</a>
-
-</li><li>
-<a href="T2/12_hierarchical_normal_modeling.html">Hierarchical Normal Modeling</a>
-
-</li><li>
-<a href="T2/13_hierarchical_beta_binomial_modeling.html">Hierarchical Beta-Binomial Modeling</a>
-
-</li></ul>
+<p>
+In the second scenario, we're comparing models that aren't nested. For example, we might compare two regression models that use different predictors to explain the same data. In these cases, we're not necessarily trying to pick one model over the other. Instead, we might want to build a larger model that includes both sets of predictors, along with any interactions between them. This way, we get a more comprehensive picture. However, it's still useful to compare the performance of each model on its own to see how well they do individually.
+</p>
 </div>
   
 
