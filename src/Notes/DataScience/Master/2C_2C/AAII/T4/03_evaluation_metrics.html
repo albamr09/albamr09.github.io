@@ -227,6 +227,235 @@ The Xu coefficient takes into account the dimensionality \(D\) of the data, the 
 X_u = D \log_2 \left(\sqrt{\frac{SSE_M}{DN^2}}\right) + \log M
 \end{align}
 
+</li><li>
+The silhouette coefficient is the most common way to combine the metrics of cohesion and separation in a single measure. Its computation is divided into four steps:
+
+<ol>
+<li>
+Compute the average intracluster distance for each example \(i\): \(a(i) = \frac{1}{|C_a|} \sum_{j \in C_a, i \neq j} d(i, j)\)
+
+</li><li>
+Compute the minimum intercluster distance for each example \(i\): \(b(i) = \min_{C_b \neq C_a} \frac{1}{|C_b|} \sum_{j \in C_b} d(i, j)\)
+
+</li><li>
+Compute the silhouette coefficient for each example \(i\): \(s(i) = \frac{b(i) - a(i)}{max(a(i), b(i))}\)
+
+</li><li>
+Compute the silhouette puntuation as the average of the silhouette coefficients: \(S = \frac{1}{n} \sum_{i = 1}^n s(i)\)
+
+</li></ol>
+</li></ul>
+<p>
+The silhouette is defined in the interval \([-1, 1]\). Positive values indicate a high separation between clusters, negative values are an indication that the clusters are mixed with each other. When the silhouette
+coefficient is zero, it is an an indication that the data are uniformly distributed throughout the Euclidean space.
+</p>
+
+<p>
+Unfortunately, one of the main drawbacks of the silhouette coefficient is its high computational complexity.
+</p>
+
+<p>
+Cohesion and separation metrics are not the only validation method available for partitional clustering techniques. In fact, cohesion and separation metrics do not perform well when it comes to analyzing results obtained by algorithms based on density analysis.
+</p>
+
+<p>
+One way to validate clustering is by comparing the actual proximity matrix with an ideal version based on the provided clustering by the algorithm. If we reorder rows and columns so that all examples of the same cluster appear together, the ideal proximity matrix has a block diagonal structure. High correlation between the actual and ideal proximity matrices indicates that examples in the same cluster are close to each other, although it may not be a good measure for density-based clustering.
+</p>
+
+<p>
+Imagine you have a table where each row and column represents a data point, and the cells contain numbers indicating how similar or close those data points are to each other. Now, if you group similar data points together into clusters, you can rearrange the rows and columns of the table so that all the data points within each cluster are together. When you do this, the table will have a diagonal pattern where each cluster forms a block of closely related data points. This diagonal pattern is what we mean by a "block diagonal structure" in the context of a proximity matrix.
+</p>
+
+<p>
+Unfortunately, the mere construction of the whole proximity matrix is computationally expensive.
+</p>
+
+<div id="Evaluation Metrics-Internal Validation-Hierarchical Methods"><h3 id="Hierarchical Methods" class="header"><a href="#Evaluation Metrics-Internal Validation-Hierarchical Methods">Hierarchical Methods</a></h3></div>
+
+<div id="Evaluation Metrics-Internal Validation-Hierarchical Methods-Cophenetic Correlation Coefficient"><h4 id="Cophenetic Correlation Coefficient" class="header"><a href="#Evaluation Metrics-Internal Validation-Hierarchical Methods-Cophenetic Correlation Coefficient">Cophenetic Correlation Coefficient</a></h4></div>
+
+<p>
+The cophenetic distance between two examples is the proximity at which an agglomerative hierarchical clustering algorithm puts the examples in the same cluster for the first time. The cophenetic correlation coefficient (CPCC) is defined as he correlation between the entries of the cophenetic matrix \(P_c\) containing cophenetic distances, and the proximity matrix \(P\), containing similarities. The cophenetic correlation coefficient is then defined as:
+</p>
+
+\begin{align}
+\text{CPCC} = \frac{\sum_{i &lt; j} (d_{ij} - \overline{d})(d_{ij}^* - \overline{d}^*)}{\sqrt{\sum_{i &lt; j} (d_{ij} - \overline{d})^2 \sum_{i &lt; j}(d_{ij}^* - \overline{d}^*)}}
+\end{align}
+
+<p>
+where \(d_{ij}\) is the distance between the example pair \((i, j)\), \(d_{ij}^*\) is their cophenetic distance, \(\overline{d}\) is the average of the distances in the proximity matrix and \(d_{ij}^*\) is the average of the cophenetic distances in the cophenetic matrix.
+</p>
+
+\begin{align}
+\overline{d} = \frac{\sum_{i &lt; j} d_{ij}}{2(n^2 - n)}
+\end{align}
+
+\begin{align}
+\overline{d}^* = \sqrt{\frac{\sum_{i &lt; j} (d_{ij} - d_{ij}^*)^2}{\sum_{i &lt; j} (d_{ij}^*)^2}}
+\end{align}
+
+<p>
+The cophenetic correlation coefficient is a value in the interval \([−1, 1]\). High CPCC values indicate a high level of similarity between the two matrices, an indication that the clustering algorithm has been able to identify the underlying structure of its input data.
+</p>
+
+<div id="Evaluation Metrics-Internal Validation-Hierarchical Methods-Hubert Statistic"><h4 id="Hubert Statistic" class="header"><a href="#Evaluation Metrics-Internal Validation-Hierarchical Methods-Hubert Statistic">Hubert Statistic</a></h4></div>
+
+<p>
+First, concordance are discordance are defined for pairs of examples. A pair \((i, j)\) is concordant when \(((v_{p_i} &lt; v_{c_i}) &amp; (v_{p_j} &lt; v_{c_j}))\) or \(((v_{p_i} &gt; v_{c_i}) &amp; (v_{p_j} &gt; v_{c_j}))\). And it is said to be discordant when \(((v_{p_i} &lt; v_{c_i}) &amp; (v_{p_j} &gt; v_{c_j}))\) or \(((v_{p_i} &gt; v_{c_i}) &amp; (v_{p_j} &lt; v_{c_j}))\). Therefore, a pair is neither concordant nor discordant if \(v_{p_i} = v_{c_i}\) or \(v_{p_j} = v_{c_j}\).
+</p>
+
+<p>
+Let \(S_+\) and \(S_-\) be the number of concordant and discordant pairs, respectively. Then, the Hubert coefficient is defined as:
+</p>
+
+\begin{align}
+\gamma = \frac{S_+ - S_-}{S_+ + S_-}
+\end{align}
+
+<p>
+The Hubert statistic is between \(-1\) and \(1\). It has been mainly used to compare the results of two hierarchical clustering algorithms. A higher Hubert \(\gamma\) value corresponds to a better clustering of data.
+</p>
+
+<div id="Evaluation Metrics-External Validation"><h2 id="External Validation" class="header"><a href="#Evaluation Metrics-External Validation">External Validation</a></h2></div>
+
+<p>
+External validation proceeds by incorporating additional information in the clustering validation process, i.e. external class labels for the training examples. We want to compare the result of a clustering algorithm
+\(C = \{C_1, C_2, \cdots, C_m\}\) to a potentially different partition of data \(P = \{P_1, P_2, \cdots, P_s\}\) which might represent the expert knowledge of the analyst (his experience or intuition), prior knowledge of the data in the form of class labels, the results obtained by another clustering algorithm, or simply a grouping considered to be "correct".
+</p>
+
+<p>
+In order to carry out this analysis, a contingency matrix must be built to evaluate the clusters detected by the algorithm that encompasses the following data:
+</p>
+
+<ul>
+<li>
+\(TP\): The number of data pairs found in the same cluster, both in \(C\) and in \(P\).
+
+</li><li>
+\(FP\): The number of data pairs found in the same cluster in \(C\) but in different clusters in \(P\).
+
+</li><li>
+\(FN\): The number of data pairs found in different clusters in \(C\) but in the same cluster in \(P\).
+
+</li><li>
+\(TN\): The number of data pairs found in different clusters, both in \(C\) and in \(P\).
+
+</li></ul>
+<div id="Evaluation Metrics-External Validation-Matching Sets"><h3 id="Matching Sets" class="header"><a href="#Evaluation Metrics-External Validation-Matching Sets">Matching Sets</a></h3></div>
+
+<p>
+Several measures can be defined to measure the similarity between the clusters in \(C\), obtained by the clustering algorithm, and the clusters if \(P\), corresponding to our prior (external) knowledge:
+</p>
+
+<ul>
+<li>
+Precision: \(Pr = \frac{TP}{TP + FP}\)
+
+</li><li>
+Recall: \(R = \frac{TP}{TP + FN}\)
+
+</li><li>
+F-measure: \(F_{\alpha} = \frac{1 + \alpha}{\frac{1}{Pr} + \frac{\alpha}{R}}\)
+
+</li></ul>
+<p>
+Quite often, precision and recall are evenly combined with an unweighted harmonic mean (\(\alpha = 1\)):
+</p>
+
+\begin{align}
+F = \frac{2 \cdot Pr \cdot R}{Pr + R}
+\end{align}
+
+<ul>
+<li>
+Purity: evaluates whether each cluster contains only examples from the same class:
+\begin{align}
+U = \sum_{i} p_i (\max_j \frac{p_{ij}}{p_i})
+\end{align}
+
+</li></ul>
+<p>
+where \(p_i = \frac{n_i}{n}\), \(p_j = \frac{n_j}{n}\) and \(p_{ij} = \frac{n_{ij}}{n}\). Where \(n_{ij}\) are the number of examples belonging to the class \(i\) found in the cluster \(j\) and \(n_i\) is the number of examples in the cluster \(i\).
+</p>
+
+<div id="Evaluation Metrics-External Validation-Peer-to-peer Correlation"><h3 id="Peer-to-peer Correlation" class="header"><a href="#Evaluation Metrics-External Validation-Peer-to-peer Correlation">Peer-to-peer Correlation</a></h3></div>
+
+<p>
+A second family of measures for external validation are based on the correlation between pairs, i.e. they seek to measure the similarity between two partitions under equal conditions, such as the result of a grouping process for the same set, but by means of two different methods \(C\) and \(P\).
+</p>
+
+<ul>
+<li>
+The Jaccard Coefficient: \(J = \frac{TP}{TP + FP + FN}\)
+
+</li><li>
+The Rand Coefficient: \(Rand = \frac{TP + TN}{M}\)
+
+</li><li>
+The Folkes and Mallows coefficient: \(FM = \sqrt{\frac{TP}{TP + FP} \cdot \frac{TP}{TP + FN}}\)
+
+</li><li>
+The Hubert statistical coefficient: \(\Gamma = \frac{1}{M} \sum_{i=1}^{n - 1} \sum_{j = i + 1}^{n} X_{ij} Y_{ij}\)
+
+</li></ul>
+<p>
+Where \(n_{ij}\) are the number of examples belonging to the class \(i\) found in the cluster \(j\) and \(n_i\) is the number of examples in the cluster \(i\).
+</p>
+
+<div id="Evaluation Metrics-External Validation-Measures Based on Information Theory"><h3 id="Measures Based on Information Theory" class="header"><a href="#Evaluation Metrics-External Validation-Measures Based on Information Theory">Measures Based on Information Theory</a></h3></div>
+
+<p>
+This family includes basic measures such as entropy and mutual information, as well as their respective normalized variants.
+</p>
+
+<ul>
+<li>
+Entropy: \(H = - \sum_{i} p_i \left(\sum_{j} \frac{p_{ij}}{p_i} \log \frac{p_{ij}}{p_i}\right)\)
+
+</li><li>
+Mutual Information: \(MI = \sum_{i} \sum_{j} p_{ij} \log \frac{p_{ij}}{p_i p_j}\)
+
+</li></ul>
+<p>
+Where \(p_{ij} = \frac{n_{ij}}{n}\) and \(p_i = \frac{n_i}{n}\).
+</p>
+
+<div id="Evaluation Metrics-Hyperparameter Tuning"><h2 id="Hyperparameter Tuning" class="header"><a href="#Evaluation Metrics-Hyperparameter Tuning">Hyperparameter Tuning</a></h2></div>
+
+<p>
+Even though external validation metrics can help us evaluate whether the obtained clusters closely match the underlying categories in the training data, which the clustering algorithm tries to identify without externally-provided class labels, those metrics cannot address other issues such as the right number of clusters for our current data set.
+</p>
+
+<p>
+Hyperparameter tuning tries to determine, for the different possible values of the parameters in \(P_{alg}\) , which set of parameter values is the most suitable for our particular clustering problem. We could proceed in the following way:
+</p>
+
+<ul>
+<li>
+When the algorithm does not include the number of clusters \(n_c\) among its parameters, we run the algorithm with different values for its parameters so  that we can determine their largest range for which \(n_c\) remains constant. Later, we choose as parameter values the values in the middle of this range.
+
+</li><li>
+When the algorithm parameters Palg include the desired number of clusters \(n_c\), we run the algorithm for a range of values for \(n_c\). For each value of \(n_c\), we run the algorithm multiple times using different sets of values (i.e. starting from different initial conditions) and choose the value that optimizes our desired validation metric.
+
+</li></ul>
+<p>
+When we just want to determine the “right” number of clusters, \(n_c\), plotting the validation results for different values of \(n_c\) can sometimes show a relevant change in the validation metric, commonly referred to as a "knee" or "elbow".
+</p>
+
+<p>
+Hyperparameter tuning can then be seen as a combinatorial optimization problem using different strategies:
+</p>
+
+<ul>
+<li>
+Grid Search: is based on a systematic exploration of the hyperparameter space.
+
+</li><li>
+Random Search: chooses parameter configurations at random.
+
+</li><li>
+Smart Search techniques try to optimize the problem of searching for hyperparameter values. Different strategies can be implemented, such as Bayesian optimization using Gaussian processes and evolutionary optimization using genetic algorithms or evolution strategies.
+
 </li></ul>
 </div>
   
