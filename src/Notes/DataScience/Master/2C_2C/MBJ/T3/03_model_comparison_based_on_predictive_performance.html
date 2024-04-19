@@ -43,11 +43,128 @@ There are two common scenarios where we compare models. First, when we expand a 
 </p>
 
 <p>
-When comparing nested models, the bigger model usually fits the data better but can be more complex and harder to understand. So, we need to ask two main questions: (1) Does the better fit of the larger model justify its added complexity? and (2) Are the extra parameters in the larger model reasonable based on our prior knowledge?
+When comparing nested models, the bigger model usually fits the data better but can be more complex and harder to understand. So, we need to ask two main questions: 
+</p>
+
+<ol>
+<li>
+Does the better fit of the larger model justify its added complexity? and 
+
+</li><li>
+Are the extra parameters in the larger model reasonable based on our prior knowledge?
+
+</li></ol>
+<p>
+In the second scenario, we're comparing models that aren't nested. For example, we might compare two regression models that use different predictors to explain the same data. In these cases, we're not necessarily trying to pick one model over the other. Instead, we might want to build a larger model that includes both sets of predictors, along with any interactions between them. This way, we get a more comprehensive picture. However, it's still useful to compare the performance of each model on its own to see how well they do individually.
+</p>
+
+<div id="Model Comparison Based on Predictive Performance-Example"><h2 id="Example" class="header"><a href="#Model Comparison Based on Predictive Performance-Example">Example</a></h2></div>
+
+<p>
+On the <a href="../T2/05_example_normal.html">eight schools example</a> we defined three separate models:
+</p>
+
+<ol>
+<li>
+<span id="Model Comparison Based on Predictive Performance-Example-No pooling"></span><strong id="No pooling">No pooling</strong>: Separate estimates for each of the eight schools, reflecting that the experiments were performed independently. This model has eight parameters: an estimate for each school.
+
+</li><li>
+<span id="Model Comparison Based on Predictive Performance-Example-Complete pooling"></span><strong id="Complete pooling">Complete pooling</strong>: A combined estimate averaging the data from all schools into a single number, reflecting that the eight schools come from the same population. This model has only one, shared, parameter.
+
+</li><li>
+<span id="Model Comparison Based on Predictive Performance-Example-Hierarchical model"></span><strong id="Hierarchical model">Hierarchical model</strong>: A Bayesian meta-analysis, partially pooling the eight estimates toward a common mean. This model has eight parameters but they are constrained through their hierarchical distribution and are not estimated independently; thus the effective number of parameters should be some number less than 8.
+
+</li></ol>
+<p>
+In the following table we show the performance metrics for each of the models using predivtive log densities and information criteria. 
 </p>
 
 <p>
-In the second scenario, we're comparing models that aren't nested. For example, we might compare two regression models that use different predictors to explain the same data. In these cases, we're not necessarily trying to pick one model over the other. Instead, we might want to build a larger model that includes both sets of predictors, along with any interactions between them. This way, we get a more comprehensive picture. However, it's still useful to compare the performance of each model on its own to see how well they do individually.
+<img src="https://albamr09.github.io/public/assets/example_evaluation_metrics.png" alt="Evaluation Metrics" style="height:500px;">
+</p>
+
+<div id="Model Comparison Based on Predictive Performance-Example-AIC"><h3 id="AIC" class="header"><a href="#Model Comparison Based on Predictive Performance-Example-AIC">AIC</a></h3></div>
+
+<p>
+The log predictive density is higher—that is, a better fit—for the <span id="Model Comparison Based on Predictive Performance-Example-AIC-no pooling model"></span><strong id="no pooling model">no pooling model</strong>. This makes sense: with no pooling, the maximum likelihood estimate is right at the data, whereas with complete pooling there is only one number to fit all \(8\) schools. However, the ranking of the models changes after adjusting for the fitted parameters (\(8\) for no pooling, \(1\) for complete pooling), and the expected log predictive density is estimated to be the best (that is, AIC is lowest) for <span id="Model Comparison Based on Predictive Performance-Example-AIC-complete pooling"></span><strong id="complete pooling">complete pooling</strong>. The last column of the table is blank for AIC, as this procedure is defined based on maximum likelihood estimation which is meaningless for the hierarchical model.
+</p>
+
+<div id="Model Comparison Based on Predictive Performance-Example-DIC"><h3 id="DIC" class="header"><a href="#Model Comparison Based on Predictive Performance-Example-DIC">DIC</a></h3></div>
+
+<p>
+For both the <span id="Model Comparison Based on Predictive Performance-Example-DIC-no-pooling"></span><strong id="no-pooling">no-pooling</strong> and <span id="Model Comparison Based on Predictive Performance-Example-DIC-complete-pooling"></span><strong id="complete-pooling">complete-pooling</strong> models with their flat priors, DIC provides results similar to AIC. However, for the <span id="Model Comparison Based on Predictive Performance-Example-DIC-hierarchical model"></span><strong id="hierarchical model">hierarchical model</strong>, DIC falls in between the two extremes: it fits the data better than complete pooling but not as well as no pooling, and it suggests an effective number of parameters closer to \(1\) than to \(8\). This indicates that the estimated school effects are mostly pooled back to their common mean. When considering the correction for fitting, complete pooling emerges as the winner, which aligns with the idea that the data support very little variation between groups.
+</p>
+
+<div id="Model Comparison Based on Predictive Performance-Example-WAIC"><h3 id="WAIC" class="header"><a href="#Model Comparison Based on Predictive Performance-Example-WAIC">WAIC</a></h3></div>
+
+<p>
+This Bayesian measure, similar to DIC, indicates slightly worse fit to observed data for each model. This is because the posterior predictive density has a wider distribution, resulting in lower density values at the mode compared to the predictive density conditional on the point estimate. However, the correction for the effective number of parameters is lower with WAIC compared to DIC. For models with <span id="Model Comparison Based on Predictive Performance-Example-WAIC-no pooling"></span><strong id="no pooling">no pooling</strong> and <span id="Model Comparison Based on Predictive Performance-Example-WAIC-hierarchical models"></span><strong id="hierarchical models">hierarchical models</strong>, the effective number of parameters (\(p_{\text{WAIC}}\)) is about half of what's estimated by DIC, suggesting that WAIC behaves as expected when there's only one data point per parameter. Conversely, for <span id="Model Comparison Based on Predictive Performance-Example-WAIC-complete pooling"></span><strong id="complete pooling">complete pooling</strong>, \(p_{\text{WAIC}}\) is only slightly less than \(1\), which aligns with expectations given the sample size of \(8\). Overall, \(p_{\text{WAIC}}\) is much less than pDIC for all three models, mainly because the WAIC already considers much of the uncertainty stemming from parameter estimation.
+</p>
+
+<div id="Model Comparison Based on Predictive Performance-Example-Cross Validation"><h3 id="Cross Validation" class="header"><a href="#Model Comparison Based on Predictive Performance-Example-Cross Validation">Cross Validation</a></h3></div>
+
+<p>
+For this example, it's impossible to cross-validate the <span id="Model Comparison Based on Predictive Performance-Example-Cross Validation-no-pooling"></span><strong id="no-pooling">no-pooling</strong> model because it would mean predicting the performance of one school using data from the other seven, which isn't feasible. This highlights a key difference from information criteria, which assume predictions for the same schools and can work even in the absence of pooling.
+</p>
+
+<p>
+However, for the <span id="Model Comparison Based on Predictive Performance-Example-Cross Validation-complete pooling"></span><strong id="complete pooling">complete pooling</strong> and <span id="Model Comparison Based on Predictive Performance-Example-Cross Validation-hierarchical models"></span><strong id="hierarchical models">hierarchical models</strong>, we can directly perform leave-one-out cross-validation. In this setup, cross-validation predicts based only on information from other schools, while WAIC considers both the local observation and information from other schools. Although both methods predict unknown future data, they differ in the amount of information used. As the hierarchical prior becomes less informative (or more vague), the predictive performance estimates diverge further, with the difference approaching infinity when the hierarchical prior becomes uninformative, effectively yielding the no-pooling model.
+</p>
+
+<div id="Model Comparison Based on Predictive Performance-Example-Comparing the Three Models"><h3 id="Comparing the Three Models" class="header"><a href="#Model Comparison Based on Predictive Performance-Example-Comparing the Three Models">Comparing the Three Models</a></h3></div>
+
+<p>
+In this dataset, the complete pooling model performs best in predicting new data. Surprisingly, setting the hierarchical variance \(\tau\) to zero results in a better fit to the data compared to both no pooling and complete pooling models. However, despite this result, we still prefer the hierarchical model because we don't believe \(\tau\) is truly zero.
+</p>
+
+<p>
+For instance, the estimated effects in schools A and C show some differences, although they are not statistically significant. The data suggest that there might be no variation in effects between schools, but we are not entirely confident in this conclusion. Therefore, while the model with \(\tau = 0\) performs well, we might consider using a more informative prior distribution for \(\tau\) to better capture the uncertainty and avoid implausible scenarios.
+</p>
+
+<p>
+In general, predictive accuracy measures are useful in parallel with posterior predictive checks to see if there are important patterns in the data that are not captured by each model.
+</p>
+
+<div id="Model Comparison Based on Predictive Performance-Evaluating Predictive Error Comparisons"><h2 id="Evaluating Predictive Error Comparisons" class="header"><a href="#Model Comparison Based on Predictive Performance-Evaluating Predictive Error Comparisons">Evaluating Predictive Error Comparisons</a></h2></div>
+
+<p>
+When comparing models for their predictive accuracy, we face two main challenges: <span id="Model Comparison Based on Predictive Performance-Evaluating Predictive Error Comparisons-statistical significance"></span><strong id="statistical significance">statistical significance</strong> and <span id="Model Comparison Based on Predictive Performance-Evaluating Predictive Error Comparisons-practical significance"></span><strong id="practical significance">practical significance</strong>.
+</p>
+
+<p>
+Statistical significance arises from the uncertainty in estimating how well a model predicts new data. This uncertainty is due to variation in individual prediction errors, which can affect the averages we calculate from any finite dataset. A practical estimate of related sampling uncertainty can be obtained by analyzing the variation in the expected log predictive densities \(\hat{\text{elppd}}\) using parametric or nonparametric approaches.
+</p>
+
+<p>
+In some cases, we can use scoring functions that are familiar to experts in a particular field to understand the significance of differences in predictive accuracy. However, in situations where there are no established measures like AUC, it can be challenging to interpret the significance of differences in log predictive probability between two models. One way to gauge the importance of such differences is by comparing them to simpler models.
+</p>
+
+<p>
+Consider a scenario where we have two models for a survey of voters in an election: one model predicts a \(50\)/\(50\) chance for each voter to support either party, while the other model correctly assigns probabilities of \(0.4\) and \(0.6\) to the voters. In this case, the improvement in log predictive probability from using the better model can be calculated. For instance, if we have \(1000\) voters, the improvement would be \(20\), but for only \(10\) voters, the improvement would be just \(2\). This aligns with our intuition: a clear improvement in prediction is more noticeable in a larger dataset than in a smaller one where noise might overshadow the improvement.
+</p>
+
+<div id="Model Comparison Based on Predictive Performance-Bias Induced by Model Selection"><h2 id="Bias Induced by Model Selection" class="header"><a href="#Model Comparison Based on Predictive Performance-Bias Induced by Model Selection">Bias Induced by Model Selection</a></h2></div>
+
+<p>
+Cross-validation and information criteria are methods that adjust for using the data twice—once for building the model and again for evaluating its performance. They aim to provide unbiased estimates of how well a model predicts new data. However, when these methods are used to select a model from multiple options, the estimate of predictive performance for the chosen model can be biased because of the selection process.
+</p>
+
+<p>
+When there are only a few models to compare, any bias introduced by the selection process is usually small. However, if there are many models to choose from, especially as the number of observations or predictors increases, the selection process can lead to significant overfitting. While it's possible to estimate and correct for this bias using additional cross-validation, it doesn't guarantee that the selected model will have the best predictive performance. Therefore, cross-validation and information criteria are better suited for understanding models rather than selecting the best one among many options.
+</p>
+
+<div id="Model Comparison Based on Predictive Performance-Challenges"><h2 id="Challenges" class="header"><a href="#Model Comparison Based on Predictive Performance-Challenges">Challenges</a></h2></div>
+
+<p>
+The methods we have for measuring how well predictive models fit still have their flaws. AIC, DIC, and WAIC don't always work perfectly: AIC struggles with strong prior information, DIC gives odd results when the average of the posterior distribution isn't reliable, and WAIC can be tricky to use with structured data like spatial or network data. Cross-validation seems like a good alternative, but it can be slow to compute and doesn't always work well with dependent data.
+</p>
+
+<p>
+Bayesian statisticians often don't rely solely on predictive error comparisons in their work because of various limitations. However, there are situations where comparing very different models is necessary, and in those cases, predictive comparisons can be valuable. Additionally, measures of effective numbers of parameters are useful for understanding statistical methods.
+</p>
+
+<p>
+Currently, we prefer cross-validation because it's similar to WAIC in large samples. However, in finite cases with weak priors or strong outliers, Pareto-smoothed importance sampling LOO-CV is both computationally efficient and robust.
 </p>
 </div>
   

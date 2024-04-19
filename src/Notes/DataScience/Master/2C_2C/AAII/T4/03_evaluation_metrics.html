@@ -1,0 +1,239 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/custom.css">
+    <title>Evaluation Metrics</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Evaluation Metrics"><h1 id="Evaluation Metrics" class="header"><a href="#Evaluation Metrics">Evaluation Metrics</a></h1></div>
+
+<hr>
+
+<div id="Evaluation Metrics-Formal Limitations of Clustering"><h2 id="Formal Limitations of Clustering" class="header"><a href="#Evaluation Metrics-Formal Limitations of Clustering">Formal Limitations of Clustering</a></h2></div>
+
+<p>
+Jon Kleinberg proposes three axioms that highlight the characteristics that a grouping problem should exhibit and can be considered "good".
+</p>
+
+<ol>
+<li>
+<span id="Evaluation Metrics-Formal Limitations of Clustering-Scale Invariance"></span><strong id="Scale Invariance">Scale Invariance</strong>: indicates that a clustering algorithm should not modify its results when all distances between points are scaled by the factor determined by a constant \(\alpha\).
+
+</li><li>
+<span id="Evaluation Metrics-Formal Limitations of Clustering-Richness"></span><strong id="Richness">Richness</strong>:  the clustering function must be flexible enough to produce any arbitrary partition/clustering of the input data set.
+
+</li><li>
+<span id="Evaluation Metrics-Formal Limitations of Clustering-Consistency"></span><strong id="Consistency">Consistency</strong>:  the clustering results do not change if the distances within clusters decrease and/or the distances between clusters increase.
+
+</li></ol>
+<p>
+Given the above three axioms, Kleinberg proves the following theorem: For every \(n \geq 2\), there is no clustering function \(f\) that satisfies scale invariance, richness, and consistency. Since the three axioms cannot hold simultaneously, clustering algorithms can be designed to violate one of the axioms while sarisfying the other two.
+</p>
+
+<ul>
+<li>
+\(k\)-clsuter stopping condition:  Stop merging clusters when we have \(k\) clusters (violates the richness axiom).
+
+</li><li>
+Distance \(r\) stopping condition: Stop merging clusters when the nearest pair of clusters are farther than \(r \) (violates scale invariance).
+
+</li><li>
+Scale-\(\epsilon\) stopping condition: Stop merging clusters when the nearest pair of clusters are farther than a fraction \(\epsilon\) the maximum pairwise distance \(\Delta\). (consistency is violated).
+
+</li></ul>
+<div id="Evaluation Metrics-Methods for Clustering Evaluation"><h2 id="Methods for Clustering Evaluation" class="header"><a href="#Evaluation Metrics-Methods for Clustering Evaluation">Methods for Clustering Evaluation</a></h2></div>
+
+<p>
+When analyzing clustering results, several aspects must be taken into account for the validation of the algorithm results:
+</p>
+
+<ul>
+<li>
+Determining the clustering tendency in the data (i.e. whether non-random structure really exists).
+
+</li><li>
+Determining the correct number of clusters.
+
+</li><li>
+Assessing the quality of the clustering results without external information.
+
+</li><li>
+Comparing the results obtained with external information.
+
+</li><li>
+Comparing two sets of clusters to determine which one is better.
+
+</li></ul>
+<p>
+The first three issues are addressed by <span id="Evaluation Metrics-Methods for Clustering Evaluation-internal or unsupervised validation"></span><strong id="internal or unsupervised validation">internal or unsupervised validation</strong>, because there is no use of external information. The fourth issue is resolved by <span id="Evaluation Metrics-Methods for Clustering Evaluation-external or supervised validation"></span><strong id="external or supervised validation">external or supervised validation</strong>. Finally, the last issue can be addressed by both supervised and unsupervised validation techniques.
+</p>
+
+
+<div id="Evaluation Metrics-Methods for Clustering Evaluation-Null Hypothesis Testing"><h3 id="Null Hypothesis Testing" class="header"><a href="#Evaluation Metrics-Methods for Clustering Evaluation-Null Hypothesis Testing">Null Hypothesis Testing</a></h3></div>
+
+<p>
+One of the desirable characteristics of a clustering process is to show whether data exhibits some tendency to form actual clusters. In this case, the null hypothesis \(H_0\) is the randomness of data and, when the null hypothesis is rejected, we assume that the data is significantly unlikely to be random.
+</p>
+
+<p>
+One of the difficulties of null hypothesis testing in this context is determining the statistical distribution under which the randomness hypothesis can be rejected. Jain and Dubes propose three alternatives:
+</p>
+
+<ul>
+<li>
+Random plot hypothesis \(H_0\): all proximity matrices of order \(n \times n\) are equally likely.
+
+</li><li>
+Random label hypothesis \(H_0\): all permutations of labels of \(n\) objects are equally likely.
+
+</li><li>
+Randon position hypothesis \(H_0\): all sets of \(n\) locations is some region of a \(d\)-dimensional space are equally likely.
+
+</li></ul>
+<div id="Evaluation Metrics-Internal Validation"><h2 id="Internal Validation" class="header"><a href="#Evaluation Metrics-Internal Validation">Internal Validation</a></h2></div>
+
+<p>
+Internal validation methods (or internal indices) make it possible to establish the quality of the clustering structure without having access to external information. In general, two types of internal validation metrics can be combined:
+</p>
+
+<ul>
+<li>
+Cohesion measures: evaluates how closely the elements of the same cluster are to each other.
+
+</li><li>
+Separation measures: quantify the level of separation between clusters.
+
+</li></ul>
+<p>
+Internal indices are usually employed in conjunction with two clustering algorithm families: hierarchical clustering algorithms and partitional algorithms. For partitional algorithms, metrics based on the proximity matrix, as well as metrics of cohesion and separation, such as the silhouette coefficient, are often used. For hierarchical algorithms, the cophenetic coefficient is the most common.
+</p>
+
+<div id="Evaluation Metrics-Internal Validation-Partitional Methods"><h3 id="Partitional Methods" class="header"><a href="#Evaluation Metrics-Internal Validation-Partitional Methods">Partitional Methods</a></h3></div>
+
+<p>
+In general, the internal validation value of a set of \(K\) clusters can be decomposed as the sum of the validation values for each cluster:
+</p>
+
+\begin{align}
+\text{general validity} = \sum_{i=1}^K w_i \text{validity}(C_i)
+\end{align}
+
+<p>
+This measure of validity can be cohesion, separation, or some combination of both. Quite often, the weights that appear in the previous expression correspond to cluster size. The individual measures of cohesion and separation are defined as follows:
+</p>
+
+\begin{align}
+\text{cohesion}(C_i) = \sum_{x \in C_i, y \in C_i} \text{proximity}(x, y)
+\end{align}
+
+\begin{align}
+\text{separation}(C_i, C_j) = \sum_{x \in C_i, y \in C_j} \text{proximity}(x, y)
+\end{align}
+
+<p>
+It should be noted that the cohesion metric defined above is equivalent to the cluster SSE [Sum of Squared Errors]:
+</p>
+
+\begin{align}
+SSE(C_i) = \sum_{x \in C_i} d(c_i, x)^2 = \frac{1}{2m_i} \sum_{x \in C_i} \sum_{y \in C_i} d(x, y)^2
+\end{align}
+
+<p>
+Likewise, we can maximize the distance between clusters using a separation metric. This approach leads to the between group sum of squares, or SSB:
+</p>
+
+\begin{align}
+SSB = \sum_{i = 1}^K m_i d(c_i, c)^2 = \frac{1}{2K} \sum_{i=1}^K \sum_{j = 1}^K \frac{m}{K} d(c_i, c_j)^2
+\end{align}
+
+<p>
+where \(c_i\) is the mean of the \(i\)th cluster and \(c\) is the overall mean.
+</p>
+
+<p>
+Instead of dealing with separate metrics for cohesion and separation, there are several metrics that try to quantify the level of separation and cohesion in a single measure:
+</p>
+
+<ul>
+<li>
+The Calisnki-Harabasz coefficient: it is a measure based on the internal dispersion of clusters and the dispersion between clusters. We would choose the number of clusters that maximizes the CH.
+\begin{align}
+CH = \frac{\frac{SSB_M}{M - 1}}{\frac{SSE_M}{M}}
+\end{align}
+
+</li><li>
+The Dunn index is the ratio of the smallest distance between data from different clusters and the largest distance between clusters. Again, this ratio should be maximized:
+\begin{align}
+D = \min_{1 &lt; i &lt; k} \left\{\min_{1 &lt; j &lt; k, i\neq j} \left\{\frac{\delta (C_i, C_j)}{\max_{1 &lt; l &lt; k} \{\Delta (C_l)\}}\right\}\right\}
+\end{align}
+
+</li><li>
+The Xie-Beni score was designed for fuzzy clustering, but it can applied to hard clustering. It is a ratio whose numerator estimates the level of compaction of the data within the same cluster and whose denominator estimates the level of separation of the data from different clusters:
+\begin{align}
+XB = \frac{\sum_{i=1}^N \sum_{k=1}^M u^2_{ik} ||x_i - C_k||^2}{N_{t \neq s} \min (||C_t - C_s||^2)}
+\end{align}
+
+</li><li>
+The Ball-Hall index is a dispersion measure based on the quadratic distances of the cluster points with respect to their centroid 
+\begin{align}
+BH = \frac{SSE_M}{M}
+\end{align}
+
+</li><li>
+The Hartigan index is based on the logarithmic relationship between the sum of squares within the cluster and
+
+</li></ul>
+<p>
+the sum of squares between clusters:
+</p>
+
+\begin{align}
+H = \log \left(\frac{SSB_M}{SSE_M}\right)
+\end{align}
+
+<ul>
+<li>
+The Xu coefficient takes into account the dimensionality \(D\) of the data, the number \(N\) of data examples, and the sum of squared errors \(SSE_M\) form \(M\) clusters:
+\begin{align}
+X_u = D \log_2 \left(\sqrt{\frac{SSE_M}{DN^2}}\right) + \log M
+\end{align}
+
+</li></ul>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
