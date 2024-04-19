@@ -83,7 +83,7 @@ Several methods are available to estimate the expected predictive accuracy witho
 
 <p>
 In much of the statistical literature on predictive accuracy, inference for \(\theta\) is summarized not by a posterior distribution \(p_{\text{post}}\) but by a point estimate \(\hat{\theta}\), typically the maximum
-likelihood estimate. Out-of-sample predictive accuracy is then defined not by the expected log posterior predictive density (elppd) but by \(elpd_{\hat{\theta}} = \mathbb{E}_f[\log p(\tilde{y}|\tilde{\theta}(y))]\).
+likelihood estimate. Out-of-sample predictive accuracy is then defined not by the expected log posterior predictive density (elppd) but by \(\text{elpd}_{\hat{\theta}} = \mathbb{E}_f[\log p(\tilde{y}|\tilde{\theta}(y))]\).
 </p>
 
 <p>
@@ -121,11 +121,11 @@ p_{\text{DIC}} = 2 \left(\log p(y|\hat{\theta}_{\text{Bayes}}) - \mathbb{E}_{pos
 \end{align}
 
 <p>
-where \(\mathbb{E}_{post}[\log p(y|\theta)]\) is an average of θ over its posterior distribution. This is computed using simulation \(\theta^s, s= 1, \cdots, S\) as:
+where \(\mathbb{E}_{post}[\log p(y|\theta)]\) is an average of \(\theta\) over its posterior distribution. This is computed using simulation \(\theta^s, s= 1, \cdots, S\) as:
 </p>
 
 \begin{align}
-\text{computed} p_{\text{DIC}} = 2 \left(\log p(y|\hat{\theta}_{\text{Bayes}}) - \frac{1}{S} \sum_{s=1}^S \log p(y|\theta^s)\right)
+\text{computed } p_{\text{DIC}} = 2 \left(\log p(y|\hat{\theta}_{\text{Bayes}}) - \frac{1}{S} \sum_{s=1}^S \log p(y|\theta^s)\right)
 \end{align}
 
 <p>
@@ -137,7 +137,7 @@ An alternative version of DIC uses a slightly different effective number of para
 </p>
 
 \begin{align}
-p_{\text{DIC}}_{\text{alt}} = 2 \mathbb{V}_{\text{post}}[\log p(y|\theta)]
+p_{\text{DIC}_{\text{alt}}} = 2 \mathbb{V}_{\text{post}}[\log p(y|\theta)]
 \end{align}
 
 <p>
@@ -163,7 +163,7 @@ computed by replacing the expectations by averages over the \(S\) posterior draw
 </p>
 
 \begin{align}
-\text{computed} p_{\text{WAIC}1} = 2 \sum_{n=1}^n \left(\log\left(\frac{1}{S}\sum_{s=1}^S p(y_i|\theta^s)\right) - \frac{1}{S}\sum_{s=1}^S \log p(y_i|\theta^s) \right)
+\text{computed } p_{\text{WAIC}1} = 2 \sum_{n=1}^n \left(\log\left(\frac{1}{S}\sum_{s=1}^S p(y_i|\theta^s)\right) - \frac{1}{S}\sum_{s=1}^S \log p(y_i|\theta^s) \right)
 \end{align}
 
 <p>
@@ -171,7 +171,7 @@ The other measure uses the variance of individual terms:
 </p>
 
 \begin{align}
-p_{\text{WAIC}2} = sum_{i=1}^n \mathbb{V}_{\text{post}}[\log p(y_i|\theta)]
+p_{\text{WAIC}2} = \sum_{i=1}^n \mathbb{V}_{\text{post}}[\log p(y_i|\theta)]
 \end{align}
 
 <p>
@@ -179,7 +179,7 @@ To compute it we compute the posterior sample variance (\(\mathbb{V}_{s=1}^S\)) 
 </p>
 
 \begin{align}
-\text{computed} p_{\text{WAIC}2} = sum_{i=1}^n \mathbb{V}_{s=1}^S[\log p(y_i|\theta^s)]
+\text{computed } p_{\text{WAIC}2} = \sum_{i=1}^n \mathbb{V}_{s=1}^S[\log p(y_i|\theta^s)]
 \end{align}
 
 <p>
@@ -187,7 +187,7 @@ We can then use either \(p_{\text{WAIC}1}\) or \(p_{\text{WAIC}2}\) as a bias co
 </p>
 
 \begin{align}
-\hat{elppd}_{\text{WAIC}} = lppd - p_{\text{WAIC}}
+\hat{\text{elppd}}_{\text{WAIC}} = \text{lppd} - p_{\text{WAIC}}
 \end{align}
 
 <p>
@@ -195,7 +195,7 @@ As with \(\text{AIC}\) and \(\text{DIC}\), we define \(\text{WAIC}\) so as to be
 </p>
 
 \begin{align}
-\text{WAIC} = -2lppd + 2p_{\text{WAIC}2}
+\text{WAIC} = -2\text{lppd} + 2p_{\text{WAIC}2}
 \end{align}
 
 <p>
@@ -267,15 +267,15 @@ In Bayesian cross-validation, we split the data into two parts: a training set (
 
 <ul>
 <li>
-We train the model using the training set (\(\text{ytrain}\)). This gives us a distribution of possible parameter values called \(p_{\text{train}}(\)\theta\() = p(\theta|y_{\text{train}})\).
+We train the model using the training set (\(\text{ytrain}\)). This gives us a distribution of possible parameter values called \(p_{\text{train}}(\theta) = p(\theta|y_{\text{train}})\).
 
 </li><li>
-Then, we use this trained model to make predictions on the holdout set (\(\text{yholdout}\)).
+Then, we use this trained model to make predictions on the holdout set (\(y_\text{holdout}\)).
 
 </li><li>
 We evaluate the performance of our predictions using the log predictive density:
 \begin{align}
-\log p_{\text{train}}(y_{\text{holdout}}) = \log \int p_{\pred}(y_{\text{holdout}}|\theta)p_{\text{train}}(\theta)d\theta
+\log p_{\text{train}}(y_{\text{holdout}}) = \log \mathbb{E}_{\text{post}}[p_{\text{train}}(y_{\text{holdout}})] = \log \int p_{\text{pred}}(y_{\text{holdout}}|\theta)p_{\text{train}}(\theta)d\theta
 \end{align}
 
 </li></ul>
@@ -296,7 +296,7 @@ The Bayesian LOO-CV estimate of out-of-sample predictive fit is:
 </p>
 
 \begin{align}
-\text{llpd}_{\text{loo-cv}} = \sum_{i=1}^n \log (p_{\text{post}(-i)}(y_i))
+\text{lppd}_{\text{loo-cv}} = \sum_{i=1}^n \log (p_{\text{post}(-i)}(y_i))
 \end{align}
 
 <p>
@@ -306,6 +306,10 @@ computed as:
 \begin{align}
 \sum_{i=1}^n \log \left(\frac{1}{S} \sum_{s=1}^S p(y_i|\theta^{is})\right)
 \end{align}
+
+<p>
+Where \(\theta^s\) represents the \(S\) simulations under the posterior distribution \(p(\theta|y_{-1})\).
+</p>
 
 <p>
 Each prediction is conditioned on \(n − 1\) data points, which causes underestimation of the predictive fit. For large \(n\) the difference is negligible, but for small \(n\) (or when using \(k\)-fold cross-validation) we can use a first order bias correction b by estimating how much better predictions would be obtained if conditioning on \(n\) data points:
