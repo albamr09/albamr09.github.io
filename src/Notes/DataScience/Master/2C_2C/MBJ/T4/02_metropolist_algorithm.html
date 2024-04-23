@@ -132,6 +132,83 @@ It is shown that the simulated sequence is a Markov chain with a unique stationa
 It is shown that the stationary distribution equals the target distribution.
 
 </li></ol>
+<p>
+Except for trivial exceptions, the latter two conditions hold for a random walk on any proper distribution, and irreducibility holds as long as the jumping distributions Jt is eventually be able to jump to all states with positive probability.
+</p>
+
+<ol>
+<li>
+To show (1) consider starting the algorithm at time \(t − 1\) with a draw \(\theta^{t−1}\) from the target distribution \(p(\theta|y)\). Now consider any two such points \(\theta_a\) and \(\theta_b\), drawn from \(p(\theta|y)\) and labeled so that \(p(\theta_b|y) \geq p(\theta_a|y)\). The unconditional probability density of a transition from \(\theta_a\) to \(\theta_b\) is:
+\begin{align}
+p(\theta^{t - 1} = \theta_a, \theta^t = \theta_b) = p(\theta_a|y)J_t(\theta_b|\theta_a)
+\end{align}
+
+</li></ol>
+<p>
+where the acceptance probability is \(1\) because of our labeling of \(a\) and \(b\), and the unconditional probability density of a transition from \(\theta_b\) to \(\theta_a\) is:
+</p>
+
+\begin{align}
+p(\theta^t = \theta_a, \theta^{t-1} = \theta_b) = p(\theta_b|y)J_t(\theta_a|\theta_b) \left(\frac{p(\theta_a|y)}{p(\theta_b|y)}\right)
+\end{align}
+
+\begin{align}
+= p(\theta_b|y)J_t(\theta_a|\theta_b)
+\end{align}
+
+<p>
+which is the same as the probability of a transition from \(\theta_a\) to \(\theta_b\), since we have required that \(J_t(\cdot|\cdot)\) be symmetric.
+</p>
+
+<p>
+Since their joint distribution is symmetric, \(\theta^t\) and \(\theta^{t−1}\) have the same marginal distributions, and so \(p(\theta|y)\) is the stationary distribution of the Markov chain of \(\theta\).
+</p>
+
+<div id="Metropolis and Metropolis-Hastings Algorithms-The Metropolis-Hastings Algorithm"><h2 id="The Metropolis-Hastings Algorithm" class="header"><a href="#Metropolis and Metropolis-Hastings Algorithms-The Metropolis-Hastings Algorithm">The Metropolis-Hastings Algorithm</a></h2></div>
+
+<p>
+The Metropolis-Hastings algorithm generalizes the basic Metropolis algorithm presented above in two ways. 
+</p>
+
+<ol>
+<li>
+The jumping rules \(J_t\) need no longer be symmetric.
+
+</li><li>
+To correct for the asymmetry in the jumping rule the ratio \(r\) is replaced by a ratio of ratios:
+\begin{align}
+r = \frac{\frac{p(\theta^*|y)}{J_t(\theta^*|\theta^{t-1})}}{\frac{p(\theta^{t-1}|y)}{J_t(\theta^{t-1}|\theta^*)}}
+\end{align}
+
+</li></ol>
+<p>
+Allowing asymmetric jumping rules can be useful in increasing the speed of the random walk.
+</p>
+
+<div id="Metropolis and Metropolis-Hastings Algorithms-Relation Between the Jumping Rule and Efficiency of Simulations"><h2 id="Relation Between the Jumping Rule and Efficiency of Simulations" class="header"><a href="#Metropolis and Metropolis-Hastings Algorithms-Relation Between the Jumping Rule and Efficiency of Simulations">Relation Between the Jumping Rule and Efficiency of Simulations</a></h2></div>
+
+<p>
+The ideal Metropolis-Hastings jumping rule is simply to sample the proposal, \(\theta^*\), from the target distribution; such that our jumping distribution is equal to the target distribution, \(J(\theta^*|\theta) ≡ p(\theta^*|y)\). Then the ratio \(r\) is always exactly \(1\), so we always choose the new sampled \(\theta^*\) to update \(\theta^t\) instead of remaining with \(\theta^{t-1}\).
+</p>
+
+<p>
+A good jumping distribution has the following properties:
+</p>
+
+<ol>
+<li>
+For any \(\theta\), it is easy to sample from \(J(\theta^*|\theta)\)
+
+</li><li>
+It is easy to compute the ratio \(r\)
+
+</li><li>
+Each jump goes a reasonable distance in the parameter space (otherwise the random walk moves too slowly).
+
+</li><li>
+The jumps are not rejected too frequently (otherwise the random walk wastes too much time standing still).
+
+</li></ol>
 </div>
   
 
