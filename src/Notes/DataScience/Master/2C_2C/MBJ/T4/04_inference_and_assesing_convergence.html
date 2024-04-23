@@ -1,0 +1,154 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/custom.css">
+    <title>Inference and Assessing Convergence</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Inference and Assessing Convergence"><h1 id="Inference and Assessing Convergence" class="header"><a href="#Inference and Assessing Convergence">Inference and Assessing Convergence</a></h1></div>
+
+<hr>
+
+<p>
+The basic method of inference from iterative simulation is the same as for Bayesian simulation in general: use the collection of all the simulated draws from \(p(\theta|y)\) to summarize the posterior density and to compute quantiles, moments, and other summaries of interest as needed.
+</p>
+
+<div id="Inference and Assessing Convergence-Difficulties of Inference from Iterative Simulation"><h2 id="Difficulties of Inference from Iterative Simulation" class="header"><a href="#Inference and Assessing Convergence-Difficulties of Inference from Iterative Simulation">Difficulties of Inference from Iterative Simulation</a></h2></div>
+
+<p>
+Iterative simulation adds two challenges to simulation inference:
+</p>
+
+<ol>
+<li>
+If the iterations have not proceeded long enough the simulations may be unrepresentative of the target distribution (<a href="01_gibbs_sampler.html#Introduction">Figure 11.1a</a>)
+
+</li><li>
+The iterative simulation draws present within-sequence correlation.
+
+</li></ol>
+<p>
+Serial correlation in the simulations is not necessarily a problem because, at convergence, the draws are identically distributed as \(p(\theta|y)\). But such correlation can cause inefficiencies in simulations.
+</p>
+
+<p>
+We handle these problems as follows:
+</p>
+
+<ol>
+<li>
+We design the simulation runs to allow effective monitoring of convergence by simulating multiple sequences with starting points dispersed throughout parameter space.
+
+</li><li>
+We monitor the convergence of all quantities of interest by comparing variation between and within simulated sequences until "within" variation roughly equals "between" variation. Only when the distribution of each simulated sequence is close to the distribution of all the sequences mixed together can they all be approximating the target distribution.
+
+</li><li>
+If the simulation efficiency is low, the algorithm may be altered.
+
+</li></ol>
+<div id="Inference and Assessing Convergence-Discarding Early iterations of the Simulation Runs"><h2 id="Discarding Early iterations of the Simulation Runs" class="header"><a href="#Inference and Assessing Convergence-Discarding Early iterations of the Simulation Runs">Discarding Early iterations of the Simulation Runs</a></h2></div>
+
+<p>
+To diminish the influence of the starting values, we discard the first half of each sequence and focus attention on the second half. So our inferences will be based on the assumption that the distributions of the simulated values \(theta_t\), for large enough \(t\), are close to the target distribution, \(p(\theta|y)\).
+</p>
+
+<p>
+We refer to the practice of discarding early iterations in Markov chain simulation as warm-up. Depending on the context, different warm-up fractions (number of elements on the sequence to discard) can be appropriate.
+</p>
+
+<div id="Inference and Assessing Convergence-Dependence of the Iterations in each Sequence"><h2 id="Dependence of the Iterations in each Sequence" class="header"><a href="#Inference and Assessing Convergence-Dependence of the Iterations in each Sequence">Dependence of the Iterations in each Sequence</a></h2></div>
+
+<p>
+Once approximate convergence has been reached, is whether to thin the sequences by keeping every \(k\)th simulation draw from each sequence and discarding the rest. Whether or not the sequences are thinned, if the sequences have reached approximate convergence, they can be directly used for inferences about the parameters \(\theta\) and any other quantities of interest.
+</p>
+
+<div id="Inference and Assessing Convergence-Multiple Sequences with Overdispersed Starting Points"><h2 id="Multiple Sequences with Overdispersed Starting Points" class="header"><a href="#Inference and Assessing Convergence-Multiple Sequences with Overdispersed Starting Points">Multiple Sequences with Overdispersed Starting Points</a></h2></div>
+
+<p>
+Our recommended approach to assessing convergence of iterative simulation is based on comparing different simulated sequences, as illustrated in <a href="01_gibbs_sampler.html#Introduction">Figure 11.1</a>.
+</p>
+
+<p>
+In Figure 11.1a, the multiple sequences clearly have not converged; the variance within each sequence is much less than the variance between sequences. Later, in Figure 11.1b, the sequences have mixed, and the two variance components are essentially equal.
+</p>
+
+<div id="Inference and Assessing Convergence-Monitoring Scalar Estimands"><h2 id="Monitoring Scalar Estimands" class="header"><a href="#Inference and Assessing Convergence-Monitoring Scalar Estimands">Monitoring Scalar Estimands</a></h2></div>
+
+<p>
+We monitor each scalar estimand or other scalar quantities of interest separately. Estimands include all the parameters of interest in the model and any other quantities of interest (for example, the ratio of two parameters or the value of a predicted future observation). It is often useful also to monitor the value of the logarithm of the posterior density, which has probably already been computed if we are using a version of the Metropolis algorithm.
+</p>
+
+<div id="Inference and Assessing Convergence-Challenges of Monitoring Convergence: Mixing and Stationarity"><h2 id="Challenges of Monitoring Convergence: Mixing and Stationarity" class="header"><a href="#Inference and Assessing Convergence-Challenges of Monitoring Convergence: Mixing and Stationarity">Challenges of Monitoring Convergence: Mixing and Stationarity</a></h2></div>
+
+<p>
+Figure 11.3a illustrates that, to achieve convergence, the sequences must together have mixed. The second graph in Figure 11.3 shows two chains that have mixed, in the sense that they have traced out a common distribution, but they do not appear to have converged. Figure 11.3b illustrates that, to achieve convergence, each individual sequence must reach stationarity.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/convergence_monitorization.png" alt="Convergence Monitorization" style="height:300px">
+</p>
+
+<p>
+So to check convergence we have to simultaneously tests mixing (if all the chains have mixed well, the separate parts of the different chains should also mix) and stationarity (at stationarity, the first and second half of each sequence should be traversing the same distribution).
+</p>
+
+<div id="Inference and Assessing Convergence-Splitting each Saved Sequence into Two Parts"><h2 id="Splitting each Saved Sequence into Two Parts" class="header"><a href="#Inference and Assessing Convergence-Splitting each Saved Sequence into Two Parts">Splitting each Saved Sequence into Two Parts</a></h2></div>
+
+<p>
+We diagnose convergence (as noted above, separately for each scalar quantity of interest) by checking mixing and stationarity. Our approach consists on splitting each chain in half and check that all the resulting halfsequences have mixed. 
+</p>
+
+<ol>
+<li>
+We start with some number of simulated sequences in which the warm-up period has already been discarded. 
+
+</li><li>
+We then take each of these chains and split into the first and second half.
+
+</li><li>
+Let \(m\) be the number of chains (after splitting) and \(n\) be the length of each chain.
+
+</li></ol>
+<p>
+For example, suppose we simulate \(5\) chains, each of length \(1000\), and then discard the first half of each as warm-up. We are then left with \(5\) chains, each of length \(500\), and we split each into two parts: iterations \(1–250\) (originally iterations \(501–750\)) and iterations \(251–500\) (originally iterations \(751–1000\)). We now have \(m = 10\) chains, each of length \(n = 250\).
+</p>
+
+<div id="Inference and Assessing Convergence-Assessing Mixing using Between- and Within-Sequence Variances"><h2 id="Assessing Mixing using Between- and Within-Sequence Variances" class="header"><a href="#Inference and Assessing Convergence-Assessing Mixing using Between- and Within-Sequence Variances">Assessing Mixing using Between- and Within-Sequence Variances</a></h2></div>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

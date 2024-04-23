@@ -84,8 +84,7 @@ r = \frac{\frac{p(\theta^*|y)}{J_{j, t}^{\text{Gibbs}}(\theta^*|\theta^{t-1})}}{
 \end{align}
 
 <p>
-and thus every jump is accepted. The second line above follows from the first because, under this jumping rule, \(\theta^*\) differs from \(\theta^{t−1}\) only in the \(j\)th component. The third line
-follows from the second by applying the rules of conditional probability to \(\theta = (\theta_j, \theta_{−j})\) and noting that \(\theta^*_{-j} = \theta^{t-1}_{-j}\).
+and thus every jump is accepted. The second line above follows from the first because, under this jumping rule, \(\theta^*\) differs from \(\theta^{t−1}\) only in the \(j\)th component. The third line follows from the second by applying the rules of conditional probability to \(\theta = (\theta_j, \theta_{−j})\) and noting that \(\theta^*_{-j} = \theta^{t-1}_{-j}\).
 </p>
 
 <p>
@@ -93,6 +92,21 @@ It is possible to define Gibbs sampling without the restriction that each compon
 </p>
 
 <div id="Using Gibbs and Metropolis as Building Blocks-Gibbs Sampler with Approximations"><h2 id="Gibbs Sampler with Approximations" class="header"><a href="#Using Gibbs and Metropolis as Building Blocks-Gibbs Sampler with Approximations">Gibbs Sampler with Approximations</a></h2></div>
+
+<p>
+For some problems, sampling from some, or all, of the conditional distributions \(p(\theta_j|\theta_{−j}, y)\) is impossible, but one can construct approximations, which we label \(g(\theta_j|\theta_{−j})\), from which sampling is possible. The jumping function at the jth Metropolis step at iteration \(t\) is then:
+</p>
+
+\begin{align}
+J_{j, t}(\theta^*|\theta^{t-1}) = \begin{cases}
+g(\theta^*_j|\theta_{-j}^{t-1}) &amp; \text{ if } \theta^*_{-j} = \theta^{t-1}_{-j} \\
+0 &amp; \text{ otherwise }
+\end{cases}
+\end{align}
+
+<p>
+and the ratio \(r\) must be computed and the acceptance or rejection of \(\theta^*\) decided.
+</p>
 </div>
   
 
