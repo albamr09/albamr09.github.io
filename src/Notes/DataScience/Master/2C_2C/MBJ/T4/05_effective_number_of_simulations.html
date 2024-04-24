@@ -1,0 +1,128 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/custom.css">
+    <title>Effective Number of Simulation Draws</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Effective Number of Simulation Draws"><h1 id="Effective Number of Simulation Draws" class="header"><a href="#Effective Number of Simulation Draws">Effective Number of Simulation Draws</a></h1></div>
+
+<hr>
+
+<p>
+One way to define effective sample size for correlated simulation draws is to consider the statistical efficiency of the average of the simulations \(\overline{\psi}_{..}\), as an estimate of the posterior mean, \(\mathbb{E}[\psi|y]\). This might be inappropriate, for example, if there is particular interest in accurate representation of low-probability events in the tails of the distribution.
+</p>
+
+<p>
+Continuing with this definition, it is usual to compute effective sample size using the following asymptotic formula for the variance of the average of a correlated sequence:
+</p>
+
+\begin{align}
+\lim_{n \rightarrow \infty} mn \mathbb{V}[\overline{\psi}_{..}] = \left(1 + 2 \sum_{t = 1}^{\infty} \rho_t\right) \mathbb{V}[\psi|y]
+\end{align}
+
+<p>
+where \(\rho_t\) is the autocorrelation of the sequence \(\psi\) at \(t\). In the presence of correlation we then define the effective sample size as:
+</p>
+
+\begin{align}
+n_{eff} = \frac{mn}{1 + 2 \sum_{t = 1}^{\infty} \rho_t}
+\end{align}
+
+<p>
+The asymptotic nature of the previous equations might seem disturbing given that in reality we will only have a finite simulation, but this should not be a problem given that we already want to run the simulations long enough for approximate convergence to the (asymptotic) target distribution.
+</p>
+
+<p>
+We then estimate the correlations as:
+</p>
+
+\begin{align}
+\hat{\rho}_t = 1 - \frac{V_t}{2 \overline{\mathbb{V}}^+}
+\end{align}
+
+<p>
+where:
+</p>
+
+\begin{align}
+V_t = \frac{1}{m(n - t)} \sum_{j=1}^m \sum_{i = t+1}^n (\psi_{i,j} - \psi_{i - t, j})^2
+\end{align}
+
+<p>
+Unfortunately we cannot simply sum all of these to estimate \(n_{eff}\) given that for large values of \(t\) the sample correlation \(\psi_t\) is too noisy. Instead we compute a partial sum, starting from \(t = 0\) and continuing until the sum of autocorrelation estimates for two successive iterationsis negative:
+</p>
+
+\begin{align}
+\hat{n}_{eff} = \frac{mn}{1 + 2 \sum_{t = 1}^T \hat{\rho}_t}
+\end{align}
+
+<p>
+All these calculations should be performed using only the saved iterations, after discarding the warm-up period.
+</p>
+
+<div id="Effective Number of Simulation Draws-Bounded or Long-Tailed Distributions"><h2 id="Bounded or Long-Tailed Distributions" class="header"><a href="#Effective Number of Simulation Draws-Bounded or Long-Tailed Distributions">Bounded or Long-Tailed Distributions</a></h2></div>
+
+<p>
+The above convergence diagnostics are based on means and variances, and they will not work so well for parameters or scalar summaries for which the posterior distribution, \(p(\phi|y)\), is far from Gaussian.
+</p>
+
+<p>
+For summaries \(\phi\) whose distributions are constrained or otherwise far from normal, we can preprocess simulations using transformations before computing the potential scale reduction factor \(\hat{R}\) and the effective sample size \(\hat{n}_{eff}\).
+</p>
+
+<div id="Effective Number of Simulation Draws-Stopping the Simulations"><h2 id="Stopping the Simulations" class="header"><a href="#Effective Number of Simulation Draws-Stopping the Simulations">Stopping the Simulations</a></h2></div>
+
+<p>
+We monitor convergence for the entire multivariate distribution, \(p(\theta|y)\), by computing the potential scale reduction factor \(\hat{R}\) and the effective sample size \(\hat{n}_{eff}\) for each scalar summary of interest.
+</p>
+
+<p>
+We recommend computing the potential scale reduction for all scalar estimands of interest; if \(\hat{R}\) is not near \(1\) for all of them, continue the simulation runs. We can use effective sample size \(\hat{n}_{eff}\) to give us a sense of the precision obtained from our simulations. As a default rule, we suggest running the simulation until \(\hat{n}_{eff}\) is at least \(5m\), that is, until there are the equivalent of at least \(10\) independent draws per sequence. For some purposes, more precision will be desired, and then a higher effective sample size threshold can be used.
+</p>
+
+<p>
+Once \(\hat{R}\) is near \(1\) and \(\hat{n}_{eff}\) is more than \(10\) per chain for all scalar estimands of interest, just collect the \(mn\) simulations (with warm-up iterations already excluded) and treat them as a sample from the target distribution.
+</p>
+
+<p>
+Even if an iterative simulation appears to converge and has passed all tests of convergence, it still may actually be far from convergence if important areas of the target distribution were not captured by the starting distribution and are not easily reachable by the simulation algorithm. When we declare approximate convergence, we are actually concluding that each individual sequence appears stationary and that the observed sequences have mixed well with each other. These checks are not hypothesis tests. There is no p-value and no statistical significance.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

@@ -143,6 +143,92 @@ For example, suppose we simulate \(5\) chains, each of length \(1000\), and then
 </p>
 
 <div id="Inference and Assessing Convergence-Assessing Mixing using Between- and Within-Sequence Variances"><h2 id="Assessing Mixing using Between- and Within-Sequence Variances" class="header"><a href="#Inference and Assessing Convergence-Assessing Mixing using Between- and Within-Sequence Variances">Assessing Mixing using Between- and Within-Sequence Variances</a></h2></div>
+
+<p>
+For each scalar estimand \(\psi\), we label the simulations as \(\psi_{ij}, (i = 1, \cdots, n; j = 1, \cdots, m)\), and we compute \(B\) and \(W\), the between- and within-sequence variances:
+</p>
+
+\begin{align}
+B = \frac{n}{m - 1} \sum_{j=1}^m (\overline{\psi}_{.j} - \overline{\psi}_{..})^2
+\end{align}
+
+<p>
+where:
+</p>
+
+\begin{align}
+\overline{\psi}_{.j} = \frac{1}{n} \sum_{i=1}^n \psi_{ij}
+\end{align}
+
+\begin{align}
+\overline{\psi}_{..} = \frac{1}{m} \sum_{j=1}^m \overline{\psi}_{.j}
+\end{align}
+
+<p>
+and
+</p>
+
+\begin{align}
+W = \frac{1}{m} \sum_{j=1}^m s_{j}^2
+\end{align}
+
+<p>
+where
+</p>
+
+\begin{align}
+s^2_j = \frac{1}{n - 1} \sum_{i = 1}^n (\psi_{ij} - \overline{\psi}_{.j})^2
+\end{align}
+
+<p>
+We can estimate \(\mathbb{V}[\psi|y]\), the marginal posterior variance of the estimand, by a weighted average of \(W\) and \(B\), namely:
+</p>
+
+\begin{align}
+\hat{\mathbb{V}}^+[\psi|y] = \frac{n - 1}{n}W + \frac{1}{n} B
+\end{align}
+
+<p>
+This quantity overestimates the marginal posterior variance assuming the starting distribution is appropriately overdispersed, but is unbiased under stationarity.
+</p>
+
+<p>
+Meanwhile, for any finite \(n\), the "within" variance \(W\) should be an underestimate of \(\mathbb{V}[\psi|y]\) because the individual sequences have not had time to range over all of the target distribution and, as a result, will have less variability; in the limit as \(n \rightarrow \infty\), the expectation of \(W\) approaches \(\mathbb{V}[\psi|y]\).
+</p>
+
+<p>
+We monitor convergence of the iterative simulation by estimating the factor by which the scale of the current distribution for \(\psi\) might be reduced if the simulations were continued in the limit \(n \rightarrow \infty\). This potential scale reduction is estimated by:
+</p>
+
+\begin{align}
+\hat{R} = \sqrt{\frac{\hat{\mathbb{V}}[\psi|y]}{W}}
+\end{align}
+
+<p>
+which declines to \(1\) as \(n \rightarrow 1\). If the potential scale reduction is high, then we have reason to believe that proceeding with further simulations may improve our inference about the target distribution of the associated scalar estimand.
+</p>
+
+<div id="Inference and Assessing Convergence-Assessing Mixing using Between- and Within-Sequence Variances-Example. Bivariate Unit Normal Density with Bivariate Normal Jumping Kernel (continued)"><h3 id="Example. Bivariate Unit Normal Density with Bivariate Normal Jumping Kernel (continued)" class="header"><a href="#Inference and Assessing Convergence-Assessing Mixing using Between- and Within-Sequence Variances-Example. Bivariate Unit Normal Density with Bivariate Normal Jumping Kernel (continued)">Example. Bivariate Unit Normal Density with Bivariate Normal Jumping Kernel (continued)</a></h3></div>
+
+<p>
+Table 11.1 displays posterior inference for the two parameters of the distribution as well as the log posterior density.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/simulation_convergence_evaluation.png" alt="Simulation Convergence Evaluation" style="height:300px">
+</p>
+
+<p>
+After \(50\) iterations, the variance between the five sequences is much greater than the variance within, for all three univariate summaries considered. However, the five simulated sequences have converged adequately after \(2000\) or certainly \(5000\) iterations for the quantities of interest.
+</p>
+
+<p>
+The comparison with the true target distribution shows how some variability remains in the posterior inferences even after the Markov chains have converged.º
+</p>
+
+<p>
+The method of monitoring convergence presented here has the key advantage of not requiring the user to examine time series graphs of simulated sequences. Inspection of such plots is a notoriously unreliable method.
+</p>
 </div>
   
 
