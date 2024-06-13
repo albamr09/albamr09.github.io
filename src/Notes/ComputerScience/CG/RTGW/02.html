@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../../src/style/custom.css">
-    <title>Computer Science</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Rendering</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,34 +31,36 @@
     <hr>
     <div class="content">
 <p>
-<a href="../index.html">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="Computer Science"><h1 id="Computer Science" class="header"><a href="#Computer Science">Computer Science</a></h1></div>
+<div id="Rendering"><h1 id="Rendering" class="header"><a href="#Rendering">Rendering</a></h1></div>
 
 <hr>
 
-<div id="Computer Science-Computer Architecture"><h2 id="Computer Architecture" class="header"><a href="#Computer Science-Computer Architecture">Computer Architecture</a></h2></div>
+<div id="Rendering-WebGL Rendering Pipeline"><h2 id="WebGL Rendering Pipeline" class="header"><a href="#Rendering-WebGL Rendering Pipeline">WebGL Rendering Pipeline</a></h2></div>
 
-<ol>
-<li>
-<a href="CA/ECS/index.html">The Elements of Computer Systems</a>
+<p>
+<span id="Rendering-WebGL Rendering Pipeline-WebGL runs on the GPU on your computer"></span><strong id="WebGL runs on the GPU on your computer">WebGL runs on the GPU on your computer</strong>. As such, you need to provide code that runs on that GPU. This code is comprised by two functions called vertex shader and fragment shader, written in a very strictly-typed C/C++-like language called <span id="Rendering-WebGL Rendering Pipeline-GLSL, GL Shader Language"></span><strong id="GLSL, GL Shader Language">GLSL, GL Shader Language</strong>.  Together, they are called a <span id="Rendering-WebGL Rendering Pipeline-program"></span><strong id="program">program</strong>.
+</p>
 
-</li></ol>
-<div id="Computer Science-Computer Graphics"><h2 id="Computer Graphics" class="header"><a href="#Computer Science-Computer Graphics">Computer Graphics</a></h2></div>
+<p>
+A vertex shader's job is to compute vertex attributes, it outputs values that can be used to rasterize various kinds of primitives, including points, lines, and triangles.
+</p>
 
-<ol>
-<li>
-<a href="CG/RTGW/index.html">Real-Time 3D Graphics with WebGL 2</a>
+<p>
+A fragment shader's job is to compute a color for each pixel of the primitive currently being drawn.
+</p>
 
-</li></ol>
-<div id="Computer Science-Web"><h2 id="Web" class="header"><a href="#Computer Science-Web">Web</a></h2></div>
+<p>
+Let's examine what WebGL's rendering pipeline. The following is a diagram of a simplified version of WebGL's rendering pipeline:
+</p>
 
-<ul>
-<li>
-<a href="WebDev/index.html">WebDev</a>
+<p>
+<img src="https://albamr09.github.io/public/assets/webgl_rendering_pipeline.png" alt="WebGL Rendering Pipeline" style="height:400px">
+</p>
 
-</li></ul>
+<div id="Rendering-WebGL Rendering Pipeline-Vertex Buffer Objects (VBOs)"><h3 id="Vertex Buffer Objects (VBOs)" class="header"><a href="#Rendering-WebGL Rendering Pipeline-Vertex Buffer Objects (VBOs)">Vertex Buffer Objects (VBOs)</a></h3></div>
 </div>
   
 
