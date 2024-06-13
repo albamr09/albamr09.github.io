@@ -1,0 +1,179 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Qualifier</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="Dependency Injection.html">Back</a>
+</p>
+
+<div id="Qualifier"><h1 id="Qualifier" class="header"><a href="#Qualifier">Qualifier</a></h1></div>
+
+<hr>
+
+<p>
+In order to specify which specific implementation of an interface we want to use, when this interface is implemented by several beans, then we use the <code>Qualifier</code> annotation.
+</p>
+
+<p>
+The <code>Qualifier</code> annotation can be used in any Dependency Injection implementation:
+</p>
+
+<ul>
+<li>
+Constructor Injection <a href="Qualifier Annotation.html#Qualifier-Qualifier in Constructor">(has different syntax)</a>
+
+</li><li>
+Setter Injection
+
+</li><li>
+Method Injection
+
+</li><li>
+Field Injection
+
+</li></ul>
+<div id="Qualifier-Define Dependency as Component"><h2 id="Define Dependency as Component" class="header"><a href="#Qualifier-Define Dependency as Component">Define Dependency as Component</a></h2></div>
+
+<pre java="">package com.springdemo;
+
+import org.springframework.stereotype.Component;
+
+// We tell spring this is a bean
+@Component
+public class HappyFortuneService implements FortuneService {
+
+	@Override
+	public String getFortune() {
+		return "Today is your lucky day!";
+	}
+
+}
+</pre>
+
+<div id="Qualifier-Specify Dependency"><h2 id="Specify Dependency" class="header"><a href="#Qualifier-Specify Dependency">Specify Dependency</a></h2></div>
+
+<pre java="">package com.springdemo;
+
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@Component
+public class TennisCoach implements Coach {
+	
+	// We tell spring to search for beans (classes with @Component annotation) 
+	// that implement the FortuneService interface whose name is "happyFortuneService"
+	// (note this is the default name of the component if you set one explicitly you 
+	// will have to specify that one in the Qualifier annotation)
+	@Autowired
+	@Qualifier("happyFortuneService")
+	private FortuneService fortuneService;
+	
+	public TennisCoach() {}
+	
+	@Override
+	public String getDailyWorkout() {
+		return "Practice your backhand volley";
+	}
+	
+	@Override
+	public String getDailyFortune() {
+		return fortuneService.getFortune();
+	}
+}
+</pre>
+
+<p>
+The main method and the configuration files remain unchanged. And when we execute this piece of code, spring will automatically inject the dependency because of the <code>Autowired</code> annotation.
+</p>
+
+<pre java="">package com.springdemo;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class AnnotationDemoApp {
+	public static void main(String[] args) {
+
+		// read spring config file
+		ClassPathXmlApplicationContext context = 
+				new ClassPathXmlApplicationContext("applicationContext.xml");
+		
+		// get the bean from spring container
+		Coach theCoach = context.getBean("tennisCoach", Coach.class);
+		
+		// call a method on the bean
+		System.out.println(theCoach.getDailyWorkout());
+
+		// call method to get daily fortune
+		System.out.println(theCoach.getDailyFortune());
+				
+		// close the context
+		context.close();
+	}
+}
+</pre>
+
+
+<div id="Qualifier-Qualifier in Constructor"><h2 id="Qualifier in Constructor" class="header"><a href="#Qualifier-Qualifier in Constructor">Qualifier in Constructor</a></h2></div>
+
+<pre java="">package com.springdemo;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
+public class TennisCoach implements Coach {
+
+    private FortuneService fortuneService;
+
+    // define a default constructor
+    public TennisCoach() {
+        System.out.println("&gt;&gt; TennisCoach: inside default constructor");
+    }
+    
+    @Autowired
+    public TennisCoach(@Qualifier("happyFortuneService") FortuneService theFortuneService) {
+
+        System.out.println("&gt;&gt; TennisCoach: inside constructor using @autowired and @qualifier");
+        
+        fortuneService = theFortuneService;
+    }
+}
+</pre>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

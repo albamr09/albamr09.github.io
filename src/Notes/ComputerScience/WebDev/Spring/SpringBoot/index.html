@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Overview</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,27 +31,50 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="../index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="Overview"><h1 id="Overview" class="header"><a href="#Overview">Overview</a></h1></div>
 
 <hr>
 
+<p>
+Spring Boot is a framework that:
+</p>
+
 <ul>
 <li>
-<a href="Math/index.html">Math</a>
+Make it easier to get started with Spring development
 
 </li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
+Minimize the amount of manual configuration
 
-</li><li>
-<a href="DataScience/index.html">Data Science</a>
-
-</li><li>
-<a href="Other/index.html">Other</a>
+<ul>
+<li>
+Perform auto-configuration based on props files and JAR classpath
 
 </li></ul>
+</li><li>
+Help to resolve dependency conflicts (Maven or Gradle)
+
+</li><li>
+Provide an embedded HTTP server so you can get started quickly
+
+</li></ul>
+<p>
+To create a new project you just have to go to <a href="https://start.spring.io/">Spring Initiliazr</a>, where you simply select your dependencies and lets you create a maven/gradle project and import it into an IDE.
+</p>
+
+<p>
+So now our app is a <code>jar</code> file, and it includes the source code and also the embedded http server, so can be ran from the command line, from your IDE, etc. However if you want to export your code as a <code>war</code> file, you can also do that by exporting only your source code, without the embedded server.
+</p>
+
+<p>
+With the <code>jar</code> file you can run your application by executing:
+</p>
+
+<pre bash="">$ java -jar app.jar
+</pre>
 </div>
   
 

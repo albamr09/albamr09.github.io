@@ -1,0 +1,156 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Spring Data Rest</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Spring Data Rest"><h1 id="Spring Data Rest" class="header"><a href="#Spring Data Rest">Spring Data Rest</a></h1></div>
+
+<hr>
+
+<p>
+What if we want to <a href="Spring Data JPA.html">also</a> reduce the code for creating API, that is, what if Spring could create a REST API for us using our <code>JPARepository</code>, such that it would expose all of the basic REST API CRUD features automatically.
+</p>
+
+<p>
+What does it do? 
+</p>
+
+<ul>
+<li>
+It scans your project fro <code>JPARepository</code>
+
+</li><li>
+It exposes REST APIs for each entity type for your <code>JPARepository</code>
+
+</li></ul>
+<p>
+So now, we can remove our Employee services and our REST Controllers, because it is handled automatically by Spring. The only thing needed is adding <code>Spring Data REST</code> as a dependency:
+</p>
+
+<pre xml="">	&lt;dependencies&gt;
+    ...
+		&lt;!-- Add dependency for Spring Data REST --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-data-rest&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+    ...
+	&lt;/dependencies&gt;
+</pre>
+
+<hr>
+
+<p>
+To sum up, now in your application you only will have:
+</p>
+
+<ul>
+<li>
+Your entity: <code>Employee</code>
+
+</li><li>
+The corresponding JPA Repository: <code>EmployeeRepository</code>
+
+</li><li>
+Dependency
+
+</li><li>
+Main application
+
+</li></ul>
+<p>
+The first one applies to each entity your application has.
+</p>
+
+<hr>
+
+<p>
+Spring Data Rest is HATEOAS compliant (the responses include metadata about itself).
+</p>
+
+
+<div id="Spring Data Rest-Configuration"><h2 id="Configuration" class="header"><a href="#Spring Data Rest-Configuration">Configuration</a></h2></div>
+
+<ul>
+<li>
+You can specify the name of the endpoint that is exposed (by the default is the plural of the entity) with:
+<pre java="">@RepositoryRestResource(path="members")
+public interface EmployeeRepository extends JpaRepository&lt;Employee, Integer&gt; {
+}
+</pre>
+
+</li><li>
+The default number of elements returned are 20, then we can use pagination to retrieve the next ones with query parameters (<code>?page=0</code>).
+
+</li><li>
+Some properties available to tweak in <code>application.properties</code> are:
+
+<ul>
+<li>
+<code>spring.data.rest.base-path</code>: Base path used to expose repository resources
+
+</li><li>
+<code>spring.data.rest.default-page-size</code>: Default size pages
+
+</li><li>
+<code>spring.data.rest.max-page-size</code>: Maximum size of pages
+
+</li></ul>
+</li></ul>
+<div id="Spring Data Rest-Configuration-Sorting"><h3 id="Sorting" class="header"><a href="#Spring Data Rest-Configuration-Sorting">Sorting</a></h3></div>
+
+<p>
+You can sort by the property names of your entity. On the <code>Employee</code> example we have <code>firstName</code>, <code>lastName</code> and <code>email</code>, therefore we can do:
+</p>
+
+<p>
+<code>http://localhost:8080/employees?sort=firstName</code>
+</p>
+
+<p>
+or 
+</p>
+
+<p>
+<code>http://localhost:8080/employees?sort=firstName,desc</code>
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

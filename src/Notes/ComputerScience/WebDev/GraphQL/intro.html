@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Intro</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,27 +31,83 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="Intro"><h1 id="Intro" class="header"><a href="#Intro">Intro</a></h1></div>
 
 <hr>
 
-<ul>
+<p>
+<code>GraphQL</code> is a query language used to communicate to our API and query for data.
+</p>
+
+<div id="Intro-Difference with APIs"><h2 id="Difference with APIs" class="header"><a href="#Intro-Difference with APIs">Difference with APIs</a></h2></div>
+
+<p>
+Whenever we use REST APIs and we hit specific endpoints, more often than not, we are going to retrieve some data that we have no use for. This is what is called <code>overfetching</code>.
+</p>
+
+<p>
+For example when you access <code>https://my-rest-api/animals</code> you get an object with a list of animal objects, and you may not need all of the information of every animal.
+</p>
+
+<p>
+<code>GraphQL</code> solves this problem by:
+</p>
+
+<ol>
 <li>
-<a href="Math/index.html">Math</a>
+Only having one endpoint.
 
 </li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
+From this endpoint we use the graph query language to select whatever data that we want.
 
-</li><li>
-<a href="DataScience/index.html">Data Science</a>
+</li></ol>
+<p>
+For example, to retrieve the same information stated above:
+</p>
 
-</li><li>
-<a href="Other/index.html">Other</a>
+<pre graphql="">
+query{
+  animals{
+    title
+    ratings
+    img
+    price
+  }
+}
 
-</li></ul>
+</pre>
+
+<p>
+Which gets only the specified attributes for each animal.
+</p>
+
+<p>
+<code>GraphQL</code> also solves <code>underfetching</code>, which is the situation where you cannot get enough data with a call to only one endpoint, forcing you to call a second endpoint. 
+</p>
+
+<p>
+For example, if you want information about the animals and the categories you have to access <code>https://my-rest-api/animals</code>, and <code>https://my-rest-api/categories</code>, however with <code>GraphQL</code>:
+</p>
+
+<pre graphql="">
+query{
+  animals{
+    title
+    ratings
+    img
+    price
+  }
+  categories{
+    id
+    title
+    img
+  }
+}
+
+</pre>
 </div>
   
 

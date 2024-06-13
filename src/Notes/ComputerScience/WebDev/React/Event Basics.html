@@ -1,0 +1,136 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Event Basics</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Event Basics"><h1 id="Event Basics" class="header"><a href="#Event Basics">Event Basics</a></h1></div>
+
+<hr>
+
+<ul>
+<li>
+<a href="https://reactjs.org/docs/events.html#supported-events">List of all possible events</a>
+
+</li></ul>
+<p>
+To define an event we have to specify:
+</p>
+
+<ul>
+<li>
+<span id="Event Basics-attribute"></span><strong id="attribute">attribute</strong>: like <code>onClick</code>, <code>onMouseHover</code>, etc.
+
+</li><li>
+<span id="Event Basics-eventHandler"></span><strong id="eventHandler">eventHandler</strong>: the function to apply. This can be specified as a reference or as an in-line function.
+
+</li></ul>
+<p>
+Next, we present an example:
+</p>
+
+<pre javascript="">import React from 'react'
+
+const Book = ({ title, author }) =&gt; {
+
+  const clickHandler = () =&gt; {alert('Hello!!')}
+  
+  return (
+   &lt;article className='book'&gt;
+    &lt;!-- Here we have the eventHandler as an in-line function --&gt;
+    &lt;h1 onClick={() =&gt; alert('Hello!!')}&gt;{title}&lt;/h1&gt;
+    &lt;h4&gt;{author}&lt;/h4&gt;
+    &lt;!-- Here we have the eventHandler as a reference --&gt;
+    &lt;button type="button" onClick={clickHandler}&gt;This is a button&lt;/button&gt;
+   &lt;/article&gt;
+  );
+};
+
+export default Book
+</pre>
+
+<p>
+To pass an argument to the <code>eventHandler</code> we have to use a <code>lambda</code> function, else when we load the application will invoke the function <code>clickHandler(author)</code>
+</p>
+
+<pre javascript="">import React from 'react'
+
+const Book = ({ title, author }) =&gt; {
+
+  const clickHandler = (author) =&gt; {alert(author)}
+  
+  return (
+   &lt;article className='book'&gt;
+    &lt;h1 onClick={() =&gt; alert('Hello!!')}&gt;{title}&lt;/h1&gt;
+    &lt;h4&gt;{author}&lt;/h4&gt;
+    &lt;!-- Wrap function with an in-line function --&gt;
+    &lt;button type="button" onClick={() =&gt; clickHandler(author)}&gt;This is a button&lt;/button&gt;
+   &lt;/article&gt;
+  );
+};
+
+export default Book
+</pre>
+
+
+<p>
+We can also access the <code>event</code> object from within the function, like:
+</p>
+
+<pre javascript="">import React from 'react'
+
+const Book = ({ title, author }) =&gt; {
+
+  // You can always access the event object from an eventHandler
+  const clickHandler = (author, e) =&gt; {console.log(e)}
+  
+  return (
+   &lt;article className='book'&gt;
+    &lt;h1 onClick={() =&gt; alert('Hello!!')}&gt;{title}&lt;/h1&gt;
+    &lt;h4&gt;{author}&lt;/h4&gt;
+    &lt;button type="button" onClick={() =&gt; clickHandler(author)}&gt;This is a button&lt;/button&gt;
+   &lt;/article&gt;
+  );
+};
+
+export default Book
+</pre>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

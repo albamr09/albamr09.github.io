@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>GraphQL Server</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,27 +31,79 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="GraphQL Server"><h1 id="GraphQL Server" class="header"><a href="#GraphQL Server">GraphQL Server</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="Math/index.html">Math</a>
+<p>
+<code>GraphQL</code> supports several languages, and has several servers that do mainly the same. Consult the <a href="https://graphql.org/code/#javascript-server">official</a> page for the one that suits your needs.
+</p>
 
-</li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
+<p>
+We are going to use <code>apollo-server</code> to demonstrate how to use <code>GraphQL</code> in a <code>node.js</code> application:
+</p>
 
-</li><li>
-<a href="DataScience/index.html">Data Science</a>
+<p>
+So, first, we install the <code>apollo-server</code> along with <code>graphql</code> dependency with <code>npm</code>:
+</p>
 
-</li><li>
-<a href="Other/index.html">Other</a>
+<pre console="">
+$ npm install apollo-server graphql
 
-</li></ul>
+</pre>
+
+<p>
+Now we use <code>graphql</code> to define our type definitions:
+</p>
+
+<pre javascript="">
+const { ApolloServer, gql } = require('apollo-server');
+
+const typeDefs = gql`
+
+  type Book {
+    title: String
+    author: String
+  }
+  
+  type Query {
+    books: [Book]
+  }
+  
+</pre>
+
+<p>
+And we also create our resolvers:
+</p>
+
+<pre>
+const resolvers = {
+  Query: {
+    books: () =&gt; books,
+  }
+}
+
+</pre>
+
+<p>
+Where <code>books</code> is an already defined array of books.
+</p>
+
+<p>
+Finally we create the actual server:
+</p>
+
+<pre>
+const server = new ApolloServer({typeDefs, resolvers});
+
+server.listen().then(({ url }) =&gt; {
+  console.log(`🚀  Server ready at ${url}`);
+});
+
+</pre>
 </div>
   
 

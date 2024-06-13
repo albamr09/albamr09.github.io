@@ -1,0 +1,139 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>HTTP Methods</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="HTTP Methods"><h1 id="HTTP Methods" class="header"><a href="#HTTP Methods">HTTP Methods</a></h1></div>
+
+<hr>
+
+<p>
+In this section we will show a few examples of the different <code>HTTP</code> methods in <code>Express</code>, take into account that we are not using a database.
+</p>
+
+<div id="HTTP Methods-GET"><h2 id="GET" class="header"><a href="#HTTP Methods-GET">GET</a></h2></div>
+
+<pre javascript="">
+app.get('/api/people', (res, req) =&gt; {
+  res.status(200).json({ success: true, data: people })
+})
+
+</pre>
+
+<div id="HTTP Methods-POST"><h2 id="POST" class="header"><a href="#HTTP Methods-POST">POST</a></h2></div>
+ 
+<p>
+Observe that we use a middleware provided by <code>Express</code> that lets us parse incoming requests with <code>urlencoded</code> payload, and another middleware function to parse <code>json</code>.
+</p>
+
+<pre javascript="">
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+
+app.post('/api/people', (res, req) =&gt; {
+  const { name } = req.body
+  if(!name){
+        return res
+          .status(400)
+          .json({ success: false, msg: 'Please provide a name'})   
+  }
+    
+  // Send array of people adding the new person (this is not permanent)
+  res.status(201).json({ 
+                    success: true, 
+                    data: [...data, { name, id: data.length + 1}] 
+                    })
+})
+
+</pre>
+
+<div id="HTTP Methods-PUT"><h2 id="PUT" class="header"><a href="#HTTP Methods-PUT">PUT</a></h2></div>
+
+<pre javascript="">
+app.put('/api/people/:id', (res, req) =&gt; {
+    // De-structure params
+    const { id } = req.params
+    const { name } = req.body
+    
+    const person = people.find((person) =&gt; person.id === Number(id))
+    
+    // The person does not exist
+    if(!person){
+        return res
+          .status(400)
+          .json({ success: false, msg: `no person with id: ${id}`})   
+    }
+    // Update the person data
+    const newPeople = people.map((person) =&gt; {
+        if(person.id === Number(id)){
+            person.name = name
+        }
+        return person
+    })
+    res.status(200).json({ success: true, data: newPeople })
+})
+
+</pre>
+
+<div id="HTTP Methods-DELETE"><h2 id="DELETE" class="header"><a href="#HTTP Methods-DELETE">DELETE</a></h2></div>
+
+<pre javascript="">
+app.delete('/api/people/:id', (res, req) =&gt; {
+    // De-structure params
+    const { id } = req.params
+    const { name } = req.body
+    
+    const person = people.find((person) =&gt; person.id === Number(id))
+    
+    // The person does not exist
+    if(!person){
+        return res
+          .status(400)
+          .json({ success: false, msg: `no person with id: ${id}`})   
+    }
+    // Filter the person data
+    const newPeople = people.filter((person) =&gt; person.id !== id)
+    res.status(200).json({ success: true, data: newPeople })
+})
+
+</pre>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

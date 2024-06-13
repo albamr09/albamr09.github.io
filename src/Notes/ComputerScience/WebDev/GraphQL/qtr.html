@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Queries TypeDefs and Resolvers</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,27 +31,96 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="Queries TypeDefs and Resolvers"><h1 id="Queries TypeDefs and Resolvers" class="header"><a href="#Queries TypeDefs and Resolvers">Queries TypeDefs and Resolvers</a></h1></div>
 
 <hr>
 
 <ul>
 <li>
-<a href="Math/index.html">Math</a>
+<code>TypeDefs</code>: define how the data should look.
 
 </li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
+<code>Resolvers</code>: resolve what the actual data is going to be. Here we could introduce some logic, like calling the database or applying validation.
 
 </li><li>
-<a href="DataScience/index.html">Data Science</a>
+<code>Query</code>: defines how we can query our data
+<pre>
+type Query{
+  books: [Book]
+}
 
-</li><li>
-<a href="Other/index.html">Other</a>
+</pre>
 
 </li></ul>
+<p>
+So the <code>book</code> resolver would return an array of books.
+</p>
+
+<div id="Queries TypeDefs and Resolvers-Data Specification"><h2 id="Data Specification" class="header"><a href="#Queries TypeDefs and Resolvers-Data Specification">Data Specification</a></h2></div>
+
+<ul>
+<li>
+Arrays: to define an array on <code>TypeDefs</code> or <code>Queries</code> you use <code>[]</code>.
+<pre>
+type Book {
+  author: [String]
+}
+
+</pre>
+
+</li><li>
+Non nullable field: to specify that an attribute cannot be null you use <code>!</code>.
+<pre>
+type Book {
+  author: String!
+  author: [String]! // the array must not be null
+  author: [String!]! // the elements of the array and the array must not be null
+}
+
+</pre>
+
+</li></ul>
+<div id="Queries TypeDefs and Resolvers-Queries"><h2 id="Queries" class="header"><a href="#Queries TypeDefs and Resolvers-Queries">Queries</a></h2></div>
+
+<ul>
+<li>
+Parameters: on the query object you add an argument between brackets (the <code>!</code> specifies the argument must be provided).
+<pre>
+type Animal {
+  id: ID!
+  name: String!
+  description: [String!]!
+}
+
+type Query {
+  animals: [Animal!]!
+  animal(id: String!): Animal
+}
+
+</pre>
+
+</li></ul>
+<p>
+On the resolver we use the <code>arg</code> parameter to retrieve the parameter passed:
+</p>
+
+<pre>
+const resolvers = {
+  Query: {
+    animals: () =&gt; animals,
+    animal: (parent, args, ctx) =&gt; {
+      let animal = animals.find((animal) =&gt; {
+        retunr animal.id === args.id
+      })
+      return animal
+    }
+  }
+}
+
+</pre>
 </div>
   
 

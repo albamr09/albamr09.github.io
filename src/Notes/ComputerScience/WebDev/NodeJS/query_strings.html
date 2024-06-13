@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Query Strings</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,27 +31,66 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="Query Strings"><h1 id="Query Strings" class="header"><a href="#Query Strings">Query Strings</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="Math/index.html">Math</a>
+<p>
+We can use the <code>query</code> attribute from the <code>request</code> object in order to further filter our data. So whenever the user types <code>localhost:5000/whateverendpoint?name=john</code>, the <code>request</code> object passed as an argument of the callback defined for <code>whateverendpoint</code> will have the object <code>{name: 'john'}</code> stored in <code>request.query</code>.
+</p>
 
-</li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
+<pre javascript="">
+app.get('/whateverendpoint', (req, res) =&gt; {
+  console.log(req.query)
+})
 
-</li><li>
-<a href="DataScience/index.html">Data Science</a>
+</pre>
 
-</li><li>
-<a href="Other/index.html">Other</a>
+<p>
+Now we code the way to filter by the keywords <code>search</code> and <code>limit</code>:
+</p>
 
-</li></ul>
+<pre javascript="">
+app.get('/api/v1/query', (req, res) =&gt; {
+	
+	// De-structure keys
+  const { search, limit } = req.query
+  // Get a copy of the products
+  let sortedProducts = [...products]
+
+  // If search was specified
+  if (search) {
+	  // Return only the products whose name start with 
+    sortedProducts = sortedProducts.filter((product) =&gt; {
+      return product.name.startsWith(search)
+    })
+  }
+  // If limit was specified
+  if (limit) {
+    // Return as many products as the limit specified
+    sortedProducts = sortedProducts.slice(0, Number(limit))
+  }
+  // If no product matched the search
+  if (sortedProducts.length &lt; 1) {
+    return res.status(200).json({ sucess: true, data: [] })
+  }
+	
+  // Return the products filtered
+  res.status(200).json(sortedProducts)
+})
+
+</pre>
+
+<p>
+So now, if we go to <code>localhost:5000/api/v1/query?search=a&amp;limit=2</code> the server will return a <code>JSON</code> object that contains at most 2 products whose name start with an "a".
+</p>
+
+<p>
+Observe, that in order to avoid error for sending more than one response (note that we have two <code>res.json()</code> in our function), we must add the <code>return</code> keyword after sending each response, then the method exits.
+</p>
 </div>
   
 

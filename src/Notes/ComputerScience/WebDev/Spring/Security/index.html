@@ -1,0 +1,194 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Overview</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Overview"><h1 id="Overview" class="header"><a href="#Overview">Overview</a></h1></div>
+
+<hr>
+
+<ul>
+<li>
+Spring Security is implemented using Servlet filters in the background 
+
+</li><li>
+There are two methods of securing a Web App:
+
+<ul>
+<li>
+Declarative
+
+</li><li>
+Programmatic
+
+</li></ul>
+</li></ul>
+<div id="Overview-Servlet Filters"><h2 id="Servlet Filters" class="header"><a href="#Overview-Servlet Filters">Servlet Filters</a></h2></div>
+
+<p>
+Servlet filters are used to pre-process/post-process web requests. 
+</p>
+
+<ul>
+<li>
+They can route web requests based on security logic.
+
+</li><li>
+Spring provides a bulk of security functionality with servlet filters.
+
+</li></ul>
+<p>
+This is described in the following picture:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/security_servlet_filters.png" alt="Security Servlet Filters" style="width:700px">
+</p>
+
+<p>
+We can see Spring intercepts the request to <code>/mytopsecretstuff</code> and uses the app's security configuration, alongside information about the user, passwords and roles to pre and post-process the request.
+</p>
+
+<div id="Overview-Spring Security in Action"><h2 id="Spring Security in Action" class="header"><a href="#Overview-Spring Security in Action">Spring Security in Action</a></h2></div>
+
+<p>
+Next we show a flowchart of the pre-processing made by Spring Security Filters:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/spring_security_in_action.png" alt="Spring Security in Action" style="width:700px">
+</p>
+
+<ol>
+<li>
+If the resource is protected we go to step (2), else we go to step (4)
+
+</li><li>
+If the user is authenticated we go to step (3), else we go to step (6)
+
+</li><li>
+If the user is authorized to access the resource we go to step (4), else we go to step (5)
+
+</li><li>
+The resource is shown to the user
+
+</li><li>
+The access to the resource is denied
+
+</li><li>
+We send the user to the login page, if the user logins correctly we go to step (3)
+
+</li></ol>
+<div id="Overview-Declarative Security"><h2 id="Declarative Security" class="header"><a href="#Overview-Declarative Security">Declarative Security</a></h2></div>
+
+<p>
+You define your application's security constraints in configuration. For that, you can either:
+</p>
+
+<ul>
+<li>
+Use all Java configuration (@Configuration)
+
+</li><li>
+Use a Spring configuration file (XML)
+
+</li></ul>
+<div id="Overview-Programmatic Security"><h2 id="Programmatic Security" class="header"><a href="#Overview-Programmatic Security">Programmatic Security</a></h2></div>
+
+<p>
+You can also do it programmatically:
+</p>
+
+<ul>
+<li>
+Spring Security provides an API for custom application coding.
+
+</li><li>
+It also provides greater customization for specific apps.
+
+</li></ul>
+<div id="Overview-Authentication/Authorization"><h2 id="Authentication/Authorization" class="header"><a href="#Overview-Authentication/Authorization">Authentication/Authorization</a></h2></div>
+
+<p>
+Information about users/passwords/roles, etc can be stored:
+</p>
+
+<ul>
+<li>
+In-memory
+
+</li><li>
+JDBC
+
+</li><li>
+LDAP
+
+</li><li>
+Custom
+
+</li><li>
+etc
+
+</li></ul>
+<div id="Overview-Maven Dependencies"><h2 id="Maven Dependencies" class="header"><a href="#Overview-Maven Dependencies">Maven Dependencies</a></h2></div>
+
+<p>
+To use this framework, you have to add the following dependency to your project:
+</p>
+
+<pre xml="">	&lt;dependencies&gt;
+
+    ...
+		&lt;!-- Spring Security --&gt;
+		&lt;!-- spring-security-web and spring-security-config --&gt;
+		
+		&lt;dependency&gt;
+		    &lt;groupId&gt;org.springframework.security&lt;/groupId&gt;
+		    &lt;artifactId&gt;spring-security-web&lt;/artifactId&gt;
+		    &lt;version&gt;${springsecurity.version}&lt;/version&gt;
+		&lt;/dependency&gt;
+    
+    ...
+    
+	&lt;dependencies&gt;
+</pre>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

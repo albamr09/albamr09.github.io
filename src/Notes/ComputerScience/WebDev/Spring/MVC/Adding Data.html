@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Model</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,27 +31,76 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="../index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="Model"><h1 id="Model" class="header"><a href="#Model">Model</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="Math/index.html">Math</a>
+<p>
+The Model is a container for the application data. So in your controller you can put anything in the model (strings, objects, info from DB, etc). And then you view page (<code>JSP</code>) can access data from the model.
+</p>
 
-</li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
+<div id="Model-Example"><h2 id="Example" class="header"><a href="#Model-Example">Example</a></h2></div>
 
-</li><li>
-<a href="DataScience/index.html">Data Science</a>
+<div id="Model-Example-Controller"><h3 id="Controller" class="header"><a href="#Model-Example-Controller">Controller</a></h3></div>
 
-</li><li>
-<a href="Other/index.html">Other</a>
+<pre java="">package com.springdemo.mvc;
 
-</li></ul>
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class HelloWorldController {
+  
+  // new a controller method to read form data and
+  // add data to the model
+  
+  @RequestMapping("/processFormVersionTwo")	
+  // the HttpServletRequest allows you to retrieve information from the request (like the parameters of a form)
+  // the model is our Model where we will store data
+  public String parseString(HttpServletRequest request, Model model) {
+    
+    // read the request parameter from the HTML form
+    String theName = request.getParameter("studentName");
+    
+    // convert the data to all caps
+    theName = theName.toUpperCase();
+    
+    // create the message
+    String result = "Yo! " + theName;
+    
+    // add message attribute to the model
+    model.addAttribute("message", result);
+    		
+    return "helloworld";
+  }
+  
+}
+</pre>
+
+<div id="Model-Example-View"><h3 id="View" class="header"><a href="#Model-Example-View">View</a></h3></div>
+
+<p>
+Now, on the view, we can access the <code>Model</code> data:
+</p>
+
+<pre jsp="">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  Hello World of Spring!
+  &lt;br&gt;&lt;br&gt;
+  Student name: ${param.studentName}
+  &lt;br&gt;&lt;br&gt;
+  &lt;!-- Access model data by the attribute's name--&gt;
+  The message: ${message}
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
 </div>
   
 

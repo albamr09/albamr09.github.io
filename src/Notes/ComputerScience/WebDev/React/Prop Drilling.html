@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Prop Drilling</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,27 +31,76 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="Prop Drilling"><h1 id="Prop Drilling" class="header"><a href="#Prop Drilling">Prop Drilling</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="Math/index.html">Math</a>
+<p>
+Prop Drilling refers to the scenario where we have to pass <code>props</code> to anidated components recursively. Next up, we show and example
+</p>
 
-</li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
+<pre javascript="">import React, { useState } from 'react';
 
-</li><li>
-<a href="DataScience/index.html">Data Science</a>
+// Data
+import { data } from '../../../data';
 
-</li><li>
-<a href="Other/index.html">Other</a>
+// Outer component
+const PropDrilling = () =&gt; {
+  // State passed as a prop
+  const [people, setPeople] = useState(data);
+ 
+  // Event handler passed as a prop
+  const removePerson = (id) =&gt; {
+    setPeople((people) =&gt; {
+      return people.filter((person) =&gt; person.id !== id);
+    });
+  };
+  return (
+    &lt;section&gt;
+      &lt;h3&gt;prop drilling&lt;/h3&gt;
+      {/* Pass props to the list elements */}
+      &lt;List people={people} removePerson={removePerson} /&gt;
+    &lt;/section&gt;
+  );
+};
 
-</li></ul>
+// Middle component
+const List = ({ people, removePerson }) =&gt; {
+  return (
+    &lt;&gt;
+      {people.map((person) =&gt; {
+        {/* Pass props to the SinglePerson elements */}
+        return (
+          &lt;SinglePerson
+            key={person.id}
+            {...person}
+            removePerson={removePerson}
+          /&gt;
+        );
+      })}
+    &lt;/&gt;
+  );
+};
+
+// Inner component
+const SinglePerson = ({ id, name, removePerson }) =&gt; {
+  return (
+    &lt;div className='item'&gt;
+      &lt;h4&gt;{name}&lt;/h4&gt;
+      &lt;button onClick={() =&gt; removePerson(id)}&gt;remove&lt;/button&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default PropDrilling;
+</pre>
+
+<p>
+In these cases we can use the <a href="Context API.html">Context API</a>
+</p>
 </div>
   
 

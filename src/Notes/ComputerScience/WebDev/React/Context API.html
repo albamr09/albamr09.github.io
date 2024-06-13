@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Context API</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,27 +31,80 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="Context API"><h1 id="Context API" class="header"><a href="#Context API">Context API</a></h1></div>
 
 <hr>
 
+<p>
+<code>Context API</code> and <code>useContext</code> allows us to resolve the issue of the <a href="Prop Drilling.html">prop drilling</a>. The context has two components:
+</p>
+
 <ul>
 <li>
-<a href="Math/index.html">Math</a>
+The provider: works as a distributer
 
 </li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
-
-</li><li>
-<a href="DataScience/index.html">Data Science</a>
-
-</li><li>
-<a href="Other/index.html">Other</a>
+The consumer
 
 </li></ul>
+<p>
+We use them as follows:
+</p>
+
+<pre javascript="">import React, { useState, useContext } from 'react';
+import { data } from '../../../data';
+
+// Create context object
+const PersonContext = React.createContext();
+
+const ContextAPI = () =&gt; {
+  // State saved in the context
+  const [people, setPeople] = useState(data);
+  // Event handler saved in the context
+  const removePerson = (id) =&gt; {
+    setPeople((people) =&gt; {
+      return people.filter((person) =&gt; person.id !== id);
+    });
+  };
+  
+  return (
+    {/*Wrap the components in the context provider, so all the nested components
+      have access to the variables defined in the context object*/}
+    &lt;PersonContext.Provider value={{ removePerson, people }}&gt;
+      &lt;h3&gt;Context API / useContext&lt;/h3&gt;
+      &lt;List /&gt;
+    &lt;/PersonContext.Provider&gt;
+  );
+};
+
+const List = () =&gt; {
+  // Obtain data from the context with the useContext hook
+  const mainData = useContext(PersonContext);
+  return (
+    &lt;&gt;
+      {mainData.people.map((person) =&gt; {
+        return &lt;SinglePerson key={person.id} {...person} /&gt;;
+      })}
+    &lt;/&gt;
+  );
+};
+
+const SinglePerson = ({ id, name }) =&gt; {
+  // Obtain data from the context with the useContext hook
+  const { removePerson } = useContext(PersonContext);
+  return (
+    &lt;div className='item'&gt;
+      &lt;h4&gt;{name}&lt;/h4&gt;
+      &lt;button onClick={() =&gt; removePerson(id)}&gt;remove&lt;/button&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default ContextAPI;
+</pre>
 </div>
   
 

@@ -1,0 +1,143 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>PropTypes</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="PropTypes"><h1 id="PropTypes" class="header"><a href="#PropTypes">PropTypes</a></h1></div>
+
+<hr>
+
+<p>
+<code>PropTypes</code> allows us to validate our <code>props</code>.
+</p>
+
+<pre javascript="">import React from 'react'
+import Product from './Product'
+import { useFetch } from './useFetch'
+
+const url = 'https://course-api.com/react-prop-types-example'
+
+const Index = () =&gt; {
+  const { products } = useFetch(url)
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;products&lt;/h2&gt;
+      &lt;section className='products'&gt;
+        {products.map((product) =&gt; {
+          // Pass the props 
+          return &lt;Product key={product.id} {...product} /&gt;
+        })}
+      &lt;/section&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default Index
+</pre>
+
+<p>
+In this <code>Product</code> component we show how to use <code>propTypes</code> to parametrize the <code>props</code>, and how to use conditional render to avoid getting an error when some of the <code>props</code> are missing.
+</p>
+
+<pre javascript="">import React from 'react';
+import PropTypes from 'prop-types';
+import defaultImage from './assets/default-image.jpeg';
+
+const Product = ({ image, name, price }) =&gt; {
+  const url = image &amp;&amp; image.url;
+  return (
+    &lt;article className='product'&gt;
+      {/*Use conditional rendering in case the data does not exist */}
+      &lt;img src={url || defaultImage} alt={name || 'default name'} /&gt;
+      &lt;h4&gt;{name}&lt;/h4&gt;
+      &lt;p&gt;${price || 3.99}&lt;/p&gt;
+    &lt;/article&gt;
+  );
+};
+
+// Define the propTypes for the object
+Product.propTypes = {
+  image: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+};
+
+export default Product;
+</pre>
+
+<div id="PropTypes-Default Props"><h2 id="Default Props" class="header"><a href="#PropTypes-Default Props">Default Props</a></h2></div>
+
+<p>
+In this other <code>Product</code> component, we show how to use <code>defaultProps</code> instead of conditional rendering.
+</p>
+
+<pre javascript="">import React from 'react';
+import PropTypes from 'prop-types';
+import defaultImage from './assets/default-image.jpeg';
+
+const Product = ({ image, name, price }) =&gt; {
+  return (
+    &lt;article className='product'&gt;
+      {/*Use conditional rendering in case the data does not exist */}
+      &lt;img src={image.url} alt={name} /&gt;
+      &lt;h4&gt;{name}&lt;/h4&gt;
+      &lt;p&gt;${price}&lt;/p&gt;
+    &lt;/article&gt;
+  );
+};
+
+// Define the propTypes for the object
+Product.propTypes = {
+  image: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+};
+
+Product.defaultProps = {
+  name: 'default name',
+  price: 3.99,
+  image: defaultImage,
+};
+
+export default Product;
+</pre>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

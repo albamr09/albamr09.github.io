@@ -1,0 +1,193 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Asynchronous Patterns</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Asynchronous Patterns"><h1 id="Asynchronous Patterns" class="header"><a href="#Asynchronous Patterns">Asynchronous Patterns</a></h1></div>
+
+<hr>
+
+<div id="Asynchronous Patterns-Blocking Code"><h2 id="Blocking Code" class="header"><a href="#Asynchronous Patterns-Blocking Code">Blocking Code</a></h2></div>
+
+<p>
+Imagine we have the following piece of code:
+</p>
+
+<pre javascript="">
+const http = require('http')
+
+const server = http.createServer((req, res) =&gt; {
+  if (req.url === '/') {
+    res.end('Home Page')
+  }
+  if (req.url === '/about') {
+    // blocking code
+    for (let i = 0; i &lt; 1000; i++) {
+      for (let j = 0; j &lt; 1000; j++) {
+        console.log(`${i} ${j}`)
+      }
+    }
+    res.end('About Page')
+  }
+  res.end('Error Page')
+})
+
+server.listen(5000, () =&gt; {
+  console.log('Server listening on port : 5000....')
+})
+
+</pre>
+
+<p>
+Because inside the second conditional we have a nested for loop which is computationally expensive, when a user accesses the <code>about</code> page, the server is blocked, and so it prevents other users from loading any other page. That is essentially because <code>JavaScript</code> is single threaded, so by running the nested conditional, the thread is occupied for a period of time, during which the server will not be able to answer to any other request until it is freed.
+</p>
+
+<div id="Asynchronous Patterns-Promises"><h2 id="Promises" class="header"><a href="#Asynchronous Patterns-Promises">Promises</a></h2></div>
+
+<p>
+A <code>Promise</code> is an object that represents the eventual completion (or failure) of an asynchronous operation and its resulting value. So, we can wrap the asynchronous <code>readFile</code> function with a <code>Promise</code>:
+</p>
+
+<pre javascript="">
+const { readFile, writeFile } = require('fs')
+
+const getText = (path) =&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    readFile(path, 'utf8', (err, data) =&gt; {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(data)
+      }
+    })
+  })
+}
+
+</pre>
+
+<p>
+The result of a <code>Promise</code> can be accessed as follows:
+</p>
+
+<pre javascript="">
+getText('./content/first.txt')
+  .then((result) =&gt; console.log(result))
+  .catch((err) =&gt; console.log(err))
+
+</pre>
+
+<p>
+And then, we can define an asynchronous function <code>start</code> that will wait for the execution of <code>getText</code>:
+</p>
+
+<pre javascript="">
+const start = async () =&gt; {
+  try {
+    const first = await getText('./content/first.txt')
+    const second = await getText('./content/second.txt')
+    console.log(first, second)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+</pre>
+
+<p>
+Where you can see that we surround the call with a <code>try-catch</code> statement, which allows us to have more control over the execution flow
+</p>
+
+<div id="Asynchronous Patterns-Node's Native Promises"><h2 id="Node's Native Promises" class="header"><a href="#Asynchronous Patterns-Node's Native Promises">Node's Native Promises</a></h2></div>
+
+<p>
+We can use the <code>utils</code> module in order to wrap functions with the <code>Promise</code> object:
+</p>
+
+<pre javascript="">
+const { readFile, writeFile } = require('fs')
+const util = require('util')
+const readFilePromise = util.promisify(readFile)
+const writeFilePromise = util.promisify(writeFile)
+
+const start = async () =&gt; {
+  try {
+    const first = await readFilePromise('./content/first.txt', 'utf8')
+    const second = await readFilePromise('./content/second.txt', 'utf8')
+		await writeFilePromise(
+      './content/result-mind-grenade.txt',
+      `THIS IS AWESOME : ${first} ${second}`,
+      { flag: 'a' }
+    )
+    console.log(first, second)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+</pre>
+
+<p>
+But, we can also avoid importing the <code>utils</code> module, by adding <code>.promises</code> when importing the asynchronous functions:
+</p>
+
+<pre javascript="">
+const { readFile, writeFile } = require('fs').promises
+
+const start = async () =&gt; {
+  try {
+    const first = await readFile('./content/first.txt', 'utf8')
+    const second = await readFile('./content/second.txt', 'utf8')
+    await writeFile(
+      './content/result-mind-grenade.txt',
+      `THIS IS AWESOME : ${first} ${second}`,
+      { flag: 'a' }
+    )
+    console.log(first, second)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+start()
+
+</pre>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

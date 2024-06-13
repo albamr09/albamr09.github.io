@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Spring Framework</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,27 +31,113 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="Spring Framework"><h1 id="Spring Framework" class="header"><a href="#Spring Framework">Spring Framework</a></h1></div>
 
 <hr>
 
+<p>
+Components:
+</p>
+
 <ul>
 <li>
-<a href="Math/index.html">Math</a>
+<span id="Spring Framework-Core Container"></span><strong id="Core Container">Core Container</strong> 
+
+<ul>
+<li>
+Beans (define entities)
 
 </li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
+Core (management of beans)
 
 </li><li>
-<a href="DataScience/index.html">Data Science</a>
+SpEL: Spring Expression Language (annotations)
 
 </li><li>
-<a href="Other/index.html">Other</a>
+Context (store entities)
 
 </li></ul>
+</li><li>
+<span id="Spring Framework-AOP"></span><strong id="AOP">AOP</strong> (Aspect Oriented Programming): allows you to create application wide services like messaging, logging, security, etc. and add this functionality to your objects in a declarative fashion.
+
+</li><li>
+<span id="Spring Framework-Data Access Layer"></span><strong id="Data Access Layer">Data Access Layer</strong>: establishes the connection with the database 
+
+<ul>
+<li>
+JDBC Helper classes
+
+</li><li>
+ORM: provides hook to Hibernate
+
+</li><li>
+Transactions
+
+</li><li>
+OXM
+
+</li><li>
+JMS (Java Message Service) for async messages
+
+</li></ul>
+</li><li>
+<span id="Spring Framework-Web Layer"></span><strong id="Web Layer">Web Layer</strong>: all web related classes, holds all of the Spring MVC framework
+
+<ul>
+<li>
+Servlet
+
+</li><li>
+WebSocket
+
+</li><li>
+Web
+
+</li><li>
+Portlet
+
+</li></ul>
+</li><li>
+<span id="Spring Framework-Test Layer"></span><strong id="Test Layer">Test Layer</strong>: supports TDD:
+
+<ul>
+<li>
+Unit
+
+</li><li>
+Integration
+
+</li><li>
+Mock
+
+</li></ul>
+</li></ul>
+<div id="Spring Framework-Spring Projects"><h2 id="Spring Projects" class="header"><a href="#Spring Framework-Spring Projects">Spring Projects</a></h2></div>
+
+<p>
+Spring modules built on top of the core Spring Framework:
+</p>
+
+<ul>
+<li>
+Spring Boot
+
+</li><li>
+Spring Cloud
+
+</li><li>
+Spring Batch
+
+</li><li>
+etc
+
+</li></ul>
+<p>
+<a href="https://www.spring.io/projects">Spring Projects</a>
+</p>
 </div>
   
 

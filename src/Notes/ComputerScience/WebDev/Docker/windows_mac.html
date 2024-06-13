@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Docker on Windows and Mac</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,25 +31,49 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="Docker on Windows and Mac"><h1 id="Docker on Windows and Mac" class="header"><a href="#Docker on Windows and Mac">Docker on Windows and Mac</a></h1></div>
 
-<hr>
+<p>
+On these systems we have two options:
+</p>
 
 <ul>
 <li>
-<a href="Math/index.html">Math</a>
+<code>Docker Toolbox</code> (usually for older PC's): installs <code>Docker</code> along with <code>VirtualBox</code> to create a <code>Linux</code> system on which <code>Docker</code> is run.
 
 </li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
+<code>Hypervirtualization</code>: installs <code>Docker</code> and uses <code>Hyper-V</code> (comes with Windows Server or Professional edition) or <code>Hyperkit</code> on Mac. This allows <code>Docker</code> to create a <code>Linux</code> machine under the hood and run <code>Docker</code> in it.
+
+</li></ul>
+<div id="Docker on Windows and Mac-Windows Containers"><h2 id="Windows Containers" class="header"><a href="#Docker on Windows and Mac-Windows Containers">Windows Containers</a></h2></div>
+
+<p>
+The options just discussed will only work for <code>Linux</code> applications and containers. In 2016 Microsoft announced support for Windows containers, there are two types:
+</p>
+
+<ul>
+<li>
+<code>Windows Server Container</code>: the containers share the kernel, as regular <code>Linux</code> containers do.
 
 </li><li>
-<a href="DataScience/index.html">Data Science</a>
+<code>Hyper-V isolation</code>: each container is run within a highly optimized virtual machine, so complete kernel isolation between the containers and the underline host is guaranteed.
+
+</li></ul>
+<div id="Docker on Windows and Mac-Windows Containers-Base Images"><h3 id="Base Images" class="header"><a href="#Docker on Windows and Mac-Windows Containers-Base Images">Base Images</a></h3></div>
+
+<p>
+Where in <code>Linux</code> we had the <code>debian</code>, <code>ubuntu</code> or <code>alpine</code> base images in windows we have two options:
+</p>
+
+<ul>
+<li>
+<code>Windows Server Core</code>
 
 </li><li>
-<a href="Other/index.html">Other</a>
+<code>Nano Server</code>: this is a headless deploy of the <code>Windows Server</code>, that is, the lightweight option.
 
 </li></ul>
 </div>

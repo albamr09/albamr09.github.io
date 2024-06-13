@@ -1,0 +1,211 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Boolean Logic</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Boolean Logic"><h1 id="Boolean Logic" class="header"><a href="#Boolean Logic">Boolean Logic</a></h1></div>
+
+<hr>
+
+<div id="Boolean Logic-Boolean Algebra"><h2 id="Boolean Algebra" class="header"><a href="#Boolean Logic-Boolean Algebra">Boolean Algebra</a></h2></div>
+
+<p>
+Boolean algebra manipulates two-state binary values. On Figure 1.1 we present three commonly used Boolean functions, also known as Boolean operators. These functions are named <span id="Boolean Logic-Boolean Algebra-And"></span><strong id="And">And</strong>, <span id="Boolean Logic-Boolean Algebra-Or"></span><strong id="Or">Or</strong>, and <span id="Boolean Logic-Boolean Algebra-Not"></span><strong id="Not">Not</strong>.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/truth_table_and_or_not.png" alt="Truth Table of gates And, Or and Not" style="height:150px">
+</p>
+
+<p>
+Figure 1.2 begs the question: What makes And, Or, and Not more interesting? A deeper answer is that various subsets of logical operators can be used for expressing any Boolean function, and {And, Or, Not} is one such subset. Also,  any one of these three basic operators can be expressed using <span id="Boolean Logic-Boolean Algebra-Nand"></span><strong id="Nand">Nand</strong> gates only.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/all_binary_boolan_functions.png" alt="Binary Boolean Functions" style="height:550px">
+</p>
+
+<p>
+Every Boolean function can be defined using two alternative representations: <span id="Boolean Logic-Boolean Algebra-truth tables"></span><strong id="truth tables">truth tables</strong> or <span id="Boolean Logic-Boolean Algebra-boolean expressions"></span><strong id="boolean expressions">boolean expressions</strong>. Given a Boolean function of n variables represented by a Boolean expression, we can always construct from it the function’s truth table and vice-versa.
+</p>
+
+<p>
+Note that every Boolean function can be represented by many different yet equivalent Boolean expressions. So the ability to <span id="Boolean Logic-Boolean Algebra-simplify a Boolean expression is the first step toward hardware optimization"></span><strong id="simplify a Boolean expression is the first step toward hardware optimization">simplify a Boolean expression is the first step toward hardware optimization</strong>.
+</p>
+
+<div id="Boolean Logic-Logic Gates"><h2 id="Logic Gates" class="header"><a href="#Boolean Logic-Logic Gates">Logic Gates</a></h2></div>
+
+<p>
+A <span id="Boolean Logic-Logic Gates-gate"></span><strong id="gate">gate</strong> is a physical device that implements a simple Boolean function. Gates can be realized with any alternative technology permitting switching and conducting capabilities. Many hardware implementations of Boolean functions were created, including magnetic, optical, biological, hydraulic, pneumatic, quantum-based, and even domino-based mechanisms.
+</p>
+
+<p>
+Today, gates are typically implemented as transistors etched in silicon, packaged as <span id="Boolean Logic-Logic Gates-chips"></span><strong id="chips">chips</strong>.
+</p>
+
+<p>
+This means computer scientists don't have to worry about physical artifacts and can be content with the abstract notions of Boolean algebra and gate logic, trusting blissfully that someone else will realize them in hardware.
+</p>
+
+<div id="Boolean Logic-Logic Gates-Primitive and Composite Gates"><h3 id="Primitive and Composite Gates" class="header"><a href="#Boolean Logic-Logic Gates-Primitive and Composite Gates">Primitive and Composite Gates</a></h3></div>
+
+<p>
+Since all logic gates have the same input and output data types (0's and 1's), <span id="Boolean Logic-Logic Gates-Primitive and Composite Gates-they can be combined, creating composite gates of arbitrary complexity"></span><strong id="they can be combined, creating composite gates of arbitrary complexity">they can be combined, creating composite gates of arbitrary complexity</strong>. The right side of figure 1.5 gives the gate's internal architecture, or implementation, whereas the left side shows its interface.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/composible_gate.png" alt="Composite Gate" style="height:200px">
+</p>
+
+<p>
+Note that the interface of any given gate is unique, however it can be realized in many different ways. From an efficiency standpoint, the general rule is to try to use as few gates as possible.
+</p>
+
+<p>
+To sum up, the art of logic design can be described as follows: Given a gate abstraction (also referred to as specification, or interface), find an efficient way to implement it using other gates that were already implemented.
+</p>
+
+<div id="Boolean Logic-Hardware Construction"><h2 id="Hardware Construction" class="header"><a href="#Boolean Logic-Hardware Construction">Hardware Construction</a></h2></div>
+
+<p>
+Today, hardware designers design the chip architecture using a formalism called <span id="Boolean Logic-Hardware Construction-Hardware Description Language"></span><strong id="Hardware Description Language">Hardware Description Language</strong>, or HDL by writing an HDL program. While the tests are carried out using computer simulation.
+</p>
+
+<p>
+The  hardware designer will typically be interested in a variety of parameters such as speed of
+computation, energy consumption and the overall cost implied by the implementation. All these parameters can be simulated.
+</p>
+
+<p>
+After all tests and optimizations have been performed the final version of the HDL program can become the blueprint for the physical chip.
+</p>
+
+<p>
+Figure 1.7, shows brief introduction to HDL, using an Xor gate example.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/hdl_xor_example.png" alt="XOR gated defined with HDL" style="height:500px">
+</p>
+
+<div id="Boolean Logic-Specification"><h2 id="Specification" class="header"><a href="#Boolean Logic-Specification">Specification</a></h2></div>
+
+<p>
+<span id="Boolean Logic-Specification-Not"></span><strong id="Not">Not</strong>: this gate outputs the opposite value of its input's value.
+</p>
+
+<p>
+<span id="Boolean Logic-Specification-And"></span><strong id="And">And</strong>: Returns 1 when both its inputs are 1, and 0 otherwise
+</p>
+
+<p>
+<span id="Boolean Logic-Specification-Or"></span><strong id="Or">Or</strong>: Returns 1 when at least one of its inputs is 1, and 0 otherwise
+</p>
+
+<p>
+<span id="Boolean Logic-Specification-Xor"></span><strong id="Xor">Xor</strong>: Also known as exclusive or, this gate returns 1 when exactly one of its inputs is 1, and 0 otherwise
+</p>
+
+<p>
+<span id="Boolean Logic-Specification-Nand"></span><strong id="Nand">Nand</strong>: realizes the following Boolean function:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/nand_truth_table.png" alt="Nand Truth Table" style="height:100px">
+</p>
+
+<p>
+<span id="Boolean Logic-Specification-Multiplexer"></span><strong id="Multiplexer">Multiplexer</strong>: A multiplexer is a three-input gate (see figure 1.9). The multiplexer uses <em>sel</em> to select and output the value of either \(a\) or \(b\). 
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/multiplexer.png" alt="Multiplexer" style="height:400px">
+</p>
+
+<p>
+<span id="Boolean Logic-Specification-Demultiplexer"></span><strong id="Demultiplexer">Demultiplexer</strong>: takes a single input value and routes it to one of two possible outputs, according to a selector bit (see Figure 1.10).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/demultiplexor.png" alt="Demultiplexer" style="height:300px">
+</p>
+
+<div id="Boolean Logic-Specification-Multi-Bit Versions of Basic Gates"><h3 id="Multi-Bit Versions of Basic Gates" class="header"><a href="#Boolean Logic-Specification-Multi-Bit Versions of Basic Gates">Multi-Bit Versions of Basic Gates</a></h3></div>
+
+<p>
+Computer hardware is often designed to process multi-bit values—for example 16-bit inputs.
+</p>
+
+<p>
+<span id="Boolean Logic-Specification-Multi-Bit Versions of Basic Gates-Multi-bit Not"></span><strong id="Multi-bit Not">Multi-bit Not</strong>: An n-bit Not gate applies the Boolean operation Not to every one of the bits in its n-bit input.
+</p>
+
+<p>
+<span id="Boolean Logic-Specification-Multi-Bit Versions of Basic Gates-Multi-bit And"></span><strong id="Multi-bit And">Multi-bit And</strong>: An n-bit And gate applies the Boolean operation And to every respective pair in its two n-bit inputs
+</p>
+
+<p>
+<span id="Boolean Logic-Specification-Multi-Bit Versions of Basic Gates-Multi-bit Or"></span><strong id="Multi-bit Or">Multi-bit Or</strong>: An n-bit Or gate applies the Boolean operation Or to every respective pair in its two n-bit inputs
+</p>
+
+<p>
+<span id="Boolean Logic-Specification-Multi-Bit Versions of Basic Gates-Multi-bit multiplexer"></span><strong id="Multi-bit multiplexer">Multi-bit multiplexer</strong>: An n-bit multiplexer operates exactly the same as a basic multiplexer, except that its inputs and output are n-bits wide
+</p>
+
+<div id="Boolean Logic-Specification-Multi-Way Versions of Basic Gates"><h3 id="Multi-Way Versions of Basic Gates" class="header"><a href="#Boolean Logic-Specification-Multi-Way Versions of Basic Gates">Multi-Way Versions of Basic Gates</a></h3></div>
+
+<p>
+These are logic gates that can operate on more than two inputs, for example:
+</p>
+
+<p>
+<span id="Boolean Logic-Specification-Multi-Way Versions of Basic Gates-Multi-way Or"></span><strong id="Multi-way Or">Multi-way Or</strong>: An m-way Or gate outputs 1 when at least one of its m input bits is 1, and 0 otherwise.
+</p>
+
+<p>
+<span id="Boolean Logic-Specification-Multi-Way Versions of Basic Gates-Multi-way/Multi-bit multiplexer"></span><strong id="Multi-way/Multi-bit multiplexer">Multi-way/Multi-bit multiplexer</strong>: An \(m\)-way \(n\)-bit multiplexer selects one of its \(m\) \(n\)-bit inputs, and outputs it to its \(n\)-bit output. The selection is specified by a set of \(k\) selection bits, where \(k = \log_2 m\). For example, a \(4\)-way multiplexer is shown on the following image:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/4_way_multiplexer.png" alt="4-way Multiplexer" style="height:200px">
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

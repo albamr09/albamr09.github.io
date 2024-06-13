@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>CMD vs ENTRYPOINT</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,27 +31,108 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="`CMD` vs `ENTRYPOINT`"><h1 id="`CMD` vs `ENTRYPOINT`" class="header"><a href="#`CMD` vs `ENTRYPOINT`"><code>CMD</code> vs <code>ENTRYPOINT</code></a></h1></div>
 
-<hr>
+<div id="`CMD` vs `ENTRYPOINT`-`CMD`"><h2 id="`CMD`" class="header"><a href="#`CMD` vs `ENTRYPOINT`-`CMD`"><code>CMD</code></a></h2></div>
 
-<ul>
-<li>
-<a href="Math/index.html">Math</a>
+<p>
+A command allows us to append to the command executed when the container start of the base image. For example, <code>Ubuntu</code>'s <code>CMD</code> is <code>bash</code>, so if we append <code>sleep 5</code> our container will sleep for 5 seconds when started and then exit.
+</p>
 
-</li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
+<pre dockerfile="">
+FROM Ubuntu
 
-</li><li>
-<a href="DataScience/index.html">Data Science</a>
+CMD sleep 5
 
-</li><li>
-<a href="Other/index.html">Other</a>
+</pre>
 
-</li></ul>
+<p>
+The command can also be specified as <code>CMD ["sleep", "5"].</code>
+</p>
+
+<div id="`CMD` vs `ENTRYPOINT`-`ENTRYPOINT`"><h2 id="`ENTRYPOINT`" class="header"><a href="#`CMD` vs `ENTRYPOINT`-`ENTRYPOINT`"><code>ENTRYPOINT</code></a></h2></div>
+
+<p>
+This other instruction also adds to the base image starting command, but this lets us add arguments from the command line, for example, if we define the following <code>Dockerfile</code>:
+</p>
+
+<pre dockerfile="">
+FROM Ubuntu
+
+ENTRYPOINT ["sleep"]
+
+</pre>
+
+<p>
+We build the image
+</p>
+
+<pre console="">
+$ docker build Dockerfile -t ubuntu-sleeper
+
+</pre>
+
+<p>
+And then we running with <code>10</code> as and argument:
+</p>
+
+<pre console="">
+$ docker run ubuntu-sleeper 10
+
+</pre>
+
+<p>
+Our container will sleep for 10 seconds and then exit.
+</p>
+
+<p>
+To define a default value for sleep, when no argument is passed from the command line, we use both <code>ENTRYPOINT</code> and <code>CMD</code>
+</p>
+
+<pre dockerfile="">
+FROM Ubuntu
+
+ENTRYPOINT ["sleep"]
+
+CMD ["5"]
+
+</pre>
+
+<p>
+To override the <code>ENTRYPOINT</code> command specified in the <code>Dockerfile</code> we use the flag <code>--entrypoint</code>:
+</p>
+
+<pre console="">
+$ docker run --entrypoint sleep2.0 ubuntu-sleeper 10
+
+</pre>
+
+<div id="`CMD` vs `ENTRYPOINT`-Difference"><h2 id="Difference" class="header"><a href="#`CMD` vs `ENTRYPOINT`-Difference">Difference</a></h2></div>
+
+<p>
+When using <code>CMD</code> when running:
+</p>
+
+<pre console="">
+$ docker run ubuntu-sleeper sleep 10
+
+</pre>
+
+<p>
+The argument <code>sleep 10</code> replaces entirely the starting command. However with <code>ENTRYPOINT</code> if we run:
+</p>
+
+<pre console="">
+$ docker run ubuntu-sleeper 10
+
+</pre>
+
+<p>
+The argument <code>10</code> is passed and appended to the <code>ENTRYPOINT</code> command.
+</p>
 </div>
   
 

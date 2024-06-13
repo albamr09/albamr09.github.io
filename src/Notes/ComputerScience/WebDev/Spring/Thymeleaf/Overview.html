@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Overview</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,27 +31,98 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="../index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="Overview"><h1 id="Overview" class="header"><a href="#Overview">Overview</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="Math/index.html">Math</a>
+<p>
+Thymeleaf is a Java templating engine. 
+</p>
 
-</li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
+<p>
+A thymeleaf template can be an HTML page with some thymeleaf expressions and include dynamic content from thymeleaf expressions.
+</p>
 
-</li><li>
-<a href="DataScience/index.html">Data Science</a>
+<p>
+In a web app, thymeleaf is processed on the server.
+</p>
 
-</li><li>
-<a href="Other/index.html">Other</a>
+<hr>
 
-</li></ul>
+<p>
+To use thymeleaf you have to include it in your dependencies:
+</p>
+
+<pre xml="">...
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+...
+</pre>
+
+<div id="Overview-Placement"><h2 id="Placement" class="header"><a href="#Overview-Placement">Placement</a></h2></div>
+
+<p>
+In Spring Boot, your Thymeleaf template files go in <code>src/main/resources/templates</code>. And for web apps, Thymeleaf templates have an <code>.html</code> extension.
+</p>
+
+<div id="Overview-Example"><h2 id="Example" class="header"><a href="#Overview-Example">Example</a></h2></div>
+
+<p>
+Given the following controller:
+</p>
+
+<pre java="">@Controller
+public class DemoController {
+
+	// create a mapping for "/hello"
+	@GetMapping("/hello")
+	public String sayHello(Model theModel) {
+		
+		theModel.addAttribute("theDate", new java.util.Date());
+		
+		return "helloworld";
+	}
+}
+</pre>
+
+<p>
+We create the corresponding template <code>helloworld.html</code>:
+</p>
+
+<pre html="">&lt;!DOCTYPE HTML&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+	&lt;title&gt;Thymeleaf Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;!-- We obtain the date from the model --&gt;
+&lt;body&gt;
+	&lt;p th:text="'Time on the server is ' + ${theDate}" /&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>
+To add styles, we create a <code>css</code> files in <code>src/main/resources/static/css</code>, and then we reference the styles:
+</p>
+
+<pre html="">&lt;!DOCTYPE HTML&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+	&lt;title&gt;Thymeleaf Demo&lt;/title&gt;
+	&lt;!-- reference CSS file --&gt;
+	&lt;link rel="stylesheet"
+		  th:href="@{/css/demo.css}" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;p th:text="'Time on the server is ' + ${theDate}" class="funny" /&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
 </div>
   
 

@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Docker Registry</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,27 +31,103 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="Docker Registry"><h1 id="Docker Registry" class="header"><a href="#Docker Registry">Docker Registry</a></h1></div>
 
 <hr>
 
-<ul>
+<div id="Docker Registry-Public Registry"><h2 id="Public Registry" class="header"><a href="#Docker Registry-Public Registry">Public Registry</a></h2></div>
+
+<p>
+In the following example you are pulling the <code>nginx</code> image, which in reality is stored as <code>nginx/nginx</code> where the first <code>nginx</code> corresponds to the user name, and the second to the image name.
+</p>
+
+<pre yaml="">
+image: nginx
+
+</pre>
+
+<p>
+This is a public image so it is stored in a public registry, usually in <code>docker.io</code> which is the default registry. So a more verbose configuration file would be:
+</p>
+
+
+<pre yaml="">
+image: docker.io/nginx/nginx
+
+</pre>
+
+<div id="Docker Registry-Private Registry"><h2 id="Private Registry" class="header"><a href="#Docker Registry-Private Registry">Private Registry</a></h2></div>
+
+<p>
+When you have applications that should no be made available to the public private registries are used.
+</p>
+
+<p>
+To pull or use an image from a private registry:
+</p>
+
+<ol>
 <li>
-<a href="Math/index.html">Math</a>
+Register into the private registry:
+<pre console="">
+$ docker login private-registry.io
+
+</pre>
 
 </li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
+Run the image indicating the registry:
+<pre console="">
+$ docker run private-registry.io/apps/internal-app
 
-</li><li>
-<a href="DataScience/index.html">Data Science</a>
+</pre>
 
-</li><li>
-<a href="Other/index.html">Other</a>
+</li></ol>
+<div id="Docker Registry-Private Registry-Deploy Private Registry"><h3 id="Deploy Private Registry" class="header"><a href="#Docker Registry-Private Registry-Deploy Private Registry">Deploy Private Registry</a></h3></div>
 
-</li></ul>
+<p>
+A private registry is in itself a docker image, so first you have to have your registry image running:
+</p>
+
+
+<pre console="">
+$ docker run -p 5000:5000 --name registry registry:2
+
+</pre>
+
+<p>
+So now you have your registry running on port 5000. The next step is to assign a tag to your image as follows:
+</p>
+
+<pre console="">
+$ docker image tag my-image localhost:5000/my-image
+
+</pre>
+
+<p>
+Where <code>my-image</code> is the name of the image and <code>localhost:5000/my-image</code> is the tag assigned.
+</p>
+
+<p>
+Finally you push your image to your registry
+</p>
+
+<pre console="">
+$ docker push localhost:5000/my-image
+
+</pre>
+
+<p>
+Now you can pull your image:
+</p>
+
+<pre console="">
+$ docker pull localhost:5000/my-image
+$ docker pull 192.168.56.100:5000/my-image
+
+</pre>
 </div>
   
 

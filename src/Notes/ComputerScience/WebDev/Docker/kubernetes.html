@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Kubernetes</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,27 +31,77 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="Kubernetes"><h1 id="Kubernetes" class="header"><a href="#Kubernetes">Kubernetes</a></h1></div>
 
-<hr>
+<p>
+Some of its functionalities are:
+</p>
 
 <ul>
 <li>
-<a href="Math/index.html">Math</a>
+Running several instances of a service.
 
 </li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
+Scaling up or down the number of instances.
 
 </li><li>
-<a href="DataScience/index.html">Data Science</a>
+Rolling updates.
 
 </li><li>
-<a href="Other/index.html">Other</a>
+Rolling back from updates.
+
+</li><li>
+Supports many different network and storage renderers.
+
+</li><li>
+Provides autoscaling.
+
+</li><li>
+Helps you test new features of your application by only upgrading a percentage of the instances, which allows for doing AB testing.
 
 </li></ul>
+<div id="Kubernetes-Architecture"><h2 id="Architecture" class="header"><a href="#Kubernetes-Architecture">Architecture</a></h2></div>
+
+<p>
+A <code>kubernetes</code> cluster consists of several nodes, the worker nodes are where containers will be launched, so even if one node fails the application is still available.
+</p>
+
+<p>
+<code>Kubernetes</code> clusters are managed by the master, which is a node that watches over worker nodes and is responsible of the orchestration of containers in the worker nodes.
+</p>
+
+<div id="Kubernetes-Components"><h2 id="Components" class="header"><a href="#Kubernetes-Components">Components</a></h2></div>
+
+<p>
+When you install <code>Kubernetes</code> in your system you are actually installing:
+</p>
+
+<ul>
+<li>
+<code>API Server</code>: acts as the front-end for <code>Kubernetes</code>, so all of the programs talk to this server to interact with the <code>kubernetes</code> server.
+
+</li><li>
+<code>etcd</code>: it is the distributed reliable key value store to store all data to manage the cluster.
+
+</li><li>
+<code>Scheduler</code>: responsible for distributing work.
+
+</li><li>
+<code>Controller</code>: responsible for noticing/responding to nodes/containers going down.
+
+</li><li>
+<code>Container Runtime</code>: underline software used to run containers (e.g. <code>Docker</code>).
+
+</li><li>
+<code>kubelet</code>: is the agent that runs in each node in the cluster, and is responsible of making sure the containers are running on the nodes as expected.
+
+</li></ul>
+<p>
+One of the command line utilities used by <code>Kubernetes</code> is <code>kubectl</code>, that is the <code>Kubernetes CLI</code> and is used to deploy and manage applications on a <code>kubernetes</code> cluster.
+</p>
 </div>
   
 

@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Form Validation</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,25 +31,70 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="../index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="Form Validation"><h2 id="Form Validation" class="header"><a href="#Form Validation">Form Validation</a></h2></div>
+
+<hr>
+
+<p>
+Java has a standard <code>Bean Validation API</code> that defines a metadata model and an <code>API</code> for entity validation.
+</p>
+
+<p>
+Here is a list of bean validation features you can check:
+</p>
+
+<ul>
+<li>
+<code>required</code>
+
+</li><li>
+<code>validate length</code>
+
+</li><li>
+<code>validate numbers</code>
+
+</li><li>
+<code>validate with regular expressions</code>
+
+</li><li>
+<code>custom validation</code>
+
+</li></ul>
+<p>
+Some <code>Annotations</code> to perform the validation are the following:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/validation_annotations.png" alt="Validation Annotations">
+</p>
+
+
+<div id="Set up"><h2 id="Set up" class="header"><a href="#Set up">Set up</a></h2></div>
+
+<p>
+Add <code>Hibernate's</code> library (<a href="https://sourceforge.net/projects/hibernate/files/hibernate-validator/7.0.4.Final/hibernate-validator-7.0.4.Final-dist.zip/download">Hibernate Validator</a>)for <code>Bean Validation</code> which is fully compliant with <code>Java's</code> <code>Bean Validation API</code>.
+</p>
 
 <hr>
 
 <ul>
 <li>
-<a href="Math/index.html">Math</a>
+<a href="Required Validation.html">Required Validation</a>
 
 </li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
+<a href="Number Validation.html">Number Range Validation</a>
 
 </li><li>
-<a href="DataScience/index.html">Data Science</a>
+<a href="Validation with Regular Expressions.html">Validation with Regular Expressions</a>
 
 </li><li>
-<a href="Other/index.html">Other</a>
+<a href="Handle String in Integer Field.html">Handle String in Integer Field</a>
+
+</li><li>
+<a href="Custom Validation.html">Custom Validation</a>
 
 </li></ul>
 </div>

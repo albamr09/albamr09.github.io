@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Route Params</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,27 +31,52 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="Route Params"><h1 id="Route Params" class="header"><a href="#Route Params">Route Params</a></h1></div>
 
 <hr>
 
-<ul>
-<li>
-<a href="Math/index.html">Math</a>
+<p>
+If, for example, we have a list of products, and we want to get a certain product by its id, we use <code>route params</code>. They can have any name, and are specified by <code>:param</code>. This is then stored in the <code>request</code> object.
+</p>
 
-</li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
+<pre javascript="">
+app.get('/api/products/:productID', (req, res) =&gt; {
+	
+  // De-structure param
+  const { productID } = req.params
 
-</li><li>
-<a href="DataScience/index.html">Data Science</a>
+  // Filter products by id
+  const singleProduct = products.find(
+    (product) =&gt; product.id === Number(productID)
+  )
+	
+  // If it does not exist 
+  if (!singleProduct) {
+    return res.status(404).send('Product Does Not Exist')
+  }
 
-</li><li>
-<a href="Other/index.html">Other</a>
+  return res.json(singleProduct)
+})
 
-</li></ul>
+</pre>
+
+<p>
+Note that the <code>route params</code> are always strings, in our case we had to convert it to a <code>Number</code>. We can also have more that one <code>route parameter</code> like so:
+</p>
+
+<pre javascript="">
+app.get('/api/products/:productID/reviews/:reviewID', (req, res) =&gt; {
+  res.send('hello world')
+})
+
+</pre>
+
+<p>
+Where we define <code>productID</code> and <code>reviewID</code> as route parameters, and can, therefore, filter by them.
+</p>
 </div>
   
 

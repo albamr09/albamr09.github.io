@@ -1,0 +1,314 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Modules</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Modules"><h1 id="Modules" class="header"><a href="#Modules">Modules</a></h1></div>
+
+<hr>
+
+<p>
+Encapsulated code, as to only share what we want. Node uses CommonJS so every file is treated as a module by default.
+</p>
+
+<p>
+In any <code>.js</code> file we have the global object <code>module</code>:
+</p>
+
+<pre javascript="">
+console.log(module)
+
+</pre>
+
+<pre javascript="">
+Module {
+   id: '.',
+   path: '/home/alba/Desktop/NodeJs',
+   exports: {},
+   filename: '/home/alba/Desktop/NodeJs/02_constants.js',
+   loaded: false,
+   children: [],
+   paths: [
+     '/home/alba/Desktop/NodeJs/node_modules',
+     '/home/alba/Desktop/node_modules',
+     '/home/alba/node_modules',
+     '/home/node_modules',
+     '/node_modules'
+   ]
+ }
+ 
+</pre>
+
+<div id="Modules-Exporting"><h2 id="Exporting" class="header"><a href="#Modules-Exporting">Exporting</a></h2></div>
+
+<p>
+So we can treat the attribute <code>exports</code> as an object and pass it whatever values we would like to show to other app that import our module:
+</p>
+
+<pre javascript="">
+module.exports = { value1: 'value1', value2: 'value2'  }
+
+</pre>
+
+<p>
+Where <code>value1</code> is the key of the attribute and <code>'value1'</code> is its value, e.g.:
+</p>
+
+<pre javascript="">
+const name = 'John'
+const surname = 'Tuckey'
+
+module.exports = { Name: name, Surname: surname }
+
+</pre>
+
+<p>
+Also, if we only export one object it is sufficient to type:
+</p>
+
+<pre javascript="">
+const name = 'John'
+
+module.exports = name 
+
+</pre>
+
+<p>
+Another way to export is to define explicitly the name of the attributes to export:
+</p>
+
+<pre javascript="">
+module.exports.items = ['item1', 'item2']
+
+const person = {
+    name: 'bob'
+}
+module.exports.singlePerson = person
+
+</pre>
+
+
+<div id="Modules-Importing"><h2 id="Importing" class="header"><a href="#Modules-Importing">Importing</a></h2></div>
+
+<p>
+Now, a module can be imported with the keyword <code>require</code> as follows:
+</p>
+
+<pre javascript="">
+const externalModule = require('./module')
+console.log(externalModule)
+
+{ Name: 'John', Surname: 'Tukey' }
+
+</pre>
+
+<p>
+Another type of syntax could be unrolling the attributes of the export object:
+</p>
+
+<pre javascript="">
+const { Name, Surname } = require('./module')
+
+</pre>
+
+
+<div id="Modules-Built-in Modules"><h2 id="Built-in Modules" class="header"><a href="#Modules-Built-in Modules">Built-in Modules</a></h2></div>
+
+<p>
+Some built-in modules are:
+</p>
+
+<ul>
+<li>
+<span id="Modules-Built-in Modules-OS"></span><strong id="OS">OS</strong>
+
+</li><li>
+<span id="Modules-Built-in Modules-PATH"></span><strong id="PATH">PATH</strong>
+
+</li><li>
+<span id="Modules-Built-in Modules-FS (Filesystem)"></span><strong id="FS (Filesystem)">FS (Filesystem)</strong>
+
+</li><li>
+<span id="Modules-Built-in Modules-HTTP"></span><strong id="HTTP">HTTP</strong>
+
+</li></ul>
+<p>
+Even though there are several more built-in modules. 
+</p>
+
+<div id="Modules-Built-in Modules-OS"><h3 id="OS" class="header"><a href="#Modules-Built-in Modules-OS">OS</a></h3></div>
+
+<p>
+To import the <code>OS</code> built-in module we do:
+</p>
+
+<pre javascript="">
+const os = require('os')
+
+</pre>
+
+<p>
+And we call it by:
+</p>
+
+<pre javascript="">
+console.log(`The system uptime is ${os.uptime()} seconds`)
+
+</pre>
+
+<div id="Modules-Built-in Modules-FS"><h3 id="FS" class="header"><a href="#Modules-Built-in Modules-FS">FS</a></h3></div>
+
+<p>
+We can also interact with the file system via the <code>FS</code> module. There are two ways to do so:
+</p>
+
+<ol>
+<li>
+Asynchronously, which is non-blocking
+
+</li><li>
+Synchronously, that is blocking
+
+</li></ol>
+<div id="Modules-Built-in Modules-FS-Synchronous"><h4 id="Synchronous" class="header"><a href="#Modules-Built-in Modules-FS-Synchronous">Synchronous</a></h4></div>
+
+<p>
+To exemply both setups, we first de-structure the read and write synchronous methods from the <code>FS</code> module, and then we read and write files.
+</p>
+
+<pre javascript="">
+const { readFileSync, writeFileSync } = require('fs')
+
+// Read file with a given path and the corresponding encoding
+const first = readFileSync('./file.txt', 'utf8')
+const second = readFileSync('./file2.txt', 'utf8')
+
+// Write to a file given a path, the content is overwritten
+writeFileSync('./writeFile', 'This content will be written')
+
+// Write to a file given a path, the content is appended
+writeFileSync('./writeFile', 'This content will be written', {flag: 'a'})
+
+</pre>
+
+<div id="Modules-Built-in Modules-FS-Asynchronous"><h4 id="Asynchronous" class="header"><a href="#Modules-Built-in Modules-FS-Asynchronous">Asynchronous</a></h4></div>
+
+<p>
+Now, in order to access the file system asynchronously, we need a callback, and so we do:
+</p>
+
+<pre javascript="">
+const { readFileSync, writeFileSync } = require('fs')
+
+readFile('./file', 'utf8', (error, result) =&gt; {
+  if(error){
+    console.log(error)
+    return
+  }
+  else{
+    console.log(result)
+    const first = result
+    // Here we can add another read call
+  }
+})
+
+writeFile('./file', 'This is the content', (error, result) =&gt; {
+  if(error){
+    console.log(error)
+    return
+  }else{
+    console.log(result)
+  }
+})
+
+</pre>
+
+<p>
+Where we specify a callback function with the ES6 syntax. Its first parameter is the error parameter and the second is the result of the operation.
+</p>
+
+<p>
+The problem with synchronous calls is that they can be very time consuming and they halt the execution, which can be critical when working on time sensitive tasks or when several user call upon these type of functions at a time.
+</p>
+
+<div id="Modules-Built-in Modules-HTTP"><h3 id="HTTP" class="header"><a href="#Modules-Built-in Modules-HTTP">HTTP</a></h3></div>
+
+<p>
+To show the bare basics, we will set up a server:
+</p>
+
+<pre javascript="">
+const http = require('http')
+
+const server = http.createServer((request, response) =&gt; {
+  response.write('This is the index!')
+  response.end()
+})
+
+// Define the port
+server.listen(5000)
+
+</pre>
+
+<p>
+That can be accessed on <code>localhost:5000</code>. Next, we can code something a little more complex, where the content handed as a response depends on the request:
+</p>
+
+<pre javascript="">
+const http = require('http')
+
+const server = http.createServer((request, response) =&gt; {
+  if(request.url === '/'){
+    response.end('This is the index')
+  }else if(request.url === '/about'){
+    response.end('This is the about')
+  }else{
+    response.end('404')
+  }
+})
+
+// Define the port
+server.listen(5000)
+
+
+</pre>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

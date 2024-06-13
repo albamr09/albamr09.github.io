@@ -1,0 +1,149 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Spring Boot Actuator</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Spring Boot Actuator"><h1 id="Spring Boot Actuator" class="header"><a href="#Spring Boot Actuator">Spring Boot Actuator</a></h1></div>
+
+<hr>
+
+<p>
+Spring Boot Actuator automatically exposes endpoints to monitor and manage your application. You only need to add the dependency to you <code>pom.xml</code> file:
+</p>
+
+<pre xml="">...
+	&lt;dependencies&gt;
+
+    ...
+
+		&lt;!-- ADD SUPPORT FOR SPRING BOOT ACTUATOR --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+				
+	&lt;/dependencies&gt;
+...
+</pre>
+
+<p>
+The endpoints are prefixed by <code>/actuator</code>, some of them are:
+</p>
+
+<ul>
+<li>
+<code>/health</code>: health information about your application
+
+</li><li>
+<code>/info</code>: information about your project. By default it return an empty json object. You can add info through <code>application.properties</code> as follows:
+<pre json="">info.app.name=My Super Cool App
+info.app.description=A crazy fun app, yoohoo!
+info.app.version=1.0.0
+</pre>
+
+</li><li>
+<code>/auditevents</code>: Audit events for your application
+
+</li><li>
+<code>/beans</code>: List of all beans registered in the Spring application context
+
+</li><li>
+<code>/mappings</code>: List of all <code>@RequestMapping</code> path
+
+</li></ul>
+<hr>
+
+<p>
+By default only <code>/health</code> and <code>/info</code> are exposed, to expose all actuator endpoints you need to specify on <code>application.properties</code> (you can also specify only the ones you want separated by commas): 
+</p>
+
+<pre json="">management.endpoints.web.exposure.include=*
+</pre>
+
+<div id="Spring Boot Actuator-Add security"><h2 id="Add security" class="header"><a href="#Spring Boot Actuator-Add security">Add security</a></h2></div>
+
+<p>
+First you need to add Spring Security as a dependency in your <code>pom.xml</code>: 
+</p>
+
+<pre xml="">...
+	&lt;dependencies&gt;
+		...
+    &lt;!-- SECURITY --&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+		...
+	&lt;/dependencies&gt;
+...
+</pre>
+
+<p>
+Now, when we access some endpoints like <code>/actuator/beans</code> Spring will prompt a login to grant access to the endpoint.
+</p>
+
+<ul>
+<li>
+The default user name is "user"
+
+</li><li>
+The password will be printed on the console where you start the application
+
+</li></ul>
+<p>
+To override these defaults edit the <code>application.properties</code> file as follows:
+</p>
+
+<pre json="">spring.security.user.name=alba
+spring.security.user.password=mypassword
+</pre>
+
+<hr>
+
+<p>
+We can also exclude endpoints by adding the following declarations to the <code>application.properties</code> file:
+</p>
+
+<pre json="">management.endpoints.web.exposure.exclude=health,info
+</pre>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

@@ -1,9 +1,9 @@
 <html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/index.css">
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../src/style/custom.css">
-    <title>Notes</title>
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Form Tags</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,25 +31,63 @@
     <hr>
     <div class="content">
 <p>
-<a href="https://albamr09.github.io/">Back</a>
+<a href="../index.html">Back</a>
 </p>
 
-<div id="Notes"><h1 id="Notes" class="header"><a href="#Notes">Notes</a></h1></div>
+<div id="Form Tags"><h1 id="Form Tags" class="header"><a href="#Form Tags">Form Tags</a></h1></div>
+
+<hr>
+
+<p>
+Form Tags are configurable an reusable:
+</p>
+
+<ul>
+<li>
+They can make use of data binding (you can automatically set and retrieve data from a Java object)
+
+</li><li>
+You can mix them in with you HTML web page
+
+</li></ul>
+<p>
+Some examples are:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/list_form_tags.png" alt="List of Form Tags">
+</p>
+
+<div id="Form Tags-Reference Spring MVC Form Tags"><h2 id="Reference Spring MVC Form Tags" class="header"><a href="#Form Tags-Reference Spring MVC Form Tags">Reference Spring MVC Form Tags</a></h2></div>
+
+<p>
+To use these tags in your web page you have to specify the spring namespace at the beginning of the <code>JSP</code> file:
+</p>
+
+<pre>&lt;!-- Reference to the namespace --&gt;
+&lt;%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
 
 <hr>
 
 <ul>
 <li>
-<a href="Math/index.html">Math</a>
+<a href="Text Fields.html">Text Fields</a>
 
 </li><li>
-<a href="ComputerScience/index.html">Computer Science</a>
+<a href="Drop Down Lists.html">Drop Down Lists</a>
 
 </li><li>
-<a href="DataScience/index.html">Data Science</a>
+<a href="Radio Buttons.html">Radio Buttons</a>
 
 </li><li>
-<a href="Other/index.html">Other</a>
+<a href="CheckBox.html">CheckBox</a>
 
 </li></ul>
 </div>
