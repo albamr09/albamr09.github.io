@@ -61,6 +61,229 @@ Let's examine what WebGL's rendering pipeline. The following is a diagram of a s
 </p>
 
 <div id="Rendering-WebGL Rendering Pipeline-Vertex Buffer Objects (VBOs)"><h3 id="Vertex Buffer Objects (VBOs)" class="header"><a href="#Rendering-WebGL Rendering Pipeline-Vertex Buffer Objects (VBOs)">Vertex Buffer Objects (VBOs)</a></h3></div>
+
+<p>
+<span id="Rendering-WebGL Rendering Pipeline-Vertex Buffer Objects (VBOs)-VBOs"></span><strong id="VBOs">VBOs</strong> contain the data that is used to describe the geometry to be rendered. Vertex coordinates, are usually stored and processed in WebGL as VBOs. 
+</p>
+
+<div id="Rendering-WebGL Rendering Pipeline-Index Buffer Objects (IBOs)"><h3 id="Index Buffer Objects (IBOs)" class="header"><a href="#Rendering-WebGL Rendering Pipeline-Index Buffer Objects (IBOs)">Index Buffer Objects (IBOs)</a></h3></div>
+
+<p>
+IBOs contain information about the relationship of the vertices. It uses the index of each vertex in the vertex buffer as a value.
+</p>
+
+<div id="Rendering-WebGL Rendering Pipeline-Vertex Shader"><h3 id="Vertex Shader" class="header"><a href="#Rendering-WebGL Rendering Pipeline-Vertex Shader">Vertex Shader</a></h3></div>
+
+<p>
+The vertex shader is called on each vertex. The <span id="Rendering-WebGL Rendering Pipeline-Vertex Shader-shader manipulates per-vertex data"></span><strong id="shader manipulates per-vertex data">shader manipulates per-vertex data</strong>.
+</p>
+
+<div id="Rendering-WebGL Rendering Pipeline-Fragment Shader"><h3 id="Fragment Shader" class="header"><a href="#Rendering-WebGL Rendering Pipeline-Fragment Shader">Fragment Shader</a></h3></div>
+
+<p>
+Each surface element (pixel) is called a fragment. The main goal of the fragment shader is to calculate the color of individual pixels.
+</p>
+
+<div id="Rendering-WebGL Rendering Pipeline-Framebuffer"><h3 id="Framebuffer" class="header"><a href="#Rendering-WebGL Rendering Pipeline-Framebuffer">Framebuffer</a></h3></div>
+
+<p>
+The <span id="Rendering-WebGL Rendering Pipeline-Framebuffer-framebuffer"></span><strong id="framebuffer">framebuffer</strong> is a two-dimensional buffer contains the fragments that have been processed by the fragment shader. 
+</p>
+
+<div id="Rendering-WebGL Rendering Pipeline-Attributes"><h3 id="Attributes" class="header"><a href="#Rendering-WebGL Rendering Pipeline-Attributes">Attributes</a></h3></div>
+
+<p>
+<span id="Rendering-WebGL Rendering Pipeline-Attributes-Attributes"></span><strong id="Attributes">Attributes</strong> are input variables that are used in the vertex shader.
+</p>
+
+<p>
+For example, you may put three dimensional \(32\)-bit vectors in a buffer. You would tell a particular attribute which buffer to pull the vectors out of, what type of data it should pull out (\(3\)-component, \(32\)-bit floating point numbers), what offset in the buffer the positions start at, and how many bytes to get from one position to the next.
+</p>
+
+<div id="Rendering-WebGL Rendering Pipeline-Uniform"><h3 id="Uniform" class="header"><a href="#Rendering-WebGL Rendering Pipeline-Uniform">Uniform</a></h3></div>
+
+<p>
+<span id="Rendering-WebGL Rendering Pipeline-Uniform-Uniforms"></span><strong id="Uniforms">Uniforms</strong> are input variables that are available to both the vertex shader and the fragment shader. Unlike attributes, uniforms are constant during a rendering cycle.
+</p>
+
+<div id="Rendering-WebGL Rendering Pipeline-Textures"><h3 id="Textures" class="header"><a href="#Rendering-WebGL Rendering Pipeline-Textures">Textures</a></h3></div>
+
+<p>
+<span id="Rendering-WebGL Rendering Pipeline-Textures-Textures"></span><strong id="Textures">Textures</strong> are arrays of data that can be accessed in your shader program. Image data is the most common thing to put in a texture.
+</p>
+
+<div id="Rendering-WebGL Rendering Pipeline-Varyings"><h3 id="Varyings" class="header"><a href="#Rendering-WebGL Rendering Pipeline-Varyings">Varyings</a></h3></div>
+
+<p>
+<span id="Rendering-WebGL Rendering Pipeline-Varyings-Varyings"></span><strong id="Varyings">Varyings</strong> are used to pass data from the vertex shader to the fragment shader. The values set on a varying by a vertex shader will be interpolated while executing the fragment shader.
+</p>
+
+<div id="Rendering-Rendering in WebGL"><h2 id="Rendering in WebGL" class="header"><a href="#Rendering-Rendering in WebGL">Rendering in WebGL</a></h2></div>
+
+<p>
+There are two data types that are fundamental: <span id="Rendering-Rendering in WebGL-vertices"></span><strong id="vertices">vertices</strong> and <span id="Rendering-Rendering in WebGL-indices"></span><strong id="indices">indices</strong>. Vertices are the points that define the corners of 3D objects. Each vertex is represented by three floating-point numbers that correspond to the x, y, and z coordinates of the vertex. 
+</p>
+
+<p>
+Indices are numeric labels for the vertices in a given 3D scene. Indices allow us to tell WebGL how to connect vertices in order to produce a surface.
+</p>
+
+<p>
+Both vertices and indices are stored on a javascript array and passed to WebGL's rendering pipeline.
+</p>
+
+<div id="Rendering-Rendering in WebGL-Defining a Geometry Using JavaScript Arrays"><h3 id="Defining a Geometry Using JavaScript Arrays" class="header"><a href="#Rendering-Rendering in WebGL-Defining a Geometry Using JavaScript Arrays">Defining a Geometry Using JavaScript Arrays</a></h3></div>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/vertices_and_indices.png" alt="Vertices and Indices" style="height:400px">
+</p>
+
+<p>
+As you can see from the preceding illustration, we have placed the coordinates sequentially in the vertex array and then indicated how these coordinates are used to draw the trapezoid in the index array.
+</p>
+
+<p>
+Triangles in the index array are usually, but not necessarily, defined in <span id="Rendering-Rendering in WebGL-Defining a Geometry Using JavaScript Arrays-counter-clockwise order"></span><strong id="counter-clockwise order">counter-clockwise order</strong>. It's important to pick one approach and keep it consistent because programs may use the clockwise/counter-clockwise order to determine whether a face is facing forward or backward for culling and rendering purposes.
+</p>
+
+<p>
+In computer graphics, <span id="Rendering-Rendering in WebGL-Defining a Geometry Using JavaScript Arrays-back-face culling"></span><strong id="back-face culling">back-face culling</strong> determines whether a polygon of a graphical object is visible.
+</p>
+
+<div id="Rendering-Rendering in WebGL-Creating WebGL Buffers"><h3 id="Creating WebGL Buffers" class="header"><a href="#Rendering-Rendering in WebGL-Creating WebGL Buffers">Creating WebGL Buffers</a></h3></div>
+
+<p>
+Let's render a square. We define the vertices, and create the respective buffer. These vertices are defined in <span id="Rendering-Rendering in WebGL-Creating WebGL Buffers-clipspace coordinates"></span><strong id="clipspace coordinates">clipspace coordinates</strong>, because WebGL only deals with clipspace coordinates. Clipspace coordinates always go from \(-1\) to \(+1\).
+</p>
+
+<pre javascript="">const vertices = [
+  -0.5, 0.5, 0,
+  -0.5, -0.5, 0,
+  0.5, -0.5, 0,
+  0.5, 0.5, 0
+];
+const positionBuffer = gl.createBuffer();
+</pre>
+
+<p>
+Now, when <code>positionBuffer</code> is made the currently-bound WebGL buffer any subsequent buffer operation will be executed on this buffer until it is unbound, or another buffer is made the current one.
+</p>
+
+<pre javascript="">gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+</pre>
+
+<p>
+The first parameter is the type of buffer we are creating:
+</p>
+
+<ul>
+<li>
+<code>gl.ARRAY_BUFFER</code>: Vertex data
+
+</li><li>
+<code>gl.ELEMENT_ARRAY_BUFFER</code>: Index data
+
+</li></ul>
+<p>
+Once we have bound a buffer, we need to pass along its contents.
+</p>
+
+<pre javascript="">gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+</pre>
+
+<p>
+The last argument is the type, which is a performance hint for WebGL. The accepted values for type are as follows:
+</p>
+
+<ul>
+<li>
+<code>STATIC_DRAW</code>: Data in the buffer will not be changed (specified once and used many times)
+
+</li><li>
+<code>DYNAMIC_DRAW</code>: Data will be changed frequently (specified many times and used many times)
+
+</li><li>
+<code>STREAM_DRAW</code>: Data will change on every rendering cycle (specified once and used once)
+
+</li></ul>
+<p>
+WebGL requires JavaScript typed array so that the buffer data can be processed in its native binary form with the objective of speeding up geometryprocessing performance. The typed arrays used by WebGL include <code>Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, Float32Array</code>, and <code>Float64Array</code>.
+</p>
+
+<p>
+It's important to note that vertex coordinates can be float, but indices are always integers. Finally, it is a good practice to unbind the buffer.
+</p>
+
+<pre javascript="">gl.bindBuffer(gl.ARRAY_BUFFER, null);
+</pre>
+
+<p>
+All this same process applies for the index buffer.
+</p>
+
+<div id="Rendering-Rendering in WebGL-Associating Attributes to VBOs"><h3 id="Associating Attributes to VBOs" class="header"><a href="#Rendering-Rendering in WebGL-Associating Attributes to VBOs">Associating Attributes to VBOs</a></h3></div>
+
+<p>
+Once we have created the VBOs, we need to associate these buffers to vertex shader attributes. Each vertex shader attribute will refer to one and only one buffer. We can achieve this by following these steps:
+</p>
+
+<ol>
+<li>
+Bind a VBO
+<pre javascript="">gl.bindBuffer(gl.ARRAY_BUFFER, myBuffer);
+</pre>
+
+</li><li>
+Point an attribute to the currently-bound VBO
+<pre javascript="">gl.vertexAttribPointer(index, size, type, normalize, stride, offset);
+</pre>
+
+<ul>
+<li>
+index: attribute's index that we are bounding the currently-bound buffer to (i.e. aVertexPosition)
+
+</li><li>
+size: number of values per vertex that are stored in the currently-bound buffer.
+
+</li><li>
+type: data type of the values stored in the current buffer (<code>FIXED, BYTE, UNSIGNED_BYTE, FLOAT, SHORT, UNSIGNED_SHORT</code>)
+
+</li><li>
+normalize: beyond scope (set to false)
+
+</li><li>
+stride: If stride is 0, then we are indicating that elements are stored sequentially in the buffer.
+
+</li><li>
+offset: The position in the buffer from which we will start reading values for the corresponding attribute. Generally \(0\).
+
+</li></ul>
+</li><li>
+Enable the attribute
+<pre javascript="">gl.enableVertexAttribArray(positionAttributeLocation);
+</pre>
+
+</li><li>
+Unbind
+<pre javascript="">gl.bindBuffer(gl.ARRAY_BUFFER, null);
+</pre>
+
+</li></ol>
+<p>
+<img src="https://albamr09.github.io/public/assets/enabling_attributes.png" alt="Enabling Attributes" style="height:400px">
+</p>
+
+<div id="Rendering-Rendering"><h2 id="Rendering" class="header"><a href="#Rendering-Rendering">Rendering</a></h2></div>
+
+<div id="Rendering-Rendering-Drawing Functions"><h3 id="Drawing Functions" class="header"><a href="#Rendering-Rendering-Drawing Functions">Drawing Functions</a></h3></div>
+
+<p>
+The <code>drawArrays</code> and <code>drawElements</code> functions are used for writing to the framebuffer.
+</p>
+
+<p>
+<code>drawArrays</code> uses vertex data in the order in which it is defined in the buffer to create the geometry. In contrast, <code>drawElements</code> uses indices to access the vertex data buffers and create the geometry. Both drawArrays and drawElements will only use <span id="Rendering-Rendering-Drawing Functions-enabled arrays"></span><strong id="enabled arrays">enabled arrays</strong>.
+</p>
 </div>
   
 
