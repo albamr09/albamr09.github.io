@@ -37,6 +37,162 @@
 <div id="Boolean Arithmetic"><h1 id="Boolean Arithmetic" class="header"><a href="#Boolean Arithmetic">Boolean Arithmetic</a></h1></div>
 
 <hr>
+
+<p>
+General-purpose computer systems are required to perform at least the following arithmetic operations on signed integers:
+</p>
+
+<ul>
+<li>
+addition
+
+</li><li>
+sign conversion
+
+</li><li>
+subtraction
+
+</li><li>
+comparison
+
+</li><li>
+multiplication
+
+</li><li>
+division
+
+</li></ul>
+<p>
+Inside computers, everything is represented using binary codes.
+</p>
+
+<p>
+<span id="Boolean Arithmetic-Word size"></span><strong id="Word size">Word size</strong> is a hardware term used for specifying the number of bits that computers use for representing a basic chunk of information. The <span id="Boolean Arithmetic-fixed word size"></span><strong id="fixed word size">fixed word size</strong> implies that there is a limit on the number of values that these registers can represent.
+</p>
+
+<p>
+For example, suppose we use 8-bit registers for representing integers. This representation can code \(2^8 = 256\).
+</p>
+
+<p>
+To represent numbers greater than, or less than, the maximal and minimal values permitted by the fixed register size is  typically implemented by lashing together as many \(n\)-bit registers as necessary.
+</p>
+
+<div id="Boolean Arithmetic-Binary Addition"><h2 id="Binary Addition" class="header"><a href="#Boolean Arithmetic-Binary Addition">Binary Addition</a></h2></div>
+
+<p>
+A pair of binary numbers can be added bitwise from right to left by adding the two rightmost bits (<span id="Boolean Arithmetic-Binary Addition-lest significant"></span><strong id="lest significant">lest significant</strong> bits or LSB). Next, we add the resulting carry bit to the sum of the next pair of bits. We continue until the two left <span id="Boolean Arithmetic-Binary Addition-most significan bits"></span><strong id="most significan bits">most significan bits</strong> (MSB) are added.
+</p>
+
+<p>
+If the most significant bitwise addition generates a carry of 1, we have what is known as <span id="Boolean Arithmetic-Binary Addition-overflow"></span><strong id="overflow">overflow</strong>.
+</p>
+
+<div id="Boolean Arithmetic-Signed Binary Numbers"><h2 id="Signed Binary Numbers" class="header"><a href="#Boolean Arithmetic-Signed Binary Numbers">Signed Binary Numbers</a></h2></div>
+
+<p>
+We use <span id="Boolean Arithmetic-Signed Binary Numbers-two's complement"></span><strong id="two's complement">two's complement</strong> (also known as radix complement) for representing signed numbers in binary code.  Given a word size of \(n\) bits, the two's complement for negative \(x\) is given by the binary code of \(2^n - x\).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/2s_complement.png" alt="Two's Complement" style="height:300px">
+</p>
+
+<p>
+The two’s complement representation has the following attractive properties:
+</p>
+
+<ul>
+<li>
+The system codes signed numbers, ranging from \(-(2^{n-1})\) to \(2^{n-1} - 1\)
+
+</li><li>
+The code of any nonnegative number begins with a \(0\).
+
+</li><li>
+The code of any negative number begins with a \(1\).
+
+</li><li>
+To obtain the binary code of \(-x\) flip all the bits of x and add 1 to the result.
+
+</li><li>
+Subtraction is handled as a special case of addition.
+
+</li></ul>
+<div id="Boolean Arithmetic-Adders"><h2 id="Adders" class="header"><a href="#Boolean Arithmetic-Adders">Adders</a></h2></div>
+
+<p>
+<span id="Boolean Arithmetic-Adders-Half Adders"></span><strong id="Half Adders">Half Adders</strong>: adds two bits, outputs two bits.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/half_adder.png" alt="Half Adder" style="height:300px">
+</p>
+
+<p>
+<span id="Boolean Arithmetic-Adders-Full adder"></span><strong id="Full adder">Full adder</strong>: adds three bits, outputs two bits.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/full_adder.png" alt="Full Adder" style="height:300px">
+</p>
+
+<p>
+<span id="Boolean Arithmetic-Adders-Adder"></span><strong id="Adder">Adder</strong>: adds two \(n\)-bit numbers.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/adder.png" alt="Adder" style="height:300px">
+</p>
+
+
+<p>
+<span id="Boolean Arithmetic-Adders-Incrementer"></span><strong id="Incrementer">Incrementer</strong>: adds \(1\) to a given number (<em>Spoiler: This will enable fetching the next instruction from memory, after executing the current one</em>).
+</p>
+
+<div id="Boolean Arithmetic-The Arithmetic Logic Unit"><h2 id="The Arithmetic Logic Unit" class="header"><a href="#Boolean Arithmetic-The Arithmetic Logic Unit">The Arithmetic Logic Unit</a></h2></div>
+
+<p>
+An <span id="Boolean Arithmetic-The Arithmetic Logic Unit-Arithmetic Logic Unit"></span><strong id="Arithmetic Logic Unit">Arithmetic Logic Unit</strong> is a chip designed to compute a set of arithmetic and logic operations. Exactly which operations an ALU should feature is a design decision. This ALU design is unique to the computer built in Nand to Tetris, named Hack.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/ALU.png" alt="ALU" style="height:250px">
+</p>
+
+<p>
+As seen in figure 2.5a, the Hack ALU operates on two \(16\)-bit two's complement integers, denoted \(x\) and \(y\), and on six \(1\)-bit inputs, called <span id="Boolean Arithmetic-The Arithmetic Logic Unit-control bits"></span><strong id="control bits">control bits</strong>. These control bits tell the ALU which function to compute. The exact specification is given in figure 2.5b.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/ALU_specification.png" alt="ALU" style="height:450px">
+</p>
+
+<p>
+Note that each one of the six control bits is associated with a standalone, conditional micro-action. The six directives are to be performed in order: 
+</p>
+
+<ol>
+<li>
+We either set the \(x\) and \(y\) inputs to \(0\), or not
+
+</li><li>
+We either negate the resulting values, or not
+
+</li><li>
+We compute either \(+\) or \(&amp;\) on the preprocessed values
+
+</li><li>
+We either negate the resulting value, or not. 
+
+</li></ol>
+<p>
+All these settings, negations, additions, and conjunctions are \(16\)-bit operations.
+</p>
+
+<p>
+Note that the ALU actually computes a total of sixty-four functions, since six control bits code that many possibilities. We’ve decided to focus on, and document, only eighteen of these possibilities, since these will suffice for supporting the instruction set of our target computer system
+</p>
 </div>
   
 
