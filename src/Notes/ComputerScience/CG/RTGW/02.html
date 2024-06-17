@@ -284,6 +284,354 @@ The <code>drawArrays</code> and <code>drawElements</code> functions are used for
 <p>
 <code>drawArrays</code> uses vertex data in the order in which it is defined in the buffer to create the geometry. In contrast, <code>drawElements</code> uses indices to access the vertex data buffers and create the geometry. Both drawArrays and drawElements will only use <span id="Rendering-Rendering-Drawing Functions-enabled arrays"></span><strong id="enabled arrays">enabled arrays</strong>.
 </p>
+
+<div id="Rendering-Rendering-Drawing Functions-Using `drawArrays`"><h4 id="Using `drawArrays`" class="header"><a href="#Rendering-Rendering-Drawing Functions-Using `drawArrays`">Using <code>drawArrays</code></a></h4></div>
+
+<p>
+We will call <code>drawArrays</code> when information about indices is not available. In most cases, <code>drawArrays</code> is used when the geometry is simple enough that defining indices is overkill.
+</p>
+
+<p>
+When we want to render a triangle or a rectangle. In that case, WebGL will create the geometry in the order in which the vertex coordinates are defined in the VBO. If you have contiguous triangles (as we did in the trapezoid example), you will have to <span id="Rendering-Rendering-Drawing Functions-Using <code>drawArrays</code>-repeat"></span><strong id="repeat">repeat</strong> these coordinates in the VBO.
+</p>
+
+<p>
+If you need to repeat many vertices to create the geometry, <code>drawArrays</code> is not the optimal method. The more vertex data you duplicate, the more calls you will have on the vertex shader, one per vertex.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/draw_arrays.png" alt="Draw Arrays" style="height:400px">
+</p>
+
+<p>
+The signature for <code>drawArrays</code> is as follows:
+</p>
+
+<pre javascript="">gl.drawArrays(mode, first, count)
+</pre>
+
+<p>
+Where:
+</p>
+
+<ul>
+<li>
+<code>mode</code>: the type of primitive that we are going to render: <code>gl.POINTS, gl.LINE_STRIP, gl.LINE_LOOP, gl.LINES, gl.TRIANGLE_STRIP, gl.TRIANGLE_FAN</code>, and <code>gl.TRIANGLES</code>.
+
+</li><li>
+<code>first</code>: the starting element in the enabled arrays.
+
+</li><li>
+<code>count</code>: the number of elements rendered.
+
+</li></ul>
+<div id="Rendering-Rendering-Drawing Functions-Using `drawElements`"><h4 id="Using `drawElements`" class="header"><a href="#Rendering-Rendering-Drawing Functions-Using `drawElements`">Using <code>drawElements</code></a></h4></div>
+
+<p>
+<code>drawElements</code> allows us to use the IBO to tell WebGL how to render the geometry. Therefore, vertices are only processed once, and can be used as many times as they are defined in the IBO. This feature reduces both the memory and processing required on the GPU.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/draw_elements.png" alt="Draw Elements" style="height:400px">
+</p>
+
+<p>
+When we use <code>drawElements</code>, we need at least two buffers: a VBO and an IBO. As the vertex shader gets executed on each vertex, the rendering pipeline assembles the geometry into triangles using the IBO.
+</p>
+
+<p>
+The signature for <code>drawElements</code> is as follows:
+</p>
+
+<pre javascript="">gl.drawElements(mode, count, type, offset)
+</pre>
+
+<p>
+Where:
+</p>
+
+<ul>
+<li>
+<code>mode</code>: the type of primitive that we are going to render: <code>gl.POINTS, gl.LINE_STRIP, gl.LINE_LOOP, gl.LINES, gl.TRIANGLE_STRIP, gl.TRIANGLE_FAN</code>, and <code>gl.TRIANGLES</code>.
+
+</li><li>
+<code>count</code>: the number of elements rendered.
+
+</li><li>
+<code>type</code>: the type of the values in indices: <code>UNSIGNED_BYTE</code> or <code>UNSIGNED_SHORT</code>.
+
+</li><li>
+<code>offset</code>: which element in the buffer will be the starting point for rendering.
+
+</li></ul>
+<div id="Rendering-Rendering a Square"><h2 id="Rendering a Square" class="header"><a href="#Rendering-Rendering a Square">Rendering a Square</a></h2></div>
+
+<p>
+We first, compile each shader as follows:
+</p>
+
+<pre javascript="">/**
+ * Compiles the vertex or fragment shader
+ */
+export const compileShader = (
+  gl: WebGL2RenderingContext,
+  type: PROGRAM_TYPE,
+  source: string
+) =&gt; {
+  let shader;
+  if (type === PROGRAM_TYPE.VERTEX) {
+    shader = gl.createShader(gl.VERTEX_SHADER);
+  } else {
+    shader = gl.createShader(gl.FRAGMENT_SHADER);
+  }
+
+  if (!shader) return;
+
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
+
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    console.error(gl.getShaderInfoLog(shader));
+    return null;
+  }
+
+  return shader;
+};
+</pre>
+
+<p>
+We use this utility function to create the <span id="Rendering-Rendering a Square-program"></span><strong id="program">program</strong>:
+</p>
+
+<pre javascript="">/**
+ * Creates a program that is made up of a vertex shader and a fragment shader
+ */
+
+export const createProgram = (
+  gl: WebGL2RenderingContext,
+  vertexShaderSource: string,
+  fragmentShaderSource: string
+) =&gt; {
+  // Obtain the shaders
+  const vertexShader = compileShader(
+    gl,
+    PROGRAM_TYPE.VERTEX,
+    vertexShaderSource
+  );
+  const fragmentShader = compileShader(
+    gl,
+    PROGRAM_TYPE.FRAGMENT,
+    fragmentShaderSource
+  );
+
+  // Create a program
+  const program = gl.createProgram();
+  if (!program || !vertexShader || !fragmentShader) {
+    throw "Could no create program";
+  }
+
+  // Attach the shaders to this program
+  gl.attachShader(program, vertexShader);
+  gl.attachShader(program, fragmentShader);
+  gl.linkProgram(program);
+
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+    throw "Could not initialize shaders";
+  }
+
+  // Use this program instance
+  gl.useProgram(program);
+
+  return program;
+};
+</pre>
+
+<p>
+Once the program has been created, we populate our buffers:
+</p>
+
+<pre javascript="">/** Draws square on center of clipspace x in (-1, 1), y in (-1, 1)
+ *  0-&gt;(-0.5, 0.5)  3-&gt;(0.5, 0.5)
+ *      +-------------+
+ *      |           / |
+ *      |        /    |
+ *      |     /       |
+ *      | /           |
+ *      +-------------+
+ *  1-&gt;(-0.5, -0.5)  2-&gt;(0.5, -0.5)
+ *
+ */
+
+// Define vertices for position on space: the depth (z) is not important for now
+const vertices = [-0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0];
+
+// Define indices for identifying triangles that make up the geometry
+// Using counter-clock wise order
+// First triangle is made up from the vertices 0, 1, and 2, the second triangle
+// is made up of vertices 1, 2 and 3
+indices = [0, 1, 3, 1, 2, 3];
+
+// Set up VBO
+verticesBuffer = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, verticesBuffer);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+
+// Set up IBO
+indicesBuffer = gl.createBuffer();
+gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indicesBuffer);
+gl.bufferData(
+  gl.ELEMENT_ARRAY_BUFFER,
+  new Uint16Array(indices),
+  gl.STATIC_DRAW
+);
+
+// Unbind buffers
+gl.bindBuffer(gl.ARRAY_BUFFER, null);
+gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+</pre>
+
+<p>
+Now, in order to draw, we bind our buffers again and the we bind and enable the attributes:
+</p>
+
+<pre javascript="">// Clear the scene
+gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+// Bind the vertex buffer with an attribute
+gl.bindBuffer(gl.ARRAY_BUFFER, verticesBuffer);
+// Obtain attribute instance
+const vertexPositionAttr = gl.getAttribLocation(program, "aVertexPosition");
+// Bind attibute to buffer and set some metadata
+gl.vertexAttribPointer(vertexPositionAttr, 3, gl.FLOAT, false, 0, 0);
+// Enable attribute
+gl.enableVertexAttribArray(vertexPositionAttr);
+
+// Bind IBO
+gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indicesBuffer);
+
+// Draw to the scene using triangle primitives
+gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+
+// Unbind buffers
+gl.bindBuffer(gl.ARRAY_BUFFER, null);
+gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+</pre>
+
+<div id="Rendering-Vertex Array Objects"><h2 id="Vertex Array Objects" class="header"><a href="#Rendering-Vertex Array Objects">Vertex Array Objects</a></h2></div>
+
+<p>
+<span id="Rendering-Vertex Array Objects-Vertex array objects"></span><strong id="Vertex array objects">Vertex array objects</strong> (VAOs) allow you to store all of the vertex/index binding information for a set of buffers in a single, easy to manage object. 
+</p>
+
+<p>
+This is an important feature that should always be used, since it significantly reduces rendering times.  
+</p>
+
+<p>
+When not using VAOs, all attributes data is in global WebGL state, which means that calling functions such as <code>gl.vertexAttribPointer</code>, <code>gl.enableVertexAttribArray</code>, and <code>gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffer)</code> manipulates the global state. This leads to performance loss, because before any draw call, we would need to set up all vertex attributes and set the <code>ELEMENT_ARRAY_BUFFER</code> where indexed data is being used. with VAOs, we would set up all attributes during our application's initialization and simply bind the data at render, yielding much better performance.
+</p>
+
+<p>
+So how would we use a VAO. There are two steps that change, firstly when we populate our data we create a VAO object alongside our VBO and IBO. And we also create create and enable here our vertex attributes.
+</p>
+
+<pre javascript="">// Define vertices for position on space: the depth (z) is not important for now
+const vertices = [-0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0];
+
+// Define indices for identifying triangles that make up the geometry
+// Using counter-clock wise order
+// First triangle is made up from the vertices 0, 1, and 2, the second triangle
+// is made up of vertices 1, 2 and 3
+indices = [0, 1, 3, 1, 2, 3];
+
+// Set up VAO
+VAO = gl.createVertexArray();
+gl.bindVertexArray(VAO);
+
+// Set up VBO (used inside VAO)
+const verticesBuffer = gl.createBuffer();
+
+gl.bindBuffer(gl.ARRAY_BUFFER, verticesBuffer);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+
+// Tell VAO how to use the current bound buffer (vertices buffer!)
+// Refer to 01_square.html and see how now the definition of how the data should
+// be retrived is done now on initialization instead of on render.
+// Obtain attribute instance
+const vertexPositionAttr = gl.getAttribLocation(program, "aVertexPosition");
+
+gl.enableVertexAttribArray(vertexPositionAttr);
+gl.vertexAttribPointer(vertexPositionAttr, 3, gl.FLOAT, false, 0, 0);
+
+// Set up IBO
+indicesBuffer = gl.createBuffer();
+
+gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indicesBuffer);
+gl.bufferData(
+  gl.ELEMENT_ARRAY_BUFFER,
+  new Uint16Array(indices),
+  gl.STATIC_DRAW
+);
+
+// Unbind buffers
+gl.bindVertexArray(null);
+gl.bindBuffer(gl.ARRAY_BUFFER, null);
+gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+</pre>
+
+<p>
+And, in order to draw we simply bind our VAO and our IBO to be used with <code>drawElements</code>.
+</p>
+
+<pre javascript="">// Clear the scene
+gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+// Bind VAO
+gl.bindVertexArray(VAO);
+
+// Bind IBO
+gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indicesBuffer);
+
+// Draw to the scene using triangle primitives
+gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+
+// Unbind buffers
+gl.bindVertexArray(null);
+gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+</pre>
+
+<div id="Rendering-`drawElements` Modes"><h2 id="`drawElements` Modes" class="header"><a href="#Rendering-`drawElements` Modes"><code>drawElements</code> Modes</a></h2></div>
+
+<ul>
+<li>
+<code>TRIANGLES</code>: WebGL will use the first three indices defined in your IBO to construct the first triangle, the next three to construct the second triangle, and so on.
+
+</li><li>
+<code>LINES</code>: will instruct WebGL to take each consecutive pair of indices defined in the IBO and draw lines by taking the coordinates of the corresponding vertices.
+
+</li><li>
+<code>POINTS</code>: WebGL will not generate surfaces. Instead, it will render the vertices that we had defined using the index array.
+
+</li><li>
+<code>LINES_LOOP</code>: draws a closed loop connecting the vertices defined in the IBO to the next one.
+
+</li><li>
+<code>LINE_STRIP</code>: is similar to <code>LINE_LOOP</code>. The difference is that WebGL does not connect the last vertex to the first one.
+
+</li><li>
+<code>TRIANGLE_STRIP</code>: draws connected triangles. Every vertex is specified after the first three.
+
+</li><li>
+<code>TRIANGLE_FAN</code>: FAN creates triangles in a similar way to <code>TRIANGLE_STRIP</code>. However, the first vertex defined in the IBO is taken as the origin of the fan (the only shared vertex among consecutive triangles).
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/assets/draw_elements_modes.png" alt="Draw Elements Modes" style="height:400px">
+</p>
+
+<div id="Rendering-WebGL as a State Machine: Buffer Manipulation"><h2 id="WebGL as a State Machine: Buffer Manipulation" class="header"><a href="#Rendering-WebGL as a State Machine: Buffer Manipulation">WebGL as a State Machine: Buffer Manipulation</a></h2></div>
 </div>
   
 
