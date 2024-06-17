@@ -98,6 +98,74 @@ It can be used for neutralizing the randomness associated with communications an
 <p>
 <img src="https://albamr09.github.io/public/assets/discrete_time.png" alt="Discrete Time Representation" style="height:300px">
 </p>
+
+<p>
+Let's focus on the bottom part of figure 3.2, which tracks how a Not gate (used as an example) responds to arbitrarily chosen inputs. When we feed the gate with \(1\), it takes a while before the gate's output stabilizes on \(0\). However, since the cycle duration is—by design—longer than the time delay, when we reach the cycle's end, the gate output has already stabilized on \(0\).
+</p>
+
+<p>
+Therefore the cycle's length must be longer than the maximal time delays that can occur in the system. In practice, we design our hardware such that the cycle is sufficiently long to contain any possible time delay taking into acount that, the shorter the cycle, the faster the computer. To sum up, the cycle length is chosen to be slightly longer than the maximal time delay in any chip in the system.
+</p>
+
+<p>
+Typically, the cycles are realized by an oscillator that alternates continuously between two phases labeled \(0\)−\(1\), low-high, or ticktock. Using the hardware’s circuitry, the same <span id="Memory-Sequential Logic-master clock signal"></span><strong id="master clock signal">master clock signal</strong> is simultaneously broadcast to every memory chip in the system. In every such chip, the clock input is funneled to the lower-level DFF gates.
+</p>
+
+<div id="Memory-Sequential Logic-Flip-flops"><h3 id="Flip-flops" class="header"><a href="#Memory-Sequential Logic-Flip-flops">Flip-flops</a></h3></div>
+
+<p>
+The low-level devices that facilitate the memory/storage abstraction are named <span id="Memory-Sequential Logic-Flip-flops-flip-flop"></span><strong id="flip-flop">flip-flop</strong> gates, in our case, data flip-flop or DFF, whose interface includes a single-bit data input and a single-bit data output. 
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/data_flip_flop_specification.png" alt="Data Flip-flop" style="height:300px">
+</p>
+
+<p>
+In addition, the DFF has a clock input that feeds from the master clock’s signal. Taken together, the data input and the clock input enable the DFF to implement the following behaviour \(out(t) = in(t - 1)\)
+</p>
+
+<div id="Memory-Sequential Logic-Combinational and Sequential Logic"><h3 id="Combinational and Sequential Logic" class="header"><a href="#Memory-Sequential Logic-Combinational and Sequential Logic">Combinational and Sequential Logic</a></h3></div>
+
+<p>
+The most fundamental sequential gate is the DFF, and any chip that includes it is also said to be sequential.
+</p>
+
+<p>
+As shown in figure 3.4, these sequential chips may also interact with combinational chips. In combinational chips, the introduction of feedback loops is problematic, because the output would depend on itself. However, if the  feedback loop goes through a DFF gate: the DFF introduces an inherent time delay so that the output at time \(t\) does not depend on itself but rather on the output at time \(t - 1\).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/feedback_loop.png" alt="Combinational and Sequential Logic" style="height:300px">
+</p>
+
+<p>
+The time dependency of sequential chips has an important side effect that serves to synchronize the overall computer architecture.
+</p>
+
+<p>
+Suppose we instruct the ALU to compute \(x + y\), because of physical constraints the electric signals representing \(x\) and \(y\) will likely arrive at the ALU at different times. It will take some time before the ALU’s output stabilizes to the correct result. Until then, the ALU will generate garbage.
+</p>
+
+<div id="Memory-Random Access Memory"><h2 id="Random Access Memory" class="header"><a href="#Memory-Random Access Memory">Random Access Memory</a></h2></div>
+
+<p>
+A direct-access memory unit, also called <span id="Memory-Random Access Memory-Random Access Memory"></span><strong id="Random Access Memory">Random Access Memory</strong>, or RAM, is an aggregate of \(n\) Register chips (see figure 3.7).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/ram.png" alt="RAM" style="height:250px">
+</p>
+
+<div id="Memory-Counter"><h2 id="Counter" class="header"><a href="#Memory-Counter">Counter</a></h2></div>
+
+<p>
+The <span id="Memory-Counter-Counter"></span><strong id="Counter">Counter</strong> is a chip that knows how to increment its value by 1 each time unit, aslo known as <span id="Memory-Counter-Program Counter"></span><strong id="Program Counter">Program Counter</strong> or PC (see figure 3.8).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/counter.png" alt="Counter" style="height:150px">
+</p>
 </div>
   
 
