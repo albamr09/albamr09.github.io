@@ -632,6 +632,45 @@ gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 </p>
 
 <div id="Rendering-WebGL as a State Machine: Buffer Manipulation"><h2 id="WebGL as a State Machine: Buffer Manipulation" class="header"><a href="#Rendering-WebGL as a State Machine: Buffer Manipulation">WebGL as a State Machine: Buffer Manipulation</a></h2></div>
+
+<p>
+When dealing with buffers for the <code>getParameter</code>, <code>getBufferParameter</code>, and <code>isBuffer</code> functions, new information about the state of the rendering pipeline becomes available to us.
+</p>
+
+<p>
+<code>getParameter(parameter)</code>, we use <code>parameter</code> to retrieve a reference to the currently-bound VBO (<code>parameter=ARRAY_BUFFER_BINDING</code>) or to retrieve a reference to the currently-bound IBO (<code>parameter=ELEMENT_ARRAY_BUFFER_BINDINGS</code>).
+</p>
+
+<p>
+We can also query the size and the usage of the currently-bound VBO and IBO using <code>getBufferParameter(type, parameter)</code>, where type can have the following values:
+</p>
+
+<ul>
+<li>
+<code>ARRAY_BUFFER</code>: To refer to the currently-bound VBO
+
+</li><li>
+<code>ELEMENT_ARRAY_BUFFER</code>: To refer to the currently-bound IBO
+
+</li><li>
+
+
+</li></ul>
+<p>
+And parameter can have the following values:
+</p>
+
+<ul>
+<li>
+<code>BUFFER_SIZE</code>: Returns the size of the requested buffer
+
+</li><li>
+<code>BUFFER_USAGE</code>: Returns the usage of the requested buffer
+
+</li></ul>
+<p>
+Finally, <code>isBuffer(object)</code> will return true if the <code>object</code> is a WebGL buffer, or false with an error when the buffer is invalid.
+</p>
 </div>
   
 
