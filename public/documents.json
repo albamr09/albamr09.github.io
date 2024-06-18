@@ -507,7 +507,12 @@
   {
     "id": "https://albamr09.github.io/src/Notes/ComputerScience/CG/RTGW/index.html",
     "title": "Real-Time 3D Graphics with WebGL 2",
-    "body": " index search search back real-time 3d graphics with webgl 2 getting started rendering $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
+    "body": " index search search back real-time 3d graphics with webgl 2 getting started rendering lights $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
+  },
+  {
+    "id": "https://albamr09.github.io/src/Notes/ComputerScience/CG/RTGW/03.html",
+    "title": "Lights",
+    "body": " index search search back lights positional versus directional lights light sources can be positional or directional. a light source is called positional when its location will affect how the scene is lit. directional lights are lights that produce the same luminous result, regardless of their position. directional lighting assumes that the light is coming uniformly from one direction. normals normals are vectors that are perpendicular to the surface we want to illuminate. normals represent the orientation of the surface. by definition, the cross-product of vectors \\(a\\) and \\(b\\) will be a vector perpendicular to both vectors \\(a\\) and \\(b\\). what about the vertices that are shared by more than one triangle? each shared vertex normal will receive a contribution from each of the triangles in which the vertex appears. for example, say that the p1 vertex is shared by the #1 and #2 triangles, and that we have already calculated the normals for the vertices of the #1 triangle. then, we need to update the \\(p_1\\) normal by adding up the calculated normal for \\(p_1\\) on the #2 triangle. this is a vector sum. materials in webgl, the material of an object can be modeled by several parameters, including its color and texture. material colors are usually modeled as triplets in the rgb (red, green, blue) space. textures, on the other hand, correspond to images that are mapped onto the surface of the object. this process is usually called texture mapping. using lights, normals, and materials in the pipeline let's revisit the pipeline and see where lights, normals, and materials fit in: $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
   },
   {
     "id": "https://albamr09.github.io/src/Notes/ComputerScience/index.html",
