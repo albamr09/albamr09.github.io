@@ -85,6 +85,175 @@ In WebGL, the material of an object can be modeled by several parameters, includ
 <p>
 Let's revisit the pipeline and see where lights, normals, and materials fit in:
 </p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/webgl_rendering_pipeline_with_lights.png" alt="Rendering pipeline" style="height:350px">
+</p>
+
+<p>
+Normals are defined on a vertex-per-vertex basis; therefore, normals are modeled as a VBO and are mapped using an attribute, as shown in the preceding diagram.
+</p>
+
+<p>
+Lights and materials are passed as uniforms. Uniforms are available to both the vertex shader and the fragment shader, we can calculate how the light is reflected on a vertex-by-vertex basis (vertex shader) or on a fragment-per-fragment basis (fragment shader).
+</p>
+
+<div id="Lights-Parallelism and the Difference Between Attributes and Uniforms"><h2 id="Parallelism and the Difference Between Attributes and Uniforms" class="header"><a href="#Lights-Parallelism and the Difference Between Attributes and Uniforms">Parallelism and the Difference Between Attributes and Uniforms</a></h2></div>
+
+<p>
+When a draw call is invoked (using <code>drawArrays</code> or <code>drawElements</code>), the GPU will launch several copies of the vertex shader in parallel. Each copy will receive a different set of attributes. All of the copies of the vertex shaders will receive the same uniforms.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/vertex_paralellism.png" alt="Attributes and Uniforms on the Vertex Shader" style="height:350px">
+</p>
+
+<div id="Lights-Shading Methods and Light-Reflection Models"><h2 id="Shading Methods and Light-Reflection Models" class="header"><a href="#Lights-Shading Methods and Light-Reflection Models">Shading Methods and Light-Reflection Models</a></h2></div>
+
+<p>
+<span id="Lights-Shading Methods and Light-Reflection Models-Shading"></span><strong id="Shading">Shading</strong> refers to the type of interpolation that is performed to obtain the final color for every fragment in the scene.
+</p>
+
+<p>
+The <span id="Lights-Shading Methods and Light-Reflection Models-lighting model"></span><strong id="lighting model">lighting model</strong> determines how the normals, materials, and lights need to be combined to produce the final color.
+</p>
+
+<div id="Lights-Shading Methods and Light-Reflection Models-Shading/Interpolation Methods"><h3 id="Shading/Interpolation Methods" class="header"><a href="#Lights-Shading Methods and Light-Reflection Models-Shading/Interpolation Methods">Shading/Interpolation Methods</a></h3></div>
+
+<p>
+<span id="Lights-Shading Methods and Light-Reflection Models-Shading/Interpolation Methods-Goraud Interpolation"></span><strong id="Goraud Interpolation">Goraud Interpolation</strong>: calculates the final color in the <span id="Lights-Shading Methods and Light-Reflection Models-Shading/Interpolation Methods-vertex shader"></span><strong id="vertex shader">vertex shader</strong>. The vertex normals are used to perform this calculation. Then, using a varying variable, the final color for the vertex is passed to the fragment shader.
+</p>
+
+<p>
+<span id="Lights-Shading Methods and Light-Reflection Models-Shading/Interpolation Methods-Phong Interpolation"></span><strong id="Phong Interpolation">Phong Interpolation</strong>: calculates the final color in the <span id="Lights-Shading Methods and Light-Reflection Models-Shading/Interpolation Methods-fragment shader"></span><strong id="fragment shader">fragment shader</strong>. Each vertex normal is passed from the vertex shader to the fragment shader using a varying. 
+</p>
+
+<p>
+Due to the automatic interpolation of varyings provided by the rendering pipeline, each fragment will have a color that is the result of interpolating the colors of the enclosing triangle for each fragment for goraud interpolation or its own normal in the case of phong interpolation.
+</p>
+
+<p>
+The following diagram summarizes the two interpolation models:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/shading_methods.png" alt="Shading Methods" style="height:350px">
+</p>
+
+<p>
+The shading only specifies where (vertex or fragment shader) and the type of interpolation (vertex colors or vertex normals) to be used.
+</p>
+
+<div id="Lights-Shading Methods and Light-Reflection Models-Shading/Interpolation Methods-Goraud Versus Phong Shading"><h4 id="Goraud Versus Phong Shading" class="header"><a href="#Lights-Shading Methods and Light-Reflection Models-Shading/Interpolation Methods-Goraud Versus Phong Shading">Goraud Versus Phong Shading</a></h4></div>
+
+<p>
+Goraud shading is considered to be faster since the performed calculations are computed per vertex, whereas Phong shading is calculated per fragment. The speed in performance does come at the cost of accurate or more realistic interpolation.
+</p>
+
+<div id="Lights-Shading Methods and Light-Reflection Models-Light-Reflection Models"><h3 id="Light-Reflection Models" class="header"><a href="#Lights-Shading Methods and Light-Reflection Models-Light-Reflection Models">Light-Reflection Models</a></h3></div>
+
+<div id="Lights-Shading Methods and Light-Reflection Models-Light-Reflection Models-Lambertian Reflection Model"><h4 id="Lambertian Reflection Model" class="header"><a href="#Lights-Shading Methods and Light-Reflection Models-Light-Reflection Models-Lambertian Reflection Model">Lambertian Reflection Model</a></h4></div>
+
+<p>
+Lambertian reflections are commonly used in computer graphics as a model for diffuse reflections, which are the kinds of reflections where an incident light ray is reflected in many angles instead of just one angle, as is the case for specular reflections:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/diffuse_reflections.png" alt="Diffuse Reflections" style="height:350px">
+</p>
+
+<p>
+The Lambertian reflection is usually calculated as the dot product between the surface normal (vertex or fragment normal, depending on the interpolation method used) and the negative of the light-direction vector. Then, the number is multiplied by the material and light source colors.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/lambertian_light_model.png" alt="Lambertian Reflection Model" style="height:350px">
+</p>
+
+<p>
+The light-direction vector is the vector that starts on the surface and ends on the light source position. It is essentially the vector that maps the light's position to the surface of the geometry.
+</p>
+
+\begin{align}
+F = C_lC_m(-L \dot N)
+\end{align}
+
+<p>
+Where \(F\) is the final diffuse color, \(C_l\) is the light diffuse color and \(C_m\) is the material diffuse color. Given:
+</p>
+
+\begin{align}
+-L \cot N = |-L||N| \dot \emptyset
+\end{align}
+
+<p>
+If \(L\) and \(N\) are normalized then \(|-L| = |N| = 1\), thus:
+</p>
+
+\begin{align}
+-L \cot N = \cos \emptyset
+\end{align}
+
+<p>
+And the final color is computed as:
+</p>
+
+\begin{align}
+F = C_lC_m(\cos \emptyset)
+\end{align}
+
+<div id="Lights-Shading Methods and Light-Reflection Models-Light-Reflection Models-Phong Reflection Model"><h4 id="Phong Reflection Model" class="header"><a href="#Lights-Shading Methods and Light-Reflection Models-Light-Reflection Models-Phong Reflection Model">Phong Reflection Model</a></h4></div>
+
+<p>
+The Phong reflection model describes the way a surface reflects the light as the sum of three types of reflection.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/phong_reflection_model.png" alt="Phong Reflection Model" style="height:350px">
+</p>
+
+<ul>
+<li>
+Ambient: accounts for the scattered light present in the scene, independent of any light source.
+
+</li><li>
+Diffuse: corresponds to diffuse reflections. A Lambertian model is typically used for this component.
+
+</li><li>
+Specular: provides mirror-like reflections. The specular reflection reaches its maximum when we look at the object at an angle that is equal to the reflected light-direction vector.
+
+</li></ul>
+<p>
+The specular term is modeled by the dot product of two vectors, the eye vector and the reflected light-direction vector. The eye vector originates in the fragment and terminates in the view position (camera). The reflected light-direction vector is obtained by reflecting the light-direction vector upon the surface normal vector. When this dot product equals \(1\) (by working with normalized vectors), our camera will capture the maximum specular reflection.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/specular_color.png" alt="Specular Color" style="height:350px">
+</p>
+
+<p>
+So the specular color is computed as follows:
+</p>
+
+\begin{align}
+F_s = C_lC_m (R \dot E)^n
+\end{align}
+
+<p>
+where \(F_s\) is the final specular color, \(C_l\) is the light specular color, \(C_l\) is the material specular color, and \(n\) is the shininess factor.
+</p>
+
+<p>
+If \(R\) and \(E\) are normalized, then \(R \dot E = \cos \emptyset\):
+</p>
+
+\begin{align}
+F_s = C_lC_m (\cos \emptyset)^n
+\end{align}
+
+<p>
+We know that the maximum value of \(\cos \theta\) is \(1\), and it is reached when \(\theta = 0\), that is when \(R\) and \(E\) have the same direction.
+</p>
 </div>
   
 
