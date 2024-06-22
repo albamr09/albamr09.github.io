@@ -175,7 +175,7 @@ The light-direction vector is the vector that starts on the surface and ends on 
 </p>
 
 \begin{align}
-F = C_lC_m(-L \circle N)
+F = C_lC_m(-L \circ N)
 \end{align}
 
 <p>
@@ -183,7 +183,7 @@ Where \(F\) is the final diffuse color, \(C_l\) is the light diffuse color and \
 </p>
 
 \begin{align}
--L \cot N = |-L||N| \circle \emptyset
+-L \cot N = |-L||N| \circ \emptyset
 \end{align}
 
 <p>
@@ -236,7 +236,7 @@ So the specular color is computed as follows:
 </p>
 
 \begin{align}
-F_s = C_lC_m (R \circle E)^n
+F_s = C_lC_m (R \circ E)^n
 \end{align}
 
 <p>
@@ -244,7 +244,7 @@ where \(F_s\) is the final specular color, \(C_l\) is the light specular color, 
 </p>
 
 <p>
-If \(R\) and \(E\) are normalized, then \(R \circle E = \cos \emptyset\):
+If \(R\) and \(E\) are normalized, then \(R \circ E = \cos \emptyset\):
 </p>
 
 \begin{align}
@@ -413,7 +413,7 @@ Let's cover a sample vertex shader. In this example we are applying Goraud Shadi
 </p>
 
 \begin{align}
-F = C_lC_m (-L \circle N) = C_l C_m (|-L||N| \cos \emptyset) = C_l C_m (\cos \emptyset)
+F = C_lC_m (-L \circ N) = C_l C_m (|-L||N| \cos \emptyset) = C_l C_m (\cos \emptyset)
 \end{align}
 
 <p>
@@ -476,7 +476,7 @@ The final color is computed as follows:
 </p>
 
 \begin{align}
-\text{vVertexColor} = \text{uMaterialDiffuse} * \text{uLightDiffuse} * (\text{normal} \circle \text{-lightDirection})
+\text{vVertexColor} = \text{uMaterialDiffuse} * \text{uLightDiffuse} * (\text{normal} \circ \text{-lightDirection})
 \end{align}
 
 \begin{align}
@@ -522,7 +522,7 @@ The fragment shader is very simple. We just assign the <code>vVertexColor</code>
 // to pick one. mediump is a good default. It means "medium precision"
 precision mediump float;
 
-// Computer color coming from the vertex shader
+// Computed color coming from the vertex shader
 in vec4 vVertexColor;
 
 // We need to declare an output for the fragment shader
