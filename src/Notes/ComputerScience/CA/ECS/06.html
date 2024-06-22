@@ -1,0 +1,149 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Assembler</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Assembler"><h1 id="Assembler" class="header"><a href="#Assembler">Assembler</a></h1></div>
+
+<hr>
+
+<p>
+Since the translation from mnemonics and symbols to binary code is straightforward, it makes sense to write low-level programs directly in symbolic notation and have a computer program translate them into binary code. The symbolic language is called <span id="Assembler-assembly"></span><strong id="assembly">assembly</strong>, and the translator program <span id="Assembler-assembler"></span><strong id="assembler">assembler</strong>.
+</p>
+
+<p>
+In general, assembly languages use symbols for three purposes:
+</p>
+
+<ul>
+<li>
+<span id="Assembler-Labels"></span><strong id="Labels">Labels</strong>: mark locations on the code.
+
+</li><li>
+<span id="Assembler-Variables"></span><strong id="Variables">Variables</strong>: act as landmark for arbitrary values.
+
+</li><li>
+<span id="Assembler-Predefined symbols"></span><strong id="Predefined symbols">Predefined symbols</strong>: programs can refer to special addresses in the computer’s memory using agreed-upon symbols, for example <code>SCREEN</code> nad <code>KBD</code>.
+
+</li></ul>
+<p>
+Figure 6.1 lists two versions of the same program written in the Hack machine language, both symbolic and binary.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/hack_machine_language.png" alt="Hack Machine Language" style="height:400px">
+</p>
+
+<div id="Assembler-The Hack Machine Language Specification"><h2 id="The Hack Machine Language Specification" class="header"><a href="#Assembler-The Hack Machine Language Specification">The Hack Machine Language Specification</a></h2></div>
+
+<p>
+We distinguish two programs:
+</p>
+
+<p>
+<span id="Assembler-The Hack Machine Language Specification-Binary Hack program"></span><strong id="Binary Hack program">Binary Hack program</strong>: A binary Hack program is a sequence of text lines, each consisting of sixteen 0 and 1 characters. Contains the instruction data we load onto the CPU to execute.
+</p>
+
+<p>
+Assembly Hack program: An assembly Hack program is a sequence of text lines, each being one of thre:
+</p>
+
+<ul>
+<li>
+<span id="Assembler-The Hack Machine Language Specification-Assembly instruction"></span><strong id="Assembly instruction">Assembly instruction</strong>: A symbolic A-instruction or a symbolic C-instruction.
+
+</li><li>
+<span id="Assembler-The Hack Machine Language Specification-Label declaration"></span><strong id="Label declaration">Label declaration</strong>: A line of the form <code>(xxx)</code>, where <code>xxx</code> is a symbol.
+
+</li><li>
+<span id="Assembler-The Hack Machine Language Specification-Comment"></span><strong id="Comment">Comment</strong>: A line beginning with two slashes (//) is considered a comment and is ignored.
+
+</li></ul>
+<p>
+See Figure 4.5 for the specification of the Hack instruction set:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/hack_instruction_set.png" alt="Hack Instruction Set" style="height:400px">
+</p>
+
+<div id="Assembler-The Hack Machine Language Specification-Handling Instructions"><h3 id="Handling Instructions" class="header"><a href="#Assembler-The Hack Machine Language Specification-Handling Instructions">Handling Instructions</a></h3></div>
+
+<p>
+For each assembly instruction, the assembler
+</p>
+
+<ol>
+<li>
+Parses the instruction into its underlying fields.
+
+</li><li>
+For each field, generates the corresponding bit-code, as specified in figure 4.5.
+
+</li><li>
+If the instruction contains a symbolic reference, resolves the symbol into its numeric value.
+
+</li><li>
+Assembles the resulting binary codes into a string of sixteen \(0\) and \(1\) characters.
+
+</li><li>
+Writes the assembled string to the output file.
+
+</li></ol>
+<div id="Assembler-The Hack Machine Language Specification-Handling Symbols"><h3 id="Handling Symbols" class="header"><a href="#Assembler-The Hack Machine Language Specification-Handling Symbols">Handling Symbols</a></h3></div>
+
+<p>
+A common solution is to develop a two-pass assembler.
+</p>
+
+<ol>
+<li>
+The assembler creates a symbol table and initializes it with all the predefined symbols and their pre-allocated values.
+
+</li><li>
+In the first pass, the assembler builds a symbol table, adds all the label symbols to the table, and generates no code
+
+</li><li>
+In the second pass, the assembler handles the variable symbols and generates binary code, using the symbol table.
+
+</li></ol>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
