@@ -406,10 +406,12 @@ of components.
 <code>reflect(t, n)</code>: Reflects the \(t\) vector along the \(n\) vector.
 
 </li></ul>
-<div id="Lights-OpenGL ES Shading Language (ESSL)-Vertex Shader"><h3 id="Vertex Shader" class="header"><a href="#Lights-OpenGL ES Shading Language (ESSL)-Vertex Shader">Vertex Shader</a></h3></div>
+<div id="Lights-Goraud Shading with Phong Reflection Model"><h2 id="Goraud Shading with Phong Reflection Model" class="header"><a href="#Lights-Goraud Shading with Phong Reflection Model">Goraud Shading with Phong Reflection Model</a></h2></div>
+
+<div id="Lights-Goraud Shading with Phong Reflection Model-Vertex Shader"><h3 id="Vertex Shader" class="header"><a href="#Lights-Goraud Shading with Phong Reflection Model-Vertex Shader">Vertex Shader</a></h3></div>
 
 <p>
-Let's cover a sample vertex shader. In this example we are applying Goraud Shading (we compute the color on the vertex shader and the pass it as a <code>varying</code> to the fragment shader). And in order to compute the color we use the Lambertian reflection model. That is the color is computed as follows:
+Let's cover a sample vertex shader. In this example we are applying Goraud Shading (we compute the color on the vertex shader and the pass it as a <code>varying</code> to the fragment shader). And in order to compute the color we use the Phong reflection model. That is the color is computed as follows:
 </p>
 
 \begin{align}
@@ -510,7 +512,7 @@ And then we normalize the result. And to compute the final vertex position we pe
 This line calculates the transformed vertex position. <code>gl_Position</code> is a special output variable that stores the transformed vertex position. So these uniforms and operations deal with camera and world transformations (rotation, scale, and translation).
 </p>
 
-<div id="Lights-OpenGL ES Shading Language (ESSL)-Fragment Shader"><h3 id="Fragment Shader" class="header"><a href="#Lights-OpenGL ES Shading Language (ESSL)-Fragment Shader">Fragment Shader</a></h3></div>
+<div id="Lights-Goraud Shading with Phong Reflection Model-Fragment Shader"><h3 id="Fragment Shader" class="header"><a href="#Lights-Goraud Shading with Phong Reflection Model-Fragment Shader">Fragment Shader</a></h3></div>
 
 <p>
 The fragment shader is very simple. We just assign the <code>vVertexColor</code> varying to the <code>fragColor</code> output variable.
@@ -536,6 +538,56 @@ void main() {
 <p>
 Remember that the value of the <code>vVertexColor</code> varying will be different from the one calculated in the vertex shader since WebGL will interpolate it by taking the corresponding calculated colors for the vertices surrounding the correspondent fragment (pixel).
 </p>
+
+<div id="Lights-Goraud Shading with Lambertian Reflection Model"><h2 id="Goraud Shading with Lambertian Reflection Model" class="header"><a href="#Lights-Goraud Shading with Lambertian Reflection Model">Goraud Shading with Lambertian Reflection Model</a></h2></div>
+
+<p>
+The Lambertian reflection model only considers the interaction of diffuse material and diffuse light properties. In short, we assign the final color as follows:
+</p>
+
+<pre>#version 300 es
+precision mediump float;
+uniform mat4 uModelViewMatrix;
+uniform mat4 uProjectionMatrix;
+uniform mat4 uNormalMatrix;
+uniform vec3 uLightDirection;
+uniform vec3 uLightDiffuse;
+uniform vec3 uMaterialDiffuse;
+
+in vec3 aVertexPosition;
+in vec3 aVertexNormal;
+out vec4 vVertexColor;
+
+void main(void) {
+  // Calculate the normal vector
+  vec3 N = normalize(vec3(uNormalMatrix * vec4(aVertexNormal, 1.0)));
+  // Normalized light direction
+  vec3 L = normalize(uLightDirection);
+  // Dot product of the normal product and negative light direction vector
+  float lambertTerm = dot(N, -L);
+  // Calculating the diffuse color based on the Lambertian reflection model
+  vec3 Id = uMaterialDiffuse * uLightDiffuse * lambertTerm;
+  vVertexColor = vec4(Id, 1.0);
+  // Setting the vertex position
+  gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);
+}
+</pre>
+
+<p>
+And the fragment shader simply outputs the color computed on the vertex shader:
+</p>
+
+<pre>#version 300 es
+precision mediump float;
+// Expect the interpolated value fro, the vertex shader
+in vec4 vVertexColor;
+// Return the final color as fragColor
+out vec4 fragColor;
+void main(void) {
+  // Simply set the value passed in from the vertex shader
+  fragColor = vVertexColor;
+}
+</pre>
 </div>
   
 
