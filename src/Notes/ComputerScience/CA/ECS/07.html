@@ -141,6 +141,72 @@ Logical commands: <code>and, or, not</code>
 <p>
 The commands <code>add, sub, eq, gt, lt, and,</code> and <code>or</code> have two implicit operands. We mean that the operand is not part of the command syntax since the command is designed to always operate on the two top stack values, there is no need to specify them.
 </p>
+
+<div id="Virtual Marchine I: Processing-Implementation"><h2 id="Implementation" class="header"><a href="#Virtual Marchine I: Processing-Implementation">Implementation</a></h2></div>
+
+<p>
+The VM abstraction has only one data type: a signed integer. This type is implemented on the Hack platform as a two’s complement \(16\)-bit value. The VM Boolean values true and false are represented as \(-1\) and \(0\), respectively.
+</p>
+
+<p>
+The host Hack RAM consists of \(32\)K \(16\)-bit words. VM implementations should use the top of this address space as follows:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/ram_slots.png" alt="RAM Slots" style="height:100px">
+</p>
+
+<p>
+Where some slots are already allocated:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/ram_allocated_slots.png" alt="RAM Allocated Slots" style="height:250px">
+</p>
+
+<p>
+Note that deciding where to locate virtual memory segments in the host RAM is a delicate issue. How can we ensure that these open-ended memory segments will not overflow into each other and into other reserved RAM areas? We will deal with this on the next chapter.
+</p>
+
+<p>
+VM implementations manipulate these virtual segments symbolically, using the pointer names. For example, suppose we want to push the value of the <code>D</code> register onto the stack. This operation can be implemented using the logic which can be expressed in Hack assembly 
+</p>
+
+<pre>// Selects RAM[SP] so we obtain the base address of the top of the stack
+@SP
+// Sets A to be the value under M, RAM[SP] (address of the top of the stack),
+// So now the selected register (M) will be RAM[RAM[SP]] -&gt; value of the element on top 
+// of the stack
+A=M
+// Update M to equal D, RAM[RAM[SP]] = M
+M=D
+// Selects RAM[SP] as the selected memory register, M = RAM[SP]
+@SP
+// As we pushed a new element on the stack, we augment the pointer
+M=M+1
+</pre>
+
+<div id="Virtual Marchine I: Processing-Implementation-Memory Segments Mapping"><h3 id="Memory Segments Mapping" class="header"><a href="#Virtual Marchine I: Processing-Implementation-Memory Segments Mapping">Memory Segments Mapping</a></h3></div>
+
+<p>
+<span id="Virtual Marchine I: Processing-Implementation-Memory Segments Mapping-Local, argument, this, that"></span><strong id="Local, argument, this, that">Local, argument, this, that</strong>: the base addresses of these segments are stored in the registers <code>LCL</code>, <code>ARG</code>, <code>THIS</code>, and <code>THAT</code>, respectively. Therefore, any access to the i-th entry of a virtual segment (in the context of a VM <code>push/pop segmentName i</code> command) should be translated into assembly code that accesses address in the RAM.
+</p>
+
+<p>
+<span id="Virtual Marchine I: Processing-Implementation-Memory Segments Mapping-Pointer"></span><strong id="Pointer">Pointer</strong>: the <code>pointer</code> segment contains exactly two values and is mapped directly onto RAM locations \(3\) and \(4\). These RAM locations are also called, respectively, <code>THIS</code> and <code>THAT</code>. Any access to pointer \(0\) should result in accessing the <code>THIS</code> pointer, and any access to pointer \(1\) should result in accessing the <code>THAT</code> pointer.
+</p>
+
+<p>
+<span id="Virtual Marchine I: Processing-Implementation-Memory Segments Mapping-Temp"></span><strong id="Temp">Temp</strong>: This \(8\)-word segment is also fixed and mapped directly on RAM locations \(5\)–\(12\). 
+</p>
+
+<p>
+<span id="Virtual Marchine I: Processing-Implementation-Memory Segments Mapping-Constant"></span><strong id="Constant">Constant</strong>: This virtual memory segment is truly virtual, as it does not occupy any physical RAM space. Instead, the VM implementation handles any access to constant \(i\) by simply supplying the constant \(i\).
+</p>
+
+<p>
+<span id="Virtual Marchine I: Processing-Implementation-Memory Segments Mapping-Static"></span><strong id="Static">Static</strong>: are mapped on addresses \(16\) to \(255\) of the host RAM. Each reference to static i in a VM program stored in file <code>Foo.vm</code> can be translated to the assembly symbol <code>Foo.i</code>. the Hack assembler will map these symbolic variables on the host RAM, starting at address \(16\). We note in closing that since the stack begins at address \(256\), the implementation limits the number of static variables in a Jack program to \(255 - 16 + 1 = 240\).
+</p>
 </div>
   
 
