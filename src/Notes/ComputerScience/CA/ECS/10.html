@@ -1,0 +1,150 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Compiler I: Syntax Analysis</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Compiler I: Syntax Analysis"><h1 id="Compiler I: Syntax Analysis" class="header"><a href="#Compiler I: Syntax Analysis">Compiler I: Syntax Analysis</a></h1></div>
+
+<hr>
+
+<div id="Compiler I: Syntax Analysis-Background"><h2 id="Background" class="header"><a href="#Compiler I: Syntax Analysis-Background">Background</a></h2></div>
+
+<p>
+A <span id="Compiler I: Syntax Analysis-Background-compiler"></span><strong id="compiler">compiler</strong> is a program that translates programs from a source language into a target language. The translation process, known as compilation, is conceptually based on two distinct tasks:
+</p>
+
+<ul>
+<li>
+Syntax analysis: usually divided further into two substages
+
+<ul>
+<li>
+Tokenizing: grouping of input characters into language atoms called tokens.
+
+</li><li>
+Parsing: grouping of tokens into structured statements that have a meaning.
+
+</li></ul>
+</li><li>
+Code generation
+
+</li></ul>
+<p>
+Figure 10.1 shows these steps:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/compiler_steps.png" alt="Compiler Steps" style="height:250px">
+</p>
+
+<p>
+Given grammar—the set of rules that define the syntax of a programming language, parsing a program means to determine the exact correspondence between the program's text and the grammar's rules. To do so, we must first transform the program's text into a list of tokens.
+</p>
+
+<div id="Compiler I: Syntax Analysis-Background-Lexical Analysis"><h3 id="Lexical Analysis" class="header"><a href="#Compiler I: Syntax Analysis-Background-Lexical Analysis">Lexical Analysis</a></h3></div>
+
+<p>
+The first step in analyzing the program's syntax is grouping the characters into tokens, as defined by the language lexicon, while ignoring white space and comments. This task is called <span id="Compiler I: Syntax Analysis-Background-Lexical Analysis-lexical analysis"></span><strong id="lexical analysis">lexical analysis</strong>, <span id="Compiler I: Syntax Analysis-Background-Lexical Analysis-scanning"></span><strong id="scanning">scanning</strong>, or <span id="Compiler I: Syntax Analysis-Background-Lexical Analysis-tokenizing"></span><strong id="tokenizing">tokenizing</strong>.
+</p>
+
+<p>
+Figure 10.2 presents the Jack language lexicon and illustrates the tokenization of a typical code segment.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/tokenization.png" alt="Tokenization" style="height:300px">
+</p>
+
+<div id="Compiler I: Syntax Analysis-Background-Gammars"><h3 id="Gammars" class="header"><a href="#Compiler I: Syntax Analysis-Background-Gammars">Gammars</a></h3></div>
+
+<p>
+A grammar is written in a meta-language: a language describing a language.  Terminals are tokens, nonterminals are names of other rules, and qualifiers are represented by the five symbols <code>|</code>, <code>*</code>, <code>?</code>, <code>(</code>, and <code>)</code>. See figure 10.3 for an example.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/grammar_example.png" alt="Grammar Exmaple" style="height:400px">
+</p>
+
+<p>
+We see that the grammar of a programming language can be used to ascertain, without ambiguity, whether given inputs are accepted or rejected. As a side effect of this parsing act, the parser produces an exact correspondence between the given input, on the one hand, and the syntactic patterns admitted by the grammar rules, on the other. The correspondence can be represented by a data structure called a <span id="Compiler I: Syntax Analysis-Background-Gammars-parse tree"></span><strong id="parse tree">parse tree</strong>, also called a <span id="Compiler I: Syntax Analysis-Background-Gammars-derivation tree"></span><strong id="derivation tree">derivation tree</strong>, like the one shown in figure 10.4a.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/parse_tree_example.png" alt="Parse Tree Example" style="height:350px">
+</p>
+
+<p>
+How can we represent parse trees textually? See figure 10.4b for an example.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/parse_tree_xml_example.png" alt="Parse Tree as XML Example" style="height:400px">
+</p>
+
+<div id="Compiler I: Syntax Analysis-Background-Parser"><h3 id="Parser" class="header"><a href="#Compiler I: Syntax Analysis-Background-Parser">Parser</a></h3></div>
+
+<p>
+A <span id="Compiler I: Syntax Analysis-Background-Parser-parser"></span><strong id="parser">parser</strong> is an agent that operates according to a given grammar. The parser accepts as input a stream of tokens and attempts to produce as output the parse tree associated with the given input.
+</p>
+
+<p>
+There are several algorithms for constructing parse trees. The <span id="Compiler I: Syntax Analysis-Background-Parser-top-down approach"></span><strong id="top-down approach">top-down approach</strong>, also known as recursive descent parsing, attempts to parse the tokenized input recursively, using the nested structures admitted by the language grammar.
+</p>
+
+<p>
+Recursive parsing algorithms are simple and elegant. If the language is simple, a single token lookahead is all that it takes to know which parsing rule to invoke next. Grammars that have this lingual property are called LL (1). These grammars can be handled simply and elegantly by recursive descent algorithms, without backtracking.
+</p>
+
+<p>
+The term LL comes from the observation that the grammar parses the input from left to right, performing leftmost derivation of the input. The (1) parameter informs that looking ahead \(1\) token.
+</p>
+
+<div id="Compiler I: Syntax Analysis-Specification"><h2 id="Specification" class="header"><a href="#Compiler I: Syntax Analysis-Specification">Specification</a></h2></div>
+
+<p>
+The complete Jack grammar is specified in figure 10.5.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/jack_grammar_specification.png" alt="Jack Grammar Specification" style="height:700px">
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
