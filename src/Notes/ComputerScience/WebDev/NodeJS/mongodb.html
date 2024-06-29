@@ -38,6 +38,34 @@
 
 <hr>
 
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="mongodb.html#Intro">Intro</a>
+
+</li><li>
+<a href="mongodb.html#Set Up">Set Up</a>
+
+</li><li>
+<a href="mongodb.html#Mongoose">Mongoose</a>
+
+<ul>
+<li>
+<a href="mongodb.html#Installing">Installing</a>
+
+</li><li>
+[[#Connect to <code>MongoDB</code>|Connect to <code>MongoDB</code>]]
+
+</li><li>
+<a href="mongodb.html#Create Models &amp; Schemas">Create Models &amp; Schemas</a>
+
+</li></ul>
+</li><li>
+<a href="mongodb.html#Getting/Saving Data">Getting/Saving Data</a>
+
+</li></ul>
+<hr>
+
 <div id="MongoDB-Intro"><h2 id="Intro" class="header"><a href="#MongoDB-Intro">Intro</a></h2></div>
 
 <p>
@@ -45,17 +73,9 @@ It is a <code>NoSQL</code> which is structured in collections, where each collec
 </p>
 
 <table>
-<thead>
-<tr>
-<th>
+<tbody><tr>
+<td>
 Blog Collection
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-Blog document
 </td>
 </tr>
 <tr>
@@ -68,8 +88,12 @@ Blog document
 Blog document
 </td>
 </tr>
-</tbody>
-</table>
+<tr>
+<td>
+Blog document
+</td>
+</tr>
+</tbody></table>
 
 <p>
 Here each document represent a single item of data, for example, each <code>Blog document</code> represents one blog. The data is contained inside the documents in a very similar fashion to <code>JSON</code> objects, so the documents consist of key-value pairs like so:

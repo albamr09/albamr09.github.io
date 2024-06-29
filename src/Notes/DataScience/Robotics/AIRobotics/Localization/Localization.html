@@ -38,6 +38,61 @@
 
 <hr>
 
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="Localization.html#Probability given by Belief">Probability given by Belief</a>
+
+</li><li>
+<a href="Localization.html#Probability after Sense">Probability after Sense</a>
+
+<ul>
+<li>
+<a href="Localization.html#Normalize the distribution">Normalize the distribution</a>
+
+</li></ul>
+</li><li>
+<a href="Localization.html#Exact Motion">Exact Motion</a>
+
+<ul>
+<li>
+<a href="Localization.html#Theorem of Total Probability">Theorem of Total Probability</a>
+
+</li></ul>
+</li><li>
+<a href="Localization.html#Inexact Motion">Inexact Motion</a>
+
+<ul>
+<li>
+<a href="Localization.html#Entropy">Entropy</a>
+
+</li></ul>
+</li><li>
+<a href="Localization.html#Bayes Rule">Bayes Rule</a>
+
+</li><li>
+<a href="Localization.html#Motion using Total Probability">Motion using Total Probability</a>
+
+</li><li>
+<a href="Localization.html#Summary">Summary</a>
+
+<ul>
+<li>
+<a href="Localization.html#Belief">Belief</a>
+
+</li><li>
+<a href="Localization.html#Sense">Sense</a>
+
+</li><li>
+<a href="Localization.html#Move">Move</a>
+
+</li></ul>
+</li><li>
+<a href="Localization.html#Localization Algorithm">Localization Algorithm</a>
+
+</li></ul>
+<hr>
+
 <ol>
 <li>
 <a href="Localization.html#Localization-Probability given by Belief">Probability given by Belief</a>
@@ -64,8 +119,6 @@
 <a href="Localization.html#Localization-Localization Algorithm">Localization Algorithm</a>
 
 </li></ol>
-<hr>
-
 <div id="Histogram Localization-Probability given by Belief"><h2 id="Probability given by Belief" class="header"><a href="#Histogram Localization-Probability given by Belief">Probability given by Belief</a></h2></div>
 
 <p>
@@ -110,8 +163,6 @@ Compute the probabilities after the robot "senses" a measurement
 Normalize these probabilities by dividing each probability by the total sum of all probabilities
 
 </li></ol>
-<hr>
-
 <div id="Histogram Localization-Exact Motion"><h2 id="Exact Motion" class="header"><a href="#Histogram Localization-Exact Motion">Exact Motion</a></h2></div>
 
 <p>
@@ -148,7 +199,6 @@ Then, by the conditional probability formula:
 P(A) = \sum_n P(A|B_n)P(B_n)
 \end{align}
 
-<hr>
 
 <p>
 So to apply this theorem what we do is sum the probabilities of ending up in cell \(j\) when we come from cell \(i\), which is expressed symbolically:
@@ -209,7 +259,6 @@ P(X_{j}|X_{i}) =
 \end{cases}
 \end{align}
 
-<hr>
 
 <div id="Histogram Localization-Inexact Motion-Entropy"><h3 id="Entropy" class="header"><a href="#Histogram Localization-Inexact Motion-Entropy">Entropy</a></h3></div>
 
@@ -229,7 +278,6 @@ The entropy formula for our case is the following:
 Entropy = \sum_{i=1}^5(-p(x_i) \cdot \log(p(x_i)))
 \end{align}
 
-<hr>
 
 <div id="Histogram Localization-Bayes Rule"><h2 id="Bayes Rule" class="header"><a href="#Histogram Localization-Bayes Rule">Bayes Rule</a></h2></div>
 
@@ -311,8 +359,6 @@ If we break down this formula:
 \(P(X_i^t)\) is the probability of being in cell \(X_i\) at time \(t\)
 
 </li></ul>
-<hr>
-
 <div id="Histogram Localization-Summary"><h2 id="Summary" class="header"><a href="#Histogram Localization-Summary">Summary</a></h2></div>
 
 <div id="Histogram Localization-Summary-Belief"><h3 id="Belief" class="header"><a href="#Histogram Localization-Summary-Belief">Belief</a></h3></div>
@@ -385,7 +431,6 @@ Suppose now that then only cells in the world are mentioned: \(X_k, X_l, X_i, X_
 P(X_k) = P(X_l) * P_{exact} + P(X_i) * P_{undershoot} + P(X_j) * P_{overshoot}
 \end{align}
 
-<hr>
 
 <div id="Histogram Localization-Localization Algorithm"><h2 id="Localization Algorithm" class="header"><a href="#Histogram Localization-Localization Algorithm">Localization Algorithm</a></h2></div>
 

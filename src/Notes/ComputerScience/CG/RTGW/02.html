@@ -38,6 +38,85 @@
 
 <hr>
 
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="02.html#WebGL Rendering Pipeline">WebGL Rendering Pipeline</a>
+
+<ul>
+<li>
+<a href="02.html#Vertex Buffer Objects (VBOs)">Vertex Buffer Objects (VBOs)</a>
+
+</li><li>
+<a href="02.html#Index Buffer Objects (IBOs)">Index Buffer Objects (IBOs)</a>
+
+</li><li>
+<a href="02.html#Vertex Shader">Vertex Shader</a>
+
+</li><li>
+<a href="02.html#Fragment Shader">Fragment Shader</a>
+
+</li><li>
+<a href="02.html#Framebuffer">Framebuffer</a>
+
+</li><li>
+<a href="02.html#Attributes">Attributes</a>
+
+</li><li>
+<a href="02.html#Uniform">Uniform</a>
+
+</li><li>
+<a href="02.html#Textures">Textures</a>
+
+</li><li>
+<a href="02.html#Varyings">Varyings</a>
+
+</li></ul>
+</li><li>
+<a href="02.html#Rendering in WebGL">Rendering in WebGL</a>
+
+<ul>
+<li>
+<a href="02.html#Defining a Geometry Using JavaScript Arrays">Defining a Geometry Using JavaScript Arrays</a>
+
+</li><li>
+<a href="02.html#Creating WebGL Buffers">Creating WebGL Buffers</a>
+
+</li><li>
+<a href="02.html#Associating Attributes to VBOs">Associating Attributes to VBOs</a>
+
+</li></ul>
+</li><li>
+<a href="02.html#Rendering">Rendering</a>
+
+<ul>
+<li>
+<a href="02.html#Drawing Functions">Drawing Functions</a>
+
+<ul>
+<li>
+[[#Using <code>drawArrays</code>|Using <code>drawArrays</code>]]
+
+</li><li>
+[[#Using <code>drawElements</code>|Using <code>drawElements</code>]]
+
+</li></ul>
+</li></ul>
+</li><li>
+<a href="02.html#Rendering a Square">Rendering a Square</a>
+
+</li><li>
+<a href="02.html#Vertex Array Objects">Vertex Array Objects</a>
+
+</li><li>
+[[#<code>drawElements</code> Modes|<code>drawElements</code> Modes]]
+
+</li><li>
+<a href="02.html#WebGL as a State Machine: Buffer Manipulation">WebGL as a State Machine: Buffer Manipulation</a>
+
+</li></ul>
+<hr>
+
 <div id="Rendering-WebGL Rendering Pipeline"><h2 id="WebGL Rendering Pipeline" class="header"><a href="#Rendering-WebGL Rendering Pipeline">WebGL Rendering Pipeline</a></h2></div>
 
 <p>
@@ -452,12 +531,10 @@ Once the program has been created, we populate our buffers:
 
 <pre javascript="">/** Draws square on center of clipspace x in (-1, 1), y in (-1, 1)
  *  0-&gt;(-0.5, 0.5)  3-&gt;(0.5, 0.5)
- *      +-------------+
  *      |           / |
  *      |        /    |
  *      |     /       |
  *      | /           |
- *      +-------------+
  *  1-&gt;(-0.5, -0.5)  2-&gt;(0.5, -0.5)
  *
  */

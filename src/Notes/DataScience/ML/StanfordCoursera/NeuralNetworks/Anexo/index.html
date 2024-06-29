@@ -38,6 +38,59 @@
 
 <hr>
 
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="index.html#Clasificación múltiple">Clasificación múltiple</a>
+
+</li><li>
+[[#Como podemos ver, los valores de \(y_j\) indican claramente a qué clase pertenece el ejemplo \(j\) (clase 3), mientras que la hipótesis \(h_\Theta(x_j)\) ofrece, para cada clase (columna) la probabilidad de que el ejemplo \(j\) pertenezca a esa clase.|Como podemos ver, los valores de \(y_j\) indican claramente a qué clase pertenece el ejemplo \(j\) (clase 3), mientras que la hipótesis \(h_\Theta(x_j)\) ofrece, para cada clase (columna) la probabilidad de que el ejemplo \(j\) pertenezca a esa clase.]]
+
+</li><li>
+<a href="index.html#Función de coste">Función de coste</a>
+
+<ul>
+<li>
+<a href="index.html#Notación">Notación</a>
+
+</li><li>
+<a href="index.html#Regularización">Regularización</a>
+
+</li><li>
+<a href="index.html#Múltiple Ejemplos">Múltiple Ejemplos</a>
+
+</li></ul>
+</li><li>
+<a href="https://albamr09.github.io/public/assests/nn_multi_ejemplos.svg"><img src="https://albamr09.github.io/public/assets/nn_multi_ejemplos.svg" alt="Red Neuronal con varios ejemplos" style="width:800px;height:600px"></a>
+
+</li><li>
+<a href="index.html#Retropropagación">Retropropagación</a>
+
+<ul>
+<li>
+<a href="index.html#Derivada de la función de coste">Derivada de la función de coste</a>
+
+</li><li>
+<a href="index.html#Capas intermedias">Capas intermedias</a>
+
+</li><li>
+<a href="index.html#Ejemplo de retropropagación">Ejemplo de retropropagación</a>
+
+</li></ul>
+</li><li>
+<a href="index.html#Algoritmo">Algoritmo</a>
+
+<ul>
+<li>
+<a href="index.html#Notación">Notación</a>
+
+</li><li>
+<a href="index.html#Pseudocódigo">Pseudocódigo</a>
+
+</li></ul>
+</li></ul>
+<hr>
+
 <ol>
 <li>
 <a href="index.html#Anexo-Clasificación múltiple">Clasificación múltiple</a>
@@ -52,8 +105,6 @@
 <a href="index.html#Anexo-Algoritmo">Algoritmo</a>
 
 </li></ol>
-<hr>
-
 <div id="Anexo-Clasificación múltiple"><h2 id="Clasificación múltiple" class="header"><a href="#Anexo-Clasificación múltiple">Clasificación múltiple</a></h2></div>
 
 <p>
@@ -70,8 +121,7 @@ De tal manera que ahora, cada salida \(y_j\) será un vector columna \(c\times1\
 
 <p>
 Como podemos ver, los valores de \(y_j\) indican claramente a qué clase pertenece el ejemplo \(j\) (clase 3), mientras que la hipótesis \(h_\Theta(x_j)\) ofrece, para cada clase (columna) la probabilidad de que el ejemplo \(j\) pertenezca a esa clase.
-</p><hr>
-<p></p>
+</p>
 
 <div id="Anexo-Función de coste"><h2 id="Función de coste" class="header"><a href="#Anexo-Función de coste">Función de coste</a></h2></div>
 
@@ -95,8 +145,6 @@ Sea \(k\) el número de capas y \(S_i\) el número de nodos en la capa \(i\).
 Sea \(Y=(y_{ij})\) una matriz \(c\times m\), donde \(m\) es el número de ejemplos y cada \(y_{j}\) es el vector columna \(c\times1\) de salida para el ejemplo \(j\).
 
 </li></ul>
-<hr>
-
 <p>
 Definimos la función de coste como sigue:
 </p>
@@ -171,8 +219,7 @@ Si generalizamos esto a \(m\) ejemplos tenemos que la salida de cada capa es una
 
 <p>
 <img src="https://albamr09.github.io/public/assets/nn_multi_ejemplos.svg" alt="Red Neuronal con varios ejemplos" style="width:800px;height:600px">
-</p><hr>
-<p></p>
+</p>
 
 <div id="Anexo-Retropropagación"><h2 id="Retropropagación" class="header"><a href="#Anexo-Retropropagación">Retropropagación</a></h2></div>
 
@@ -201,7 +248,6 @@ Normalmente en las capas intermedias, \(q\), nos referimos al término \(\frac{\
 </p>
 
 
-<hr>
 
 <div id="Anexo-Retropropagación-Derivada de la función de coste"><h3 id="Derivada de la función de coste" class="header"><a href="#Anexo-Retropropagación-Derivada de la función de coste">Derivada de la función de coste</a></h3></div>
 
@@ -214,7 +260,6 @@ A continuación explicamos cómo derivar la función de coste (<span id="Anexo-R
 </p>
 
 
-<hr>
 
 <div id="Anexo-Retropropagación-Capas intermedias"><h3 id="Capas intermedias" class="header"><a href="#Anexo-Retropropagación-Capas intermedias">Capas intermedias</a></h3></div>
 
@@ -230,7 +275,6 @@ Veamos, ahora, cómo llevar a cabo el <span id="Anexo-Retropropagación-Capas in
 <a href="Derivadas capas intermedias.html">Derivadas capas intermedias</a>
 </p>
 
-<hr>
 
 <div id="Anexo-Retropropagación-Ejemplo de retropropagación"><h3 id="Ejemplo de retropropagación" class="header"><a href="#Anexo-Retropropagación-Ejemplo de retropropagación">Ejemplo de retropropagación</a></h3></div>
 
@@ -239,7 +283,6 @@ Veamos, ahora, cómo llevar a cabo el <span id="Anexo-Retropropagación-Capas in
 </p>
 
 
-<hr>
 
 <div id="Anexo-Algoritmo"><h2 id="Algoritmo" class="header"><a href="#Anexo-Algoritmo">Algoritmo</a></h2></div>
 
