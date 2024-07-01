@@ -1,0 +1,270 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Operating System</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Operating System"><h1 id="Operating System" class="header"><a href="#Operating System">Operating System</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="12.html#Mathematical Operations">Mathematical Operations</a>
+
+<ul>
+<li>
+<a href="12.html#Multiplication">Multiplication</a>
+
+</li><li>
+<a href="12.html#Division">Division</a>
+
+</li><li>
+<a href="12.html#Square Root">Square Root</a>
+
+</li></ul>
+</li><li>
+<a href="12.html#Strings">Strings</a>
+
+</li><li>
+<a href="12.html#Memory Management">Memory Management</a>
+
+<ul>
+<li>
+<a href="12.html#Basic Memory Allocation Algorithm">Basic Memory Allocation Algorithm</a>
+
+</li><li>
+<a href="12.html#Improved Memory Allocation Algorithm">Improved Memory Allocation Algorithm</a>
+
+</li></ul>
+</li></ul>
+<hr>
+
+<p>
+The OS is designed to close gaps between the computer's hardware and software, making the computer system more accessible. Our OS is minimal, aiming at:
+</p>
+
+<ol>
+<li>
+Encapsulating low-level hardware-specific services in high-level programmer-friendly software services. 
+
+</li><li>
+Extending high-level languages with commonly used functions and abstract data types. The dividing line between an operating system in this sense and a standard class library is not clear.
+
+</li></ol>
+<p>
+Further, because the OS supports the execution of every program that runs on the computer, <span id="Operating System-it must be highly efficient"></span><strong id="it must be highly efficient">it must be highly efficient</strong>.
+</p>
+
+<p>
+Operating systems are usually written in a high-level language and compiled into binary form. Our OS is no exception—it is written in Jack, just like Unix was written in C.
+</p>
+
+<div id="Operating System-Mathematical Operations"><h2 id="Mathematical Operations" class="header"><a href="#Operating System-Mathematical Operations">Mathematical Operations</a></h2></div>
+
+<p>
+Normally, addition is implemented in hardware, at the ALU level, and subtraction is gained freely, using two's complement method. Other arithmetic operations can be handled either by hardware or by software, depending on cost/performance considerations. 
+</p>
+
+<p>
+As a rule, we seek algorithms whose running time is a polynomial function of the input's word size \(n\). Algorithms whose running time depends on the values of \(n\)-bit numbers are unacceptable, since these values are exponential in \(n\).
+</p>
+
+<div id="Operating System-Mathematical Operations-Multiplication"><h4 id="Multiplication" class="header"><a href="#Operating System-Mathematical Operations-Multiplication">Multiplication</a></h4></div>
+
+<p>
+On decimal notation, To compute \(356\) times \(73\), we line up the two numbers one on top of the other, right-justified. Next, we multiply \(356\) by \(3\). Next, we shift \(356\) to the left one position, and multiply \(3560\) by \(7\). The binary version of the multiplication procedure is illustrated in figure 12.1.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/os_multiplication_algorithm.png" alt="Multiplication Algorithm" style="width:600px">
+</p>
+
+<ol>
+<li>
+For each \(i\)-th bit of \(y\), we shift \(x\) \(i\) times to the left (same as multiplying \(x\) by \(2^i\)). 
+
+</li><li>
+We look at the \(i\)-th bit of \(y\): If it is \(1\), we add the shifted \(x\) to an accumulator; otherwise, we do nothing. 
+
+</li></ol>
+<p>
+Note that \(2 * shiftedx\) can be computed either by left-shifting the bitwise representation of \(shiftedx\) or by adding \(shiftedx\) to itself. Either operation lends itself to primitive hardware operations.
+</p>
+
+<p>
+The multiplication algorithm performs \(n\) iterations, where \(n\) is the bit width of the \(y\) input. In the Hack platform, the bit width of all data types is \(16\). If we assume that each iteration of the multiplication algorithm entails about ten Hack machine instructions, it follows that each multiplication operation will require at most \(160\) clock cycles
+</p>
+
+<div id="Operating System-Mathematical Operations-Division"><h4 id="Division" class="header"><a href="#Operating System-Mathematical Operations-Division">Division</a></h4></div>
+
+<p>
+We can try to subtract large chunks of \(y\)'s from \(x\) in each iteration. For example, suppose we have to divide \(175\) by \(3\). We start by asking: What is the largest number \(x = (90, 80, \cdots, 10)\), so that \(3 \cdot x \leq 175\). The answer is \(50\). This accelerated subtraction leaves a remainder of \(175 - 3 \cdot 50 = 25\). Moving along, we now ask: What is the largest number \(x = (9, 8, \cdots, 1)\), so that \(3 \cdot x \leq 25\)? We perform this steps until the remainder is less than \(3\). This technique is the rationale behind the dreaded school procedure known as long division.
+</p>
+
+<p>
+The binary version of this algorithm is identical, except that instead of accelerating the subtraction using powers of \(10\) we use powers of \(2\). Figure 12.2 presents another division algorithm which is as efficient, but more elegant and easier to implement.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/os_division_algorithm.png" alt="Division Algorithm" style="width:300px">
+</p>
+
+<p>
+Suppose we have to divide \(480\) by \(17\). The algorithm shown in figure 12.2 is based on the insight and so on. The depth of this recursion is bounded by the number of times \(y\) can be multiplied by \(2\) before reaching \(x\). This also happens to be, at most, the number of bits required to represent \(x\). 
+</p>
+
+<div id="Operating System-Mathematical Operations-Square Root"><h4 id="Square Root" class="header"><a href="#Operating System-Mathematical Operations-Square Root">Square Root</a></h4></div>
+
+<p>
+The square root function has two attractive properties. 
+</p>
+
+<ol>
+<li>
+It is monotonically increasing. 
+
+</li><li>
+Its inverse function, is a function that we already know how to compute efficiently, multiplication. 
+
+</li></ol>
+<p>
+Taken together, these properties imply that we have all we need to compute square roots efficiently, using a form of binary search. Figure 12.3 gives the details.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/os_sqrt_algorithm.png" alt="Sqrt Algorithm" style="width:500px">
+</p>
+
+<p>
+Since the number of iterations in the binary search that the algorithm performs is bound by \(\frac{n}{2}\) where \(n\) is the number of bits in \(x\), the algorithm's running time is \(O(n)\).
+</p>
+
+<div id="Operating System-Mathematical Operations-Strings"><h3 id="Strings" class="header"><a href="#Operating System-Mathematical Operations-Strings">Strings</a></h3></div>
+
+<p>
+Typically, the string abstraction is supplied by a <code>String</code> class that is part of the standard class library that supports the language.
+</p>
+
+<p>
+The more challenging <code>String</code> methods are those that convert integer values to strings and strings of digit characters to integer values.
+</p>
+
+<p>
+<span id="Operating System-Mathematical Operations-Strings-String representation of numbers"></span><strong id="String representation of numbers">String representation of numbers</strong>: When numbers are captured from an input device like a keyboard they are cast as strings of characters, each representing one of the digits \(0\) to \(9\). The subset of relevant characters is: 
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/number_string_representation.png" alt="Number-String Representation" style="width:500px">
+</p>
+
+<p>
+The integer value of character \(c\), where \(48 \leq c \leq 57\) is \(c - 48\). Conversely, the character code of the integer \(x\), where \(0 \leq x \leq 9\) is \(x + 48\). These conversion algorithms can be based on either iterative or recursive logic, so figure 12.4 presents one of each.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/string_integer_conversion_algorithm.png" alt="String-Integer Conversion" style="width:600px">
+</p>
+
+<div id="Operating System-Mathematical Operations-Memory Management"><h3 id="Memory Management" class="header"><a href="#Operating System-Mathematical Operations-Memory Management">Memory Management</a></h3></div>
+
+<p>
+Each time a program creates a new array or a new object, a memory block of a certain size must be allocated for representing the new array or object. And when the array or object is no longer needed, its RAM space may be recycled. These chores are done by two classical OS functions called <code>alloc</code> and <code>deAlloc</code>.
+</p>
+
+<p>
+The memory blocks for representing arrays and objects are carved from, and recycled back into, a designated RAM area called a <span id="Operating System-Mathematical Operations-Memory Management-heap"></span><strong id="heap">heap</strong>.
+</p>
+
+<p>
+The agent responsible for managing this resource is the operating system. When the OS starts running, it initializes a pointer named <code>heapBase</code>, containing the heap's base address in the RAM (in Jack, the heap starts just after the
+stack's end, with <code>heapBase=2048</code>). We’ll present two heap management algorithms: basic and improved.
+</p>
+
+<div id="Operating System-Mathematical Operations-Memory Management-Basic Memory Allocation Algorithm"><h4 id="Basic Memory Allocation Algorithm" class="header"><a href="#Operating System-Mathematical Operations-Memory Management-Basic Memory Allocation Algorithm">Basic Memory Allocation Algorithm</a></h4></div>
+
+<p>
+The data structure that this algorithm manages is a single pointer, named <code>free</code>, which points to the beginning of the heap segment that was not yet allocated. See figure 12.5a for the details. 
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/basic_memory_management_algorithm.png" alt="Basic Memory Management Algorithm" style="width:400px">
+</p>
+
+<p>
+The basic heap management scheme is clearly wasteful, as it never reclaims any memory space. 
+</p>
+
+<div id="Operating System-Mathematical Operations-Memory Management-Improved Memory Allocation Algorithm"><h4 id="Improved Memory Allocation Algorithm" class="header"><a href="#Operating System-Mathematical Operations-Memory Management-Improved Memory Allocation Algorithm">Improved Memory Allocation Algorithm</a></h4></div>
+
+<p>
+This algorithm manages a linked list of available memory segments, called <code>freeList</code> (see figure 12.5b). Each segment in the list begins with two housekeeping fields: the segment's length and a pointer to the next segment in the list.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/improved_memory_management_algorithm.png" alt="Improved Memory Management Algorithm" style="width:600px">
+</p>
+
+<p>
+When asked to allocate a memory block of a given size, the algorithm has to search the <code>freeList</code> for a suitable segment. There are two heuristics for doing this search.
+</p>
+
+<ol>
+<li>
+Best-fit: finds the shortest segment that is long enough for representing the required size
+
+</li><li>
+First-fit: finds the first segment that is long enough
+
+</li></ol>
+<p>
+Next, the length of this segment is updated in the <code>freeList</code>, reflecting the length of the part that remained after the allocation. If no memory was left in the segment, or if the remaining part is practically too small, the entire segment is eliminated from the <code>freeList</code>.
+</p>
+
+<p>
+When asked to reclaim the memory block of an unused object, the algorithm appends the deallocated block to the end of the <code>freeList</code>.
+</p>
+
+<p>
+Dynamic memory allocation algorithms like the one shown in figure 12.5b may create block fragmentation problems. Hence, a defragmentation operation should be considered, that is, merging memory areas that are physically adjacent in memory but logically split into different segments in the <code>freeList</code>. The defragmentation can be done each time an object is deallocated, when <code>alloc()</code> fails to find a block of the requested size, or according to some other, periodical ad hoc condition.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
