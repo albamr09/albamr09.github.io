@@ -259,6 +259,93 @@ When asked to reclaim the memory block of an unused object, the algorithm append
 <p>
 Dynamic memory allocation algorithms like the one shown in figure 12.5b may create block fragmentation problems. Hence, a defragmentation operation should be considered, that is, merging memory areas that are physically adjacent in memory but logically split into different segments in the <code>freeList</code>. The defragmentation can be done each time an object is deallocated, when <code>alloc()</code> fails to find a block of the requested size, or according to some other, periodical ad hoc condition.
 </p>
+
+<p>
+We end the discussion of memory management with two simple OS functions that have nothing to do with resource allocation. <code>Memory.peek(addr)</code> returns the value of the RAM at address <code>addr</code>, and <code>Memory.poke(addr,value)</code> sets the word in RAM address addr to value. These functions play a role in various OS services that manipulate the memory.
+</p>
+
+<div id="Operating System-Mathematical Operations-Graphical Output"><h3 id="Graphical Output" class="header"><a href="#Operating System-Mathematical Operations-Graphical Output">Graphical Output</a></h3></div>
+
+<p>
+Modern computers render graphical output like animation and video on high-resolution color screens, using optimized graphics drivers and dedicated graphical processing units (GPUs). In Nand to Tetris we abstract away most of this complexity, focusing instead on fundamental graphicsdrawing algorithms and techniques.
+</p>
+
+<p>
+We assume that the computer is connected to a physical black-and-white screen arranged as a grid of rows and columns, and at the intersection of each lies a pixel. By convention, the columns are numbered from left to right and the rows are numbered from top to bottom. Thus pixel \((0,0)\) is located at the screen’s top-left corner.
+</p>
+
+<p>
+We assume that the screen is connected to the computer system through a memory map—a dedicated RAM area in which each pixel is represented by one bit. The screen is refreshed from this memory map many times per second by a process that is external to the computer.
+</p>
+
+<p>
+The most basic operation that can be performed on the screen is drawing an individual pixel specified by \((x,y)\) coordinates. This is done by turning the corresponding bit in the memory map on or off. Other operations like drawing a line and drawing a circle are built on top of this basic operation. The graphics package maintains a current color that can be set to black or white. All the drawing operations use the current color. Since the RAM is an \(n\)-bit device, this operation requires reading and writing an n-bit value. See figure 12.6.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/draw_pixel_algorithm.png" alt="Algorithm to draw a pixel" style="width:400px">
+</p>
+
+<p>
+When asked to render a continuous "line" between two "points" on a grid made of discrete pixels, the best that we can possibly do is approximate the line by drawing a series of pixels along the imaginary line connecting the two points. The procedure for drawing a line from \((x1,y1)\) to \((x2,y2)\) starts by drawing the \((x1,y1)\) pixel and then zigzagging in the direction of \((x2,y2)\) until that pixel is reached. See figure 12.7.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/draw_line_algorithm.png" alt="Algorithm to draw a line" style="width:600px">
+</p>
+
+<p>
+Figure 12.8 presents an algorithm that uses three routines that we've already implemented: multiplication, square root, and line drawing.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/draw_circle_algorithm.png" alt="Algorithm to draw a circle" style="width:600px">
+</p>
+
+<p>
+The algorithm is based on drawing a sequence of horizontal lines (like the typical line \(ab\) in the figure), one for each row in the range \(y - r\) to \(y + r\). Since \(r\) is specified in pixels, the algorithm ends up drawing a line in every row along the circle's north-south diameter, resulting in a completely filled circle. A simple tweak can cause this algorithm to draw only the circle's outline, if so desired.
+</p>
+
+<div id="Operating System-Mathematical Operations-Character Output"><h3 id="Character Output" class="header"><a href="#Operating System-Mathematical Operations-Character Output">Character Output</a></h3></div>
+
+<p>
+The character sets that computers use are divided into printable and non-printable subsets. For each printable character in the Hack character set, an 11-row-by-8-column bitmap image was designed. Taken together, these images are
+called a font. To handle character spacing, each character image includes at least a \(1\)-pixel space before the next character in the row and at least a \(1\)-pixel space between adjacent rows (the exact spacing varies with the size and squiggles of individual characters). Figure 12.9 shows how our font renders the uppercase letter N.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/bitmap_font_example.png" alt="Bitmap Font Example" style="width:300px">
+</p>
+
+<p>
+Characters are usually displayed one after the other, from left to right, until the end of the line is reached. The character-writing package maintains a global cursor that keeps track of the screen location where the next character should be drawn. The cursor information consists of column and row counts, say, <code>cursor.col</code> and <code>cursor.row</code>.
+</p>
+
+<p>
+After a character has been displayed, we do <code>cursor.col++</code>. At the end of the row we do <code>cursor.row++</code> and <code>cursor.col = 0</code>. When the bottom of the screen is reached, there is a question of what to do next. Two possible actions are effecting a scrolling operation or clearing the screen and starting over by setting the cursor to \((0,0)\).
+</p>
+
+<div id="Operating System-Mathematical Operations-Keyboard Input"><h3 id="Keyboard Input" class="header"><a href="#Operating System-Mathematical Operations-Keyboard Input">Keyboard Input</a></h3></div>
+
+<p>
+Detecting which key is presently pressed is a hardware-specific operation that depends on the keyboard interface. In the Hack computer, the keyboard continuously refreshes a \(16\)-bit memory register whose address is kept in a pointer named <code>KBD</code>. If a key is currently pressed on the keyboard, that address contains the key’s character code; otherwise, it contains \(0\). This contract is used for implementing the keyPressed function shown in figure 12.10.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/key_pressed_algorithm.png" alt="Key Pressed Algorithm" style="width:600px">
+</p>
+
+<p>
+The elapsed time between the key pressed and the subsequent key released events is unpredictable. Hence, we have to write code that neutralizes this uncertainty. Also, when users press keys on the keyboard, we want to give feedback as to which keys have been pressed. Typically, we want to display some graphical cursor at the screen location where the next input goes, and, after some key has been pressed, we want to echo the inputted character by displaying its bitmap on the screen at the cursor location. All these actions are implemented by the <code>readChar</code> function.
+</p>
+
+<p>
+A multicharacter input typed by the user is considered final after the ENTER key has been pressed, yielding the newLine character. Until the ENTER key is pressed, the user should be allowed to backspace, delete, and retype previously typed characters. All these actions are accommodated by the <code>readLine</code> function.
+</p>
+
+<p>
+Our input-handling solutions are based on a cascading series of abstractions: The high-level program relies on the <code>readLine</code> abstraction, which relies on the <code>readChar</code> abstraction, which relies on the <code>keyPressed</code> abstraction, which relies on the <code>Memory.peek</code> abstraction, which relies on the hardware.
+</p>
 </div>
   
 
