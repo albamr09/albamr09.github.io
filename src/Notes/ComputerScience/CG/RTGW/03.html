@@ -486,6 +486,11 @@ of components.
 </li></ul>
 <div id="Lights-Goraud Shading with Phong Reflection Model"><h2 id="Goraud Shading with Phong Reflection Model" class="header"><a href="#Lights-Goraud Shading with Phong Reflection Model">Goraud Shading with Phong Reflection Model</a></h2></div>
 
+<p>
+Different from the Lambertian reflection model, the Phong reflection model considers three properties: the ambient, diffuse, and specular, and ultimately yields a more realistic reflection. So now both light and material have three properties: the ambient, diffuse, and specular colors.
+</p>
+
+
 <div id="Lights-Goraud Shading with Phong Reflection Model-Vertex Shader"><h3 id="Vertex Shader" class="header"><a href="#Lights-Goraud Shading with Phong Reflection Model-Vertex Shader">Vertex Shader</a></h3></div>
 
 <p>
@@ -515,16 +520,41 @@ Where:
 
 </li></ul>
 <p>
+So:
+</p>
+
+
+<pre>finalVertexColor = Ia + Id + Is;
+
+// Ambient
+Ia = lightAmbient * materialAmbient;
+// Diffuse (following lambertian model)
+Id = lightDiffuse * materialDiffuse * lambertCoefficient;
+// Specular
+Is = lightSpecular * materialSpecular * specularCoefficient;
+</pre>
+
+<p>
+And based on our knowledge of the Phong reflection model (the final equation we saw above):
+</p>
+
+<pre>float specular = pow(max(dot(lightReflection, eyeVector), 0.0), shininess);
+</pre>
+
+<p>
 And we output the computed color <code>vVertexColor</code> to the fragment shader.
 </p>
 
 <pre>#version 300 es
+precision mediump float;
 uniform mat4 uModelViewMatrix;
 uniform mat4 uProjectionMatrix;
 uniform mat4 uNormalMatrix;
-uniform vec3 uLightDirection;     // incoming light source direction
-uniform vec3 uLightDiffuse;       // light diffuse component
-uniform vec3 uMaterialDiffuse;    // material diffuse color
+// Light and materials
+uniform vec3 uLightDirection;
+uniform vec4 uLightAmbient;
+uniform vec4 uLightDiffuse;
+uniform vec4 uMaterialDiffuse;
 
 in vec3 aVertexPosition;
 in vec3 aVertexNormal;
@@ -532,62 +562,34 @@ in vec3 aVertexNormal;
 out vec4 vVertexColor;
 
 void main(void) {
-  vec3 normal = normalize(vec3(uNormalMatrix * vec4(aVertexNormal, 1.0)));
-  vec3 lightDirection = normalize(uLightDirection);
+  // Normal
+  vec3 N = vec3(uNormalMatrix * vec4(aVertexNormal, 1.0));
+  // Light direction
+  vec3 light = vec3(uModelViewMatrix * vec4(uLightDirection, 0.0));
+  vec3 L = normalize(light);
   
-  float LambertianTerm = dot(normal, -lightDirection);
+  // Ambient and diffuse colors
+  float lambertTerm = dot(N,-L);
+  vec4 Ia = uMaterialDiffuse * uLightAmbient;
+  vec4 Id = uMaterialDiffuse * uLightDiffuse * lambertTerm;
   
-  vVertexColor = vec4(uMaterialDiffuse * uLightDiffuse * LambertianTerm, 1.0);
+  // Combine ambient and diffuse
+  vVertexColor = vec4(vec3(Ia + Id), 1.0);
   
   gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);
 }
 </pre>
 
 <p>
-As you can see first we normalize the vertex normal, named <code>normal</code> and we do the same with the light direction and we stored the normalized value under <code>lightDirection</code>.
+Negative light contributions are not physically realistic. Light does not contribute negatively to the color intensity; it either contributes positively or not at all. When the surface is concave, some parts of the surface might face away from the light source. The light direction vector (pointing from the surface to the light source) and the normal vector (pointing out from the surface) will form an obtuse angle:
 </p>
 
 <p>
-Once normalized we compute the <code>LambertianTerm</code> which is basically \(\cos \emptyset\), that is the dot product of the normalized vertex normal (<code>normal</code>) and the normalized light direction (<code>-lightDirection</code>).
+<img src="https://albamr09.github.io/public/assets/goraud_shading_phong_model_lambert_coefficient.png" alt="Lamberti Coefficient Correction" style="height:400px">
 </p>
 
 <p>
-The final color is computed as follows:
-</p>
-
-\begin{align}
-\text{vVertexColor} = \text{uMaterialDiffuse} * \text{uLightDiffuse} * (\text{normal} \circ \text{-lightDirection})
-\end{align}
-
-\begin{align}
-= \text{uMaterialDiffuse} * \text{uLightDiffuse} * \text{LambertianTerm}
-\end{align}
-
-<p>
-There are three uniforms that we haven’t discussed yet:
-</p>
-
-<pre>uniform mat4 uModelViewMatrix;
-uniform mat4 uProjectionMatrix;
-uniform mat4 uNormalMatrix;
-</pre>
-
-<p>
-We can see that these three uniforms are 4x4 matrices. These matrices are required in the vertex shader to calculate the location for vertices and normals whenever we move the camera. So, for example, when we compute the normalized vertex normals, first we transform them using <code>uNormalMatrix</code>:
-</p>
-
-<pre>vec3(uNormalMatrix * vec4(aVertexNormal, 1.0));
-</pre>
-
-<p>
-And then we normalize the result. And to compute the final vertex position we perform the following computation:
-</p>
-
-<pre>gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);
-</pre>
-
-<p>
-This line calculates the transformed vertex position. <code>gl_Position</code> is a special output variable that stores the transformed vertex position. So these uniforms and operations deal with camera and world transformations (rotation, scale, and translation).
+The dot product between these two vectors (\(N \circ L\), where \(N\) is the normal and \(L\) is the light direction) will be negative because the cosine of an obtuse angle is negative. To ensure the Lambertian term contributes positively to the diffuse reflection, we clamp the dot product to the range \([0, 1]\) using the <code>clamp</code> function. By clamping to zero, we discard these unrealistic negative values.
 </p>
 
 <div id="Lights-Goraud Shading with Phong Reflection Model-Fragment Shader"><h3 id="Fragment Shader" class="header"><a href="#Lights-Goraud Shading with Phong Reflection Model-Fragment Shader">Fragment Shader</a></h3></div>
@@ -666,6 +668,10 @@ void main(void) {
   fragColor = vVertexColor;
 }
 </pre>
+
+<p>
+Note that the <code>uModelViewMatrix</code> matrix contains the Model-View transformation matrix. We will see how all this works in Chapter 4, Cameras. For now, suffice to say that this matrix allows us to update vertices' positions, and in this example, the light's position as well.
+</p>
 </div>
   
 
