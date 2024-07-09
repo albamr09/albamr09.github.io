@@ -100,19 +100,24 @@
 
 </li></ul>
 </li><li>
-<a href="03.html#Goraud Shading with Phong Reflection Model">Goraud Shading with Phong Reflection Model</a>
+<a href="03.html#Goraud Shading in Practice">Goraud Shading in Practice</a>
+
+<ul>
+<li>
+<a href="03.html#With Phong Reflection Model">With Phong Reflection Model</a>
 
 <ul>
 <li>
 <a href="03.html#Vertex Shader">Vertex Shader</a>
 
+</li></ul>
 </li><li>
 <a href="03.html#Fragment Shader">Fragment Shader</a>
 
-</li></ul>
 </li><li>
-<a href="03.html#Goraud Shading with Lambertian Reflection Model">Goraud Shading with Lambertian Reflection Model</a>
+<a href="03.html#With Lambertian Reflection Model">With Lambertian Reflection Model</a>
 
+</li></ul>
 </li></ul>
 <hr>
 
@@ -484,21 +489,22 @@ of components.
 <code>reflect(t, n)</code>: Reflects the \(t\) vector along the \(n\) vector.
 
 </li></ul>
-<div id="Lights-Goraud Shading with Phong Reflection Model"><h2 id="Goraud Shading with Phong Reflection Model" class="header"><a href="#Lights-Goraud Shading with Phong Reflection Model">Goraud Shading with Phong Reflection Model</a></h2></div>
+<div id="Lights-Goraud Shading in Practice"><h2 id="Goraud Shading in Practice" class="header"><a href="#Lights-Goraud Shading in Practice">Goraud Shading in Practice</a></h2></div>
+
+<div id="Lights-Goraud Shading in Practice-With Phong Reflection Model"><h3 id="With Phong Reflection Model" class="header"><a href="#Lights-Goraud Shading in Practice-With Phong Reflection Model">With Phong Reflection Model</a></h3></div>
 
 <p>
-Different from the Lambertian reflection model, the Phong reflection model considers three properties: the ambient, diffuse, and specular, and ultimately yields a more realistic reflection. So now both light and material have three properties: the ambient, diffuse, and specular colors.
+Different from the Lambertian reflection model, the Phong reflection model considers three properties: the <span id="Lights-Goraud Shading in Practice-With Phong Reflection Model-ambient"></span><strong id="ambient">ambient</strong>, <span id="Lights-Goraud Shading in Practice-With Phong Reflection Model-diffuse"></span><strong id="diffuse">diffuse</strong>, and <span id="Lights-Goraud Shading in Practice-With Phong Reflection Model-specular"></span><strong id="specular">specular</strong>, and ultimately yields a more realistic reflection. So now both light and material have three properties: the ambient, diffuse, and specular colors.
 </p>
 
-
-<div id="Lights-Goraud Shading with Phong Reflection Model-Vertex Shader"><h3 id="Vertex Shader" class="header"><a href="#Lights-Goraud Shading with Phong Reflection Model-Vertex Shader">Vertex Shader</a></h3></div>
+<div id="Lights-Goraud Shading in Practice-With Phong Reflection Model-Vertex Shader"><h4 id="Vertex Shader" class="header"><a href="#Lights-Goraud Shading in Practice-With Phong Reflection Model-Vertex Shader">Vertex Shader</a></h4></div>
 
 <p>
 Let's cover a sample vertex shader. In this example we are applying Goraud Shading (we compute the color on the vertex shader and the pass it as a <code>varying</code> to the fragment shader). And in order to compute the color we use the Phong reflection model. That is the color is computed as follows:
 </p>
 
 \begin{align}
-F = C_lC_m (-L \circ N) = C_l C_m (|-L||N| \cos \emptyset) = C_l C_m (\cos \emptyset)
+F_s = C_lC_m (R \circ E) = C_lC_m (|R||E| \cos \emptyset) = C_l C_m (\cos \emptyset)^n
 \end{align}
 
 <p>
@@ -513,18 +519,17 @@ Where:
 <code>uMaterialDiffuse</code> is \(C_m\)
 
 </li><li>
-<code>aVertexNormal</code> is \(N\)
+<code>eyeVector</code> is \(E\)
 
 </li><li>
-<code>uLightDirection</code> is \(L\)
+<code>reflect(uLightDirection, N)</code> is \(R\)
 
 </li></ul>
 <p>
-So:
+So the final colo is computed as follows:
 </p>
 
-
-<pre>finalVertexColor = Ia + Id + Is;
+<pre javascript="">finalVertexColor = Ia + Id + Is;
 
 // Ambient
 Ia = lightAmbient * materialAmbient;
@@ -542,7 +547,7 @@ And based on our knowledge of the Phong reflection model (the final equation we 
 </pre>
 
 <p>
-And we output the computed color <code>vVertexColor</code> to the fragment shader.
+And we output the computed color <code>vVertexColor</code> to the fragment shader. Note that not all logic is shown on this code:
 </p>
 
 <pre>#version 300 es
@@ -554,7 +559,7 @@ uniform mat4 uNormalMatrix;
 uniform vec3 uLightDirection;
 uniform vec4 uLightAmbient;
 uniform vec4 uLightDiffuse;
-uniform vec4 uMaterialDiffuse;
+uniform vec4 uLightSpecular;
 
 in vec3 aVertexPosition;
 in vec3 aVertexNormal;
@@ -568,13 +573,17 @@ void main(void) {
   vec3 light = vec3(uModelViewMatrix * vec4(uLightDirection, 0.0));
   vec3 L = normalize(light);
   
-  // Ambient and diffuse colors
-  float lambertTerm = dot(N,-L);
+  // Ambient colors
   vec4 Ia = uMaterialDiffuse * uLightAmbient;
+  // Diffuse colors
+  float lambertTerm = dot(N,-L);
   vec4 Id = uMaterialDiffuse * uLightDiffuse * lambertTerm;
+  // Specular colors
+  float specular = pow(max(dot(lightReflection, eyeVector), 0.0), shininess);
+  vec4 Is = uMaterialDiffuse * uLightSpecular * specular;
   
   // Combine ambient and diffuse
-  vVertexColor = vec4(vec3(Ia + Id), 1.0);
+  vVertexColor = vec4(vec3(Ia + Id + Is), 1.0);
   
   gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);
 }
@@ -585,14 +594,14 @@ Negative light contributions are not physically realistic. Light does not contri
 </p>
 
 <p>
-<img src="https://albamr09.github.io/public/assets/goraud_shading_phong_model_lambert_coefficient.png" alt="Lamberti Coefficient Correction" style="height:400px">
+<img src="https://albamr09.github.io/public/assets/goraud_shading_phong_model_lambert_coefficient.png" alt="Lambert Coefficient Correction" style="height:400px">
 </p>
 
 <p>
 The dot product between these two vectors (\(N \circ L\), where \(N\) is the normal and \(L\) is the light direction) will be negative because the cosine of an obtuse angle is negative. To ensure the Lambertian term contributes positively to the diffuse reflection, we clamp the dot product to the range \([0, 1]\) using the <code>clamp</code> function. By clamping to zero, we discard these unrealistic negative values.
 </p>
 
-<div id="Lights-Goraud Shading with Phong Reflection Model-Fragment Shader"><h3 id="Fragment Shader" class="header"><a href="#Lights-Goraud Shading with Phong Reflection Model-Fragment Shader">Fragment Shader</a></h3></div>
+<div id="Lights-Goraud Shading in Practice-Fragment Shader"><h3 id="Fragment Shader" class="header"><a href="#Lights-Goraud Shading in Practice-Fragment Shader">Fragment Shader</a></h3></div>
 
 <p>
 The fragment shader is very simple. We just assign the <code>vVertexColor</code> varying to the <code>fragColor</code> output variable.
@@ -619,10 +628,37 @@ void main() {
 Remember that the value of the <code>vVertexColor</code> varying will be different from the one calculated in the vertex shader since WebGL will interpolate it by taking the corresponding calculated colors for the vertices surrounding the correspondent fragment (pixel).
 </p>
 
-<div id="Lights-Goraud Shading with Lambertian Reflection Model"><h2 id="Goraud Shading with Lambertian Reflection Model" class="header"><a href="#Lights-Goraud Shading with Lambertian Reflection Model">Goraud Shading with Lambertian Reflection Model</a></h2></div>
+<div id="Lights-Goraud Shading in Practice-With Lambertian Reflection Model"><h3 id="With Lambertian Reflection Model" class="header"><a href="#Lights-Goraud Shading in Practice-With Lambertian Reflection Model">With Lambertian Reflection Model</a></h3></div>
 
 <p>
 The Lambertian reflection model only considers the interaction of diffuse material and diffuse light properties. In short, we assign the final color as follows:
+</p>
+
+
+\begin{align}
+F_d = C_lC_m (-L \circ N) = C_lC_m (|-L||N| \cos \emptyset) = C_l C_m (\cos \emptyset)
+\end{align}
+
+<p>
+Where:
+</p>
+
+<ul>
+<li>
+<code>uLightDiffuse</code> is \(C_l\)
+
+</li><li>
+<code>uMaterialDiffuse</code> is \(C_m\)
+
+</li><li>
+<code>aVertexNormal</code> is \(N\)
+
+</li><li>
+<code>uLightDirection</code> is \(L\)
+
+</li></ul>
+<p>
+These can be translated onto a vertex shader as follows:
 </p>
 
 <pre>#version 300 es
