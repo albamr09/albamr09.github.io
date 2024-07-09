@@ -110,10 +110,10 @@
 <li>
 <a href="03.html#Vertex Shader">Vertex Shader</a>
 
-</li></ul>
 </li><li>
 <a href="03.html#Fragment Shader">Fragment Shader</a>
 
+</li></ul>
 </li><li>
 <a href="03.html#With Lambertian Reflection Model">With Lambertian Reflection Model</a>
 
@@ -601,7 +601,7 @@ Negative light contributions are not physically realistic. Light does not contri
 The dot product between these two vectors (\(N \circ L\), where \(N\) is the normal and \(L\) is the light direction) will be negative because the cosine of an obtuse angle is negative. To ensure the Lambertian term contributes positively to the diffuse reflection, we clamp the dot product to the range \([0, 1]\) using the <code>clamp</code> function. By clamping to zero, we discard these unrealistic negative values.
 </p>
 
-<div id="Lights-Goraud Shading in Practice-Fragment Shader"><h3 id="Fragment Shader" class="header"><a href="#Lights-Goraud Shading in Practice-Fragment Shader">Fragment Shader</a></h3></div>
+<div id="Lights-Goraud Shading in Practice-With Phong Reflection Model-Fragment Shader"><h4 id="Fragment Shader" class="header"><a href="#Lights-Goraud Shading in Practice-With Phong Reflection Model-Fragment Shader">Fragment Shader</a></h4></div>
 
 <p>
 The fragment shader is very simple. We just assign the <code>vVertexColor</code> varying to the <code>fragColor</code> output variable.
