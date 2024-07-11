@@ -575,12 +575,16 @@ void main(void) {
   
   // Ambient colors
   vec4 Ia = uMaterialDiffuse * uLightAmbient;
-  // Diffuse colors
   float lambertTerm = dot(N,-L);
-  vec4 Id = uMaterialDiffuse * uLightDiffuse * lambertTerm;
-  // Specular colors
-  float specular = pow(max(dot(lightReflection, eyeVector), 0.0), shininess);
-  vec4 Is = uMaterialDiffuse * uLightSpecular * specular;
+  // If this value is positive the cos between the surface normal and the negative light direction is positive, that is the angle is between 0º and 90º or between 270º and 360º
+  // which means the surface is facing the light
+  if (lambertTerm &gt; 0.0) {
+    // Diffuse colors
+    vec4 Id = uMaterialDiffuse * uLightDiffuse * lambertTerm;
+    // Specular colors: note we retrieve the positive value for the dot product between R and E
+    float specular = pow(max(dot(lightReflection, eyeVector), 0.0), shininess);
+    vec4 Is = uMaterialDiffuse * uLightSpecular * specular;
+  }
   
   // Combine ambient and diffuse
   vVertexColor = vec4(vec3(Ia + Id + Is), 1.0);
@@ -588,6 +592,8 @@ void main(void) {
   gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);
 }
 </pre>
+
+<div id="Lights-Goraud Shading in Practice-With Phong Reflection Model-Vertex Shader-Light Reflection"><h5 id="Light Reflection" class="header"><a href="#Lights-Goraud Shading in Practice-With Phong Reflection Model-Vertex Shader-Light Reflection">Light Reflection</a></h5></div>
 
 <p>
 Negative light contributions are not physically realistic. Light does not contribute negatively to the color intensity; it either contributes positively or not at all. When the surface is concave, some parts of the surface might face away from the light source. The light direction vector (pointing from the surface to the light source) and the normal vector (pointing out from the surface) will form an obtuse angle:
@@ -599,6 +605,10 @@ Negative light contributions are not physically realistic. Light does not contri
 
 <p>
 The dot product between these two vectors (\(N \circ L\), where \(N\) is the normal and \(L\) is the light direction) will be negative because the cosine of an obtuse angle is negative. To ensure the Lambertian term contributes positively to the diffuse reflection, we clamp the dot product to the range \([0, 1]\) using the <code>clamp</code> function. By clamping to zero, we discard these unrealistic negative values.
+</p>
+
+<p>
+Also note how we check for \(\cos (\theta)\) to be positive where \(\theta\) is the angle between the negative light direction \(-L\) and the surface normal \(N\). As we have said on the example this means the surface faces the light. If the surface does not face the light it should not contribute to the diffuse reflection nor specular component of the lighting.
 </p>
 
 <div id="Lights-Goraud Shading in Practice-With Phong Reflection Model-Fragment Shader"><h4 id="Fragment Shader" class="header"><a href="#Lights-Goraud Shading in Practice-With Phong Reflection Model-Fragment Shader">Fragment Shader</a></h4></div>
