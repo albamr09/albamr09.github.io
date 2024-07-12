@@ -100,11 +100,7 @@
 
 </li></ul>
 </li><li>
-<a href="03.html#Goraud%20Shading%20in%20Practice">Goraud Shading in Practice</a>
-
-<ul>
-<li>
-<a href="03.html#With%20Phong%20Reflection%20Model">With Phong Reflection Model</a>
+<a href="03.html#Goraud%20Shading%20with%20Phong%20Reflection%20Model">Goraud Shading with Phong Reflection Model</a>
 
 <ul>
 <li>
@@ -120,9 +116,11 @@
 
 </li></ul>
 </li><li>
-<a href="03.html#With%20Lambertian%20Reflection%20Model">With Lambertian Reflection Model</a>
+<a href="03.html#Goraud%20Shading%20with%20Lambertian%20Reflection%20Model">Goraud Shading with Lambertian Reflection Model</a>
 
-</li></ul>
+</li><li>
+<a href="03.html#Phong%20Shading%20with%20Phong%20Lighting%20in%20Practice">Phong Shading with Phong Lighting in Practice</a>
+
 </li></ul>
 <hr>
 
@@ -494,15 +492,13 @@ of components.
 <code>reflect(t, n)</code>: Reflects the \(t\) vector along the \(n\) vector.
 
 </li></ul>
-<div id="Lights-Goraud Shading in Practice"><h2 id="Goraud Shading in Practice" class="header"><a href="#Lights-Goraud Shading in Practice">Goraud Shading in Practice</a></h2></div>
-
-<div id="Lights-Goraud Shading in Practice-With Phong Reflection Model"><h3 id="With Phong Reflection Model" class="header"><a href="#Lights-Goraud Shading in Practice-With Phong Reflection Model">With Phong Reflection Model</a></h3></div>
+<div id="Lights-Goraud Shading with Phong Reflection Model"><h2 id="Goraud Shading with Phong Reflection Model" class="header"><a href="#Lights-Goraud Shading with Phong Reflection Model">Goraud Shading with Phong Reflection Model</a></h2></div>
 
 <p>
-Different from the Lambertian reflection model, the Phong reflection model considers three properties: the <span id="Lights-Goraud Shading in Practice-With Phong Reflection Model-ambient"></span><strong id="ambient">ambient</strong>, <span id="Lights-Goraud Shading in Practice-With Phong Reflection Model-diffuse"></span><strong id="diffuse">diffuse</strong>, and <span id="Lights-Goraud Shading in Practice-With Phong Reflection Model-specular"></span><strong id="specular">specular</strong>, and ultimately yields a more realistic reflection. So now both light and material have three properties: the ambient, diffuse, and specular colors.
+Different from the Lambertian reflection model, the Phong reflection model considers three properties: the <span id="Lights-Goraud Shading with Phong Reflection Model-ambient"></span><strong id="ambient">ambient</strong>, <span id="Lights-Goraud Shading with Phong Reflection Model-diffuse"></span><strong id="diffuse">diffuse</strong>, and <span id="Lights-Goraud Shading with Phong Reflection Model-specular"></span><strong id="specular">specular</strong>, and ultimately yields a more realistic reflection. So now both light and material have three properties: the ambient, diffuse, and specular colors.
 </p>
 
-<div id="Lights-Goraud Shading in Practice-With Phong Reflection Model-Vertex Shader"><h4 id="Vertex Shader" class="header"><a href="#Lights-Goraud Shading in Practice-With Phong Reflection Model-Vertex Shader">Vertex Shader</a></h4></div>
+<div id="Lights-Goraud Shading with Phong Reflection Model-Vertex Shader"><h3 id="Vertex Shader" class="header"><a href="#Lights-Goraud Shading with Phong Reflection Model-Vertex Shader">Vertex Shader</a></h3></div>
 
 <p>
 Let's cover a sample vertex shader. In this example we are applying Goraud Shading (we compute the color on the vertex shader and the pass it as a <code>varying</code> to the fragment shader). And in order to compute the color we use the Phong reflection model. That is the color is computed as follows:
@@ -598,7 +594,7 @@ void main(void) {
 }
 </pre>
 
-<div id="Lights-Goraud Shading in Practice-With Phong Reflection Model-Vertex Shader-Light Reflection"><h5 id="Light Reflection" class="header"><a href="#Lights-Goraud Shading in Practice-With Phong Reflection Model-Vertex Shader-Light Reflection">Light Reflection</a></h5></div>
+<div id="Lights-Goraud Shading with Phong Reflection Model-Vertex Shader-Light Reflection"><h4 id="Light Reflection" class="header"><a href="#Lights-Goraud Shading with Phong Reflection Model-Vertex Shader-Light Reflection">Light Reflection</a></h4></div>
 
 <p>
 Negative light contributions are not physically realistic. Light does not contribute negatively to the color intensity; it either contributes positively or not at all. When the surface is concave, some parts of the surface might face away from the light source. The light direction vector (pointing from the surface to the light source) and the normal vector (pointing out from the surface) will form an obtuse angle:
@@ -616,7 +612,7 @@ The dot product between these two vectors (\(N \circ L\), where \(N\) is the nor
 Also note how we check for \(\cos (\theta)\) to be positive where \(\theta\) is the angle between the negative light direction \(-L\) and the surface normal \(N\). As we have said on the example this means the surface faces the light. If the surface does not face the light it should not contribute to the diffuse reflection nor specular component of the lighting.
 </p>
 
-<div id="Lights-Goraud Shading in Practice-With Phong Reflection Model-Fragment Shader"><h4 id="Fragment Shader" class="header"><a href="#Lights-Goraud Shading in Practice-With Phong Reflection Model-Fragment Shader">Fragment Shader</a></h4></div>
+<div id="Lights-Goraud Shading with Phong Reflection Model-Fragment Shader"><h3 id="Fragment Shader" class="header"><a href="#Lights-Goraud Shading with Phong Reflection Model-Fragment Shader">Fragment Shader</a></h3></div>
 
 <p>
 The fragment shader is very simple. We just assign the <code>vVertexColor</code> varying to the <code>fragColor</code> output variable.
@@ -643,7 +639,7 @@ void main() {
 Remember that the value of the <code>vVertexColor</code> varying will be different from the one calculated in the vertex shader since WebGL will interpolate it by taking the corresponding calculated colors for the vertices surrounding the correspondent fragment (pixel).
 </p>
 
-<div id="Lights-Goraud Shading in Practice-With Lambertian Reflection Model"><h3 id="With Lambertian Reflection Model" class="header"><a href="#Lights-Goraud Shading in Practice-With Lambertian Reflection Model">With Lambertian Reflection Model</a></h3></div>
+<div id="Lights-Goraud Shading with Lambertian Reflection Model"><h2 id="Goraud Shading with Lambertian Reflection Model" class="header"><a href="#Lights-Goraud Shading with Lambertian Reflection Model">Goraud Shading with Lambertian Reflection Model</a></h2></div>
 
 <p>
 The Lambertian reflection model only considers the interaction of diffuse material and diffuse light properties. In short, we assign the final color as follows:
@@ -723,6 +719,91 @@ void main(void) {
 <p>
 Note that the <code>uModelViewMatrix</code> matrix contains the Model-View transformation matrix. We will see how all this works in Chapter 4, Cameras. For now, suffice to say that this matrix allows us to update vertices' positions, and in this example, the light's position as well.
 </p>
+
+<div id="Lights-Phong Shading with Phong Lighting in Practice"><h2 id="Phong Shading with Phong Lighting in Practice" class="header"><a href="#Lights-Phong Shading with Phong Lighting in Practice">Phong Shading with Phong Lighting in Practice</a></h2></div>
+
+<p>
+The Phong interpolation calculates the final color for every fragment. This means that the calculation of the ambient, diffuse, and specular terms in the Phong model are performed in the fragment shader instead of the vertex shader.
+</p>
+
+<p>
+This is computationally more intensive than performing a simple interpolation like with Goraud shading. However, we obtain a scene that seems more realistic.
+</p>
+
+<p>
+Whereas before we had a normal per vertex, now we need to generate a normal for every pixel so that we can calculate the Lambert coefficient for each fragment. We do so by interpolating the normals that we pass to the fragment shader.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/normal_interpolation_fragment_shader.png" alt="Normal Pixel Interpolation" style="width:500px">
+</p>
+
+<p>
+Now, let's take a look at the <span id="Lights-Phong Shading with Phong Lighting in Practice-vertex shader"></span><strong id="vertex shader">vertex shader</strong> under Phong shading:
+</p>
+
+<pre>#version 300 es
+precision mediump float;
+uniform mat4 uModelViewMatrix;
+uniform mat4 uProjectionMatrix;
+uniform mat4 uNormalMatrix;
+
+in vec3 aVertexPosition;
+in vec3 aVertexNormal;
+
+out vec3 vNormal;
+out vec3 vEyeVector;
+
+void main(void) {
+  vec4 vertex = uModelViewMatrix * vec4(aVertexPosition, 1.0);
+  vNormal = vec3(uNormalMatrix * vec4(aVertexNormal, 1.0));
+  vEyeVector = -vec3(vertex.xyz);
+  gl_Position = uProjectionMatrix * uModelViewMatrix *
+  vec4(aVertexPosition, 1.0);
+}
+</pre>
+
+<p>
+We are using two varyings to pass information to the <span id="Lights-Phong Shading with Phong Lighting in Practice-fragment shader"></span><strong id="fragment shader">fragment shader</strong>. Next we look at the fragment shader, where we can see that it is very similar to the vertex shader for the Phong lighting model.
+</p>
+
+<pre>#version 300 es
+precision mediump float;
+uniform float uShininess;
+uniform vec3 uLightDirection;
+uniform vec4 uLightAmbient;
+uniform vec4 uLightDiffuse;
+uniform vec4 uLightSpecular;
+uniform vec4 uMaterialAmbient;
+uniform vec4 uMaterialDiffuse;
+uniform vec4 uMaterialSpecular;
+
+in vec3 vNormal;
+in vec3 vEyeVector;
+
+out vec4 fragColor;
+
+void main(void) {
+  vec3 L = normalize(uLightDirection);
+  vec3 N = normalize(vNormal);
+
+  float lambertTerm = dot(N, -L);
+
+  vec4 Ia = uLightAmbient * uMaterialAmbient;
+
+  vec4 Id = vec4(0.0, 0.0, 0.0, 1.0);
+  vec4 Is = vec4(0.0, 0.0, 0.0, 1.0);
+
+  if (lambertTerm &gt; 0.0) {
+    Id = uLightDiffuse * uMaterialDiffuse * lambertTerm;
+    vec3 E = normalize(vEyeVector);
+    vec3 R = reflect(L, N);
+    float specular = pow( max(dot(R, E), 0.0), uShininess);
+    Is = uLightSpecular * uMaterialSpecular * specular;
+  }
+  fragColor = vec4(vec3(Ia + Id + Is), 1.0);
+}
+</pre>
 </div>
   
 
