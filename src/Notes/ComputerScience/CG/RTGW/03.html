@@ -1015,6 +1015,7 @@ program.uShininess = gl.getUniformLocation(program, "uShininess");
 <p>
 Here, we have used the following WebGL API functions:
 </p>
+
 <table>
 <thead>
 <tr>
@@ -1045,6 +1046,40 @@ This function receives the current program object and a string that contains the
 </tr>
 </tbody>
 </table>
+
+<p>
+We can use the <span id="Lights-How To Create a Program-layout qualifier"></span><strong id="layout qualifier">layout qualifier</strong> to look up resource locations. So instead of using <code>getAttribLocation</code>:
+</p>
+
+<pre javascript="">const vertexPosition = gl.getAttribLocation(program, 'aVertexPosition');
+gl.enableVertexAttribArray(vertexPosition);
+</pre>
+
+<p>
+We define the attribute's index:
+</p>
+
+<pre javascript="">const vertexPosition = 0;
+gl.enableVertexAttribArray(vertexPosition);
+const colorLocation = 1;
+gl.enableVertexAttribArray(colorLocation);
+</pre>
+
+<p>
+And so the vertex shader becomes:
+</p>
+
+<pre javascript="">#version 300 es
+layout (location=0) in vec4 aVertexPosition;
+layout (location=1) in vec3 aVertexColor;
+
+out vec3 vVertexColor;
+
+void main() {
+  vVertexColor = aVertexColor;
+  gl_Position = aVertexPosition;
+}
+</pre>
 </div>
   
 
