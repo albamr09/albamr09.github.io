@@ -124,6 +124,9 @@
 </li><li>
 <a href="03.html#How%20To%20Create%20a%20Program">How To Create a Program</a>
 
+</li><li>
+<a href="03.html#Positional%20Lights">Positional Lights</a>
+
 </li></ul>
 <hr>
 
@@ -1080,6 +1083,20 @@ void main() {
   gl_Position = aVertexPosition;
 }
 </pre>
+
+<div id="Lights-Positional Lights"><h2 id="Positional Lights" class="header"><a href="#Lights-Positional Lights">Positional Lights</a></h2></div>
+
+<p>
+Now, we are going to consider a case where the light source is relatively close to the object it needs to illuminate.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/positional_lights.png" alt="Positional Lights" style="width: 500px">
+</p>
+
+<p>
+When working with positional lights, we need to know the location of the light. We can represent it by using a uniform that we will name <code>uLightPosition</code>. We need to calculate each light ray separately. We will do this by using a varying that we will name <code>vLightRay</code>.
+</p>
 </div>
   
 
