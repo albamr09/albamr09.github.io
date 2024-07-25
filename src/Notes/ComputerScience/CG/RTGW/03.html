@@ -579,6 +579,8 @@ void main(void) {
   // Light direction
   vec3 light = vec3(uModelViewMatrix * vec4(uLightDirection, 0.0));
   vec3 L = normalize(light);
+  // Eye vector -&gt; vector between camera and vector
+  vec3 eyeVector = -vectex.xyz;
   
   // Ambient colors
   vec4 Ia = uMaterialDiffuse * uLightAmbient;
@@ -763,6 +765,7 @@ out vec3 vEyeVector;
 void main(void) {
   vec4 vertex = uModelViewMatrix * vec4(aVertexPosition, 1.0);
   vNormal = vec3(uNormalMatrix * vec4(aVertexNormal, 1.0));
+  // Eye vector -&gt; vector between camera and vector 
   vEyeVector = -vec3(vertex.xyz);
   gl_Position = uProjectionMatrix * uModelViewMatrix *
   vec4(aVertexPosition, 1.0);
@@ -1096,6 +1099,92 @@ Now, we are going to consider a case where the light source is relatively close 
 
 <p>
 When working with positional lights, we need to know the location of the light. We can represent it by using a uniform that we will name <code>uLightPosition</code>. We need to calculate each light ray separately. We will do this by using a varying that we will name <code>vLightRay</code>.
+</p>
+
+<p>
+So on the following program we intent to create a positional light source using the Phong Shading model alongside the Phong Light model. The vertex shader is very similar to the vertex shader we showed for the Phong Shading model. But now we also compute a <code>vLightRay</code>, that is simply the vector between the vertex (transformed by <code>uModelViewMatrix</code>) and the light position (transformed by <code>uModelViewMatrix</code>). Note that now we use <code>uLightPosition</code> instead of <code>uLightDirection</code>.
+</p>
+
+<pre javascript="">#version 300 es
+
+uniform mat4 uModelViewMatrix;
+uniform mat4 uNormalMatrix;
+uniform mat4 uProjectionMatrix;
+uniform vec3 uLightPosition;
+
+in vec3 aPosition;
+in vec3 aNormal;
+
+out vec3 vNormal;
+out vec3 vLightRay;
+out vec3 vEyeVector;
+
+void main(void) {
+  // Obtains transformed vertex position
+  vec4 vertex = uModelViewMatrix * vec4(aPosition, 1.0);
+  // Obtains transformed light position
+  vec4 light = uModelViewMatrix * vec4(uLightPosition, 1.0);
+
+  // Obtains transformed normal (use normal matrix)
+  vNormal = vec3(uNormalMatrix * vec4(aNormal, 1.0));
+  // Light ray -&gt; vector between vertex and light vector
+  vLightRay = vertex.xyz - light.xyz;
+  // Eye vector -&gt; vector between camera and vector
+  vEyeVector = -vec3(vertex.xyz);
+
+  gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aPosition, 1.0);
+}
+</pre>
+
+<p>
+Let's now look at the fragment shader. It is identical to the fragment shader shown for the Phong Shading model with the difference that now we use <code>vLightRay</code> instead of <code>uLightDirection</code>. This basically means that we do not define infinite light sources that have the direction given by <code>uLightDirection</code>, but now we define a single light source that is defined by <code>vLightRay</code>.
+</p>
+
+<pre javascript="">#version 300 es
+
+precision highp float;
+
+uniform vec4 uMaterialDiffuseColor;
+uniform vec4 uMaterialSpecularColor;
+uniform vec4 uMaterialAmbientColor;
+uniform vec4 uLightDiffuseColor;
+uniform vec4 uLightAmbientColor;
+uniform vec4 uLightSpecularColor;
+uniform float uShininess;
+
+in vec3 vNormal;
+in vec3 vLightRay;
+in vec3 vEyeVector;
+
+out vec4 fragColor;
+
+void main(void) {
+  vec3 L = normalize(vLightRay);
+  vec3 N = normalize(vNormal);
+
+  vec4 Ia = uMaterialAmbientColor * uLightAmbientColor;
+  vec4 Id = vec4(0.0, 0.0, 0.0, 1.0);
+  vec4 Is = vec4(0.0, 0.0, 0.0, 1.0);
+  float lambertTerm = dot(N, -L);
+
+  if (lambertTerm &gt; 0.0) {
+    Id = uLightDiffuseColor * uMaterialDiffuseColor * lambertTerm;
+    vec3 E = normalize(vEyeVector);
+    vec3 R = reflect(L, N);
+    float specular = pow(max(dot(R, E), 0.0), uShininess);
+    Is = uLightSpecularColor * uMaterialSpecularColor * specular;
+  }
+
+  fragColor = vec4(vec3(Ia + Id + Is), 1.0);
+}
+</pre>
+
+<p>
+Thanks to the interpolation of varyings that is provided by ESSL, we automatically obtain all the light rays per pixel in the fragment shader:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/interpolated_positional_lights.png" alt="Positional Light Interpoaltion" style="width:600px">
 </p>
 </div>
   
