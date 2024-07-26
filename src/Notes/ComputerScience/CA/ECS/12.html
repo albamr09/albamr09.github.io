@@ -297,6 +297,44 @@ The most basic operation that can be performed on the screen is drawing an indiv
 </p>
 
 <p>
+On the next code section we show how a pixel is drawn on our OS:
+</p>
+
+<pre java="">function int setPixelOnWord(int x, int idx) {
+      var int mask;
+      // Avoid getting warning of integer constant too big
+      let mask = powersOfTwo[idx];
+      if (drawBlack) {
+          // or operation over 000000001000000
+          // where there is a 1 on the idx-th position
+          // this ensures the idx-th bit is 1
+          let x = x | mask;
+      } else {
+          // and operation over 111111101111111
+          // where there is a 0 on the idx-th position
+          // this ensures the idx-th bit is 0
+          let x = x &amp; -mask;
+      }
+      return x;
+  }
+
+/** Draws the (x,y) pixel, using the current color. */
+function void drawPixel(int x, int y) {
+      var int screenAddress, screenValue, wordIdx;
+      var int col, row;
+      let col = x;
+      let row = y;
+      let screenAddress = baseScreenMemory + (32 * row) + (col / 16);
+      // Computes the index on the 16-bit word by performing col % 16
+      let wordIdx = col - ((col / 16) * 16);
+      let screenValue = Memory.peek(screenAddress);
+      let screenValue = Screen.setPixelOnWord(screenValue, wordIdx);
+      do Memory.poke(screenAddress, screenValue);
+      return;
+  }
+</pre>
+
+<p>
 When asked to render a continuous "line" between two "points" on a grid made of discrete pixels, the best that we can possibly do is approximate the line by drawing a series of pixels along the imaginary line connecting the two points. The procedure for drawing a line from \((x1,y1)\) to \((x2,y2)\) starts by drawing the \((x1,y1)\) pixel and then zigzagging in the direction of \((x2,y2)\) until that pixel is reached. See figure 12.7.
 </p>
 
@@ -304,6 +342,68 @@ When asked to render a continuous "line" between two "points" on a grid made of 
 <img src="https://albamr09.github.io/public/assets/draw_line_algorithm.png" alt="Algorithm to draw a line" style="width:600px">
 </p>
 
+<p>
+The following code realizes this algorithm:
+</p>
+
+<pre java="">/** Draws a line from pixel (x1,y1) to pixel (x2,y2), using the current color. */
+function void drawLine(int x1, int y1, int x2, int y2) {
+    var int a, b;
+    var int dx, dy, da, db;
+    var int xDirection, yDirection;
+    let dx = Math.abs(x2 - x1);
+    let dy = Math.abs(y2 - y1);
+    let a = 0;
+    let b = 0;
+    let da = 0;
+    let db = 0;
+    // Vertical line
+    if (dx = 0) {
+        do Screen.drawVerticalLine(x1, Math.min(y1, y2), dy);
+        return;
+    }
+    // Horizontal line
+    if (dy = 0) {
+        do Screen.drawHorizontalLine(Math.max(x1, x2), y1, dx);
+        return;
+    }
+    // If y1 &gt; y2 we have to always go up, that is we have to decrement y1
+    if (y1 &gt; y2) {
+        let yDirection = -1;
+    } else {
+        // Else we have to always go down, that is we have to increment y1
+        let yDirection = 1;
+    }
+    // If x1 &gt; x2 we have to always go left, that is we have to decrement x1
+    if (x1 &gt; x2) {
+        let xDirection = -1;
+    } else {
+        // Else we have to always go right, that is we have to increment x1
+        let xDirection = 1;
+    }
+    while (((da = dx) | (da &lt; dx)) &amp; ((db = dy) | (db &lt; dy))) {
+        do Screen.drawPixel(x1 + a, y1 + b);
+        // (da, db) is, let's say the current dx and dy. They store 
+        // how many times we have gone (up-down)/(right-left). da being the units to the 
+        // "right-left" and db being the units "up-down". 
+        if ((db * dx) &lt; (da * dy)) {
+            // If the b/a ratio, that is the slope of our current line, m1, is below the 
+            // slope of the line to be painted (dx / dy), then we should readjust the 
+            // next pixel to draw so we augment m1. That means we need to modify the height b. 
+            // Go up/down
+            let b = b + yDirection;
+        } else {
+            // Else we need to decrement the slope m1 by modifying the x-coordinate of 
+            // the endpoint of our current line, that is a
+            // Go right/left
+            let a = a + xDirection;
+        }
+        let da = Math.abs(a);
+        let db = Math.abs(b);
+    }
+    return;
+}
+</pre>
 <p>
 Figure 12.8 presents an algorithm that uses three routines that we've already implemented: multiplication, square root, and line drawing.
 </p>
@@ -316,6 +416,37 @@ Figure 12.8 presents an algorithm that uses three routines that we've already im
 The algorithm is based on drawing a sequence of horizontal lines (like the typical line \(ab\) in the figure), one for each row in the range \(y - r\) to \(y + r\). Since \(r\) is specified in pixels, the algorithm ends up drawing a line in every row along the circle's north-south diameter, resulting in a completely filled circle. A simple tweak can cause this algorithm to draw only the circle's outline, if so desired.
 </p>
 
+<p>
+And finally the next funcion shows how to implement the algorithm to draw the circle:
+</p>
+
+<pre java="">/** Draws a filled circle of radius r&lt;=181 around (x,y), using the current color. */
+function void drawCircle(int x, int y, int r) {
+    var int dy, dx, rSquare, dySquare, ySum, yDiff;
+    let dy = 0;
+    let rSquare = r * r;
+    while (dy &lt; (r + 1)) {
+        let dySquare = dy * dy;
+        // y coordinate is computed using original y +- an offset of dy, which takes values in [0, r]
+        let ySum = y + dy;
+        let yDiff = y - dy;
+        // x coordinate is computed using pythagorean theorem, where the triangle's 
+        // hypothenuses length is equal to the radious (r) we also know the length of 
+        // one of the cathetus equals dy, therefore dx = +-sqrt(r^2 - dy^2)
+        let dx = Math.sqrt(rSquare - dySquare);
+        // Avoid redrawing middle part of circle
+        if (~(dy = 0)) {
+            // Draw upper part
+            do Screen.drawLine(x - dx, yDiff, x + dx, yDiff);
+        }
+        // Draw lower part
+        do Screen.drawLine(x - dx, ySum, x + dx, ySum);
+        let dy = dy + 1;
+    }
+    return;
+}
+</pre>
+
 <div id="Operating System-Mathematical Operations-Character Output"><h3 id="Character Output" class="header"><a href="#Operating System-Mathematical Operations-Character Output">Character Output</a></h3></div>
 
 <p>
@@ -325,6 +456,62 @@ called a font. To handle character spacing, each character image includes at lea
 
 <p>
 <img src="https://albamr09.github.io/public/assets/bitmap_font_example.png" alt="Bitmap Font Example" style="width:300px">
+</p>
+
+<p>
+On our OS the pixel representation for the characters are stored on a map, indexed by the int value assigned to each character:
+</p>
+
+<pre java="">// Initializes the character map array
+function void initMap() {
+     var int i;
+ 
+     let charMaps = Array.new(127);
+     
+     // Black square, used for displaying non-printable characters.
+     do Output.create(0,63,63,63,63,63,63,63,63,63,0,0);
+
+     // Assigns the bitmap for each character in the charachter set.
+     // The first parameter is the character index, the next 11 numbers
+     // are the values of each row in the frame that represents this character.
+     do Output.create(32,0,0,0,0,0,0,0,0,0,0,0);          //
+     do Output.create(97,0,0,0,14,24,30,27,27,54,0,0);      // a
+     do Output.create(98,3,3,3,15,27,51,51,51,30,0,0);      // b
+     do Output.create(99,0,0,0,30,51,3,3,51,30,0,0);        // c
+     do Output.create(100,48,48,48,60,54,51,51,51,30,0,0);  // d
+     do Output.create(101,0,0,0,30,51,63,3,51,30,0,0);      // e
+     do Output.create(102,28,54,38,6,15,6,6,6,15,0,0);      // f
+     do Output.create(103,0,0,30,51,51,51,62,48,51,30,0);   // g
+     do Output.create(104,3,3,3,27,55,51,51,51,51,0,0);     // h
+     ...
+}
+
+// Creates the character map array of the given character index, using the given values.
+function void create(int index, int a, int b, int c, int d, int e,
+                     int f, int g, int h, int i, int j, int k) {
+    var Array map;
+
+    let map = Array.new(11);
+    let charMaps[index] = map;
+
+    let map[0] = a;
+    let map[1] = b;
+    let map[2] = c;
+    let map[3] = d;
+    let map[4] = e;
+    let map[5] = f;
+    let map[6] = g;
+    let map[7] = h;
+    let map[8] = i;
+    let map[9] = j;
+    let map[10] = k;
+
+    return;
+}
+</pre>
+
+<p>
+The resulting font is a collection of ninetyfive rectangular bitmap images, each representing a printable character. For each printable character, we define an array that holds the character's bitmap. The array consists of 11 elements, each corresponding to a row of 8 pixels. Specifically, we set the value of each array entry j to an integer value whose binary representation (bits) codes the 8 pixels appearing in the j-th row of the character’s bitmap. So for example, the number \(4\), whose binary representation in \(8\) bits is \(00000100\), would just color black the third column for the \(j\)th row.
 </p>
 
 <p>
