@@ -1,0 +1,249 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>The Law of Sines</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="The Law of Sines"><h1 id="The Law of Sines" class="header"><a href="#The Law of Sines">The Law of Sines</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="10_01.html#Congruency%20and%20Oblique%20Triangles">Congruency and Oblique Triangles</a>
+
+</li><li>
+<a href="10_01.html#Derivation%20of%20the%20Law%20of%20Sines">Derivation of the Law of Sines</a>
+
+</li><li>
+<a href="10_01.html#Ambiguous%20Case">Ambiguous Case</a>
+
+</li></ul>
+<hr>
+
+<div id="The Law of Sines-Congruency and Oblique Triangles"><h2 id="Congruency and Oblique Triangles" class="header"><a href="#The Law of Sines-Congruency and Oblique Triangles">Congruency and Oblique Triangles</a></h2></div>
+
+<p>
+We say two trigangles are <span id="The Law of Sines-Congruency and Oblique Triangles-congruent"></span><strong id="congruent">congruent</strong> if their sides and angles are equal. We list the three <span id="The Law of Sines-Congruency and Oblique Triangles-congruency axioms"></span><strong id="congruency axioms">congruency axioms</strong>:
+</p>
+
+<ul>
+<li>
+<span id="The Law of Sines-Congruency and Oblique Triangles-Side-Angle-Side"></span><strong id="Side-Angle-Side">Side-Angle-Side</strong> (SAS): If two sides and the angle between them of a triangle equal two sides and the angles between them of a second triangle, then the triangles are congruent.
+
+</li><li>
+<span id="The Law of Sines-Congruency and Oblique Triangles-Angle-Side-Angle"></span><strong id="Angle-Side-Angle">Angle-Side-Angle</strong> (ASA): If two angles and the side between them of a triangle equal two angles and the side between them of a second triangle, then the triangles are congruent.
+
+</li><li>
+<span id="The Law of Sines-Congruency and Oblique Triangles-Side-Side-Side"></span><strong id="Side-Side-Side">Side-Side-Side</strong> (SSS): If three sides of a triangles are equal to three sides of a second triangle, then the triangles are congruent.
+
+</li></ul>
+<p>
+An <span id="The Law of Sines-Congruency and Oblique Triangles-oblique triangle"></span><strong id="oblique triangle">oblique triangle</strong> is a triangle that is not a right triangle.
+</p>
+
+<p>
+To solve an oblique triangle we need the following data:
+</p>
+
+<ul>
+<li>
+<span id="The Law of Sines-Congruency and Oblique Triangles-Case 1"></span><strong id="Case 1">Case 1</strong>: One side and two angles are known (SAA or ASA).
+
+</li><li>
+<span id="The Law of Sines-Congruency and Oblique Triangles-Case 2"></span><strong id="Case 2">Case 2</strong>: Two sides and one angle not included between the two sides are known (SSA). This may lead to zero, one or two triangles. This is called the <span id="The Law of Sines-Congruency and Oblique Triangles-ambiguous case"></span><strong id="ambiguous case">ambiguous case</strong>.
+
+</li><li>
+<span id="The Law of Sines-Congruency and Oblique Triangles-Case 3"></span><strong id="Case 3">Case 3</strong>: Two sides and the angle included between are known (SAS).
+
+</li><li>
+<span id="The Law of Sines-Congruency and Oblique Triangles-Case 4"></span><strong id="Case 4">Case 4</strong>: Thre sides are known (SSS).
+
+</li></ul>
+<p>
+Cases 1 and 2 require the <span id="The Law of Sines-Congruency and Oblique Triangles-law of sines"></span><strong id="law of sines">law of sines</strong>. Cases 3 and 4 require the <span id="The Law of Sines-Congruency and Oblique Triangles-law of cosines"></span><strong id="law of cosines">law of cosines</strong>.
+</p>
+
+<div id="The Law of Sines-Derivation of the Law of Sines"><h2 id="Derivation of the Law of Sines" class="header"><a href="#The Law of Sines-Derivation of the Law of Sines">Derivation of the Law of Sines</a></h2></div>
+
+<p>
+Given an acute triangle (Figure 1(a)) or an obtuse triangle (Figure 1(b)). We construct the perpenciular from \(B\) to side \(AC\). Let \(h\) be the length of the perpendicular. 
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/law_of_sines.png" alt="Law of Sines" style="width:300px">
+</p>
+
+<p>
+Then:
+</p>
+
+\begin{align}
+\sin A = \frac{h}{c} \leftrightarrow h = c \sin A
+\end{align}
+
+\begin{align}
+\sin C = \frac{h}{a} \leftrightarrow h = a \sin C
+\end{align}
+
+<p>
+Since \(h = c \sin A = a \sin C\), then:
+</p>
+
+\begin{align}
+a \sin C = c \sin A
+\end{align}
+
+\begin{align}
+\frac{a}{\sin A} = \frac{c}{\sin C}
+\end{align}
+
+<p>
+By constructing perpendicular lines from the other vertices, it can be shown that:
+</p>
+
+\begin{align}
+\frac{a}{\sin A} = \frac{b}{\sin B}
+\end{align}
+
+\begin{align}
+\frac{b}{\sin B} = \frac{c}{\sin C}
+\end{align}
+
+<p>
+Therefore:
+</p>
+
+\begin{align}
+\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}
+\end{align}
+
+<div id="The Law of Sines-Ambiguous Case"><h2 id="Ambiguous Case" class="header"><a href="#The Law of Sines-Ambiguous Case">Ambiguous Case</a></h2></div>
+
+<p>
+If we are given the length of two sides and the angle opposite to one of them then zero, one or two such triangles could exist. This is what we call the <span id="The Law of Sines-Ambiguous Case-ambiguous case"></span><strong id="ambiguous case">ambiguous case</strong>.
+</p>
+
+<p>
+To solve this type of triangle we make use of the following facts:
+</p>
+
+<ul>
+<li>
+For any angle \(\theta\) of a triangle, \(0 &lt; \sin \theta \leq 1\).
+
+</li><li>
+Given an angle \(\theta\) on the triangle where \(\sin \theta = 1\), then \(\theta = 90º\) and the triangle is a right triangle.
+
+</li><li>
+For any angle \(\theta\) it follows \(\sin \theta = \sin (180º - \theta)\)
+
+</li><li>
+The smallest angle is opposite the shortest side, the largest angle is opposite the longest side and the midle-valued angle is opposite the intermediate side.
+
+</li></ul>
+<p>
+We know that if \(A\) is acute then there are four possible outcomes, whilst if \(A\) is obtuse there are two possible outcomes.
+</p>
+
+<p>
+When \(A\) is acute we define the following cases, after applying the law of sines:
+</p>
+
+<ul>
+<li>
+If \(\sin B &gt; 1\) and \(a &lt; h&lt; b\) then there are \(0\) possible triangles, as the range of \(\sin\) is \([-1, 1]\).
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/assets/oblique_triangle_acute_1.png" alt="Oblique Triangle with Acute angle" style="width:150px">
+</p>
+
+<ul>
+<li>
+If \(\sin B = 1\) and \(a = b\) and \(h &lt; b\) then there is \(1\) possible triangle.
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/assets/oblique_triangle_acute_2.png" alt="Oblique Triangle with Acute angle" style="width:150px">
+</p>
+
+<ul>
+<li>
+If \(0 &lt; \sin B &lt; 1\) and \(a \leq b\) there is \(1\) possible triangle.
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/assets/oblique_triangle_acute_3.png" alt="Oblique Triangle with Acute angle" style="width:150px">
+</p>
+
+<ul>
+<li>
+If \(0 &lt; \sin B_1 &lt; 1\), \(h &lt; a &lt; b\), there is \(1\) possible triangle. Note that \(\sin B_1 = \sin (180º - B_1)\), so if if, \(A + B_2 &lt; 180º\) (which means there is a \(C\) such that \(A + B_2 + C = 180º\)) then there is another possible triangle.
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/assets/oblique_triangle_acute_4.png" alt="Oblique Triangle with Acute angle" style="width:150px">
+</p>
+
+<p>
+When \(A\) is obtuse we define the following cases, after applying the law of sines:
+</p>
+
+<ul>
+<li>
+If \(\sin B \geq 1\) and \(a \leq b\), then there are zero possible triangles as the range of \(\sin\)is \([-1, 1]\).
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/assets/oblique_triangle_obtuse_1.png" alt="Oblique Triangle with Obtuse angle" style="width:150px">
+</p>
+
+<ul>
+<li>
+If \(0 &lt; \sin B &lt; 1\) and \(a &gt; b\) then there is one possible triangle.
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/assets/oblique_triangle_obtuse_2.png" alt="Oblique Triangle with Obtuse angle" style="width:150px">
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
