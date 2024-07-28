@@ -1002,7 +1002,7 @@
   {
     "id": "https://albamr09.github.io/src/Notes/ComputerScience/CA/ECS/index.html",
     "title": "The Elements of Computer Systems",
-    "body": " index search search back the elements of computer systems hardware boolean logic boolean arithmetic memory machine language computer architecture assembler software virtual machine i: processing virtual machine ii: control compiler i: syntax analysis compiler ii: code generation operating system $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
+    "body": " index search search back the elements of computer systems implementation hardware boolean logic boolean arithmetic memory machine language computer architecture assembler software virtual machine i: processing virtual machine ii: control compiler i: syntax analysis compiler ii: code generation operating system $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
   },
   {
     "id": "https://albamr09.github.io/src/Notes/ComputerScience/CA/ECS/01.html",
