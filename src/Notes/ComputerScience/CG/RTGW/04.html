@@ -1,0 +1,358 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Camera</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Camera"><h1 id="Camera" class="header"><a href="#Camera">Camera</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="04.html#WebGL%20Does%20Not%20Have%20Cameras">WebGL Does Not Have Cameras</a>
+
+</li><li>
+<a href="04.html#Vertex%20Transformations">Vertex Transformations</a>
+
+<ul>
+<li>
+<a href="04.html#Homogeneous%20Coordinates">Homogeneous Coordinates</a>
+
+</li><li>
+<a href="04.html#Model%20Transform">Model Transform</a>
+
+</li><li>
+<a href="04.html#View%20Transform">View Transform</a>
+
+</li><li>
+<a href="04.html#Projection%20Transform">Projection Transform</a>
+
+</li><li>
+<a href="04.html#Perspective%20Division">Perspective Division</a>
+
+</li><li>
+<a href="04.html#View%20Transform">View Transform</a>
+
+</li></ul>
+</li><li>
+<a href="04.html#Normal%20Transformations">Normal Transformations</a>
+
+<ul>
+<li>
+<a href="04.html#Calculating%20the%20Normal%20Matrix">Calculating the Normal Matrix</a>
+
+</li></ul>
+</li></ul>
+<hr>
+
+<p>
+Even though we have a camera within our 3D application, there is no camera object in the WebGL API—only matrices. That is because having matrices instead of a camera object gives WebGL the flexibility to represent complex projections and animations.
+</p>
+
+<div id="Camera-WebGL Does Not Have Cameras"><h2 id="WebGL Does Not Have Cameras" class="header"><a href="#Camera-WebGL Does Not Have Cameras">WebGL Does Not Have Cameras</a></h2></div>
+
+<p>
+WebGL does not have a camera object that you can manipulate. However, we can assume that what we render in the <code>canvas</code> is what our camera captures.
+</p>
+
+<p>
+Every time we move our camera around, we need to update the objects according to the new camera position. So, we need to transform each vertex. Similarly, we need to make sure that the object normals and light directions are still consistent after the camera has moved. In summary, we need to analyze two different types of transformations: 
+</p>
+
+<ul>
+<li>
+vertex (points) and 
+
+</li><li>
+normal (vectors)
+
+</li></ul>
+<div id="Camera-Vertex Transformations"><h2 id="Vertex Transformations" class="header"><a href="#Camera-Vertex Transformations">Vertex Transformations</a></h2></div>
+
+<p>
+Each transformation is encoded by a \(4\)x\(4\) matrix. We multiply vertices that have three components, \((x, y, z)\), by this \(4\)x\(4\) matrix by adding a fourth component to each vertex called the Homogeneous coordinate.
+</p>
+
+<div id="Camera-Vertex Transformations-Homogeneous Coordinates"><h3 id="Homogeneous Coordinates" class="header"><a href="#Camera-Vertex Transformations-Homogeneous Coordinates">Homogeneous Coordinates</a></h3></div>
+
+<p>
+Homogeneous coordinates make it possible to represent <span id="Camera-Vertex Transformations-Homogeneous Coordinates-affine transformations"></span><strong id="affine transformations">affine transformations</strong> (such as rotation, scaling, shear, and translation) and projective transformations as \(4\)x\(4\) matrices.
+</p>
+
+<p>
+In Homogeneous coordinates, vertices have four components: \(x, y, z\), and \(w\). The first three components are the <span id="Camera-Vertex Transformations-Homogeneous Coordinates-vertex coordinates"></span><strong id="vertex coordinates">vertex coordinates</strong> in <span id="Camera-Vertex Transformations-Homogeneous Coordinates-Euclidian Space"></span><strong id="Euclidian Space">Euclidian Space</strong>. The fourth is the <span id="Camera-Vertex Transformations-Homogeneous Coordinates-perspective component"></span><strong id="perspective component">perspective component</strong>. So \((x, y, z, w)\) take us to a new space: the <span id="Camera-Vertex Transformations-Homogeneous Coordinates-Projective Space"></span><strong id="Projective Space">Projective Space</strong>.
+</p>
+
+<p>
+Homogeneous coordinates make it possible to solve a system of linear equations where each equation represents a line that is parallel with all the others in the system. Remember that in Euclidian Space, a system like that does not have solutions, because there are no intersections. However, in Projective Space, this system has a solution—the lines will intersect at infinity. This fact is represented by the perspective component having a value of \(0\).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/projection_space.png" alt="Projective Space" style="width:400px">
+</p>
+
+<p>
+It's easy to convert from Homogeneous coordinates to non-Homogeneous, old-fashioned, Euclidean coordinates by dividing each coordinate by \(w\):
+</p>
+
+\begin{align}
+h(x, y, z, w) = v(\frac{x}{w}, \frac{y}{w}, \frac{z}{w})
+\end{align}
+
+<p>
+Consequently, if you want to go from Euclidean to Projective space, you add the fourth component, \(w\), and make it \(1\):
+</p>
+
+\begin{align}
+v(x, y, z) = h(x, y, z, 1)
+\end{align}
+
+<p>
+In fact, this is what we've been doing throughout the first three chapters:
+</p>
+
+<pre javascript="">#version 300 es
+
+precision mediump float;
+
+uniform mat4 uModelViewMatrix;
+uniform mat4 uProjectionMatrix;
+uniform mat4 uNormalMatrix;
+
+in vec3 aVertexPosition;
+
+void main(void) {
+  gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);
+}
+</pre>
+
+<p>
+There is one more thing to note about Homogeneous coordinates: while vertices have a Homogeneous coordinate, \(w = 1\), vectors have a Homogeneous coordinate, \(w = 0\). This is because in the Phong vertex shader, the line that processes the normals looks like this:
+</p>
+
+<pre javascript="">vVertexNormal = vec3(uNormalMatrix * vec4(aVertexNormal, 0.0));
+</pre>
+
+<div id="Camera-Vertex Transformations-Model Transform"><h3 id="Model Transform" class="header"><a href="#Camera-Vertex Transformations-Model Transform">Model Transform</a></h3></div>
+
+<p>
+The object-coordinate system is the space where vertex coordinates are specified. If we want to translate or move objects around, we use a matrix that encodes these transformations, known as the <span id="Camera-Vertex Transformations-Model Transform-Model matrix"></span><strong id="Model matrix">Model matrix</strong>. Once we multiply the vertices of our object by the Model matrix, we obtain new vertex coordinates. These new vertices will determine the position of the object in our 3D world.
+</p>
+
+<p>
+In object coordinates, each object is free to define where its origin is and to specify where its vertices are with respect to this origin. In world coordinates, the origin is shared by all of the objects. World coordinates allow us to know where objects are located with respect to each other. So the model transform "maps" the model coordinates to the world coordinates:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/model_transform.png" alt="Model Transform" style="width:500px">
+</p>
+
+<div id="Camera-Vertex Transformations-View Transform"><h3 id="View Transform" class="header"><a href="#Camera-Vertex Transformations-View Transform">View Transform</a></h3></div>
+
+<p>
+The <span id="Camera-Vertex Transformations-View Transform-view transform"></span><strong id="view transform">view transform</strong>, shifts the origin of the coordinate system to the view origin. The view origin is where our eye or camera is located with respect to the world origin. This transformation is encoded in the <span id="Camera-Vertex Transformations-View Transform-View matrix"></span><strong id="View matrix">View matrix</strong>.  It is in this coordinate system that our camera is going to operate.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/view_transform.png" alt="View Transform" style="width:500px">
+</p>
+
+<div id="Camera-Vertex Transformations-Projection Transform"><h3 id="Projection Transform" class="header"><a href="#Camera-Vertex Transformations-Projection Transform">Projection Transform</a></h3></div>
+
+<p>
+The next operation is called the <span id="Camera-Vertex Transformations-Projection Transform-projection transform"></span><strong id="projection transform">projection transform</strong>. This operation determines how much of the view space will be rendered and how it will be mapped onto the computer screen. This region is known as the <span id="Camera-Vertex Transformations-Projection Transform-frustum"></span><strong id="frustum">frustum</strong> and it is defined by six planes (near, far, top, bottom, right, and left planes), as shown in the following diagram:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/projection_transform.png" alt="Projection Transform" style="width:500px">
+</p>
+
+<p>
+These six planes are encoded in the <span id="Camera-Vertex Transformations-Projection Transform-Projection matrix"></span><strong id="Projection matrix">Projection matrix</strong>. Any vertices lying outside the frustum after applying the transformation are clipped out and discarded from further processing. Therefore, the frustum defines clipping coordinates, and the Projection matrix that encodes the frustum produces clipping coordinates.
+</p>
+
+<p>
+ If the far and near planes have the same dimensions, the frustum will then determine an <span id="Camera-Vertex Transformations-Projection Transform-orthographic projection"></span><strong id="orthographic projection">orthographic projection</strong>. Otherwise, it will be a <span id="Camera-Vertex Transformations-Projection Transform-perspective projection"></span><strong id="perspective projection">perspective projection</strong>.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/orthographic_perspective_projection.png" alt="Orthographic vs Perspective projection" style="width:500px">
+Up to this point, we are still working with Homogeneous coordinates, so the clipping coordinates have four components: \(x\), \(y\), \(z\), and \(w\). The clipping is done by comparing the \(x\), \(y\), and \(z\) components against the Homogeneous coordinate, \(w\). If any of them is more than, \(+w\), or less than, \(-w\), then that vertex lies outside the frustum and is discarded.
+</p>
+
+<div id="Camera-Vertex Transformations-Perspective Division"><h3 id="Perspective Division" class="header"><a href="#Camera-Vertex Transformations-Perspective Division">Perspective Division</a></h3></div>
+
+<p>
+Once it has been determined how much of the viewing space will be rendered, the frustum is mapped into the near plane in order to produce a 2D image.
+</p>
+
+<p>
+Different operative systems and displaying devices can have mechanisms to represent 2D information on screen. To provide robustness for all possible cases, WebGL and OpenGL ES provide an intermediate coordinate system that is independent from any specific hardware. This space is known as the <span id="Camera-Vertex Transformations-Perspective Division-Normalized Device Coordinates (NDC)"></span><strong id="Normalized Device Coordinates (NDC)">Normalized Device Coordinates (NDC)</strong>.
+</p>
+
+<p>
+Normalized device coordinates are obtained by dividing the clipping coordinates by the \(w\) component. This is why this step is known as perspective division. In the NDC space, the \(x\) and \(y\) coordinates represent the location of your vertices on a normalized 2D screen, while the z-coordinate encodes depth information, which is the relative location of the objects with respect to the near and far planes. 
+</p>
+
+<p>
+This will allow WebGL to later determine how to display overlapping objects based on their distance from the nearest plane. When using normalized device coordinates, the depth is encoded in the \(z\) component.
+</p>
+
+<p>
+The perspective division transforms the viewing frustum into a cube centered in the origin with the minimum coordinates of \([-1, -1, -1]\) and the maximum coordinates of \([1, 1, 1]\). Also, the direction of the z-axis is inverted.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/normalized_device_coordinates.png" alt="Normalized Device Coordinates" style="width:500px">
+</p>
+
+<div id="Camera-Vertex Transformations-View Transform"><h3 id="View Transform" class="header"><a href="#Camera-Vertex Transformations-View Transform">View Transform</a></h3></div>
+
+<p>
+Finally, NDCs are mapped to viewport coordinates. This step maps these coordinates to the available space in your screen. In WebGL, this space is provided by the HTML5 <code>canvas</code>:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/view_transform_1.png" alt="View Transform" style="width:500px">
+</p>
+
+<p>
+Unlike the previous cases, the viewport transform is not generated by a matrix transformation. In this case, we use the WebGL viewport function. We will learn more about this function later in this chapter. 
+</p>
+
+<div id="Camera-Normal Transformations"><h2 id="Normal Transformations" class="header"><a href="#Camera-Normal Transformations">Normal Transformations</a></h2></div>
+
+<p>
+Whenever vertices are transformed, normal vectors should also be transformed so that they point in the right direction. We could consider using the Model-View matrix that transforms vertices to do this, but this approach is problematic: the Model-View matrix will not always keep the perpendicularity of normals:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/normal_transformations.png" alt="Normal Transformations" style="width:400px">
+</p>
+
+<p>
+This problem occurs if there is a unidirectional (one axis) scaling transformation or a shearing transformation in the Model-View matrix.
+</p>
+
+<div id="Camera-Normal Transformations-Calculating the Normal Matrix"><h3 id="Calculating the Normal Matrix" class="header"><a href="#Camera-Normal Transformations-Calculating the Normal Matrix">Calculating the Normal Matrix</a></h3></div>
+
+<p>
+Two vectors are perpendicular if their dot product is \(0\). In our example
+</p>
+
+\begin{align}
+&lt;N, S&gt; = 0
+\end{align}
+
+<p>
+Here, \(S\) is the surface vector and can be calculated as the difference of two vertices. Let \(M\) be the Model-View matrix. We can use \(M\) to transform \(S\) as follows:
+</p>
+
+\begin{align}
+S' = MS
+\end{align}
+
+<p>
+We want to find a matrix, \(K\), that allows us to transform normals in a similar way. For the \(N\) normal, we want the following:
+</p>
+
+\begin{align}
+N' = KN
+\end{align}
+
+<p>
+For the scene to be consistent after obtaining \(N'\) and \(S'\), these two need to keep the perpendicularity that the original vectors \(N\) and \(S\) had.
+</p>
+
+\begin{align}
+&lt;N', S'&gt; = 0
+\end{align}
+
+<p>
+Substituting \(N'\) and \(S'\):
+</p>
+
+\begin{align}
+&lt;KN, MS&gt; = 0
+\end{align}
+
+\begin{align}
+(KN)^T(MS) = 0
+\end{align}
+
+\begin{align}
+N^TK^TMS = 0
+\end{align}
+
+\begin{align}
+N^T(K^TM)S = 0
+\end{align}
+
+<p>
+Now, remember that \(&lt;N, S&gt; = 0\) so \(N^TS = 0\). This means that in the previous equation, \((K^TM)\) needs to be the identity matrix, \(I\), so the original condition of N and S being perpendicular holds:
+</p>
+
+\begin{align}
+K^TM = I
+\end{align}
+
+\begin{align}
+K^TMM^{-1} = IM^{-1} = M^{-1}
+\end{align}
+
+\begin{align}
+K^T = M^{-1}
+\end{align}
+
+\begin{align}
+(K^T)^T = (M^{-1})^T
+\end{align}
+
+\begin{align}
+K = (M^{-1})^T
+\end{align}
+
+<p>
+\(K\) is obtained by transposing the inverse of the Model-View matrix (\(M\), in this example). We need to use \(K\) to multiply the normal vectors so that they keep being perpendicular to the surface when transformed.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
