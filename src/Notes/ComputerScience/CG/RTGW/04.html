@@ -74,6 +74,36 @@
 <a href="04.html#Calculating%20the%20Normal%20Matrix">Calculating the Normal Matrix</a>
 
 </li></ul>
+</li><li>
+<a href="04.html#WebGL%20Implementation">WebGL Implementation</a>
+
+</li><li>
+<a href="04.html#The%20Model-View%20Matrix">The Model-View Matrix</a>
+
+<ul>
+<li>
+<a href="04.html#Spatial%20Encoding%20of%20the%20World">Spatial Encoding of the World</a>
+
+<ul>
+<li>
+<a href="04.html#Rotation%20Matrix">Rotation Matrix</a>
+
+</li><li>
+<a href="04.html#Translation%20Vector">Translation Vector</a>
+
+</li><li>
+<a href="04.html#The%20Mysterious%20Fourth%20Row">The Mysterious Fourth Row</a>
+
+</li></ul>
+</li></ul>
+</li><li>
+<a href="04.html#The%20Camera%20Matrix">The Camera Matrix</a>
+
+<ul>
+<li>
+<a href="04.html#Camera%20Translation">Camera Translation</a>
+
+</li></ul>
 </li></ul>
 <hr>
 
@@ -172,7 +202,7 @@ The object-coordinate system is the space where vertex coordinates are specified
 </p>
 
 <p>
-In object coordinates, each object is free to define where its origin is and to specify where its vertices are with respect to this origin. In world coordinates, the origin is shared by all of the objects. World coordinates allow us to know where objects are located with respect to each other. So the model transform "maps" the model coordinates to the world coordinates:
+In object coordinates, each object is free to define where its origin is and to specify where its vertices are with respect to this origin. In world coordinates, the origin is shared by all of the objects. World coordinates allow us to know where objects are located with respect to each other.
 </p>
 
 <p>
@@ -346,6 +376,125 @@ K = (M^{-1})^T
 
 <p>
 \(K\) is obtained by transposing the inverse of the Model-View matrix (\(M\), in this example). We need to use \(K\) to multiply the normal vectors so that they keep being perpendicular to the surface when transformed.
+</p>
+
+<div id="Camera-WebGL Implementation"><h2 id="WebGL Implementation" class="header"><a href="#Camera-WebGL Implementation">WebGL Implementation</a></h2></div>
+
+<p>
+The following diagram shows the theory we have learned so far, along with the relationships between the steps in the theory and the implementation in WebGL.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/web_gl_transformations_pipeline.png" alt="WebGL Transformations" style="width:600px">
+</p>
+
+<p>
+The five transformations that we apply to object coordinates to obtain viewport coordinates are grouped into three matrices and one WebGL method:
+</p>
+
+<ul>
+<li>
+The <span id="Camera-WebGL Implementation-Model-View matrix"></span><strong id="Model-View matrix">Model-View matrix</strong> that groups the model and view transform in one single matrix. When we multiply our vertices by this matrix, we end up in view coordinates.
+
+</li><li>
+The <span id="Camera-WebGL Implementation-Normal matrix"></span><strong id="Normal matrix">Normal matrix</strong> is obtained by inverting and transposing the Model-View matrix. This matrix is applied to normal vectors to ensure that they continue to be perpendicular to the surface. 
+
+</li><li>
+The <span id="Camera-WebGL Implementation-Projection matrix"></span><strong id="Projection matrix">Projection matrix</strong> groups the projection transformation and the perspective division, and as a result, we end up in normalized device coordinates.
+
+</li></ul>
+<p>
+Finally, we use the gl.viewport operation to map NDCs to viewport coordinates:
+</p>
+
+<pre javascript="">gl.viewport(minX, minY, width, height);
+</pre>
+
+<p>
+The viewport coordinates originate in the lower-left corner of the HTML5 canvas.
+</p>
+
+<div id="Camera-The Model-View Matrix"><h2 id="The Model-View Matrix" class="header"><a href="#Camera-The Model-View Matrix">The Model-View Matrix</a></h2></div>
+
+<p>
+The Model-View matrix allows us to perform <span id="Camera-The Model-View Matrix-affine transformations"></span><strong id="affine transformations">affine transformations</strong> in our scene. Affine is a mathematical name that describes transformations that do not change the structure of the object undergoing such transformations. In our 3D world scene, such transformations are rotation, scaling, reflection shearing, and translation. Let's take a look at how the Model-View matrix is constructed.
+</p>
+
+<div id="Camera-The Model-View Matrix-Spatial Encoding of the World"><h3 id="Spatial Encoding of the World" class="header"><a href="#Camera-The Model-View Matrix-Spatial Encoding of the World">Spatial Encoding of the World</a></h3></div>
+
+<p>
+By default, when you render a scene, you are looking at it from the origin of the world in the negative direction of the z-axis. As shown in the following diagram, the z-axis is coming out of the screen:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/spatial_world_encoding.png" alt="Spatial World Encoding" style="width:600px">
+</p>
+
+<div id="Camera-The Model-View Matrix-Spatial Encoding of the World-Rotation Matrix"><h4 id="Rotation Matrix" class="header"><a href="#Camera-The Model-View Matrix-Spatial Encoding of the World-Rotation Matrix">Rotation Matrix</a></h4></div>
+
+<p>
+The intersection of the first three rows with the first three columns defines the 3x3 Rotation matrix. This matrix contains information about rotations around the standard axis.
+</p>
+
+\begin{align}
+\begin{bmatrix}
+m_1 &amp; m_2 &amp; m_3 \\
+m_5 &amp; m_6 &amp; m_7 \\
+m_9 &amp; m_{10} &amp; m_{11} 
+\end{bmatrix}
+\end{align}
+
+<div id="Camera-The Model-View Matrix-Spatial Encoding of the World-Translation Vector"><h4 id="Translation Vector" class="header"><a href="#Camera-The Model-View Matrix-Spatial Encoding of the World-Translation Vector">Translation Vector</a></h4></div>
+
+<p>
+The intersection of the first three rows with the last column defines a three-component Translation vector.
+</p>
+
+\begin{align}
+\begin{bmatrix}
+m_{13} &amp; m_{14} &amp; m_{15}
+\end{bmatrix}
+\end{align}
+
+
+<div id="Camera-The Model-View Matrix-Spatial Encoding of the World-The Mysterious Fourth Row"><h4 id="The Mysterious Fourth Row" class="header"><a href="#Camera-The Model-View Matrix-Spatial Encoding of the World-The Mysterious Fourth Row">The Mysterious Fourth Row</a></h4></div>
+
+<p>
+The fourth row does not have any special meaning.
+</p>
+
+<ul>
+<li>
+The \(m_4\), \(m_8\), and \(m_{12}\) elements are always \(0\).
+
+</li><li>
+The \(m_{16}\) element (the Homogeneous coordinate) will always be \(1\).
+
+</li></ul>
+<div id="Camera-The Camera Matrix"><h2 id="The Camera Matrix" class="header"><a href="#Camera-The Camera Matrix">The Camera Matrix</a></h2></div>
+
+<p>
+Let's assume that our camera is located at the origin of the world and that it's oriented so that it's looking toward the negative z-axis direction. We already know what transformation represents such a configuration in WebGL (Identity matrix of rank four).
+</p>
+
+<div id="Camera-The Camera Matrix-Camera Translation"><h3 id="Camera Translation" class="header"><a href="#Camera-The Camera Matrix-Camera Translation">Camera Translation</a></h3></div>
+
+<p>
+Let's move the camera to \([0, 0, 4]\) in world coordinates. This means four units from the origin on the positive z-axis. If we applied:
+</p>
+
+<pre javascript="">mat4.translate(modelViewMatrix, modelViewMatrix, [0, 0, 4]);
+</pre>
+
+<p>
+In such a case, the world would be translated 4 units on the positive z-axis, and since the camera position has not been changed, it would be located at \([0, 0, -4]\), which is exactly the opposite of what we want. Now, say that we applied the translation in the opposite direction:
+</p>
+
+<pre javascript="">mat4.translate(modelViewMatrix, modelViewMatrix, [0, 0, -4]);
+</pre>
+
+<p>
+In such a case, the world would be moved 4 units on the negative z-axis and then the camera would be located at \([0, 0, 4]\) in the new world-coordinate system.
 </p>
 </div>
   
