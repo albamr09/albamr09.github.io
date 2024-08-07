@@ -103,10 +103,18 @@
 <li>
 <a href="04.html#Camera%20Translation">Camera Translation</a>
 
+</li><li>
+<a href="04.html#Interpreting%20Transformations%20Using%20the%20Model-View%20Matrix">Interpreting Transformations Using the Model-View Matrix</a>
+
 </li></ul>
 </li><li>
-<a href="04.html#References">References</a>
+<a href="04.html#Basic%20Camera%20Types">Basic Camera Types</a>
 
+<ul>
+<li>
+<a href="04.html#The%20Camera%20Model">The Camera Model</a>
+
+</li></ul>
 </li></ul>
 <hr>
 
@@ -515,7 +523,47 @@ In such a case, the world would be translated 4 units on the positive z-axis, an
 In such a case, the world would be moved 4 units on the negative z-axis and then the camera would be located at \([0, 0, 4]\) in the new world-coordinate system.
 </p>
 
-<div id="Camera-References"><h2 id="References" class="header"><a href="#Camera-References">References</a></h2></div>
+<p>
+The Camera matrix transformation is the inverse of the Model-View matrix transformation.
+</p>
+
+<div id="Camera-The Camera Matrix-Interpreting Transformations Using the Model-View Matrix"><h3 id="Interpreting Transformations Using the Model-View Matrix" class="header"><a href="#Camera-The Camera Matrix-Interpreting Transformations Using the Model-View Matrix">Interpreting Transformations Using the Model-View Matrix</a></h3></div>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/rotations_with_model_view_matrix.png" alt="Rotation on the Model-View Matrix" style="width:600px">
+</p>
+
+<p>
+As we've just seen, understanding the rotation matrix (the \(3 \times 3\) upper-left corner of the Model-View matrix) is simple: the first \(3\) columns always tell us where the axis is.
+</p>
+
+<div id="Camera-Basic Camera Types"><h2 id="Basic Camera Types" class="header"><a href="#Camera-Basic Camera Types">Basic Camera Types</a></h2></div>
+
+<p>
+So far, we've learned how to generate rotations and translations in either world or camera coordinates. In both cases, however, we are always generating the rotations around the center of the world. This may be ideal when we're orbiting around a 3D object. We will refer to this type of camera as an <span id="Camera-Basic Camera Types-orbiting camera"></span><strong id="orbiting camera">orbiting camera</strong>.
+</p>
+
+<p>
+If we are able to look left and right (rotations) and then move in the direction in which our
+camera is pointing (translation), then this camera type can be designated as a <span id="Camera-Basic Camera Types-first-person camera"></span><strong id="first-person camera">first-person camera</strong> and it is generally known as a <span id="Camera-Basic Camera Types-tracking camera"></span><strong id="tracking camera">tracking camera</strong>.
+</p>
+
+<p>
+When applying transformation the order of the operations affects the result. It is not the same to rotate around the origin and then translate away from it (orbiting camera), as compared to translating the origin and then rotating around it (tracking camera).
+</p>
+
+<p>
+With an orbiting camera, the camera will always look toward the center of the world.
+Therefore, we will always use the z-axis to move to and from the object we are examining.
+However, with a tracking camera, since the rotation occurs at the camera location, we can
+end up looking to any position in the world. Thus, we need to know the direction in which the camera is pointing in world coordinates (camera axis).
+</p>
+
+<div id="Camera-Basic Camera Types-The Camera Model"><h3 id="The Camera Model" class="header"><a href="#Camera-Basic Camera Types-The Camera Model">The Camera Model</a></h3></div>
+
+<p>
+Just like its counterpart, the Model-View matrix, the Camera matrix encodes information about the camera orientation.
+</p>
 </div>
   
 
