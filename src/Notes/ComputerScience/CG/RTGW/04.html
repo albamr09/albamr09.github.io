@@ -562,7 +562,26 @@ end up looking to any position in the world. Thus, we need to know the direction
 <div id="Camera-Basic Camera Types-The Camera Model"><h3 id="The Camera Model" class="header"><a href="#Camera-Basic Camera Types-The Camera Model">The Camera Model</a></h3></div>
 
 <p>
-Just like its counterpart, the Model-View matrix, the Camera matrix encodes information about the camera orientation.
+Just like the Model-View matrix, the Camera matrix encodes information about the camera orientation. As we can see in the following diagram, the upper-left \(3 \times 3\) matrix corresponds to the camera axes:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/camera_model.png" alt="Camera Model" style="width:600px">
+</p>
+
+<ul>
+<li>
+The first column corresponds to the x-axis of the camera. We will call it <code>RightVector</code>.
+
+</li><li>
+The second column is the y-axis of the camera. This will be <code>UpVector</code>.
+
+</li><li>
+The third column determines the vector in which the camera can move back and forth. This is the z-axis of the camera and we will call it <code>CameraAxis</code>.
+
+</li></ul>
+<p>
+Because the Camera matrix is the inverse of the Model-View matrix, the upper-left \(3 \times 3\) rotation matrix contained in the Camera matrix gives us the orientation of the camera axes in world space. This means that we can tell the orientation of our camera in world space just by looking at the columns of this \(3 \times 3\) rotation matrix.
 </p>
 </div>
   
