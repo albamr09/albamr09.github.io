@@ -54,7 +54,6 @@
 </li></ul>
 <hr>
 
-
 <div id="Docker Registry-Public Registry"><h2 id="Public Registry" class="header"><a href="#Docker Registry-Public Registry">Public Registry</a></h2></div>
 
 <p>
@@ -69,7 +68,6 @@ image: nginx
 <p>
 This is a public image so it is stored in a public registry, usually in <code>docker.io</code> which is the default registry. So a more verbose configuration file would be:
 </p>
-
 
 <pre yaml="">
 image: docker.io/nginx/nginx
@@ -107,7 +105,6 @@ $ docker run private-registry.io/apps/internal-app
 <p>
 A private registry is in itself a docker image, so first you have to have your registry image running:
 </p>
-
 
 <pre console="">
 $ docker run -p 5000:5000 --name registry registry:2

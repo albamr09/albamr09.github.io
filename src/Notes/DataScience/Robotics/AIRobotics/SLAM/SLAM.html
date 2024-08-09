@@ -52,7 +52,6 @@
 </li></ul>
 <hr>
 
-
 <p>
 How to create maps and localize a robot at the same time? For this we use a technique known as <code>SLAM</code>: Simultaneous Localization and Mapping
 </p>
@@ -78,7 +77,6 @@ So to express this with a gaussian, that we do is define a distribution whose pd
 <p>
 Here if \(x_1 = x_0 + 10\), then \(x_1 - x_0 - 10 = 0\) and if \(y_1 = y_0\) ,then \(y_1 - y_0 = 0\). These conditions we define are called constraints, so what Graph SLAM does is creating our probabilities defining a sequence of these constraints.   
 </p>
-
 
 <p>
 Suppose we have a robot that has followed the following path:
@@ -116,7 +114,6 @@ After we have collected these constraints, what the algorithm does is it relaxes
 <p>
 To define our constraints, suppose we have 3 position vectors \(x_0, x_1, x_2\) and two landmarks \(L_0, L_1\), then we define the following matrix:
 </p>
-
 
 \begin{align}
 \begin{array}{c}

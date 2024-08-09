@@ -69,7 +69,6 @@
 </li></ul>
 <hr>
 
-
 <div id="Bayesian analysis of conjugate hierarchical models-Analytic derivation of conditional and marginal distributions"><h2 id="Analytic derivation of conditional and marginal distributions" class="header"><a href="#Bayesian analysis of conjugate hierarchical models-Analytic derivation of conditional and marginal distributions">Analytic derivation of conditional and marginal distributions</a></h2></div>
 
 <p>
@@ -286,7 +285,6 @@ p(\alpha, \beta|y) = \frac{p(\theta, \alpha, \beta|y)}{p(\theta|\alpha, \beta, y
 <p>
 Because we have no immediately available information about the distribution of tumor rates in populations of rats, we seek a relatively diffuse hyperprior distribution for \((\alpha, \beta)\).
 </p>
-
 
 <p>
 By reparameterizing the hyperparameters, we transform them into a space that may have more intuitive or meaningful interpretations. In this case, \(logit(\frac{\alpha}{\alpha + \beta}) = \log(\frac{\alpha}{\beta})\) represents the log-odds of \(\alpha\) relative to the total of \(\alpha\) and \(\beta\), providing a clear interpretation of the prior mean in the beta distribution for \(\theta\). Similarly, \(\log(\alpha + \beta)\) captures the logarithm of the "sample size," influencing the precision or spread of the distribution.

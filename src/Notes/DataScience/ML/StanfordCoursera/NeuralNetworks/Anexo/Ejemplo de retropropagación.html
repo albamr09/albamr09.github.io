@@ -130,7 +130,6 @@ Si vectorizamos:
 Para la capa \(1\), volvemos a expandir la función de coste para ver cómo aplicar la regla de la cadena:
 </p>
 
-
 \begin{align}
 J(\Theta) = E^{(3)}(g(\Theta^{(3)}\cdot g(\Theta^{(2)} \cdot a^{(1)}))) = E^{(3)}(g(\Theta^{(3)}\cdot g(\Theta^{(2)} \cdot g(z^{(1)})))) =
 \end{align}
@@ -152,7 +151,6 @@ Para simplificar la notación: sea, para cada nodo \(l\) de la capa \(2\)
 <p>
 Aplicamos la regla de la cadena, tal que para cada nodo \(l\) de la capa \(2\):
 </p>
-
 
 \begin{align}
 \frac{\delta J(\Theta)}{\delta \theta_{it}^{(1)}} = \sum_{l=1}^{S_{(2)}} \Delta_{lj}^{(2)}\frac{\delta z_{lj}^{(2)}}{\delta a_{lj}^{(1)}}\frac{\delta a_{lj}^{(1)}}{\delta z_{lj}^{(1)}}\frac{\delta z_{lj}^{(1)}}{\delta \theta_{it}^{(1)}}

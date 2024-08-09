@@ -49,7 +49,8 @@
 </li><li>
 <a href="Bayes Filter.html#Recursive%20Bayes%20Filter">Recursive Bayes Filter</a>
 
-</li><li>
+<ul>
+<li>
 <a href="Bayes Filter.html#Intuition">Intuition</a>
 
 </li><li>
@@ -61,18 +62,21 @@
 </li><li>
 <a href="Bayes Filter.html#Implementation">Implementation</a>
 
+</li></ul>
 </li><li>
 <a href="Bayes Filter.html#Popular%20Filters">Popular Filters</a>
 
 </li><li>
 <a href="Bayes Filter.html#Model%20Examples">Model Examples</a>
 
-</li><li>
+<ul>
+<li>
 <a href="Bayes Filter.html#Motion%20model">Motion model</a>
 
 </li><li>
 <a href="Bayes Filter.html#Measurement%20model">Measurement model</a>
 
+</li></ul>
 </li></ul>
 <hr>
 
@@ -165,7 +169,6 @@ Where \(\eta\) is a normalization constant. Now, let's pay attention to \(p(z_t 
 <p>
 For \(p(x_t|z_{1:t-1}, u_{1:t})\) we are going to use the law of Total Probability to add a new variable, so we integrate over this new variable. More concretely to add \(x_{t-1}\), which will allow us to introduce recursion to our expression:
 </p>
-
 
 \[
 = \eta \cdot p(z_t | x_t) \cdot \int p(x_t | x_{t-1}, z_{1:t-1}, u_{1:t}) \cdot p(x_{t-1}|z_{1:t-1},u_{1:t}) dx_{t-1}

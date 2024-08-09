@@ -197,7 +197,6 @@ $ docker-compose up
 And enter to the admin page located on 127.0.0.1:8000/admin, where you can log in with your credentials.
 </p>
 
-
 <div id="`Django` Notes-URLs"><h2 id="URLs" class="header"><a href="#`Django` Notes-URLs">URLs</a></h2></div>
 
 <p>
@@ -256,7 +255,6 @@ Next on, we have a simple example of our <code>User Model</code> serializer:
 from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
-
 
 class UserSerializer(serializers.ModelSerializer):
     """Serializer for the users object"""
@@ -367,7 +365,6 @@ $ docker-compose run app sh -c "python manage.py migrate"
 <p>
 On <code>docker</code>: 
 </p>
-
 
 <pre console="">
 $ docker-compose run app sh -c "python manage.py makemigrations"

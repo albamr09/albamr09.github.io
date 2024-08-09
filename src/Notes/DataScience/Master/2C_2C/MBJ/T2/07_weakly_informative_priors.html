@@ -77,7 +77,6 @@
 </li></ul>
 <hr>
 
-
 <div id="Weakly Informative Priors-Concepts relating to the choice of prior distribution"><h2 id="Concepts relating to the choice of prior distribution" class="header"><a href="#Weakly Informative Priors-Concepts relating to the choice of prior distribution">Concepts relating to the choice of prior distribution</a></h2></div>
 
 <div id="Weakly Informative Priors-Concepts relating to the choice of prior distribution-Improper limit of a prior distribution"><h3 id="Improper limit of a prior distribution" class="header"><a href="#Weakly Informative Priors-Concepts relating to the choice of prior distribution-Improper limit of a prior distribution">Improper limit of a prior distribution</a></h3></div>
@@ -171,7 +170,6 @@ Sometimes, in Bayesian statistics, people suggest using a uniform prior distribu
 <p>
 In the schools model, the parameter \(\tau\) doesn't have any simple family of prior distributions that work well because its likelihood depends on all the data from all the groups in a complex way. However, there's a kind of distribution called the inverse-gamma family that works well in this situation. This means that if we use an inverse-gamma distribution as a prior for \(\tau^2\), then after we collect our data and update our beliefs, the conditional distribution for \(\tau^2\), \(p(\tau^2|\mu, \theta, y)\) that we get is still an inverse-gamma distribution.
 </p>
-
 
 <p>
 The inverse-gamma prior distribution is a way to set up our beliefs in a noninformative (or weakly informative) manner when we're dealing with certain types of data. We choose a parameter called alpha (\(\alpha\)) to control how informative the prior is. Now, here's the thing: If we set alpha to a very low value, like \(1\) or \(0.01\) or \(0.001\), it's supposed to mean we're not putting much prior information into our model. But there's a problem: When we make alpha too small, the posterior distribution (our updated beliefs after looking at the data) can end up being improper, which means it doesn't add up to \(1\). To avoid this, we need to set alpha to a reasonable value, not too small.

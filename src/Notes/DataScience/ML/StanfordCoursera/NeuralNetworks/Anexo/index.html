@@ -38,60 +38,6 @@
 
 <hr>
 
-<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
-<ul>
-<li>
-<a href="index.html#Clasificación múltiple">Clasificación múltiple</a>
-
-</li><li>
-[[#Como podemos ver, los valores de \(y_j\) indican claramente a qué clase pertenece el ejemplo \(j\) (clase 3), mientras que la hipótesis \(h_\Theta(x_j)\) ofrece, para cada clase (columna) la probabilidad de que el ejemplo \(j\) pertenezca a esa clase.|Como podemos ver, los valores de \(y_j\) indican claramente a qué clase pertenece el ejemplo \(j\) (clase 3), mientras que la hipótesis \(h_\Theta(x_j)\) ofrece, para cada clase (columna) la probabilidad de que el ejemplo \(j\) pertenezca a esa clase.]]
-
-</li><li>
-<a href="index.html#Función de coste">Función de coste</a>
-
-<ul>
-<li>
-<a href="index.html#Notación">Notación</a>
-
-</li><li>
-<a href="index.html#Regularización">Regularización</a>
-
-</li><li>
-<a href="index.html#Múltiple Ejemplos">Múltiple Ejemplos</a>
-
-</li></ul>
-</li><li>
-<a href="https://albamr09.github.io/public/assests/nn_multi_ejemplos.svg"><img src="https://albamr09.github.io/public/assets/nn_multi_ejemplos.svg" alt="Red Neuronal con varios ejemplos" style="width:800px;height:600px"></a>
-
-</li><li>
-<a href="index.html#Retropropagación">Retropropagación</a>
-
-<ul>
-<li>
-<a href="index.html#Derivada de la función de coste">Derivada de la función de coste</a>
-
-</li><li>
-<a href="index.html#Capas intermedias">Capas intermedias</a>
-
-</li><li>
-<a href="index.html#Ejemplo de retropropagación">Ejemplo de retropropagación</a>
-
-</li></ul>
-</li><li>
-<a href="index.html#Algoritmo">Algoritmo</a>
-
-<ul>
-<li>
-<a href="index.html#Notación">Notación</a>
-
-</li><li>
-<a href="index.html#Pseudocódigo">Pseudocódigo</a>
-
-</li></ul>
-</li></ul>
-<hr>
-
-
 <div id="Anexo-Clasificación múltiple"><h2 id="Clasificación múltiple" class="header"><a href="#Anexo-Clasificación múltiple">Clasificación múltiple</a></h2></div>
 
 <p>
@@ -152,7 +98,6 @@ Esta función se aplica sobre los \(k\) nodos en la capa de salida.
 <a href="Ejemplo Cálculo Función de Coste.html">Ejemplo Cálculo Función de Coste</a>
 </p>
 
-
 <div id="Anexo-Función de coste-Regularización"><h4 id="Regularización" class="header"><a href="#Anexo-Función de coste-Regularización">Regularización</a></h4></div>
 
 <p>
@@ -162,7 +107,6 @@ Definimos la función de coste introduciendo regularización como sigue:
 \begin{align}
 J(\Theta) = - \frac{1}{m} \left\{ \sum_{j=1}^m \sum_{i=1}^c [y_{ij}\cdot \log(h_\Theta(x_j)_i)] + [(1-y_{ij})\cdot \log(1-(h_\Theta(x_j)_i))]\right\} + \frac{\lambda}{2m} \sum_{q=1}^k \sum_{i=1}^{S_q}\sum_{j=1}^{S_{q+1}} (\theta_{ji}^{(q)})^2
 \end{align}
-
 
 <p>
 Antes de nada, recordar que \(S_q\) denota el número de nodos en la capa \(q\). Entonces, el primer término de la función es igual que cuando no se aplicaba regularización. Expliquemos el segundo término. La regularización, en este caso, consiste en sumar todos los pesos de la red neuronal, por lo tanto:
@@ -214,7 +158,6 @@ Si generalizamos esto a \(m\) ejemplos tenemos que la salida de cada capa es una
 Vamos, ahora a explicar cómo se aplica la retropropagación. Lo primero que debemos tener en cuenta es que este proceso se basa en la misma idea de optimización que la <a href="../../Regresión Lineal.html">Regresión Lineal</a> y la <a href="../../Regresión Logística.html">Regresión Logística</a>, es decir, lo que queremos hacer es minimizar el coste, \(J(\Theta)\)
 </p>
 
-
 <p>
 Sea \(c\) el número de nodos en la última capa, \(\theta_{it}\) el peso \(t\) del nodo \(i\) de la última capa \(k\), \(a_{ij}^{(k)}\) la salida del nodo \(i\) para el ejemplo \(j\) en la capa \(k\):
 </p>
@@ -234,8 +177,6 @@ Normalmente en las capas intermedias, \(q\), nos referimos al término \(\frac{\
 <a href="Explicación de la retropropagación.html">Explicación de la retropropagación</a>
 </p>
 
-
-
 <div id="Anexo-Retropropagación-Derivada de la función de coste"><h3 id="Derivada de la función de coste" class="header"><a href="#Anexo-Retropropagación-Derivada de la función de coste">Derivada de la función de coste</a></h3></div>
 
 <p>
@@ -245,8 +186,6 @@ A continuación explicamos cómo derivar la función de coste (<span id="Anexo-R
 <p>
 <a href="Derivada de la función de coste.html">Derivada de la función de coste</a>
 </p>
-
-
 
 <div id="Anexo-Retropropagación-Capas intermedias"><h3 id="Capas intermedias" class="header"><a href="#Anexo-Retropropagación-Capas intermedias">Capas intermedias</a></h3></div>
 
@@ -262,14 +201,11 @@ Veamos, ahora, cómo llevar a cabo el <span id="Anexo-Retropropagación-Capas in
 <a href="Derivadas capas intermedias.html">Derivadas capas intermedias</a>
 </p>
 
-
 <div id="Anexo-Retropropagación-Ejemplo de retropropagación"><h3 id="Ejemplo de retropropagación" class="header"><a href="#Anexo-Retropropagación-Ejemplo de retropropagación">Ejemplo de retropropagación</a></h3></div>
 
 <p>
 <a href="Ejemplo de retropropagación.html">Ejemplo de retropropagación</a>
 </p>
-
-
 
 <div id="Anexo-Algoritmo"><h2 id="Algoritmo" class="header"><a href="#Anexo-Algoritmo">Algoritmo</a></h2></div>
 

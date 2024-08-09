@@ -42,11 +42,9 @@
 Donde \(q\) denota la capa, con \(1 \leq q \leq (k-1)\). Pues lo que tenemos que hacer es, de nuevo, aplicar la regla de la cadena, entre el peso \(\theta_{it}^{(q)}\) (peso \(t\) del nodo \(i\) de la capa \(q\)) y todo nodo \(a_{lj}^{(q+1)}\)(es decir para el nodo \(l\) en la capa \(q+1\) para el ejemplo \(j\)).
 </p>
 
-
 \[%align
 \frac{\delta J(\Theta)}{\delta \theta_{it}^{(q)}} = \frac{J(\Theta)}{\delta a^{(q+1)}_{1j}}\frac{\delta a_{1j}^{(q+1)}}{\delta \theta_{it}^{(q)}} + \cdots + \frac{J(\Theta)}{\delta a^{(q+1)}_{(S_(q+1))j}}\frac{\delta a_{(S_(q+1))j}^{(q+1)}}{\delta \theta_{it}^{(q)}}
 \]
-
 
 <p>
 Donde \(S_{(q+1)}\) es el número de nodos en la capa \(q+1\). Para cada término \(l\) de la suma, debemos volver a aplicar la regla de la cadena, tal que:

@@ -55,7 +55,6 @@
 </li></ul>
 <hr>
 
-
 <p>
 We will now use the node library <code>MongoMemoryServer</code> in order to mock our <code>MongoDB</code> database using <code>Node.js</code> inside a <code>Docker</code> container.
 </p>
@@ -90,7 +89,6 @@ RUN apk add mongodb
 RUN apk add mongodb-tools
 RUN mkdir -p /data/db/
 RUN chmod -R 777 /data/db
-
 
 # Add common user
 RUN adduser -D user
@@ -162,7 +160,6 @@ describe('User Model Tests', ()=&gt; {
         useUnifiedTopology: true,
       }).catch(error =&gt; console.log(error));
     });
-
 
     afterAll(async () =&gt; {
         await mongoServer.stop();

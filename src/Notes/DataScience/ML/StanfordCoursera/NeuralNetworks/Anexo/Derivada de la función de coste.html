@@ -66,7 +66,6 @@ Por la regla de la cadena, separamos la derivada de la función del coste en fun
 \frac{\delta J(\Theta)}{\delta \theta_{it}^{(k)}} = \sum_{j=1}^m \sum_{i=1}^c \frac{\delta E^{(k)}}{\delta a_{ij}^{(k)}} \frac{\delta a_{ij}^{(k)}}{\delta \theta_{it}^{(k)}}
 \end{align}
 
-
 <div id="Derivada de la Función de Coste-Capa de salida"><h3 id="Capa de salida" class="header"><a href="#Derivada de la Función de Coste-Capa de salida">Capa de salida</a></h3></div>
 
 <p>
@@ -92,7 +91,6 @@ Sea \(h_\Theta(x_j) = a^{(k)}_j\), es decir la salida de la última capa para el
 \[%align
 \frac{\delta J(\Theta)}{\delta \theta_{it}^{(k)}} = \left(- \frac{1}{m}\right)  \sum_{j=1}^m\sum_{i=1}^c \frac{\delta}{\delta \theta_{it}^{(k)}} \left\{(y_{ij}\cdot \log(a^{(k)}_{ij})) + [(1-y_{ij})\log(1-a^{(k)}_{ij})]\right\}
 \]
-
 
 <p>
 Sacaremos el término \(y_{ij}\) de la derivada y juntemos todas las expresiones:
@@ -133,7 +131,6 @@ Entonces
 <p>
 Sacamos \(\frac{\delta a_{ij}^{(k)}}{\delta \theta_{it}^{(k)}}\) como factor común y aplicamos el \((-1)\):
 </p>
-
 
 \[%align
 \frac{\delta J(\Theta)}{\delta \theta_{it}^{(k)}} = \left(- \frac{1}{m}\right)  \sum_{j=1}^m\sum_{i=1}^c  \frac{\delta a_{ij}^{(k)}}{\delta \theta_{it}^{(k)}}\left\{y_{ij} \frac{\delta \log(a_{ij}^{(k)})}{\delta a_{ij}^{(k)}} -  \left((1-y_{ij})\frac{\delta \log(1-a^{(k)}_{ij})}{\delta (1-a^{(k)}_{ij})} \right)\right\}

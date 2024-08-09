@@ -49,15 +49,19 @@
 </li><li>
 <a href="Regresión Logística.html#Funcion%20de%20coste">Funcion de coste</a>
 
-</li><li>
+<ul>
+<li>
 <a href="Regresión Logística.html#Regularizaci%F3n">Regularizaci n</a>
 
+</li></ul>
 </li><li>
 <a href="Regresión Logística.html#Descenso%20gradiente">Descenso gradiente</a>
 
-</li><li>
+<ul>
+<li>
 <a href="Regresión Logística.html#Regularizaci%F3n">Regularizaci n</a>
 
+</li></ul>
 </li></ul>
 <hr>
 
@@ -230,7 +234,6 @@ Por lo tanto, si sustituimos:
 Aplicamos la regla \(\frac{\delta \log(x)}{\delta x} = \frac{1}{x}\), sacamos la expresión \(\frac{\delta h_\Theta(x_j)}{\delta \theta_i}\) como factor común y hacemos negativo el segundo término:
 </p>
 
-
 \begin{align}
 \frac{\delta J(\Theta)}{\delta \theta_i} = -\frac{1}{m}\sum_{j=1}^m  \left(\frac{y_j}{h_\Theta(x_j)} \right) - \left(\frac{(1 - y_j)}{1-h_\Theta(x_j)}\right) \frac{\delta h_\Theta(x_j)}{\delta \theta_i} =
 \end{align}
@@ -248,7 +251,6 @@ Aplicamos operationes aritméticas:
 <p>
 Centrémonos ahora en \(\frac{\delta h_\Theta(x_j)}{\delta \theta_i}\). Para calcular esta derivada, primero expresamos la hipótesis utilizando la función sigmoide:
 </p>
-
 
 \begin{align}
 \frac{\delta h_\Theta(x_j)}{\delta \theta_i} = \frac{\delta}{\delta \theta_i} g(\Theta x_j) 

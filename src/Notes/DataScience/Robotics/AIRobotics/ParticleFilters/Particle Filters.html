@@ -58,12 +58,14 @@
 </li><li>
 <a href="Particle Filters.html#Algorithm">Algorithm</a>
 
-</li><li>
+<ul>
+<li>
 <a href="Particle Filters.html#Measurement%20Updates">Measurement Updates</a>
 
 </li><li>
 <a href="Particle Filters.html#Motion%20Updates">Motion Updates</a>
 
+</li></ul>
 </li><li>
 <a href="Particle Filters.html#Resampling%20Example">Resampling Example</a>
 
@@ -113,7 +115,6 @@ Approximate
 So, in a first instance, given a floor plan the robot has to perform global localization. That is, it does not know where it is, and it has to find out based on sensor measurements:
 </p>
 
-
 <p>
 <img src="https://albamr09.github.io/public/assets/particle_filter_1.png" alt="Initial State in Particle Filter">
 </p>
@@ -129,7 +130,6 @@ Each particle (dot) is a discrete guess whether the robot might be, and it holds
 <p>
 So, initially the robot is completely uncertain as to where it is, which derives into a uniform distribution as to where it may be, and thus the particles are scattered all over the floor plan. However as time passes, the particle filter makes them survive according to how consistent these particles are compared to the sensor measurements:
 </p>
-
 
 <p>
 <img src="https://albamr09.github.io/public/assets/particle_filter_2.png" alt="Update State in Particle Filter" style="width: 500px">
