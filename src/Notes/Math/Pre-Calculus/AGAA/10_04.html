@@ -1,0 +1,299 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Trigonometric (Polar) Form of Complex Numbers</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Trigonometric (Polar) Form of Complex Numbers"><h1 id="Trigonometric (Polar) Form of Complex Numbers" class="header"><a href="#Trigonometric (Polar) Form of Complex Numbers">Trigonometric (Polar) Form of Complex Numbers</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="10_04.html#The%20Complex%20Plane%20and%20Vector%20Representation">The Complex Plane and Vector Representation</a>
+
+</li><li>
+<a href="10_04.html#Trigonometric%20%28Polar%29%20Form">Trigonometric  Polar  Form</a>
+
+<ul>
+<li>
+<a href="10_04.html#Converting%20from%20Rectangular%20to%20Trigonometric%20Form">Converting from Rectangular to Trigonometric Form</a>
+
+</li></ul>
+</li><li>
+<a href="10_04.html#Produc%20Theorem">Produc Theorem</a>
+
+</li><li>
+<a href="10_04.html#Quotient%20Theorem">Quotient Theorem</a>
+
+</li></ul>
+<hr>
+
+<div id="Trigonometric (Polar) Form of Complex Numbers-The Complex Plane and Vector Representation"><h2 id="The Complex Plane and Vector Representation" class="header"><a href="#Trigonometric (Polar) Form of Complex Numbers-The Complex Plane and Vector Representation">The Complex Plane and Vector Representation</a></h2></div>
+
+<p>
+To graph a complex number we modify the rectangular coordinate system by calling the horizontal axis the <span id="Trigonometric (Polar) Form of Complex Numbers-The Complex Plane and Vector Representation-real axis"></span><strong id="real axis">real axis</strong> and the vertical axis the <span id="Trigonometric (Polar) Form of Complex Numbers-The Complex Plane and Vector Representation-imaginary axis"></span><strong id="imaginary axis">imaginary axis</strong>, such that we obtain the <span id="Trigonometric (Polar) Form of Complex Numbers-The Complex Plane and Vector Representation-complex plane"></span><strong id="complex plane">complex plane</strong> (Figure 46).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/src/Notes/Math/Pre-Calculus/AGAA/public/assets/complex_plane.png" alt="Complex Plane" style="width:250px">
+</p>
+
+<p>
+Each complex number \(a + bi\) determines a unique position vector \(\textbf{OP}\) with initial point \((0, 0)\) and terminal point \((a, b)\).
+</p>
+
+<div id="Trigonometric (Polar) Form of Complex Numbers-Trigonometric (Polar) Form"><h2 id="Trigonometric (Polar) Form" class="header"><a href="#Trigonometric (Polar) Form of Complex Numbers-Trigonometric (Polar) Form">Trigonometric (Polar) Form</a></h2></div>
+
+<p>
+The next figure shows the complex number \(x + yi\) that corresponds to a vector \(\textbf{OP}\) with direction angle \(\theta\) and magnitude \(r\), such that:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/src/Notes/Math/Pre-Calculus/AGAA/public/assets/trigonometric_polar_form.png" alt="Trigonometric (Polar) Form" style="width:300px">
+</p>
+
+\begin{align}
+x = r \cos \theta
+\end{align}
+
+\begin{align}
+y = r \sin \theta
+\end{align}
+
+\begin{align}
+r = \sqrt{x^2 + y^2}
+\end{align}
+
+\begin{align}
+\tan \theta = \frac{y}{x}, x \neq 0
+\end{align}
+
+<p>
+If we substitute \(x = r \cos \theta\) and \(y = r \sin \theta\) into \(x + yi\) it gives:
+</p>
+
+\begin{align}
+x + yi = r \cos \theta + r \sin \theta i
+\end{align}
+
+\begin{align}
+= r (\cos \theta + i \sin \theta)
+\end{align}
+
+<p>
+This is called the <span id="Trigonometric (Polar) Form of Complex Numbers-Trigonometric (Polar) Form-trigonometric form"></span><strong id="trigonometric form">trigonometric form</strong> (or <span id="Trigonometric (Polar) Form of Complex Numbers-Trigonometric (Polar) Form-polar form"></span><strong id="polar form">polar form</strong>) of the complex number \(x + yi\).
+</p>
+
+<p>
+The expression \(\cos \theta + i \sin \theta\) is sometimes abbreviated \(\text{cis} \theta\), therefore \(r(\cos \theta + i \sin \theta) = r \text{cis} \theta\)
+</p>
+
+<p>
+The number \(r\) is the <span id="Trigonometric (Polar) Form of Complex Numbers-Trigonometric (Polar) Form-modulus"></span><strong id="modulus">modulus</strong> or <span id="Trigonometric (Polar) Form of Complex Numbers-Trigonometric (Polar) Form-absolute value"></span><strong id="absolute value">absolute value</strong> of \(x + yi\) and \(\theta\) is the <span id="Trigonometric (Polar) Form of Complex Numbers-Trigonometric (Polar) Form-argument"></span><strong id="argument">argument</strong> of \(x + yi\).
+</p>
+
+<div id="Trigonometric (Polar) Form of Complex Numbers-Trigonometric (Polar) Form-Converting from Rectangular to Trigonometric Form"><h3 id="Converting from Rectangular to Trigonometric Form" class="header"><a href="#Trigonometric (Polar) Form of Complex Numbers-Trigonometric (Polar) Form-Converting from Rectangular to Trigonometric Form">Converting from Rectangular to Trigonometric Form</a></h3></div>
+
+<ol>
+<li>
+Sketch a graph of the number \(x + yi\) in the complex plane.
+
+</li><li>
+Find \(r\) by using the equation \(r = \sqrt{x^2 + y^2}\).
+
+</li><li>
+Find \(\theta\) by using th equation \(\tan \theta = \frac{y}{x}, x \neq 0\) choosing the quadrant indicated in (1).
+
+</li></ol>
+<p>
+A <span id="Trigonometric (Polar) Form of Complex Numbers-Trigonometric (Polar) Form-Converting from Rectangular to Trigonometric Form-fractal"></span><strong id="fractal">fractal</strong> is a geometric figure with an endless self-similarity property. A fractal image repeats itself infinitely with ever decreasing dimensions.
+</p>
+
+<div id="Trigonometric (Polar) Form of Complex Numbers-Produc Theorem"><h2 id="Produc Theorem" class="header"><a href="#Trigonometric (Polar) Form of Complex Numbers-Produc Theorem">Produc Theorem</a></h2></div>
+
+<p>
+Given two complex number \(x + yi\) and \(a + bi\) such that their trigonometric form is given by:
+</p>
+
+\begin{align}
+x + yi = r(\cos \theta + i \sin \theta)
+\end{align}
+
+<p>
+and 
+</p>
+
+\begin{align}
+a + bi = n(\cos \phi + i \sin \phi)
+\end{align}
+
+<p>
+If we multiply their trigonometric forms we obtain:
+</p>
+
+\begin{align}
+[r(\cos \theta + i \sin \theta)][n(\cos \phi + i \sin \phi)] 
+\end{align}
+
+\begin{align}
+r \cdot n (\cos \theta + i \sin \theta)(\cos \phi + i \sin \phi)
+\end{align}
+
+\begin{align}
+r \cdot n (\cos \theta \cdot \cos \phi + i \sin \theta \cdot \cos \phi + \cos \theta \cdot i \sin \phi + i^2 \sin \theta \cdot \sin \phi)
+\end{align}
+
+<p>
+We know that \(i^2 = -1\), and we factor out \(i\).
+</p>
+
+\begin{align}
+r \cdot n (\cos \theta \cdot \cos \phi + (-1) \sin \theta \cdot \sin \phi + i (\sin \theta \cdot \cos \phi + \cos \theta \cdot \sin \phi))
+\end{align}
+
+\begin{align}
+r \cdot n (\cos \theta \cdot \cos \phi - \sin \theta \cdot \sin \phi + i (\sin \theta \cdot \cos \phi + \cos \theta \cdot \sin \phi))
+\end{align}
+
+<p>
+Given \(\cos \theta \cdot \cos \phi - \sin \theta \cdot \sin \phi = \cos (\theta + \phi)\) and \(\sin \theta \cdot \cos \phi + \cos \theta \cdot \sin \phi = \sin (\theta + \phi)\)
+</p>
+
+\begin{align}
+r \cdot n (\cos (\theta + \phi) + i \sin (\theta + \phi))
+\end{align}
+
+<p>
+In compact form this is written:
+</p>
+
+\begin{align}
+r \cdot n \text{cis} (\theta + \phi)
+\end{align}
+
+<div id="Trigonometric (Polar) Form of Complex Numbers-Quotient Theorem"><h2 id="Quotient Theorem" class="header"><a href="#Trigonometric (Polar) Form of Complex Numbers-Quotient Theorem">Quotient Theorem</a></h2></div>
+
+<p>
+Given two complex number \(x + yi\) and \(a + bi\) such that their trigonometric form is given by:
+</p>
+
+\begin{align}
+x + yi = r(\cos \theta + i \sin \theta)
+\end{align}
+
+<p>
+and 
+</p>
+
+\begin{align}
+a + bi = n(\cos \phi + i \sin \phi)
+\end{align}
+
+<p>
+If we divide them we obtain:
+</p>
+
+\begin{align}
+\frac{x + yi}{a + bi} = \frac{(x + yi)(a - bi)}{(a + bi)(a - bi)}
+\end{align}
+
+\begin{align}
+= \frac{ax + ayi - bxi -ybi^2}{a^2 - b^2i^2} = \frac{ax + ayi - bxi + yb}{a^2 + b^2}
+\end{align}
+
+\begin{align}
+= \frac{a(x + yi) + b(y - xi)}{a^2 + b^2}
+\end{align}
+
+<p>
+If we substitute their trigonometric forms, knowing that \(a = n \cdot \cos \phi\), \(b = n \cdot \sin \phi\), \(x = r \cdot \cos \theta\) and \(y = r \cdot \sin \theta\), then
+</p>
+
+\begin{align}
+= \frac{(n \cdot \cos \phi)(r \cdot \cos \theta + i \cdot r \cdot \sin \theta) + (n \cdot \sin \phi)(r \cdot \sin \theta - i \cdot r \cdot \cos \theta)}{(n \cdot \cos \phi)^2 + (n \cdot \sin \phi)^2}
+\end{align}
+
+<p>
+We extract \(n\) and \(r\) as common factors and we expand the denominator:
+</p>
+
+\begin{align}
+= \frac{n \cdot r [\cos \phi \cdot (\cos \theta + i \cdot \sin \theta) + \sin \phi \cdot (\sin \theta - i \cdot \cos \theta)]}{n^2 (\cos^2 \phi + \sin^2 \phi)}
+\end{align}
+
+<p>
+We know that \(\cos^2 x + \sin^2 x = 1\). We multiply the elements on the numerator:
+</p>
+
+\begin{align}
+= \frac{n \cdot r (\cos \phi \cdot \cos \theta + i \cdot \cos \phi \cdot \sin \theta + \sin \phi \cdot \sin \theta - i \sin \phi \cdot \cos \theta)}{n^2}
+\end{align}
+
+<p>
+We rearrange the elements on the numerator and extract \(i\) as a common factor:
+</p>
+
+\begin{align}
+= \frac{n \cdot r [\cos \theta \cdot \cos \phi + \sin \theta \cdot \sin \phi + i \cdot (\sin \theta \cdot \cos \phi - \sin \phi \cdot \cos \theta)]}{n^2}
+\end{align}
+
+<p>
+Given that \(\cos \theta \cdot \cos \theta + \sin \theta \cdot \sin \phi = \cos (\theta - \phi)\) and \(\sin \theta \cdot \cos \phi - \sin \phi \cdot \cos \theta = \sin (\theta - \phi)\):
+</p>
+
+\begin{align}
+= \frac{n \cdot r (\cos (\theta - \phi) + i \cdot \sin (\theta - \phi))}{n^2}
+\end{align}
+
+\begin{align}
+= \frac{r}{n} (\cos (\theta - \phi) + i \cdot \sin (\theta - \phi))
+\end{align}
+
+<p>
+In compact form this is written:
+</p>
+
+\begin{align}
+= \frac{r}{n} \text{cis} (\theta - \phi)
+\end{align}
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
