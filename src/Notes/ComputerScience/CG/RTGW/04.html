@@ -262,7 +262,7 @@ These are the most simple tranformation matrices to understand. A translation ma
 </p>
 
 \begin{align}
-\being{bmatrix}
+\begin{bmatrix}
 1 &amp; 0 &amp; 0 &amp; X \\
 0 &amp; 1 &amp; 0 &amp; Y \\
 0 &amp; 0 &amp; 1 &amp; Z \\
@@ -279,26 +279,26 @@ So if we want to translate the vector \((10,10,10,1)\) of \(10\) units in the X 
 </p>
 
 \begin{align}
-\being{bmatrix}
+\begin{bmatrix}
 1 &amp; 0 &amp; 0 &amp; 10 \\
 0 &amp; 1 &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 1 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1 \\
 \end{bmatrix}
 * 
-\being{bmatrix}
+\begin{bmatrix}
 10 \\
 10 \\
 10 \\
 1 \\
 \end{bmatrix} = 
-\being{bmatrix}
+\begin{bmatrix}
 1 * 10 + 0 * 10 + 0 * 10 + 10 * 1 \\
 0 * 10 + 1 * 10 + 0 * 10 + 0 * 1 \\
 0 * 10 + 0 * 10 + 1 * 10 + 0 * 1 \\
 0 * 10 + 0 * 10 + 0 * 10 + 1 * 1 \\
 \end{bmatrix} = 
-\being{bmatrix}
+\begin{bmatrix}
 20 \\
 10 \\
 10 \\
@@ -317,7 +317,7 @@ Scaling matrices are quite easy too:
 </p>
 
 \begin{align}
-\being{bmatrix}
+\begin{bmatrix}
 x &amp; 0 &amp; 0 &amp; 0 \\
 0 &amp; y &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; z &amp; 0 \\
@@ -330,26 +330,26 @@ So if you want to scale a vector (position or direction, it doesn’t matter) by
 </p>
 
 \begin{align}
-\being{bmatrix}
+\begin{bmatrix}
 2 &amp; 0 &amp; 0 &amp; 0 \\
 0 &amp; 2 &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 2 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1 \\
 \end{bmatrix}
 * 
-\being{bmatrix}
+\begin{bmatrix}
 x \\
 y \\
 z \\
 w \\
 \end{bmatrix} = 
-\being{bmatrix}
+\begin{bmatrix}
 2 * x + 0 * y + 0 * z + 0 * w \\
 0 * x + 2 * y + 0 * z + 0 * w \\
 0 * x + 0 * y + 2 * z + 0 * w \\
 0 * x + 0 * y + 0 * z + 1 * w \\
 \end{bmatrix} = 
-\being{bmatrix}
+\begin{bmatrix}
 2x \\
 2y \\
 2z \\
