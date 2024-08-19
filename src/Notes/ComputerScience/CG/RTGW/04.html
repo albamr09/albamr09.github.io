@@ -51,19 +51,38 @@
 <a href="04.html#Homogeneous%20Coordinates">Homogeneous Coordinates</a>
 
 </li><li>
-<a href="04.html#Model%20Transform">Model Transform</a>
+<a href="04.html#Transformations">Transformations</a>
+
+<ul>
+<li>
+<a href="04.html#Translation%20Matrices">Translation Matrices</a>
 
 </li><li>
-<a href="04.html#View%20Transform">View Transform</a>
+<a href="04.html#Scaling%20matrices">Scaling matrices</a>
 
 </li><li>
-<a href="04.html#Projection%20Transform">Projection Transform</a>
+<a href="04.html#Rotation%20Matrices">Rotation Matrices</a>
 
+</li><li>
+<a href="04.html#Cumulating%20transformations">Cumulating transformations</a>
+
+</li></ul>
+</li><li>
+<a href="04.html#The%20Model%2C%20View%20and%20Projection%20matrices">The Model  View and Projection matrices</a>
+
+<ul>
+<li>
+<a href="04.html#The%20Model%20Matrix">The Model Matrix</a>
+
+</li><li>
+<a href="04.html#The%20View%20Matrix">The View Matrix</a>
+
+</li><li>
+<a href="04.html#The%20Projection%20Matrix">The Projection Matrix</a>
+
+</li></ul>
 </li><li>
 <a href="04.html#Perspective%20Division">Perspective Division</a>
-
-</li><li>
-<a href="04.html#View%20Transform">View Transform</a>
 
 </li></ul>
 </li><li>
@@ -164,11 +183,24 @@ Clip Space
 <div id="Camera-Vertex Transformations-Homogeneous Coordinates"><h3 id="Homogeneous Coordinates" class="header"><a href="#Camera-Vertex Transformations-Homogeneous Coordinates">Homogeneous Coordinates</a></h3></div>
 
 <p>
-Homogeneous coordinates make it possible to represent <span id="Camera-Vertex Transformations-Homogeneous Coordinates-affine transformations"></span><strong id="affine transformations">affine transformations</strong> (such as rotation, scaling, shear, and translation) and projective transformations as \(4\)x\(4\) matrices.
+Until now, we only considered 3D vertices as a \((x,y,z)\) triplet. Let’s introduce \(w\). Homogeneous coordinates make it possible to represent <span id="Camera-Vertex Transformations-Homogeneous Coordinates-affine transformations"></span><strong id="affine transformations">affine transformations</strong> (such as rotation, scaling, shear, and translation) and projective transformations as \(4\)x\(4\) matrices.
 </p>
 
 <p>
 In Homogeneous coordinates, vertices have four components: \(x, y, z\), and \(w\). The first three components are the <span id="Camera-Vertex Transformations-Homogeneous Coordinates-vertex coordinates"></span><strong id="vertex coordinates">vertex coordinates</strong> in <span id="Camera-Vertex Transformations-Homogeneous Coordinates-Euclidian Space"></span><strong id="Euclidian Space">Euclidian Space</strong>. The fourth is the <span id="Camera-Vertex Transformations-Homogeneous Coordinates-perspective component"></span><strong id="perspective component">perspective component</strong>. So \((x, y, z, w)\) take us to a new space: the <span id="Camera-Vertex Transformations-Homogeneous Coordinates-Projective Space"></span><strong id="Projective Space">Projective Space</strong>.
+</p>
+
+<p>
+This will be more clear soon, but for now, just remember this:
+</p>
+
+<p>
+If \(w == 1\), then the vector \((x,y,z,1)\) is a position in space.
+If \(w == 0\), then the vector \((x,y,z,0)\) is a direction.
+</p>
+
+<p>
+What difference does this make? Well, for a rotation, it doesn’t change anything. When you rotate a point or a direction, you get the same result. However, for a translation (when you move the point in a certain direction), things are different. What could mean “translate a direction”? Not much. Homogeneous coordinates allow us to use a single mathematical formula to deal with these two cases.
 </p>
 
 <p>
@@ -221,34 +253,187 @@ There is one more thing to note about Homogeneous coordinates: while vertices ha
 <pre javascript="">vVertexNormal = vec3(uNormalMatrix * vec4(aVertexNormal, 0.0));
 </pre>
 
-<div id="Camera-Vertex Transformations-Model Transform"><h3 id="Model Transform" class="header"><a href="#Camera-Vertex Transformations-Model Transform">Model Transform</a></h3></div>
+<div id="Camera-Vertex Transformations-Transformations"><h3 id="Transformations" class="header"><a href="#Camera-Vertex Transformations-Transformations">Transformations</a></h3></div>
+
+<div id="Camera-Vertex Transformations-Transformations-Translation Matrices"><h4 id="Translation Matrices" class="header"><a href="#Camera-Vertex Transformations-Transformations-Translation Matrices">Translation Matrices</a></h4></div>
 
 <p>
-The object-coordinate system is the space where vertex coordinates are specified. If we want to translate or move objects around, we use a matrix that encodes these transformations, known as the <span id="Camera-Vertex Transformations-Model Transform-Model matrix"></span><strong id="Model matrix">Model matrix</strong>. Once we multiply the vertices of our object by the Model matrix, we obtain new vertex coordinates. These new vertices will determine the position of the object in our 3D world.
+These are the most simple tranformation matrices to understand. A translation matrix look like this:
+</p>
+
+\begin{align}
+\being{bmatrix}
+1 &amp; 0 &amp; 0 &amp; X \\
+0 &amp; 1 &amp; 0 &amp; Y \\
+0 &amp; 0 &amp; 1 &amp; Z \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}
+\end{align}
+
+<p>
+where \(X,Y,Z\) are the values that you want to add to your position.
 </p>
 
 <p>
-In object coordinates, each object is free to define where its origin is and to specify where its vertices are with respect to this origin. In world coordinates, the origin is shared by all of the objects. World coordinates allow us to know where objects are located with respect to each other.
+So if we want to translate the vector \((10,10,10,1)\) of \(10\) units in the X direction, we get:
+</p>
+
+\begin{align}
+\being{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 10 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}
+* 
+\being{bmatrix}
+10 \\
+10 \\
+10 \\
+1 \\
+\end{bmatrix} = 
+\being{bmatrix}
+1 * 10 + 0 * 10 + 0 * 10 + 10 * 1 \\
+0 * 10 + 1 * 10 + 0 * 10 + 0 * 1 \\
+0 * 10 + 0 * 10 + 1 * 10 + 0 * 1 \\
+0 * 10 + 0 * 10 + 0 * 10 + 1 * 1 \\
+\end{bmatrix} = 
+\being{bmatrix}
+20 \\
+10 \\
+10 \\
+1 \\
+\end{bmatrix}
+\end{align}
+
+<p>
+and we get a \((20,10,10,1)\) homogeneous vector! Remember, the \(1\) means that it is a position, not a direction. So our transformation didn’t change the fact that we were dealing with a position, which is good.
+</p>
+
+<div id="Camera-Vertex Transformations-Transformations-Scaling matrices"><h4 id="Scaling matrices" class="header"><a href="#Camera-Vertex Transformations-Transformations-Scaling matrices">Scaling matrices</a></h4></div>
+
+<p>
+Scaling matrices are quite easy too:
+</p>
+
+\begin{align}
+\being{bmatrix}
+x &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; y &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; z &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}
+\end{align}
+
+<p>
+So if you want to scale a vector (position or direction, it doesn’t matter) by \(2.0\) in all directions:
+</p>
+
+\begin{align}
+\being{bmatrix}
+2 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 2 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 2 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}
+* 
+\being{bmatrix}
+x \\
+y \\
+z \\
+w \\
+\end{bmatrix} = 
+\being{bmatrix}
+2 * x + 0 * y + 0 * z + 0 * w \\
+0 * x + 2 * y + 0 * z + 0 * w \\
+0 * x + 0 * y + 2 * z + 0 * w \\
+0 * x + 0 * y + 0 * z + 1 * w \\
+\end{bmatrix} = 
+\being{bmatrix}
+2x \\
+2y \\
+2z \\
+w \\
+\end{bmatrix}
+\end{align}
+
+<div id="Camera-Vertex Transformations-Transformations-Rotation Matrices"><h4 id="Rotation Matrices" class="header"><a href="#Camera-Vertex Transformations-Transformations-Rotation Matrices">Rotation Matrices</a></h4></div>
+
+<p>
+<a href="https://www.opengl-tutorial.org/intermediate-tutorials/tutorial-17-quaternions/">TBC</a>
+</p>
+
+<div id="Camera-Vertex Transformations-Transformations-Cumulating transformations"><h4 id="Cumulating transformations" class="header"><a href="#Camera-Vertex Transformations-Transformations-Cumulating transformations">Cumulating transformations</a></h4></div>
+
+<p>
+So now we know how to rotate, translate, and scale our vectors. It would be great to combine these transformations. This is done by multiplying the matrices together:
+</p>
+
+<pre javascript="">TransformedVector = TranslationMatrix * RotationMatrix * ScaleMatrix * OriginalVector;
+</pre>
+
+<p>
+This actually performs the scaling FIRST, and THEN the rotation, and THEN the translation. This is how matrix multiplication works.
+</p>
+
+<div id="Camera-Vertex Transformations-The Model, View and Projection matrices"><h3 id="The Model, View and Projection matrices" class="header"><a href="#Camera-Vertex Transformations-The Model, View and Projection matrices">The Model, View and Projection matrices</a></h3></div>
+
+<p>
+The Model, View and Projection matrices are a handy tool to separate transformations cleanly.
+</p>
+
+<div id="Camera-Vertex Transformations-The Model, View and Projection matrices-The Model Matrix"><h4 id="The Model Matrix" class="header"><a href="#Camera-Vertex Transformations-The Model, View and Projection matrices-The Model Matrix">The Model Matrix</a></h4></div>
+
+<p>
+A model is defined by a set of vertices. The \(X,Y,Z\) coordinates of these vertices are defined relative to the object’s center: that is, if a vertex is at \((0,0,0)\), it is at the center of the object.
+</p>
+
+<p>
+We'd like to be able to move this model (you just learnt to do so: <code>translation*rotation*scale</code>, and done. You apply this matrix to all your vertices at each frame and everything moves. Something that doesn't move will be at the center of the world.
 </p>
 
 <p>
 <img src="https://albamr09.github.io/public/assets/model_transform.png" alt="Model Transform" style="width:500px">
 </p>
 
-<div id="Camera-Vertex Transformations-View Transform"><h3 id="View Transform" class="header"><a href="#Camera-Vertex Transformations-View Transform">View Transform</a></h3></div>
+<p>
+Your vertices are now in World Space. We went from <span id="Camera-Vertex Transformations-The Model, View and Projection matrices-The Model Matrix-Model Space"></span><strong id="Model Space">Model Space</strong> (all vertices defined relatively to the center of the model) to <span id="Camera-Vertex Transformations-The Model, View and Projection matrices-The Model Matrix-World Space"></span><strong id="World Space">World Space</strong> (all vertices defined relatively to the center of the world). See figure below:
+</p>
 
 <p>
-The <span id="Camera-Vertex Transformations-View Transform-view transform"></span><strong id="view transform">view transform</strong>, shifts the origin of the coordinate system to the view origin. The view origin is where our eye or camera is located with respect to the world origin. This transformation is encoded in the <span id="Camera-Vertex Transformations-View Transform-View matrix"></span><strong id="View matrix">View matrix</strong>.  It is in this coordinate system that our camera is going to operate.
+<img src="https://albamr09.github.io/public/assets/world_coordinates.png" alt="World Coordinates" style="width:500px">
+</p>
+
+<div id="Camera-Vertex Transformations-The Model, View and Projection matrices-The View Matrix"><h4 id="The View Matrix" class="header"><a href="#Camera-Vertex Transformations-The Model, View and Projection matrices-The View Matrix">The View Matrix</a></h4></div>
+
+<p>
+It you want to view a moutain from another angle, you can either move the camera... or move the mountain.
+</p>
+
+<p>
+So initially your camera is at the origin of the World Space. In order to move the world, you simply introduce another matrix. Let’s say you want to move your camera of \(3\) units to the right (\(+X\)). This is equivalent to moving your whole world \(3\) units to the left (\(-X\)).
 </p>
 
 <p>
 <img src="https://albamr09.github.io/public/assets/view_transform.png" alt="View Transform" style="width:500px">
 </p>
 
-<div id="Camera-Vertex Transformations-Projection Transform"><h3 id="Projection Transform" class="header"><a href="#Camera-Vertex Transformations-Projection Transform">Projection Transform</a></h3></div>
+<p>
+We went from <span id="Camera-Vertex Transformations-The Model, View and Projection matrices-The View Matrix-World Space"></span><strong id="World Space">World Space</strong> (all vertices defined relatively to the center of the world, as we made so in the previous section) to <span id="Camera-Vertex Transformations-The Model, View and Projection matrices-The View Matrix-Camera Space"></span><strong id="Camera Space">Camera Space</strong> (all vertices defined relatively to the camera). The figure below shows how we go from model/object coordinates to world coordinates and finally to camera coordinates.
+</p>
 
 <p>
-The next operation is called the <span id="Camera-Vertex Transformations-Projection Transform-projection transform"></span><strong id="projection transform">projection transform</strong>. This operation determines how much of the view space will be rendered and how it will be mapped onto the computer screen. This region is known as the <span id="Camera-Vertex Transformations-Projection Transform-frustum"></span><strong id="frustum">frustum</strong> and it is defined by six planes (near, far, top, bottom, right, and left planes), as shown in the following diagram:
+<img src="https://albamr09.github.io/public/assets/camera_coordinates.png" alt="Camera Coordinates" style="width:500px">
+</p>
+
+<div id="Camera-Vertex Transformations-The Model, View and Projection matrices-The Projection Matrix"><h4 id="The Projection Matrix" class="header"><a href="#Camera-Vertex Transformations-The Model, View and Projection matrices-The Projection Matrix">The Projection Matrix</a></h4></div>
+
+<p>
+We're now in Camera Space. This means that after all theses transformations, a vertex that happens to have \(x==0\) and \(y==0\) should be rendered at the center of the screen. But we can't use only the \(x\) and \(y\) coordinates to determine where an object should be put on the screen: its distance to the camera (\(z\)) counts, too! For two vertices with equivalent \(x\) and \(y\) coordinates, the vertex with the biggest \(z\) coordinate will be more on the center of the screen than the other.
+</p>
+
+<p>
+The operation is called the <span id="Camera-Vertex Transformations-The Model, View and Projection matrices-The Projection Matrix-projection transform"></span><strong id="projection transform">projection transform</strong>. This operation determines how much of the view space will be rendered and how it will be mapped onto the computer screen. This region is known as the <span id="Camera-Vertex Transformations-The Model, View and Projection matrices-The Projection Matrix-frustum"></span><strong id="frustum">frustum</strong> and it is defined by six planes (near, far, top, bottom, right, and left planes), as shown in the following diagram:
 </p>
 
 <p>
@@ -256,15 +441,35 @@ The next operation is called the <span id="Camera-Vertex Transformations-Project
 </p>
 
 <p>
-These six planes are encoded in the <span id="Camera-Vertex Transformations-Projection Transform-Projection matrix"></span><strong id="Projection matrix">Projection matrix</strong>. Any vertices lying outside the frustum after applying the transformation are clipped out and discarded from further processing. Therefore, the frustum defines clipping coordinates, and the Projection matrix that encodes the frustum produces clipping coordinates.
+These six planes are encoded in the <span id="Camera-Vertex Transformations-The Model, View and Projection matrices-The Projection Matrix-Projection matrix"></span><strong id="Projection matrix">Projection matrix</strong>. Any vertices lying outside the frustum after applying the transformation are clipped out and discarded from further processing. Therefore, the frustum defines clipping coordinates, and the Projection matrix that encodes the frustum produces clipping coordinates.
 </p>
 
 <p>
- If the far and near planes have the same dimensions, the frustum will then determine an <span id="Camera-Vertex Transformations-Projection Transform-orthographic projection"></span><strong id="orthographic projection">orthographic projection</strong>. Otherwise, it will be a <span id="Camera-Vertex Transformations-Projection Transform-perspective projection"></span><strong id="perspective projection">perspective projection</strong>.
+ If the far and near planes have the same dimensions, the frustum will then determine an <span id="Camera-Vertex Transformations-The Model, View and Projection matrices-The Projection Matrix-orthographic projection"></span><strong id="orthographic projection">orthographic projection</strong>. Otherwise, it will be a <span id="Camera-Vertex Transformations-The Model, View and Projection matrices-The Projection Matrix-perspective projection"></span><strong id="perspective projection">perspective projection</strong>.
 </p>
 
 <p>
 <img src="https://albamr09.github.io/public/assets/orthographic_perspective_projection.png" alt="Orthographic vs Perspective projection" style="width:500px">
+We went from <span id="Camera-Vertex Transformations-The Model, View and Projection matrices-The Projection Matrix-Camera Space"></span><strong id="Camera Space">Camera Space</strong> (all vertices defined relatively to the camera) to <span id="Camera-Vertex Transformations-The Model, View and Projection matrices-The Projection Matrix-Homogeneous Space"></span><strong id="Homogeneous Space">Homogeneous Space</strong> (all vertices defined in a small cube. Everything inside the cube is onscreen).
+</p>
+
+<p>
+Before projection, we’ve got our blue objects, in Camera Space, and the red shape represents the frustum of the camera: the part of the scene that the camera is actually able to see.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/projection_coordinates_before.png" alt="Projection Coordinates" style="width:500px">
+</p>
+
+<p>
+Multiplying everything by the Projection Matrix has the following effect:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/projection_coordinates_after.png" alt="Projection Coordinates" style="width:500px">
+</p>
+
+<p>
 Up to this point, we are still working with Homogeneous coordinates, so the clipping coordinates have four components: \(x\), \(y\), \(z\), and \(w\). The clipping is done by comparing the \(x\), \(y\), and \(z\) components against the Homogeneous coordinate, \(w\). If any of them is more than, \(+w\), or less than, \(-w\), then that vertex lies outside the frustum and is discarded.
 </p>
 
@@ -279,7 +484,7 @@ Different operative systems and displaying devices can have mechanisms to repres
 </p>
 
 <p>
-Normalized device coordinates are obtained by dividing the clipping coordinates by the \(w\) component. This is why this step is known as perspective division. In the NDC space, the \(x\) and \(y\) coordinates represent the location of your vertices on a normalized 2D screen, while the z-coordinate encodes depth information, which is the relative location of the objects with respect to the near and far planes. 
+Normalized device coordinates are obtained by dividing the clipping coordinates by the \(w\) component. This is why this step is known as <span id="Camera-Vertex Transformations-Perspective Division-perspective division"></span><strong id="perspective division">perspective division</strong>. In the NDC space, the \(x\) and \(y\) coordinates represent the location of your vertices on a normalized 2D screen, while the z-coordinate encodes depth information, which is the relative location of the objects with respect to the near and far planes. 
 </p>
 
 <p>
@@ -293,8 +498,6 @@ The perspective division transforms the viewing frustum into a cube centered in 
 <p>
 <img src="https://albamr09.github.io/public/assets/normalized_device_coordinates.png" alt="Normalized Device Coordinates" style="width:500px">
 </p>
-
-<div id="Camera-Vertex Transformations-View Transform"><h3 id="View Transform" class="header"><a href="#Camera-Vertex Transformations-View Transform">View Transform</a></h3></div>
 
 <p>
 Finally, NDCs are mapped to viewport coordinates. This step maps these coordinates to the available space in your screen. In WebGL, this space is provided by the HTML5 <code>canvas</code>:
@@ -420,7 +623,7 @@ The five transformations that we apply to object coordinates to obtain viewport 
 
 <ul>
 <li>
-The <span id="Camera-WebGL Implementation-Model-View matrix"></span><strong id="Model-View matrix">Model-View matrix</strong> that groups the model and view transform in one single matrix. When we multiply our vertices by this matrix, we end up in view coordinates.
+The <span id="Camera-WebGL Implementation-Model-View matrix"></span><strong id="Model-View matrix">Model-View matrix</strong> that groups the model and view transform in one single matrix. When we multiply our vertices by this matrix, we end up in world coordinates.
 
 </li><li>
 The <span id="Camera-WebGL Implementation-Normal matrix"></span><strong id="Normal matrix">Normal matrix</strong> is obtained by inverting and transposing the Model-View matrix. This matrix is applied to normal vectors to ensure that they continue to be perpendicular to the surface. 
@@ -430,7 +633,7 @@ The <span id="Camera-WebGL Implementation-Projection matrix"></span><strong id="
 
 </li></ul>
 <p>
-Finally, we use the gl.viewport operation to map NDCs to viewport coordinates:
+Finally, we use the <code>gl.viewport</code> operation to map NDCs to viewport coordinates:
 </p>
 
 <pre javascript="">gl.viewport(minX, minY, width, height);
