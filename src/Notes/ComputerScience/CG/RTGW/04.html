@@ -84,6 +84,12 @@
 </li><li>
 <a href="04.html#Normalized%20Device%20Coordinates">Normalized Device Coordinates</a>
 
+</li><li>
+<a href="04.html#Field%20of%20View">Field of View</a>
+
+</li><li>
+<a href="04.html#Perspective%20or%20Orthogonal%20Projection">Perspective or Orthogonal Projection</a>
+
 </li></ul>
 </li><li>
 <a href="04.html#Normal%20Transformations">Normal Transformations</a>
@@ -493,6 +499,26 @@ These coordinates range from \(-1\) to \(+1\) on each axis, regardless of the sh
 
 <p>
 <img src="https://albamr09.github.io/public/assets/view_transform_1.png" alt="View Transform" style="width:500px">
+</p>
+
+<div id="Camera-Vertex Transformations-Field of View"><h3 id="Field of View" class="header"><a href="#Camera-Vertex Transformations-Field of View">Field of View</a></h3></div>
+
+<p>
+The Projection matrix determines the <span id="Camera-Vertex Transformations-Field of View-field of view"></span><strong id="field of view">field of view</strong> (FOV) of the camera. Which is how much of the 3D space will be captured by the camera. It is a measure given in degrees, and the term is used interchangeably with the term <span id="Camera-Vertex Transformations-Field of View-angle of view"></span><strong id="angle of view">angle of view</strong>.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/fov.png" alt="Field of View (FOV)" style="width:600px;">
+</p>
+
+<div id="Camera-Vertex Transformations-Perspective or Orthogonal Projection"><h3 id="Perspective or Orthogonal Projection" class="header"><a href="#Camera-Vertex Transformations-Perspective or Orthogonal Projection">Perspective or Orthogonal Projection</a></h3></div>
+
+<p>
+A perspective projection assigns more space to details that are closer to the camera than details that are farther away. In other words, the geometry that is close to the camera will appear larger than the geometry that is farther from it. 
+</p>
+
+<p>
+In contrast, an orthogonal projection uses parallel lines; this means that lines will appear to be the same size, regardless of their distance to the camera.
 </p>
 
 <div id="Camera-Normal Transformations"><h2 id="Normal Transformations" class="header"><a href="#Camera-Normal Transformations">Normal Transformations</a></h2></div>
