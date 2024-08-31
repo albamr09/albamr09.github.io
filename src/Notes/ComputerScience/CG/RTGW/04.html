@@ -80,6 +80,9 @@
 </li><li>
 <a href="04.html#The%20Projection%20Matrix">The Projection Matrix</a>
 
+</li><li>
+<a href="04.html#Perspective%20Matrix">Perspective Matrix</a>
+
 </li></ul>
 </li><li>
 <a href="04.html#Normalized%20Device%20Coordinates">Normalized Device Coordinates</a>
@@ -140,6 +143,9 @@
 <a href="04.html#The%20Camera%20Model">The Camera Model</a>
 
 </li></ul>
+</li><li>
+<a href="04.html#References">References</a>
+
 </li></ul>
 <hr>
 
@@ -456,6 +462,9 @@ These six planes are encoded in the <span id="Camera-Vertex Transformations-The 
 
 <p>
 <img src="https://albamr09.github.io/public/assets/orthographic_perspective_projection.png" alt="Orthographic vs Perspective projection" style="width:500px">
+</p>
+
+<p>
 We went from <span id="Camera-Vertex Transformations-The Model, View and Projection matrices-The Projection Matrix-Camera Space"></span><strong id="Camera Space">Camera Space</strong> (all vertices defined relatively to the camera) to <span id="Camera-Vertex Transformations-The Model, View and Projection matrices-The Projection Matrix-Homogeneous Space"></span><strong id="Homogeneous Space">Homogeneous Space</strong> (all vertices defined in a small cube. Everything inside the cube is onscreen).
 </p>
 
@@ -478,6 +487,86 @@ Multiplying everything by the Projection Matrix has the following effect:
 <p>
 Up to this point, we are still working with Homogeneous coordinates, so the clipping coordinates have four components: \(x\), \(y\), \(z\), and \(w\). The clipping is done by comparing the \(x\), \(y\), and \(z\) components against the Homogeneous coordinate, \(w\). If any of them is more than, \(+w\), or less than, \(-w\), then that vertex lies outside the frustum and is discarded.
 </p>
+
+<div id="Camera-Vertex Transformations-The Model, View and Projection matrices-Perspective Matrix"><h4 id="Perspective Matrix" class="header"><a href="#Camera-Vertex Transformations-The Model, View and Projection matrices-Perspective Matrix">Perspective Matrix</a></h4></div>
+
+<p>
+In all OpenGL books and references, the perspective projection matrix used in OpenGL is defined as:
+</p>
+
+\begin{align}
+\begin{bmatrix}
+\frac{2n}{r - l} &amp; 0 &amp; 0 \frac{r + l}{t - l} &amp; 0 \\
+0 &amp; \frac{2n}{t - b} &amp; \frac{t + b}{t - b} &amp; 0 \\
+0 &amp; 0 &amp; -\frac{f + n}{f - n} &amp; -\frac{2fn}{f - n} \\
+0 &amp; 0 &amp; -1 &amp; 0
+\end{bmatrix}
+\end{align}
+
+<p>
+When we multiply a homogeneous point with this matrix, the point's \(w\) coordinate is multiplied by this element, and the value of \(w\) ends up being the projected point's \(z\) coordinate:
+</p>
+
+\begin{align}
+\begin{bmatrix}
+\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{t - l} &amp; 0 \\
+0 &amp; \frac{2n}{t - b} &amp; \frac{t + b}{t - b} &amp; 0 \\
+0 &amp; 0 &amp; -\frac{f + n}{f - n} &amp; -\frac{2fn}{f - n} \\
+0 &amp; 0 &amp; -1 &amp; 0
+\end{bmatrix} \cdot 
+\begin{bmatrix}
+x \\
+y \\
+z \\
+w = 1
+\end{bmatrix} = 
+\begin{bmatrix}
+\frac{2n}{r - l} \cdot x + \frac{r + l}{t - l} \cdot y \\
+\frac{2n}{t - b} \cdot y + \frac{t + b}{t - b} \cdot z \\
+-\frac{f + n}{f - n} \cdot z + -\frac{2fn}{f - n} \cdot w \\
+-1 \cdot z
+\end{bmatrix}
+\end{align}
+
+<p>
+In summary, we understand that the matrix is correctly set up for the z-divide. Let's now examine how points are projected in OpenGL (or WebGL). A line is drawn from the camera's origin to the point \(P\) that we want to project, and the intersection of this line with the image plane determines the position of the projected point \(P_s\). It's important to note that in OpenGL, the image plane is situated on the near clipping plane.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/perspective_projection.png" alt="Perspective Projection" style="width: 500px;">
+</p>
+
+<p>
+The triangles \(\Delta ABC\) and \(\Delta DEF\) are similar. Thus, we can express:
+</p>
+
+\begin{align}
+\frac{AB}{DE} = \frac{BC}{EF}
+\end{align}
+
+<p>
+By substituting \(AB\) with \(n\) (the near clipping plane), \(DE\) with \(P_z\) (the z-coordinate of \(P\)), and \(EF\) with \(P_y\) (the y-coordinate of \(P\)), we can rewrite this equation as:
+</p>
+
+\begin{align}
+\frac{n}{-P_z} = \frac{BC}{P_y}
+\end{align}
+
+<p>
+And solving for \(BC\) we obtain:
+</p>
+
+\begin{align}
+BC = P_{sy} \frac{n \cdot P_y}{-P_z}
+\end{align}
+
+<p>
+Note that since the camera is oriented along the negative z-axis, \(P_z\) is negative, so, to maintain the sign of the y-coordinate, we negate \(P_z\). Following the same logic, we derive the x-coordinate of the projected point with the following equation:
+</p>
+
+\begin{align}
+P_{sx} = \frac{n \cdot P_x}{-P_z}
+\end{align}
 
 <div id="Camera-Vertex Transformations-Normalized Device Coordinates"><h3 id="Normalized Device Coordinates" class="header"><a href="#Camera-Vertex Transformations-Normalized Device Coordinates">Normalized Device Coordinates</a></h3></div>
 
@@ -795,6 +884,17 @@ The third column determines the vector in which the camera can move back and for
 <p>
 Because the Camera matrix is the inverse of the Model-View matrix, the upper-left \(3 \times 3\) rotation matrix contained in the Camera matrix gives us the orientation of the camera axes in world space. This means that we can tell the orientation of our camera in world space just by looking at the columns of this \(3 \times 3\) rotation matrix.
 </p>
+
+<div id="Camera-References"><h2 id="References" class="header"><a href="#Camera-References">References</a></h2></div>
+
+<ol>
+<li>
+<a href="https://jsantell.com/model-view-projection/">Model View Projection</a>
+
+</li><li>
+<a href="https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/opengl-perspective-projection-matrix.html">The Perspective Projection Matrix</a>
+
+</li></ol>
 </div>
   
 
