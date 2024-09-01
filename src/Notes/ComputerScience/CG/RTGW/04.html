@@ -80,9 +80,16 @@
 </li><li>
 <a href="04.html#The%20Projection%20Matrix">The Projection Matrix</a>
 
-</li><li>
+<ul>
+<li>
 <a href="04.html#Perspective%20Matrix">Perspective Matrix</a>
 
+<ul>
+<li>
+<a href="04.html#Derivation">Derivation</a>
+
+</li></ul>
+</li></ul>
 </li></ul>
 </li><li>
 <a href="04.html#Normalized%20Device%20Coordinates">Normalized Device Coordinates</a>
@@ -488,7 +495,7 @@ Multiplying everything by the Projection Matrix has the following effect:
 Up to this point, we are still working with Homogeneous coordinates, so the clipping coordinates have four components: \(x\), \(y\), \(z\), and \(w\). The clipping is done by comparing the \(x\), \(y\), and \(z\) components against the Homogeneous coordinate, \(w\). If any of them is more than, \(+w\), or less than, \(-w\), then that vertex lies outside the frustum and is discarded.
 </p>
 
-<div id="Camera-Vertex Transformations-The Model, View and Projection matrices-Perspective Matrix"><h4 id="Perspective Matrix" class="header"><a href="#Camera-Vertex Transformations-The Model, View and Projection matrices-Perspective Matrix">Perspective Matrix</a></h4></div>
+<div id="Camera-Vertex Transformations-The Model, View and Projection matrices-The Projection Matrix-Perspective Matrix"><h5 id="Perspective Matrix" class="header"><a href="#Camera-Vertex Transformations-The Model, View and Projection matrices-The Projection Matrix-Perspective Matrix">Perspective Matrix</a></h5></div>
 
 <p>
 In all OpenGL books and references, the perspective projection matrix used in OpenGL is defined as:
@@ -533,7 +540,7 @@ In summary, we understand that the matrix is correctly set up for the z-divide. 
 </p>
 
 <p>
-<img src="https://albamr09.github.io/public/assets/perspective_projection.png" alt="Perspective Projection" style="width: 500px;">
+<img src="https://albamr09.github.io/public/assets/perspective_projection.png" alt="Perspective Projection" style="width:350px;">
 </p>
 
 <p>
@@ -568,6 +575,156 @@ Note that since the camera is oriented along the negative z-axis, \(P_z\) is neg
 P_{sx} = \frac{n \cdot P_x}{-P_z}
 \end{align}
 
+<div id="Camera-Vertex Transformations-The Model, View and Projection matrices-The Projection Matrix-Perspective Matrix-Derivation"><h6 id="Derivation" class="header"><a href="#Camera-Vertex Transformations-The Model, View and Projection matrices-The Projection Matrix-Perspective Matrix-Derivation">Derivation</a></h6></div>
+
+<p>
+We need to figure out how \(P_{sx}\) and \(P_{sy}\) correlate with the WebGL perspective matrix. The purpose of a projection matrix is to remap the values projected onto the image plane to a unit cube (defined by minimum \((-1, -1, -1)\) and maximum \((1, 1, 1)\)).
+</p>
+
+<p>
+Once the point \(P\) is projected onto the image plane (near clipping plane), is considered visible if its and coordinates fall within the range \([left, right]\) for \(x\) and \([bottom, top]\) for \(y\), as depicted in Figure 2.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/frustrum.png" alt="Frustrum" style="width: 500px;">
+</p>
+
+<p>
+Such that:
+</p>
+
+\begin{align}
+l \leq P_{sx} \leq r
+\end{align}
+
+<p>
+where \(l\) and \(r\) are the left and right coordinates respectively. Our objective is to remap so that its final value resides within the range \([-1, 1]\):
+</p>
+
+\begin{align}
+0 \leq P_{sx} - l \leq r - l
+\end{align}
+
+<p>
+normalizing by dividing by \(r - l\) gives:
+</p>
+
+\begin{align}
+0 \leq \frac{P_{sx} - l}{r - l} \leq 1
+\end{align}
+
+<p>
+multiplying all terms by \(2\):
+</p>
+
+\begin{align}
+0 \leq 2 \frac{P_{sx} - l}{r - l} \leq 2
+\end{align}
+
+<p>
+substracting \(1\) from all terms results in:
+</p>
+
+\begin{align}
+-1 \leq 2 \frac{P_{sx} - l}{r - l} - 1 \leq 1
+\end{align}
+
+<p>
+Now the central term on the inequality is defined to exist on the range \([-1, 1]\), which is what we wanted. With some further rearrangement:
+</p>
+
+\begin{align}
+-1 \leq 2 \frac{P_{sx} - l}{r - l} - \frac{r - l}{r - l} \leq 1
+\end{align}
+
+\begin{align}
+-1 \leq \frac{2P_{sx} - 2l - r + l}{r - l}\leq 1
+\end{align}
+
+\begin{align}
+-1 \leq \frac{2P_{sx} - r - l}{r - l}\leq 1
+\end{align}
+
+\begin{align}
+-1 \leq \frac{2P_{sx}}{r - l} - \frac{r + l}{r - l}\leq 1
+\end{align}
+
+<p>
+The two central terms are quite similar to the first two terms of the first row in the WebGL perspective projection matrix. If we replace \(P_{sx}\) from the previous equation with 
+</p>
+
+\begin{align}
+P_{sx} = \frac{n P_x}{-P_z}
+\end{align}
+
+<p>
+we get:
+</p>
+
+\begin{align}
+-1 \leq \frac{2nP_x}{-P_z(r - l)} - \frac{r + l}{r - l}\leq 1
+\end{align}
+
+<p>
+We can encode this equation in matrix form if we replace the first and third coefficients of the matrix's first row with the first and second term of this formula:
+</p>
+
+\begin{align}
+\begin{bmatrix}
+\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \\
+\cdots &amp; \cdots &amp; \cdots &amp; \cdots \\
+\cdots &amp; \cdots &amp; \cdots &amp; \cdots \\
+0 &amp; 0 &amp; -1 &amp; 0
+\end{bmatrix}
+\end{align}
+
+<p>
+So computing \(P_{sx}\) yields:
+</p>
+
+\begin{align}
+\begin{bmatrix}
+\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \\
+\cdots &amp; \cdots &amp; \cdots &amp; \cdots \\
+\cdots &amp; \cdots &amp; \cdots &amp; \cdots \\
+0 &amp; 0 &amp; -1 &amp; 0
+\end{bmatrix} \cdot 
+\begin{bmatrix}
+P_x \\
+P_y \\
+P_z \\
+P_w \\
+\end{bmatrix}
+\end{align}
+
+<p>
+such that:
+</p>
+
+\begin{align}
+P_{sx} = \frac{2n}{r - l} P_x + \frac{r + l}{r - l} P_z
+\end{align}
+
+<p>
+And since \(P_{sx}\) will be divided at the end of the process by \(-P_z\) when we convert from homogeneous to Cartesian coordinates, we get:
+</p>
+
+\begin{align}
+P_{sx} = \frac{\frac{2n}{r - l} P_x}{-P_z} + \frac{\frac{r + l}{r - l} P_z}{-P_z} = \frac{2nP_x}{-P_z(r - l)} - \frac{r + l}{r - l}
+\end{align}
+
+<p>
+This is the first coordinate of the projected point \(P_{s}\) computed using the WebGL perspective matrix.
+</p>
+
+<p>
+The derivation for \(P_{sy}\) is analogous, replacing \(l\) and \(r\) with and \(b\) and \(t\), and you end up with the following formula:
+</p>
+
+\begin{align}
+-1 \leq \frac{2nP_y}{-P_z(t - b)} - \frac{t + b}{t - b} \leq 1
+\end{align}
+
 <div id="Camera-Vertex Transformations-Normalized Device Coordinates"><h3 id="Normalized Device Coordinates" class="header"><a href="#Camera-Vertex Transformations-Normalized Device Coordinates">Normalized Device Coordinates</a></h3></div>
 
 <p>
@@ -579,7 +736,7 @@ At the heart of things, WebGL doesn't really know anything about your coordinate
 </p>
 
 <p>
-These coordinates range from \(-1\) to \(+1\) on each axis, regardless of the shape or size of the actual screen. The bottom left corner will be at \((-1, -1)\), and the top right corner will be at (1, 1). WeblGL will then map these coordinates onto the viewport that was configured with <code>glViewport</code>.
+These coordinates range from \(-1\) to \(+1\) on each axis, regardless of the shape or size of the actual screen. The bottom left corner will be at \((-1, -1)\), and the top right corner will be at (1, 1). WebGL will then map these coordinates onto the viewport that was configured with <code>glViewport</code>.
 </p>
 
 <p>
