@@ -1,0 +1,157 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Sequences and Series</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Sequences and Series"><h1 id="Sequences and Series" class="header"><a href="#Sequences and Series">Sequences and Series</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="11_01.html#Sequences">Sequences</a>
+
+</li><li>
+<a href="11_01.html#Series">Series</a>
+
+</li><li>
+<a href="11_01.html#Summation%20Properties">Summation Properties</a>
+
+</li><li>
+<a href="11_01.html#Summation%20Rules">Summation Rules</a>
+
+</li></ul>
+<hr>
+
+<div id="Sequences and Series-Sequences"><h2 id="Sequences" class="header"><a href="#Sequences and Series-Sequences">Sequences</a></h2></div>
+
+<p>
+A <span id="Sequences and Series-Sequences-sequence"></span><strong id="sequence">sequence</strong> is a function that has a set of natural numbers as its domain.
+</p>
+
+<p>
+Instead of using a funcion notation to indicate a sequence \(f\), we use \(a_n\), where \(a_n = f(n)\).
+</p>
+
+<p>
+The elements in the range of a sequence are called the <span id="Sequences and Series-Sequences-terms"></span><strong id="terms">terms</strong> of the sequence, and they are ordered.
+</p>
+
+<p>
+The <span id="Sequences and Series-Sequences-general term"></span><strong id="general term">general term</strong> of the \(n\)th term of the sequence is \(a_n\).
+</p>
+
+<p>
+A sequence is a <span id="Sequences and Series-Sequences-finite sequence"></span><strong id="finite sequence">finite sequence</strong> if the domain is a finite set \(\{1, 2, 3, 4, \cdots, n\}\), where \(n\) is a natural number. An <span id="Sequences and Series-Sequences-infinite sequence"></span><strong id="infinite sequence">infinite sequence</strong> has the set of a ll natural numbers as its domain.
+</p>
+
+<p>
+If the terms of an infinite sequence get closer to some real number, the sequence is said to be <span id="Sequences and Series-Sequences-convergent"></span><strong id="convergent">convergent</strong> and to <span id="Sequences and Series-Sequences-converge"></span><strong id="converge">converge</strong> to that real number (see Figure 3). A sequence that does not converte to some number is <span id="Sequences and Series-Sequences-divergent"></span><strong id="divergent">divergent</strong>.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/convergent_sequence.png" alt="Convergent Sequence" style="width:300px;">
+</p>
+
+<p>
+Some sequences are defined by a <span id="Sequences and Series-Sequences-recursive definition"></span><strong id="recursive definition">recursive definition</strong>, a definition in which each term is defined as an expression involving the previous term or terms.
+</p>
+
+<div id="Sequences and Series-Series"><h2 id="Series" class="header"><a href="#Sequences and Series-Series">Series</a></h2></div>
+
+<p>
+The sum of the terms of a sequence is called a <span id="Sequences and Series-Series-series"></span><strong id="series">series</strong>.
+</p>
+
+<p>
+A <span id="Sequences and Series-Series-finite series"></span><strong id="finite series">finite series</strong> is an expression of the form:
+</p>
+
+\begin{align}
+S_n = a_1 + a_2 + a_3 + \cdots + a_n = \sum_{i=1}^n a_i
+\end{align}
+
+<p>
+An <span id="Sequences and Series-Series-infinite series"></span><strong id="infinite series">infinite series</strong> is an expression of the form:
+</p>
+
+\begin{align}
+S_{\infty} = a_1 + a_2 + a_3 + \cdots + a_n  + \cdots = \sum_{i=1}^{\infty} a_i
+\end{align}
+
+<div id="Sequences and Series-Summation Properties"><h2 id="Summation Properties" class="header"><a href="#Sequences and Series-Summation Properties">Summation Properties</a></h2></div>
+
+<p>
+If \(a_1, a_2, a_3, \cdots, a_n\) and \(b_1, b_2, b_3, \cdots, b_n\) are two sequences, and \(c\) is a constante, then for every positive integer \(n\), the following hold:
+</p>
+
+\begin{align}
+\sum_{i=1}^n c = n c
+\end{align}
+
+\begin{align}
+\sum_{i=1}^n ca_i = c \sum_{i=1}^n a_i
+\end{align}
+
+\begin{align}
+\sum_{i=1}^n (a_i + b_i) = \sum_{i=1}^n a_i + \sum_{i=1}^n b_i
+\end{align}
+
+\begin{align}
+\sum_{i=1}^n (a_i - b_i) = \sum_{i=1}^n a_i - \sum_{i=1}^n b_i
+\end{align}
+
+<div id="Sequences and Series-Summation Rules"><h2 id="Summation Rules" class="header"><a href="#Sequences and Series-Summation Rules">Summation Rules</a></h2></div>
+
+\begin{align}
+\sum_{i=1}^n i = 1 + 2 + \cdots + n = \frac{n(n + 1)}{2}
+\end{align}
+
+\begin{align}
+\sum_{i=1}^n i^2 = 1^2 + 2^2 + \cdots + n^2 = \frac{n(n + 1)(2n + 1)}{6}
+\end{align}
+
+\begin{align}
+\sum_{i=1}^n i^3 = 1^3 + 2^3 + \cdots + n^3 = \frac{n^2(n + 1)^2}{4}
+\end{align}
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
