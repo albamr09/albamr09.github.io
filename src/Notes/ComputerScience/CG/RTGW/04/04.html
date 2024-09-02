@@ -44,10 +44,10 @@
 <a href="04.html#WebGL%20Does%20Not%20Have%20Cameras">WebGL Does Not Have Cameras</a>
 
 </li><li>
-<a href="04.html#.%2F04%2Ftransformations.wiki%7CTransformations%7C.%2F04%2Ftransformations.wiki">Transformations</a>
+<a href="04.html#.%2Ftransformations.wiki%7CTransformations%7C.%2Ftransformations.wiki">Transformations</a>
 
 </li><li>
-<a href="04.html#.%2F04%2Fmodel_view.wiki%7CThe%20Model%2C%20View%20and%20Projection%20matrices%7C.%2F04%2Fmodel_view.wiki">The Model  View and Projection matrices</a>
+<a href="04.html#.%2Fmodel_view.wiki%7CThe%20Model%2C%20View%20and%20Projection%20matrices%7C.%2Fmodel_view.wiki">The Model  View and Projection matrices</a>
 
 <ul>
 <li>
@@ -58,7 +58,7 @@
 
 </li></ul>
 </li><li>
-<a href="04.html#.%2F04%2Fnormal_transform.wiki%7CNormal%20Transform%7C.%2F04%2Fnormal_transform.wiki">Normal Transform</a>
+<a href="04.html#.%2Fnormal_transform.wiki%7CNormal%20Transform%7C.%2Fnormal_transform.wiki">Normal Transform</a>
 
 </li><li>
 <a href="04.html#WebGL%20Implementation">WebGL Implementation</a>
@@ -83,7 +83,7 @@
 </li></ul>
 </li></ul>
 </li><li>
-<a href="04.html#.%2F04%2Fcamera.wiki%7CCamera%7C.%2F04%2Fcamera.wiki">Camera</a>
+<a href="04.html#.%2Fcamera.wiki%7CCamera%7C.%2Fcamera.wiki">Camera</a>
 
 </li><li>
 <a href="04.html#References">References</a>
@@ -113,18 +113,18 @@ vertex (points) and
 normal (vectors)
 
 </li></ul>
-<div id="Camera-[[./04/transformations.wiki|Transformations]]"><h2 id="[[./04/transformations.wiki|Transformations]]" class="header"><a href="#Camera-[[./04/transformations.wiki|Transformations]]"></a><a href="04/transformations.html">Transformations</a></h2></div>
+<div id="Camera-[[./transformations.wiki|Transformations]]"><h2 id="[[./transformations.wiki|Transformations]]" class="header"><a href="#Camera-[[./transformations.wiki|Transformations]]"></a><a href="transformations.html">Transformations</a></h2></div>
 
-<div id="Camera-[[./04/model_view.wiki|The Model, View and Projection matrices]]"><h2 id="[[./04/model_view.wiki|The Model, View and Projection matrices]]" class="header"><a href="#Camera-[[./04/model_view.wiki|The Model, View and Projection matrices]]"></a><a href="04/model_view.html">The Model, View and Projection matrices</a></h2></div>
+<div id="Camera-[[./model_view.wiki|The Model, View and Projection matrices]]"><h2 id="[[./model_view.wiki|The Model, View and Projection matrices]]" class="header"><a href="#Camera-[[./model_view.wiki|The Model, View and Projection matrices]]"></a><a href="model_view.html">The Model, View and Projection matrices</a></h2></div>
 
-<div id="Camera-[[./04/model_view.wiki|The Model, View and Projection matrices]]-Normalized Device Coordinates"><h3 id="Normalized Device Coordinates" class="header"><a href="#Camera-[[./04/model_view.wiki|The Model, View and Projection matrices]]-Normalized Device Coordinates">Normalized Device Coordinates</a></h3></div>
+<div id="Camera-[[./model_view.wiki|The Model, View and Projection matrices]]-Normalized Device Coordinates"><h3 id="Normalized Device Coordinates" class="header"><a href="#Camera-[[./model_view.wiki|The Model, View and Projection matrices]]-Normalized Device Coordinates">Normalized Device Coordinates</a></h3></div>
 
 <p>
 Once it has been determined how much of the viewing space will be rendered, the frustum is mapped into the near plane in order to produce a 2D image.
 </p>
 
 <p>
-At the heart of things, WebGL doesn't really know anything about your coordinate space or about the matrices that you're using. WebGL only requires that when all of your transformations are done, things should be in normalized device coordinates. Normalized device coordinates are obtained by dividing the clipping coordinates by the \(w\) component. This is why this step is known as <span id="Camera-[[./04/model_view.wiki|The Model, View and Projection matrices]]-Normalized Device Coordinates-perspective division"></span><strong id="perspective division">perspective division</strong>. In the NDC space, the \(x\) and \(y\) coordinates represent the location of your vertices on a normalized 2D screen, while the z-coordinate encodes depth information, which is the relative location of the objects with respect to the near and far planes.
+At the heart of things, WebGL doesn't really know anything about your coordinate space or about the matrices that you're using. WebGL only requires that when all of your transformations are done, things should be in normalized device coordinates. Normalized device coordinates are obtained by dividing the clipping coordinates by the \(w\) component. This is why this step is known as <span id="Camera-[[./model_view.wiki|The Model, View and Projection matrices]]-Normalized Device Coordinates-perspective division"></span><strong id="perspective division">perspective division</strong>. In the NDC space, the \(x\) and \(y\) coordinates represent the location of your vertices on a normalized 2D screen, while the z-coordinate encodes depth information, which is the relative location of the objects with respect to the near and far planes.
 </p>
 
 <p>
@@ -139,17 +139,17 @@ These coordinates range from \(-1\) to \(+1\) on each axis, regardless of the sh
 <img src="https://albamr09.github.io/public/assets/view_transform_1.png" alt="View Transform" style="width:500px">
 </p>
 
-<div id="Camera-[[./04/model_view.wiki|The Model, View and Projection matrices]]-Field of View"><h3 id="Field of View" class="header"><a href="#Camera-[[./04/model_view.wiki|The Model, View and Projection matrices]]-Field of View">Field of View</a></h3></div>
+<div id="Camera-[[./model_view.wiki|The Model, View and Projection matrices]]-Field of View"><h3 id="Field of View" class="header"><a href="#Camera-[[./model_view.wiki|The Model, View and Projection matrices]]-Field of View">Field of View</a></h3></div>
 
 <p>
-The Projection matrix determines the <span id="Camera-[[./04/model_view.wiki|The Model, View and Projection matrices]]-Field of View-field of view"></span><strong id="field of view">field of view</strong> (FOV) of the camera. Which is how much of the 3D space will be captured by the camera. It is a measure given in degrees, and the term is used interchangeably with the term <span id="Camera-[[./04/model_view.wiki|The Model, View and Projection matrices]]-Field of View-angle of view"></span><strong id="angle of view">angle of view</strong>.
+The Projection matrix determines the <span id="Camera-[[./model_view.wiki|The Model, View and Projection matrices]]-Field of View-field of view"></span><strong id="field of view">field of view</strong> (FOV) of the camera. Which is how much of the 3D space will be captured by the camera. It is a measure given in degrees, and the term is used interchangeably with the term <span id="Camera-[[./model_view.wiki|The Model, View and Projection matrices]]-Field of View-angle of view"></span><strong id="angle of view">angle of view</strong>.
 </p>
 
 <p>
 <img src="https://albamr09.github.io/public/assets/fov.png" alt="Field of View (FOV)" style="width:600px;">
 </p>
 
-<div id="Camera-[[./04/normal_transform.wiki|Normal Transform]]"><h2 id="[[./04/normal_transform.wiki|Normal Transform]]" class="header"><a href="#Camera-[[./04/normal_transform.wiki|Normal Transform]]"></a><a href="04/normal_transform.html">Normal Transform</a></h2></div>
+<div id="Camera-[[./normal_transform.wiki|Normal Transform]]"><h2 id="[[./normal_transform.wiki|Normal Transform]]" class="header"><a href="#Camera-[[./normal_transform.wiki|Normal Transform]]"></a><a href="normal_transform.html">Normal Transform</a></h2></div>
 
 <div id="Camera-WebGL Implementation"><h2 id="WebGL Implementation" class="header"><a href="#Camera-WebGL Implementation">WebGL Implementation</a></h2></div>
 
@@ -243,7 +243,7 @@ The \(m_4\), \(m_8\), and \(m_{12}\) elements are always \(0\).
 The \(m_{16}\) element (the Homogeneous coordinate) will always be \(1\).
 
 </li></ul>
-<div id="Camera-[[./04/camera.wiki|Camera]]"><h2 id="[[./04/camera.wiki|Camera]]" class="header"><a href="#Camera-[[./04/camera.wiki|Camera]]"></a><a href="04/camera.html">Camera</a></h2></div>
+<div id="Camera-[[./camera.wiki|Camera]]"><h2 id="[[./camera.wiki|Camera]]" class="header"><a href="#Camera-[[./camera.wiki|Camera]]"></a><a href="camera.html">Camera</a></h2></div>
 
 <div id="Camera-References"><h2 id="References" class="header"><a href="#Camera-References">References</a></h2></div>
 
