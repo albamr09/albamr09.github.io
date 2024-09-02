@@ -1,0 +1,537 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Perspective Matrix</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="model_view.html">Back</a>
+</p>
+
+<div id="Perspective Matrix"><h1 id="Perspective Matrix" class="header"><a href="#Perspective Matrix">Perspective Matrix</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="perspective.html#Derivation">Derivation</a>
+
+</li></ul>
+<hr>
+
+<p>
+In all OpenGL books and references, the perspective projection matrix used in OpenGL is defined as:
+</p>
+
+\begin{align}
+\begin{bmatrix}
+\frac{2n}{r - l} &amp; 0 &amp; 0 \frac{r + l}{t - l} &amp; 0 \\
+0 &amp; \frac{2n}{t - b} &amp; \frac{t + b}{t - b} &amp; 0 \\
+0 &amp; 0 &amp; -\frac{f + n}{f - n} &amp; -\frac{2fn}{f - n} \\
+0 &amp; 0 &amp; -1 &amp; 0
+\end{bmatrix}
+\end{align}
+
+<p>
+When we multiply a homogeneous point with this matrix, the point's \(w\) coordinate is multiplied by this element, and the value of \(w\) ends up being the projected point's \(z\) coordinate:
+</p>
+
+\begin{align}
+\begin{bmatrix}
+\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{t - l} &amp; 0 \\
+0 &amp; \frac{2n}{t - b} &amp; \frac{t + b}{t - b} &amp; 0 \\
+0 &amp; 0 &amp; -\frac{f + n}{f - n} &amp; -\frac{2fn}{f - n} \\
+0 &amp; 0 &amp; -1 &amp; 0
+\end{bmatrix} \cdot 
+\begin{bmatrix}
+x \\
+y \\
+z \\
+w = 1
+\end{bmatrix} = 
+\begin{bmatrix}
+\frac{2n}{r - l} \cdot x + \frac{r + l}{t - l} \cdot y \\
+\frac{2n}{t - b} \cdot y + \frac{t + b}{t - b} \cdot z \\
+-\frac{f + n}{f - n} \cdot z + -\frac{2fn}{f - n} \cdot w \\
+-1 \cdot z
+\end{bmatrix}
+\end{align}
+
+<p>
+In summary, we understand that the matrix is correctly set up for the z-divide. Let's now examine how points are projected in OpenGL (or WebGL). A line is drawn from the camera's origin to the point \(P\) that we want to project, and the intersection of this line with the image plane determines the position of the projected point \(P_s\). It's important to note that in OpenGL, the image plane is situated on the near clipping plane.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/perspective_projection.png" alt="Perspective Projection" style="width:350px;">
+</p>
+
+<p>
+The triangles \(\Delta ABC\) and \(\Delta DEF\) are similar. Thus, we can express:
+</p>
+
+\begin{align}
+\frac{AB}{DE} = \frac{BC}{EF}
+\end{align}
+
+<p>
+By substituting \(AB\) with \(n\) (the near clipping plane), \(DE\) with \(P_z\) (the z-coordinate of \(P\)), and \(EF\) with \(P_y\) (the y-coordinate of \(P\)), we can rewrite this equation as:
+</p>
+
+\begin{align}
+\frac{n}{-P_z} = \frac{BC}{P_y}
+\end{align}
+
+<p>
+And solving for \(BC\) we obtain:
+</p>
+
+\begin{align}
+BC = P_{sy} \frac{n \cdot P_y}{-P_z}
+\end{align}
+
+<p>
+Note that since the camera is oriented along the negative z-axis, \(P_z\) is negative, so, to maintain the sign of the y-coordinate, we negate \(P_z\). Following the same logic, we derive the x-coordinate of the projected point with the following equation:
+</p>
+
+\begin{align}
+P_{s_x} = \frac{n \cdot P_x}{-P_z}
+\end{align}
+
+<p>
+Following the same reasoning for \(P_y\), we obtain:
+</p>
+
+\begin{align}
+P_{s_y} = \frac{n \cdot P_y}{-P_z}
+\end{align}
+
+<div id="Perspective Matrix-Derivation"><h2 id="Derivation" class="header"><a href="#Perspective Matrix-Derivation">Derivation</a></h2></div>
+
+<p>
+We need to figure out how \(P_{sx}\) and \(P_{sy}\) correlate with the WebGL perspective matrix. The purpose of a projection matrix is to remap the values projected onto the image plane to a unit cube (defined by minimum \((-1, -1, -1)\) and maximum \((1, 1, 1)\)).
+</p>
+
+<p>
+Once the point \(P\) is projected onto the image plane (near clipping plane), is considered visible if its and coordinates fall within the range \([left, right]\) for \(x\) and \([bottom, top]\) for \(y\), as depicted in Figure 2.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/frustrum.png" alt="Frustrum" style="width: 500px;">
+</p>
+
+<p>
+Such that:
+</p>
+
+\begin{align}
+l \leq P_{sx} \leq r
+\end{align}
+
+<p>
+where \(l\) and \(r\) are the left and right coordinates respectively. Our objective is to remap so that its final value resides within the range \([-1, 1]\):
+</p>
+
+\begin{align}
+0 \leq P_{sx} - l \leq r - l
+\end{align}
+
+<p>
+normalizing by dividing by \(r - l\) gives:
+</p>
+
+\begin{align}
+0 \leq \frac{P_{sx} - l}{r - l} \leq 1
+\end{align}
+
+<p>
+multiplying all terms by \(2\):
+</p>
+
+\begin{align}
+0 \leq 2 \frac{P_{sx} - l}{r - l} \leq 2
+\end{align}
+
+<p>
+substracting \(1\) from all terms results in:
+</p>
+
+\begin{align}
+-1 \leq 2 \frac{P_{sx} - l}{r - l} - 1 \leq 1
+\end{align}
+
+<p>
+Now the central term on the inequality is defined to exist on the range \([-1, 1]\), which is what we wanted. With some further rearrangement:
+</p>
+
+\begin{align}
+-1 \leq 2 \frac{P_{sx} - l}{r - l} - \frac{r - l}{r - l} \leq 1
+\end{align}
+
+\begin{align}
+-1 \leq \frac{2P_{sx} - 2l - r + l}{r - l}\leq 1
+\end{align}
+
+\begin{align}
+-1 \leq \frac{2P_{sx} - r - l}{r - l}\leq 1
+\end{align}
+
+\begin{align}
+-1 \leq \frac{2P_{sx}}{r - l} - \frac{r + l}{r - l}\leq 1
+\end{align}
+
+<p>
+The two central terms are quite similar to the first two terms of the first row in the WebGL perspective projection matrix. If we replace \(P_{sx}\) from the previous equation with 
+</p>
+
+\begin{align}
+P_{sx} = \frac{n P_x}{-P_z}
+\end{align}
+
+<p>
+we get:
+</p>
+
+\begin{align}
+-1 \leq \frac{2nP_x}{-P_z(r - l)} - \frac{r + l}{r - l}\leq 1
+\end{align}
+
+<p>
+We can encode this equation in matrix form if we replace the first and third coefficients of the matrix's first row with the first and second term of this formula:
+</p>
+
+\begin{align}
+\begin{bmatrix}
+\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \\
+\cdots &amp; \cdots &amp; \cdots &amp; \cdots \\
+\cdots &amp; \cdots &amp; \cdots &amp; \cdots \\
+0 &amp; 0 &amp; -1 &amp; 0
+\end{bmatrix}
+\end{align}
+
+<p>
+So computing \(P_{sx}\) yields:
+</p>
+
+\begin{align}
+\begin{bmatrix}
+\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \\
+\cdots &amp; \cdots &amp; \cdots &amp; \cdots \\
+\cdots &amp; \cdots &amp; \cdots &amp; \cdots \\
+0 &amp; 0 &amp; -1 &amp; 0
+\end{bmatrix} \cdot 
+\begin{bmatrix}
+P_x \\
+P_y \\
+P_z \\
+P_w \\
+\end{bmatrix}
+\end{align}
+
+<p>
+such that:
+</p>
+
+\begin{align}
+P_{sx} = \frac{2n}{r - l} P_x + \frac{r + l}{r - l} P_z
+\end{align}
+
+<p>
+And since \(P_{sx}\) will be divided at the end of the process by \(-P_z\) when we convert from homogeneous to Cartesian coordinates, we get:
+</p>
+
+\begin{align}
+P_{sx} = \frac{\frac{2n}{r - l} P_x}{-P_z} + \frac{\frac{r + l}{r - l} P_z}{-P_z} = \frac{2nP_x}{-P_z(r - l)} - \frac{r + l}{r - l}
+\end{align}
+
+<p>
+This is the first coordinate of the projected point \(P_{s}\) computed using the WebGL perspective matrix.
+</p>
+
+<p>
+The derivation for \(P_{sy}\) is analogous, replacing \(l\) and \(r\) with and \(b\) and \(t\), such that:
+</p>
+
+\begin{align}
+b \leq P_{s_y} \leq t
+\end{align}
+
+\begin{align}
+0 \leq P_{s_y} - b \leq t - b
+\end{align}
+
+\begin{align}
+0 \leq \frac{P_{s_y} - b}{t - b} \leq 1
+\end{align}
+
+<p>
+We multiply by \(2\):
+</p>
+
+\begin{align}
+0 \leq 2\frac{P_{s_y} - b}{t - b} \leq 2
+\end{align}
+
+<p>
+And we substract \(1\):
+</p>
+
+\begin{align}
+-1 \leq 2\frac{P_{s_y} - b}{t - b} - 1 \leq 1
+\end{align}
+
+\begin{align}
+-1 \leq 2\frac{P_{s_y} - b}{t - b} - \frac{t - b}{t - b} \leq 1
+\end{align}
+
+\begin{align}
+-1 \leq \frac{2P_{s_y} - 2b - t + b}{t - b} \leq 1
+\end{align}
+
+\begin{align}
+-1 \leq \frac{2P_{s_y} - b - t}{t - b} \leq 1
+\end{align}
+
+\begin{align}
+-1 \leq \frac{2P_{s_y}}{t - b} - \frac{t + b}{t - b} \leq 1
+\end{align}
+
+<p>
+Given we know that:
+</p>
+
+\begin{align}
+P_{s_y} = \frac{n P_y}{-P_z}
+\end{align}
+
+<p>
+then:
+</p>
+
+\begin{align}
+-1 \leq \frac{2n P_y}{-P_z(t - b)} - \frac{t + b}{t - b} \leq 1
+\end{align}
+
+<p>
+Therefore, now our projection matrix has the following shape:
+</p>
+
+\begin{align}
+\begin{bmatrix}
+\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \\
+0 &amp; \frac{2n}{t - b} &amp; \frac{t + b}{t - b} &amp; 0 \\
+\cdots &amp; \cdots &amp; \cdots &amp; \cdots \\
+0 &amp; 0 &amp; -1 &amp; 0
+\end{bmatrix}
+\end{align}
+
+<p>
+Computing \(P_{s_y}\) using this matrix gives:
+</p>
+
+\begin{align}
+\begin{bmatrix}
+\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \\
+0 &amp; \frac{2n}{t - b} &amp; \frac{t + b}{t - b} &amp; 0 \\
+\cdots &amp; \cdots &amp; \cdots &amp; \cdots \\
+0 &amp; 0 &amp; -1 &amp; 0
+\end{bmatrix} \cdot 
+\begin{bmatrix}
+x \\
+y \\
+w \\
+z \\
+\end{bmatrix}
+\end{align}
+
+\begin{align}
+P_{s_y} = 0 \cdot x + \frac{2n}{t - b} P_y + \frac{t + b}{t - b}P_z + 0
+\end{align}
+
+<p>
+and after the difivio by \(-P_z\):
+</p>
+
+\begin{align}
+P_{s_y} = \frac{\frac{2n}{t - b}P_y}{-P_z}  + \frac{\frac{t + b}{t - b}P_z}{-P_z}
+\end{align}
+
+\begin{align}
+= \frac{2n P_y}{-P_z(t - b)}  - \frac{t + b}{t - b}
+\end{align}
+
+<p>
+All that's left to do to complete it is find a way to remap the z-coordinate of the projected points to the range \([-1,1]\)
+</p>
+
+<p>
+We know that the \(x\) and \(y\) coordinates of \(P\) don't contribute to the calculation of the projected point's z-coordinate. Thus, the first and second coefficients of the matrix's third row are necessarily zero. We are left with the following matrix:
+</p>
+
+\begin{align}
+\begin{bmatrix}
+\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \\
+0 &amp; \frac{2n}{t - b} &amp; \frac{t + b}{t - b} &amp; 0 \\
+0 &amp; 0 &amp; A &amp; B \\
+0 &amp; 0 &amp; -1 &amp; 0
+\end{bmatrix}
+\end{align}
+
+<p>
+If we write the equation to compute \(P_{s_z}\) using this matrix, we get:
+</p>
+
+\begin{align}
+P_{s_z} = \frac{0 \cdot P_x + 0 \cdot P_y + A \cdot P_z + B \cdot P_w}{P_{s_w} = - P_z}
+\end{align}
+
+\begin{align}
+\frac{A \cdot P_z + B}{P_{s_w} = -P_z}
+\end{align}
+
+<p>
+Note that we are dividing \(P_{s_z}\) by \(P_{s_w}\) when the point is converted from homogeneous to Cartesian coordinates, and that \(P_w = 1\).
+</p>
+
+<p>
+We need to find the values of \(A\) and \(B\). We know that when \(P_z\) is on the near clipping plane, \(P_{s_z}\) needs to be remapped to \(-1\), and when \(P_z\) is on the far clipping plane, \(P_{s_z}\)needs to be remapped to \(1\).
+</p>
+
+<p>
+So, when \(P_z\) is on the near plane, the previous equation is as follows:
+</p>
+
+\begin{align}
+\frac{A \cdot (P_z = -n) + B}{(-P_z = -(-n) = n)} = -1
+\end{align}
+
+\begin{align}
+\frac{A \cdot -n + B}{n} = -1
+\end{align}
+
+\begin{align}
+-nA + B} = -n
+\end{align}
+
+<p>
+And when \(P_z\) is on the far plane:
+</p>
+
+\begin{align}
+\frac{A \cdot (P_z = -f) + B}{(-P_z = -(-f) = f)} = 1
+\end{align}
+
+\begin{align}
+\frac{A \cdot -f + B}{f} = 1
+\end{align}
+
+\begin{align}
+-fA + B = f
+\end{align}
+
+<p>
+These two equations form the following system of equations:
+</p>
+
+\begin{align}
+\begin{cases}
+-nA + B = -n \\
+-fA + B = f 
+\end{cases}
+\end{align}
+
+<p>
+We solve the first equation for \(B\):
+</p>
+
+\begin{align}
+B = -n + An
+\end{align}
+
+<p>
+And we substitute on the second equation:
+</p>
+
+\begin{align}
+-fA + (-n + An) = f
+\end{align}
+
+\begin{align}
+A (n - f) = f + n
+\end{align}
+
+\begin{align}
+A= -\frac{f + n}{f - n}
+\end{align}
+
+<p>
+Finding \(B\) is straightforward. We just replace \(A\) in the first equation:
+</p>
+
+\begin{align}
+B = -n + (-\frac{f + n}{f - n})n
+\end{align}
+
+\begin{align}
+B = -n(1 + \frac{f + n}{f - n})
+\end{align}
+
+\begin{align}
+B = -n(\frac{f + n + f - n}{f - n})
+\end{align}
+
+\begin{align}
+B = -n(\frac{2f}{f - n})
+\end{align}
+
+\begin{align}
+B = -\frac{2fn}{f - n}
+\end{align}
+
+<p>
+We can replace the solutions we found for A and B in our matrix, and we finally get:
+</p>
+
+\begin{align}
+\begin{bmatrix}
+\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \\
+0 &amp; \frac{2n}{t - b} &amp; \frac{t + b}{t - b} &amp; 0 \\
+0 &amp; 0 &amp; -\fra¢{f + n}{f - n}&amp; -\frac{2fn}{f - n} \\
+0 &amp; 0 &amp; -1 &amp; 0
+\end{bmatrix}
+\end{align}
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

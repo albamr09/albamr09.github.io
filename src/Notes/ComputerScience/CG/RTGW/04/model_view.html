@@ -1,0 +1,182 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Model, View and Projection Transform</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="04.html">Back</a>
+</p>
+
+<div id="Model, View and Projection Transform"><h1 id="Model, View and Projection Transform" class="header"><a href="#Model, View and Projection Transform">Model, View and Projection Transform</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="model_view.html#The%20Model%20Matrix">The Model Matrix</a>
+
+</li><li>
+<a href="model_view.html#The%20View%20Matrix">The View Matrix</a>
+
+</li><li>
+<a href="model_view.html#The%20Projection%20Matrix">The Projection Matrix</a>
+
+<ul>
+<li>
+<a href="model_view.html#Perspective%20or%20Orthogonal%20Projection">Perspective or Orthogonal Projection</a>
+
+<ul>
+<li>
+<a href="model_view.html#.%2Fperspective.wiki%7CPerpective%20Matrix%7C.%2Fperspective.wiki">Perpective Matrix</a>
+
+</li></ul>
+</li></ul>
+</li></ul>
+<hr>
+
+<p>
+The Model, View and Projection matrices are a handy tool to separate transformations cleanly.
+</p>
+
+<div id="Model, View and Projection Transform-The Model Matrix"><h2 id="The Model Matrix" class="header"><a href="#Model, View and Projection Transform-The Model Matrix">The Model Matrix</a></h2></div>
+
+<p>
+A model is defined by a set of vertices. The \(X,Y,Z\) coordinates of these vertices are defined relative to the object’s center: that is, if a vertex is at \((0,0,0)\), it is at the center of the object.
+</p>
+
+<p>
+We'd like to be able to move this model (you just learnt to do so: <code>translation*rotation*scale</code>, and done. You apply this matrix to all your vertices at each frame and everything moves. Something that doesn't move will be at the center of the world.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/model_transform.png" alt="Model Transform" style="width:500px">
+</p>
+
+<p>
+Your vertices are now in World Space. We went from <span id="Model, View and Projection Transform-The Model Matrix-Model Space"></span><strong id="Model Space">Model Space</strong> (all vertices defined relatively to the center of the model) to <span id="Model, View and Projection Transform-The Model Matrix-World Space"></span><strong id="World Space">World Space</strong> (all vertices defined relatively to the center of the world). See figure below:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/world_coordinates.png" alt="World Coordinates" style="width:500px">
+</p>
+
+<div id="Model, View and Projection Transform-The View Matrix"><h2 id="The View Matrix" class="header"><a href="#Model, View and Projection Transform-The View Matrix">The View Matrix</a></h2></div>
+
+<p>
+It you want to view a moutain from another angle, you can either move the camera... or move the mountain.
+</p>
+
+<p>
+So initially your camera is at the origin of the World Space. In order to move the world, you simply introduce another matrix. Let’s say you want to move your camera of \(3\) units to the right (\(+X\)). This is equivalent to moving your whole world \(3\) units to the left (\(-X\)).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/view_transform.png" alt="View Transform" style="width:500px">
+</p>
+
+<p>
+We went from <span id="Model, View and Projection Transform-The View Matrix-World Space"></span><strong id="World Space">World Space</strong> (all vertices defined relatively to the center of the world, as we made so in the previous section) to <span id="Model, View and Projection Transform-The View Matrix-Camera Space"></span><strong id="Camera Space">Camera Space</strong> (all vertices defined relatively to the camera). The figure below shows how we go from model/object coordinates to world coordinates and finally to camera coordinates.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/camera_coordinates.png" alt="Camera Coordinates" style="width:500px">
+</p>
+
+<div id="Model, View and Projection Transform-The Projection Matrix"><h2 id="The Projection Matrix" class="header"><a href="#Model, View and Projection Transform-The Projection Matrix">The Projection Matrix</a></h2></div>
+
+<p>
+We're now in Camera Space. This means that after all theses transformations, a vertex that happens to have \(x==0\) and \(y==0\) should be rendered at the center of the screen. But we can't use only the \(x\) and \(y\) coordinates to determine where an object should be put on the screen: its distance to the camera (\(z\)) counts, too! For two vertices with equivalent \(x\) and \(y\) coordinates, the vertex with the biggest \(z\) coordinate will be more on the center of the screen than the other.
+</p>
+
+<p>
+The operation is called the <span id="Model, View and Projection Transform-The Projection Matrix-projection transform"></span><strong id="projection transform">projection transform</strong>. This operation determines how much of the view space will be rendered and how it will be mapped onto the computer screen. This region is known as the <span id="Model, View and Projection Transform-The Projection Matrix-frustum"></span><strong id="frustum">frustum</strong> and it is defined by six planes (near, far, top, bottom, right, and left planes), as shown in the following diagram:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/projection_transform.png" alt="Projection Transform" style="width:500px">
+</p>
+
+<p>
+These six planes are encoded in the <span id="Model, View and Projection Transform-The Projection Matrix-Projection matrix"></span><strong id="Projection matrix">Projection matrix</strong>. Any vertices lying outside the frustum after applying the transformation are clipped out and discarded from further processing. Therefore, the frustum defines clipping coordinates, and the Projection matrix that encodes the frustum produces clipping coordinates.
+</p>
+
+<p>
+ If the far and near planes have the same dimensions, the frustum will then determine an <span id="Model, View and Projection Transform-The Projection Matrix-orthographic projection"></span><strong id="orthographic projection">orthographic projection</strong>. Otherwise, it will be a <span id="Model, View and Projection Transform-The Projection Matrix-perspective projection"></span><strong id="perspective projection">perspective projection</strong>.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/orthographic_perspective_projection.png" alt="Orthographic vs Perspective projection" style="width:500px">
+</p>
+
+<p>
+We went from <span id="Model, View and Projection Transform-The Projection Matrix-Camera Space"></span><strong id="Camera Space">Camera Space</strong> (all vertices defined relatively to the camera) to <span id="Model, View and Projection Transform-The Projection Matrix-Homogeneous Space"></span><strong id="Homogeneous Space">Homogeneous Space</strong> (all vertices defined in a small cube. Everything inside the cube is onscreen).
+</p>
+
+<p>
+Before projection, we’ve got our blue objects, in Camera Space, and the red shape represents the frustum of the camera: the part of the scene that the camera is actually able to see.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/projection_coordinates_before.png" alt="Projection Coordinates" style="width:500px">
+</p>
+
+<p>
+Multiplying everything by the Projection Matrix has the following effect:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/projection_coordinates_after.png" alt="Projection Coordinates" style="width:500px">
+</p>
+
+<p>
+Up to this point, we are still working with Homogeneous coordinates, so the clipping coordinates have four components: \(x\), \(y\), \(z\), and \(w\). The clipping is done by comparing the \(x\), \(y\), and \(z\) components against the Homogeneous coordinate, \(w\). If any of them is more than, \(+w\), or less than, \(-w\), then that vertex lies outside the frustum and is discarded.
+</p>
+
+<div id="Model, View and Projection Transform-The Projection Matrix-Perspective or Orthogonal Projection"><h3 id="Perspective or Orthogonal Projection" class="header"><a href="#Model, View and Projection Transform-The Projection Matrix-Perspective or Orthogonal Projection">Perspective or Orthogonal Projection</a></h3></div>
+
+<p>
+A perspective projection assigns more space to details that are closer to the camera than details that are farther away. In other words, the geometry that is close to the camera will appear larger than the geometry that is farther from it. 
+</p>
+
+<p>
+In contrast, an orthogonal projection uses parallel lines; this means that lines will appear to be the same size, regardless of their distance to the camera.
+</p>
+
+<div id="Model, View and Projection Transform-The Projection Matrix-Perspective or Orthogonal Projection-[[./perspective.wiki|Perpective Matrix]]"><h4 id="[[./perspective.wiki|Perpective Matrix]]" class="header"><a href="#Model, View and Projection Transform-The Projection Matrix-Perspective or Orthogonal Projection-[[./perspective.wiki|Perpective Matrix]]"></a><a href="perspective.html">Perpective Matrix</a></h4></div>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
