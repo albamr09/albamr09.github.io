@@ -77,7 +77,7 @@ In all OpenGL books and references, the perspective projection matrix used in Op
 
 \begin{align}
 \begin{bmatrix}
-\frac{2n}{r - l} &amp; 0 &amp; 0 \frac{r + l}{t - l} &amp; 0 \\
+\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \\
 0 &amp; \frac{2n}{t - b} &amp; \frac{t + b}{t - b} &amp; 0 \\
 0 &amp; 0 &amp; -\frac{f + n}{f - n} &amp; -\frac{2fn}{f - n} \\
 0 &amp; 0 &amp; -1 &amp; 0
@@ -90,7 +90,7 @@ When we multiply a homogeneous point with this matrix, the point's \(w\) coordin
 
 \begin{align}
 \begin{bmatrix}
-\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{t - l} &amp; 0 \\
+\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \\
 0 &amp; \frac{2n}{t - b} &amp; \frac{t + b}{t - b} &amp; 0 \\
 0 &amp; 0 &amp; -\frac{f + n}{f - n} &amp; -\frac{2fn}{f - n} \\
 0 &amp; 0 &amp; -1 &amp; 0
@@ -102,7 +102,7 @@ z \\
 w = 1
 \end{bmatrix} = 
 \begin{bmatrix}
-\frac{2n}{r - l} \cdot x + \frac{r + l}{t - l} \cdot y \\
+\frac{2n}{r - l} \cdot x + \frac{r + l}{r - l} \cdot y \\
 \frac{2n}{t - b} \cdot y + \frac{t + b}{t - b} \cdot z \\
 -\frac{f + n}{f - n} \cdot z + -\frac{2fn}{f - n} \cdot w \\
 -1 \cdot z
