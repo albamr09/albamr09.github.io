@@ -31,7 +31,7 @@
     <hr>
     <div class="content">
 <p>
-<a href="04.html">Back</a>
+<a href="index.html">Back</a>
 </p>
 
 <div id="Model, View and Projection Transform"><h1 id="Model, View and Projection Transform" class="header"><a href="#Model, View and Projection Transform">Model, View and Projection Transform</a></h1></div>
@@ -41,24 +41,50 @@
 <div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
 <ul>
 <li>
-<a href="model_view.html#The%20Model%20Matrix">The Model Matrix</a>
+<a href="02_model_view.html#The%20Model%20Matrix">The Model Matrix</a>
 
 </li><li>
-<a href="model_view.html#The%20View%20Matrix">The View Matrix</a>
+<a href="02_model_view.html#The%20View%20Matrix">The View Matrix</a>
 
 </li><li>
-<a href="model_view.html#The%20Projection%20Matrix">The Projection Matrix</a>
+<a href="02_model_view.html#The%20Model-View%20Matrix">The Model-View Matrix</a>
 
 <ul>
 <li>
-<a href="model_view.html#Perspective%20or%20Orthogonal%20Projection">Perspective or Orthogonal Projection</a>
+<a href="02_model_view.html#Spatial%20Encoding%20of%20the%20World">Spatial Encoding of the World</a>
 
 <ul>
 <li>
-<a href="model_view.html#.%2Fperspective.wiki%7CPerpective%20Matrix%7C.%2Fperspective.wiki">Perpective Matrix</a>
+<a href="02_model_view.html#Rotation%20Matrix">Rotation Matrix</a>
+
+</li><li>
+<a href="02_model_view.html#Translation%20Vector">Translation Vector</a>
+
+</li><li>
+<a href="02_model_view.html#The%20Mysterious%20Fourth%20Row">The Mysterious Fourth Row</a>
 
 </li></ul>
 </li></ul>
+</li><li>
+<a href="02_model_view.html#The%20Projection%20Matrix">The Projection Matrix</a>
+
+<ul>
+<li>
+<a href="02_model_view.html#Normalized%20Device%20Coordinates">Normalized Device Coordinates</a>
+
+</li><li>
+<a href="02_model_view.html#Field%20of%20View">Field of View</a>
+
+</li><li>
+<a href="02_model_view.html#Perspective%20or%20Orthogonal%20Projection">Perspective or Orthogonal Projection</a>
+
+</li></ul>
+</li><li>
+<a href="02_model_view.html#WebGL%20Implementation">WebGL Implementation</a>
+
+</li><li>
+<a href="02_model_view.html#References">References</a>
+
 </li></ul>
 <hr>
 
@@ -110,6 +136,62 @@ We went from <span id="Model, View and Projection Transform-The View Matrix-Worl
 <img src="https://albamr09.github.io/public/assets/camera_coordinates.png" alt="Camera Coordinates" style="width:500px">
 </p>
 
+<div id="Model, View and Projection Transform-The Model-View Matrix"><h2 id="The Model-View Matrix" class="header"><a href="#Model, View and Projection Transform-The Model-View Matrix">The Model-View Matrix</a></h2></div>
+
+<p>
+The Model-View matrix allows us to perform <span id="Model, View and Projection Transform-The Model-View Matrix-affine transformations"></span><strong id="affine transformations">affine transformations</strong> in our scene. Affine is a mathematical name that describes transformations that do not change the structure of the object undergoing such transformations. In our 3D world scene, such transformations are rotation, scaling, reflection shearing, and translation. Let's take a look at how the Model-View matrix is constructed.
+</p>
+
+<div id="Model, View and Projection Transform-The Model-View Matrix-Spatial Encoding of the World"><h3 id="Spatial Encoding of the World" class="header"><a href="#Model, View and Projection Transform-The Model-View Matrix-Spatial Encoding of the World">Spatial Encoding of the World</a></h3></div>
+
+<p>
+By default, when you render a scene, you are looking at it from the origin of the world in the negative direction of the z-axis. As shown in the following diagram, the z-axis is coming out of the screen:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/spatial_world_encoding.png" alt="Spatial World Encoding" style="width:600px">
+</p>
+
+<div id="Model, View and Projection Transform-The Model-View Matrix-Spatial Encoding of the World-Rotation Matrix"><h4 id="Rotation Matrix" class="header"><a href="#Model, View and Projection Transform-The Model-View Matrix-Spatial Encoding of the World-Rotation Matrix">Rotation Matrix</a></h4></div>
+
+<p>
+The intersection of the first three rows with the first three columns defines the 3x3 Rotation matrix. This matrix contains information about rotations around the standard axis.
+</p>
+
+\begin{align}
+\begin{bmatrix}
+m_1 &amp; m_2 &amp; m_3 \\
+m_5 &amp; m_6 &amp; m_7 \\
+m_9 &amp; m_{10} &amp; m_{11} 
+\end{bmatrix}
+\end{align}
+
+<div id="Model, View and Projection Transform-The Model-View Matrix-Spatial Encoding of the World-Translation Vector"><h4 id="Translation Vector" class="header"><a href="#Model, View and Projection Transform-The Model-View Matrix-Spatial Encoding of the World-Translation Vector">Translation Vector</a></h4></div>
+
+<p>
+The intersection of the first three rows with the last column defines a three-component Translation vector.
+</p>
+
+\begin{align}
+\begin{bmatrix}
+m_{13} &amp; m_{14} &amp; m_{15}
+\end{bmatrix}
+\end{align}
+
+<div id="Model, View and Projection Transform-The Model-View Matrix-Spatial Encoding of the World-The Mysterious Fourth Row"><h4 id="The Mysterious Fourth Row" class="header"><a href="#Model, View and Projection Transform-The Model-View Matrix-Spatial Encoding of the World-The Mysterious Fourth Row">The Mysterious Fourth Row</a></h4></div>
+
+<p>
+The fourth row does not have any special meaning.
+</p>
+
+<ul>
+<li>
+The \(m_4\), \(m_8\), and \(m_{12}\) elements are always \(0\).
+
+</li><li>
+The \(m_{16}\) element (the Homogeneous coordinate) will always be \(1\).
+
+</li></ul>
 <div id="Model, View and Projection Transform-The Projection Matrix"><h2 id="The Projection Matrix" class="header"><a href="#Model, View and Projection Transform-The Projection Matrix">The Projection Matrix</a></h2></div>
 
 <p>
@@ -160,6 +242,38 @@ Multiplying everything by the Projection Matrix has the following effect:
 Up to this point, we are still working with Homogeneous coordinates, so the clipping coordinates have four components: \(x\), \(y\), \(z\), and \(w\). The clipping is done by comparing the \(x\), \(y\), and \(z\) components against the Homogeneous coordinate, \(w\). If any of them is more than, \(+w\), or less than, \(-w\), then that vertex lies outside the frustum and is discarded.
 </p>
 
+<div id="Model, View and Projection Transform-The Projection Matrix-Normalized Device Coordinates"><h3 id="Normalized Device Coordinates" class="header"><a href="#Model, View and Projection Transform-The Projection Matrix-Normalized Device Coordinates">Normalized Device Coordinates</a></h3></div>
+
+<p>
+Once it has been determined how much of the viewing space will be rendered, the frustum is mapped into the near plane in order to produce a 2D image.
+</p>
+
+<p>
+At the heart of things, WebGL doesn't really know anything about your coordinate space or about the matrices that you're using. WebGL only requires that when all of your transformations are done, things should be in normalized device coordinates. Normalized device coordinates are obtained by dividing the clipping coordinates by the \(w\) component. This is why this step is known as <span id="Model, View and Projection Transform-The Projection Matrix-Normalized Device Coordinates-perspective division"></span><strong id="perspective division">perspective division</strong>. In the NDC space, the \(x\) and \(y\) coordinates represent the location of your vertices on a normalized 2D screen, while the z-coordinate encodes depth information, which is the relative location of the objects with respect to the near and far planes.
+</p>
+
+<p>
+These coordinates range from \(-1\) to \(+1\) on each axis, regardless of the shape or size of the actual screen. The bottom left corner will be at \((-1, -1)\), and the top right corner will be at (1, 1). WebGL will then map these coordinates onto the viewport that was configured with <code>glViewport</code>.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/normalized_device_coordinates.png" alt="Normalized Device Coordinates" style="width:500px">
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/view_transform_1.png" alt="View Transform" style="width:500px">
+</p>
+
+<div id="Model, View and Projection Transform-The Projection Matrix-Field of View"><h3 id="Field of View" class="header"><a href="#Model, View and Projection Transform-The Projection Matrix-Field of View">Field of View</a></h3></div>
+
+<p>
+The Projection matrix determines the <span id="Model, View and Projection Transform-The Projection Matrix-Field of View-field of view"></span><strong id="field of view">field of view</strong> (FOV) of the camera. Which is how much of the 3D space will be captured by the camera. It is a measure given in degrees, and the term is used interchangeably with the term <span id="Model, View and Projection Transform-The Projection Matrix-Field of View-angle of view"></span><strong id="angle of view">angle of view</strong>.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/fov.png" alt="Field of View (FOV)" style="width:600px;">
+</p>
+
 <div id="Model, View and Projection Transform-The Projection Matrix-Perspective or Orthogonal Projection"><h3 id="Perspective or Orthogonal Projection" class="header"><a href="#Model, View and Projection Transform-The Projection Matrix-Perspective or Orthogonal Projection">Perspective or Orthogonal Projection</a></h3></div>
 
 <p>
@@ -170,7 +284,58 @@ A perspective projection assigns more space to details that are closer to the ca
 In contrast, an orthogonal projection uses parallel lines; this means that lines will appear to be the same size, regardless of their distance to the camera.
 </p>
 
-<div id="Model, View and Projection Transform-The Projection Matrix-Perspective or Orthogonal Projection-[[./perspective.wiki|Perpective Matrix]]"><h4 id="[[./perspective.wiki|Perpective Matrix]]" class="header"><a href="#Model, View and Projection Transform-The Projection Matrix-Perspective or Orthogonal Projection-[[./perspective.wiki|Perpective Matrix]]"></a><a href="perspective.html">Perpective Matrix</a></h4></div>
+<ul>
+<li>
+<a href="02_01_perspective.html">Perpective Matrix</a>
+
+</li></ul>
+ 
+<div id="Model, View and Projection Transform-WebGL Implementation"><h2 id="WebGL Implementation" class="header"><a href="#Model, View and Projection Transform-WebGL Implementation">WebGL Implementation</a></h2></div>
+
+<p>
+The following diagram shows the theory we have learned so far, along with the relationships between the steps in the theory and the implementation in WebGL.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/web_gl_transformations_pipeline.png" alt="WebGL Transformations" style="width:600px">
+</p>
+
+<p>
+The five transformations that we apply to object coordinates to obtain viewport coordinates are grouped into three matrices and one WebGL method:
+</p>
+
+<ul>
+<li>
+The <span id="Model, View and Projection Transform-WebGL Implementation-Model-View matrix"></span><strong id="Model-View matrix">Model-View matrix</strong> that groups the model and view transform in one single matrix. When we multiply our vertices by this matrix, we end up in world coordinates.
+
+</li><li>
+The <span id="Model, View and Projection Transform-WebGL Implementation-Normal matrix"></span><strong id="Normal matrix">Normal matrix</strong> is obtained by inverting and transposing the Model-View matrix. This matrix is applied to normal vectors to ensure that they continue to be perpendicular to the surface. 
+
+</li><li>
+The <span id="Model, View and Projection Transform-WebGL Implementation-Projection matrix"></span><strong id="Projection matrix">Projection matrix</strong> groups the projection transformation and the perspective division, and as a result, we end up in normalized device coordinates.
+
+</li></ul>
+<p>
+Finally, we use the <code>gl.viewport</code> operation to map NDCs to viewport coordinates:
+</p>
+
+<pre javascript="">gl.viewport(minX, minY, width, height);
+</pre>
+
+<p>
+The viewport coordinates originate in the lower-left corner of the HTML5 canvas.
+</p>
+
+<div id="Model, View and Projection Transform-References"><h2 id="References" class="header"><a href="#Model, View and Projection Transform-References">References</a></h2></div>
+
+<ol>
+<li>
+<a href="https://jsantell.com/model-view-projection/">Model View Projection</a>
+
+</li><li>
+<a href="https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/opengl-perspective-projection-matrix.html">The Perspective Projection Matrix</a>
+
+</li></ol>
 </div>
   
 
