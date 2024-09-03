@@ -31,7 +31,7 @@
     <hr>
     <div class="content">
 <p>
-<a href="model_view.html">Back</a>
+<a href="02_model_view.html">Back</a>
 </p>
 
 <div id="Perspective Matrix"><h1 id="Perspective Matrix" class="header"><a href="#Perspective Matrix">Perspective Matrix</a></h1></div>
@@ -41,7 +41,32 @@
 <div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
 <ul>
 <li>
+<a href="02_01_perspective.html#Fundamentals">Fundamentals</a>
+
+</li><li>
 <a href="02_01_perspective.html#Derivation">Derivation</a>
+
+<ul>
+<li>
+<a href="02_01_perspective.html#Projected%20X">Projected X</a>
+
+</li><li>
+<a href="02_01_perspective.html#Projected%20Y">Projected Y</a>
+
+</li><li>
+<a href="02_01_perspective.html#Projected%20Z">Projected Z</a>
+
+</li></ul>
+</li><li>
+<a href="02_01_perspective.html#The%20Field%20of%20View%20and%20Image%20Aspect%20Ratio">The Field of View and Image Aspect Ratio</a>
+
+<ul>
+<li>
+<a href="02_01_perspective.html#Computing%20the%20Coordinates">Computing the Coordinates</a>
+
+</li></ul>
+</li><li>
+<a href="02_01_perspective.html#References">References</a>
 
 </li></ul>
 <hr>
@@ -85,7 +110,13 @@ w = 1
 \end{align}
 
 <p>
-In summary, we understand that the matrix is correctly set up for the z-divide. Let's now examine how points are projected in OpenGL (or WebGL). A line is drawn from the camera's origin to the point \(P\) that we want to project, and the intersection of this line with the image plane determines the position of the projected point \(P_s\). It's important to note that in OpenGL, the image plane is situated on the near clipping plane.
+In summary, we understand that the matrix is correctly set up for the z-divide. 
+</p>
+
+<div id="Perspective Matrix-Fundamentals"><h2 id="Fundamentals" class="header"><a href="#Perspective Matrix-Fundamentals">Fundamentals</a></h2></div>
+
+<p>
+Let's now examine how points are projected in OpenGL (or WebGL). A line is drawn from the camera's origin to the point \(P\) that we want to project, and the intersection of this line with the image plane determines the position of the projected point \(P_s\). It's important to note that in OpenGL, the image plane is situated on the near clipping plane.
 </p>
 
 <p>
@@ -137,6 +168,8 @@ P_{s_y} = \frac{n \cdot P_y}{-P_z}
 <p>
 We need to figure out how \(P_{sx}\) and \(P_{sy}\) correlate with the WebGL perspective matrix. The purpose of a projection matrix is to remap the values projected onto the image plane to a unit cube (defined by minimum \((-1, -1, -1)\) and maximum \((1, 1, 1)\)).
 </p>
+
+<div id="Perspective Matrix-Derivation-Projected X"><h3 id="Projected X" class="header"><a href="#Perspective Matrix-Derivation-Projected X">Projected X</a></h3></div>
 
 <p>
 Once the point \(P\) is projected onto the image plane (near clipping plane), is considered visible if its and coordinates fall within the range \([left, right]\) for \(x\) and \([bottom, top]\) for \(y\), as depicted in Figure 2.
@@ -274,6 +307,8 @@ P_{sx} = \frac{\frac{2n}{r - l} P_x}{-P_z} + \frac{\frac{r + l}{r - l} P_z}{-P_z
 This is the first coordinate of the projected point \(P_{s}\) computed using the WebGL perspective matrix.
 </p>
 
+<div id="Perspective Matrix-Derivation-Projected Y"><h3 id="Projected Y" class="header"><a href="#Perspective Matrix-Derivation-Projected Y">Projected Y</a></h3></div>
+
 <p>
 The derivation for \(P_{sy}\) is analogous, replacing \(l\) and \(r\) with and \(b\) and \(t\), such that:
 </p>
@@ -375,7 +410,7 @@ P_{s_y} = 0 \cdot x + \frac{2n}{t - b} P_y + \frac{t + b}{t - b}P_z + 0
 \end{align}
 
 <p>
-and after the difivio by \(-P_z\):
+and after the divsion by \(-P_z\):
 </p>
 
 \begin{align}
@@ -385,6 +420,8 @@ P_{s_y} = \frac{\frac{2n}{t - b}P_y}{-P_z}  + \frac{\frac{t + b}{t - b}P_z}{-P_z
 \begin{align}
 = \frac{2n P_y}{-P_z(t - b)}  - \frac{t + b}{t - b}
 \end{align}
+
+<div id="Perspective Matrix-Derivation-Projected Z"><h3 id="Projected Z" class="header"><a href="#Perspective Matrix-Derivation-Projected Z">Projected Z</a></h3></div>
 
 <p>
 All that's left to do to complete it is find a way to remap the z-coordinate of the projected points to the range \([-1,1]\)
@@ -436,7 +473,7 @@ So, when \(P_z\) is on the near plane, the previous equation is as follows:
 \end{align}
 
 \begin{align}
--nA + B} = -n
+-nA + B = -n
 \end{align}
 
 <p>
@@ -522,10 +559,114 @@ We can replace the solutions we found for A and B in our matrix, and we finally 
 \begin{bmatrix}
 \frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \\
 0 &amp; \frac{2n}{t - b} &amp; \frac{t + b}{t - b} &amp; 0 \\
-0 &amp; 0 &amp; -\fra¢{f + n}{f - n}&amp; -\frac{2fn}{f - n} \\
+0 &amp; 0 &amp; -\frac{f + n}{f - n}&amp; -\frac{2fn}{f - n} \\
 0 &amp; 0 &amp; -1 &amp; 0
 \end{bmatrix}
 \end{align}
+
+<div id="Perspective Matrix-The Field of View and Image Aspect Ratio"><h2 id="The Field of View and Image Aspect Ratio" class="header"><a href="#Perspective Matrix-The Field of View and Image Aspect Ratio">The Field of View and Image Aspect Ratio</a></h2></div>
+
+<p>
+The field of view and the image aspect ratio are somehow related to the projection process. The construction of the matrix relies on six parameters: the left, right, bottom, and top coordinates, as well as the near and far clipping planes. The user provides the values for the near and far clipping planes, but how about the left, right, bottom, and top coordinates? What are these, where do they come from, and how do we calculate them? 
+</p>
+
+<p>
+Observing the following figure, you can see that these coordinates correspond to the lower-left and upper-right corners of the frustum front face, where the image of the 3D scene is projected:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/frustrum.png" alt="Frustrum" style="width: 500px;">
+</p>
+
+<p>
+The angle of view can either be defined vertically or horizontally. OpenGL tends to define the field-of-view as vertical (hence the Y in FOVY).
+</p>
+
+<div id="Perspective Matrix-The Field of View and Image Aspect Ratio-Computing the Coordinates"><h3 id="Computing the Coordinates" class="header"><a href="#Perspective Matrix-The Field of View and Image Aspect Ratio-Computing the Coordinates">Computing the Coordinates</a></h3></div>
+
+<p>
+To compute the top coordinate, we look at the right-angled triangle \(ABC\) on the following image.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/camera_side_view.png" alt="Camera Side View" style="width:350px;">
+</p>
+
+<p>
+The angle between by \(AB\) and \(AC\) is half the FOV. Also, the adjacent side of the triangle is the value for the near-clipping plane. Using <a href="../../../../Math/Pre-Calculus/AGAA/08_03.html">trigonometry</a>, we can express this as:
+</p>
+
+\begin{align}
+\tan(\frac{FOVY}{2}) = \frac{opposite}{adyacent} = \frac{BC}{AB} = \frac{top}{near}
+\end{align}
+
+<p>
+Therefore:
+</p>
+
+\begin{align}
+top = \tan(\frac{FOVY}{2}) \cdot near
+\end{align}
+
+<p>
+And since the bottom half of the camera is symmetrical to the upper half, we can state that:
+</p>
+
+\begin{align}
+bottom = -top
+\end{align}
+
+<p>
+<img src="https://albamr09.github.io/public/assets/aspect_ratio.png" alt="Aspect Ratio" style="width:600px;">
+</p>
+
+<p>
+In Figure 5, two scenarios are considered: the image can either be square or rectangular. For a square camera, it's straightforward: the left and bottom coordinates are the same, the right and top coordinates are also the same. Therefore:
+</p>
+
+\begin{align}
+top = \tan(\frac{FOVY}{2}) \cdot near
+\end{align}
+
+\begin{align}
+left = bottom = -top
+\end{align}
+
+\begin{align}
+right = top
+\end{align}
+
+<p>
+For a non-square camera, as shown in the right inside of figure 5, the bottom and top coordinates remain the same, but the left and right coordinates are scaled by the aspect ratio, defined as the image width over the image height. The general formulas for computing the left, right, and bottom coordinates are:
+</p>
+
+\begin{align}
+aspect ratio = \frac{width}{heigth}
+\end{align}
+
+\begin{align}
+top = \tan(\frac{FOVY}{2}) \cdot near
+\end{align}
+
+\begin{align}
+bottom = -top
+\end{align}
+
+\begin{align}
+right = top \cdot aspect ratio
+\end{align}
+
+\begin{align}
+left = bottom \cdot aspect ratio
+\end{align}
+
+<div id="Perspective Matrix-References"><h2 id="References" class="header"><a href="#Perspective Matrix-References">References</a></h2></div>
+
+<ol>
+<li>
+<a href="https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/opengl-perspective-projection-matrix.html">The Perspective Projection Matrix</a>
+
+</li></ol>
 </div>
   
 
