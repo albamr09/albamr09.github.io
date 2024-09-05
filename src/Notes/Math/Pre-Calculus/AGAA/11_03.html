@@ -1,0 +1,150 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Geometric Sequences and Series</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Geometric Sequences and Series"><h1 id="Geometric Sequences and Series" class="header"><a href="#Geometric Sequences and Series">Geometric Sequences and Series</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="11_03.html#Geometric%20Sequences">Geometric Sequences</a>
+
+</li><li>
+<a href="11_03.html#Geometric%20Series">Geometric Series</a>
+
+<ul>
+<li>
+<a href="11_03.html#Infinite%20Geometric%20Series">Infinite Geometric Series</a>
+
+</li></ul>
+</li></ul>
+<hr>
+
+<div id="Geometric Sequences and Series-Geometric Sequences"><h2 id="Geometric Sequences" class="header"><a href="#Geometric Sequences and Series-Geometric Sequences">Geometric Sequences</a></h2></div>
+
+<p>
+A <span id="Geometric Sequences and Series-Geometric Sequences-geometric sequence"></span><strong id="geometric sequence">geometric sequence</strong> (or <span id="Geometric Sequences and Series-Geometric Sequences-geometric progression"></span><strong id="geometric progression">geometric progression</strong>) is a sequence in which each term after the first is obtained by multiplying the preceding term by a constant non-zero real number, called the <span id="Geometric Sequences and Series-Geometric Sequences-common ratio"></span><strong id="common ratio">common ratio</strong> \(r\). That is:
+</p>
+
+\begin{align}
+r = \frac{a_{n+1}}{a_n}
+\end{align}
+
+<p>
+In a geometric sequence with first term \(a_1\) and common ratio \(r\), where neither of them are zero, then the \(n\)th term is:
+</p>
+
+\begin{align}
+a_n = a_1 r^{n-1}
+\end{align}
+
+<div id="Geometric Sequences and Series-Geometric Series"><h2 id="Geometric Series" class="header"><a href="#Geometric Sequences and Series-Geometric Series">Geometric Series</a></h2></div>
+
+<p>
+A <span id="Geometric Sequences and Series-Geometric Series-geometric series"></span><strong id="geometric series">geometric series</strong> is the sum of the terms of a geometric sequence. To find a formula of the sum \(S_n\) first we write the sum as follows:
+</p>
+
+\begin{align}
+S_n = a_1 + a_2 + \cdots + a_n
+\end{align}
+
+\begin{align}
+= a_1 + a_1 r + \cdots + a_1 r^{n-1}
+\end{align}
+
+<p>
+We multiply each side of the equation by \(r\)
+</p>
+
+\begin{align}
+rS_n = a_1r + a_1 r^2 + \cdots + a_1 r^{n}
+\end{align}
+
+<p>
+And now we substract these two equations:
+</p>
+
+\begin{align}
+S_n - rS_n = a_1 + (a_1r - a_1r) + (a_1 r^2 - a_1 r^2) + \cdots + (a_1 r^{n-1} - a_1 r^{n-1}) - a_1 r^{n}
+\end{align}
+
+\begin{align}
+S_n - rS_n = a_1 - a_1 r^{n}
+\end{align}
+
+\begin{align}
+S_n (1 - r) = a_1 - a_1 r^{n}
+\end{align}
+
+\begin{align}
+S_n = \frac{a_1 - a_1 r^{n}}{1 - r}, r \neq 1
+\end{align}
+
+<div id="Geometric Sequences and Series-Geometric Series-Infinite Geometric Series"><h3 id="Infinite Geometric Series" class="header"><a href="#Geometric Sequences and Series-Geometric Series-Infinite Geometric Series">Infinite Geometric Series</a></h3></div>
+
+<p>
+If a geometric sequence has first term \(a_1\) and common ratio \(r\), then:
+</p>
+
+\begin{align}
+S_n = \frac{a_1 - a_1 r^{n}}{1 - r}, r \neq 1
+\end{align}
+
+\begin{align}
+S_n = \frac{a_1(1 - r^{n})}{1 - r}, r \neq 1
+\end{align}
+
+<p>
+If \(|r| &lt; 1\), then \(\lim_{n \rightarrow \infty}r^n = 0\) and 
+</p>
+
+\begin{align}
+\lim_{n \rightarrow \infty} S_n = \frac{a_1(1 - 0)}{1 - r} = \frac{a_1}{1 - r}
+\end{align}
+
+<p>
+The quotient \(\frac{a_1}{1 - r}\) is called the <span id="Geometric Sequences and Series-Geometric Series-Infinite Geometric Series-sum of the term of an infinite geometric sequence"></span><strong id="sum of the term of an infinite geometric sequence">sum of the term of an infinite geometric sequence</strong>. The limit \(\lim_{n \rightarrow \infty} S_n\) can be expressed as \(S_{\infty}\) or \(\sum_{i=1}^{\infty} a_i\).
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
