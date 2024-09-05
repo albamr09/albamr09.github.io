@@ -41,17 +41,36 @@
 <div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
 <ul>
 <li>
+<a href="02_02_orthographic.html#Intro">Intro</a>
+
+</li><li>
+<a href="02_02_orthographic.html#Derivation">Derivation</a>
+
+<ul>
+<li>
+<a href="02_02_orthographic.html#Projection%20of%20%24x%24">Projection of  x</a>
+
+</li><li>
+<a href="02_02_orthographic.html#Projection%20of%20%24y%24">Projection of  y</a>
+
+</li><li>
+<a href="02_02_orthographic.html#Projection%20of%20%24z%24">Projection of  z</a>
+
+</li></ul>
+</li><li>
 <a href="02_02_orthographic.html#References">References</a>
 
 </li></ul>
 <hr>
+
+<div id="Orthographic Matrix-Intro"><h2 id="Intro" class="header"><a href="#Orthographic Matrix-Intro">Intro</a></h2></div>
 
 <p>
 In this chapter, we will explore how to construct a matrix that projects a point from camera space onto the image plane of an orthographic camera.
 </p>
 
 <p>
-The aim of the orthographic projection matrix is to remap all coordinates within a specific 3D space bounding box to the <span id="Orthographic Matrix-canonical viewing volume"></span><strong id="canonical viewing volume">canonical viewing volume</strong>. For that we need to know the scene's bounding box, that is the bounding box that encompasses all the objects on the scene. The orthographic matrix then aims to remap this box to a canonical view volume, defined by minimum and maximum extents of \((-1, -1, -1)\) and \((1, 1, 1)\).
+The aim of the orthographic projection matrix is to remap all coordinates within a specific 3D space bounding box to the <span id="Orthographic Matrix-Intro-canonical viewing volume"></span><strong id="canonical viewing volume">canonical viewing volume</strong>. For that we need to know the scene's bounding box, that is the bounding box that encompasses all the objects on the scene. The orthographic matrix then aims to remap this box to a canonical view volume, defined by minimum and maximum extents of \((-1, -1, -1)\) and \((1, 1, 1)\).
 </p>
 
 <p>
@@ -64,8 +83,14 @@ Once we have computed the scene bounding box, we need to project the minimum and
 
 <p>
 <img src="https://albamr09.github.io/public/assets/camera_to_image_mapping.png" alt="Camera Coordinates' Mapping to Image Coordinates'" style="witdh:500px;">
+</p>
+<div id="Orthographic Matrix-Derivation"><h2 id="Derivation" class="header"><a href="#Orthographic Matrix-Derivation">Derivation</a></h2></div>
+
+<p>
 We will refer to these screen coordinates as \(l\), \(r\), \(t\), and \(b\), which stand for left, right, top, and bottom, respectively.
 </p>
+
+<div id="Orthographic Matrix-Derivation-Projection of $x$"><h3 id="Projection of $x$" class="header"><a href="#Orthographic Matrix-Derivation-Projection of $x$">Projection of \(x\)</a></h3></div>
 
 <p>
 Now, we need to remap the left and right screen coordinates \((l, r)\) to \(-1\) and \(1\), and apply the same remapping to the top and bottom coordinates \((t, b)\). Assuming \(x\) is any point within the range \([l ,r]\), we can state:
@@ -146,12 +171,14 @@ z \\
 1 \\
 \end{bmatrix} = 
 \begin{bmatrix}
-\frac{2x}{r - l} - \frac{r + l}{r - l}
-y
-z
-1
+\frac{2x}{r - l} - \frac{r + l}{r - l} \\
+y \\
+z \\
+1 \\
 \end{bmatrix}
 \end{align}
+
+<div id="Orthographic Matrix-Derivation-Projection of $y$"><h3 id="Projection of $y$" class="header"><a href="#Orthographic Matrix-Derivation-Projection of $y$">Projection of \(y\)</a></h3></div>
 
 <p>
 The process for the y-coordinate is the same. You just need to replace \(r\) and \(l\) with \(t\) and \(b\) (top and bottom).
@@ -204,7 +231,7 @@ Which yields the following transformation matrix:
 \begin{align}
 \begin{bmatrix}
 \frac{2}{r - l} &amp; 0 &amp; 0 &amp; -\frac{r + l}{r - l} \\
-0 &amp; frac{2}{t - b} &amp; 0 &amp; -\frac{t + b}{t - b} \\
+0 &amp; \frac{2}{t - b} &amp; 0 &amp; -\frac{t + b}{t - b} \\
 0 &amp; 0 &amp; 1 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1 \\
 \end{bmatrix}
@@ -217,7 +244,7 @@ So:
 \begin{align}
 \begin{bmatrix}
 \frac{2}{r - l} &amp; 0 &amp; 0 &amp; -\frac{r + l}{r - l} \\
-0 &amp; frac{2}{t - b} &amp; 0 &amp; -\frac{t + b}{t - b} \\
+0 &amp; \frac{2}{t - b} &amp; 0 &amp; -\frac{t + b}{t - b} \\
 0 &amp; 0 &amp; 1 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1 \\
 \end{bmatrix} \cdot 
@@ -228,12 +255,14 @@ z \\
 1 \\
 \end{bmatrix} = 
 \begin{bmatrix}
-\frac{2x}{r - l} - \frac{r + l}{r - l}
-\frac{2y}{t - b} - \frac{t + b}{t - b}
-z
-1
+\frac{2x}{r - l} - \frac{r + l}{r - l} \\
+\frac{2y}{t - b} - \frac{t + b}{t - b} \\
+z \\
+1 \\
 \end{bmatrix}
 \end{align}
+
+<div id="Orthographic Matrix-Derivation-Projection of $z$"><h3 id="Projection of $z$" class="header"><a href="#Orthographic Matrix-Derivation-Projection of $z$">Projection of \(z\)</a></h3></div>
 
 <p>
 And finally, to complete our orthographic projection matrix, we need to remap the z-coordinates from \(-1\) to \(1\). We start with the following condition:
@@ -282,7 +311,7 @@ Now we add this to the matrix:
 \begin{align}
 \begin{bmatrix}
 \frac{2}{r - l} &amp; 0 &amp; 0 &amp; -\frac{r + l}{r - l} \\
-0 &amp; frac{2}{t - b} &amp; 0 &amp; -\frac{t + b}{t - b} \\
+0 &amp; \frac{2}{t - b} &amp; 0 &amp; -\frac{t + b}{t - b} \\
 0 &amp; 0 &amp; -\frac{2}{f - n} &amp; -\frac{n + f}{n - f} \\
 0 &amp; 0 &amp; 0 &amp; 1 \\
 \end{bmatrix}
@@ -295,7 +324,7 @@ So:
 \begin{align}
 \begin{bmatrix}
 \frac{2}{r - l} &amp; 0 &amp; 0 &amp; -\frac{r + l}{r - l} \\
-0 &amp; frac{2}{t - b} &amp; 0 &amp; -\frac{t + b}{t - b} \\
+0 &amp; \frac{2}{t - b} &amp; 0 &amp; -\frac{t + b}{t - b} \\
 0 &amp; 0 &amp; -\frac{2}{f - n} &amp; -\frac{n + f}{n - f} \\
 0 &amp; 0 &amp; 0 &amp; 1 \\
 \end{bmatrix} \cdot
@@ -306,10 +335,10 @@ z \\
 1 \\
 \end{bmatrix} = 
 \begin{bmatrix}
-\frac{2x}{r - l} - \frac{r + l}{r - l}
-\frac{2y}{t - b} - \frac{t + b}{t - b}
-\frac{-2z}{f - n} - \frac{f + n}{f - n}
-1
+\frac{2x}{r - l} - \frac{r + l}{r - l} \\
+\frac{2y}{t - b} - \frac{t + b}{t - b} \\
+\frac{-2z}{f - n} - \frac{f + n}{f - n} \\
+1 \\
 \end{bmatrix}
 \end{align}
 
