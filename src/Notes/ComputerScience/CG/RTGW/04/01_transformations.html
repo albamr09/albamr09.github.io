@@ -65,6 +65,9 @@
 
 </li></ul>
 </li></ul>
+</li><li>
+<a href="01_transformations.html#Transposing%20Transformation%20or%20Projection%20Matrices">Transposing Transformation or Projection Matrices</a>
+
 </li></ul>
 <hr>
 
@@ -283,6 +286,23 @@ So now we know how to rotate, translate, and scale our vectors. It would be grea
 
 <p>
 This actually performs the scaling FIRST, and THEN the rotation, and THEN the translation. This is how matrix multiplication works.
+</p>
+
+<div id="Transformations-Transposing Transformation or Projection Matrices"><h2 id="Transposing Transformation or Projection Matrices" class="header"><a href="#Transformations-Transposing Transformation or Projection Matrices">Transposing Transformation or Projection Matrices</a></h2></div>
+
+<p>
+It can be confusing to determine whether you should transpose your matrix before passing it to the graphics pipeline. According to the WebGL specifications, matrices are conventionally written in column-major order. Row-major order is what is conventionally used on mathematics to define matrices, and throughout all this chapter we define the matrices on row-major order, therefore to avoid this before passing them to WebGL we need to transpose them, either we do it manually, or we can use:
+</p>
+
+<pre javascript="">gl.uniformMatrix4fv(
+  uModelViewMatrix,
+  true,
+  modelViewMatrix.toFloatArray()
+);
+</pre>
+
+<p>
+Where the second argument determines whether we want to transpose the matrix or not.
 </p>
 </div>
   

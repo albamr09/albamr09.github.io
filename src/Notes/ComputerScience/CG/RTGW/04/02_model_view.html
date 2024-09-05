@@ -70,17 +70,22 @@
 
 <ul>
 <li>
-<a href="02_model_view.html#Normalized%20Device%20Coordinates">Normalized Device Coordinates</a>
-
-</li><li>
-<a href="02_model_view.html#Field%20of%20View">Field of View</a>
-
-</li><li>
 <a href="02_model_view.html#Perspective%20or%20Orthogonal%20Projection">Perspective or Orthogonal Projection</a>
 
+<ul>
+<li>
+<a href="02_model_view.html#Perspective%20Matrix">Perspective Matrix</a>
+
+</li><li>
+<a href="02_model_view.html#Orthographic%20Matrix">Orthographic Matrix</a>
+
+</li></ul>
 </li></ul>
 </li><li>
-<a href="02_model_view.html#WebGL%20Implementation">WebGL Implementation</a>
+<a href="02_model_view.html#Clipping">Clipping</a>
+
+</li><li>
+<a href="02_model_view.html#Recap">Recap</a>
 
 </li><li>
 <a href="02_model_view.html#References">References</a>
@@ -195,11 +200,15 @@ The \(m_{16}\) element (the Homogeneous coordinate) will always be \(1\).
 <div id="Model, View and Projection Transform-The Projection Matrix"><h2 id="The Projection Matrix" class="header"><a href="#Model, View and Projection Transform-The Projection Matrix">The Projection Matrix</a></h2></div>
 
 <p>
-We're now in Camera Space. This means that after all theses transformations, a vertex that happens to have \(x==0\) and \(y==0\) should be rendered at the center of the screen. But we can't use only the \(x\) and \(y\) coordinates to determine where an object should be put on the screen: its distance to the camera (\(z\)) counts, too! For two vertices with equivalent \(x\) and \(y\) coordinates, the vertex with the biggest \(z\) coordinate will be more on the center of the screen than the other.
+Projection matrices are specialized \(4\)x\(4\) matrices designed to transform a 3D point in camera space into its projected counterpart on the canvas. Essentially, when you multiply a 3D point by a projection matrix, you determine its 2D coordinates on the canvas within NDC (Normalized Device Coordinates) space (we'll see what these are later). Points in NDC space fall within the range \([-1, 1]\).
 </p>
 
 <p>
-The operation is called the <span id="Model, View and Projection Transform-The Projection Matrix-projection transform"></span><strong id="projection transform">projection transform</strong>. This operation determines how much of the view space will be rendered and how it will be mapped onto the computer screen. This region is known as the <span id="Model, View and Projection Transform-The Projection Matrix-frustum"></span><strong id="frustum">frustum</strong> and it is defined by six planes (near, far, top, bottom, right, and left planes), as shown in the following diagram:
+It's crucial to remember that projection matrices are intended for transforming vertices or 3D points, not vectors. The workaround involves treating points as \(1\times 4\) vectors, enabling their multiplication by a \(4\times 4\) matrix. The result is another \(1\times 4\) matrix, or 4D points with homogeneous coordinates. These coordinates are only directly applicable as 3D points if their fourth component is \(1\), allowing the first three components to represent a standard 3D Cartesian point.
+</p>
+
+<p>
+This operation determines how much of the view space will be rendered and how it will be mapped onto the computer screen. This region is known as the <span id="Model, View and Projection Transform-The Projection Matrix-frustum"></span><strong id="frustum">frustum</strong> and it is defined by six planes (near, far, top, bottom, right, and left planes), as shown in the following diagram:
 </p>
 
 <p>
@@ -238,42 +247,6 @@ Multiplying everything by the Projection Matrix has the following effect:
 <img src="https://albamr09.github.io/public/assets/projection_coordinates_after.png" alt="Projection Coordinates" style="width:500px">
 </p>
 
-<p>
-Up to this point, we are still working with Homogeneous coordinates, so the clipping coordinates have four components: \(x\), \(y\), \(z\), and \(w\). The clipping is done by comparing the \(x\), \(y\), and \(z\) components against the Homogeneous coordinate, \(w\). If any of them is more than, \(+w\), or less than, \(-w\), then that vertex lies outside the frustum and is discarded.
-</p>
-
-<div id="Model, View and Projection Transform-The Projection Matrix-Normalized Device Coordinates"><h3 id="Normalized Device Coordinates" class="header"><a href="#Model, View and Projection Transform-The Projection Matrix-Normalized Device Coordinates">Normalized Device Coordinates</a></h3></div>
-
-<p>
-Once it has been determined how much of the viewing space will be rendered, the frustum is mapped into the near plane in order to produce a 2D image.
-</p>
-
-<p>
-At the heart of things, WebGL doesn't really know anything about your coordinate space or about the matrices that you're using. WebGL only requires that when all of your transformations are done, things should be in normalized device coordinates. Normalized device coordinates are obtained by dividing the clipping coordinates by the \(w\) component. This is why this step is known as <span id="Model, View and Projection Transform-The Projection Matrix-Normalized Device Coordinates-perspective division"></span><strong id="perspective division">perspective division</strong>. In the NDC space, the \(x\) and \(y\) coordinates represent the location of your vertices on a normalized 2D screen, while the z-coordinate encodes depth information, which is the relative location of the objects with respect to the near and far planes.
-</p>
-
-<p>
-These coordinates range from \(-1\) to \(+1\) on each axis, regardless of the shape or size of the actual screen. The bottom left corner will be at \((-1, -1)\), and the top right corner will be at (1, 1). WebGL will then map these coordinates onto the viewport that was configured with <code>glViewport</code>.
-</p>
-
-<p>
-<img src="https://albamr09.github.io/public/assets/normalized_device_coordinates.png" alt="Normalized Device Coordinates" style="width:500px">
-</p>
-
-<p>
-<img src="https://albamr09.github.io/public/assets/view_transform_1.png" alt="View Transform" style="width:500px">
-</p>
-
-<div id="Model, View and Projection Transform-The Projection Matrix-Field of View"><h3 id="Field of View" class="header"><a href="#Model, View and Projection Transform-The Projection Matrix-Field of View">Field of View</a></h3></div>
-
-<p>
-The Projection matrix determines the <span id="Model, View and Projection Transform-The Projection Matrix-Field of View-field of view"></span><strong id="field of view">field of view</strong> (FOV) of the camera. Which is how much of the 3D space will be captured by the camera. It is a measure given in degrees, and the term is used interchangeably with the term <span id="Model, View and Projection Transform-The Projection Matrix-Field of View-angle of view"></span><strong id="angle of view">angle of view</strong>.
-</p>
-
-<p>
-<img src="https://albamr09.github.io/public/assets/fov.png" alt="Field of View (FOV)" style="width:600px;">
-</p>
-
 <div id="Model, View and Projection Transform-The Projection Matrix-Perspective or Orthogonal Projection"><h3 id="Perspective or Orthogonal Projection" class="header"><a href="#Model, View and Projection Transform-The Projection Matrix-Perspective or Orthogonal Projection">Perspective or Orthogonal Projection</a></h3></div>
 
 <p>
@@ -284,49 +257,88 @@ A perspective projection assigns more space to details that are closer to the ca
 In contrast, an orthogonal projection uses parallel lines; this means that lines will appear to be the same size, regardless of their distance to the camera.
 </p>
 
+<div id="Model, View and Projection Transform-The Projection Matrix-Perspective or Orthogonal Projection-Perspective Matrix"><h4 id="Perspective Matrix" class="header"><a href="#Model, View and Projection Transform-The Projection Matrix-Perspective or Orthogonal Projection-Perspective Matrix">Perspective Matrix</a></h4></div>
+
+<p>
+The Projection matrix determines the <span id="Model, View and Projection Transform-The Projection Matrix-Perspective or Orthogonal Projection-Perspective Matrix-field of view"></span><strong id="field of view">field of view</strong> (FOV) of the camera. Which is how much of the 3D space will be captured by the camera. It is a measure given in degrees, and the term is used interchangeably with the term <span id="Model, View and Projection Transform-The Projection Matrix-Perspective or Orthogonal Projection-Perspective Matrix-angle of view"></span><strong id="angle of view">angle of view</strong>.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/fov.png" alt="Field of View (FOV)" style="width:600px;">
+</p>
+
 <ul>
 <li>
 <a href="02_01_perspective.html">Perspective Matrix</a>
 
-</li><li>
+</li></ul>
+<div id="Model, View and Projection Transform-The Projection Matrix-Perspective or Orthogonal Projection-Orthographic Matrix"><h4 id="Orthographic Matrix" class="header"><a href="#Model, View and Projection Transform-The Projection Matrix-Perspective or Orthogonal Projection-Orthographic Matrix">Orthographic Matrix</a></h4></div>
+
+<ul>
+<li>
 <a href="02_02_orthographic.html">Orthographic Matrix</a>
 
 </li></ul>
+<div id="Model, View and Projection Transform-Clipping"><h2 id="Clipping" class="header"><a href="#Model, View and Projection Transform-Clipping">Clipping</a></h2></div>
+
+<p>
+Up to this point, we are still working with Homogeneous coordinates. Projection matrices actually transform points from the camera space to the <span id="Model, View and Projection Transform-Clipping-homogeneous clip space"></span><strong id="homogeneous clip space">homogeneous clip space</strong>, not to <span id="Model, View and Projection Transform-Clipping-NDC"></span><strong id="NDC">NDC</strong> (Normalized Device Coordinate) space.
+</p>
+
+<p>
+Because WebGL doesn't know anything about the coordinate space it requires that when all of the transformations are done, things should be in normalized device coordinates. Normalized device coordinates are obtained by dividing the clipping coordinates by the \(w\) component. This is why this step is known as <span id="Model, View and Projection Transform-Clipping-perspective division"></span><strong id="perspective division">perspective division</strong>. In the NDC space, the \(x\) and \(y\) coordinates represent the location of your vertices on a normalized 2D screen, while the z-coordinate encodes depth information, which is the relative location of the objects with respect to the near and far planes.
+</p>
+
+<p>
+Basically the homogeneous coordinates have four components: \(x\), \(y\), \(z\), and \(w\). The clipping is done by comparing the \(x\), \(y\), and \(z\) components against the Homogeneous coordinate, \(w\). If any of them is more than, \(+w\), or less than, \(-w\), then that vertex lies outside the frustum and is discarded. 
+</p>
+
+<p>
+The <span id="Model, View and Projection Transform-Clipping-clipping coordinates"></span><strong id="clipping coordinates">clipping coordinates</strong> now range from \(-1\) to \(+1\) on each axis, regardless of the shape or size of the actual screen. The bottom left corner will be at \((-1, -1)\), and the top right corner will be at (1, 1). WebGL will then map these coordinates onto the viewport that was configured with <code>glViewport</code>.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/normalized_device_coordinates.png" alt="Normalized Device Coordinates" style="width:500px">
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/view_transform_1.png" alt="View Transform" style="width:500px">
+</p>
  
-<div id="Model, View and Projection Transform-WebGL Implementation"><h2 id="WebGL Implementation" class="header"><a href="#Model, View and Projection Transform-WebGL Implementation">WebGL Implementation</a></h2></div>
+<div id="Model, View and Projection Transform-Recap"><h2 id="Recap" class="header"><a href="#Model, View and Projection Transform-Recap">Recap</a></h2></div>
 
 <p>
 The following diagram shows the theory we have learned so far, along with the relationships between the steps in the theory and the implementation in WebGL.
 </p>
 
 <p>
-<img src="https://albamr09.github.io/public/assets/web_gl_transformations_pipeline.png" alt="WebGL Transformations" style="width:600px">
+<img src="https://albamr09.github.io/public/assets/transformations_recap.png" alt="Translations Recap" style="width: 500px;">
 </p>
 
 <p>
-The five transformations that we apply to object coordinates to obtain viewport coordinates are grouped into three matrices and one WebGL method:
+The five transformations that we apply to object coordinates to obtain viewport coordinates are:
 </p>
 
 <ul>
 <li>
-The <span id="Model, View and Projection Transform-WebGL Implementation-Model-View matrix"></span><strong id="Model-View matrix">Model-View matrix</strong> that groups the model and view transform in one single matrix. When we multiply our vertices by this matrix, we end up in world coordinates.
+The <span id="Model, View and Projection Transform-Recap-Model-View matrix"></span><strong id="Model-View matrix">Model-View matrix</strong> that groups the model and view transform in one single matrix. When we multiply our vertices by this matrix, we end up in the <span id="Model, View and Projection Transform-Recap-camera space"></span><strong id="camera space">camera space</strong> with homogeneous coordinates.
 
 </li><li>
-The <span id="Model, View and Projection Transform-WebGL Implementation-Normal matrix"></span><strong id="Normal matrix">Normal matrix</strong> is obtained by inverting and transposing the Model-View matrix. This matrix is applied to normal vectors to ensure that they continue to be perpendicular to the surface. 
+The <span id="Model, View and Projection Transform-Recap-Projection matrix"></span><strong id="Projection matrix">Projection matrix</strong> as a result, we end up in the <span id="Model, View and Projection Transform-Recap-homogeneous clip space"></span><strong id="homogeneous clip space">homogeneous clip space</strong>.
 
 </li><li>
-The <span id="Model, View and Projection Transform-WebGL Implementation-Projection matrix"></span><strong id="Projection matrix">Projection matrix</strong> groups the projection transformation and the perspective division, and as a result, we end up in normalized device coordinates.
+<span id="Model, View and Projection Transform-Recap-Clipping"></span><strong id="Clipping">Clipping</strong>: transforms the homogeneous coordinates on cartesian coordinates by leaving out all vertices ouside of the range \([-w, w]\). This leaves us on the <span id="Model, View and Projection Transform-Recap-clip space"></span><strong id="clip space">clip space</strong>.
+
+</li><li>
+<span id="Model, View and Projection Transform-Recap-Perspective Division"></span><strong id="Perspective Division">Perspective Division</strong>: after we apply perspective division, so now our coordinates are on the <span id="Model, View and Projection Transform-Recap-NDC space"></span><strong id="NDC space">NDC space</strong>.
+
+</li><li>
+<span id="Model, View and Projection Transform-Recap-GL Viewport"></span><strong id="GL Viewport">GL Viewport</strong>: internal transform to move to the <span id="Model, View and Projection Transform-Recap-raster space"></span><strong id="raster space">raster space</strong>.
 
 </li></ul>
+ 
 <p>
-Finally, we use the <code>gl.viewport</code> operation to map NDCs to viewport coordinates:
-</p>
-
-<pre javascript="">gl.viewport(minX, minY, width, height);
-</pre>
-
-<p>
-The viewport coordinates originate in the lower-left corner of the HTML5 canvas.
+ An extra transformation matrix is defined specially for the normals. This is the <span id="Model, View and Projection Transform-Recap-Normal matrix"></span><strong id="Normal matrix">Normal matrix</strong>, which is obtained by inverting and transposing the Model-View matrix. This matrix is applied to normal vectors to ensure that they continue to be perpendicular to the surface. 
 </p>
 
 <div id="Model, View and Projection Transform-References"><h2 id="References" class="header"><a href="#Model, View and Projection Transform-References">References</a></h2></div>
@@ -334,6 +346,9 @@ The viewport coordinates originate in the lower-left corner of the HTML5 canvas.
 <ol>
 <li>
 <a href="https://jsantell.com/model-view-projection/">Model View Projection</a>
+
+</li><li>
+<a href="https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/projection-matrix-GPU-rendering-pipeline-clipping.html">Projection Matrices</a>
 
 </li></ol>
 </div>
