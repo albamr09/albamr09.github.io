@@ -1,0 +1,147 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Animations</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Animations"><h1 id="Animations" class="header"><a href="#Animations">Animations</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="05.html#WebGL%20Matrix%20Naming%20Conventions">WebGL Matrix Naming Conventions</a>
+
+</li><li>
+<a href="05.html#Scene%20graph">Scene graph</a>
+
+</li><li>
+<a href="05.html#Matrix%20Stacks">Matrix Stacks</a>
+
+</li><li>
+<a href="05.html#Animating%20a%203D%20scene">Animating a 3D scene</a>
+
+<ul>
+<li>
+<a href="05.html#The%20requestAnimationFrame%20Function">The requestAnimationFrame Function</a>
+
+</li></ul>
+</li></ul>
+<hr>
+
+<div id="Animations-WebGL Matrix Naming Conventions"><h2 id="WebGL Matrix Naming Conventions" class="header"><a href="#Animations-WebGL Matrix Naming Conventions">WebGL Matrix Naming Conventions</a></h2></div>
+
+<p>
+Before we go any further, let's take a moment to quickly summarize some of the conventions around matrix-naming:
+</p>
+
+<ul>
+<li>
+<span id="Animations-WebGL Matrix Naming Conventions-World Matrix"></span><strong id="World Matrix">World Matrix</strong>: Sometimes referred to as the Model matrix, this is a matrix that takes the vertices of a model and moves them to world space.
+
+</li><li>
+*Camera Matri*x: This matrix positions the camera in the world. You can also think of it as the World matrix for the camera.
+
+</li><li>
+<span id="Animations-WebGL Matrix Naming Conventions-View Matrix"></span><strong id="View Matrix">View Matrix</strong>: This matrix moves everything else in the world in front of the camera. As we've seen, this is the inverse of the Camera matrix.
+
+</li><li>
+<span id="Animations-WebGL Matrix Naming Conventions-Projection Matrix"></span><strong id="Projection Matrix">Projection Matrix</strong>: This is the matrix that converts a frustum of space into clip space. You can also think of it as the matrix returned by your matrix math library's perspective or orthographic function.
+
+</li><li>
+<span id="Animations-WebGL Matrix Naming Conventions-Local Matrix"></span><strong id="Local Matrix">Local Matrix</strong>: The matrix is used in scene graphs, where the matrix, at any particular node on the graph, is used before multiplying with any other nodes.
+
+</li></ul>
+<div id="Animations-Scene graph"><h2 id="Scene graph" class="header"><a href="#Animations-Scene graph">Scene graph</a></h2></div>
+
+<p>
+This is a data structure, commonly used by vector-based graphics-editing applications and modern computer games, that arranges the logical and often spatial representation of a graphical scene. A scene graph is a collection of nodes in a graph or tree structure.
+</p>
+
+<div id="Animations-Matrix Stacks"><h2 id="Matrix Stacks" class="header"><a href="#Animations-Matrix Stacks">Matrix Stacks</a></h2></div>
+
+<p>
+A <span id="Animations-Matrix Stacks-matrix stack"></span><strong id="matrix stack">matrix stack</strong> provides a way to apply local transforms to individual objects in our scene while preserving global transforms.
+</p>
+
+<p>
+The matrix stack works at each rendering cycle, it requires calculating the scene matrices to react to camera movements. The update is done in the following steps:
+</p>
+
+<ol>
+<li>
+Global Transform: Update the model-view matrix for each object and push it to the stack. This allows us to recover the original matrix once we’ve applied local transforms.
+
+</li><li>
+Local Transform: Update Model-View matrix for each object in the scene by multiplying the original Model-View matrix by a matrix that represents the rotation, translation, and/or scaling of each object in the scene.
+
+</li><li>
+Recover the original matrix for the stack.
+
+</li><li>
+Repeat the process for each object on the scene.
+
+</li></ol>
+<p>
+The following diagram shows this procedure for one object:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/matrix_stack.png" alt="Matrix Stack" style="width:600px;">
+</p>
+
+<div id="Animations-Animating a 3D scene"><h2 id="Animating a 3D scene" class="header"><a href="#Animations-Animating a 3D scene">Animating a 3D scene</a></h2></div>
+
+<p>
+Animating a scene is nothing more than applying the appropriate local transformations to the objects in the scene. For instance, if we want to move a cone and a sphere, each one of them will have a corresponding local transformation that will describe its location, orientation, and scale.
+</p>
+
+<p>
+We should address when to apply these transforms. If we calculate the position to apply to the cone and sphere in our example every time we call the render function, this would imply that the animation rate would depend on the speed of our rendering cycle. A slow rendering cycle would produce choppy animations and too fast a rendering cycle would create the illusion of objects jumping from one side to the other without smooth transitions.
+</p>
+
+<div id="Animations-Animating a 3D scene-The requestAnimationFrame Function"><h3 id="The requestAnimationFrame Function" class="header"><a href="#Animations-Animating a 3D scene-The requestAnimationFrame Function">The requestAnimationFrame Function</a></h3></div>
+
+<p>
+One of the advantages of leveraging this function is that it is designed to call the rendering function (whatever function we indicate) only when the browser/tab window is in focus.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
