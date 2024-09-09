@@ -1,0 +1,136 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Quadratic Functions and Graphs</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Quadratic Functions and Graphs"><h1 id="Quadratic Functions and Graphs" class="header"><a href="#Quadratic Functions and Graphs">Quadratic Functions and Graphs</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="03_02.html#Quadratic%20Function">Quadratic Function</a>
+
+</li><li>
+<a href="03_02.html#Completing%20the%20Square">Completing the Square</a>
+
+</li><li>
+<a href="03_02.html#Graphs%20of%20Quadratic%20Functions">Graphs of Quadratic Functions</a>
+
+</li></ul>
+<hr>
+
+<div id="Quadratic Functions and Graphs-Quadratic Function"><h2 id="Quadratic Function" class="header"><a href="#Quadratic Functions and Graphs-Quadratic Function">Quadratic Function</a></h2></div>
+
+<p>
+The function:
+</p>
+
+\begin{align}
+P(x) = ax^2 + bx + c
+\end{align}
+
+<p>
+where \(a\), \(b\), and \(c\) are real numbers, with \(a \neq 0\), is called a <span id="Quadratic Functions and Graphs-Quadratic Function-quadratic function"></span><strong id="quadratic function">quadratic function</strong>.
+</p>
+
+<p>
+Quadratic functions, as well as linear functions, are examples of <span id="Quadratic Functions and Graphs-Quadratic Function-polynomial functions"></span><strong id="polynomial functions">polynomial functions</strong>.
+</p>
+
+<div id="Quadratic Functions and Graphs-Completing the Square"><h2 id="Completing the Square" class="header"><a href="#Quadratic Functions and Graphs-Completing the Square">Completing the Square</a></h2></div>
+
+<p>
+To transform the quadratic function \(P(x) = ax^2 + bx + c\) into the form \(P(x) = a(x - h)^2 + k\), follow these steps.
+</p>
+
+<ul>
+<li>
+Divide each side of the equation by \(a\) so the coefficient of \(x^2\) is \(1\).
+\begin{align}
+\frac{P(x)}{a} = x^2 + \frac{b}{a}x + \frac{c}{a}
+\end{align}
+
+</li><li>
+Add \(-\frac{c}{a}\) to each side
+
+</li></ul>
+ 
+\begin{align}
+\frac{P(x)}{a} - \frac{c}{a} = x^2 + \frac{b}{a}x
+\end{align}
+
+<ul>
+<li>
+<span id="Quadratic Functions and Graphs-Completing the Square-Completing the squares"></span><strong id="Completing the squares">Completing the squares</strong>: Add to each side the square of hald the coefficient of \(x\): \(\left(\frac{b}{2a}\right)^2\)
+\begin{align}
+\frac{P(x)}{a} - \frac{c}{a} + \left(\frac{b}{2a}\right)^2 = x^2 + \frac{b}{a}x + \left(\frac{b}{2a}\right)^2
+\end{align}
+
+</li><li>
+Factor the right side as the square of a binomial and combine terms on the left.
+\begin{align}
+\frac{P(x)}{a} - \frac{c}{a} + \left(\frac{b}{2a}\right)^2 = (x + \frac{b}{a})^2
+\end{align}
+
+</li><li>
+Isolate the term involving \(P(x)\) on the left.
+\begin{align}
+\frac{P(x)}{a} = (x + \frac{b}{a})^2 + \frac{c}{a} - \left(\frac{b}{2a}\right)^2
+\end{align}
+\begin{align}
+= (x + \frac{b}{a})^2 + \frac{c}{a} - \frac{b^2}{4a^2}
+\end{align}
+
+</li><li>
+Multiply each side by \(a\).
+\begin{align}
+P(x) = a(x + \frac{b}{a})^2 + c - \frac{b^2}{4a}
+\end{align}
+\begin{align}
+= a(x + \frac{b}{a})^2 - \frac{b^2 - 4ac}{4a}
+\end{align}
+
+</li></ul>
+<div id="Quadratic Functions and Graphs-Graphs of Quadratic Functions"><h2 id="Graphs of Quadratic Functions" class="header"><a href="#Quadratic Functions and Graphs-Graphs of Quadratic Functions">Graphs of Quadratic Functions</a></h2></div>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
