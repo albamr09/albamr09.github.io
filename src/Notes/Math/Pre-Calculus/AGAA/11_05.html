@@ -1,0 +1,95 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>The Binomial Theorem</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="The Binomial Theorem"><h1 id="The Binomial Theorem" class="header"><a href="#The Binomial Theorem">The Binomial Theorem</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="11_05.html#The%20Binomial%20Theorem">The Binomial Theorem</a>
+
+</li></ul>
+<hr>
+
+<div id="The Binomial Theorem-The Binomial Theorem"><h2 id="The Binomial Theorem" class="header"><a href="#The Binomial Theorem-The Binomial Theorem">The Binomial Theorem</a></h2></div>
+
+<p>
+Our observations about the expansion of \((x + y)^n\) are summarized as follows:
+</p>
+
+<ul>
+<li>
+There are \(n + 1\) terms in the expansion.
+
+</li><li>
+The first term is \(x^n\) and the last term is \(y^n\)
+
+</li><li>
+In each term, the exponent on \(x\) decreases by \(1\), and the exponent on \(y\) increases by \(1\).
+
+</li><li>
+The sum of the exponents on \(x\) and \(y\) in any term is \(n\)
+
+</li><li>
+The coefficient of the term with \(x^ry^{n - r}\) o \(x^{n - r}y^r\) is \(\binom{n}{r}\)
+
+</li></ul>
+<p>
+From these observations the <span id="The Binomial Theorem-The Binomial Theorem-binomial theorem"></span><strong id="binomial theorem">binomial theorem</strong> is derived:
+</p>
+
+<p>
+For any positive integer \(n\):
+</p>
+
+\begin{align}
+(x + y)^n = x^n + \binom{n}{1} x^{n-1}y + \binom{n}{2}x^{n-2}y^2 + \cdots + \binom{n}{r}x^{n - r}y^r + \cdots + \binom{n}{n - 1}xy^{n - 1} + y^n
+\end{align}
+
+\begin{align}
+(x + y)^n = \sum_{r=0}^n \binom{n}{r}x^{n - r}y^r
+\end{align}
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
