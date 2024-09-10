@@ -41,10 +41,47 @@
 <div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
 <ul>
 <li>
+<a href="11_05.html#Binomial%20Coefficient">Binomial Coefficient</a>
+
+</li><li>
+<a href="11_05.html#Pascal%27s%20Triangle">Pascal s Triangle</a>
+
+</li><li>
 <a href="11_05.html#The%20Binomial%20Theorem">The Binomial Theorem</a>
+
+</li><li>
+<a href="11_05.html#rth%20Term%20of%20a%20Binomial%20Expansion">rth Term of a Binomial Expansion</a>
 
 </li></ul>
 <hr>
+
+<div id="The Binomial Theorem-Binomial Coefficient"><h2 id="Binomial Coefficient" class="header"><a href="#The Binomial Theorem-Binomial Coefficient">Binomial Coefficient</a></h2></div>
+
+<p>
+Generalizing, we find that the coefficient for the term of the expansion of \((x + y)^n\) in which the variable part is \(x^ry^{n -r}\), where \(r \leq n\) is:
+</p>
+
+\begin{align}
+\binom{n}{r} = \frac{n!}{r!(n - r)!}
+\end{align}
+
+<p>
+which is equivalent to \(C(n ,r)\). This number is called the <span id="The Binomial Theorem-Binomial Coefficient-binomial coefficient"></span><strong id="binomial coefficient">binomial coefficient</strong> and is often written as \(\binom{n}{r}\).
+</p>
+
+<div id="The Binomial Theorem-Pascal's Triangle"><h2 id="Pascal's Triangle" class="header"><a href="#The Binomial Theorem-Pascal's Triangle">Pascal's Triangle</a></h2></div>
+
+<p>
+If we only write the coffiencients for the expansion of \((x + y)^n\) we obtain the following pattern:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/pascals_triangle.png" alt=" Pascal's Triangle" style="width: 400px;">
+</p>
+
+<p>
+Such that each number in the triangle is the sum of the two numbers directly above it. This triangular array of numbers is called <span id="The Binomial Theorem-Pascal's Triangle-Pascal's Triangle"></span><strong id="Pascal's Triangle">Pascal's Triangle</strong>.
+</p>
 
 <div id="The Binomial Theorem-The Binomial Theorem"><h2 id="The Binomial Theorem" class="header"><a href="#The Binomial Theorem-The Binomial Theorem">The Binomial Theorem</a></h2></div>
 
@@ -83,6 +120,16 @@ For any positive integer \(n\):
 
 \begin{align}
 (x + y)^n = \sum_{r=0}^n \binom{n}{r}x^{n - r}y^r
+\end{align}
+
+<div id="The Binomial Theorem-rth Term of a Binomial Expansion"><h2 id="rth Term of a Binomial Expansion" class="header"><a href="#The Binomial Theorem-rth Term of a Binomial Expansion">rth Term of a Binomial Expansion</a></h2></div>
+
+<p>
+The \(r\)th term of the binomial expansion of \((x + y)^n\), where \(n \geq r - 1\) is:
+</p>
+
+\begin{align}
+\binom{n}{r - 1} x^{n - (r - 1)} y^{r - 1}
 \end{align}
 </div>
   
