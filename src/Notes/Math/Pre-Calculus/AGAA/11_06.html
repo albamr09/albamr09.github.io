@@ -1,0 +1,214 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Mathematical Induction</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Mathematical Induction"><h1 id="Mathematical Induction" class="header"><a href="#Mathematical Induction">Mathematical Induction</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="11_06.html#Principle%20of%20Mathematical%20Induction">Principle of Mathematical Induction</a>
+
+</li><li>
+<a href="11_06.html#Method%20of%20Proof%20by%20Mathematical%20Induction">Method of Proof by Mathematical Induction</a>
+
+</li><li>
+<a href="11_06.html#Generalized%20Principle%20of%20Mathematical%20Induction">Generalized Principle of Mathematical Induction</a>
+
+</li><li>
+<a href="11_06.html#Proof%20of%20the%20Binomial%20Theorem">Proof of the Binomial Theorem</a>
+
+</li></ul>
+<hr>
+
+<div id="Mathematical Induction-Principle of Mathematical Induction"><h2 id="Principle of Mathematical Induction" class="header"><a href="#Mathematical Induction-Principle of Mathematical Induction">Principle of Mathematical Induction</a></h2></div>
+
+<p>
+Let \(S_n\) be a statement concerning the positive integer \(n\). Suppose that both of the following hold:
+</p>
+
+<ol>
+<li>
+\(S_1\) is true.
+
+</li><li>
+For any positive integer \(k\), \(k \leq n\) if \(S_k\) is true, then \(S_{k+1}\) is also true.
+
+</li></ol>
+<p>
+Then \(S_n\) is true for every positive integer \(n\).
+</p>
+
+<div id="Mathematical Induction-Method of Proof by Mathematical Induction"><h2 id="Method of Proof by Mathematical Induction" class="header"><a href="#Mathematical Induction-Method of Proof by Mathematical Induction">Method of Proof by Mathematical Induction</a></h2></div>
+
+<ol>
+<li>
+Prove that the statement is true for \(n = 1\).
+
+</li><li>
+Show that for any positive integer \(k\), if \(S_k\) is true then \(S_{k+1}\) is also true.
+
+</li></ol>
+<div id="Mathematical Induction-Generalized Principle of Mathematical Induction"><h2 id="Generalized Principle of Mathematical Induction" class="header"><a href="#Mathematical Induction-Generalized Principle of Mathematical Induction">Generalized Principle of Mathematical Induction</a></h2></div>
+
+<p>
+Let \(S_n\) be a statement concerning the positive integer \(n\). Let \(j\) be a fixed positive integer. Suppose that both of the following hold.
+</p>
+
+<ol>
+<li>
+\(S_j\) is true.
+
+</li><li>
+For any positive integer \(k\), \(k \geq j\), \(S_k\) implies \(S_{k+1}\)
+
+</li></ol>
+<p>
+Then \(S_n\) is true for all positive integers \(n\), where \(n \geq j\).
+</p>
+
+<div id="Mathematical Induction-Proof of the Binomial Theorem"><h2 id="Proof of the Binomial Theorem" class="header"><a href="#Mathematical Induction-Proof of the Binomial Theorem">Proof of the Binomial Theorem</a></h2></div>
+
+<p>
+The binomial theorem can be proved by mathematical induction. That is, for any positive integer \(n\) and any numbers \(x\) and \(y\),
+</p>
+
+\begin{align}
+(x + y)^n = x^n + \binom{n}{1} x^{n-1}y + \binom{n}{2} x^{n-2}y^2 + \cdots + \binom{n}{r} x^{n - r}y^r + \cdots + \binom{n}{n-1}xy^{n-1} + y^n
+\end{align}
+
+<p>
+<span id="Mathematical Induction-Proof of the Binomial Theorem-Proof"></span><strong id="Proof">Proof</strong> Let \(S_n\) be the previous statement. Begin by verifying \(S_n\) for \(n = 1\).
+</p>
+
+\begin{align}
+(x + y)^{n=1} = x + y = \binom{1}{0}x^1y^0 + \binom{1}{1} x^0y^1
+\end{align}
+
+<p>
+Now we assume \(S_k\), such that:
+</p>
+
+\begin{align}
+(x + y)^k = x^k + \frac{k!}{1!(k - 1)!} x^{k-1}y + \frac{k!}{2!(k - 2)!} x^{k-2}y^2 + \cdots + frac{k!}{r!(k - r)!} x^{k - r}y^r + \cdots + \frac{k!}{(k - 1)!1!}xy^{k-1} + y^k
+\end{align}
+
+<p>
+We multiply the left side by \((x + y)\):
+</p>
+
+\begin{align}
+(x + y)(x + y)^k = x(x + y)^k + y(x + y)^k
+\end{align}
+
+<p>
+And we apply \(S_k\)
+</p>
+
+\begin{align}
+x(x + y)^k + y(x + y)^k = x\left[x^k + \frac{k!}{1!(k - 1)!} x^{k-1}y + \frac{k!}{2!(k - 2)!} x^{k-2}y^2 + \cdots + frac{k!}{r!(k - r)!} x^{k - r}y^r + \cdots + \frac{k!}{(k - 1)!1!}xy^{k-1} + y^k\right] + y \left[x^k + \frac{k!}{1!(k - 1)!} x^{k-1}y + \frac{k!}{2!(k - 2)!} x^{k-2}y^2 + \cdots + frac{k!}{r!(k - r)!} x^{k - r}y^r + \cdots + \frac{k!}{(k - 1)!1!}xy^{k-1} + y^k\right]
+\end{align}
+
+\begin{align}
+= \left[x^{k + 1} + \frac{k!}{1!(k - 1)!} x^{k}y + \frac{k!}{2!(k - 2)!} x^{k-1}y^2 + \cdots + frac{k!}{r!(k - r)!} x^{k - r + 1}y^r + \cdots + \frac{k!}{(k - 1)!1!}x^2y^{k-1} + xy^k\right] + \left[yx^k + \frac{k!}{1!(k - 1)!} x^{k-1}y^2 + \frac{k!}{2!(k - 2)!} x^{k-2}y^3 + \cdots + frac{k!}{r!(k - r)!} x^{k - r}y^{r + 1} + \cdots + \frac{k!}{(k - 1)!1!}xy^{k} + y^{k+1}\right]
+\end{align}
+
+<p>
+Now we group the elements with the same terms:
+</p>
+
+\begin{align}
+= x^{k+1} + \left[\frac{k!}{1!(k - 1)!} x^{k}y + yx^k \right] + \left[\frac{k!}{2!(k - 2)!} x^{k-1}y^2 + \frac{k!}{1!(k - 1)!} x^{k-1}y^2 \right] + \cdots + \left[frac{k!}{r!(k - r)!} x^{(k - r) + 1}y^r +  \frac{k!}{(r - 1)!(k - (r - 1))!}x^{(k - r) + 1}y^{r} \right] + \cdots
++ y^{k + 1}
+\end{align}
+
+<p>
+We first show that:
+</p>
+
+\begin{align}
+\frac{k!}{r!(k - r)!} + \frac{k!}{(r + 1)!(k - (r + 1))!} = \binom{k + 1}{r + 1}
+\end{align}
+
+<p>
+By the definition of the factorial of a number:
+</p>
+
+\begin{align}
+= \frac{k (k - 1) (k - 2) \cdots (k - r) \cdots 1}{(r + 1)!(k - r - 1)!} + \frac{k (k - 1) (k - 2) \cdots (k - r + 1) \cdots 1}{r!(k - r)!} 
+\end{align}
+
+\begin{align}
+= \frac{k (k - 1) (k - 2) \cdots (k - r)}{(r + 1)!} + \frac{k (k - 1) (k - 2) \cdots (k - r - 1)}{r!} 
+\end{align}
+
+\begin{align}
+= \frac{k (k - 1) (k - 2) \cdots (k - r)}{(r + 1)!} + (r + 1)\frac{k (k - 1) (k - 2) \cdots (k - r + 1)}{(r + 1)!} 
+\end{align}
+
+\begin{align}
+= \frac{k(k - 1)(k - 2) \codts (k - r - 1) \left[(k - r) + (r + 1)\right]}{(r + 1)!}
+\end{align}
+
+\begin{align}
+= \frac{k(k - 1)(k - 2) \codts (k - r - 1) \left[k + 1\right]}{(r + 1)!}
+\end{align}
+
+\begin{align}
+= \frac{(k + 1)k(k - 1)(k - 2) \codts (k - r - 1)}{(r + 1)!}
+\end{align}
+
+\begin{align}
+= \frac{(k + 1)k(k - 1)(k - 2) \codts (k - r - 1) \cdots 1}{(r + 1)!(k - r)!}
+\end{align}
+
+\begin{align}
+= \frac{(k + 1)!}{(r + 1)!((k + 1) - (r + 1))!}
+\end{align}
+
+\begin{align}
+= \binom{k + 1}{r + 1}
+\end{align}
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
