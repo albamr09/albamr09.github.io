@@ -1,0 +1,166 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Topics in the Theory of Polynomial Functions (I)</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Topics in the Theory of Polynomial Functions (I)"><h1 id="Topics in the Theory of Polynomial Functions (I)" class="header"><a href="#Topics in the Theory of Polynomial Functions (I)">Topics in the Theory of Polynomial Functions (I)</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="03_06.html#Intermediate%20Value%20Theorem">Intermediate Value Theorem</a>
+
+</li><li>
+<a href="03_06.html#Division%20of%20Polynomials%20by%20x%20%2212%20k%20and%20Synthetic%20Division">Division of Polynomials by x   k and Synthetic Division</a>
+
+</li><li>
+<a href="03_06.html#Remainder%20Theorem">Remainder Theorem</a>
+
+</li><li>
+<a href="03_06.html#Factor%20Theorem">Factor Theorem</a>
+
+</li><li>
+<a href="03_06.html#Division%20of%20Any%20Two%20Polynomials">Division of Any Two Polynomials</a>
+
+</li></ul>
+<hr>
+
+<div id="Topics in the Theory of Polynomial Functions (I)-Intermediate Value Theorem"><h2 id="Intermediate Value Theorem" class="header"><a href="#Topics in the Theory of Polynomial Functions (I)-Intermediate Value Theorem">Intermediate Value Theorem</a></h2></div>
+
+<p>
+If \(P(x)\) defines a polynomial function with only real coefficients, and if, for real numbers \(a\) and \(b\), the values \(P(a)\) and \(P(b)\) are opposite in sign, then there exists at least one real zero between \(a\) and \(b\).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/intermediate_value_theorem.png" alt="Intermediate Value Theorem" style="width: 400px;">
+</p>
+
+<div id="Topics in the Theory of Polynomial Functions (I)-Division of Polynomials by x − k and Synthetic Division"><h2 id="Division of Polynomials by x − k and Synthetic Division" class="header"><a href="#Topics in the Theory of Polynomial Functions (I)-Division of Polynomials by x − k and Synthetic Division">Division of Polynomials by x − k and Synthetic Division</a></h2></div>
+
+<p>
+We can use long division to determine whether one whole number is a factor of another.
+</p>
+
+<p>
+If the degree \(n\) polynomial \(P(x)\) (where \(n \geq 1\)) is divided by \(x - k\), then the quotient polynomial, \(Q(x)\), has degree \(n - 1\).
+</p>
+
+<p>
+The remainder \(R\) is a constant (and may be \(0\)). The complete quotient for \(\frac{P(x)}{x - k}\) may be written as:
+</p>
+
+\begin{align}
+\frac{P(x)}{x - k} = Q(x) + \frac{R}{x - k}
+\end{align}
+
+<p>
+Long division of a polynomial by a binomial of the form \(x - k\) can be condensed
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/long_division_1.png" alt="Long Division" style="width: 400px;">
+</p>
+
+<p>
+On the right, exactly the same division is shown without the variables. All the numbers in color on the right are repetitions of the numbers directly above them, so they can be omitted, as shown below on the left. Since the coefficient of \(x\) in the divisor is always \(1\), it can be omitted, too
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/long_division_2.png" alt="Long Division" style="width: 400px;">
+</p>
+
+<p>
+The numbers in color on the left are again repetitions of the numbers directly above them. They may be omitted, as shown on the right. Now the problem can be condensed. If the 3 in the dividend is brought down to the beginning of the bottom row, the top row can be omitted, since it duplicates the bottom row
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/long_division_3.png" alt="Long Division" style="width: 400px;">
+</p>
+
+<p>
+To simplify the arithmetic, we replace subtraction in the second row by addition and compensate by changing the \(-3\) at the upper left to its additive inverse, \(3\).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/long_division_4.png" alt="Long Division" style="width: 400px;">
+</p>
+
+<div id="Topics in the Theory of Polynomial Functions (I)-Remainder Theorem"><h2 id="Remainder Theorem" class="header"><a href="#Topics in the Theory of Polynomial Functions (I)-Remainder Theorem">Remainder Theorem</a></h2></div>
+
+<p>
+If a polynomial \(P(x)\) is divided by \(x - k\), the remainder is equal to \(P(k)\). By the division algorithm for polynomials:
+</p>
+
+\begin{align}
+P(x) = Q(x)(x-k) + R
+\end{align}
+
+\begin{align}
+P(k) = Q(k)(k-k) + R = R
+\end{align}
+
+<div id="Topics in the Theory of Polynomial Functions (I)-Factor Theorem"><h2 id="Factor Theorem" class="header"><a href="#Topics in the Theory of Polynomial Functions (I)-Factor Theorem">Factor Theorem</a></h2></div>
+
+<p>
+A polynomial \(P(x)\) has a factor \(x - k\) if and only if \(P(k) = 0\). By the remainder theorem:
+</p>
+
+\begin{align}
+P(k) = R
+\end{align}
+
+<p>
+where \(R\) is the remainder, which is necessarily \(0\).
+</p>
+
+<div id="Topics in the Theory of Polynomial Functions (I)-Division of Any Two Polynomials"><h2 id="Division of Any Two Polynomials" class="header"><a href="#Topics in the Theory of Polynomial Functions (I)-Division of Any Two Polynomials">Division of Any Two Polynomials</a></h2></div>
+
+<p>
+Let \(P(x)\) and \(D(x)\) be two polynomials, with the degree of \(D(x)\) greater than zero and less than the degree of \(P(x)\). Then there exist unique polynomials \(Q(x)\) and \(R(x)\) such that:
+</p>
+
+\begin{align}
+\frac{P(x)}{D(x)} = Q(x) + \frac{R(x)}{D(x)}
+\end{align}
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
