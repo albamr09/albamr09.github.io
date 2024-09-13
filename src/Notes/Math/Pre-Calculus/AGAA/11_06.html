@@ -124,7 +124,7 @@ Now we assume \(S_k\), such that:
 </p>
 
 \begin{align}
-(x + y)^k = x^k + \frac{k!}{1!(k - 1)!} x^{k-1}y + \frac{k!}{2!(k - 2)!} x^{k-2}y^2 + \cdots + frac{k!}{r!(k - r)!} x^{k - r}y^r + \cdots + \frac{k!}{(k - 1)!1!}xy^{k-1} + y^k
+(x + y)^k = x^k + \frac{k!}{1!(k - 1)!} x^{k-1}y + \frac{k!}{2!(k - 2)!} x^{k-2}y^2 + \cdots + \frac{k!}{r!(k - r)!} x^{k - r}y^r + \cdots + \frac{k!}{(k - 1)!1!}xy^{k-1} + y^k
 \end{align}
 
 <p>
@@ -140,11 +140,11 @@ And we apply \(S_k\)
 </p>
 
 \begin{align}
-x(x + y)^k + y(x + y)^k = x\left[x^k + \frac{k!}{1!(k - 1)!} x^{k-1}y + \frac{k!}{2!(k - 2)!} x^{k-2}y^2 + \cdots + frac{k!}{r!(k - r)!} x^{k - r}y^r + \cdots + \frac{k!}{(k - 1)!1!}xy^{k-1} + y^k\right] + y \left[x^k + \frac{k!}{1!(k - 1)!} x^{k-1}y + \frac{k!}{2!(k - 2)!} x^{k-2}y^2 + \cdots + frac{k!}{r!(k - r)!} x^{k - r}y^r + \cdots + \frac{k!}{(k - 1)!1!}xy^{k-1} + y^k\right]
+x(x + y)^k + y(x + y)^k = x\left[x^k + \frac{k!}{1!(k - 1)!} x^{k-1}y + \frac{k!}{2!(k - 2)!} x^{k-2}y^2 + \cdots + \frac{k!}{r!(k - r)!} x^{k - r}y^r + \cdots + \frac{k!}{(k - 1)!1!}xy^{k-1} + y^k\right] + y \left[x^k + \frac{k!}{1!(k - 1)!} x^{k-1}y + \frac{k!}{2!(k - 2)!} x^{k-2}y^2 + \cdots + \frac{k!}{r!(k - r)!} x^{k - r}y^r + \cdots + \frac{k!}{(k - 1)!1!}xy^{k-1} + y^k\right]
 \end{align}
 
 \begin{align}
-= \left[x^{k + 1} + \frac{k!}{1!(k - 1)!} x^{k}y + \frac{k!}{2!(k - 2)!} x^{k-1}y^2 + \cdots + frac{k!}{r!(k - r)!} x^{k - r + 1}y^r + \cdots + \frac{k!}{(k - 1)!1!}x^2y^{k-1} + xy^k\right] + \left[yx^k + \frac{k!}{1!(k - 1)!} x^{k-1}y^2 + \frac{k!}{2!(k - 2)!} x^{k-2}y^3 + \cdots + frac{k!}{r!(k - r)!} x^{k - r}y^{r + 1} + \cdots + \frac{k!}{(k - 1)!1!}xy^{k} + y^{k+1}\right]
+= \left[x^{k + 1} + \frac{k!}{1!(k - 1)!} x^{k}y + \frac{k!}{2!(k - 2)!} x^{k-1}y^2 + \cdots + \frac{k!}{r!(k - r)!} x^{k - r + 1}y^r + \cdots + \frac{k!}{(k - 1)!1!}x^2y^{k-1} + xy^k\right] + \left[yx^k + \frac{k!}{1!(k - 1)!} x^{k-1}y^2 + \frac{k!}{2!(k - 2)!} x^{k-2}y^3 + \cdots + \frac{k!}{r!(k - r)!} x^{k - r}y^{r + 1} + \cdots + \frac{k!}{(k - 1)!1!}xy^{k} + y^{k+1}\right]
 \end{align}
 
 <p>
@@ -152,8 +152,7 @@ Now we group the elements with the same terms:
 </p>
 
 \begin{align}
-= x^{k+1} + \left[\frac{k!}{1!(k - 1)!} x^{k}y + yx^k \right] + \left[\frac{k!}{2!(k - 2)!} x^{k-1}y^2 + \frac{k!}{1!(k - 1)!} x^{k-1}y^2 \right] + \cdots + \left[frac{k!}{r!(k - r)!} x^{(k - r) + 1}y^r +  \frac{k!}{(r - 1)!(k - (r - 1))!}x^{(k - r) + 1}y^{r} \right] + \cdots
-+ y^{k + 1}
+= x^{k+1} + \left[\frac{k!}{1!(k - 1)!} x^{k}y + \frac{k!}{0!k!} yx^k \right] + \left[\frac{k!}{2!(k - 2)!} x^{k-1}y^2 + \frac{k!}{1!(k - 1)!} x^{k-1}y^2 \right] + \cdots + \left[frac{k!}{r!(k - r)!} x^{(k - r) + 1}y^r +  \frac{k!}{(r - 1)!(k - (r - 1))!}x^{(k - r) + 1}y^{r} \right] + \cdots + y^{k + 1}
 \end{align}
 
 <p>
@@ -181,19 +180,19 @@ By the definition of the factorial of a number:
 \end{align}
 
 \begin{align}
-= \frac{k(k - 1)(k - 2) \codts (k - r - 1) \left[(k - r) + (r + 1)\right]}{(r + 1)!}
+= \frac{k(k - 1)(k - 2) \cdots (k - r - 1) \left[(k - r) + (r + 1)\right]}{(r + 1)!}
 \end{align}
 
 \begin{align}
-= \frac{k(k - 1)(k - 2) \codts (k - r - 1) \left[k + 1\right]}{(r + 1)!}
+= \frac{k(k - 1)(k - 2) \cdots (k - r - 1) \left[k + 1\right]}{(r + 1)!}
 \end{align}
 
 \begin{align}
-= \frac{(k + 1)k(k - 1)(k - 2) \codts (k - r - 1)}{(r + 1)!}
+= \frac{(k + 1)k(k - 1)(k - 2) \cdots (k - r - 1)}{(r + 1)!}
 \end{align}
 
 \begin{align}
-= \frac{(k + 1)k(k - 1)(k - 2) \codts (k - r - 1) \cdots 1}{(r + 1)!(k - r)!}
+= \frac{(k + 1)k(k - 1)(k - 2) \cdots (k - r - 1) \cdots 1}{(r + 1)!(k - r)!}
 \end{align}
 
 \begin{align}
@@ -202,6 +201,30 @@ By the definition of the factorial of a number:
 
 \begin{align}
 = \binom{k + 1}{r + 1}
+\end{align}
+
+<p>
+So now:
+</p>
+
+\begin{align}
+= x^{k+1} + \left[\frac{k!}{1!(k - 1)!} + \frac{k!}{0!k!}\right] x^{k}y + \left[\frac{k!}{2!(k - 2)!} + \frac{k!}{1!(k - 1)!} \right] x^{k-1}y^2 + \cdots + \left[frac{k!}{r!(k - r)!} + \frac{k!}{(r - 1)!(k - (r - 1))!} \right] x^{(k - r) + 1} y^r + \cdots + y^{k + 1}
+\end{align}
+
+<p>
+By the previous proof \(\frac{k!}{r!(k - r)!} + \frac{k!}{(r + 1)!(k - (r + 1))!} = \binom{k + 1}{r + 1}\), therefore:
+</p>
+
+\begin{align}
+= x^{k+1} + \binom{k + 1}{1} x^{k}y + \binom{k + 1}{2} x^{k-1}y^2 + \cdots + \binom{k + 1}{r!} x^{(k - r) + 1} y^r + \cdots + y^{k + 1}
+\end{align}
+
+\begin{align}
+= x^{k+1} + \binom{k + 1}{1} x^{(k + 1) - 1}y + \binom{k + 1}{2} x^{(k + 1) - 2}y^2 + \cdots + \binom{k + 1}{r} x^{(k + 1) - r} y^r + \cdots + y^{k + 1}
+\end{align}
+
+\begin{align}
+= \sum_{r = 0}^{k + 1} \binom{k + 1}{r}x^{(k + 1) - r}y^r
 \end{align}
 </div>
   
