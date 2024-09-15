@@ -1,0 +1,127 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Logarithms Functions</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Logarithms Functions"><h1 id="Logarithms Functions" class="header"><a href="#Logarithms Functions">Logarithms Functions</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="05_04.html#Logarithmic%20Function">Logarithmic Function</a>
+
+</li><li>
+<a href="05_04.html#Graphs%20of%20Logarithmic%20Functions">Graphs of Logarithmic Functions</a>
+
+</li></ul>
+<hr>
+
+<div id="Logarithms Functions-Logarithmic Function"><h2 id="Logarithmic Function" class="header"><a href="#Logarithms Functions-Logarithmic Function">Logarithmic Function</a></h2></div>
+
+<p>
+If \(a &gt; 0\), \(a \neq 1\), and \(x &gt; 0\), then
+</p>
+
+\begin{align}
+f(x) = \log_a x
+\end{align}
+
+<p>
+is the <span id="Logarithms Functions-Logarithmic Function-logarithmic function with base"></span><strong id="logarithmic function with base">logarithmic function with base</strong> \(a\).
+</p>
+
+<p>
+The exponential function \(f(x) = a^x\), \(a &gt; 1\), is increasing on its domain. If \(0&lt; a &lt;1\), the function is decreasing on its domain. Thus, for all allowable bases \(a\), function \(f\) is one-to-one and has an inverse. We can find the rule for \(f^{-1}\) analytically:
+</p>
+
+\begin{align}
+f(x) = a^x
+\end{align}
+
+\begin{align}
+y = a^x
+\end{align}
+
+\begin{align}
+x = a^y
+\end{align}
+
+<p>
+By the definition of the logarithm:
+</p>
+
+\begin{align}
+y = \log_a x
+\end{align}
+
+\begin{align}
+f^{-1}(x) = \log_a x
+\end{align}
+
+<p>
+To confirm this, use <a href="05_03.html#Properties of Logarithms">properties of logarithms</a> to show that \((f \circ f^{-1})(x) = x\) and \((f^{-1} \circ f)(x) = x\).
+</p>
+
+\begin{align}
+(f \circ f^{-1})(x) = f(f^{-1}(x)) = a^{\log_a x} = x
+\end{align}
+
+\begin{align}
+(f^{-1} \circ f)(x) = f^{-1}(f(x)) = \log_a a^x = x 
+\end{align}
+
+<p>
+Thus, the functions \(f(x) = a^x\) and \(g(x) = log_a x\) are inverse functions.
+</p>
+
+<div id="Logarithms Functions-Graphs of Logarithmic Functions"><h2 id="Graphs of Logarithmic Functions" class="header"><a href="#Logarithms Functions-Graphs of Logarithmic Functions">Graphs of Logarithmic Functions</a></h2></div>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/graph_of_log_function.png" alt="Graph of Logarithmic Function" style="width:600px;">
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/graph_of_log_function_1.png" alt="Graph of Logarithmic Function" style="width:600px;">
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>

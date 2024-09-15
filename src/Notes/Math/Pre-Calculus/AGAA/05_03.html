@@ -1,0 +1,249 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Logarithms and Their Properties</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Logarithms and Their Properties"><h1 id="Logarithms and Their Properties" class="header"><a href="#Logarithms and Their Properties">Logarithms and Their Properties</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="05_03.html#Logarithm">Logarithm</a>
+
+</li><li>
+<a href="05_03.html#Common%20Logarithm">Common Logarithm</a>
+
+</li><li>
+<a href="05_03.html#Natural%20Logarithm">Natural Logarithm</a>
+
+</li><li>
+<a href="05_03.html#Properties%20of%20Logarithms">Properties of Logarithms</a>
+
+<ul>
+<li>
+<a href="05_03.html#Proofs">Proofs</a>
+
+</li></ul>
+</li><li>
+<a href="05_03.html#Change-of-Base%20Rule">Change-of-Base Rule</a>
+
+</li></ul>
+<hr>
+
+<div id="Logarithms and Their Properties-Logarithm"><h2 id="Logarithm" class="header"><a href="#Logarithms and Their Properties-Logarithm">Logarithm</a></h2></div>
+
+<p>
+For all positive numbers \(a\), where \(a \neq 1\),
+</p>
+
+\begin{align}
+a^y = x
+\end{align}
+
+<p>
+is equivalent to
+</p>
+
+\begin{align}
+y = \log_a x
+\end{align}
+
+<p>
+The expression \(\log_a x\) represents the exponent to which the base \(a\) must be raised in order to obtain \(x\).
+</p>
+
+<p>
+The number \(a\) is called the <span id="Logarithms and Their Properties-Logarithm-base"></span><strong id="base">base</strong> of the logarithm, and \(x\) is called the <span id="Logarithms and Their Properties-Logarithm-argument"></span><strong id="argument">argument</strong> of the expression.
+</p>
+
+<p>
+The argument of a logarithm must be a positive number.
+</p>
+
+<div id="Logarithms and Their Properties-Common Logarithm"><h2 id="Common Logarithm" class="header"><a href="#Logarithms and Their Properties-Common Logarithm">Common Logarithm</a></h2></div>
+
+<p>
+Base \(10\) logarithms are called <span id="Logarithms and Their Properties-Common Logarithm-common logarithms"></span><strong id="common logarithms">common logarithms</strong>. The common logarithm of \(x\) is written \(log x\), where the base is understood to be \(10\).
+</p>
+
+<div id="Logarithms and Their Properties-Natural Logarithm"><h2 id="Natural Logarithm" class="header"><a href="#Logarithms and Their Properties-Natural Logarithm">Natural Logarithm</a></h2></div>
+
+<p>
+Logarithms with base \(e\) are called <span id="Logarithms and Their Properties-Natural Logarithm-natural logarithms"></span><strong id="natural logarithms">natural logarithms</strong>. The natural logarithm of a positive number \(x\) is written \(\ln x\).
+</p>
+
+<div id="Logarithms and Their Properties-Properties of Logarithms"><h2 id="Properties of Logarithms" class="header"><a href="#Logarithms and Their Properties-Properties of Logarithms">Properties of Logarithms</a></h2></div>
+
+<p>
+For \(a &gt; 0\), \(a \neq q\), and any real number \(k\), the following hold.
+</p>
+
+<ol>
+<li>
+\(log_a 1 = 0\)
+
+</li><li>
+\(log_a a^k = k\)
+
+</li><li>
+\(a^{\log_a k} = k ,k &gt; 0\)
+
+</li><li>
+<span id="Logarithms and Their Properties-Properties of Logarithms-Product rule"></span><strong id="Product rule">Product rule</strong> \(\log_a xy = \log_a x + \log_a y\)
+
+</li><li>
+<span id="Logarithms and Their Properties-Properties of Logarithms-Quotient rule"></span><strong id="Quotient rule">Quotient rule</strong> \(\log_a \frac{x}{y} = \log_a x - \log_a y\)
+
+</li><li>
+<span id="Logarithms and Their Properties-Properties of Logarithms-Power rule"></span><strong id="Power rule">Power rule</strong> \(\log_a x^r = r\log_a x\)
+
+</li></ol>
+<div id="Logarithms and Their Properties-Properties of Logarithms-Proofs"><h3 id="Proofs" class="header"><a href="#Logarithms and Their Properties-Properties of Logarithms-Proofs">Proofs</a></h3></div>
+
+<p>
+Property \(1\) is true because \(a^0 = 1\) for any nonzero value of \(a\).
+</p>
+
+<p>
+Property \(2\) is verified by writing the equation in exponential form. By the definition of the logarithm, if \(\log_a a^k = k\), then \(a^k = a^k\), which is true.
+</p>
+
+<p>
+Property \(3\) is justified by the fact that \(\log_a k\) is the value we have to raise \(a\) to obtain \(k\). If we raise \(a\) by \(\log_a k\), then by the definition of the logarithm we obtain \(k\).
+</p>
+
+<p>
+The proof of Property \(4\), the product rule, is as follows:
+</p>
+
+<p>
+Let \(m = \log_a x\) and \(n = \log_a y\), then
+</p>
+
+<p>
+\(a^m = x\) and \(a^n = y\) by the definiton of a logarithm. If we multiply them:
+</p>
+
+\begin{align}
+a^m a^n = xy
+\end{align}
+
+\begin{align}
+a^{m + n} = xy
+\end{align}
+
+<p>
+By the definition of the logarithm:
+</p>
+
+\begin{align}
+\log_a xy = m + n
+\end{align}
+
+<p>
+Substituting \(m = \log_a x\) and \(n = \log_a y\)
+</p>
+
+\begin{align}
+\log_a xy = \log_a x + \log_a y
+\end{align}
+
+<p>
+Properties \(5\) and \(6\), the quotient and power rules, are proved in a similar way
+</p>
+
+<div id="Logarithms and Their Properties-Change-of-Base Rule"><h2 id="Change-of-Base Rule" class="header"><a href="#Logarithms and Their Properties-Change-of-Base Rule">Change-of-Base Rule</a></h2></div>
+
+<p>
+For any positive real numbers \(x\), \(a\), and \(b\), where \(a \neq 1\) and \(b \neq 1\)
+</p>
+
+\begin{align}
+\log_a x = \frac{\log_b x}{\log_b a}
+\end{align}
+
+<p>
+Let
+</p>
+
+\begin{align}
+y = \log_a x
+\end{align}
+
+<p>
+By the definition of the logarithm:
+</p>
+
+\begin{align}
+a^y = x
+\end{align}
+
+<p>
+We apply the logarithm on both sides:
+</p>
+
+\begin{align}
+\log_b a^y = \log_b x
+\end{align}
+
+<p>
+By the power rule:
+</p>
+
+\begin{align}
+y \log_b a = \log_b x
+\end{align}
+
+\begin{align}
+y = \frac{\log_b x}{\log_b a}
+\end{align}
+
+<p>
+Substituting \(y = \log_a x\)
+</p>
+
+\begin{align}
+\log_a x = \frac{\log_b x}{\log_b a}
+\end{align}
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
