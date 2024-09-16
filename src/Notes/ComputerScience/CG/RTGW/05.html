@@ -57,6 +57,9 @@
 <a href="05.html#The%20requestAnimationFrame%20Function">The requestAnimationFrame Function</a>
 
 </li></ul>
+</li><li>
+<a href="05.html#Parametric%20Curves">Parametric Curves</a>
+
 </li></ul>
 <hr>
 
@@ -135,6 +138,24 @@ We should address when to apply these transforms. If we calculate the position t
 
 <p>
 One of the advantages of leveraging this function is that it is designed to call the rendering function (whatever function we indicate) only when the browser/tab window is in focus.
+</p>
+
+<div id="Animations-Parametric Curves"><h2 id="Parametric Curves" class="header"><a href="#Animations-Parametric Curves">Parametric Curves</a></h2></div>
+
+<p>
+There are many situations where we don't know the exact position of an object at a given time, but we do know an equation that describes its movement. These equations are known as <span id="Animations-Parametric Curves-parametric curves"></span><strong id="parametric curves">parametric curves</strong>. The following diagram shows the parametric equation that describes the free-fall motion:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/parametric_curves_example.png" alt="Parametric Curves" style="width:500px;">
+</p>
+
+\[
+h = H_0 + V_0t - \frac{1}{2}gt^2
+\]
+
+<p>
+where \(g\) is the gravity at \(9.8 m/s\), \(V_0\) is the initial velocity, \(H_0\) is the initial position, \(t\) is the time and \(h\) is the position at \(t\).
 </p>
 </div>
   
