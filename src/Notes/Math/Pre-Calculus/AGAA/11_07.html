@@ -1,0 +1,203 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Probability</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Probability"><h1 id="Probability" class="header"><a href="#Probability">Probability</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="11_07.html#Basic%20Concepts">Basic Concepts</a>
+
+<ul>
+<li>
+<a href="11_07.html#Probability%20of%20Event%20E">Probability of Event E</a>
+
+</li></ul>
+</li><li>
+<a href="11_07.html#Complements%20and%20Venn%20Diagrams">Complements and Venn Diagrams</a>
+
+</li><li>
+<a href="11_07.html#Odds">Odds</a>
+
+</li><li>
+<a href="11_07.html#Union%20of%20Two%20Events">Union of Two Events</a>
+
+</li><li>
+<a href="11_07.html#Properties%20of%20Probability">Properties of Probability</a>
+
+</li><li>
+<a href="11_07.html#Binomial%20Probability">Binomial Probability</a>
+
+</li></ul>
+<hr>
+
+<div id="Probability-Basic Concepts"><h2 id="Basic Concepts" class="header"><a href="#Probability-Basic Concepts">Basic Concepts</a></h2></div>
+
+<p>
+Given an experiment that has one or more <span id="Probability-Basic Concepts-outcomes"></span><strong id="outcomes">outcomes</strong> that are equally likely to occur. Then the set \(S\) of all possible outcomes of a given experiment is called the <span id="Probability-Basic Concepts-sample space"></span><strong id="sample space">sample space</strong> for the experiment. For example, the sample space for the experiment of tossing a consists of the outcomes \(H\) (heads) and \(T\) (tails). This can be written in set notation as:
+</p>
+
+\begin{align}
+S = \{H, T\}
+\end{align}
+
+<p>
+Any subset of the sample space is called an <span id="Probability-Basic Concepts-event"></span><strong id="event">event</strong>. To represent the number of outcomes that belong to event \(E\) we use the notation \(n(E)\).
+</p>
+
+<p>
+The notation \(P(E)\) is used for the probability of an event \(E\).
+</p>
+
+<div id="Probability-Basic Concepts-Probability of Event E"><h3 id="Probability of Event E" class="header"><a href="#Probability-Basic Concepts-Probability of Event E">Probability of Event E</a></h3></div>
+
+<p>
+In a sample space with equally likely outcomes, the <span id="Probability-Basic Concepts-Probability of Event E-probability"></span><strong id="probability">probability</strong> of an event \(E\), written \(P(E)\) is given by:
+</p>
+
+\begin{align}
+P(E) = \frac{n(E)}{n(S)}
+\end{align}
+
+<p>
+where \(n(E)\) is the number of outcomes in sample space \(S\) that belong to event \(E\), and \(n(S)\) is the total number of outcomes in sample space \(S\).
+</p>
+
+<div id="Probability-Complements and Venn Diagrams"><h2 id="Complements and Venn Diagrams" class="header"><a href="#Probability-Complements and Venn Diagrams">Complements and Venn Diagrams</a></h2></div>
+
+<p>
+The set of all outcomes in the sample space that do not belong to event \(E\) is called the <span id="Probability-Complements and Venn Diagrams-complement"></span><strong id="complement">complement</strong> of \(E\), written \(E'\). By definition:
+</p>
+
+\begin{align}
+E \cup E' = S
+\end{align}
+
+\begin{align}
+E \cap E' = \emptyset
+\end{align}
+
+<p>
+Probability concepts can be illustrated using <span id="Probability-Complements and Venn Diagrams-Venn Diagrams"></span><strong id="Venn Diagrams">Venn Diagrams</strong>, as shown in FIGURE 23.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/venn_diagram.png" alt="Venn Diagram" style="width:400px;">
+</p>
+
+<div id="Probability-Odds"><h2 id="Odds" class="header"><a href="#Probability-Odds">Odds</a></h2></div>
+
+<p>
+The <span id="Probability-Odds-odds"></span><strong id="odds">odds</strong> in favor of an event \(E\) are expressed as the ratio of \(P(E)\) to \(P(E')\), or as the fraction \(\frac{P(E)}{P(E')}\).
+</p>
+
+<p>
+If the odds favoring event \(E\) are \(m\) to \(n\), then:
+</p>
+
+\begin{align}
+P(E) = \frac{m}{m + n}
+\end{align}
+
+<p>
+and 
+</p>
+
+\begin{align}
+P(E') = \frac{n}{m + n}
+\end{align}
+
+<div id="Probability-Union of Two Events"><h2 id="Union of Two Events" class="header"><a href="#Probability-Union of Two Events">Union of Two Events</a></h2></div>
+
+<p>
+Two events \(H\) and \(K\) that cannot occur simultaneously are said to be <span id="Probability-Union of Two Events-mutually exclusive"></span><strong id="mutually exclusive">mutually exclusive</strong>, therefore \(H \cap K = \emptyset\) is always true. This suggests the following proprety:
+</p>
+
+<p>
+For any events \(E\) and \(F\):
+</p>
+
+\begin{align}
+P(E \text{ or } F) = P(E \cup F) = P(E) + P(F) - P(E \cap F)
+\end{align}
+
+<div id="Probability-Properties of Probability"><h2 id="Properties of Probability" class="header"><a href="#Probability-Properties of Probability">Properties of Probability</a></h2></div>
+
+<p>
+For any events \(E\) and \(F\) the following hold:
+</p>
+
+<ol>
+<li>
+\(0 \leq P(E) \leq 1\)
+
+</li><li>
+P(\text{a certain event}) = 1
+
+</li><li>
+P(\text{an impossible event}) = 0
+
+</li><li>
+\(P(E') = 1 - P(E)\)
+
+</li><li>
+\(P(E \text{ or } F) = P(E \cup F) = P(E) + P(F) - P(E \cap F)\)
+
+</li></ol>
+<div id="Probability-Binomial Probability"><h2 id="Binomial Probability" class="header"><a href="#Probability-Binomial Probability">Binomial Probability</a></h2></div>
+
+<p>
+An experiment that consists of repeated independent trials, which only has two outcomes (success and failure) is called a <span id="Probability-Binomial Probability-binomial experiment"></span><strong id="binomial experiment">binomial experiment</strong>.
+</p>
+
+<p>
+Let the probability of success in one trial be \(p\), such that the probability of failure becomes \(1 - p\). Then the probability of \(r\) successes in \(n\) trials is:
+</p>
+
+\begin{align}
+\binom{n}{r} p^r (1 - p)^r
+\end{align}
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
