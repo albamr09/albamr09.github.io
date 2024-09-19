@@ -1,15 +1,12 @@
-<html>
-  <head>
+<html><head>
     <!-- Normal styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css" />
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
-    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css" />
-    <title>05</title>
-  </head>
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Animations</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
-    <a
-      href="https://albamr09.github.io/"
-      style="
+    <a href="https://albamr09.github.io/" style="
         color: white;
         font-weight: bold;
         text-decoration: none;
@@ -17,29 +14,21 @@
         border-radius: 3px;
         background-color: #1e90ff;
         text-transform: uppercase;
-      "
-      >Index</a
-    >
+      ">Index</a>
     <form id="search_form" class="search-form">
-      <input required type="search" id="search_term" class="searchTerm" />
+      <input required="" type="search" id="search_term" class="searchTerm">
       <button type="submit" class="searchButton">Search</button>
     </form>
     <div id="search-background" class="search-background">
       <div id="search-result" class="search-result-hide"></div>
       <div id="search-form-modal" class="search-form-modal">
         <form id="search-form-in-modal">
-          <input
-            required
-            type="search"
-            id="search-input-in-modal"
-            class="search-input-in-modal"
-            placeholder="Search whatever..."
-          />
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
           <button type="submit" class="searchButton">Search</button>
         </form>
       </div>
     </div>
-    <hr />
+    <hr>
     <div class="content">
 <p>
 <a href="index.html">Back</a>
@@ -47,32 +36,49 @@
 
 <div id="Animations"><h1 id="Animations" class="header"><a href="#Animations">Animations</a></h1></div>
 
-<hr />
+<hr>
 
 <div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
 <ul>
 <li>
 <a href="05.html#WebGL%20Matrix%20Naming%20Conventions">WebGL Matrix Naming Conventions</a>
 
-<li>
+</li><li>
 <a href="05.html#Scene%20graph">Scene graph</a>
 
-<li>
+</li><li>
 <a href="05.html#Matrix%20Stacks">Matrix Stacks</a>
 
-<li>
+</li><li>
 <a href="05.html#Animating%20a%203D%20scene">Animating a 3D scene</a>
 
 <ul>
 <li>
 <a href="05.html#The%20requestAnimationFrame%20Function">The requestAnimationFrame Function</a>
 
-</ul>
-<li>
+</li></ul>
+</li><li>
 <a href="05.html#Parametric%20Curves">Parametric Curves</a>
 
-</ul>
-<hr />
+</li><li>
+<a href="05.html#Optimizing%20Batch%20Performance">Optimizing Batch Performance</a>
+
+</li><li>
+<a href="05.html#Interpolation">Interpolation</a>
+
+<ul>
+<li>
+<a href="05.html#Linear%20Interpolation">Linear Interpolation</a>
+
+</li><li>
+<a href="05.html#Polynomial%20Interpolation">Polynomial Interpolation</a>
+
+</li><li>
+<a href="05.html#B-Splines">B-Splines</a>
+
+</li></ul>
+</li></ul>
+<hr>
 
 <div id="Animations-WebGL Matrix Naming Conventions"><h2 id="WebGL Matrix Naming Conventions" class="header"><a href="#Animations-WebGL Matrix Naming Conventions">WebGL Matrix Naming Conventions</a></h2></div>
 
@@ -84,19 +90,19 @@ Before we go any further, let's take a moment to quickly summarize some of the c
 <li>
 <span id="Animations-WebGL Matrix Naming Conventions-World Matrix"></span><strong id="World Matrix">World Matrix</strong>: Sometimes referred to as the Model matrix, this is a matrix that takes the vertices of a model and moves them to world space.
 
-<li>
+</li><li>
 *Camera Matri*x: This matrix positions the camera in the world. You can also think of it as the World matrix for the camera.
 
-<li>
+</li><li>
 <span id="Animations-WebGL Matrix Naming Conventions-View Matrix"></span><strong id="View Matrix">View Matrix</strong>: This matrix moves everything else in the world in front of the camera. As we've seen, this is the inverse of the Camera matrix.
 
-<li>
+</li><li>
 <span id="Animations-WebGL Matrix Naming Conventions-Projection Matrix"></span><strong id="Projection Matrix">Projection Matrix</strong>: This is the matrix that converts a frustum of space into clip space. You can also think of it as the matrix returned by your matrix math library's perspective or orthographic function.
 
-<li>
+</li><li>
 <span id="Animations-WebGL Matrix Naming Conventions-Local Matrix"></span><strong id="Local Matrix">Local Matrix</strong>: The matrix is used in scene graphs, where the matrix, at any particular node on the graph, is used before multiplying with any other nodes.
 
-</ul>
+</li></ul>
 <div id="Animations-Scene graph"><h2 id="Scene graph" class="header"><a href="#Animations-Scene graph">Scene graph</a></h2></div>
 
 <p>
@@ -117,22 +123,22 @@ The matrix stack works at each rendering cycle, it requires calculating the scen
 <li>
 Global Transform: Update the model-view matrix for each object and push it to the stack. This allows us to recover the original matrix once we’ve applied local transforms.
 
-<li>
+</li><li>
 Local Transform: Update Model-View matrix for each object in the scene by multiplying the original Model-View matrix by a matrix that represents the rotation, translation, and/or scaling of each object in the scene.
 
-<li>
+</li><li>
 Recover the original matrix for the stack.
 
-<li>
+</li><li>
 Repeat the process for each object on the scene.
 
-</ol>
+</li></ol>
 <p>
 The following diagram shows this procedure for one object:
 </p>
 
 <p>
-<img src="/home/alba/Documentos/GitRepos/Estudio/NoteWorld/VimWiki/src/Notes/ComputerScience/CG/RTGW/assets/matrix_stack.png" alt="Matrix Stack" style="width:600px;" />
+<img src="https://albamr09.github.io/public/assets/matrix_stack.png" alt="Matrix Stack" style="width:600px;">
 </p>
 
 <div id="Animations-Animating a 3D scene"><h2 id="Animating a 3D scene" class="header"><a href="#Animations-Animating a 3D scene">Animating a 3D scene</a></h2></div>
@@ -158,7 +164,7 @@ There are many situations where we don't know the exact position of an object at
 </p>
 
 <p>
-<img src="/home/alba/Documentos/GitRepos/Estudio/NoteWorld/VimWiki/src/Notes/ComputerScience/CG/RTGW/assets/parametric_curves_example.png" alt="Parametric Curves" style="width:500px;" />
+<img src="https://albamr09.github.io/public/assets/parametric_curves_example.png" alt="Parametric Curves" style="width:500px;">
 </p>
 
 \[
@@ -175,9 +181,55 @@ where \(g\) is the gravity at \(9.8 m/s\), \(V_0\) is the initial velocity, \(H_
 WebGL 2 adds some interesting features, such as <span id="Animations-Optimizing Batch Performance-geometry-instancing"></span><strong id="geometry-instancing">geometry-instancing</strong>. This feature allows us to render the same instance of a single mesh with differing shader attributes using instancing and only one render call. Though instancing is limited, as it’s based on the same mesh only, it’s still a great way to improve performance if you have to draw the same meshes multiple times, especially if combined with shaders.
 </p>
 
+<div id="Animations-Interpolation"><h2 id="Interpolation" class="header"><a href="#Animations-Interpolation">Interpolation</a></h2></div>
+
 <p>
-While this functionality is provided in WebGL 2, we'll build our own geometry-optimization techniques for educational purposes.
+Interpolation greatly simplifies a 3D objects’ animation. Unlike parametric curves, it is not necessary to define the position of the object as a function of time. When interpolation is used, we only need to define control points or knots. The set of control points describes the path that a particular animate object will follow.
+</p>
+
+<div id="Animations-Interpolation-Linear Interpolation"><h3 id="Linear Interpolation" class="header"><a href="#Animations-Interpolation-Linear Interpolation">Linear Interpolation</a></h3></div>
+
+<p>
+This method requires that we define the starting and ending points of the location of our object, along with the number of interpolating steps. The object will move on the line determined by the starting and ending point:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/linear_interpolation.png" alt="Linear Interpolation" style="width:500px;">
+</p>
+
+<div id="Animations-Interpolation-Polynomial Interpolation"><h3 id="Polynomial Interpolation" class="header"><a href="#Animations-Interpolation-Polynomial Interpolation">Polynomial Interpolation</a></h3></div>
+
+<p>
+This method allows us to determine as many control points as we want. The object will move from the starting point to the ending point and will pass through each one of the control points in between
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/polynomial_interpolation.png" alt="Polynomial Interpolation" style="width:500px;">
+</p>
+
+<p>
+While using polynomials, an increasing number of control points can produce undesired oscillations on the object's path described by this technique. This is known as <span id="Animations-Interpolation-Polynomial Interpolation-Runge's phenomenon"></span><strong id="Runge's phenomenon">Runge's phenomenon</strong>.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/rungus_phenomenon.png" alt="Rungus Phenomenon" style="width:500px;">
+</p>
+
+<div id="Animations-Interpolation-B-Splines"><h3 id="B-Splines" class="header"><a href="#Animations-Interpolation-B-Splines">B-Splines</a></h3></div>
+
+<p>
+This method is similar to polynomial interpolation with the difference that the control points are outside of the object's path. In other words, the object does not pass through the control points as it moves. B-splines also respond better to Runge's phenomenon:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/b_splines.png" alt="B Splines" style="width:500px;">
 </p>
 </div>
-  </body>
-</html>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
