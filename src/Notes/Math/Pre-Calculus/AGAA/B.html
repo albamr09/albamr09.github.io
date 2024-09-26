@@ -1,0 +1,106 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Vectors in Space</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Vectors in Space"><h1 id="Vectors in Space" class="header"><a href="#Vectors in Space">Vectors in Space</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="B.html#Rectangular%20Coordinates%20in%20Space">Rectangular Coordinates in Space</a>
+
+<ul>
+<li>
+<a href="B.html#Distance%20Formula">Distance Formula</a>
+
+</li></ul>
+</li><li>
+<a href="B.html#Vectors%20in%20Space">Vectors in Space</a>
+
+</li></ul>
+<hr>
+
+<div id="Vectors in Space-Rectangular Coordinates in Space"><h2 id="Rectangular Coordinates in Space" class="header"><a href="#Vectors in Space-Rectangular Coordinates in Space">Rectangular Coordinates in Space</a></h2></div>
+
+<p>
+On a three dimensional space, we associate each point with an <span id="Vectors in Space-Rectangular Coordinates in Space-ordered triple"></span><strong id="ordered triple">ordered triple</strong> \((x, y z)\) (see FIGure 1). The region of three-dimensional space where are coordinates are positive is called the <span id="Vectors in Space-Rectangular Coordinates in Space-first octant"></span><strong id="first octant">first octant</strong>. There are eight octants in all.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/three_dimensional_space.png" alt="Three Dimensional Space" style="width:400px;">
+</p>
+
+<div id="Vectors in Space-Rectangular Coordinates in Space-Distance Formula"><h3 id="Distance Formula" class="header"><a href="#Vectors in Space-Rectangular Coordinates in Space-Distance Formula">Distance Formula</a></h3></div>
+
+<p>
+If \(P_1(x_1, y_1, z_1)\) and \(P_2(x_2, y_2, z_2)\) are two points in a three-dimensional coordinate system, then the distance between \(P_1\) and \(P_2\) is given by:
+</p>
+
+\begin{align}
+d(P_1, P_2) = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2}
+\end{align}
+
+<div id="Vectors in Space-Vectors in Space"><h2 id="Vectors in Space" class="header"><a href="#Vectors in Space-Vectors in Space">Vectors in Space</a></h2></div>
+
+<p>
+We denote a vector \(\textbf{v}\) in space with initial point \(O\) at the origin as:
+</p>
+
+\begin{align}
+\textbf{v} = \langle a, b, c \rangle
+\end{align}
+
+<p>
+Using the unit vectors \(\textbf{i} = \langle 1, 0, 0 \rangle\), \(\textbf{j} = \langle 0, 1, 0 \rangle\) and \(\textbf{k} = \langle 0, 0, 1 \rangle\), we can represent \(\textbf{v}\) as:
+</p>
+
+\begin{align}
+\textbf{v} = a\textbf{i} + b \textbf{j} + c \textbf{k}
+\end{align}
+
+<p>
+where the scalars \(a\), \(b\) and \(c\) are the <span id="Vectors in Space-Vectors in Space-components"></span><strong id="components">components</strong> of vector \(\textbf{v}\).
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
