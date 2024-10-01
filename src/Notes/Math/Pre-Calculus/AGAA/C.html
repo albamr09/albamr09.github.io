@@ -1,0 +1,204 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Polar Form of Conic Sections</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Polar Form of Conic Sections"><h1 id="Polar Form of Conic Sections" class="header"><a href="#Polar Form of Conic Sections">Polar Form of Conic Sections</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="C.html#Polar%20Forms%20of%20Conic%20Sections">Polar Forms of Conic Sections</a>
+
+</li></ul>
+<hr>
+
+<div id="Polar Form of Conic Sections-Polar Forms of Conic Sections"><h2 id="Polar Forms of Conic Sections" class="header"><a href="#Polar Form of Conic Sections-Polar Forms of Conic Sections">Polar Forms of Conic Sections</a></h2></div>
+
+<p>
+A polar equation of the form:
+</p>
+
+\begin{aling}
+r = \frac{ep}{1 \pm e \cos \theta}
+\end{aling}
+
+<p>
+or
+</p>
+
+\begin{aling}
+r = \frac{ep}{1 \pm e \sin \theta}
+\end{aling}
+
+<p>
+has a conic section as its graph. The eccentricity is \(e\) (where \(e &gt; 0\)), and \(|p|\) is the distance between the pole (focus) and the directrix.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/polar_form_conic_section.png" alt="Polar Form of Conic Section" style="width:500px;">
+</p>
+
+<p>
+We can verify that those equations satisfy the <a href="07_03.html#Eccentricity">definition of a conic section</a>. Consider FIGURE 1, where the directrix is vertical and \(p &gt; 0\) units to the right of the focus \(F(0, 0º)\). Let \(P(r, \theta)\) be a point on the graph, then the distance between \(P\) and the directrix is obtained as:
+</p>
+
+\begin{aling}
+PP' = |p - x|
+\end{aling}
+
+\begin{aling}
+= |p - r \cos \theta|
+\end{aling}
+
+<p>
+We substitute \(r\) by \(\frac{ep}{1 \pm e \cos \theta}\).
+</p>
+
+\begin{aling}
+= |p - \left(\frac{ep}{1 \pm e \cos \theta} \right) \cos \theta|
+\end{aling}
+
+\begin{aling}
+= |\frac{(1 + e \cos \theta) - ep\cos \theta}{1 \pm e \cos \theta} |
+\end{aling}
+
+\begin{aling}
+= |\frac{p + ep \cos \theta - ep\cos \theta}{1 \pm e \cos \theta}|
+\end{aling}
+
+\begin{aling}
+= |\frac{p}{1 \pm e \cos \theta}|
+\end{aling}
+
+<p>
+Given:
+</p>
+
+\begin{aling}
+r = \frac{ep}{1 \pm e \cos \theta}
+\end{aling}
+
+<p>
+Then we can multiply each side by \(\frac{1}{e}\)
+</p>
+
+\begin{aling}
+\frac{r}{e} = \frac{p}{1 \pm e \cos \theta}
+\end{aling}
+
+<p>
+We substitute this expression for \(\frac{r}{e}\):
+</p>
+
+\begin{aling}
+PP' = |\frac{p}{1 \pm e \cos \theta}| = |\frac{r}{e}| = \frac{|r|}{|e|} = \frac{|r|}{e}
+\end{aling}
+
+<p>
+Note that \(e &gt; 0\), therefor \(|e| = e\).
+</p>
+
+<p>
+The distance between the pole and \(P\) is \(PF = |r|\), so the ratio of \(PF\) to \(PP'\) is:
+</p>
+
+\begin{aling}
+\frac{PF}{PP'} = frac{|r|}{\frac{|r|}{e}} = e
+\end{aling}
+
+<p>
+Thus, by definition, the graph has eccentricity \(e\) and must be a conic.
+</p>
+
+<p>
+In the previous discussion, we assumed a vertical directrix to the right of the pole. There a re three other possible situations:
+</p>
+<table>
+<thead>
+<tr>
+<th>
+Equation
+</th>
+<th>
+Directrix
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+\(r = \frac{ep}{1 + e \cos \theta}\)
+</td>
+<td>
+vertical, \(p\) units to the right of the pole
+</td>
+</tr>
+<tr>
+<td>
+\(r = \frac{ep}{1 - e \cos \theta}\)
+</td>
+<td>
+vertical, \(p\) units to the left of the pole
+</td>
+</tr>
+<tr>
+<td>
+\(r = \frac{ep}{1 + e \sin \theta}\)
+</td>
+<td>
+horizontal, \(p\) units above the pole
+</td>
+</tr>
+<tr>
+<td>
+\(r = \frac{ep}{1 - e \sin \theta}\)
+</td>
+<td>
+horizontal, \(p\) units below the pole
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
