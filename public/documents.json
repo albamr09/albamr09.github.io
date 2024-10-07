@@ -507,7 +507,7 @@
   {
     "id": "https://albamr09.github.io/src/Notes/ComputerScience/CG/RTGW/index.html",
     "title": "Real-Time 3D Graphics with WebGL 2",
-    "body": " index search search back real-time 3d graphics with webgl 2 getting started rendering lights camera animations $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
+    "body": " index search search back real-time 3d graphics with webgl 2 getting started rendering lights camera animations colors, depth testing and alpha blending $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
   },
   {
     "id": "https://albamr09.github.io/src/Notes/ComputerScience/CG/RTGW/03.html",
@@ -2008,5 +2008,10 @@
     "id": "https://albamr09.github.io/src/Notes/DataScience/Master/3C_1C/ICPDM/index.html",
     "title": "Infraestructuras Computacionales para Procesamiento de Datos Masivos",
     "body": " index search search back infraestructuras computacionales para procesamiento de datos masivos módulo 1 tema 1. introducción a big data $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
+  },
+  {
+    "id": "https://albamr09.github.io/src/Notes/ComputerScience/CG/RTGW/06.html",
+    "title": "Colors, Depth Testing, and Alpha Blending",
+    "body": " index search search back colors, depth testing, and alpha blending contents using colors in weblgl using colors in objects constant coloring per-vertex coloring per-fragment coloring using colors in weblgl webgl supplies a fourth attribute to the rgb model. this attribute is called the alpha channel. the extended model then is known as the rgba model, where a stands for alpha. the alpha channel contains a value between the range of \\(0.0\\) to \\(1.0\\). a completely opaque color will have an alpha value of \\(1.0\\), whereas a completely transparent color will have an alpha value of \\(0.0\\). this is the general case, but as we will see, we need to take other factors into account when we obtain translucent colors. using colors in objects constant coloring to obtain a constant color, we store the desired color in a uniform that is passed to the fragment shader. this uniform is usually called the object's diffuse material property. we can also combine object normals and light-source information to obtain a lambert coefficient. we can use the lambert coefficient to proportionally change the reflecting color depending on the angle on which the light hits the object. per-vertex coloring to implement per-vertex coloring, we need to define an attribute that stores the color for the vertex in the vertex shader: in vec4 avertexcolor; the next step is to assign the avertexcolor attribute to a varying so that it can be passed to the fragment shader. remember that varyings are automatically interpolated. therefore, each fragment will have a color that is the weighted result of its contributing vertices. if we want our color map to be sensitive to lighting conditions, we can multiply each vertex color by the diffuse component of the light. the result is then assigned to the varying that will transfer the result to the fragment shader. per-fragment coloring we can also assign a random color to each pixel of the object we are rendering. $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
   }
 ]
