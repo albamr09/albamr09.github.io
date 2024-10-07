@@ -482,7 +482,7 @@
   {
     "id": "https://albamr09.github.io/src/Notes/DataScience/Master/index.html",
     "title": "Data Science Master",
-    "body": " index search search back data science master 2c 2c aprendizaje automático ii deep learning modelos bayesianos jerárquicos 3c 1c ./3c_1c/icpdm/index.wikiinfraestructuras computacionales para procesamiento de datos masivos $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
+    "body": " index search search back data science master 2c 2c aprendizaje automático ii deep learning modelos bayesianos jerárquicos 3c 1c infraestructuras computacionales para procesamiento de datos masivos $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
   },
   {
     "id": "https://albamr09.github.io/src/Notes/DataScience/index.html",
