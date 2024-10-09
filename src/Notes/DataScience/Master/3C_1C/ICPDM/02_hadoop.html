@@ -127,6 +127,34 @@
 
 </li></ul>
 </li></ul>
+</li><li>
+<a href="02_hadoop.html#Yarn%3A%20Gesti%F3n%20de%20Recursos">Yarn  Gesti n de Recursos</a>
+
+<ul>
+<li>
+<a href="02_hadoop.html#Por%20Qu%E9%20Surge%20YARN%3F">Por Qu  Surge YARN</a>
+
+</li><li>
+<a href="02_hadoop.html#Arquitectura%20y%20Componentes">Arquitectura y Componentes</a>
+
+<ul>
+<li>
+<a href="02_hadoop.html#Resource%20Manager">Resource Manager</a>
+
+</li><li>
+<a href="02_hadoop.html#Node%20Manager">Node Manager</a>
+
+</li><li>
+<a href="02_hadoop.html#Application%20Master">Application Master</a>
+
+</li></ul>
+</li><li>
+<a href="02_hadoop.html#Secuencia%20de%20trabajo%20en%20Hadoop%20YARN">Secuencia de trabajo en Hadoop YARN</a>
+
+</li><li>
+<a href="02_hadoop.html#Federaci%F3n%20en%20Hadoop%20YARN">Federaci n en Hadoop YARN</a>
+
+</li></ul>
 </li></ul>
 <hr>
 
@@ -173,7 +201,7 @@ El código fuente de Hadoop se encuentra disposible públicamente, lo cual fomen
 <div id="El Núcleo de Hadoop-Fundamentos y Herramientas del Ecosistema de Hadoop-Características de Hadoop-Distribuido"><h4 id="Distribuido" class="header"><a href="#El Núcleo de Hadoop-Fundamentos y Herramientas del Ecosistema de Hadoop-Características de Hadoop-Distribuido">Distribuido</a></h4></div>
 
 <p>
-Se trata de una plataforma de computación distribuida que ha sido diseñada para poder manejar grandes volúmenes de datos en múltiples nodos de un clúster de servidores. De tal manera que Hadoos puede distribuir la carga de trabajo y los datos entre varios nodos. Esto permite procesamiento en paralelo y escalable.
+Se trata de una plataforma de computación distribuida que ha sido diseñada para poder manejar grandes volúmenes de datos en múltiples nodos de un clúster de servidores. De tal manera que Hadoop puede distribuir la carga de trabajo y los datos entre varios nodos. Esto permite procesamiento en paralelo y escalable.
 </p>
 
 <div id="El Núcleo de Hadoop-Fundamentos y Herramientas del Ecosistema de Hadoop-Características de Hadoop-Escalable"><h4 id="Escalable" class="header"><a href="#El Núcleo de Hadoop-Fundamentos y Herramientas del Ecosistema de Hadoop-Características de Hadoop-Escalable">Escalable</a></h4></div>
@@ -285,7 +313,7 @@ En un clúster HDFS sólo hay un NameNode, y su disponibilidad es crucial, si es
 <div id="El Núcleo de Hadoop-Sistema de Ficheros Distribuidos-¿Qué es Hadoop Distributed File System (HDFS)?-Arquitectura y componentes-DataNode"><h5 id="DataNode" class="header"><a href="#El Núcleo de Hadoop-Sistema de Ficheros Distribuidos-¿Qué es Hadoop Distributed File System (HDFS)?-Arquitectura y componentes-DataNode">DataNode</a></h5></div>
 
 <p>
-Este tipo de nodos son los encargados de almadenar los datos y de recuperar los bloeques de datos que conforman los archivos así como de gestionar el almacenamiento del nodo. Además deben informar periódicamente del estado de los bloques al NameNode.
+Este tipo de nodos son los encargados de almadenar los datos y de recuperar los bloques de datos que conforman los archivos así como de gestionar el almacenamiento del nodo. Además deben informar periódicamente del estado de los bloques al NameNode.
 </p>
 
 <p>
@@ -308,7 +336,7 @@ Escritura de datos en DataNodes por parte del cliente.
 Confirmación al NameNode por parte de los DataNodes.
 
 </li><li>
-El NameNode actualiza su talba de metadatos con la nueva información acerta de la ubicación de los bloques de datos del archivo.
+El NameNode actualiza su tabla de metadatos con la nueva información acerta de la ubicación de los bloques de datos del archivo.
 
 </li></ol>
 <div id="El Núcleo de Hadoop-Sistema de Ficheros Distribuidos-Lectura en HDFS"><h3 id="Lectura en HDFS" class="header"><a href="#El Núcleo de Hadoop-Sistema de Ficheros Distribuidos-Lectura en HDFS">Lectura en HDFS</a></h3></div>
@@ -321,7 +349,7 @@ Cliente solicita la lectura de un archivo al NameNode.
 El NameNode consulta su tabla de metadatos y devuelve la ubicación del archivo al cliente.
 
 </li><li>
-El cliente solicita los bloque de datos a los DataNodes donde están almacenados y estes devuelven los bloques.
+El cliente solicita los bloques de datos a los DataNodes donde están almacenados y estes devuelven los bloques.
 
 </li><li>
 El cliente reconstruye el archivo a partir de los bloques.
@@ -666,6 +694,7 @@ Cambia el grupo del fichero
 </table>
 
 <div id="El Núcleo de Hadoop-Sistema de Ficheros Distribuidos-Comandos de HDFS-Gestión de Administración"><h4 id="Gestión de Administración" class="header"><a href="#El Núcleo de Hadoop-Sistema de Ficheros Distribuidos-Comandos de HDFS-Gestión de Administración">Gestión de Administración</a></h4></div>
+
 <table>
 <thead>
 <tr>
@@ -744,6 +773,89 @@ Cambia el factor de replicación de un fichero a 3. Si se indica un directorio, 
 </tr>
 </tbody>
 </table>
+
+<div id="El Núcleo de Hadoop-Yarn: Gestión de Recursos"><h2 id="Yarn: Gestión de Recursos" class="header"><a href="#El Núcleo de Hadoop-Yarn: Gestión de Recursos">Yarn: Gestión de Recursos</a></h2></div>
+
+<div id="El Núcleo de Hadoop-Yarn: Gestión de Recursos-Por Qué Surge YARN?"><h3 id="Por Qué Surge YARN?" class="header"><a href="#El Núcleo de Hadoop-Yarn: Gestión de Recursos-Por Qué Surge YARN?">Por Qué Surge YARN?</a></h3></div>
+
+<p>
+YARN se encarga de administrar y asignar recursos a las diversas aplicaciones que se ejecutan en el clúster de Hadooop. Algunos de los objetivos principales de YARN son la escalabilidad, la eficiencia y la capacidad de ejecutar múltiples frameworks de procesamiento de datos no sólo MapReduce.
+</p>
+
+<p>
+En la verisón 1, MapReduce contaba con un administrador de recursos y un planificador interno. YARN permite separar la gestión de recursos de la lógica de programación. Anteriormente se presentaban muchas limitaciones al no admitir apliaciones que siguiesen el modelo MapReduce (como el análisis de grafos) y era necesario transladar los datos a otras plataformas. A partir de Hadoop 2 la utilización de otros frameworks (Giraph para análisis de datos, Storm para análisis de datos en tiempo real, etc) es transparente.
+</p>
+
+<p>
+Esto permite una mejor utilización de los recursos del clúster y una mayor flexibilidad en la ejecución de aplicaciones.
+</p>
+
+<div id="El Núcleo de Hadoop-Yarn: Gestión de Recursos-Arquitectura y Componentes"><h3 id="Arquitectura y Componentes" class="header"><a href="#El Núcleo de Hadoop-Yarn: Gestión de Recursos-Arquitectura y Componentes">Arquitectura y Componentes</a></h3></div>
+
+<p>
+YARN consta de tres componentes principales: <span id="El Núcleo de Hadoop-Yarn: Gestión de Recursos-Arquitectura y Componentes-Resource Manager"></span><strong id="Resource Manager">Resource Manager</strong>, <span id="El Núcleo de Hadoop-Yarn: Gestión de Recursos-Arquitectura y Componentes-Node Manager"></span><strong id="Node Manager">Node Manager</strong> y <span id="El Núcleo de Hadoop-Yarn: Gestión de Recursos-Arquitectura y Componentes-Application Master"></span><strong id="Application Master">Application Master</strong>.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/yarn_architecture.png" alt="Yarn Architecture">
+</p>
+
+<div id="El Núcleo de Hadoop-Yarn: Gestión de Recursos-Arquitectura y Componentes-Resource Manager"><h4 id="Resource Manager" class="header"><a href="#El Núcleo de Hadoop-Yarn: Gestión de Recursos-Arquitectura y Componentes-Resource Manager">Resource Manager</a></h4></div>
+
+<p>
+Se trata del maestro del clúster y se encarga de aceptar las solicitudes de recursos de las aplicaciones, negociar los recursos con los nodos y asignar recursos a la aplicaciones mediante un planificador. Cabe destacar que este planificador no ofrece garantías de ejecución de la aplicaciones ni las monitoriza.
+</p>
+
+<p>
+Existe un segundo componente denominado <span id="El Núcleo de Hadoop-Yarn: Gestión de Recursos-Arquitectura y Componentes-Resource Manager-gestor de aplicaciones"></span><strong id="gestor de aplicaciones">gestor de aplicaciones</strong> que se encarga de aceptar las peticiones de trabajos, negocial el contenedor para la ejecutación de la aplicación y proporcionar, en caso de error, el reinicio de los trabajos.
+</p>
+
+<div id="El Núcleo de Hadoop-Yarn: Gestión de Recursos-Arquitectura y Componentes-Node Manager"><h4 id="Node Manager" class="header"><a href="#El Núcleo de Hadoop-Yarn: Gestión de Recursos-Arquitectura y Componentes-Node Manager">Node Manager</a></h4></div>
+
+<p>
+Se ejecutan en cada nodo y son los encargados de administrar los recursos locales (CPU, almacenamiento, memoria) y reportar su disponibilidad al Resource Manager. También gestiona el lanzamiento y la supervisión de los contenedores que ejecutan las tareas de las aplicaciones y mapean las variables de entorno necesarias, descargan las dependencias y los servicios necesarios para crar los procesos.
+</p>
+
+<div id="El Núcleo de Hadoop-Yarn: Gestión de Recursos-Arquitectura y Componentes-Application Master"><h4 id="Application Master" class="header"><a href="#El Núcleo de Hadoop-Yarn: Gestión de Recursos-Arquitectura y Componentes-Application Master">Application Master</a></h4></div>
+
+<p>
+Se crea y ejecuta para cada aplicación dentro de un contenedor. Es el responsable de negociar los recursos con el Resouce Manager y de supervisar el progreso de la aplicación.
+</p>
+
+<div id="El Núcleo de Hadoop-Yarn: Gestión de Recursos-Secuencia de trabajo en Hadoop YARN"><h3 id="Secuencia de trabajo en Hadoop YARN" class="header"><a href="#El Núcleo de Hadoop-Yarn: Gestión de Recursos-Secuencia de trabajo en Hadoop YARN">Secuencia de trabajo en Hadoop YARN</a></h3></div>
+
+<ol>
+<li>
+El cliente envía una aplicación YARN al Resource Manager
+
+</li><li>
+El Resource Manager reserva recursos en contenedores para la ejecución de la aplicación
+
+</li><li>
+El Application Manager se registra con el Resource Manager y solicita los recursos necesarios para la aplicación
+
+</li><li>
+El Application Manager notifica al Node Manager la ejecución de los contenedores asignados
+
+</li><li>
+La aplicación YARN se ejecuta en le contenedor correspondiente
+
+</li><li>
+El Application Master supervisa la ejecución y reporta el estado al Resource Manager y al Application Manager
+
+</li><li>
+Al finalizar la ejecución el Application Manager notifica al Resource Manager
+
+</li></ol>
+<div id="El Núcleo de Hadoop-Yarn: Gestión de Recursos-Federación en Hadoop YARN"><h3 id="Federación en Hadoop YARN" class="header"><a href="#El Núcleo de Hadoop-Yarn: Gestión de Recursos-Federación en Hadoop YARN">Federación en Hadoop YARN</a></h3></div>
+
+<p>
+La federación en Hadoop YARN pemite la conexión de múltiples clústeres YARN para formar un clúster lógico único. De esta manera podemos lograr una gestión centralizada de recursos lo cual simplifica su administración.
+</p>
+
+<p>
+Una de las ventajas clave es el escalamiento horizontal sin límites dados por el tamaño del clúster. Por lo tanto, se facilita la ejecución de trabajos de gran embergadura y distribuidos.
+</p>
 </div>
   
 
