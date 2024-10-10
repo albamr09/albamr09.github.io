@@ -3,7 +3,7 @@
     <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
     <!-- Custom styling from vimwiki -->
     <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
-    <title>Infraestructuras Computacionales para Procesamiento de Datos Masivos</title>
+    <title>Programación MapReduce</title>
   <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
   <body>
     <a href="https://albamr09.github.io/" style="
@@ -31,26 +31,49 @@
     <hr>
     <div class="content">
 <p>
-<a href="../../index.html">Back</a>
+<a href="index.html">Back</a>
 </p>
 
-<div id="Infraestructuras Computacionales para Procesamiento de Datos Masivos"><h1 id="Infraestructuras Computacionales para Procesamiento de Datos Masivos" class="header"><a href="#Infraestructuras Computacionales para Procesamiento de Datos Masivos">Infraestructuras Computacionales para Procesamiento de Datos Masivos</a></h1></div>
+<div id="Programación MapReduce"><h1 id="Programación MapReduce" class="header"><a href="#Programación MapReduce">Programación MapReduce</a></h1></div>
 
 <hr>
 
-<div id="Infraestructuras Computacionales para Procesamiento de Datos Masivos-Módulo 1"><h2 id="Módulo 1" class="header"><a href="#Infraestructuras Computacionales para Procesamiento de Datos Masivos-Módulo 1">Módulo 1</a></h2></div>
-
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
 <ul>
 <li>
-<a href="01_intro.html">Tema 1. Introducción a Big Data</a>
+<a href="03_mapreduce.html#%BFQu%E9%20es%20MapReduce%3F">Qu  es MapReduce</a>
 
 </li><li>
-<a href="02_hadoop.html">Tema 2. El Núcleo de Hadoop</a>
-
-</li><li>
-<a href="03_mapreduce.html">Tema 3. Programación MapReduce</a>
+<a href="03_mapreduce.html#Fases%20de%20Map%20Reduce">Fases de Map Reduce</a>
 
 </li></ul>
+<hr>
+
+<div id="Programación MapReduce-¿Qué es MapReduce?"><h2 id="¿Qué es MapReduce?" class="header"><a href="#Programación MapReduce-¿Qué es MapReduce?">¿Qué es MapReduce?</a></h2></div>
+
+<p>
+El flujo de procesamiento de MapReduce se divide en dos etapas: <span id="Programación MapReduce-¿Qué es MapReduce?-Map"></span><strong id="Map">Map</strong> y <span id="Programación MapReduce-¿Qué es MapReduce?-Reduce"></span><strong id="Reduce">Reduce</strong> las cuales se ejecutan de manera distribuida en distintos nodos de procesamiento mientras que un proceso central denominado <span id="Programación MapReduce-¿Qué es MapReduce?-Job Tracker"></span><strong id="Job Tracker">Job Tracker</strong> controla su ejecución.
+</p>
+
+<div id="Programación MapReduce-Fases de Map Reduce"><h2 id="Fases de Map Reduce" class="header"><a href="#Programación MapReduce-Fases de Map Reduce">Fases de Map Reduce</a></h2></div>
+
+<ol>
+<li>
+<span id="Programación MapReduce-Fases de Map Reduce-Map"></span><strong id="Map">Map</strong>: Los datos de entrada se subdividen en bloques independientes que son procesados de forma paralela por los mappers.
+
+</li><li>
+<span id="Programación MapReduce-Fases de Map Reduce-Shuffle &amp; sort"></span><strong id="Shuffle &amp; sort">Shuffle &amp; sort</strong>: los datos intermedios de los mappers se ordenan.
+
+</li><li>
+<span id="Programación MapReduce-Fases de Map Reduce-Reduce"></span><strong id="Reduce">Reduce</strong>: recibe como entrada los datos ordenados y los agrega para producir el resultado final.
+
+</li><li>
+Generalmente se concatenan varias fases de mapper-reducer para completar una tarea.
+
+</li></ol>
+<p>
+Normalmente Hadoop intenta ejecutar los mappers en los nodos donde se encuentran los datos sobre los que va a trabajar (<span id="Programación MapReduce-Fases de Map Reduce-data locality"></span><strong id="data locality">data locality</strong>). Esto reduce los tiempos de acceso a los datos y la necesidad de transferencia de datos entre nodos.
+</p>
 </div>
   
 
