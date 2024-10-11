@@ -57,6 +57,20 @@
 <a href="06.html#Per-Fragment%20Coloring">Per-Fragment Coloring</a>
 
 </li></ul>
+</li><li>
+<a href="06.html#Use%20of%20Color%20in%20Lights">Use of Color in Lights</a>
+
+<ul>
+<li>
+<a href="06.html#Scalability%20Problem">Scalability Problem</a>
+
+</li><li>
+<a href="06.html#How%20Many%20Uniforms%20Can%20We%20Use">How Many Uniforms Can We Use</a>
+
+</li><li>
+<a href="06.html#Simplifying%20the%20Problem">Simplifying the Problem</a>
+
+</li></ul>
 </li></ul>
 <hr>
 
@@ -103,6 +117,30 @@ If we want our color map to be sensitive to lighting conditions, we can multiply
 
 <p>
 We can also assign a random color to each pixel of the object we are rendering.
+</p>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Use of Color in Lights"><h2 id="Use of Color in Lights" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Use of Color in Lights">Use of Color in Lights</a></h2></div>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Use of Color in Lights-Scalability Problem"><h3 id="Scalability Problem" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Use of Color in Lights-Scalability Problem">Scalability Problem</a></h3></div>
+
+<p>
+Given the desire to use more than one light in our scene, we need to define and map the number of appropriate uniforms of the lighting model of choice. If we have four properties per light (ambient, diffuse, specular, and location), we need to define four uniforms for each light. If we want to have three lights, we need to write, use, and map twelve uniforms! We need to resolve this complexity before it gets out of hand.
+</p>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Use of Color in Lights-How Many Uniforms Can We Use"><h3 id="How Many Uniforms Can We Use" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Use of Color in Lights-How Many Uniforms Can We Use">How Many Uniforms Can We Use</a></h3></div>
+
+<p>
+To find out the limit for your WebGL implementation, you can query WebGL using the <code>gl.getParameter</code> function with these constants:
+</p>
+
+<pre>gl.MAX_VERTEX_UNIFORM_VECTORS
+gl.MAX_FRAGMENT_UNIFORM_VECTORS
+</pre>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Use of Color in Lights-Simplifying the Problem"><h3 id="Simplifying the Problem" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Use of Color in Lights-Simplifying the Problem">Simplifying the Problem</a></h3></div>
+
+<p>
+In order to simplify the problem, we can assume that the ambient component is the same for all of the lights. This will reduce the number of uniforms—one fewer uniform for each light.
 </p>
 </div>
   
