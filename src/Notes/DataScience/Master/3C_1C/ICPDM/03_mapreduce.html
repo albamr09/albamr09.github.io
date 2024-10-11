@@ -46,6 +46,15 @@
 </li><li>
 <a href="03_mapreduce.html#Fases%20de%20Map%20Reduce">Fases de Map Reduce</a>
 
+</li><li>
+<a href="03_mapreduce.html#Hadoop%20Streaming">Hadoop Streaming</a>
+
+</li><li>
+<a href="03_mapreduce.html#Ejemplo%20Pr%E1ctico%20de%20MapReduce">Ejemplo Pr ctico de MapReduce</a>
+
+</li><li>
+<a href="03_mapreduce.html#Optimizaci%F3n%3A%20Combiners%20y%20Partitioner">Optimizaci n  Combiners y Partitioner</a>
+
 </li></ul>
 <hr>
 
@@ -59,21 +68,111 @@ El flujo de procesamiento de MapReduce se divide en dos etapas: <span id="Progra
 
 <ol>
 <li>
-<span id="Programación MapReduce-Fases de Map Reduce-Map"></span><strong id="Map">Map</strong>: Los datos de entrada se subdividen en bloques independientes que son procesados de forma paralela por los mappers.
+<span id="Programación MapReduce-Fases de Map Reduce-Map"></span><strong id="Map">Map</strong>: Los datos de entrada se subdividen en bloques independientes que son procesados de forma paralela por los mappers. Normalmente Hadoop intenta ejecutar los mappers en los nodos donde se encuentran los datos sobre los que va a trabajar (<span id="Programación MapReduce-Fases de Map Reduce-data locality"></span><strong id="data locality">data locality</strong>). Esto reduce los tiempos de acceso a los datos y la necesidad de transferencia de datos entre nodos.
 
 </li><li>
-<span id="Programación MapReduce-Fases de Map Reduce-Shuffle &amp; sort"></span><strong id="Shuffle &amp; sort">Shuffle &amp; sort</strong>: los datos intermedios de los mappers se ordenan.
+<span id="Programación MapReduce-Fases de Map Reduce-Shuffle &amp; sort"></span><strong id="Shuffle &amp; sort">Shuffle &amp; sort</strong>: los datos intermedios de los mappers se ordenan. Este proceso comienza mientras las tareas map están en progreso, a medida que van terminando. No es necesario esperar a que todas terminen.
 
 </li><li>
-<span id="Programación MapReduce-Fases de Map Reduce-Reduce"></span><strong id="Reduce">Reduce</strong>: recibe como entrada los datos ordenados y los agrega para producir el resultado final.
+<span id="Programación MapReduce-Fases de Map Reduce-Reduce"></span><strong id="Reduce">Reduce</strong>: comienza cuando todos los datos han sido ordenados en <span id="Programación MapReduce-Fases de Map Reduce-Shuffle &amp; sort"></span><strong id="Shuffle &amp; sort">Shuffle &amp; sort</strong>. Recibe como entrada estes datos ordenados estructurados como pares clave valor agrupados por clave. Cada reducer toma los valores asociados a una clave y los agrega/procesa y devuelve el resultado como salida que se puede almacenar en HDFS o en otro sistema.
 
 </li><li>
 Generalmente se concatenan varias fases de mapper-reducer para completar una tarea.
 
 </li></ol>
 <p>
-Normalmente Hadoop intenta ejecutar los mappers en los nodos donde se encuentran los datos sobre los que va a trabajar (<span id="Programación MapReduce-Fases de Map Reduce-data locality"></span><strong id="data locality">data locality</strong>). Esto reduce los tiempos de acceso a los datos y la necesidad de transferencia de datos entre nodos.
+<img src="https://albamr09.github.io/public/assets/map_reduce.png" alt="Map Reduce">
 </p>
+
+<div id="Programación MapReduce-Hadoop Streaming"><h2 id="Hadoop Streaming" class="header"><a href="#Programación MapReduce-Hadoop Streaming">Hadoop Streaming</a></h2></div>
+
+<p>
+Hadoop Streaming se trata de una utilidad que permite ejecutar aplicaciones en Hadoop escritas en cualquier lenguaje, a pesar de que Hadoop este escrito en Java. Este proporciona un interfaz de entrada y de salida (stdin/stdout) que es consumida por las aplicaciones, tal que existe una pasarela de datos que actúa como comunicación entre Hadoop y la aplicación.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/hadoop_streaming.png">
+</p>
+
+<p>
+En la imagen anterior se muestra el flujo de un trabajo MapReduce.
+</p>
+
+<ol>
+<li>
+Se leen los datos de entrada y se produce una lista de pares clave-valor.
+
+</li><li>
+Se proporcionan los datos en este formato a un mapper externo a través del canal estándar de entrada.
+
+</li><li>
+Se devuelve el resultado de los mapper en el mismo formato a través del canal estándar de salida.
+
+</li><li>
+Se proporcionan los datos procesados por los mapper al reducer externo a través de la entrada estándar.
+
+</li><li>
+Se devuelve el resultado del reducer a través de stdout.
+
+</li><li>
+Finalmente se almacena el resultado del reducer, bien en HDFS o en otro sistema externo.
+
+</li></ol>
+<p>
+Como podemos ver en todas las fases del proceso de mantiene siempre la estructura de pares clave-valor.
+</p>
+
+<div id="Programación MapReduce-Ejemplo Práctico de MapReduce"><h2 id="Ejemplo Práctico de MapReduce" class="header"><a href="#Programación MapReduce-Ejemplo Práctico de MapReduce">Ejemplo Práctico de MapReduce</a></h2></div>
+
+<p>
+Para ejemplificar MapReduce planteamos el siguiente problema: queremos obtener la frecuencia de cada palabra en un documento.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/map_reduce_example_1.png" alt="MapReduce Example">
+</p>
+
+<ul>
+<li>
+<span id="Programación MapReduce-Ejemplo Práctico de MapReduce-Map"></span><strong id="Map">Map</strong>: dividimos el proceso en dos mappers (idealmente cada proceso mapper se debería de ejecutar en el nodo en el cual se encuentra el bloque de datos). Estes se encargan de obtener la frecuencia de las palabras en la "porción de texto" sobre el que trabajan.
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/assets/map_reduce_example_2.png" alt="MapReduce Example">
+</p>
+
+<ul>
+<li>
+<span id="Programación MapReduce-Ejemplo Práctico de MapReduce-Shuffle &amp; Sort"></span><strong id="Shuffle &amp; Sort">Shuffle &amp; Sort</strong>: se ordenan y se agrupan los valores por la clave, donde la clave en nuestro caso es la palabra y el valor su frecuencia.
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/assets/map_reduce_example_3.png" alt="MapReduce Example">
+</p>
+
+<ul>
+<li>
+<span id="Programación MapReduce-Ejemplo Práctico de MapReduce-Reduce"></span><strong id="Reduce">Reduce</strong>: se ejecuta un reducer por cada clave presente en el resultado, que agrupa (en nuestro caso suma) los valores bajo cada clave, es decir las frecuencias asociadas a la palabra.
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/assets/map_reduce_example_4.png" alt="MapReduce Example">
+</p>
+
+<div id="Programación MapReduce-Optimización: Combiners y Partitioner"><h2 id="Optimización: Combiners y Partitioner" class="header"><a href="#Programación MapReduce-Optimización: Combiners y Partitioner">Optimización: Combiners y Partitioner</a></h2></div>
+
+<p>
+MapReduce cuenta con dos componentes para optimizar el procesamiento denominados <span id="Programación MapReduce-Optimización: Combiners y Partitioner-combiners"></span><strong id="combiners">combiners</strong> y <span id="Programación MapReduce-Optimización: Combiners y Partitioner-partitioners"></span><strong id="partitioners">partitioners</strong>.
+</p>
+
+<ol>
+<li>
+<span id="Programación MapReduce-Optimización: Combiners y Partitioner-Combiners"></span><strong id="Combiners">Combiners</strong>: agrupan los resultados de cada mapper antes de llegar a la frase de shuffle and sort con el objetivo de reducir el tamaño de los datos que se le proporcionan al reducer.
+
+</li><li>
+<span id="Programación MapReduce-Optimización: Combiners y Partitioner-Partitioners"></span><strong id="Partitioners">Partitioners</strong>: se utilizan para determinar cómo se distribuyen los datos a cada reducer. Por defecto Hadoop distribuye la carga de trabajo de manera uniforme entre los reducers, pero se puede personalizar utilizando los <span id="Programación MapReduce-Optimización: Combiners y Partitioner-partitioners"></span><strong id="partitioners">partitioners</strong>.
+
+</li></ol>
 </div>
   
 
