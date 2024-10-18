@@ -156,7 +156,7 @@ As we've seen, handling light properties with individual uniforms makes the code
 This technique allows us to handle multiple lights by introducing enumerable arrays of vectors in the shaders. This allows us to calculate light contributions by iterating through the light arrays in the shaders.
 </p>
 
-<pre>uniform vec3 uPositionLight[3];
+<pre c="">uniform vec3 uPositionLight[3];
 </pre>
 
 <p>
@@ -164,7 +164,7 @@ It’s important to note that ESSL does not support dynamic initialization of un
 We could try something such as this, but will not work:
 </p>
 
-<pre>uniform int numLights;
+<pre c="">uniform int numLights;
 uniform vec3 uPositionLight[numLights];
 </pre>
 
@@ -172,7 +172,7 @@ uniform vec3 uPositionLight[numLights];
 However, this construct is valid:
 </p>
 
-<pre>const int numLights = 3;
+<pre c="">const int numLights = 3;
 uniform vec3 uPositionLight[numLights];
 </pre>
 
@@ -180,7 +180,7 @@ uniform vec3 uPositionLight[numLights];
 To map these variables on javascript:
 </p>
 
-<pre>const lightPosition1 = [0, 7, 3];
+<pre javascript="">const lightPosition1 = [0, 7, 3];
 const lightPosition2 = [2.5, 3, 3];
 const lightPosition3 = [-2.5, 3, 3];
 
