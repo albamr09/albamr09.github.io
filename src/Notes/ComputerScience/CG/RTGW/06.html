@@ -70,6 +70,9 @@
 </li><li>
 <a href="06.html#Simplifying%20the%20Problem">Simplifying the Problem</a>
 
+</li><li>
+<a href="06.html#Using%20Uniform%20Arrays%20to%20Handle%20Multiple%20Lights">Using Uniform Arrays to Handle Multiple Lights</a>
+
 </li></ul>
 </li></ul>
 <hr>
@@ -142,6 +145,36 @@ gl.MAX_FRAGMENT_UNIFORM_VECTORS
 <p>
 In order to simplify the problem, we can assume that the ambient component is the same for all of the lights. This will reduce the number of uniforms—one fewer uniform for each light.
 </p>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Use of Color in Lights-Using Uniform Arrays to Handle Multiple Lights"><h3 id="Using Uniform Arrays to Handle Multiple Lights" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Use of Color in Lights-Using Uniform Arrays to Handle Multiple Lights">Using Uniform Arrays to Handle Multiple Lights</a></h3></div>
+
+<p>
+As we've seen, handling light properties with individual uniforms makes the code verbose and difficult to maintain. Fortunately, ESSL provides several mechanisms we can use to solve the problem of handling multiple lights. One of them is <span id="Colors, Depth Testing, and Alpha Blending-Use of Color in Lights-Using Uniform Arrays to Handle Multiple Lights-uniform arrays"></span><strong id="uniform arrays">uniform arrays</strong>.
+</p>
+
+<p>
+This technique allows us to handle multiple lights by introducing enumerable arrays of vectors in the shaders. This allows us to calculate light contributions by iterating through the light arrays in the shaders.
+</p>
+
+<pre>uniform vec3 uPositionLight[3];
+</pre>
+
+<p>
+It’s important to note that ESSL does not support dynamic initialization of uniform arrays.
+We could try something such as this, but will not work:
+</p>
+
+<pre>uniform int numLights;
+uniform vec3 uPositionLight[numLights];
+</pre>
+
+<p>
+However, this construct is valid:
+</p>
+
+<pre>const int numLights = 3;
+uniform vec3 uPositionLight[numLights];
+</pre>
 </div>
   
 
