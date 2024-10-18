@@ -175,6 +175,20 @@ However, this construct is valid:
 <pre>const int numLights = 3;
 uniform vec3 uPositionLight[numLights];
 </pre>
+
+<p>
+To map these variables on javascript:
+</p>
+
+<pre>const lightPosition1 = [0, 7, 3];
+const lightPosition2 = [2.5, 3, 3];
+const lightPosition3 = [-2.5, 3, 3];
+
+const location = gl.getUniformLocation(program, 'uPositionLight');
+
+// The values are concatenated on a single flat array
+gl.uniform3fv(location, [...lightPosition1, ...lightPosition2, ...lightPosition3]);
+</pre>
 </div>
   
 
