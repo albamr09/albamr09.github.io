@@ -2022,7 +2022,7 @@
   {
     "id": "https://albamr09.github.io/src/Notes/Math/Calculus/CET/index.html",
     "title": "Calculus Ealy Transcendentals",
-    "body": " index search search back calculus ealy transcendentals functions and models four ways to represent a function mathematical models: a catalog of essential functions new functions from old functions $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
+    "body": " index search search back calculus ealy transcendentals functions and models four ways to represent a function mathematical models: a catalog of essential functions new functions from old functions exponential functions $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
   },
   {
     "id": "https://albamr09.github.io/src/Notes/Music/ABPCI/abpci.html",
