@@ -1,0 +1,287 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../src/style/custom.css">
+    <title>Inyección/Extracción y Serialización/Deserialización de los Datos</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos"><h1 id="Inyección/Extracción y Serialización/Deserialización de los Datos" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos">Inyección/Extracción y Serialización/Deserialización de los Datos</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="04_data.html#Apache%20Flume">Apache Flume</a>
+
+<ul>
+<li>
+<a href="04_data.html#Las%20Fuentes%20de%20datos">Las Fuentes de datos</a>
+
+</li><li>
+<a href="04_data.html#Batch%20vs%20Streaming">Batch vs Streaming</a>
+
+</li><li>
+<a href="04_data.html#Herramientas%20para%20la%20Inyecci%F3n%20y%20Extracci%F3n%20de%20Datos">Herramientas para la Inyecci n y Extracci n de Datos</a>
+
+<ul>
+<li>
+<a href="04_data.html#Apache%20Scoop">Apache Scoop</a>
+
+</li><li>
+<a href="04_data.html#Apache%20Flume">Apache Flume</a>
+
+<ul>
+<li>
+<a href="04_data.html#Ventajas">Ventajas</a>
+
+</li><li>
+<a href="04_data.html#Desventajas">Desventajas</a>
+
+</li></ul>
+</li></ul>
+</li><li>
+<a href="04_data.html#Arquitectura">Arquitectura</a>
+
+<ul>
+<li>
+<a href="04_data.html#Agentes">Agentes</a>
+
+</li><li>
+<a href="04_data.html#Eventos">Eventos</a>
+
+</li><li>
+<a href="04_data.html#Flujo%20de%20Datos">Flujo de Datos</a>
+
+</li></ul>
+</li></ul>
+</li></ul>
+<hr>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume"><h2 id="Apache Flume" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume">Apache Flume</a></h2></div>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Las Fuentes de datos"><h3 id="Las Fuentes de datos" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Las Fuentes de datos">Las Fuentes de datos</a></h3></div>
+
+<p>
+Las empresas buscan tener todos sus datos centralizados, sean de la naturaleza que sean. Tal que existirá una única fuente de verdad o Single Source of Truth que permite la consistencia de los datos. Bajo esta premisa nacen los conceptos de Data Lake y Data Warehouse.
+</p>
+
+<p>
+En un <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Las Fuentes de datos-Data Warehouse"></span><strong id="Data Warehouse">Data Warehouse</strong> los datos deberán adaptarse a una estructura definida antes de poder ser guardados. Se utilizan los procesos <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Las Fuentes de datos-ETL"></span><strong id="ETL">ETL</strong> de Extracción, Transformación y Carga para adaptar los datos y su formato a la estructura definida antes de volcarlos.
+</p>
+
+<p>
+En un <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Las Fuentes de datos-Data Lake"></span><strong id="Data Lake">Data Lake</strong> los datos se guardan tal cual se reciben, pero pueden ser transformados antes de su extracción. Este utiliza procesos <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Las Fuentes de datos-ELT"></span><strong id="ELT">ELT</strong> en los que primero se realiza la carga y cuando queramos extraer información útil de dichos datos, realizaremos una transformación en caso de ser necesario.
+</p>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Batch vs Streaming"><h3 id="Batch vs Streaming" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Batch vs Streaming">Batch vs Streaming</a></h3></div>
+
+<p>
+El <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Batch vs Streaming-Procesamiento Batch"></span><strong id="Procesamiento Batch">Procesamiento Batch</strong> se da cuando los datos a procesar se encuentran en un almacén de datos estático y estes son finitos, tal que se escogen y procesan por lotes.
+</p>
+
+<p>
+El <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Batch vs Streaming-Procesamiento Streaming"></span><strong id="Procesamiento Streaming">Procesamiento Streaming</strong> es el procesamiento sobre datos que fluyen a través de un sistema, conforme se van añadiendo al mismo. Estes datos no son finitos y la toma de decisiones sobre ellos se hace en tiempo real.
+</p>
+
+<p>
+A continuación mostramos las diferencias entre los dos tipos de procesamiento:
+</p>
+
+<table>
+<thead>
+<tr>
+<th>
+&nbsp;
+</th>
+<th>
+Procesamiento Batch
+</th>
+<th>
+Procesamiento Streaming
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Hardware
+</td>
+<td>
+Los recursos deben ser capaces de procesar y almacenar grandes conjuntos de datos
+</td>
+<td>
+Los datos tienen menor tamaño, por lo que los requisitos computacionales y el almacenamiento puede ser menor
+</td>
+</tr>
+<tr>
+<td>
+Latencia
+</td>
+<td>
+La latencia puede ser de minutos, horas o días.
+</td>
+<td>
+La latencia debe ser en segundos o milisegundos.
+</td>
+</tr>
+<tr>
+<td>
+Tamaño del conjunto de datos
+</td>
+<td>
+Grandes lotes de datos.
+</td>
+<td>
+Un paquete de datos o varios de ellos, siempre de tamaño menor.
+</td>
+</tr>
+<tr>
+<td>
+Análisis
+</td>
+<td>
+Cálculo complejo y análisis en un marco temporal más amplio.
+</td>
+<td>
+Informes o cálculos simples sobre los datos.
+</td>
+</tr>
+</tbody>
+</table>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Herramientas para la Inyección y Extracción de Datos"><h3 id="Herramientas para la Inyección y Extracción de Datos" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Herramientas para la Inyección y Extracción de Datos">Herramientas para la Inyección y Extracción de Datos</a></h3></div>
+
+<p>
+A continuación comentaremos las herramientas que nos permiten la ingesta y extracción de los datos de forma masiva.
+</p>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Herramientas para la Inyección y Extracción de Datos-Apache Scoop"><h4 id="Apache Scoop" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Herramientas para la Inyección y Extracción de Datos-Apache Scoop">Apache Scoop</a></h4></div>
+
+<p>
+Está pensado para la transferencia de datos desde un almacén estructurado a otro y utiliza procesamiento por lotes. Sin embargo, desde junio de 2021 el proyecto Sqoop dejó de tener continuidad. 
+</p>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Herramientas para la Inyección y Extracción de Datos-Apache Flume"><h4 id="Apache Flume" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Herramientas para la Inyección y Extracción de Datos-Apache Flume">Apache Flume</a></h4></div>
+
+<p>
+Flume es un software para la ingesta de datos masivos en streaming. Fue presentado por Cloudera en el año 2010 y posteriormente se incorporó bajo licencia Apache como Open Source a la Fundación Apache.
+</p>
+
+<p>
+Flume está basado en el flujo de datos en streaming de eventos sencillos y permite la lectura y escritura de múltiples fuentes de datos. Además de ello, Flume tiene mecanismos que aseguran la fiabilidad y confiabilidad de los datos.
+</p>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Herramientas para la Inyección y Extracción de Datos-Apache Flume-Ventajas"><h5 id="Ventajas" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Herramientas para la Inyección y Extracción de Datos-Apache Flume-Ventajas">Ventajas</a></h5></div>
+
+<ul>
+<li>
+Puede manejar <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Herramientas para la Inyección y Extracción de Datos-Apache Flume-Ventajas-grandes volúmenes de datos"></span><strong id="grandes volúmenes de datos">grandes volúmenes de datos</strong> eficientemente distribuyendo la carga entre múltiples agentes.
+
+</li><li>
+Presenta una <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Herramientas para la Inyección y Extracción de Datos-Apache Flume-Ventajas-gran flexibilidad"></span><strong id="gran flexibilidad">gran flexibilidad</strong>, ya que nos permite recoger datos de diversas fuentes sin atender a su formato.
+
+</li><li>
+Se <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Herramientas para la Inyección y Extracción de Datos-Apache Flume-Ventajas-integra perfectamente"></span><strong id="integra perfectamente">integra perfectamente</strong> con el Ecosistema Hadoop.
+
+</li><li>
+Presenta <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Herramientas para la Inyección y Extracción de Datos-Apache Flume-Ventajas-tolerancia a fallos"></span><strong id="tolerancia a fallos">tolerancia a fallos</strong>.
+
+</li></ul>
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Herramientas para la Inyección y Extracción de Datos-Apache Flume-Desventajas"><h5 id="Desventajas" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Herramientas para la Inyección y Extracción de Datos-Apache Flume-Desventajas">Desventajas</a></h5></div>
+
+<ul>
+<li>
+Puede resultar difícil configurar los parámetros adecuados para los agentes. Esto puede derivar en un fenómeno conocido como Backpressure que ocurren cuando el volumen de datos entrantes supera a la cantidad de datos que pueden ser consumidos por Flume dando lugar a pérdida de eventos y por lo tanto de información, para evitar esto hay que configurar adecuadamente a los agentes.
+
+</li><li>
+Está estrechamente ligado a la ingesta de datos en Hadoop, para la ingesta en otro tipo de sistemas podemos utilizar herramientas como Kafka. 
+
+</li><li>
+No ofrece herramientas para el monitoreo y diagnóstico de errores de forma clara para el usuario.
+
+</li></ul>
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura"><h3 id="Arquitectura" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura">Arquitectura</a></h3></div>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Agentes"><h4 id="Agentes" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Agentes">Agentes</a></h4></div>
+
+<p>
+Se trata de un conjunto de componentes independientes que dirigen los eventos desde la entrada a la salida. Además los agentes pueder recibir y enviarse datos entre sí. Un agente está compuesto de tres componentes fundamentales:
+</p>
+
+<ul>
+<li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Agentes-Source"></span><strong id="Source">Source</strong>: es el punto de entrada de datos de un agente. Cada source es configurada para leer datos desde un lugar o ubicación específica y enviarlos al channel del agente.
+
+</li><li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Agentes-Channels"></span><strong id="Channels">Channels</strong>: es el lugar temporal donde los datos llegan desde el source y se procesan o no, dependiendo del caso de uso, para transmitirlos al destino final (sink).
+
+</li><li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Agentes-Sinks"></span><strong id="Sinks">Sinks</strong>: Son los encargados de leer los datos de los canales y enviarlos al siguiente componente del sistema, que será u otro agente, o el destino final. Si los datos son consumidos por los sinks se eliminan de los canales.
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/assets/apache_flume_arch.png" alt="Apache Flume Architecture">
+</p>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Eventos"><h4 id="Eventos" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Eventos">Eventos</a></h4></div>
+
+<p>
+Se trata de una unidad de "dato". El dato es extraído por la fuente, enviado y procesado por el canal y consumido por el sink o sumidero.
+</p>
+
+<p>
+Un evento se compone de dos partes:
+</p>
+
+<ul>
+<li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Eventos-Cabecera"></span><strong id="Cabecera">Cabecera</strong>: registra información de metadata mediante pares clave-valor
+
+</li><li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Eventos-Datos"></span><strong id="Datos">Datos</strong>: son almacenados en forma de array en el cuerpo de un evento.
+
+</li></ul>
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Flujo de Datos"><h4 id="Flujo de Datos" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Flujo de Datos">Flujo de Datos</a></h4></div>
+
+<p>
+El flujo de datos describe el recorrido de los eventos desde el comienzo hasta el destino final.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
