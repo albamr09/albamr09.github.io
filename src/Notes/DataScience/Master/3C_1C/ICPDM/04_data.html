@@ -70,7 +70,7 @@
 </li></ul>
 </li></ul>
 </li><li>
-<a href="04_data.html#Arquitectura">Arquitectura</a>
+<a href="04_data.html#Arquitectura%20de%20Apache%20Flume">Arquitectura de Apache Flume</a>
 
 <ul>
 <li>
@@ -83,6 +83,14 @@
 <a href="04_data.html#Flujo%20de%20Datos">Flujo de Datos</a>
 
 </li></ul>
+</li></ul>
+</li><li>
+<a href="04_data.html#Apache%20Avro">Apache Avro</a>
+
+<ul>
+<li>
+<a href="04_data.html#La%20Evoluci%F3n%20de%20los%20Formatos">La Evoluci n de los Formatos</a>
+
 </li></ul>
 </li></ul>
 <hr>
@@ -221,7 +229,7 @@ Presenta <span id="Inyección/Extracción y Serialización/Deserialización de l
 
 <ul>
 <li>
-Puede resultar difícil configurar los parámetros adecuados para los agentes. Esto puede derivar en un fenómeno conocido como Backpressure que ocurren cuando el volumen de datos entrantes supera a la cantidad de datos que pueden ser consumidos por Flume dando lugar a pérdida de eventos y por lo tanto de información, para evitar esto hay que configurar adecuadamente a los agentes.
+Puede resultar difícil configurar los parámetros adecuados para los agentes. Esto puede derivar en un fenómeno conocido como Backpressure que ocurre cuando el volumen de datos entrantes supera a la cantidad de datos que pueden ser consumidos por Flume dando lugar a pérdida de eventos y por lo tanto de información, para evitar esto hay que configurar adecuadamente a los agentes.
 
 </li><li>
 Está estrechamente ligado a la ingesta de datos en Hadoop, para la ingesta en otro tipo de sistemas podemos utilizar herramientas como Kafka. 
@@ -230,9 +238,9 @@ Está estrechamente ligado a la ingesta de datos en Hadoop, para la ingesta en o
 No ofrece herramientas para el monitoreo y diagnóstico de errores de forma clara para el usuario.
 
 </li></ul>
-<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura"><h3 id="Arquitectura" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura">Arquitectura</a></h3></div>
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura de Apache Flume"><h3 id="Arquitectura de Apache Flume" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura de Apache Flume">Arquitectura de Apache Flume</a></h3></div>
 
-<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Agentes"><h4 id="Agentes" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Agentes">Agentes</a></h4></div>
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura de Apache Flume-Agentes"><h4 id="Agentes" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura de Apache Flume-Agentes">Agentes</a></h4></div>
 
 <p>
 Se trata de un conjunto de componentes independientes que dirigen los eventos desde la entrada a la salida. Además los agentes pueder recibir y enviarse datos entre sí. Un agente está compuesto de tres componentes fundamentales:
@@ -240,20 +248,20 @@ Se trata de un conjunto de componentes independientes que dirigen los eventos de
 
 <ul>
 <li>
-<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Agentes-Source"></span><strong id="Source">Source</strong>: es el punto de entrada de datos de un agente. Cada source es configurada para leer datos desde un lugar o ubicación específica y enviarlos al channel del agente.
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura de Apache Flume-Agentes-Source"></span><strong id="Source">Source</strong>: es el punto de entrada de datos de un agente. Cada source es configurada para leer datos desde un lugar o ubicación específica y enviarlos al channel del agente.
 
 </li><li>
-<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Agentes-Channels"></span><strong id="Channels">Channels</strong>: es el lugar temporal donde los datos llegan desde el source y se procesan o no, dependiendo del caso de uso, para transmitirlos al destino final (sink).
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura de Apache Flume-Agentes-Channels"></span><strong id="Channels">Channels</strong>: es el lugar temporal donde los datos llegan desde el source y se procesan o no, dependiendo del caso de uso, para transmitirlos al destino final (sink).
 
 </li><li>
-<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Agentes-Sinks"></span><strong id="Sinks">Sinks</strong>: Son los encargados de leer los datos de los canales y enviarlos al siguiente componente del sistema, que será u otro agente, o el destino final. Si los datos son consumidos por los sinks se eliminan de los canales.
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura de Apache Flume-Agentes-Sinks"></span><strong id="Sinks">Sinks</strong>: Son los encargados de leer los datos de los canales y enviarlos al siguiente componente del sistema, que será u otro agente, o el destino final. Si los datos son consumidos por los sinks se eliminan de los canales.
 
 </li></ul>
 <p>
 <img src="https://albamr09.github.io/public/assets/apache_flume_arch.png" alt="Apache Flume Architecture">
 </p>
 
-<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Eventos"><h4 id="Eventos" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Eventos">Eventos</a></h4></div>
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura de Apache Flume-Eventos"><h4 id="Eventos" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura de Apache Flume-Eventos">Eventos</a></h4></div>
 
 <p>
 Se trata de una unidad de "dato". El dato es extraído por la fuente, enviado y procesado por el canal y consumido por el sink o sumidero.
@@ -265,17 +273,21 @@ Un evento se compone de dos partes:
 
 <ul>
 <li>
-<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Eventos-Cabecera"></span><strong id="Cabecera">Cabecera</strong>: registra información de metadata mediante pares clave-valor
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura de Apache Flume-Eventos-Cabecera"></span><strong id="Cabecera">Cabecera</strong>: registra información de metadata mediante pares clave-valor
 
 </li><li>
-<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Eventos-Datos"></span><strong id="Datos">Datos</strong>: son almacenados en forma de array en el cuerpo de un evento.
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura de Apache Flume-Eventos-Datos"></span><strong id="Datos">Datos</strong>: son almacenados en forma de array en el cuerpo de un evento.
 
 </li></ul>
-<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Flujo de Datos"><h4 id="Flujo de Datos" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura-Flujo de Datos">Flujo de Datos</a></h4></div>
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura de Apache Flume-Flujo de Datos"><h4 id="Flujo de Datos" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Flume-Arquitectura de Apache Flume-Flujo de Datos">Flujo de Datos</a></h4></div>
 
 <p>
 El flujo de datos describe el recorrido de los eventos desde el comienzo hasta el destino final.
 </p>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro"><h2 id="Apache Avro" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro">Apache Avro</a></h2></div>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-La Evolución de los Formatos"><h3 id="La Evolución de los Formatos" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-La Evolución de los Formatos">La Evolución de los Formatos</a></h3></div>
 </div>
   
 
