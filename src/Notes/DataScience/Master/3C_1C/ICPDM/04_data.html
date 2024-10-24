@@ -107,6 +107,19 @@
 <a href="04_data.html#Ejemplo%20de%20Esquema">Ejemplo de Esquema</a>
 
 </li></ul>
+</li><li>
+<a href="04_data.html#Apache%20Parquet">Apache Parquet</a>
+
+<ul>
+<li>
+<a href="04_data.html#Formato%20Columnar">Formato Columnar</a>
+
+<ul>
+<li>
+<a href="04_data.html#Ventajas">Ventajas</a>
+
+</li></ul>
+</li></ul>
 </li></ul>
 <hr>
 
@@ -469,6 +482,40 @@ Definimos un esquema que define un objeto, en concreto un usuario. Por lo tanto,
      ]
 }
 </pre>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Parquet"><h2 id="Apache Parquet" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Parquet">Apache Parquet</a></h2></div>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Parquet-Formato Columnar"><h3 id="Formato Columnar" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Parquet-Formato Columnar">Formato Columnar</a></h3></div>
+
+<p>
+Los formatos que habíamos estado tratando guardan los datos en filas (CSV, Avro, JSON), los formatos de archivos columnares guardan los datos en columnas. Lo formatos más populares son Apace Parquet y Apache OCR.
+</p>
+
+<p>
+Por ejemplo, dada la siguiente tabla:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/apache_parquet_table.png" alt="Example Table">
+</p>
+
+<p>
+La siguiente imagen nos ilustra las diferencia entre guardarla en formato fila y en formato columna:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/apache_parquet_row_vs_col.png" alt="Row vs Column Format">
+</p>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Parquet-Formato Columnar-Ventajas"><h4 id="Ventajas" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Parquet-Formato Columnar-Ventajas">Ventajas</a></h4></div>
+
+<p>
+El formato columnar presenta ventajas a la hora de llevar a cabo agrupaciones en grandes conjuntos de datos. Si utilizamos el formato basado en filas deberemos de recorrer toda la tabla, sin embargo con el formato columnar sólo es necesario leer el campo por el cual se lleva a cabo la agrupación.
+</p>
+
+<p>
+Por el mismo motivo este tipo de formato puede suponer menos costes (p.ej. si están alojados en el cloud). Generalmente no sólo se cobra por el almacenamiento si no también por la consulta y el uso de los datos. Tal que si sólo queremos consultar una columna, con un formato basado en filas de nuevo deberemos de consultar la fila completa, mientras que el formato columnar nos permite sólo obtener el campo consultado.
+</p>
 </div>
   
 
