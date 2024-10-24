@@ -54,6 +54,26 @@
 </li><li>
 <a href="01_05.html#Logarithmic%20Functions">Logarithmic Functions</a>
 
+</li><li>
+<a href="01_05.html#Natural%20Logarithms">Natural Logarithms</a>
+
+</li><li>
+<a href="01_05.html#Inverse%20Trigonometric%20Functions">Inverse Trigonometric Functions</a>
+
+<ul>
+<li>
+<a href="01_05.html#Inverse%20Sine%20Function">Inverse Sine Function</a>
+
+</li><li>
+<a href="01_05.html#Inverse%20Cosine%20Function">Inverse Cosine Function</a>
+
+</li><li>
+<a href="01_05.html#Inverse%20Tangent%20Function">Inverse Tangent Function</a>
+
+</li><li>
+<a href="01_05.html#Other%20Inverse%20Functions">Other Inverse Functions</a>
+
+</li></ul>
 </li></ul>
 <hr>
 
@@ -131,6 +151,174 @@ The logarithmic function has domain \((0, \infty)\) and range \(\mathbb{R}\). It
 
 <p>
 <img src="https://albamr09.github.io/public/assets/inverse_log_function.png" alt="Graph of the invserse of the exponential function">
+</p>
+
+<div id="Inverse Functions and Logarithms-Natural Logarithms"><h2 id="Natural Logarithms" class="header"><a href="#Inverse Functions and Logarithms-Natural Logarithms">Natural Logarithms</a></h2></div>
+
+<p>
+The logarithm with base \(e\) is called the <span id="Inverse Functions and Logarithms-Natural Logarithms-natural logarithm"></span><strong id="natural logarithm">natural logarithm</strong> and is denoted as:
+</p>
+
+\begin{align}
+\log_e x = \ln x
+\end{align}
+
+<p>
+If we apply the <a href="01_05.html#Cancellation Equations">cancellation equations</a> we obtain:
+</p>
+
+\begin{align}
+\ln(e^x) = x, x \in \mathbb{R}
+\end{align}
+
+\begin{align}
+e^{\ln x} = x, x &gt; 0
+\end{align}
+
+<p>
+In particular if we set \(x = 1\) we get:
+</p>
+
+\begin{align}
+\ln e = 1
+\end{align}
+
+<p>
+Therefore:
+</p>
+
+\begin{align}
+x^r = \left(e^{\ln(x)}\right)^r = e^{r \ln(x)}
+\end{align}
+
+<div id="Inverse Functions and Logarithms-Inverse Trigonometric Functions"><h2 id="Inverse Trigonometric Functions" class="header"><a href="#Inverse Functions and Logarithms-Inverse Trigonometric Functions">Inverse Trigonometric Functions</a></h2></div>
+
+<p>
+Trigonometric functions are not one-to-one, as their are periodic function. However if their domain to an interval that "lats" one period of the function then it is one-to-on.
+</p>
+
+<div id="Inverse Functions and Logarithms-Inverse Trigonometric Functions-Inverse Sine Function"><h3 id="Inverse Sine Function" class="header"><a href="#Inverse Functions and Logarithms-Inverse Trigonometric Functions-Inverse Sine Function">Inverse Sine Function</a></h3></div>
+
+<p>
+The inverse of the sine function is denoted by \(\sin^{-1}\) or \(\arcsin\), and it is defined as:
+</p>
+
+\begin{align}
+\sin^{-1}(x) = y \leftrightarrow \sin y = x, -\frac{\pi}{2} \leq y \leq \frac{\pi}{2}
+\end{align}
+
+<p>
+As you can see the domain has been restricted to \([-\frac{\pi}{2}, \frac{-pi}{2}]\) (See Figure 18).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/restricted_sin_function.png" alt="Restricted Sine Function">
+</p>
+
+<p>
+By the <a href="01_05.html#Cancellation Equations">cancellation equations</a> we obtain:
+</p>
+
+\begin{aling}
+\sin^{-1}(\sin x) = x, -\frac{\pi}{2} \leq x \leq \frac{\pi}{2}
+\end{aling}
+
+\begin{aling}
+\sin(\sin^{-1} x) = x, -1 \leq x \leq 1
+\end{aling}
+
+<p>
+The inverse sine function has domain \([-1, 1]\) and range \([-\frac{\pi}{2}, \frac{\pi}{2}]\) and its graph is shown on Figure 20.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/inverse_sine_function.png" alt="Inverse Sine Function">
+</p>
+
+<div id="Inverse Functions and Logarithms-Inverse Trigonometric Functions-Inverse Cosine Function"><h3 id="Inverse Cosine Function" class="header"><a href="#Inverse Functions and Logarithms-Inverse Trigonometric Functions-Inverse Cosine Function">Inverse Cosine Function</a></h3></div>
+
+<p>
+The inverse of the cosine function is denoted by \(\cos^{-1}\) or \(\arccos\), and it is defined as:
+</p>
+
+\begin{align}
+\cos^{-1}(x) = y \leftrightarrow \cos y = x, 0 \leq y \leq \pi
+\end{align}
+
+<p>
+As you can see the domain has been restricted to \([0, \pi]\) (See Figure 21).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/restricted_consine_function.png" alt="Restricted Cosine Function">
+</p>
+
+<p>
+By the <a href="01_05.html#Cancellation Equations">cancellation equations</a> we obtain:
+</p>
+
+\begin{aling}
+\cos^{-1}(\cos x) = x, 0 \leq x \leq \pi
+\end{aling}
+
+\begin{aling}
+\cos(\cos^{-1} x) = x, -1 \leq x \leq 1
+\end{aling}
+
+<p>
+The inverse cosine function has domain \([-1, 1]\) and range \([0, \pi]\) and its graph is shown on Figure 22.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/inverse_cosine_function.png" alt="Inverse Cosine Function">
+</p>
+
+<div id="Inverse Functions and Logarithms-Inverse Trigonometric Functions-Inverse Tangent Function"><h3 id="Inverse Tangent Function" class="header"><a href="#Inverse Functions and Logarithms-Inverse Trigonometric Functions-Inverse Tangent Function">Inverse Tangent Function</a></h3></div>
+
+<p>
+The inverse of the tangent function is denoted by \(\tan^{-1}\) or \(\arctan\), and it is defined as:
+</p>
+
+\begin{align}
+\tan^{-1}(x) = y \leftrightarrow \tan y = x, -\frac{\pi}{2} \leq y \leq \frac{\pi}{2}
+\end{align}
+
+<p>
+As you can see the domain has been restricted to \([-\frac{\pi}{2}, \frac{\pi}{2}]\) (See Figure 23).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/restricted_tan_function.png" alt="Restricted Tangent Function">
+</p>
+
+<p>
+By the <a href="01_05.html#Cancellation Equations">cancellation equations</a> we obtain:
+</p>
+
+\begin{aling}
+\tan^{-1}(\tan x) = x, -\frac{\pi}{2} \leq x \leq \frac{\pi}{2}
+\end{aling}
+
+\begin{aling}
+\tan(\tan^{-1} x) = x, -1 \leq x \leq 1
+\end{aling}
+
+<p>
+The inverse tangent function has domain \([-1, 1]\) and range \([-\frac{\pi}{2}, \frac{\pi}{2}]\) and its graph is shown on Figure 25.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/inverse_tan_function.png" alt="Inverse Tangent Function">
+</p>
+
+<p>
+We know that the lines \(x = \pm \frac{\pi}{2}\) are vertical asymptotes of the graph of the tangent function. Since the graph of \(\tan^{-1}\) is obtained by reflecting the graph of the restricted tangnet function about the line \(y = x\), the the lines \(y = \frac{\pi}{2}\) and \(y = -\frac{\pi}{2}\) are horizontal asymptotes of the graph of \(\tan^{-1}\).
+</p>
+
+<div id="Inverse Functions and Logarithms-Inverse Trigonometric Functions-Other Inverse Functions"><h3 id="Other Inverse Functions" class="header"><a href="#Inverse Functions and Logarithms-Inverse Trigonometric Functions-Other Inverse Functions">Other Inverse Functions</a></h3></div>
+
+<p>
+<a href="../../Pre-Calculus/AGAA/09_04.html#Other Inverse Trigonometric Functions">See</a> for information about the remaning inverse trigonometric functions.
 </p>
 </div>
   
