@@ -89,7 +89,22 @@
 
 <ul>
 <li>
+<a href="04_data.html#Serializaci%F3n%2FDeserializaci%F3n">Serializaci n Deserializaci n</a>
+
+</li><li>
 <a href="04_data.html#La%20Evoluci%F3n%20de%20los%20Formatos">La Evoluci n de los Formatos</a>
+
+</li><li>
+<a href="04_data.html#Estructura">Estructura</a>
+
+</li><li>
+<a href="04_data.html#La%20Evoluci%F3n%20de%20los%20Esquemas">La Evoluci n de los Esquemas</a>
+
+</li><li>
+<a href="04_data.html#Ventajas">Ventajas</a>
+
+</li><li>
+<a href="04_data.html#Ejemplo%20de%20Esquema">Ejemplo de Esquema</a>
 
 </li></ul>
 </li></ul>
@@ -287,7 +302,173 @@ El flujo de datos describe el recorrido de los eventos desde el comienzo hasta e
 
 <div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro"><h2 id="Apache Avro" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro">Apache Avro</a></h2></div>
 
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-Serialización/Deserialización"><h3 id="Serialización/Deserialización" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-Serialización/Deserialización">Serialización/Deserialización</a></h3></div>
+
+<p>
+La <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-Serialización/Deserialización-serialización"></span><strong id="serialización">serialización</strong> de un objeto consiste en la conversión de dicho objeto a un formato que puede ser transmitido y almacenado de forma eficiente (p.ej. binario o JSON). La conversión inversa se denomina <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-Serialización/Deserialización-deserialización"></span><strong id="deserialización">deserialización</strong>.
+</p>
+
+<p>
+Este proceso se lleva a cabo por los siguientes motivos:
+</p>
+
+<ul>
+<li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-Serialización/Deserialización-Almacenamiento"></span><strong id="Almacenamiento">Almacenamiento</strong>: generalmente queremos almacenar los datos de una forma eficiente (minimizando su tamaño).
+
+</li><li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-Serialización/Deserialización-Transmisión"></span><strong id="Transmisión">Transmisión</strong>: en sistemas distribuidos es necesario el paso de datos entre sistemas, por lo tanto necesitamos que los datos esten en un formato que optmice su envío y asegure la reconstrucción de los datos.
+
+</li><li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-Serialización/Deserialización-Intercambio de datos"></span><strong id="Intercambio de datos">Intercambio de datos</strong>: La serialización y deserialización permite intercambiar información manteniendo la integridad de los datos, independientemente del lenguaje de programación.
+
+</li></ul>
 <div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-La Evolución de los Formatos"><h3 id="La Evolución de los Formatos" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-La Evolución de los Formatos">La Evolución de los Formatos</a></h3></div>
+
+<p>
+Apache Avro pertenece a la Fundación Apache y se integra perfectamente con el ecosistema Hadoop. Avro es un formato que contiene tanto los datos como el <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-La Evolución de los Formatos-esquema"></span><strong id="esquema">esquema</strong> que deben de seguir los datos.
+</p>
+
+<p>
+En comparación con JSON, este no fuerza al uso de un esquema de los datos y su tamaño aumenta cuando existen claves repetidas.
+</p>
+
+<p>
+Avro specifica dos formas de llevar a cabo la serialización: 
+</p>
+
+<ul>
+<li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-La Evolución de los Formatos-Binaria"></span><strong id="Binaria">Binaria</strong>: resulta en ficheros más pequeños.
+
+</li><li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-La Evolución de los Formatos-JSON"></span><strong id="JSON">JSON</strong>: mejor para depurar y para comunicación en entornos web.
+
+</li></ul>
+<p>
+Avro specifica un orden de datos estándar.
+</p>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-Estructura"><h3 id="Estructura" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-Estructura">Estructura</a></h3></div>
+
+<p>
+Un fichero está conformado por dos componentes:
+</p>
+
+<ul>
+<li>
+Cabecera: contiene metadatos acerca del esquema de los datos entre otras cosas.
+
+</li><li>
+Uno o más bloques que pueden contener metadatos o datos. En todo fichero hay al menos un bloque de metadatos (ver Block 1 en la siguiente imagen).
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/assets/avro_file_structure.png" alt="File Structure">
+</p>
+
+<p>
+Avro sigue un formato basado en filas, tal que se agupan los datos en grupos de filas.
+</p>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-La Evolución de los Esquemas"><h3 id="La Evolución de los Esquemas" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-La Evolución de los Esquemas">La Evolución de los Esquemas</a></h3></div>
+
+<p>
+Avro se puede adaptar a la evolución de los esquemas. En concreto tenemos dos tipos de esquema:
+</p>
+
+<ul>
+<li>
+Esquema de <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-La Evolución de los Esquemas-escritura"></span><strong id="escritura">escritura</strong>: se utiliza en la serialización.
+
+</li><li>
+Esquema de <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-La Evolución de los Esquemas-lectura"></span><strong id="lectura">lectura</strong>: se utiliza en la deserialización.
+
+</li></ul>
+<p>
+Existen los siguientes tipos de compatibilidad:
+</p>
+
+<ul>
+<li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-La Evolución de los Esquemas-Compatibilidad hacia delante"></span><strong id="Compatibilidad hacia delante">Compatibilidad hacia delante</strong>: un nuevo esquema puede leer datos escritos con un esquema anterior.
+
+</li><li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-La Evolución de los Esquemas-Compatibilidad hacia atrás"></span><strong id="Compatibilidad hacia atrás">Compatibilidad hacia atrás</strong>: un esquema antiguo puede leer datos escritos con un nuevo esquema.
+
+</li><li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-La Evolución de los Esquemas-Compatibilidad completa"></span><strong id="Compatibilidad completa">Compatibilidad completa</strong>: combina la compatibilidad hacia delante y hacia atrás.
+
+</li></ul>
+<p>
+Para asegurar la compatibilidad de los esquema tenemos diversas reglas:
+</p>
+
+<ul>
+<li>
+Al añadir campos estes siempre deben de tener un valor por defecto.
+
+</li><li>
+Sólo se pueden eliminar campo si estes no son necesarios para las aplicaciones que leen/escriben el esquema.
+
+</li></ul>
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-Ventajas"><h3 id="Ventajas" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-Ventajas">Ventajas</a></h3></div>
+
+<ul>
+<li>
+La compresión de los datos es automática
+
+</li><li>
+Está totalmente tipado
+
+</li><li>
+Los ficheros contienen tanto los datos como la definición del esquema
+
+</li><li>
+Los datos pueden ser procesado por casi cualquier lenguaje
+
+</li><li>
+Permite la evolución sencilla de la definición del esquema de los datos
+
+</li><li>
+Permite el paso de datos entre sistemas escritos en distintos lenguajes
+
+</li></ul>
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-Ejemplo de Esquema"><h3 id="Ejemplo de Esquema" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Avro-Ejemplo de Esquema">Ejemplo de Esquema</a></h3></div>
+
+<p>
+Vamos a ver cómo definir un esquema para los siguientes datos, uno está almacenado como un archivo CSV, mientras que el otro está definido como un fichero JSON.
+</p>
+
+<pre csv="">name, email, age
+Ana,ana@avro.com,34
+Juan,juan@avro.com,28
+Alvaro,alvaro@avro.com,35
+Maria,maria@avro.com,25
+Luis,luis@avro.com,30
+</pre>
+
+<pre json="">[
+     {"name": "David", "email": "david@avro.com", "age": 28},
+     {"name": "Pablo", "email": "pablo@avro.com", "age": 31},
+     {"name": "Ines", "email": "ines@avro.com", "age": 34}
+]
+</pre>
+
+<p>
+Definimos un esquema que define un objeto, en concreto un usuario. Por lo tanto, el esquema será de tipo record. Los esquemas se escriben en formato JSON, y hay que indicar por cada campo el nombre de éste y el tipo de datos asociado.
+</p>
+
+<pre json="">{
+     "type": "record",
+     "name": "User",
+     "fields": [
+         {"name": "name", "type": "string"},
+         {"name": "email", "type": "string"},
+         {"name": "age", "type": "int"},
+     ]
+}
+</pre>
 </div>
   
 
