@@ -1,0 +1,143 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Inverse Functions and Logarithms</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"><link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Inverse Functions and Logarithms"><h1 id="Inverse Functions and Logarithms" class="header"><a href="#Inverse Functions and Logarithms">Inverse Functions and Logarithms</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="01_05.html#Inverse%20Functions">Inverse Functions</a>
+
+<ul>
+<li>
+<a href="01_05.html#Cancellation%20Equations">Cancellation Equations</a>
+
+</li><li>
+<a href="01_05.html#Graphing%20the%20Inverse">Graphing the Inverse</a>
+
+</li></ul>
+</li><li>
+<a href="01_05.html#Logarithmic%20Functions">Logarithmic Functions</a>
+
+</li></ul>
+<hr>
+
+<div id="Inverse Functions and Logarithms-Inverse Functions"><h2 id="Inverse Functions" class="header"><a href="#Inverse Functions and Logarithms-Inverse Functions">Inverse Functions</a></h2></div>
+
+<p>
+We know that a function is <a href="../../Pre-Calculus/AGAA/05_01.html#One-to-One Functions">one-to-one</a> graphically by applying the <a href="../../Pre-Calculus/AGAA/05_01.html#Horizontal Line Test">horizontal line test</a>.
+</p>
+
+<p>
+Any function \(f\) has an <a href="../../Pre-Calculus/AGAA/05_01.html#Inverse Function">inverse</a> if and only if \(f\) is one-to-one.
+</p>
+
+<div id="Inverse Functions and Logarithms-Inverse Functions-Cancellation Equations"><h3 id="Cancellation Equations" class="header"><a href="#Inverse Functions and Logarithms-Inverse Functions-Cancellation Equations">Cancellation Equations</a></h3></div>
+
+<p>
+Given a function \(f: A \rightarrow B\) whose inverse \(f^{-1}\) exists, then its cancellation equations are defined as follows:
+</p>
+
+\begin{align}
+f^{-1}(f(x)) = x, \forall x \in A
+\end{align}
+
+\begin{align}
+f(f^{-1}(x)) = x, \forall x \in B
+\end{align}
+
+<p>
+On the first cancellation equation \(f^{-1}\) undoes what \(f\) does, and viceversa for the second equation.
+</p>
+
+<div id="Inverse Functions and Logarithms-Inverse Functions-Graphing the Inverse"><h3 id="Graphing the Inverse" class="header"><a href="#Inverse Functions and Logarithms-Inverse Functions-Graphing the Inverse">Graphing the Inverse</a></h3></div>
+
+<p>
+The <a href="../../Pre-Calculus/AGAA/05_01.html#Finding the Equation of the Inverse of y = ƒ(x)">process of finding the inverse</a> gives us a method for obtaining the graph of \(f^{-1}\) from the graph of \(f\). 
+</p>
+
+<p>
+Since \(f(a) = b\) if and only if \(f^{-1}(b) = a\) then the point \((a, b)\) is on the graph of \(f\) if and only if the point \((b, a)\) is on the graph \(f^{-1}\). But we get the point \((b, a)\) from \((a, b)\) by reflecting about the line \(y = x\) (See Figure 8).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/inverse_function_graph.png" alt="Graph of the Inverse Function">
+</p>
+
+<p>
+So the graph of \(f^{-1}\) is obtained by reflecting the graph of \(f\) about the line \(y = x\).
+</p>
+
+<div id="Inverse Functions and Logarithms-Logarithmic Functions"><h2 id="Logarithmic Functions" class="header"><a href="#Inverse Functions and Logarithms-Logarithmic Functions">Logarithmic Functions</a></h2></div>
+
+<p>
+If \(b &gt; 0\) and \(b \neq 1\) then the exponential function \(f(x) = b^x\) is either increasing or decreasing, and so it is one-to-one. Therefore its inverse exists and is called the logarithmic function with base \(b\):
+</p>
+
+\begin{align}
+\log_b x = y \leftrightarrow b^y = x
+\end{align}
+
+<p>
+If we apply the <a href="01_05.html#Cancellation Equations">cancellation equations</a> we obtain:
+</p>
+
+\begin{align}
+\log_b(b^x) = x, \forall x \in \mathbb{R}
+\end{align}
+
+\begin{align}
+b^{\log_b x} = x, \forall x &gt; 0
+\end{align}
+
+<p>
+The logarithmic function has domain \((0, \infty)\) and range \(\mathbb{R}\). Its graph is the reflection of the graph of \(y = b^x\) about the line \(y = x\) (See Figure 11).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/assets/inverse_log_function.png" alt="Graph of the invserse of the exponential function">
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/flexsearch.bundle.js" id="flexsearch" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
