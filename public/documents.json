@@ -2077,6 +2077,11 @@
   {
     "id": "https://albamr09.github.io/src/Notes/Music/ABPCI/index.html",
     "title": "Alfred Basic Piano Course I",
-    "body": " index search search back alfred basic piano course i notation positions intervals chords $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
+    "body": " index search search back alfred basic piano course i notation positions intervals chords scales $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
+  },
+  {
+    "id": "https://albamr09.github.io/src/Notes/Music/ABPCI/05_scales.html",
+    "title": "Scales",
+    "body": " index search search back scales contents do major scale the major scale is made of two tetrachords joined by a whole step. do major scale the do major scale is constrcuted as follow: each scale begins and ends on a note of the same name as the scale, called the key note. $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
   }
 ]
