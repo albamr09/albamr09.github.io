@@ -119,6 +119,14 @@
 <a href="04_data.html#Ventajas">Ventajas</a>
 
 </li></ul>
+</li><li>
+<a href="04_data.html#Apache%20Parquet">Apache Parquet</a>
+
+<ul>
+<li>
+<a href="04_data.html#Estructura%20de%20un%20Fichero%20Parquet">Estructura de un Fichero Parquet</a>
+
+</li></ul>
 </li></ul>
 </li></ul>
 <hr>
@@ -515,6 +523,40 @@ El formato columnar presenta ventajas a la hora de llevar a cabo agrupaciones en
 
 <p>
 Por el mismo motivo este tipo de formato puede suponer menos costes (p.ej. si están alojados en el cloud). Generalmente no sólo se cobra por el almacenamiento si no también por la consulta y el uso de los datos. Tal que si sólo queremos consultar una columna, con un formato basado en filas de nuevo deberemos de consultar la fila completa, mientras que el formato columnar nos permite sólo obtener el campo consultado.
+</p>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Parquet-Apache Parquet"><h3 id="Apache Parquet" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Parquet-Apache Parquet">Apache Parquet</a></h3></div>
+
+<p>
+Parquet es un tipo de fichero en formato columnar diseñado para realizar consultas eficientes sobre las columnas. Además permite estructuras complejas de datos anidados y ofrece esquemas de compresión muy eficientes. Por ello es popular en campos como el Big Data, ya que a parte de su eficiencia reduce costes.
+</p>
+
+<p>
+Parquet está sostenido y mantenido en la Fundación Apache y, por tanto, está disponible para cualquier proyecto bajo licencia Apache.
+</p>
+
+<div id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Parquet-Apache Parquet-Estructura de un Fichero Parquet"><h4 id="Estructura de un Fichero Parquet" class="header"><a href="#Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Parquet-Apache Parquet-Estructura de un Fichero Parquet">Estructura de un Fichero Parquet</a></h4></div>
+
+<p>
+Los ficheros Parquet tienen una <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Parquet-Apache Parquet-Estructura de un Fichero Parquet-estructura jerarquizada"></span><strong id="estructura jerarquizada">estructura jerarquizada</strong>: encabezado, metadatos y grupos de filas.
+</p>
+
+<ul>
+<li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Parquet-Apache Parquet-Estructura de un Fichero Parquet-Encabezado"></span><strong id="Encabezado">Encabezado</strong>: contiene información necesaria para la lectura del fichero. <span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Parquet-Apache Parquet-Estructura de un Fichero Parquet-Magic number"></span><strong id="Magic number">Magic number</strong> se trata de un número al final y al principio del fichero que asegura que está completo y no corrupto.
+
+</li><li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Parquet-Apache Parquet-Estructura de un Fichero Parquet-Metadatos"></span><strong id="Metadatos">Metadatos</strong>: contienen información sobre los datos; el esquema de las columnas, tipos de datos, algunas estadísticas y otros datos relevantes.
+
+</li><li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Parquet-Apache Parquet-Estructura de un Fichero Parquet-Grupos de filas"></span><strong id="Grupos de filas">Grupos de filas</strong>: contienen los datos organizados por columnas. Cada grupo de filas tiene un subconjunto de la tabla, donde las columnas de cada grupo de filas se dividen en páginas, que son las unidades más pequeñas de almacenamiento. La subdivisión en páginas tiene como fin mejorar la eficiencia ya que admiten la compresión individual. Podemos encontrar páginas de datos, índices o de diccionario.
+
+</li><li>
+<span id="Inyección/Extracción y Serialización/Deserialización de los Datos-Apache Parquet-Apache Parquet-Estructura de un Fichero Parquet-Esquema"></span><strong id="Esquema">Esquema</strong>: define la estructura de los datos y los tipos de datos de cada columna. En caso de que los datos estén anidados también define la jerarquía de estos.
+
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/images/DataScience/Master/3C_1C/ICPDM/apache_parquet_file_structure.png" alt="Apache Parquet File Structure">
 </p>
 </div>
   
