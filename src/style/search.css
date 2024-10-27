@@ -83,7 +83,7 @@
 }
 
 /* Show results in middle of page */
-.search-result-diplay {
+.search-result-display {
   display: block;
   /* Limit height */
   max-height: 70vh;
@@ -103,21 +103,21 @@
 }
 
 /* Scroll bar */
-.search-result-diplay::-webkit-scrollbar {
+.search-result-display::-webkit-scrollbar {
   width: 10px;
 }
 
-.search-result-diplay::-webkit-scrollbar-thumb {
+.search-result-display::-webkit-scrollbar-thumb {
   background: #909090;
   border-radius: 5px;
 }
 
-.search-result-diplay::-webkit-scrollbar-track {
+.search-result-display::-webkit-scrollbar-track {
   background: #ccc;
   border-radius: 5px;
 }
 
-.search-result-diplay > ul {
+.search-result-display > ul {
   list-style-type: none;
   /* Remove padding of list decorators */
   padding: 0px;
