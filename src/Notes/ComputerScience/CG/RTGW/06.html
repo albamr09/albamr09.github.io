@@ -96,6 +96,22 @@
 </li><li>
 <a href="06.html#Depth%20Testing">Depth Testing</a>
 
+<ul>
+<li>
+<a href="06.html#Depth%20Function">Depth Function</a>
+
+</li></ul>
+</li><li>
+<a href="06.html#Alpha%20Blending">Alpha Blending</a>
+
+<ul>
+<li>
+<a href="06.html#The%20Blending%20Function">The Blending Function</a>
+
+</li><li>
+<a href="06.html#Separate%20Blending%20Functions">Separate Blending Functions</a>
+
+</li></ul>
 </li></ul>
 <hr>
 
@@ -401,6 +417,196 @@ The following diagram shows the order in which depth testing and alpha blending 
 </p>
 
 <div id="Colors, Depth Testing, and Alpha Blending-Depth Testing"><h2 id="Depth Testing" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Depth Testing">Depth Testing</a></h2></div>
+
+<p>
+Each fragment that has been processed by the fragment shader carries an associated depth value. Though fragments are two-dimensional since they're rendered on the screen, the depth value keeps the information of how far the fragment is from the camera (screen).
+</p>
+
+<p>
+Depth values are stored in a special WebGL buffer named <span id="Colors, Depth Testing, and Alpha Blending-Depth Testing-depth buffer"></span><strong id="depth buffer">depth buffer</strong> or <span id="Colors, Depth Testing, and Alpha Blending-Depth Testing-z-buffer"></span><strong id="z-buffer">z-buffer</strong>. The \(z\) comes from the fact that \(x\) and \(y\) values correspond to the screen coordinates of the fragment, while the \(z\) value measures distance perpendicular to the screen.
+</p>
+
+<p>
+After the fragment has been calculated by the fragment shader, it becomes available for depth testing. This only occurs if the depth test is enabled.
+</p>
+
+<pre javascript="">gl.enable(gl.DEPTH_TEST);
+</pre>
+
+<p>
+The depth test takes the depth value of a fragment into consideration and compares it to the depth value for the same fragment coordinates already stored in the depth buffer. The depth test determines whether that fragment is accepted for further processing in the rendering pipeline.
+</p>
+
+<p>
+In normal circumstances, when the depth test is enabled, only those fragments with a lower depth value than the corresponding fragments present in the depth buffer will be accepted.
+</p>
+
+<p>
+Depth testing is a commutative operation with respect to the rendering order. This means that no matter which object gets rendered first, as long as depth testing is enabled, we will always have a consistent scene.
+</p>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Depth Testing-Depth Function"><h3 id="Depth Function" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Depth Testing-Depth Function">Depth Function</a></h3></div>
+
+<p>
+In some applications, we may be interested in changing the default behavior of depth testing, which discards fragments with a higher depth value than those fragments in the depth buffer. For that purpose, WebGL provides the <code>gl.depthFunc(function)</code> method.
+</p>
+
+<p>
+This method has only one parameter, the <code>function</code> to use:
+</p>
+
+<table>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>gl.NEVER</code>
+</td>
+<td>
+The depth test always fails.
+</td>
+</tr>
+<tr>
+<td>
+<code>gl.LESS</code>
+</td>
+<td>
+Only fragments with a depth lower than current fragments on the depth buffer will pass the test
+</td>
+</tr>
+<tr>
+<td>
+<code>gl.LEQUAL</code>
+</td>
+<td>
+Fragments with a depth less than or equal to corresponding current fragments in the depth buffer will pass the test.
+</td>
+</tr>
+<tr>
+<td>
+<code>gl.EQUAL</code>
+</td>
+<td>
+Only fragments with the same depth as current fragments on the depth buffer will pass the test
+</td>
+</tr>
+<tr>
+<td>
+<code>gl.NOTEQUAL</code>
+</td>
+<td>
+Only fragments that do not have the same depth value as fragments on the depth buffer will pass the test.
+</td>
+</tr>
+<tr>
+<td>
+<code>gl.GEQUAL</code>
+</td>
+<td>
+Fragments with greater or equal depth value will pass the test.
+</td>
+</tr>
+<tr>
+<td>
+<code>gl.GREATER</code>
+</td>
+<td>
+Only fragments with a greater depth value will pass the test.
+</td>
+</tr>
+<tr>
+<td>
+<code>gl.ALWAYS</code>
+</td>
+<td>
+The depth test always passes.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The depth test is disabled by default in WebGL. When enabled, if no depth function is set, the <code>gl.LESS</code> function is selected by default.
+</p>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Alpha Blending"><h2 id="Alpha Blending" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Alpha Blending">Alpha Blending</a></h2></div>
+
+<p>
+Alpha blending is enabled using the following line of code:
+</p>
+
+<pre javascript="">gl.enable(gl.BLEND);
+</pre>
+
+<p>
+For each available fragment, the alpha blending operation reads the color from the framebuffer by the appropriate fragment coordinates and creates a new color based on a linear interpolation between the previously calculated color in the fragment shader and the color from the framebuffer.
+</p>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Alpha Blending-The Blending Function"><h3 id="The Blending Function" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Alpha Blending-The Blending Function">The Blending Function</a></h3></div>
+
+<p>
+With blending enabled, the next step is to define a blending function. This function will determine how fragment colors from the object (source) are combined with the fragment colors present in the framebuffer (destination).
+</p>
+
+<p>
+We combine source and destination colors as follows:
+</p>
+
+<pre javascript="">color = S * sW + D * dW;
+</pre>
+
+<p>
+Where:
+</p>
+
+<ul>
+<li>
+<code>S</code>: source color (<code>vec4</code>)
+
+</li><li>
+<code>D</code>: destination color (<code>vec4</code>)
+
+</li><li>
+<code>sW</code>: source scaling factor
+
+</li><li>
+<code>dW</code>: destination scaling factor
+
+</li><li>
+<code>S.rgb</code>: RGB components of the source color
+
+</li><li>
+<code>S.a</code>: Alpha component of the source color
+
+</li><li>
+<code>D.rgb</code>: RGB components of the destination color
+
+</li><li>
+<code>D.a</code>: Alpha component of the destination color
+
+</li></ul>
+<p>
+It's important to note that the rendering order will determine the source and the destination fragments.
+</p>
+
+<p>
+If a sphere is rendered first, it will then become the destination of the blending operation because the sphere fragments are stored in the framebuffer at the time that the cone is rendered. In other words, alpha blending is a non-commutative operation with respect to rendering order:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/alpha_blending_rendering_order.png" alt="Rendering Order in Alpha Blending">
+</p>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Alpha Blending-Separate Blending Functions"><h3 id="Separate Blending Functions" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Alpha Blending-Separate Blending Functions">Separate Blending Functions</a></h3></div>
 </div>
   
 
