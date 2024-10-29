@@ -1,0 +1,269 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>The Tangent and Velocity Problems</title>
+  <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="The Tangent and Velocity Problems"><h1 id="The Tangent and Velocity Problems" class="header"><a href="#The Tangent and Velocity Problems">The Tangent and Velocity Problems</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="02_01.html#The%20Tangent%20Problem">The Tangent Problem</a>
+
+</li><li>
+<a href="02_01.html#The%20Velocity%20Problem">The Velocity Problem</a>
+
+</li></ul>
+<hr>
+
+<div id="The Tangent and Velocity Problems-The Tangent Problem"><h2 id="The Tangent Problem" class="header"><a href="#The Tangent and Velocity Problems-The Tangent Problem">The Tangent Problem</a></h2></div>
+
+<p>
+We can think of a tangent to a curve as a line that touches the curve an follows the same direction as the curve at the point of contact.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/Math/Calculus/CET/tangent.png" alt="Tangent">
+</p>
+
+<p>
+Let's look at the next example, where we want to find an equation for the tangent line to the parabola \(y = x^2\) at point \(P(1, 1)\). To do so we only need to know the slope \(m\), however to find the slope of the line we need two points on the curve, and as of now we only have \(P(1, 1)\).
+</p>
+
+<p>
+But observe that we can compute an approximation by choosing a nearby point \(Q(x, x^2)\) (see Figure 2) and computing the slope \(m_{PQ}\) of the secant line \(PQ\). (A <span id="The Tangent and Velocity Problems-The Tangent Problem-secant line"></span><strong id="secant line">secant line</strong> if a line that intersects a curve more than once):
+</p>
+
+\begin{align}
+m_{PQ} = \frac{x^2 - 1}{x - 1}
+\end{align}
+
+<p>
+<img src="https://albamr09.github.io/public/images/Math/Calculus/CET/slope_approximation.png" alt="Slope Approximation">
+</p>
+
+<p>
+On the following tables we see that the closer \(Q\) is to \(P\), that is the closer \(x\) is to \(1\), then the closer \(m_{PQ}\) is to \(2\).
+</p>
+
+<table>
+<thead>
+<tr>
+<th>
+\(x\)
+</th>
+<th>
+$m_{PQ}
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+\(2\)
+</td>
+<td>
+\(3\)
+</td>
+</tr>
+<tr>
+<td>
+\(1.5\)
+</td>
+<td>
+\(2.5\)
+</td>
+</tr>
+<tr>
+<td>
+\(1.1\)
+</td>
+<td>
+\(2.1\)
+</td>
+</tr>
+<tr>
+<td>
+\(1.01\)
+</td>
+<td>
+\(2.01\)
+</td>
+</tr>
+<tr>
+<td>
+\(1.001\)
+</td>
+<td>
+\(2.001\)
+</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>
+\(x\)
+</th>
+<th>
+$m_{PQ}
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+\(0\)
+</td>
+<td>
+\(1\)
+</td>
+</tr>
+<tr>
+<td>
+\(0.5\)
+</td>
+<td>
+\(1.5\)
+</td>
+</tr>
+<tr>
+<td>
+\(0.9\)
+</td>
+<td>
+\(1.9\)
+</td>
+</tr>
+<tr>
+<td>
+\(0.99\)
+</td>
+<td>
+\(1.99\)
+</td>
+</tr>
+<tr>
+<td>
+\(0.999\)
+</td>
+<td>
+\(1.999\)
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+This suggests that the slope of the tangent line is the <span id="The Tangent and Velocity Problems-The Tangent Problem-limit"></span><strong id="limit">limit</strong> of the slopes of the secant lines:
+</p>
+
+\begin{align}
+\lim_{Q \leftarrow P} m_{PQ} = m
+\end{align}
+
+\begin{align}
+\lim_{x \leftarrow 1} \frac{x^2 - 1}{x - 1} = 2
+\end{align}
+
+<p>
+Assuming that the slope of the tangent is indeed \(2\), we define the equation of the tangent line through \((1, 1)\) as:
+</p>
+
+\begin{align}
+y - 1 = 2(x - 1)
+\end{align}
+
+\begin{align}
+y = 2x - 1
+\end{align}
+
+<p>
+Figure 3 illustrates the process that occurs on this example. As \(Q\) approaches \(P\) the secant lines rotate about \(P\) and approach the tangent line \(\mathcal{l}\).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/Math/Calculus/CET/tangent_using_limits.png" alt="Approximate the tangent using limits">
+</p>
+
+<p>
+Another method to approximate the slope of the tangent line at \(P\) is to measure the sides of a triangle \(ABC\) as in Figure 5:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/Math/Calculus/CET/another_tangent_approximation.png" alt="Another Way to Approximate the Tangent">
+</p>
+
+<p>
+This gives an estimate of the slope of the tangent line as:
+</p>
+
+\begin{align}
+- \frac{AB}{BC} \approx -\frac{8.0 - 5.4}{0.06 - 0.02} = -65.0
+\end{align}
+
+<div id="The Tangent and Velocity Problems-The Velocity Problem"><h2 id="The Velocity Problem" class="header"><a href="#The Tangent and Velocity Problems-The Velocity Problem">The Velocity Problem</a></h2></div>
+
+<p>
+The <span id="The Tangent and Velocity Problems-The Velocity Problem-instantaneous velocity"></span><strong id="instantaneous velocity">instantaneous velocity</strong> is defined to be the <span id="The Tangent and Velocity Problems-The Velocity Problem-limiting value"></span><strong id="limiting value">limiting value</strong> of the average velocities over shorter and shorter time periods. Thus there is a close connection between the tangent problem and the velocity problem. If we draw the grapf of the distance function and we consider points \(P(5, f(5))\) and \(Q(5 + h, f(5 + h))\) (see Figure 6).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/Math/Calculus/CET/the_velocity_problem.png" alt="The Velocity Problem">
+</p>
+
+<p>
+Then the slope of the secant line \(PQ\) is:
+</p>
+
+\begin{align}
+m_{PQ} = \frac{f(5 + h) - f(5)}{(5 + h) - 5}
+\end{align}
+
+<p>
+which is the same as the average velocity over the time interval \([5, 5 + h]\).
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="jQuery library"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/fuse.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
