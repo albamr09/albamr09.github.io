@@ -60,10 +60,10 @@ var jsonDocuments; // Holds the array of documents
 const fuseOptions = {
   includeScore: true, // Include search score to determine fuzzy match strength
   shouldSort: true, // Sort results by score
-  threshold: 0.3, // Adjusts the fuzziness; lower is stricter
+  threshold: 0.5, // Adjusts the fuzziness; lower is stricter
   keys: [
-    { name: "title", weight: 0.7 }, // Title is more important
-    { name: "content", weight: 0.3 }, // Content is less important
+    { name: "title", weight: 0.9 }, // Title is more important
+    { name: "content", weight: 0.7 }, // Content is less important
   ],
 };
 
