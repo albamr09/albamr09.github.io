@@ -1,0 +1,144 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>The Limit of a Function</title>
+  <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="The Limit of a Function"><h1 id="The Limit of a Function" class="header"><a href="#The Limit of a Function">The Limit of a Function</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="02_02.html#Limits">Limits</a>
+
+</li><li>
+<a href="02_02.html#One-Sided%20Limits">One-Sided Limits</a>
+
+</li><li>
+<a href="02_02.html#How%20Can%20a%20Limit%20Fail%20to%20Exist%3F">How Can a Limit Fail to Exist</a>
+
+</li></ul>
+<hr>
+
+<div id="The Limit of a Function-Limits"><h2 id="Limits" class="header"><a href="#The Limit of a Function-Limits">Limits</a></h2></div>
+
+<p>
+Suppose \(f(x)\) is defined when \(x\) is near the number \(a\), then we write:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} f(x) = L
+\end{align}
+
+<p>
+If we can make the values of \(f(x)\) arbitrarily close to \(L\) by restricting \(x\) to be sufficiently close to \(a\) (on either side of \(a\)) but not equal to \(a\) (See Figure 1).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/Math/Calculus/CET/limit_of_function.png" alt="Limit of a Function">
+</p>
+
+<p>
+An alternative notation is:
+</p>
+
+\begin{align}
+f(x) \rightarrow L \text{ as } x \rightarrow a
+\end{align}
+
+<p>
+Notice that we never consider \(x = a\). In fact, \(f(x)\) need not even be defined when \(x = a\). The only thing that matters is how \(f\) is defined near \(a\).
+</p>
+
+<div id="The Limit of a Function-One-Sided Limits"><h2 id="One-Sided Limits" class="header"><a href="#The Limit of a Function-One-Sided Limits">One-Sided Limits</a></h2></div>
+
+<p>
+The notation \(t \rightarrow 0^{-}\) indicates that we consider only values of \(t\) that are less than 0. Likewise, \(t \rightarrow 0^{+}\) indicates that we consider only values of \(t\) that are greater than 0.
+</p>
+
+<p>
+We write:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a^{-}} f(x) = L
+\end{align}
+
+<p>
+and say that the <span id="The Limit of a Function-One-Sided Limits-left-hand limit"></span><strong id="left-hand limit">left-hand limit</strong> of \(f(x)\) as \(x\) approaches \(a\) is equal to \(L\) if we can make the values of \(f(x)\) arbitrarily clsoe to \(L\) by restricting \(x\) to be sufficiently close to \(a\) with \(x\) less than \(a\).
+</p>
+
+<p>
+We write:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a^{+}} f(x) = L
+\end{align}
+
+<p>
+and say that the <span id="The Limit of a Function-One-Sided Limits-right-hand limit"></span><strong id="right-hand limit">right-hand limit</strong> of \(f(x)\) as \(x\) approaches \(a\) is equal to \(L\) if we can make the values of \(f(x)\) arbitrarily clsoe to \(L\) by restricting \(x\) to be sufficiently close to \(a\) with \(x\) greater than \(a\).
+</p>
+
+<p>
+See Figure 6 for a graphical representation.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/Math/Calculus/CET/one_sided_limit.png" alt="One-Sided Limit">
+</p>
+
+<p>
+By both definitions, we see that the following is true:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} f(x) = L \leftrightarrow \lim_{x \rightarrow a^{-}} f(x) = L \text{ and } \lim_{x \rightarrow a^{+}} f(x) = L
+\end{align}
+
+<div id="The Limit of a Function-How Can a Limit Fail to Exist?"><h2 id="How Can a Limit Fail to Exist?" class="header"><a href="#The Limit of a Function-How Can a Limit Fail to Exist?">How Can a Limit Fail to Exist?</a></h2></div>
+
+<p>
+A limit fails to exist at a number \(a\) if the left- and right-hand limits are not equal.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="jQuery library"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/fuse.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
