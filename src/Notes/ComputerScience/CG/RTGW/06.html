@@ -111,6 +111,32 @@
 </li><li>
 <a href="06.html#Separate%20Blending%20Functions">Separate Blending Functions</a>
 
+</li><li>
+<a href="06.html#The%20Blend%20Equation">The Blend Equation</a>
+
+</li><li>
+<a href="06.html#WebGL%20Alpha-Blending%20API">WebGL Alpha-Blending API</a>
+
+</li><li>
+<a href="06.html#The%20Blend%20Color">The Blend Color</a>
+
+</li><li>
+<a href="06.html#Alpha%20Blending%20Modes">Alpha Blending Modes</a>
+
+<ul>
+<li>
+<a href="06.html#Additive%20Blending">Additive Blending</a>
+
+</li><li>
+<a href="06.html#Substractive%20Blending">Substractive Blending</a>
+
+</li><li>
+<a href="06.html#Multiplicative%20Blending">Multiplicative Blending</a>
+
+</li><li>
+<a href="06.html#Interpolative%20Blending">Interpolative Blending</a>
+
+</li></ul>
 </li></ul>
 </li></ul>
 <hr>
@@ -607,6 +633,256 @@ If a sphere is rendered first, it will then become the destination of the blendi
 </p>
 
 <div id="Colors, Depth Testing, and Alpha Blending-Alpha Blending-Separate Blending Functions"><h3 id="Separate Blending Functions" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Alpha Blending-Separate Blending Functions">Separate Blending Functions</a></h3></div>
+
+<p>
+It is also possible to determine how the RGB channels are going to be combined independently from the alpha channels. For that, we use the <code>gl.blendFuncSeparate</code> function.
+</p>
+
+<p>
+We define two independent functions this way:
+</p>
+
+<pre>color = S.rgb * sW.rgb + D.rgb * dW.rgb;
+alpha = S.a * sW.a + D.a * dW.a;
+</pre>
+
+<p>
+More precisely:
+</p>
+
+<ul>
+<li>
+<code>S.rgb</code>: RGB components of the source color
+
+</li><li>
+<code>sW.rgb</code>: is the source scaling factor (only RGB)
+
+</li><li>
+<code>S.a</code>: Alpha component of the source color
+
+</li><li>
+<code>sW.a</code>: is the source scaling factor for the source alpha value
+
+</li><li>
+<code>D.rgb</code>: RGB components of the destination color
+
+</li><li>
+<code>sW.rgb</code>: is the destination scaling factor (only RGB)
+
+</li><li>
+<code>D.a</code>: Alpha component of the destination color
+
+</li><li>
+<code>sD.a</code>: is the source scaling factor for the destination alpha value
+
+</li></ul>
+<p>
+Then, we could have something such as the following:
+</p>
+
+<pre>color = S.rgb * S.a + D.rgb * (1.0 - S.a);
+alpha = S.a * 1.0 + D.a * 0.0;
+</pre>
+
+<p>
+This would be translated into code as follows:
+</p>
+
+<pre>gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ZERO);
+</pre>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Alpha Blending-The Blend Equation"><h3 id="The Blend Equation" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Alpha Blending-The Blend Equation">The Blend Equation</a></h3></div>
+
+<p>
+We could have a case where we do not want to interpolate the source and destination fragment colors with scale or add operations. For example, we may want to subtract one from the other. In this case, WebGL provides the <code>gl.blendEquation</code> function.
+</p>
+
+<p>
+This function receives one parameter that determines the operation on the scaled source and destination fragment colors. For example, <code>gl.blendEquation(gl.FUNC_ADD)</code> is calculated as such:
+</p>
+
+<pre>color = S * sW + D * dW;
+</pre>
+
+<p>
+And, <code>gl.blendEquation(gl.FUNC_SUBTRACT)</code> corresponds to the following:
+</p>
+
+<pre>color = S * sW - D * dW;
+</pre>
+
+<p>
+There is a third option, <code>gl.blendEquation(gl.FUNC_REVERSE_SUBTRACT)</code>, that corresponds to the following:
+</p>
+
+<pre>color = D* dw - S * sW;
+</pre>
+
+<p>
+As expected, you can define the blending equation separately for the RGB channels and for the alpha channel. For that, we use the <code>gl.blendEquationSeparate</code> function.
+</p>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Alpha Blending-WebGL Alpha-Blending API"><h3 id="WebGL Alpha-Blending API" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Alpha Blending-WebGL Alpha-Blending API">WebGL Alpha-Blending API</a></h3></div>
+
+<table>
+<thead>
+<tr>
+<th>
+WebGL function
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>gl.enable/disable(gl.BLEND)</code>
+</td>
+<td>
+Enable/disable blending
+</td>
+</tr>
+<tr>
+<td>
+<code>gl.blendFunc(sW, dW)</code>
+</td>
+<td>
+Specify pixel arithmetic
+</td>
+</tr>
+<tr>
+<td>
+<code>gl.blendFuncSeparate(sW_rgb, dW_rgb, sW_a, dW_a)</code>
+</td>
+<td>
+Specify pixel arithmetic for RGB and alpha components separately
+</td>
+</tr>
+<tr>
+<td>
+<code>gl.blendEquation(mode)</code>
+</td>
+<td>
+Specify the equation used for both the RGB blend equation and the alpha blend equation
+</td>
+</tr>
+<tr>
+<td>
+<code>gl.blendEquationSeparate(modeRGB, modeAlpha)</code>
+</td>
+<td>
+Set the RGB blend equation and the alpha blend equation separately.
+</td>
+</tr>
+<tr>
+<td>
+<code>gl.blendColor(red, green, blue, alpha)</code>
+</td>
+<td>
+Set the blend color.
+</td>
+</tr>
+<tr>
+<td>
+<code>gl.getParameter(name)</code>
+</td>
+<td>
+Just like with other WebGL variables, it is possible to query blending parameters using <code>gl.getParameter</code>.
+</td>
+</tr>
+</tbody>
+</table>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Alpha Blending-The Blend Color"><h3 id="The Blend Color" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Alpha Blending-The Blend Color">The Blend Color</a></h3></div>
+
+<p>
+WebGL provides the <code>gl.CONSTANT_COLOR</code> and <code>gl.ONE_MINUS_CONSTANT_COLOR</code> scaling factors. These scaling factors can be used with <code>gl.blendFunc</code> and <code>gl.blendFuncSeparate</code>. However, we need to first establish the blend color. We do so by invoking <code>gl.blendColor</code>.
+</p>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Alpha Blending-Alpha Blending Modes"><h3 id="Alpha Blending Modes" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Alpha Blending-Alpha Blending Modes">Alpha Blending Modes</a></h3></div>
+
+<p>
+Depending on the parameter selection for sW and dW, we can create different blending modes.
+</p>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Alpha Blending-Alpha Blending Modes-Additive Blending"><h4 id="Additive Blending" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Alpha Blending-Alpha Blending Modes-Additive Blending">Additive Blending</a></h4></div>
+
+<p>
+Additive blending simply adds the colors of the source and destination fragments, creating a lighter image. We obtain additive blending by writing the following:
+</p>
+
+<pre>gl.blendFunc(gl.ONE, gl.ONE);
+</pre>
+
+<p>
+This assigns the weights for source and destination fragments <code>sW</code> and <code>dW</code> to \(1\). The color output will be as follows:
+</p>
+
+<pre>color = S * 1.0 + D * 1.0;
+color = S + D;
+</pre>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Alpha Blending-Alpha Blending Modes-Substractive Blending"><h4 id="Substractive Blending" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Alpha Blending-Alpha Blending Modes-Substractive Blending">Substractive Blending</a></h4></div>
+
+<p>
+Similarly, we can obtain subtractive blending by writing the following:
+</p>
+
+<pre>gl.blendEquation(gl.FUNC_SUBTRACT);
+gl.blendFunc(gl.ONE, gl.ONE);
+</pre>
+
+<p>
+This will change the blending equation to the following:
+</p>
+
+<pre>color = S * 1.0 - D * 1.0;
+color = S - D;
+</pre>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Alpha Blending-Alpha Blending Modes-Multiplicative Blending"><h4 id="Multiplicative Blending" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Alpha Blending-Alpha Blending Modes-Multiplicative Blending">Multiplicative Blending</a></h4></div>
+
+<p>
+We obtain multiplicative blending by writing the following:
+</p>
+
+<pre>gl.blendFunc(gl.DST_COLOR, gl.ZERO);
+</pre>
+
+<p>
+This will be reflected in the blending equation as the following:
+</p>
+
+<pre>color = S * D + D * 0.0;
+color = S * D;
+</pre>
+
+<p>
+The result will always be a darker blending
+</p>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Alpha Blending-Alpha Blending Modes-Interpolative Blending"><h4 id="Interpolative Blending" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Alpha Blending-Alpha Blending Modes-Interpolative Blending">Interpolative Blending</a></h4></div>
+
+<p>
+If we set <code>sW</code> to <code>S.a</code> and <code>dW</code> to <code>1 - S.a</code>, then we get the following:
+</p>
+
+<pre>color = S * S.a + D *(1 - S.a);
+</pre>
+
+<p>
+This will create a linear interpolation between the source and destination color using the
+source alpha color, <code>S.a</code>, as the scaling factor. In code, this is translated as the following:
+</p>
+
+<pre>gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+</pre>
+
+<p>
+Interpolative blending allows us to create a transparency effect as long as the destination fragments have passed the depth test. As expected, this requires that the objects be rendered from back to front.
+</p>
 </div>
   
 
