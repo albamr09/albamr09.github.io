@@ -1,0 +1,258 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Calculating Limits Using the Limits Laws</title>
+  <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Calculating Limits Using the Limits Laws"><h1 id="Calculating Limits Using the Limits Laws" class="header"><a href="#Calculating Limits Using the Limits Laws">Calculating Limits Using the Limits Laws</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="02_03.html#Properties%20of%20Limits">Properties of Limits</a>
+
+</li><li>
+<a href="02_03.html#Evaluating%20Limits%20by%20Direct%20Substitution">Evaluating Limits by Direct Substitution</a>
+
+</li><li>
+<a href="02_03.html#Limit%20Equality">Limit Equality</a>
+
+</li><li>
+<a href="02_03.html#Using%20One-Sided%20Limits">Using One-Sided Limits</a>
+
+</li><li>
+<a href="02_03.html#The%20Squeeze%20Theorem">The Squeeze Theorem</a>
+
+</li></ul>
+<hr>
+
+<div id="Calculating Limits Using the Limits Laws-Properties of Limits"><h2 id="Properties of Limits" class="header"><a href="#Calculating Limits Using the Limits Laws-Properties of Limits">Properties of Limits</a></h2></div>
+
+<p>
+Supporse that \(c\) is a constant and the limits:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} f(x)
+\end{align}
+
+\begin{align}
+\lim_{x \rightarrow a} g(x)
+\end{align}
+
+<p>
+exist. Then:
+</p>
+
+<p>
+<span id="Calculating Limits Using the Limits Laws-Properties of Limits-Sum Law"></span><strong id="Sum Law">Sum Law</strong>
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} [f(x) + g(x)] = \lim_{x \rightarrow a} f(x) + \lim_{x \rightarrow a} g(x)
+\end{align}
+
+<p>
+<span id="Calculating Limits Using the Limits Laws-Properties of Limits-Difference Law"></span><strong id="Difference Law">Difference Law</strong>
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} [f(x) - g(x)] = \lim_{x \rightarrow a} f(x) - \lim_{x \rightarrow a} g(x)
+\end{align}
+
+<p>
+<span id="Calculating Limits Using the Limits Laws-Properties of Limits-Constant Multiple Law"></span><strong id="Constant Multiple Law">Constant Multiple Law</strong>
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} [cf(x)] = c\lim_{x \rightarrow a} f(x)
+\end{align}
+
+<p>
+<span id="Calculating Limits Using the Limits Laws-Properties of Limits-Product Law"></span><strong id="Product Law">Product Law</strong>
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} [f(x) g(x)] = \lim_{x \rightarrow a} f(x) \cdot \lim_{x \rightarrow a} g(x)
+\end{align}
+
+<p>
+<span id="Calculating Limits Using the Limits Laws-Properties of Limits-Quotient Law"></span><strong id="Quotient Law">Quotient Law</strong>
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} [\frac{f(x)}{g(x)}] = \frac{\lim_{x \rightarrow a} f(x)}{\lim_{x \rightarrow a} g(x)}
+\end{align}
+
+<p>
+If we use the Product Law repeteadly with \(g(x) = f(x)\), then we arrive at the <span id="Calculating Limits Using the Limits Laws-Properties of Limits-Power Law"></span><strong id="Power Law">Power Law</strong>:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} [f(x)]^n = [\lim_{x \rightarrow a} f(x)]^n
+\end{align}
+
+<p>
+<span id="Calculating Limits Using the Limits Laws-Properties of Limits-Root Law"></span><strong id="Root Law">Root Law</strong>
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} \sqrt[n]{f(x)} = \sqrt[n]{\lim_{x \rightarrow a} f(x)}
+\end{align}
+
+<p>
+Let's now see two special limits:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} c = c
+\end{align}
+
+\begin{align}
+\lim_{x \rightarrow a} x = a
+\end{align}
+
+<p>
+If we now let \(f(x) = x\) on the <span id="Calculating Limits Using the Limits Laws-Properties of Limits-Power Law"></span><strong id="Power Law">Power Law</strong>  and use \(\lim_{x \rightarrow a} x = a\), then:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} x^n = [\lim_{x \rightarrow a} x]^n = a^n
+\end{align}
+
+<p>
+If we now let \(f(x) = x\) on the <span id="Calculating Limits Using the Limits Laws-Properties of Limits-Root Law"></span><strong id="Root Law">Root Law</strong>  and use \(\lim_{x \rightarrow a} x = a\), then:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} sqrt[n]{x} = \sqrt[n]{\lim_{x \rightarrow a} x} = \sqrt[n]{a}
+\end{align}
+
+<p>
+where \(n\) is a positive integer. Also, if \(n\) is even then we assume that \(a &gt; 0\).
+</p>
+
+<div id="Calculating Limits Using the Limits Laws-Evaluating Limits by Direct Substitution"><h2 id="Evaluating Limits by Direct Substitution" class="header"><a href="#Calculating Limits Using the Limits Laws-Evaluating Limits by Direct Substitution">Evaluating Limits by Direct Substitution</a></h2></div>
+
+<p>
+The <span id="Calculating Limits Using the Limits Laws-Evaluating Limits by Direct Substitution-Limit Laws"></span><strong id="Limit Laws">Limit Laws</strong> prove that direct substitution can be used to obtain the value of a limit for polynomial and rational functions.
+</p>
+
+<p>
+If \(f\) is a polynomial or a rational function and \(a\) is in the domain of \(f\), then:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} f(x) = f(a)
+\end{align}
+
+<p>
+Functions that satisfy this property are said to be <span id="Calculating Limits Using the Limits Laws-Evaluating Limits by Direct Substitution-continuous"></span><strong id="continuous">continuous</strong> at \(a\). However, not all limits can be evaluated initially by direct substitution.
+</p>
+
+<div id="Calculating Limits Using the Limits Laws-Limit Equality"><h2 id="Limit Equality" class="header"><a href="#Calculating Limits Using the Limits Laws-Limit Equality">Limit Equality</a></h2></div>
+
+<p>
+If \(f(x) = g(x)\) when \(x \neq a\), then \(\lim_{x \rightarrow a} f(x) = \lim_{x \rightarrow a} g(a)\)
+</p>
+
+<div id="Calculating Limits Using the Limits Laws-Using One-Sided Limits"><h2 id="Using One-Sided Limits" class="header"><a href="#Calculating Limits Using the Limits Laws-Using One-Sided Limits">Using One-Sided Limits</a></h2></div>
+
+<p>
+We say:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} f(x) = L
+\end{align}
+
+<p>
+if and only if
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a^{-}} f(x) = L = \lim_{x \rightarrow a^{+}} f(x)
+\end{align}
+
+<div id="Calculating Limits Using the Limits Laws-The Squeeze Theorem"><h2 id="The Squeeze Theorem" class="header"><a href="#Calculating Limits Using the Limits Laws-The Squeeze Theorem">The Squeeze Theorem</a></h2></div>
+
+<p>
+The following two theorems describe how the limits of functions are related when the values of one function are greater than (or equal to) those of another.
+</p>
+
+<p>
+If \(f(x) \leq g(x)\) when \(x\) is near \(a\) (except possibly at \(a\)) and the limits of \(f\) and \(g\) both exist as \(x\) approaches \(a\), then:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} f(x) \leq \lim_{x \rightarrow a} g(x)
+\end{align}
+
+<p>
+The <span id="Calculating Limits Using the Limits Laws-The Squeeze Theorem-Squeeze Theorem"></span><strong id="Squeeze Theorem">Squeeze Theorem</strong> states:
+</p>
+
+<p>
+If \(f(x) \leq g(x) \leq h(x)\) when \(x\) is near \(a\) (except possibly at \(a\)) and:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} f(x) = \lim_{x \rightarrow a} h(x) = L
+\end{align}
+
+<p>
+then:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} g(x) = L
+\end{align}
+
+<p>
+This theorem is illustrated on Figure 7. It says that if \(g(x)\) is squeezed between \(f(x)\) and \(h(x)\) near \(a\), and if \(f\) and \(h\) have the same limit \(L\) at \(a\), then \(g\) is forced to have the same limit \(L\) at \(a\).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/Math/Calculus/CET/squeeze_theorem.png" alt="The Squeeze Theorem">
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="jQuery library"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/fuse.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
