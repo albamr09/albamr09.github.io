@@ -138,6 +138,9 @@
 
 </li></ul>
 </li></ul>
+</li><li>
+<a href="06.html#Creating%20Transparent%20Objects">Creating Transparent Objects</a>
+
 </li></ul>
 <hr>
 
@@ -882,6 +885,43 @@ source alpha color, <code>S.a</code>, as the scaling factor. In code, this is tr
 
 <p>
 Interpolative blending allows us to create a transparency effect as long as the destination fragments have passed the depth test. As expected, this requires that the objects be rendered from back to front.
+</p>
+
+<div id="Colors, Depth Testing, and Alpha Blending-Creating Transparent Objects"><h2 id="Creating Transparent Objects" class="header"><a href="#Colors, Depth Testing, and Alpha Blending-Creating Transparent Objects">Creating Transparent Objects</a></h2></div>
+
+<p>
+We've learned that in order to create transparency, we need to:
+</p>
+
+<ul>
+<li>
+Enable alpha blending and select the interpolative blending function
+
+</li><li>
+Render the faces of objects back to front
+
+</li></ul>
+<p>
+How do we create transparent objects when there is nothing to blend them against? In other words, if there’s only one object, how can we make it transparent? One solution is to use <span id="Colors, Depth Testing, and Alpha Blending-Creating Transparent Objects-face-culling"></span><strong id="face-culling">face-culling</strong>. Face-culling allows us to only render the back or front face of an object.
+</p>
+
+<p>
+Similar to other options in the pipeline, culling is disabled by default. We enable it by calling the following:
+</p>
+
+<pre>gl.enable(gl.FACE_CULLING);
+</pre>
+
+<p>
+To render only the back faces of an object, we call <code>gl.cullFace(gl.FRONT)</code> before we call <code>drawArrays</code> or <code>drawElements</code>. Similarly, to render only the front face, we use <code>gl.cullFace(gl.BACK)</code> before the draw call.
+</p>
+
+<p>
+The following diagram summarizes the steps needed to create a transparent object with alpha blending and face-culling:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/face_culling.png" alt="Face Culling">
 </p>
 </div>
   
