@@ -1,0 +1,208 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Textures</title>
+  <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Textures"><h1 id="Textures" class="header"><a href="#Textures">Textures</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="07.html#Creating%20and%20Uploading%20a%20Texture">Creating and Uploading a Texture</a>
+
+</li><li>
+<a href="07.html#Using%20Texture%20Coordinates">Using Texture Coordinates</a>
+
+<ul>
+<li>
+<a href="07.html#Polygon%20Mesh">Polygon Mesh</a>
+
+</li><li>
+<a href="07.html#Texture%20Coordinates">Texture Coordinates</a>
+
+</li></ul>
+</li><li>
+<a href="07.html#Using%20Textures%20in%20a%20Shader">Using Textures in a Shader</a>
+
+</li></ul>
+<hr>
+
+<div id="Textures-Creating and Uploading a Texture"><h2 id="Creating and Uploading a Texture" class="header"><a href="#Textures-Creating and Uploading a Texture">Creating and Uploading a Texture</a></h2></div>
+
+<p>
+Unlike traditional native OpenGL applications, browsers load textures "upside down". As a result, many WebGL applications set textures to be loaded with the \(Y\) coordinate flipped by:
+</p>
+
+<pre javascript="">gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+</pre>
+
+<p>
+Creating textures follows the same pattern as using buffers:
+</p>
+
+<ul>
+<li>
+Create a new texture
+<pre javascript="">const texture = gl.createTexture();
+</pre>
+
+</li><li>
+Bind it to make it the current texture. The first parameter indicates the type of texture we're binding.
+<pre javascript="">gl.bindTexture(gl.TEXTURE_2D, texture);
+</pre>
+
+</li><li>
+Pass the texture contents
+<pre javascript="">// From DOM
+const image = document.getElementById('texture-image');
+gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+
+// From Image
+const texture = gl.createTexture();
+const image = new Image();
+image.src = 'texture-file.png';
+
+image.onload = () =&gt; {
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE,
+  image);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+  gl.bindTexture(gl.TEXTURE_2D, null);
+};
+</pre>
+
+</li><li>
+Set the filter mode or other texture parameters. We'll see what filters are later on, the simplest ones are the following:
+<pre javascript="">gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+</pre>
+
+</li><li>
+Unbind the texture
+<pre javascript="">gl.bindTexture(gl.TEXTURE_2D, null);
+</pre>
+
+</li></ul>
+<p>
+When we no longer need the texture we can remove it and free up the associated memory as follows:
+</p>
+
+<pre javascript="">gl.deleteTexture(texture);
+</pre>
+
+<div id="Textures-Using Texture Coordinates"><h2 id="Using Texture Coordinates" class="header"><a href="#Textures-Using Texture Coordinates">Using Texture Coordinates</a></h2></div>
+
+<p>
+Before we apply our texture to our surface, we need to figure out which part of the texture maps onto which part of the surface. We do this through another vertex attribute known as texture coordinates.
+</p>
+
+<p>
+WebGL forces all of the texture coordinates into a \(0\) to \(1\) range, where \((0, 0)\) represents the top left-hand side corner of the texture and \((1, 1)\) represents the bottom right-hand side corner.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/web_gl_texture_coords.png" alt="WebGL Texture Coordinates">
+</p>
+
+<p>
+This comes in handy because if the texture coordinates were defined in terms of pixels, then the mapping would be dependent on the resolution of the image.
+</p>
+
+<p>
+The process of laying out textures and generating texture coordinates is called <span id="Textures-Using Texture Coordinates-unwrapping"></span><strong id="unwrapping">unwrapping</strong>.
+</p>
+
+<div id="Textures-Using Texture Coordinates-Polygon Mesh"><h3 id="Polygon Mesh" class="header"><a href="#Textures-Using Texture Coordinates-Polygon Mesh">Polygon Mesh</a></h3></div>
+
+<p>
+A <span id="Textures-Using Texture Coordinates-Polygon Mesh-polygon mesh"></span><strong id="polygon mesh">polygon mesh</strong> is a collection of vertices, edges, and faces that defines the shape of a polyhedral object in 3D computer graphics and solid
+</p>
+
+<div id="Textures-Using Texture Coordinates-Texture Coordinates"><h3 id="Texture Coordinates" class="header"><a href="#Textures-Using Texture Coordinates-Texture Coordinates">Texture Coordinates</a></h3></div>
+
+<p>
+Texture coordinates also have a common symbolic representation. Unfortunately, it's not consistent across all 3D software applications. OpenGL and WebGL refer to these coordinates as \(s\) and \(t\) for the \(x\) and \(y\) components, respectively. However, DirectX and many popular modeling packages refer to them as \(u\) and \(v\) (so they are usually referred to as "UVs").
+</p>
+
+<div id="Textures-Using Textures in a Shader"><h2 id="Using Textures in a Shader" class="header"><a href="#Textures-Using Textures in a Shader">Using Textures in a Shader</a></h2></div>
+
+<p>
+We'll want to include a two-element vector attribute in our vertex shader that will map to our texture coordinates:
+</p>
+
+<pre c="">in vec2 aVertexTextureCoords;
+</pre>
+
+<p>
+We need to add a new uniform to the fragment shader that uses a type we haven't seen before: sampler2D. The sampler2D uniform is what allows us to access the texture data in the shader:
+</p>
+
+<pre c="">uniform sampler2D uSampler;
+</pre>
+
+<p>
+The following code shows how to associate a texture with a specific sampler uniform:
+</p>
+
+<pre javascript="">gl.activeTexture(gl.TEXTURE0);
+gl.bindTexture(gl.TEXTURE_2D, texture);
+gl.uniform1i(program.uSampler, 0);
+</pre>
+
+<p>
+First off, we are changing the active texture with <code>gl.activeTexture</code>. Next, we bind the texture we wish to use, which associates it with the currently active texture, <code>TEXTURE0</code>. Finally, we tell the sampler uniform which texture it should be associated with. Here, we give it \(0\) to indicate that the sampler should use <code>TEXTURE0</code>.
+</p>
+
+<p>
+To use our texture in the fragment shader by return the value of the texture as the fragment color:
+</p>
+
+<pre c="">texture(uSampler, vTextureCoord);
+</pre>
+
+<p>
+<code>texture</code> takes in the sampler uniform we wish to query and the coordinates to lookup, and returns the color of the texture image at those coordinates as <code>vec4</code>. If the image has no alpha channel, <code>vec4</code> will still be returned with the alpha component always set to \(1\).
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="jQuery library"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/fuse.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
