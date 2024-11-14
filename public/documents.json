@@ -507,7 +507,7 @@
   {
     "id": "https://albamr09.github.io/src/Notes/ComputerScience/CG/RTGW/index.html",
     "title": "Real-Time 3D Graphics with WebGL 2",
-    "body": " index search search back real-time 3d graphics with webgl 2 getting started rendering lights camera animations colors, depth testing and alpha blending $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
+    "body": " index search search back real-time 3d graphics with webgl 2 getting started rendering lights camera animations colors, depth testing and alpha blending textures $(\"pre\").each(function (index, item) { $(item).html(\"<code>\" + $(item).html() + \"</code>\"); }); hljs.highlightall(); "
   },
   {
     "id": "https://albamr09.github.io/src/Notes/ComputerScience/CG/RTGW/03.html",
