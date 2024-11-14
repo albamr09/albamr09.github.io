@@ -1,0 +1,423 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>The Precise Definition of a Limit</title>
+  <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="The Precise Definition of a Limit"><h1 id="The Precise Definition of a Limit" class="header"><a href="#The Precise Definition of a Limit">The Precise Definition of a Limit</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="02_04.html#The%20Precise%20Definition%20of%20a%20Limit">The Precise Definition of a Limit</a>
+
+</li><li>
+<a href="02_04.html#One-Sided%20Limits">One-Sided Limits</a>
+
+<ul>
+<li>
+<a href="02_04.html#Precise%20Definition%20of%20Left-Hand%20Limit">Precise Definition of Left-Hand Limit</a>
+
+</li><li>
+<a href="02_04.html#Precise%20Definition%20of%20Right-Hand%20Limit">Precise Definition of Right-Hand Limit</a>
+
+</li></ul>
+</li><li>
+<a href="02_04.html#Limit%20Laws">Limit Laws</a>
+
+<ul>
+<li>
+<a href="02_04.html#Proof%20of%20the%20Sum%20Law">Proof of the Sum Law</a>
+
+</li></ul>
+</li><li>
+<a href="02_04.html#Infinite%20Limits">Infinite Limits</a>
+
+</li></ul>
+<hr>
+
+<p>
+The <a href="02_02.html#Limits">intuitive definition</a> is inadequate for some purpose because of it vagueness.
+</p>
+
+<div id="The Precise Definition of a Limit-The Precise Definition of a Limit"><h2 id="The Precise Definition of a Limit" class="header"><a href="#The Precise Definition of a Limit-The Precise Definition of a Limit">The Precise Definition of a Limit</a></h2></div>
+
+<p>
+As motivation consier the following function:
+</p>
+
+\begin{align}
+f(x) = \begin{cases}
+2x - 1 &amp; \text{ if } x \neq 3 \\
+6 &amp; \text{ if } x = 3 \\
+\end{cases}
+\end{align}
+
+<p>
+Think about how close to \(3\) does \(x\) have to be so that \(f(x)\) differs from \(5\) less than \(0.1\)?
+</p>
+
+<p>
+We know that the distance from \(x\) to \(3\) is \(|x - 3|\) and the distance from \(f(x)\) to \(5\) is \(|f(x) - 5|\), so out problem becomes:
+</p>
+
+\begin{align}
+| f(x) - 5 | &lt; 0.1 \text{ if } 0 &lt; | x - 3 | &lt; \delta
+\end{align}
+
+<p>
+Notice that if:
+</p>
+
+\begin{align}
+0 &lt; |x - 3| &lt; \frac{0.1}{2} = 0.5
+\end{align}
+
+<p>
+then:
+</p>
+
+\begin{align}
+|f(x) - 5| = |(2x - 1) - 5| = |2x - 6| = 2|x - 3| &lt; 2(0.05) = 0.1
+\end{align}
+
+<p>
+that is:
+</p>
+
+\begin{align}
+|f(x) - 5| &lt; 0.1 \text { if } 0 &lt; |x - 3| &lt; 0.05
+\end{align}
+
+<p>
+Thus an answer to the proposed problem is given by \(\delta = 0.05\). However, if we change the limit \(0.1\) to \(0.01\) by using the same method we find that \(\delta = 0.005\), such that:
+</p>
+
+\begin{align}
+|f(x) - 5| &lt; 0.01 \text { if } 0 &lt; |x - 3| &lt; 0.005
+\end{align}
+
+<p>
+And similarly:
+</p>
+
+\begin{align}
+|f(x) - 5| &lt; 0.001 \text { if } 0 &lt; |x - 3| &lt; 0.0005
+\end{align}
+
+<p>
+These values: \(0.1, 0.01\) and \(0.001\) are what we call <span id="The Precise Definition of a Limit-The Precise Definition of a Limit-error tolerances"></span><strong id="error tolerances">error tolerances</strong>. But to actually compute the limit we must be able to find a \(\delta\) for any arbitrarily small positive number \(\epsilon\):
+</p>
+
+\begin{align}
+|f(x) - 5| &lt; \epsilon \text { if } 0 &lt; |x - 3| &lt; \delta = \frac{\epsilon}{2}
+\end{align}
+
+<p>
+This is the precise way of saying that \(f(x)\) is close to \(5\) when \(x\) is close to \(3\) because the previous statement says that we can make the  values of \(f(x)\) within an arbitrary distance \(\epsilon\) from \(5\) by restricting \(x\) to be within a distance \(\frac{\epsilon}{2}\) from \(3\) (See Figure 1).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/Math/Calculus/CET/precise_def_limit.png" alt="Precise Definition of a Limit">
+</p>
+
+<p>
+The precise definition of a limit is as follows:
+</p>
+
+<p>
+Let \(f\) be a function defined on some open interval that contains the number \(a\), except possible at \(a\) itself. Then we say that the limit of \(f(x)\) as \(x\) approaches \(a\) is \(L\) and we write:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} f(x) = L
+\end{align}
+
+<p>
+if for every number \(\epsilon &gt; 0\) there is a number \(\delta &gt; 0\) such that:
+</p>
+
+\begin{align}
+\text{ if } 0 &lt; |x - a| &lt; \delta \text{ then } |f(x) - L| &lt; \epsilon
+\end{align}
+
+<p>
+We can reformulate this definition in terms of intervals:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} f(x) = L
+\end{align}
+
+<p>
+means that for every \(\epsilon &gt; 0\) we can find \(\delta &gt; 0\) such that if \(x \in (a - \delta, a + \delta)\) and \(x \neq a\), then \(f(x) \in (L - \epsilon, L + \epsilon)\) (See Figure 3).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/Math/Calculus/CET/interval_limit_definition.png" alt="Interval Limit Definition">
+</p>
+
+<p>
+Also we can interpret the definition geometrically in terms of the graph of a function. If \(\epsilon &gt; 0\) is given we draw horizontal lines \(y = L + \epsilon\) and \(y = L - epsilon\) as well as the graph of \(f\) (see Figure 4).
+</p>
+
+<p>
+If \(\lim_{x \rightarrow a} f(x) = L\) then we can find a number \(\delta &gt; 0\) such that if \(x \in (a - \delta, a + \delta)\) and \(x \neq a\), then the curve \(y = f(x)\) lies between the lines \(y = L - \epsilon\) and \(y = L + \epsilon\) (see Figure 5). Once \(\delta\) has been found, then any smaller \(\delta\) will also work. 
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/Math/Calculus/CET/geometric_interpretation_limit.png" alt="Geometric Interpretation of a Limit">
+</p>
+
+<p>
+Note that this process must work for every positive number \(\epsilon\), no matter how small (See Figure 6).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/Math/Calculus/CET/geometric_interpretation_limit_1.png" alt="Geometric Interpretation of a Limit">
+</p>
+
+<div id="The Precise Definition of a Limit-One-Sided Limits"><h2 id="One-Sided Limits" class="header"><a href="#The Precise Definition of a Limit-One-Sided Limits">One-Sided Limits</a></h2></div>
+
+<div id="The Precise Definition of a Limit-One-Sided Limits-Precise Definition of Left-Hand Limit"><h3 id="Precise Definition of Left-Hand Limit" class="header"><a href="#The Precise Definition of a Limit-One-Sided Limits-Precise Definition of Left-Hand Limit">Precise Definition of Left-Hand Limit</a></h3></div>
+
+\begin{align}
+\lim_{x \rightarrow a^{-}} f(x) = L
+\end{align}
+
+<p>
+if for every number \(\epsilon &gt; 0\) there is a number \(\delta &gt; 0\) such that:
+</p>
+
+\begin{align}
+\text{ if } a - \delta &lt; x &lt; a \text{ then } |f(x) - L| &lt; \epsilon
+\end{align}
+
+<p>
+that is, \(x\) is restricted to lie in the left half of the interval \((a - \delta, a + \delta)\).
+</p>
+
+<div id="The Precise Definition of a Limit-One-Sided Limits-Precise Definition of Right-Hand Limit"><h3 id="Precise Definition of Right-Hand Limit" class="header"><a href="#The Precise Definition of a Limit-One-Sided Limits-Precise Definition of Right-Hand Limit">Precise Definition of Right-Hand Limit</a></h3></div>
+
+\begin{align}
+\lim_{x \rightarrow a^{+}} f(x) = L
+\end{align}
+
+<p>
+if for every number \(\epsilon &gt; 0\) there is a number \(\delta &gt; 0\) such that:
+</p>
+
+\begin{align}
+\text{ if } a &lt; x &lt; a + \delta \text{ then } |f(x) - L| &lt; \epsilon
+\end{align}
+
+<p>
+that is, \(x\) is restricted to lie in the right half of the interval \((a - \delta, a + \delta)\).
+</p>
+
+<div id="The Precise Definition of a Limit-Limit Laws"><h2 id="Limit Laws" class="header"><a href="#The Precise Definition of a Limit-Limit Laws">Limit Laws</a></h2></div>
+
+<p>
+Up until now we have used the <a href="02_04.html#The Precise Definition of a Limit">precise definition of a limit</a> to compute the limit of a given function. However if we were given a more complicated funtion a proof would require a great deal of ingenuity. 
+</p>
+
+<p>
+Fortunately we can use the <a href="02_03.html#Properties of Limits">Limit Laws</a>, which can be proved using the definition of a limit. So the limits of complicated function can be found rigorously from the Limit Laws without resorting to the definition directly.
+</p>
+
+<div id="The Precise Definition of a Limit-Limit Laws-Proof of the Sum Law"><h3 id="Proof of the Sum Law" class="header"><a href="#The Precise Definition of a Limit-Limit Laws-Proof of the Sum Law">Proof of the Sum Law</a></h3></div>
+
+<p>
+The Sum Law states that if the limits:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} f(x)
+\end{align}
+
+\begin{align}
+\lim_{x \rightarrow a} g(x)
+\end{align}
+
+<p>
+exist. Then:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} [f(x) + g(x)] = \lim_{x \rightarrow a} f(x) + \lim_{x \rightarrow a} g(x)
+\end{align}
+
+<p>
+<span id="The Precise Definition of a Limit-Limit Laws-Proof of the Sum Law-Proof"></span><strong id="Proof">Proof</strong>
+</p>
+
+<p>
+Let \(\epsilon &gt; 0\) be given, we must find \(\delta &gt; 0\) such that:
+</p>
+
+\begin{align}
+\text{ if } 0 &lt; |x - a| &lt; \delta \text{ then } |f(x) + g(x) - (L + M)| &lt; \epsilon
+\end{align}
+
+<p>
+By the means of the Triangle Inequality:
+</p>
+
+\begin{align}
+| f(x) + g(x) - (L + M) | = | (f(x) - L) + (g(x) - M) | \leq | f(x) - L | + | g(x) - M |
+\end{align}
+
+<p>
+We make \(|f(x) + g(x) - (L + M)|\) less that \(\epsilon\) by letting:
+</p>
+
+\begin{align}
+| f(x) - L | &lt; \frac{\epsilon}{2}
+\end{align}
+
+<p>
+and
+</p>
+
+\begin{align}
+| g(x) - M | &lt; \frac{\epsilon}{2}
+\end{align}
+
+<p>
+Since \(\frac{\epsilon}{2} &gt; 0\) and \(\lim_{x \rightarrow a} f(x) = L\) there exists a number \(\delta_1 &gt; 0\) such that:
+</p>
+
+\begin{align}
+\text{ if } 0 &lt; |x - a| &lt; \delta_1 \text{ then } |f(x) - L| &lt; \frac{\epsilon}{2}
+\end{align}
+
+<p>
+Similarly, since \(\frac{\epsilon}{2} &gt; 0\) and \(\lim_{x \rightarrow a} g(x) = M\) there exists a number \(\delta_2 &gt; 0\) such that:
+</p>
+
+\begin{align}
+\text{ if } 0 &lt; |x - a| &lt; \delta_2 \text{ then } |g(x) - M| &lt; \frac{\epsilon}{2}
+\end{align}
+
+<p>
+Let \(\delta = \min\{\delta_1, \delta_2\}\), notice:
+</p>
+
+\begin{align}
+\text{ if } 0 &lt; |x - a| &lt; \delta \text{ then } 0 &lt; |x - a| &lt; \delta_1 \text{ and } 0 &lt; |x - a| &lt; \delta_2
+\end{align}
+
+<p>
+and also:
+</p>
+
+\begin{align}
+| f(x) - L | &lt; \frac{\epsilon}{2} \text{ and } | g(x) - M | &lt; \frac{\epsilon}{2}
+\end{align}
+
+<p>
+And, therefore by the triangle inequality we showed before:
+</p>
+
+\begin{align}
+|f(x) + g(x) - (L + M)| \leq | f(x) - L | + | g(x) - M | &lt; \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+\end{align}
+
+<p>
+Thus, by the definition of a limit:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} [f(x) + g(x)] = L + M
+\end{align}
+
+<div id="The Precise Definition of a Limit-Infinite Limits"><h2 id="Infinite Limits" class="header"><a href="#The Precise Definition of a Limit-Infinite Limits">Infinite Limits</a></h2></div>
+
+<p>
+Let \(f\) be a function defined on some open interval that contains the number \(a\), except possibly at \(a\) itself. Then:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} f(x) = \infty
+\end{align}
+
+<p>
+means that for every postive number \(M\) there is a positive number \(\delta\) such that:
+</p>
+
+\begin{align}
+\text{ if } 0 &lt; |x - a| &lt; \delta \text{ then } f(x) &gt; M
+\end{align}
+
+<p>
+This says that the values of \(f(x)\) ca be made arbitrarily large (larger than any given number \(M\)) by requiring \(x\) to be close enough to \(a\) (See Figure 10).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/Math/Calculus/CET/infinite_positive_limit.png" alt="Infinite Positive Limit">
+</p>
+
+<p>
+Let \(f\) be a function defined on some open interval that contains the number \(a\), except possibly at \(a\) itself. Then:
+</p>
+
+\begin{align}
+\lim_{x \rightarrow a} f(x) = -\infty
+\end{align}
+
+<p>
+means that for every postive number \(N\) there is a positive number \(\delta\) such that:
+</p>
+
+\begin{align}
+\text{ if } 0 &lt; |x - a| &lt; \delta \text{ then } f(x) &lt; N
+\end{align}
+
+<p>
+See Figure 11.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/Math/Calculus/CET/infinite_negative_limit.png" alt="Infinite Negative Limit">
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="jQuery library"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/fuse.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
