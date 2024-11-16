@@ -1,0 +1,111 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Meaningful Names</title>
+  <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Meaningful Names"><h1 id="Meaningful Names" class="header"><a href="#Meaningful Names">Meaningful Names</a></h1></div>
+
+<hr>
+
+<ul>
+<li>
+<span id="Meaningful Names-Use intention revealing names"></span><strong id="Use intention revealing names">Use intention revealing names</strong>: the name of a variable, function or class should answer why it exists, what it does and how it is used.
+
+</li></ul>
+<p>
+Let's avoid:
+</p>
+
+<pre java="">List&lt;int&gt; list1;
+</pre>
+
+<ul>
+<li>
+<span id="Meaningful Names-Make meaningful distinctions"></span><strong id="Make meaningful distinctions">Make meaningful distinctions</strong>: if variable names are different then they must mean something different, and that difference has to be easily understood.
+
+</li></ul>
+<p>
+Let's avoid:
+</p>
+
+<pre java="">char[] a1;
+char[] a2;
+</pre>
+
+<ul>
+<li>
+<span id="Meaningful Names-Use pronounceable names"></span><strong id="Use pronounceable names">Use pronounceable names</strong>: use common words for names, instead of gibberish.
+
+</li></ul>
+<p>
+Let's avoid:
+</p>
+
+<pre java="">class DtaRcRd102 {
+private Date genymdhms;
+}
+</pre>
+
+<ul>
+<li>
+<span id="Meaningful Names-Use searchable names"></span><strong id="Use searchable names">Use searchable names</strong>: if a variable is used on several places on your code it should be easy to seach, so avoid numbers and single letter variables.
+
+</li><li>
+<span id="Meaningful Names-Class names"></span><strong id="Class names">Class names</strong>: should be nouns or noun-like words.
+
+</li><li>
+<span id="Meaningful Names-Method names"></span><strong id="Method names">Method names</strong>: should have verb or verb phrases as names.
+
+</li><li>
+<span id="Meaningful Names-Pick one word per concept"></span><strong id="Pick one word per concept">Pick one word per concept</strong>: avoid having different namings for something that is fundamentally the same. For example, avoid having <code>fetch</code>, <code>retrieve</code> and <code>get</code> as different method names that do the "same".
+
+</li><li>
+<span id="Meaningful Names-Use solution domain names"></span><strong id="Use solution domain names">Use solution domain names</strong>: use algorithm names, pattern names, math names and so forth.
+
+</li><li>
+<span id="Meaningful Names-Use problem domain names"></span><strong id="Use problem domain names">Use problem domain names</strong>: if no solution domain name is suitable, go ahead and use the name from the problem domain.
+
+</li><li>
+<span id="Meaningful Names-Add meaninful context"></span><strong id="Add meaninful context">Add meaninful context</strong>: few names are meaningul in and of themselves, so it is always helpful when they are declared under well named classes, methods, namespaces, etc.
+
+</li></ul>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="jQuery library"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/fuse.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
