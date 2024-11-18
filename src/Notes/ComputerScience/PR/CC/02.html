@@ -1,0 +1,222 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Functions</title>
+  <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Functions"><h1 id="Functions" class="header"><a href="#Functions">Functions</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="02.html#How%20Functions%20Should%20be%20Defined">How Functions Should be Defined</a>
+
+</li><li>
+<a href="02.html#Switch%20Statements">Switch Statements</a>
+
+</li></ul>
+<hr>
+
+<div id="Functions-How Functions Should be Defined"><h2 id="How Functions Should be Defined" class="header"><a href="#Functions-How Functions Should be Defined">How Functions Should be Defined</a></h2></div>
+
+<p>
+Lets consider the following code:
+</p>
+
+<pre java="">public static String testableHtml(
+PageData pageData,
+boolean includeSuiteSetup
+) throws Exception {
+  WikiPage wikiPage = pageData.getWikiPage();
+  StringBuffer buffer = new StringBuffer();
+  if (pageData.hasAttribute("Test")) {
+    if (includeSuiteSetup) {
+      WikiPage suiteSetup =
+        PageCrawlerImpl.getInheritedPage(
+        SuiteResponder.SUITE_SETUP_NAME, wikiPage
+        );
+      if (suiteSetup != null) {
+        WikiPagePath pagePath =
+        suiteSetup.getPageCrawler().getFullPath(suiteSetup);
+        String pagePathName = PathParser.render(pagePath);
+        buffer.append("!include -setup .")
+          .append(pagePathName)
+          .append("\n");
+      }
+    }
+    WikiPage setup =
+      PageCrawlerImpl.getInheritedPage("SetUp", wikiPage);
+    if (setup != null) {
+      WikiPagePath setupPath =
+      wikiPage.getPageCrawler().getFullPath(setup);
+      String setupPathName = PathParser.render(setupPath);
+      buffer.append("!include -setup .")
+        .append(setupPathName)
+        .append("\n");
+    }
+  }
+  buffer.append(pageData.getContent());
+  if (pageData.hasAttribute("Test")) {
+    WikiPage teardown =
+    PageCrawlerImpl.getInheritedPage("TearDown", wikiPage);
+    if (teardown != null) {
+      WikiPagePath tearDownPath =
+        wikiPage.getPageCrawler().getFullPath(teardown);
+      String tearDownPathName = PathParser.render(tearDownPath);
+      buffer.append("\n")
+        .append("!include -teardown .")
+        .append(tearDownPathName)
+        .append("\n");
+    }
+    if (includeSuiteSetup) {
+      WikiPage suiteTeardown =
+        PageCrawlerImpl.getInheritedPage(
+        SuiteResponder.SUITE_TEARDOWN_NAME,
+        wikiPage
+        );
+      if (suiteTeardown != null) {
+        WikiPagePath pagePath =
+          suiteTeardown.getPageCrawler().getFullPath (suiteTeardown);
+        String pagePathName = PathParser.render(pagePath);
+        buffer.append("!include -teardown .")
+          .append(pagePathName)
+          .append("\n");
+      }
+    }
+  }
+  pageData.setContent(buffer.toString());
+  return pageData.getHtml();
+}
+</pre>
+
+<p>
+This is quite a convoluted function from which we can extract a few keypoints of things we should enforce when defining functions.
+</p>
+
+<ul>
+<li>
+The first rule of functions is that they should be small.
+
+</li><li>
+The indent level should not be greater than 1 or 2.
+
+</li><li>
+A function should do one thing and one thing only. What does one thing really mean though? Well we say the function does one thing by abstracting all of the steps it executes along the way.
+
+</li><li>
+The statements within a function should be all on the same level of abstraction.
+
+</li><li>
+Every function should be followed by those at the next level of abstraction, so the program can be read from top to bottom. That is:
+
+</li><li>
+Use descriptive names that say exactly what the function does.
+<pre>1 To print a string I have to create the string, show the string on the screen.
+  1.1 To create a string i have to create an array of characters and append each character
+    1.1.1 To create an array of characters i have to allocate memory
+    1.1.2 To append a character i have to find on memory the place i want to save it to and save its ascii
+  1.2. To show a string on the screen i have to show each character on the screen
+    1.2.1. To show a character on the screen i need to know its bitmap and print it on the screen
+    ...
+</pre>
+
+</li></ul>
+<div id="Functions-Switch Statements"><h2 id="Switch Statements" class="header"><a href="#Functions-Switch Statements">Switch Statements</a></h2></div>
+
+<p>
+Switch statements it violates our previous rule about functions doing only one thing, most usually swith function do as many things as clauses it has. Also they may grow whenever a new case is added. In order to avoid this it is recommended swith statements be buried low on the abstraction hierarchy. 
+</p>
+
+<p>
+For example, instead of creating a function that computes the pay with regards of the type of employee:
+</p>
+
+<pre java="">public Money calculatePay(Employee e)
+  throws InvalidEmployeeType {
+    switch (e.type) {
+    case COMMISSIONED:
+      return calculateCommissionedPay(e);
+    case HOURLY:
+      return calculateHourlyPay(e);
+    case SALARIED:
+      return calculateSalariedPay(e);
+    default:
+      throw new InvalidEmployeeType(e.type);
+  }
+}
+</pre>
+
+<p>
+We, instead, define an abstract factory that creates one type of employee or another, and where each type of employee decides how <code>calculatePay</code> is computed with polymorphism.
+</p>
+
+<pre java="">public abstract class Employee {
+  public abstract boolean isPayday();
+  public abstract Money calculatePay();
+  public abstract void deliverPay(Money pay);
+}
+
+-----------------
+
+public interface EmployeeFactory {
+  public Employee makeEmployee(EmployeeRecord r) throws InvalidEmployeeType;
+}
+-----------------
+
+public class EmployeeFactoryImpl implements EmployeeFactory {
+
+  public Employee makeEmployee(EmployeeRecord r) throws InvalidEmployeeType {
+    switch (r.type) {
+      case COMMISSIONED:
+        return new CommissionedEmployee(r) ;
+      case HOURLY:
+        return new HourlyEmployee(r);
+      case SALARIED:
+        return new SalariedEmploye(r);
+      default:
+        throw new InvalidEmployeeType(r.type);
+    }
+  }
+}
+</pre>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="jQuery library"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/fuse.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
