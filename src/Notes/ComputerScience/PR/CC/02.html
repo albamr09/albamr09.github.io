@@ -155,6 +155,44 @@ Every function should be defined so the <span id="Functions-How Functions Should
 <li>
 Use <span id="Functions-How Functions Should be Defined-descriptive names"></span><strong id="descriptive names">descriptive names</strong> that say exactly what the function does.
 
+</li><li>
+A <span id="Functions-How Functions Should be Defined-function should have zero arguments"></span><strong id="function should have zero arguments">function should have zero arguments</strong>. They take a lot of conceptual power as they are on a different level of abstraction and they also make testing harder.
+
+</li><li>
+<span id="Functions-How Functions Should be Defined-Output arguments are harder to understand"></span><strong id="Output arguments are harder to understand">Output arguments are harder to understand</strong> than input arguments as we usually do not expect arguments to be modified, so it is best to steer clear of them. If your function must change the state of something, have it change the state of its owning object.
+
+</li><li>
+<span id="Functions-How Functions Should be Defined-Avoid flag arguments"></span><strong id="Avoid flag arguments">Avoid flag arguments</strong> as these booleans make the function do one thing if they are true and another if they are false. That is now our function does two things.
+
+</li><li>
+Use the <span id="Functions-How Functions Should be Defined-keyword form of a function name"></span><strong id="keyword form of a function name">keyword form of a function name</strong>, where we encode the names of the arguments into the function name. For example instead of <code>assertEquals</code> we define <code>assertExpectedEqualsActual</code>.
+
+</li><li>
+Avoid having <span id="Functions-How Functions Should be Defined-side effects"></span><strong id="side effects">side effects</strong>, where the function seems to do one thing but is also does some other hidden thing (e.g. updating an instance variable).
+
+</li><li>
+Apply the <span id="Functions-How Functions Should be Defined-Command Query Separation"></span><strong id="Command Query Separation">Command Query Separation</strong>: functions should either change the state of an object, or it should return some information about that object. Doing both often leads to confusion.
+
+</li><li>
+Prefer returning exceptions to error codes: When you return an error code, you create the problem that the caller must deal with the error immediately.
+
+</li><li>
+Try/catch blocks confuse the structure of the code and mix error processing with normal processing. Functions should do one thing. Error handing is one thing. So it is better to extract the bodies of the try and catch blocks out into functions of their own.
+<pre java="">public void delete(Page page) {
+  try {
+    deletePageAndAllReferences(page);
+  }
+  catch (Exception e) {
+    logError(e);
+  }
+}
+private void deletePageAndAllReferences(Page page) throws Exception {
+  deletePage(page);
+  registry.deleteReference(page.name);
+  configKeys.deleteKey(page.name.makeKey());
+}
+</pre>
+
 </li></ul>
 <div id="Functions-Switch Statements"><h2 id="Switch Statements" class="header"><a href="#Functions-Switch Statements">Switch Statements</a></h2></div>
 
