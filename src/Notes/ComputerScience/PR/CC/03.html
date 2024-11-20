@@ -38,6 +38,17 @@
 
 <hr>
 
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="03.html#Good%20Comments">Good Comments</a>
+
+</li><li>
+<a href="03.html#Bad%20Comments">Bad Comments</a>
+
+</li></ul>
+<hr>
+
 <p>
 The proper use of comments is to compensate for our failure to express ourself in code. Most often that not, comments also lie. The older a comment is, and the farther away it is from the code it describes, the more likely it is to be just plain wrong.
 </p>
@@ -45,6 +56,108 @@ The proper use of comments is to compensate for our failure to express ourself i
 <p>
 Therefore, though comments are sometimes necessary, we will expend significant energy to minimize them.
 </p>
+
+<div id="Comments-Good Comments"><h2 id="Good Comments" class="header"><a href="#Comments-Good Comments">Good Comments</a></h2></div>
+
+<ul>
+<li>
+<span id="Comments-Good Comments-Legal Comments"></span><strong id="Legal Comments">Legal Comments</strong>: For example, copyright and authorship statements are necessary and reasonable things to put into a comment at the start of each source file.
+
+</li><li>
+<span id="Comments-Good Comments-Informative Comments"></span><strong id="Informative Comments">Informative Comments</strong>: they are sometimes useful, but it is better to use the name of the function to convey the information where possible
+<pre java="">// format matched kk:mm:ss EEE, MMM dd, yyyy
+Pattern timeMatcher = Pattern.compile(
+"\\d*:\\d*:\\d* \\w*, \\w* \\d*, \\d*");
+</pre>
+
+</li><li>
+<span id="Comments-Good Comments-Explanation of Intent"></span><strong id="Explanation of Intent">Explanation of Intent</strong>: comments that provide the intent behind a decision.
+<pre java="">//This is our best attempt to get a race condition
+//by creating large number of threads.
+for (int i = 0; i &lt; 25000; i++) {
+  WidgetBuilderThread widgetBuilderThread =
+  new WidgetBuilderThread(widgetBuilder, text, parent, failFlag);
+  Thread thread = new Thread(widgetBuilderThread);
+  thread.start();
+}
+</pre>
+
+</li><li>
+<span id="Comments-Good Comments-Clarification"></span><strong id="Clarification">Clarification</strong>: In general it is better to find a way to make that argument or return value clear in its own right; but when its part of the standard library, or in code that you cannot alter, then a helpful clarifying comment can be useful.
+
+</li><li>
+<span id="Comments-Good Comments-Warning of Consequences"></span><strong id="Warning of Consequences">Warning of Consequences</strong>: Sometimes it is useful to warn other programmers about certain consequences.
+<pre java="">// Don't run unless you
+// have some time to kill.
+public void _testWithReallyBigFile()
+{
+...
+}
+</pre>
+
+</li><li>
+<span id="Comments-Good Comments-<span class=" todo"="">TODO</span> Comments"&gt;<strong id="<span class=" todo"="">TODO Comments"&gt;<span class="todo">TODO</span> Comments</strong>:  Still, you don’t want your code to be littered with TODOs. 
+
+</li><li>
+<span id="Comments-Good Comments-Amplification"></span><strong id="Amplification">Amplification</strong>: used to amplify the importance of something that may otherwise seem inconsequential.
+<pre java="">String listItemContent = match.group(3).trim();
+// the trim is real important. It removes the starting
+// spaces that could cause the item to be recognized
+// as another list.
+</pre>
+
+</li><li>
+<span id="Comments-Good Comments-Docs in Public APIs"></span><strong id="Docs in Public APIs">Docs in Public APIs</strong>: If you are writing a public API, then you should certainly write good javadocs for it.
+
+</li></ul>
+ 
+<div id="Comments-Bad Comments"><h2 id="Bad Comments" class="header"><a href="#Comments-Bad Comments">Bad Comments</a></h2></div>
+
+<ul>
+<li>
+<span id="Comments-Bad Comments-Redundant Comments"></span><strong id="Redundant Comments">Redundant Comments</strong>: comments that are not more informative than the code itself.
+
+</li><li>
+<span id="Comments-Bad Comments-Misleading Comments"></span><strong id="Misleading Comments">Misleading Comments</strong>: that say half truths and may confuse future maintainers.
+
+</li><li>
+<span id="Comments-Bad Comments-Mandated Comments"></span><strong id="Mandated Comments">Mandated Comments</strong>: It is just plain silly to have a rule that says that every function must have a javadoc, or every variable must have a comment.
+
+</li><li>
+<span id="Comments-Bad Comments-Journal Comments"></span><strong id="Journal Comments">Journal Comments</strong>: Sometimes people add a comment to the start of a module every time they edit it. They are no longer necessary as we already have version control.
+
+</li><li>
+<span id="Comments-Bad Comments-Position Markers"></span><strong id="Position Markers">Position Markers</strong>: A banner is startling and obvious if you don’t see banners very often. So use them very sparingly, and only when the benefit is significant. If you overuse banners, they’ll fall into the background noise and be ignored.
+<pre java="">// Actions //////////////////////////////////
+</pre>
+
+</li><li>
+<span id="Comments-Bad Comments-Closing Brace Comments"></span><strong id="Closing Brace Comments">Closing Brace Comments</strong>: Sometimes programmers will put special comments on closing braces. It serves only to clutter the kind of small and encapsulated functions that we prefer.
+
+</li><li>
+<span id="Comments-Bad Comments-Attributions and Bylines"></span><strong id="Attributions and Bylines">Attributions and Bylines</strong>: Source code control systems are very good at remembering who added what, when.
+<pre java="">/* Added by Rick */
+</pre>
+
+</li><li>
+<span id="Comments-Bad Comments-Commented-Out Code"></span><strong id="Commented-Out Code">Commented-Out Code</strong>: Others who see that commented-out code won’t have the courage to delete it. They’ll think it is there for a reason and is too important to delete.
+
+</li><li>
+<span id="Comments-Bad Comments-Nonlocal Information"></span><strong id="Nonlocal Information">Nonlocal Information</strong>: If you must write a comment, then make sure it describes the code it appears near. Don’t offer systemwide information in the context of a local comment.
+
+</li><li>
+<span id="Comments-Bad Comments-Too Much Information"></span><strong id="Too Much Information">Too Much Information</strong>: Don’t put interesting historical discussions or irrelevant descriptions of details into your comments. 
+
+</li><li>
+<span id="Comments-Bad Comments-Inobvious Connection"></span><strong id="Inobvious Connection">Inobvious Connection</strong>: The connection between a comment and the code it describes should be obvious.
+
+</li><li>
+<span id="Comments-Bad Comments-Function Headers"></span><strong id="Function Headers">Function Headers</strong>: Short functions don’t need much description. A well-chosen name for a small function that does one thing is usually better than a comment header.
+
+</li><li>
+<span id="Comments-Bad Comments-API Docs in Nonpublic Code"></span><strong id="API Docs in Nonpublic Code">API Docs in Nonpublic Code</strong>: Generating javadoc pages for the classes and functions inside a system is not generally useful.
+
+</li></ul>
 </div>
   
 
