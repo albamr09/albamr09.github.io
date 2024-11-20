@@ -57,6 +57,9 @@
 </li><li>
 <a href="07.html#Using%20Textures%20in%20a%20Shader">Using Textures in a Shader</a>
 
+</li><li>
+<a href="07.html#Texture%20Filter%20Modes">Texture Filter Modes</a>
+
 </li></ul>
 <hr>
 
@@ -196,6 +199,53 @@ To use our texture in the fragment shader by return the value of the texture as 
 
 <p>
 <code>texture</code> takes in the sampler uniform we wish to query and the coordinates to lookup, and returns the color of the texture image at those coordinates as <code>vec4</code>. If the image has no alpha channel, <code>vec4</code> will still be returned with the alpha component always set to \(1\).
+</p>
+
+<div id="Textures-Texture Filter Modes"><h2 id="Texture Filter Modes" class="header"><a href="#Textures-Texture Filter Modes">Texture Filter Modes</a></h2></div>
+
+<p>
+If you were to zoom in on a texture you would see that it begins to alias, where we can see that jagged edges develop around the WebGL logo.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/aliasing.png" alt="Aliasing">
+</p>
+
+<p>
+Why do we see these artifacts in the first place? In the fragment shader the texture coordinates provided by the vertex shader are interpolated (as they are <code>varying</code> variables). In a perfect situation, the texture would display at a 1:1 ratio on screen, meaning each pixel of the texture
+would take up exactly one pixel on screen. In this scenario, there would be no artifacts:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/texture_display_map.png" alt="Texture to Display Mapping">
+</p>
+
+<p>
+The reality of 3D applications, however, is that textures are almost never displayed at their native resolution. We refer to these scenarios as <span id="Textures-Texture Filter Modes-magnification"></span><strong id="magnification">magnification</strong> and <span id="Textures-Texture Filter Modes-minification"></span><strong id="minification">minification</strong>.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/magnification_minification.png" alt="Texture Magnification and Minification">
+</p>
+
+<p>
+When a texture is magnified or minified, there can be some ambiguity about what color the texture sampler should return, for example:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/texture_mapping_ambiguity.png" alt="Texture Mapping Ambiguity">
+</p>
+
+<p>
+Texture filtering allows us to control how textures are sampled and achieve the look we want. We change the currently bound texture's filter mode by:
+</p>
+
+<pre javascript="">gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+</pre>
+
+<p>
+Note that different textures can have different filters.
 </p>
 </div>
   
