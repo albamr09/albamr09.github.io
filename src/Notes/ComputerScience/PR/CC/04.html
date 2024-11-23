@@ -1,0 +1,222 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Formatting</title>
+  <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Formatting"><h1 id="Formatting" class="header"><a href="#Formatting">Formatting</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="04.html#The%20Purpose%20of%20Formatting">The Purpose of Formatting</a>
+
+</li><li>
+<a href="04.html#Vertical%20Formatting">Vertical Formatting</a>
+
+<ul>
+<li>
+<a href="04.html#The%20Newspaper%20Metaphor">The Newspaper Metaphor</a>
+
+</li><li>
+<a href="04.html#Vertical%20Openness%20Between%20Concepts">Vertical Openness Between Concepts</a>
+
+</li><li>
+<a href="04.html#Vertical%20Density">Vertical Density</a>
+
+</li><li>
+<a href="04.html#Vertical%20Distance">Vertical Distance</a>
+
+</li><li>
+<a href="04.html#Vertical%20Ordering">Vertical Ordering</a>
+
+</li></ul>
+</li><li>
+<a href="04.html#Horizontal%20Formatting">Horizontal Formatting</a>
+
+<ul>
+<li>
+<a href="04.html#Horizontal%20Openness%20and%20Density">Horizontal Openness and Density</a>
+
+</li><li>
+<a href="04.html#Horizontal%20Alignment">Horizontal Alignment</a>
+
+</li><li>
+<a href="04.html#Indentantion">Indentantion</a>
+
+</li></ul>
+</li><li>
+<a href="04.html#Team%20Rules">Team Rules</a>
+
+</li></ul>
+<hr>
+
+<div id="Formatting-The Purpose of Formatting"><h2 id="The Purpose of Formatting" class="header"><a href="#Formatting-The Purpose of Formatting">The Purpose of Formatting</a></h2></div>
+
+<p>
+The coding style and readability set precedents that continue to affect maintainability and extensibility long after the original code has been changed beyond recognition.
+</p>
+
+<div id="Formatting-Vertical Formatting"><h2 id="Vertical Formatting" class="header"><a href="#Formatting-Vertical Formatting">Vertical Formatting</a></h2></div>
+
+<p>
+How big should a source file be? Small files are usually easier to understand than large files are.
+</p>
+
+<div id="Formatting-Vertical Formatting-The Newspaper Metaphor"><h3 id="The Newspaper Metaphor" class="header"><a href="#Formatting-Vertical Formatting-The Newspaper Metaphor">The Newspaper Metaphor</a></h3></div>
+
+<p>
+We would like a source file to be like a newspaper article. The name should be simple but explanatory. Detail should increase as we move downward.
+</p>
+
+<div id="Formatting-Vertical Formatting-Vertical Openness Between Concepts"><h3 id="Vertical Openness Between Concepts" class="header"><a href="#Formatting-Vertical Formatting-Vertical Openness Between Concepts">Vertical Openness Between Concepts</a></h3></div>
+
+<p>
+Each blank line is a visual cue that identifies a new and separate concept
+</p>
+
+<pre java="">package fitnesse.wikitext.widgets;
+import java.util.regex.*;
+
+public class BoldWidget extends ParentWidget {
+  public static final String REGEXP = "'''.+?'''";
+  private static final Pattern pattern = Pattern.compile("'''(.+?)'''",
+    Pattern.MULTILINE + Pattern.DOTALL
+  );
+  
+  public BoldWidget(ParentWidget parent, String text) throws Exception {
+    super(parent);
+    Matcher match = pattern.matcher(text);
+    match.find();
+    addChildWidgets(match.group(1));
+  }
+  
+  public String render() throws Exception {
+    StringBuffer html = new StringBuffer("&lt;b&gt;");
+    html.append(childHtml()).append("&lt;/b&gt;");
+    return html.toString();
+  }
+}
+</pre>
+
+<div id="Formatting-Vertical Formatting-Vertical Density"><h3 id="Vertical Density" class="header"><a href="#Formatting-Vertical Formatting-Vertical Density">Vertical Density</a></h3></div>
+
+<p>
+Vertical density implies close association. So lines of code that are tightly related should appear vertically dense.
+</p>
+
+<div id="Formatting-Vertical Formatting-Vertical Distance"><h3 id="Vertical Distance" class="header"><a href="#Formatting-Vertical Formatting-Vertical Distance">Vertical Distance</a></h3></div>
+
+<p>
+Concepts that are closely related should be kept vertically close to each other to avoid forcing our readers to hop around through our source files and classes.
+</p>
+
+<ul>
+<li>
+<span id="Formatting-Vertical Formatting-Vertical Distance-Variable declarations"></span><strong id="Variable declarations">Variable declarations</strong>: Variables should be declared as close to their usage as possible.
+
+</li><li>
+<span id="Formatting-Vertical Formatting-Vertical Distance-Instance variables"></span><strong id="Instance variables">Instance variables</strong>: should all be declared in one well-known place (e.g. at the top of the class, at then end of the class).
+
+</li><li>
+<span id="Formatting-Vertical Formatting-Vertical Distance-Dependent functions"></span><strong id="Dependent functions">Dependent functions</strong>:  If one function calls another, they should be vertically close, and the caller should be above the callee, if at all possible.
+
+</li></ul>
+<div id="Formatting-Vertical Formatting-Vertical Ordering"><h3 id="Vertical Ordering" class="header"><a href="#Formatting-Vertical Formatting-Vertical Ordering">Vertical Ordering</a></h3></div>
+
+<p>
+In general we want function call dependencies to point in the downward direction. That is, a function that is called should be below a function that does the calling.
+</p>
+
+<p>
+Also, we expect the most important concepts to come first.
+</p>
+
+<div id="Formatting-Horizontal Formatting"><h2 id="Horizontal Formatting" class="header"><a href="#Formatting-Horizontal Formatting">Horizontal Formatting</a></h2></div>
+
+<p>
+ Programmers clearly prefer short lines (80 to 120 characters).
+</p>
+
+<div id="Formatting-Horizontal Formatting-Horizontal Openness and Density"><h3 id="Horizontal Openness and Density" class="header"><a href="#Formatting-Horizontal Formatting-Horizontal Openness and Density">Horizontal Openness and Density</a></h3></div>
+
+<p>
+We use horizontal white space to associate things that are strongly related and disassociate things that are more weakly related.
+</p>
+
+<div id="Formatting-Horizontal Formatting-Horizontal Alignment"><h3 id="Horizontal Alignment" class="header"><a href="#Formatting-Horizontal Formatting-Horizontal Alignment">Horizontal Alignment</a></h3></div>
+
+<p>
+Using horizontal alignment to accentuate certain structures is not useful:
+</p>
+
+<pre java="">public class FitNesseExpediter implements ResponseSender
+{
+  private   Socket            socket;
+  private   InputStream       input;
+  private   OutputStream      output;
+  private   Request           request;
+  private   Response          response;
+  private   FitNesseContext   context;
+  protected long              requestParsingTimeLimit;
+  private   long              requestProgress;
+  private   long              requestParsingDeadline;
+  private   boolean           hasError;
+</pre>
+
+<div id="Formatting-Horizontal Formatting-Indentantion"><h3 id="Indentantion" class="header"><a href="#Formatting-Horizontal Formatting-Indentantion">Indentantion</a></h3></div>
+
+<p>
+A source file is a hierarchy rather like an outline. Each level of this hierarchy is a scope into which names can be declared and in which declarations and executable statements are interpreted. And each level of hierarchy is differentiated using indentantion. This allows readers to quickly hop over scopes.
+</p>
+
+<p>
+<span id="Formatting-Horizontal Formatting-Indentantion-Breaking indentation"></span><strong id="Breaking indentation">Breaking indentation</strong>: It is sometimes tempting to break the indentation rule for short if statements, short while loops, or short functions. However it is preferable to expand and indent those scopes.
+</p>
+
+<div id="Formatting-Team Rules"><h2 id="Team Rules" class="header"><a href="#Formatting-Team Rules">Team Rules</a></h2></div>
+
+<p>
+A team of developers should agree upon a single formatting style.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="jQuery library"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/fuse.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
