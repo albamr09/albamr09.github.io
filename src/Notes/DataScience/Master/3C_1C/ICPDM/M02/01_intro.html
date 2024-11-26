@@ -1,0 +1,208 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/custom.css">
+    <title>Introduction To Apache Spark</title>
+  <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Introduction To Apache Spark"><h1 id="Introduction To Apache Spark" class="header"><a href="#Introduction To Apache Spark">Introduction To Apache Spark</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="01_intro.html#Key%20Features%20of%20Apache%20Spark">Key Features of Apache Spark</a>
+
+</li><li>
+<a href="01_intro.html#History%20and%20Evolution">History and Evolution</a>
+
+</li><li>
+<a href="01_intro.html#Architecture%20of%20Apache%20Spark">Architecture of Apache Spark</a>
+
+</li><li>
+<a href="01_intro.html#Core%20Concepts%20and%20APIs">Core Concepts and APIs</a>
+
+<ul>
+<li>
+<a href="01_intro.html#Core%20Concepts">Core Concepts</a>
+
+</li><li>
+<a href="01_intro.html#APIs">APIs</a>
+
+</li></ul>
+</li><li>
+<a href="01_intro.html#Running%20Spark%20Applications%20and%20Ecosystem">Running Spark Applications and Ecosystem</a>
+
+</li><li>
+<a href="01_intro.html#Conclusion">Conclusion</a>
+
+</li></ul>
+<hr>
+
+<p>
+Apache Spark is a unified analytics engine designed for large-scale data processing. It provides a consistent set of APIs for handling a wide range of data processing tasks, including batch processing, SQL queries, streaming computation, and machine learning. Spark is essentially a computing engine that focuses on processing data from various storage systems such as cloud storage, distributed file systems, key-value stores, and message buses
+</p>
+
+<div id="Introduction To Apache Spark-Key Features of Apache Spark"><h2 id="Key Features of Apache Spark" class="header"><a href="#Introduction To Apache Spark-Key Features of Apache Spark">Key Features of Apache Spark</a></h2></div>
+
+<ul>
+<li>
+<span id="Introduction To Apache Spark-Key Features of Apache Spark-Unified Platform"></span><strong id="Unified Platform">Unified Platform</strong>: Spark offers a single platform for diverse data processing tasks, enabling developers to use the same engine and APIs for different types of data analysis, like processing data in batches, running SQL queries, handling real-time data streams, and even machine learning.
+
+</li><li>
+<span id="Introduction To Apache Spark-Key Features of Apache Spark-Rich Libraries"></span><strong id="Rich Libraries">Rich Libraries</strong>: Spark includes a collection of built-in and external libraries, such as Spark SQL for structured data processing, MLlib for machine learning, Spark Streaming and Structured Streaming for stream processing, and GraphX for graph analytics.
+
+</li><li>
+<span id="Introduction To Apache Spark-Key Features of Apache Spark-Designed for Big Data"></span><strong id="Designed for Big Data">Designed for Big Data</strong>: Spark addresses the challenges of processing massive datasets, driven by changes in hardware towards multi-core processors and the explosion in data volume and storage capabilities.
+
+</li></ul>
+<div id="Introduction To Apache Spark-History and Evolution"><h2 id="History and Evolution" class="header"><a href="#Introduction To Apache Spark-History and Evolution">History and Evolution</a></h2></div>
+
+<ul>
+<li>
+<span id="Introduction To Apache Spark-History and Evolution-Origins"></span><strong id="Origins">Origins</strong>: Spark originated in 2009 at UC Berkeley's AMPlab as a research project aimed at overcoming the limitations of Hadoop MapReduce for iterative algorithms.
+
+</li><li>
+<span id="Introduction To Apache Spark-History and Evolution-Early Focus"></span><strong id="Early Focus">Early Focus</strong>: Initial releases concentrated on batch applications and interactive data science using Scala and Shark (a SQL engine).
+
+</li><li>
+<span id="Introduction To Apache Spark-History and Evolution-Expansion"></span><strong id="Expansion">Expansion</strong>: Spark adopted a "standard library" approach, expanding with libraries like MLlib, Spark Streaming, and GraphX.
+
+</li><li>
+<span id="Introduction To Apache Spark-History and Evolution-Open Source Development"></span><strong id="Open Source Development">Open Source Development</strong>: In 2013, Spark became part of the Apache Software Foundation, leading to active development and widespread adoption.
+
+</li><li>
+<span id="Introduction To Apache Spark-History and Evolution-Recent Developments"></span><strong id="Recent Developments">Recent Developments</strong>: Recent releases have focused on refining structured APIs such as DataFrames and Datasets for enhanced optimisation
+
+</li></ul>
+<div id="Introduction To Apache Spark-Architecture of Apache Spark"><h2 id="Architecture of Apache Spark" class="header"><a href="#Introduction To Apache Spark-Architecture of Apache Spark">Architecture of Apache Spark</a></h2></div>
+
+<ul>
+<li>
+<span id="Introduction To Apache Spark-Architecture of Apache Spark-Cluster Management"></span><strong id="Cluster Management">Cluster Management</strong>: Spark uses a cluster manager, such as standalone, YARN, or Mesos, to manage cluster resources.
+
+</li><li>
+<span id="Introduction To Apache Spark-Architecture of Apache Spark-Application Structure"></span><strong id="Application Structure">Application Structure</strong>: A Spark application consists of a driver process and multiple executor processes.
+
+<ul>
+<li>
+<span id="Introduction To Apache Spark-Architecture of Apache Spark-Driver Process"></span><strong id="Driver Process">Driver Process</strong>: The driver runs the <code>main()</code> function, maintains application information, interacts with the user, and schedules tasks across executors.
+
+</li><li>
+<span id="Introduction To Apache Spark-Architecture of Apache Spark-Executor Processes"></span><strong id="Executor Processes">Executor Processes</strong>: Executors execute Spark code on data partitions distributed across the cluster.
+
+</li></ul>
+</li></ul>
+<p>
+<img src="https://albamr09.github.io/public/images/DataScience/Master/3C_1C/ICPDM/spark_architecture.png" alt="Spark Architecture">
+</p>
+
+<p>
+Spark supports multiple language APIs, including Python, Java, Scala, R, and SQL [5]. Developers can write applications in their preferred language.
+</p>
+
+<div id="Introduction To Apache Spark-Core Concepts and APIs"><h2 id="Core Concepts and APIs" class="header"><a href="#Introduction To Apache Spark-Core Concepts and APIs">Core Concepts and APIs</a></h2></div>
+
+<div id="Introduction To Apache Spark-Core Concepts and APIs-Core Concepts"><h3 id="Core Concepts" class="header"><a href="#Introduction To Apache Spark-Core Concepts and APIs-Core Concepts">Core Concepts</a></h3></div>
+
+<ul>
+<li>
+Unified Analytics Engine: Spark provides a consistent set of APIs for various data processing tasks, including batch processing, SQL queries, streaming computation, and machine learning.
+
+</li><li>
+Computing Engine Focus: Spark primarily processes data loaded from diverse storage systems, rather than functioning as permanent storage itself.
+
+</li><li>
+Parallel Processing: Spark leverages parallel processing to efficiently analyse massive datasets, addressing the challenges posed by the shift to multi-core processors and the explosion of data.
+
+</li><li>
+Lazy Evaluation: Spark optimises execution plans before processing, delaying action until triggered.
+
+</li></ul>
+<div id="Introduction To Apache Spark-Core Concepts and APIs-APIs"><h3 id="APIs" class="header"><a href="#Introduction To Apache Spark-Core Concepts and APIs-APIs">APIs</a></h3></div>
+
+<ul>
+<li>
+<span id="Introduction To Apache Spark-Core Concepts and APIs-APIs-SparkSession"></span><strong id="SparkSession">SparkSession</strong>:  The entry point for interacting with Spark functionality, managing the Spark application and providing access to various APIs.
+
+</li><li>
+<span id="Introduction To Apache Spark-Core Concepts and APIs-APIs-DataFrames"></span><strong id="DataFrames">DataFrames</strong>:  The primary structured API representing tabular data in rows and columns
+
+<ul>
+<li>
+<span id="Introduction To Apache Spark-Core Concepts and APIs-APIs-Partitions"></span><strong id="Partitions">Partitions</strong>:  Data is divided into partitions for parallel processing across executors
+
+</li><li>
+<span id="Introduction To Apache Spark-Core Concepts and APIs-APIs-Transformations"></span><strong id="Transformations">Transformations</strong>: Operations that define modifications to a DataFrame without altering the original data, including narrow transformations that operate within partitions and wide transformations that involve shuffling data across partitions.
+
+</li><li>
+<span id="Introduction To Apache Spark-Core Concepts and APIs-APIs-Actions"></span><strong id="Actions">Actions</strong>: Actions trigger the execution of transformations and return results
+
+</li></ul>
+</li><li>
+<span id="Introduction To Apache Spark-Core Concepts and APIs-APIs-Datasets"></span><strong id="Datasets">Datasets</strong>: A type-safe version of the structured API in Java and Scala, enabling compile-time checks for data types
+
+</li><li>
+<span id="Introduction To Apache Spark-Core Concepts and APIs-APIs-Resilient Distributed Datasets (RDDs)"></span><strong id="Resilient Distributed Datasets (RDDs)">Resilient Distributed Datasets (RDDs)</strong>: Spark's lower-level API, providing more control over data partitioning and manipulation but less commonly used in modern Spark applications
+
+</li><li>
+<span id="Introduction To Apache Spark-Core Concepts and APIs-APIs-Structured Streaming"></span><strong id="Structured Streaming">Structured Streaming</strong>:  A high-level API that allows applying batch-like operations to streaming data
+
+</li><li>
+<span id="Introduction To Apache Spark-Core Concepts and APIs-APIs-MLlib"></span><strong id="MLlib">MLlib</strong>: Spark's machine learning library, offering algorithms for classification, regression, clustering, and deep learning
+
+</li></ul>
+<div id="Introduction To Apache Spark-Running Spark Applications and Ecosystem"><h2 id="Running Spark Applications and Ecosystem" class="header"><a href="#Introduction To Apache Spark-Running Spark Applications and Ecosystem">Running Spark Applications and Ecosystem</a></h2></div>
+
+<ul>
+<li>
+<span id="Introduction To Apache Spark-Running Spark Applications and Ecosystem-Spark-submit"></span><strong id="Spark-submit">Spark-submit</strong>:  A command-line tool for submitting Spark applications to a cluster, allowing for resource specification, execution parameters, and command-line arguments.
+
+</li><li>
+<span id="Introduction To Apache Spark-Running Spark Applications and Ecosystem-Spark Ecosystem and Packages"></span><strong id="Spark Ecosystem and Packages">Spark Ecosystem and Packages</strong>: A wide range of third-party packages expands Spark's functionality and integrates with various systems.
+
+</li></ul>
+<div id="Introduction To Apache Spark-Conclusion"><h2 id="Conclusion" class="header"><a href="#Introduction To Apache Spark-Conclusion">Conclusion</a></h2></div>
+
+<p>
+Spark provides a powerful and versatile platform for tackling big data challenges across various domains. Its unified engine, rich libraries, and intuitive APIs empower developers to efficiently process, analyse, and extract insights from large datasets.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="jQuery library"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/fuse.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
