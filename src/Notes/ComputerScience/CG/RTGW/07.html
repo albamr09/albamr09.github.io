@@ -60,6 +60,25 @@
 </li><li>
 <a href="07.html#Texture%20Filter%20Modes">Texture Filter Modes</a>
 
+<ul>
+<li>
+<a href="07.html#Nearest">Nearest</a>
+
+</li><li>
+<a href="07.html#Linear">Linear</a>
+
+</li><li>
+<a href="07.html#Mipmapping">Mipmapping</a>
+
+<ul>
+<li>
+<a href="07.html#Generating%20Mipmaps">Generating Mipmaps</a>
+
+</li></ul>
+</li></ul>
+</li><li>
+<a href="07.html#Texture%20Wrapping">Texture Wrapping</a>
+
 </li></ul>
 <hr>
 
@@ -247,6 +266,104 @@ gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
 <p>
 Note that different textures can have different filters.
 </p>
+
+<div id="Textures-Texture Filter Modes-Nearest"><h3 id="Nearest" class="header"><a href="#Textures-Texture Filter Modes-Nearest">Nearest</a></h3></div>
+
+<p>
+Textures using the <span id="Textures-Texture Filter Modes-Nearest-NEAREST"></span><strong id="NEAREST">NEAREST</strong> filter always return the color of the texel whose center is nearest to the sample point. With this mode, textures will look pixilated up close:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/nearest_filter_mode.png" alt="Nearest Filter Mode">
+</p>
+
+<div id="Textures-Texture Filter Modes-Linear"><h3 id="Linear" class="header"><a href="#Textures-Texture Filter Modes-Linear">Linear</a></h3></div>
+
+<p>
+Returns the weighted average of the four pixels whose centers are nearest to the sample point. Also known as <span id="Textures-Texture Filter Modes-Linear-bilinear filtering"></span><strong id="bilinear filtering">bilinear filtering</strong>.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/linear_filter_mode.png" alt="Linear Filter Mode">
+</p>
+
+<p>
+The graphics hardware has to read four times as many pixels per fragment, so it is slower.
+</p>
+
+<div id="Textures-Texture Filter Modes-Mipmapping"><h3 id="Mipmapping" class="header"><a href="#Textures-Texture Filter Modes-Mipmapping">Mipmapping</a></h3></div>
+
+<p>
+A problem arises when sampling minified textures. In cases where we use <span id="Textures-Texture Filter Modes-Mipmapping-LINEAR"></span><strong id="LINEAR">LINEAR</strong> filtering and the sample points are so far apart, we can completely miss some details of the texture.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/mipmapping_problem.png" alt="Mipmapping Problem">
+</p>
+
+<p>
+To avoid this, graphics cards can utilize a <span id="Textures-Texture Filter Modes-Mipmapping-mipmap chain"></span><strong id="mipmap chain">mipmap chain</strong>. Mipmaps are scaled-down copies of a texture, with each copy being exactly half the size of the previous one. 
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/mipmap_chain.png" alt="Mipmap Chain">
+</p>
+
+<p>
+With these chains, graphics hardware can choose the copy of the texture that most closely matches the size of the texture on screen.
+</p>
+
+<ul>
+<li>
+<span id="Textures-Texture Filter Modes-Mipmapping-NEAREST_MIPMAP_NEAREST"></span><strong id="NEAREST_MIPMAP_NEAREST">NEAREST_MIPMAP_NEAREST</strong>: select the mipmap that most closely matches the size of the texture on screen and samples from it using the NEAREST algorithm.
+
+</li><li>
+<span id="Textures-Texture Filter Modes-Mipmapping-LINEAR_MIPMAP_NEAREST"></span><strong id="LINEAR_MIPMAP_NEAREST">LINEAR_MIPMAP_NEAREST</strong>: selects the mipmap that most closely matches the size of the texture on screen and samples from it using the LINEAR algorithm.
+
+</li><li>
+<span id="Textures-Texture Filter Modes-Mipmapping-NEAREST_MIPMAP_LINEAR"></span><strong id="NEAREST_MIPMAP_LINEAR">NEAREST_MIPMAP_LINEAR</strong>:  selects two mipmaps that most closely match the size of the texture on screen and samples from both of them by using the NEAREST algorithm. The color returned is a weighted average of those two samples.
+
+</li><li>
+<span id="Textures-Texture Filter Modes-Mipmapping-LINEAR_MIPMAP_LINEAR"></span><strong id="LINEAR_MIPMAP_LINEAR">LINEAR_MIPMAP_LINEAR</strong>: selects two mipmaps that most closely match the size of the texture on screen and samples from both of them using the LINEAR algorithm. The color returned is a weighted average of those two samples (also known as <span id="Textures-Texture Filter Modes-Mipmapping-trilinear filtering"></span><strong id="trilinear filtering">trilinear filtering</strong>).
+
+</li></ul>
+<div id="Textures-Texture Filter Modes-Mipmapping-Generating Mipmaps"><h4 id="Generating Mipmaps" class="header"><a href="#Textures-Texture Filter Modes-Mipmapping-Generating Mipmaps">Generating Mipmaps</a></h4></div>
+
+<p>
+We have to create mipamps for every texture:
+</p>
+
+<pre javascript="">gl.generateMipmap(gl.TEXTURE_2D);
+</pre>
+
+<p>
+This insttruction has to be called after the texture has been populated with the image.
+</p>
+
+<p>
+To provide the mipmaps manually we use:
+</p>
+
+<pre javascript="">gl.texImage2D(gl.TEXTURE_2D, 1, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, mipmapImage);
+</pre>
+
+<p>
+By passing a number other than 0 as the second parameter we are creating the first mipmap level.
+</p>
+
+<p>
+In order to use mipmaps with a texture in WebGL 1, mipmaps need to satisfy some dimension restrictions. Namely, the texture width and height must both be Powers of Two (POT). This does not apply for WebGL 2.
+</p>
+
+<div id="Textures-Texture Wrapping"><h2 id="Texture Wrapping" class="header"><a href="#Textures-Texture Wrapping">Texture Wrapping</a></h2></div>
+
+<p>
+Texture wrapping describes the behavior of the sampler when the texture coordinates fall outside the range of \(0\) and \(1\). The wrapping mode can be set independently for both the S and T coordinates:
+</p>
+
+<pre javascript="">gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+</pre>
 </div>
   
 
