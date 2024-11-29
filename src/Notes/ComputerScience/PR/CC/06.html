@@ -38,8 +38,98 @@
 
 <hr>
 
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="06.html#Use%20Exceptions%20Rather%20Than%20Return%20Codes">Use Exceptions Rather Than Return Codes</a>
+
+</li><li>
+<a href="06.html#Write%20Your%20Try-Catch-Finally%20Statement%20First">Write Your Try-Catch-Finally Statement First</a>
+
+</li><li>
+<a href="06.html#Use%20Unchecked%20Exceptions">Use Unchecked Exceptions</a>
+
+</li><li>
+<a href="06.html#Provide%20Context%20with%20Exceptions">Provide Context with Exceptions</a>
+
+</li><li>
+<a href="06.html#Define%20Exception%20Classes%20in%20Terms%20of%20a%20Caller%27s%20Needs">Define Exception Classes in Terms of a Caller s Needs</a>
+
+</li><li>
+<a href="06.html#Don%27t%20Return%20Null">Don t Return Null</a>
+
+</li><li>
+<a href="06.html#Don%27t%20Pass%20Null">Don t Pass Null</a>
+
+</li><li>
+<a href="06.html#Conclusion">Conclusion</a>
+
+</li></ul>
+<hr>
+
 <p>
 Error handling is important, but if it obscures logic, it’s wrong.
+</p>
+
+<div id="Error Handling-Use Exceptions Rather Than Return Codes"><h2 id="Use Exceptions Rather Than Return Codes" class="header"><a href="#Error Handling-Use Exceptions Rather Than Return Codes">Use Exceptions Rather Than Return Codes</a></h2></div>
+
+<p>
+The problem with using return codes is that they clutter the caller. The caller must check for errors immediately after the call. Unfortunately, it’s easy to forget. For this reason it is better to throw an exception.
+</p>
+
+<p>
+The code is better because two concerns that were tangled, the algorithm for device shutdown and error handling, are now separated.
+</p>
+
+<div id="Error Handling-Write Your Try-Catch-Finally Statement First"><h2 id="Write Your Try-Catch-Finally Statement First" class="header"><a href="#Error Handling-Write Your Try-Catch-Finally Statement First">Write Your Try-Catch-Finally Statement First</a></h2></div>
+
+<p>
+One of the most interesting things about exceptions is that they define a scope within your program. Your catch has to leave your program in a consistent state, no matter what happens in the try. For this reason it is good practice to start with a try-catch-finally statement when you are writing code that could throw exceptions. This helps you define what the user of that code should expect.
+</p>
+
+<div id="Error Handling-Use Unchecked Exceptions"><h2 id="Use Unchecked Exceptions" class="header"><a href="#Error Handling-Use Unchecked Exceptions">Use Unchecked Exceptions</a></h2></div>
+
+<p>
+With Unchecked Exceptions the signature of every method would list all of the exceptions that it could pass to its caller. These exceptions were part of the type of the method. Your code wouldn't compile if the signature didn’t match what your code could do.
+</p>
+
+<p>
+The price of checked exceptions is an Open/Closed Principle1 violation. If you throw a checked exception from a method in your code and the catch is three levels above, you must declare that exception in the signature of each method between you and the catch. This means that a change at a low level of the software can force signature changes on many higher levels.
+</p>
+
+<p>
+In general application development the dependency costs outweigh the benefits.
+</p>
+
+<div id="Error Handling-Provide Context with Exceptions"><h2 id="Provide Context with Exceptions" class="header"><a href="#Error Handling-Provide Context with Exceptions">Provide Context with Exceptions</a></h2></div>
+
+<p>
+Each exception that you throw should provide enough context to determine the source and location of an error by using informative error messages.
+</p>
+
+<div id="Error Handling-Define Exception Classes in Terms of a Caller's Needs"><h2 id="Define Exception Classes in Terms of a Caller's Needs" class="header"><a href="#Error Handling-Define Exception Classes in Terms of a Caller's Needs">Define Exception Classes in Terms of a Caller's Needs</a></h2></div>
+
+<p>
+Wrapping third-party APIs is a best practice. When you wrap a third-party API, you minimize you dependencies upon it. Wrapping also makes it easier to mock out third-party calls when you are
+testing your own code. One final advantage of wrapping is that you aren’t tied to a particular vendor's API design choices.
+</p>
+
+<div id="Error Handling-Don't Return Null"><h2 id="Don't Return Null" class="header"><a href="#Error Handling-Don't Return Null">Don't Return Null</a></h2></div>
+
+<p>
+If you are tempted to return null from a method, consider throwing an exception or returning a SPECIAL CASE object instead. If you are calling a null-returning method from a third-party API, consider wrapping that method with a method that either throws an exception or returns a special case object. You will minimize the chance of NullPointerExceptions and your code will be cleaner.
+</p>
+
+<div id="Error Handling-Don't Pass Null"><h2 id="Don't Pass Null" class="header"><a href="#Error Handling-Don't Pass Null">Don't Pass Null</a></h2></div>
+
+<p>
+You should avoid passing null in your code whenever possible. In most programming languages there is no good way to deal with a null that is passed by a caller accidentally. Because this is the case, the rational approach is to forbid passing null by default.
+</p>
+
+<div id="Error Handling-Conclusion"><h2 id="Conclusion" class="header"><a href="#Error Handling-Conclusion">Conclusion</a></h2></div>
+
+<p>
+Clean code is readable, but it must also be robust. These are not conflicting goals. We can write robust clean code if we see error handling as a separate concern, something that is viewable independently of our main logic. To the degree that we are able to do that, we can reason about it independently, and we can make great strides in the maintainability of our code.
 </p>
 </div>
   
