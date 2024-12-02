@@ -59,6 +59,9 @@
 </li><li>
 <a href="03_lib_spark.html#Important%20Points">Important Points</a>
 
+</li><li>
+<a href="03_lib_spark.html#Code%20Examples%20in%20Spark%20SQL">Code Examples in Spark SQL</a>
+
 </li></ul>
 </li></ul>
 <hr>
@@ -154,6 +157,78 @@ Use <code>createOrReplaceTempView</code> to avoid the <code>TempTableAlreadyExis
 Spark SQL enables complex queries involving multiple tables and various operations like filtering, joining, and aggregation.
 
 </li></ul>
+<div id="Librerías/Componentes de Spark-Spark SQL-Code Examples in Spark SQL"><h3 id="Code Examples in Spark SQL" class="header"><a href="#Librerías/Componentes de Spark-Spark SQL-Code Examples in Spark SQL">Code Examples in Spark SQL</a></h3></div>
+
+<p>
+<span id="Librerías/Componentes de Spark-Spark SQL-Code Examples in Spark SQL-Example 1: Loading a CSV File into a Dataset"></span><strong id="Example 1: Loading a CSV File into a Dataset">Example 1: Loading a CSV File into a Dataset</strong>
+</p>
+
+<pre java="">case class Employee(EmployeeID : String,   LastName : String, FirstName : String, Title : String,   BirthDate : String, HireDate : String,   City : String, State : String, Zip : String, Country : String,   ReportsTo : String)
+// ... ...
+val filePath = "/Users/ksankar/fdps-v3/"
+println(s"Running Spark Version ${sc.version}")
+// val employees = spark.read.option("header","true"). csv(filePath + "data/NW-Employees.csv").as[Employee] 
+println("Employees has "+employees.count()+" rows") 
+employees.show(5) 
+employees.head()
+</pre>
+
+<p>
+This code snippet first defines a case class called <code>Employee</code> representing the structure of the employee data. Then, it sets a <code>filePath</code> variable pointing to the directory containing the data files. The code then uses the <code>spark.read.csv</code> method to read the CSV file into a Dataset called <code>employees</code>. The <code>option("header", "true")</code> tells Spark that the first row of the CSV file contains column headers. The <code>.as[Employee]</code> part specifies that the Dataset should be composed of <code>Employee</code> objects. Finally, the code prints the number of rows in the Dataset, displays the first \(5\) rows using <code>show(5)</code>, and retrieves the first row using <code>head()</code>.
+</p>
+
+<p>
+<span id="Librerías/Componentes de Spark-Spark SQL-Code Examples in Spark SQL-Example 2: Creating a View and Running SQL Queries"></span><strong id="Example 2: Creating a View and Running SQL Queries">Example 2: Creating a View and Running SQL Queries</strong>
+</p>
+
+<pre java="">employees.createOrReplaceTempView("EmployeesTable")
+var result = spark.sql("SELECT * from EmployeesTable")
+result.show(5)
+result.head(3)
+// employees.explain(true)
+
+result = spark.sql("SELECT * from EmployeesTable WHERE State = 'WA'")
+result.show(5)
+result.head(3)
+// result.explain(true)
+</pre>
+
+<p>
+This code creates a temporary view called "<code>EmployeesTable</code>" from the employees Dataset using <code>createOrReplaceTempView</code>. This view enables you to query the Dataset using SQL statements. The first <code>spark.sql</code> statement selects all columns from the "<code>EmployeesTable</code>" view. The second query filters the results to include only employees from the state of Washington (<code>WHERE State = 'WA'</code>). Both queries use <code>show(5)</code> to display the first \(5\) rows of the result and <code>head(3)</code> to retrieve the first \(3\) rows.
+</p>
+
+<p>
+<span id="Librerías/Componentes de Spark-Spark SQL-Code Examples in Spark SQL-Example 3: Handling Multiple Tables and Joins"></span><strong id="Example 3: Handling Multiple Tables and Joins">Example 3: Handling Multiple Tables and Joins</strong>
+</p>
+
+<pre java="">// ... ...
+val orders = spark.read.option("header","true"). 
+option("inferSchema","true"). 
+csv(filePath + "data/NW-Orders.csv").as[Order] 
+println("Orders has "+orders.count()+" rows") 
+orders.show(5)
+orders.head() 
+orders.dtypes
+// ... ...
+// // Now the interesting part // 
+result = spark.sql("SELECT OrderDetailsTable.OrderID, ShipCountry, UnitPrice, Qty, Discount FROM OrdersTable INNER JOIN OrderDetailsTable ON OrdersTable.OrderID = OrderDetailsTable.OrderID")
+result.show(10) 
+result.head(3) 
+// // Sales By Country // 
+result = spark.sql("SELECT ShipCountry, SUM(OrderDetailsTable.UnitPrice * Qty * Discount) AS ProductSales FROM OrdersTable INNER JOIN OrderDetailsTable ON OrdersTable.OrderID = OrderDetailsTable.OrderID GROUP BY ShipCountry")
+result.count() 
+result.show(10) 
+result.head(3) 
+result.orderBy($"ProductSales".desc).show(10) // Top 10 by Sales
+</pre>
+
+<p>
+This example demonstrates loading the "<code>Orders</code>" table, creating a view, and then performing joins and aggregations. It first reads the "<code>NW-Orders.csv</code>" file into an orders Dataset. Notably, it uses the <code>option("inferSchema", "true")</code> option, which tells Spark to automatically infer the schema for the data. This eliminates the need to define a case class beforehand.
+</p>
+
+<p>
+The code then executes two SQL queries. The first query performs an inner join between the "<code>OrdersTable</code>" and "<code>OrderDetailsTable</code>" based on the common "<code>OrderID</code>" column and selects specific columns from the joined result. The second query calculates total sales (<code>SUM(OrderDetailsTable.UnitPrice * Qty * Discount)</code>) per country, groups the results by "<code>ShipCountry</code>", and orders the final output by "<code>ProductSales</code>" in descending order to show the top \(10\) countries by sales.
+</p>
 </div>
   
 
