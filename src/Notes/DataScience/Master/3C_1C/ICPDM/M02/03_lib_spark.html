@@ -1,0 +1,165 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/custom.css">
+    <title>Librerías/Componentes de Spark</title>
+  <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Librerías/Componentes de Spark"><h1 id="Librerías/Componentes de Spark" class="header"><a href="#Librerías/Componentes de Spark">Librerías/Componentes de Spark</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="03_lib_spark.html#Spark%20SQL">Spark SQL</a>
+
+<ul>
+<li>
+<a href="03_lib_spark.html#Spark%20SQL%20Architecture">Spark SQL Architecture</a>
+
+</li><li>
+<a href="03_lib_spark.html#Spark%20SQL%20Evolution">Spark SQL Evolution</a>
+
+</li><li>
+<a href="03_lib_spark.html#Spark%20SQL%20Programming">Spark SQL Programming</a>
+
+</li><li>
+<a href="03_lib_spark.html#Example%20Workflow">Example Workflow</a>
+
+</li><li>
+<a href="03_lib_spark.html#Important%20Points">Important Points</a>
+
+</li></ul>
+</li></ul>
+<hr>
+
+<div id="Librerías/Componentes de Spark-Spark SQL"><h2 id="Spark SQL" class="header"><a href="#Librerías/Componentes de Spark-Spark SQL">Spark SQL</a></h2></div>
+
+<p>
+Spark SQL is an important feature in the Spark ecosystem that allows integration with different data sources and other subsystems, such as visualization. Spark SQL is not meant to replace SQL databases, but rather to complement Spark's data wrangling and input capabilities by providing a versatile query interface for Spark data. This ability to scale complex data operations is only valuable if the results can be used flexibly, which is what Spark SQL achieves.
+</p>
+
+<div id="Librerías/Componentes de Spark-Spark SQL-Spark SQL Architecture"><h3 id="Spark SQL Architecture" class="header"><a href="#Librerías/Componentes de Spark-Spark SQL-Spark SQL Architecture">Spark SQL Architecture</a></h3></div>
+
+<p>
+Spark SQL's architecture is layered, with each layer performing specific functions.
+</p>
+
+<ul>
+<li>
+The bottom layer is the data access layer, which works with multiple formats and typically utilizes a distributed filesystem such as HDFS.
+
+</li><li>
+The computation layer leverages the distributed processing power of the Spark engine, including its streaming capabilities, and typically operates on RDDs (Resilient Distributed Datasets).
+
+</li><li>
+The Dataset/DataFrame layer provides the API for interacting with the data.
+
+</li><li>
+Spark SQL sits on top of this layer, providing data access for various applications, dashboards, and BI tools.
+
+</li></ul>
+<p>
+This architecture allows Spark to leverage the vast knowledge base of SQL among data professionals and use it to query Spark data.
+</p>
+
+<div id="Librerías/Componentes de Spark-Spark SQL-Spark SQL Evolution"><h3 id="Spark SQL Evolution" class="header"><a href="#Librerías/Componentes de Spark-Spark SQL-Spark SQL Evolution">Spark SQL Evolution</a></h3></div>
+
+<p>
+Prior to Spark 2.0, SchemaRDD was at the heart of Spark SQL. It essentially attached a schema to an RDD, enabling SQL queries to be run on RDDs. However, with Spark 2.0, Datasets became the primary way to work with data. Datasets offer the advantages of both RDDs and strong typing, providing a more robust and efficient way to handle data. In languages like Python and R, which lack compile-time type checking, Datasets and DataFrames are merged and referred to as DataFrames.
+</p>
+
+<div id="Librerías/Componentes de Spark-Spark SQL-Spark SQL Programming"><h3 id="Spark SQL Programming" class="header"><a href="#Librerías/Componentes de Spark-Spark SQL-Spark SQL Programming">Spark SQL Programming</a></h3></div>
+
+<p>
+Spark 2.0 introduced <code>sparkSession</code>, which replaced <code>sqlcontext</code>, <code>hivecontext</code>, and other components. The <code>sparkSession</code> instance has a versatile <code>read</code> method capable of handling various data formats like CSV, Parquet, JSON, and JDBC. This method allows you to specify format-related options such as headers and delimiters.
+</p>
+
+<p>
+To use Spark SQL, you first need to create a Dataset by reading data from a source and informing Spark about its structure and types. You can then apply SQL statements to query the data. To create a view that can be queried using SQL, you can use the <code>createOrReplaceTempView</code> method. You can then use SQL statements to filter, join, and aggregate data within these views.
+</p>
+
+<div id="Librerías/Componentes de Spark-Spark SQL-Example Workflow"><h3 id="Example Workflow" class="header"><a href="#Librerías/Componentes de Spark-Spark SQL-Example Workflow">Example Workflow</a></h3></div>
+
+<p>
+A typical Spark SQL workflow involves:
+</p>
+
+<ul>
+<li>
+Defining a case class to represent the data structure.
+
+</li><li>
+Reading the data file using <code>sparkSession.read</code>, specifying options like <code>header</code> and <code>inferSchema</code>.
+
+</li><li>
+Creating a Dataset with the case class as its element type.
+
+</li><li>
+Creating a temporary view using <code>createOrReplaceTempView</code> for SQL access.
+
+</li><li>
+Running SQL queries on the view using <code>spark.sql</code>.
+
+</li><li>
+Displaying and analyzing the results using methods like <code>show</code>, <code>head</code>, and <code>orderBy</code>
+
+</li></ul>
+<div id="Librerías/Componentes de Spark-Spark SQL-Important Points"><h3 id="Important Points" class="header"><a href="#Librerías/Componentes de Spark-Spark SQL-Important Points">Important Points</a></h3></div>
+
+<ul>
+<li>
+Spark 2.0 simplified Spark SQL by introducing Datasets and <code>sparkSession</code>.
+
+</li><li>
+You can start the Spark shell with the <code>-deprecation</code> flag to receive messages about deprecated methods.
+
+</li><li>
+The read method can infer schema automatically using the <code>inferSchema</code> option.
+
+</li><li>
+Use <code>createOrReplaceTempView</code> to avoid the <code>TempTableAlreadyExists</code> exception.
+
+</li><li>
+Spark SQL enables complex queries involving multiple tables and various operations like filtering, joining, and aggregation.
+
+</li></ul>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="jQuery library"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/fuse.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
