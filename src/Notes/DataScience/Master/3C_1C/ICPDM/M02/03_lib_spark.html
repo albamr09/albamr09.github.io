@@ -63,6 +63,40 @@
 <a href="03_lib_spark.html#Code%20Examples%20in%20Spark%20SQL">Code Examples in Spark SQL</a>
 
 </li></ul>
+</li><li>
+<a href="03_lib_spark.html#Machine%20Learning%20with%20Spark%20ML%20Pipelines">Machine Learning with Spark ML Pipelines</a>
+
+<ul>
+<li>
+<a href="03_lib_spark.html#Spark%20for%20Machine%20Learning">Spark for Machine Learning</a>
+
+</li><li>
+<a href="03_lib_spark.html#ML%20Pipelines%3A%20Addressing%20the%20Data%20Pipeline%20in%20ML">ML Pipelines  Addressing the Data Pipeline in ML</a>
+
+</li><li>
+<a href="03_lib_spark.html#Structure%20of%20Spark%20ML%20APIs">Structure of Spark ML APIs</a>
+
+</li><li>
+<a href="03_lib_spark.html#Code%20Examples%20from%20Spark%20Machine%20Learning">Code Examples from Spark Machine Learning</a>
+
+<ul>
+<li>
+<a href="03_lib_spark.html#Basic%20Statistics%20with%20Spark%20Datasets">Basic Statistics with Spark Datasets</a>
+
+</li><li>
+<a href="03_lib_spark.html#Linear%20Regression%20with%20Data%20Transformation%20and%20Model%20Evaluation">Linear Regression with Data Transformation and Model Evaluation</a>
+
+</li><li>
+<a href="03_lib_spark.html#Classification%20with%20Decision%20Tree%2C%20Data%20Transformation%20and%20Model%20Evaluation">Classification with Decision Tree  Data Transformation and Model Evaluation</a>
+
+</li><li>
+<a href="03_lib_spark.html#Clustering%20with%20K-means%2C%20Data%20Transformation%20and%20Model%20Evaluation">Clustering with K-means  Data Transformation and Model Evaluation</a>
+
+</li><li>
+<a href="03_lib_spark.html#Recommendation%20with%20ALS%2C%20Data%20Transformation%20and%20Model%20Evaluation">Recommendation with ALS  Data Transformation and Model Evaluation</a>
+
+</li></ul>
+</li></ul>
 </li></ul>
 <hr>
 
@@ -229,6 +263,526 @@ This example demonstrates loading the "<code>Orders</code>" table, creating a vi
 <p>
 The code then executes two SQL queries. The first query performs an inner join between the "<code>OrdersTable</code>" and "<code>OrderDetailsTable</code>" based on the common "<code>OrderID</code>" column and selects specific columns from the joined result. The second query calculates total sales (<code>SUM(OrderDetailsTable.UnitPrice * Qty * Discount)</code>) per country, groups the results by "<code>ShipCountry</code>", and orders the final output by "<code>ProductSales</code>" in descending order to show the top \(10\) countries by sales.
 </p>
+
+<div id="Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines"><h2 id="Machine Learning with Spark ML Pipelines" class="header"><a href="#Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines">Machine Learning with Spark ML Pipelines</a></h2></div>
+
+<p>
+This section provides a summary of Spark's capabilities for Machine Learning (ML), focusing on ML Pipelines and the transition from MLlib to ML APIs. It covers various ML algorithms, data transformation techniques, and the concept of pipelines for streamlined ML workflows.
+</p>
+
+<div id="Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-Spark for Machine Learning"><h3 id="Spark for Machine Learning" class="header"><a href="#Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-Spark for Machine Learning">Spark for Machine Learning</a></h3></div>
+
+<p>
+Spark is attractive for ML due to its ability to handle massive computations. Spark 2.0.0 onwards, Spark is considered a leading platform for building ML algorithms and applications.
+</p>
+
+<p>
+Spark's ML capabilities are primarily accessed through the <code>org.apache.spark.ml</code> package for Scala and Java, and <code>pyspark.ml</code> for Python. Spark supports a wide array of ML algorithms, including basic statistics, linear regression, classification, clustering, recommendation systems, dimensionality reduction, feature extraction, and more.
+</p>
+
+<div id="Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-ML Pipelines: Addressing the Data Pipeline in ML"><h3 id="ML Pipelines: Addressing the Data Pipeline in ML" class="header"><a href="#Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-ML Pipelines: Addressing the Data Pipeline in ML">ML Pipelines: Addressing the Data Pipeline in ML</a></h3></div>
+
+<p>
+Before Spark 1.6.0, the MLlib APIs operated on RDDs, but they lacked support for the data pipelines inherent in ML. With the introduction of DataFrames and Datasets, MLlib evolved into the ML pipeline framework, offering more capabilities and addressing the entire ML workflow.
+</p>
+
+<p>
+MLlib APIs are now in maintenance mode and will eventually be deprecated. While you should use ML APIs going forward, some functionalities might require using MLlib and converting the output RDD to a DataFrame for further processing with ML APIs.
+</p>
+
+<p>
+A typical ML process involves several steps:
+</p>
+<ol>
+<li>
+Data Acquisition: Obtain data from internal or external sources, ensuring anonymity and removal of personally identifiable information (PII).
+
+</li><li>
+Data Transformation: Convert raw data into a usable format, for example, transforming a CSV file into a DataFrame.
+
+</li><li>
+Feature Extraction: Extract relevant features from the data, such as separating text into words or normalizing them.
+
+</li><li>
+Data Splitting: Divide the data into training and testing sets, using appropriate strategies based on data characteristics like time series or class imbalance.
+
+</li><li>
+Model Training:
+
+<ul>
+<li>
+Fit the training data to different ML models.
+
+</li><li>
+Tune hyperparameters for optimal performance.
+
+</li><li>
+Select the best-performing model for the specific problem.
+
+</li></ul>
+</li><li>
+Model Evaluation: Assess the model's performance using the test data.
+
+</li><li>
+Model Deployment: Implement the trained model in a production environment for real-time predictions.
+
+</li></ol>
+<p>
+ML pipelines in Spark address all stages of this workflow.
+</p>
+
+<div id="Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-Structure of Spark ML APIs"><h3 id="Structure of Spark ML APIs" class="header"><a href="#Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-Structure of Spark ML APIs">Structure of Spark ML APIs</a></h3></div>
+
+<p>
+Spark ML APIs have a specific structure that can be challenging to navigate initially. Familiarity with this structure is key to effectively utilizing Spark for ML tasks. The source material provides a diagram to illustrate this, recommending a deeper understanding of the pipeline concept to enhance proficiency in using Spark ML classes.
+</p>
+
+<div id="Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-Code Examples from Spark Machine Learning"><h3 id="Code Examples from Spark Machine Learning" class="header"><a href="#Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-Code Examples from Spark Machine Learning">Code Examples from Spark Machine Learning</a></h3></div>
+
+<div id="Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-Code Examples from Spark Machine Learning-Basic Statistics with Spark Datasets"><h4 id="Basic Statistics with Spark Datasets" class="header"><a href="#Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-Code Examples from Spark Machine Learning-Basic Statistics with Spark Datasets">Basic Statistics with Spark Datasets</a></h4></div>
+
+<p>
+This code snippet shows how to load car mileage data from a CSV file, compute basic statistics using Spark Datasets, and calculate the correlation and covariance between specific variables:
+</p>
+
+<pre java="">val spark = SparkSession.builder       
+  .master("local")       
+  .appName("Chapter 11")       
+  .config("spark.logConf","true")       
+  .config("spark.logLevel","ERROR")       
+  .getOrCreate()   
+
+println(s"Running Spark Version ${spark.version}")   
+
+val filePath = "/Users/ksankar/fdps-v3/"   
+
+val cars = spark.read.option("header","true").option("inferSchema","true")
+  .csv(filePath + "data/car-data/car-milage.csv") 
+
+println("Cars has "+cars.count()+" rows") 
+
+cars.show(5) 
+
+cars.printSchema()
+
+// Computing statistics
+
+cars.describe("mpg","hp","weight","automatic").show()  
+
+var cor = cars.stat.corr("hp","weight")   
+println("hp to weight : Correlation = %2.4f".format(cor))   
+
+var cov = cars.stat.cov("hp","weight")   
+println("hp to weight : Covariance = %2.4f".format(cov))   
+
+cor = cars.stat.corr("RARatio","width")   
+println("Rear Axle Ratio to width : Correlation = %2.4f".format(cor))   
+
+cov = cars.stat.cov("RARatio","width")   
+println("Rear Axle Ratio to width : Covariance = %2.4f".format(cov))
+</pre>
+
+<ol>
+<li>
+SparkSession Creation: The code starts by creating a SparkSession, which is the entry point for Spark applications.
+
+</li><li>
+Data Loading: The <code>spark.read.csv()</code> method loads data from the specified CSV file into a DataFrame named cars. The <code>option("header","true")</code> indicates that the first row contains column headers, and <code>option("inferSchema","true")</code> instructs Spark to automatically infer the data types for each column.
+
+</li><li>
+Basic Statistics: The <code>describe()</code> method computes summary statistics like <code>count</code>, <code>mean</code>, <code>standard deviation</code>, <code>min</code>, and <code>max</code> for the specified columns ("mpg", "hp", "weight", "automatic").
+
+</li><li>
+Correlation and Covariance: The <code>stat.corr()</code> and <code>stat.cov()</code> methods are used to calculate the correlation and covariance between pairs of variables ("hp" and "weight", "RARatio" and "width").
+
+</li></ol>
+<div id="Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-Code Examples from Spark Machine Learning-Linear Regression with Data Transformation and Model Evaluation"><h4 id="Linear Regression with Data Transformation and Model Evaluation" class="header"><a href="#Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-Code Examples from Spark Machine Learning-Linear Regression with Data Transformation and Model Evaluation">Linear Regression with Data Transformation and Model Evaluation</a></h4></div>
+
+<p>
+This code example demonstrates a linear regression model using Spark ML Pipelines. It includes data transformation, feature extraction, splitting data into training and testing sets, fitting the model, making predictions, and evaluating the model:
+</p>
+
+<pre java="">// Data Transformation and Feature Extraction
+val cars1 = cars.na.drop() 
+
+val assembler = new VectorAssembler() 
+assembler.setInputCols(Array("displacement", "hp", "torque", "CRatio", "RARatio", "CarbBarrells", "NoOfSpeed", "length", "width", "weight", "automatic")) 
+assembler.setOutputCol("features") 
+
+val cars2 = assembler.transform(cars1)
+cars2.show(40)
+
+// Data Split
+val train = cars2.filter(cars1("weight") &lt;= 4000) 
+val test = cars2.filter(cars1("weight") &gt; 4000) 
+test.show() 
+println("Train = "+train.count()+" Test = "+test.count())
+
+// Linear Regression Model
+val algLR = new LinearRegression()     
+algLR.setMaxIter(100)     
+algLR.setRegParam(0.3)     
+algLR.setElasticNetParam(0.8)     
+algLR.setLabelCol("mpg")     
+
+val mdlLR = algLR.fit(train)     
+println(s"Coefficients: ${mdlLR.coefficients} Intercept: ${mdlLR.intercept}")     
+
+val trSummary = mdlLR.summary 
+println(s"numIterations: ${trSummary.totalIterations}") 
+println(s"Iteration Summary History: ${trSummary.objectiveHistory.toList}") 
+trSummary.residuals.show() 
+println(s"RMSE: ${trSummary.rootMeanSquaredError}") 
+println(s"r2: ${trSummary.r2}")
+
+// Predictions
+val predictions = mdlLR.transform(test) 
+predictions.show()
+
+// Model Evaluation
+val evaluator = new RegressionEvaluator() 
+evaluator.setLabelCol("mpg") 
+val rmse = evaluator.evaluate(predictions) 
+println("Root Mean Squared Error = "+"%6.3f".format(rmse)) 
+
+val mse = evaluator.evaluate(predictions) 
+println("Mean Squared Error = "+"%6.3f".format(mse))
+</pre>
+
+<ol>
+<li>
+Data Preprocessing:
+
+<ul>
+<li>
+<code>cars.na.drop()</code> removes rows with missing values (NA).
+
+</li><li>
+<code>VectorAssembler</code> combines multiple input columns into a single vector column named "features", which is required for many ML algorithms.
+
+</li></ul>
+</li><li>
+Data Splitting: The data is split into training and test sets based on the "weight" column.
+
+</li><li>
+Linear Regression:
+
+<ul>
+<li>
+A <code>LinearRegression</code> object is created and configured with parameters like maximum iterations (<code>setMaxIter</code>), regularization parameter (<code>setRegParam</code>), and elastic net parameter (<code>setElasticNetParam</code>).
+
+</li><li>
+The model is trained using the <code>fit()</code> method on the training data.
+
+</li><li>
+Model coefficients, intercept, and training summary are printed.
+
+</li></ul>
+</li><li>
+Predictions: Predictions are made on the test data using the <code>transform()</code> method, adding a "predictions" column to the resulting DataFrame.
+
+</li><li>
+Model Evaluation:
+
+<ul>
+<li>
+A <code>RegressionEvaluator</code> is used to calculate RMSE and MSE.
+
+</li><li>
+The <code>evaluate()</code> method calculates the metrics based on the "mpg" label column and the predicted values.
+
+</li></ul>
+</li></ol>
+<div id="Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-Code Examples from Spark Machine Learning-Classification with Decision Tree, Data Transformation and Model Evaluation"><h4 id="Classification with Decision Tree, Data Transformation and Model Evaluation" class="header"><a href="#Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-Code Examples from Spark Machine Learning-Classification with Decision Tree, Data Transformation and Model Evaluation">Classification with Decision Tree, Data Transformation and Model Evaluation</a></h4></div>
+
+<p>
+This example demonstrates a classification task using a decision tree algorithm. It involves data loading, transformation, feature extraction, model training, prediction, and evaluation:
+</p>
+
+<pre java="">// Loading Data
+val filePath = "/Users/ksankar/fdps-v3/"   
+val passengers = spark.read.option("header","true").option("inferSchema","true")
+  .csv(filePath + "data/titanic3_02.csv")   
+println("Passengers has "+passengers.count()+" rows")   
+passengers.show(5)   
+passengers.printSchema()
+
+// Data Transformation and Feature Extraction
+val passengers1 = passengers.select(
+  passengers("Pclass"),
+  passengers("Survived").cast(DoubleType).as("Survived"),
+  passengers("Gender"),
+  passengers("Age"),
+  passengers("SibSp"),
+  passengers("Parch"),
+  passengers("Fare")
+) 
+
+passengers1.show(5)
+
+val indexer = new StringIndexer() 
+indexer.setInputCol("Gender") 
+indexer.setOutputCol("GenderCat") 
+
+val passengers2 = indexer.fit(passengers1).transform(passengers1) 
+passengers2.show(5)    
+
+val passengers3 = passengers2.na.drop() 
+println("Orig = "+passengers2.count()+" Final = "+ passengers3.count() + " Dropped = "+ (passengers2.count() - passengers3.count()))
+
+val assembler = new VectorAssembler() 
+assembler.setInputCols(Array("Pclass", "GenderCat", "Age", "SibSp", "Parch", "Fare")) 
+assembler.setOutputCol("features") 
+val passengers4 = assembler.transform(passengers3) 
+passengers4.show(5)
+
+// Data Split
+val Array(train, test) = passengers4.randomSplit(Array(0.9, 0.1)) 
+println("Train = "+train.count()+" Test = "+test.count())
+
+// Decision Tree Model
+val algTree = new DecisionTreeClassifier() 
+algTree.setLabelCol("Survived") 
+algTree.setImpurity("gini") 
+algTree.setMaxBins(32)
+algTree.setMaxDepth(5)     
+
+val mdlTree = algTree.fit(train) 
+println("The tree has %d nodes.".format(mdlTree.numNodes)) 
+println(mdlTree.toDebugString) 
+println(mdlTree.toString) 
+println(mdlTree.featureImportances)
+
+// Predictions
+val predictions = mdlTree.transform(test) 
+predictions.show(5)
+
+// Model Evaluation
+val evaluator = new MulticlassClassificationEvaluator() 
+evaluator.setLabelCol("Survived") 
+evaluator.setMetricName("accuracy") 
+
+val accuracy = evaluator.evaluate(predictions) 
+println("Test Accuracy = %.2f%%".format(accuracy*100))
+</pre>
+
+<ol>
+<li>
+Data Loading: The Titanic passenger data is loaded from a CSV file.
+
+</li><li>
+Data Transformation and Feature Extraction:
+
+<ul>
+<li>
+Relevant columns are selected.
+
+</li><li>
+<code>StringIndexer</code> converts the categorical "Gender" column into a numerical "GenderCat" column.
+
+</li><li>
+Rows with missing values are dropped.
+
+</li><li>
+<code>VectorAssembler</code> combines selected features into a "features" vector column.
+
+</li></ul>
+</li><li>
+Data Splitting: The data is split into training and test sets using <code>randomSplit()</code>.
+
+</li><li>
+Decision Tree Model:
+
+<ul>
+<li>
+A <code>DecisionTreeClassifier</code> is created and configured with parameters like label column, impurity measure ("gini"), maximum bins, and maximum depth.
+
+</li><li>
+The model is trained using the <code>fit()</code> method.
+
+</li><li>
+Model details like the number of nodes, tree structure, and feature importances are printed.
+
+</li></ul>
+</li><li>
+Predictions: Predictions are made on the test data.
+
+</li><li>
+Model Evaluation:
+
+<ul>
+<li>
+A <code>MulticlassClassificationEvaluator</code> is used to calculate the accuracy of the model.
+
+</li></ul>
+</li></ol>
+<div id="Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-Code Examples from Spark Machine Learning-Clustering with K-means, Data Transformation and Model Evaluation"><h4 id="Clustering with K-means, Data Transformation and Model Evaluation" class="header"><a href="#Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-Code Examples from Spark Machine Learning-Clustering with K-means, Data Transformation and Model Evaluation">Clustering with K-means, Data Transformation and Model Evaluation</a></h4></div>
+
+<p>
+This example illustrates K-means clustering:
+</p>
+
+<pre java="">// Loading data
+// ... (Code for loading data, similar to previous examples)
+
+// Data Transformation and Feature Extraction
+val assembler = new VectorAssembler() 
+assembler.setInputCols(Array("X", "Y")) 
+assembler.setOutputCol("features") 
+val data1 = assembler.transform(data) 
+data1.show(5)
+
+// Clustering Model (K=2)
+var algKMeans = new KMeans().setK(2) 
+var mdlKMeans = algKMeans.fit(data1)
+
+// Predictions
+var predictions = mdlKMeans.transform(data1) 
+predictions.show(3)     
+predictions.write.mode("overwrite").option("header","true").csv(filePath + "data/cluster-2K.csv")
+
+// Model Evaluation and Interpretation (K=2)
+var WSSSE = mdlKMeans.computeCost(data1) 
+println(s"Within Set Sum of Squared Errors (K=2) = %.3f".format(WSSSE))
+
+println("Cluster Centers (K=2) : " + mdlKMeans.clusterCenters.mkString("&lt;", ",", "&gt;")) 
+println("Cluster Sizes (K=2) : " + mdlKMeans.summary.clusterSizes.mkString("&lt;", ",", "&gt;"))
+
+// Clustering Model (K=4)
+algKMeans = new KMeans().setK(4) 
+mdlKMeans = algKMeans.fit(data1)
+
+// Model Evaluation and Interpretation (K=4)
+WSSSE = mdlKMeans.computeCost(data1) 
+println(s"Within Set Sum of Squared Errors (K=4) = %.3f".format(WSSSE))
+
+println("Cluster Centers (K=4) : " + mdlKMeans.clusterCenters.mkString("&lt;", ",", "&gt;")) 
+println("Cluster Sizes (K=4) : " + mdlKMeans.summary.clusterSizes.mkString("&lt;", ",", "&gt;"))
+
+predictions = mdlKMeans.transform(data1) 
+predictions.show(30)     
+predictions.write.mode("overwrite").option("header","true").csv(filePath + "data/cluster-4K.csv")
+</pre>
+
+<ol>
+<li>
+Data Loading: Data with two dimensions (X and Y) is loaded.
+
+</li><li>
+Data Transformation: <code>VectorAssembler</code> creates a "features" vector column.
+
+</li><li>
+Clustering Model:
+
+<ul>
+<li>
+A <code>KMeans</code> object is created and the number of clusters (\(K\)) is set.
+
+</li><li>
+The model is trained using the <code>fit()</code> method.
+
+</li></ul>
+</li><li>
+Predictions: Cluster assignments for each data point are predicted.
+
+</li><li>
+Model Evaluation:
+
+<ul>
+<li>
+The <code>computeCost()</code> method calculates the Within Set Sum of Squared Errors (WSSE), which is a measure of cluster cohesion.
+
+</li><li>
+Cluster centers and cluster sizes are printed.
+
+</li></ul>
+</li><li>
+Running with Different K: The code runs the clustering with K=2 and K=4, comparing the WSSE and cluster characteristics to illustrate the effect of choosing different values for K.
+
+</li></ol>
+<div id="Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-Code Examples from Spark Machine Learning-Recommendation with ALS, Data Transformation and Model Evaluation"><h4 id="Recommendation with ALS, Data Transformation and Model Evaluation" class="header"><a href="#Librerías/Componentes de Spark-Machine Learning with Spark ML Pipelines-Code Examples from Spark Machine Learning-Recommendation with ALS, Data Transformation and Model Evaluation">Recommendation with ALS, Data Transformation and Model Evaluation</a></h4></div>
+
+<p>
+This example demonstrates a recommendation system using the Alternating Least Squares (ALS) algorithm
+</p>
+
+<pre java="">// Loading data
+// ... (Code for loading data from text files, using RDDs and DataFrames)
+
+// Data Transformation and Feature Extraction
+// ... (Code for transforming data using RDDs and DataFrames)
+
+// Data Splitting
+val Array(train, test) = ratings3.randomSplit(Array(0.8, 0.2)) 
+println("Train = "+train.count()+" Test = "+test.count())
+
+// Recommendation Model
+val algALS = new ALS() 
+algALS.setItemCol("product") 
+algALS.setRank(12) 
+algALS.setRegParam(0.1) 
+algALS.setMaxIter(20) 
+val mdlReco = algALS.fit(train)
+
+// Predicting Using the Model
+val predictions = mdlReco.transform(test) 
+predictions.show(5) 
+predictions.printSchema()
+
+// Model Evaluation and Interpretation
+val pred = predictions.na.drop() 
+println("Orig = "+predictions.count()+" Final = "+ pred.count() + " Dropped = "+ (predictions.count() - pred.count())) 
+
+val evaluator = new RegressionEvaluator() 
+evaluator.setLabelCol("rating") 
+var rmse = evaluator.evaluate(pred) 
+println("Root Mean Squared Error = "+"%.3f".format(rmse)) 
+
+var mse = evaluator.evaluate(pred) 
+println("Mean Squared Error = "+"%.3f".format(mse)) 
+mse = pred.rdd.map(r =&gt; rowSqDiff(r)).reduce(_+_) / predictions.count().toDouble 
+println("Mean Squared Error (Calculated) = "+"%.3f".format(mse))
+</pre>
+
+<ol>
+<li>
+Data Loading: MovieLens data is loaded from text files using RDDs and then converted to DataFrames.
+
+</li><li>
+Data Transformation: The data is transformed to a suitable format for the recommendation algorithm.
+
+</li><li>
+Data Splitting: The data is split into training and test sets.
+
+</li><li>
+Recommendation Model:
+
+<ul>
+<li>
+An <code>ALS</code> object is created and configured with parameters like rank, regularization parameter, and maximum iterations.
+
+</li><li>
+The model is trained on the training data.
+
+</li></ul>
+</li><li>
+Predictions: Predictions are made on the test data.
+
+</li><li>
+Model Evaluation:
+
+<ul>
+<li>
+Rows with NaN predictions are dropped to address the cold start problem.
+
+</li><li>
+RMSE and MSE are calculated using a <code>RegressionEvaluator</code>.
+
+</li><li>
+MSE is also calculated manually for demonstration purposes.
+
+</li></ul>
+</li></ol>
 </div>
   
 
