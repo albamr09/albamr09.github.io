@@ -97,6 +97,113 @@
 
 </li></ul>
 </li></ul>
+</li><li>
+<a href="03_lib_spark.html#GraphX">GraphX</a>
+
+<ul>
+<li>
+<a href="03_lib_spark.html#Introduction%20to%20Graph%20Processing">Introduction to Graph Processing</a>
+
+</li><li>
+<a href="03_lib_spark.html#Graph%20Processing%20Systems">Graph Processing Systems</a>
+
+</li><li>
+<a href="03_lib_spark.html#Challenges%20of%20Graph%20Processing">Challenges of Graph Processing</a>
+
+</li><li>
+<a href="03_lib_spark.html#Spark%20GraphX">Spark GraphX</a>
+
+<ul>
+<li>
+<a href="03_lib_spark.html#GraphX%20Architecture">GraphX Architecture</a>
+
+</li><li>
+<a href="03_lib_spark.html#GraphX%20Computational%20Model">GraphX Computational Model</a>
+
+</li><li>
+<a href="03_lib_spark.html#Building%20Graphs%20with%20GraphX">Building Graphs with GraphX</a>
+
+</li><li>
+<a href="03_lib_spark.html#GraphX%20API%20Landscape">GraphX API Landscape</a>
+
+</li><li>
+<a href="03_lib_spark.html#Structural%20APIs">Structural APIs</a>
+
+</li><li>
+<a href="03_lib_spark.html#Community%20Detection%20and%20Analysis">Community Detection and Analysis</a>
+
+</li><li>
+<a href="03_lib_spark.html#GraphX%20Algorithms">GraphX Algorithms</a>
+
+</li><li>
+<a href="03_lib_spark.html#Graph%20Parallel%20Computation%20APIs">Graph Parallel Computation APIs</a>
+
+</li><li>
+<a href="03_lib_spark.html#Partition%20Strategies">Partition Strategies</a>
+
+</li></ul>
+</li><li>
+<a href="03_lib_spark.html#Case%20Study%3A%20AlphaGo%20Tweet%20Analytics">Case Study  AlphaGo Tweet Analytics</a>
+
+</li><li>
+<a href="03_lib_spark.html#Code%20Examples%20in%20the%20GraphX%20Source">Code Examples in the GraphX Source</a>
+
+<ul>
+<li>
+<a href="03_lib_spark.html#Building%20a%20Simple%20Graph">Building a Simple Graph</a>
+
+<ul>
+<li>
+<a href="03_lib_spark.html#Defining%20Vertices%20and%20Edges">Defining Vertices and Edges</a>
+
+</li><li>
+<a href="03_lib_spark.html#Creating%20RDDs%20and%20the%20Graph">Creating RDDs and the Graph</a>
+
+</li></ul>
+</li><li>
+<a href="03_lib_spark.html#Structural%20APIs">Structural APIs</a>
+
+<ul>
+<li>
+<a href="03_lib_spark.html#Extracting%20Subgraphs">Extracting Subgraphs</a>
+
+</li></ul>
+</li><li>
+<a href="03_lib_spark.html#Community%20Detection">Community Detection</a>
+
+</li><li>
+<a href="03_lib_spark.html#PageRank%20Calculation">PageRank Calculation</a>
+
+</li><li>
+<a href="03_lib_spark.html#Aggregate%20Messages%20API">Aggregate Messages API</a>
+
+<ul>
+<li>
+<a href="03_lib_spark.html#Finding%20the%20Oldest%20Follower">Finding the Oldest Follower</a>
+
+</li><li>
+<a href="03_lib_spark.html#Finding%20the%20Oldest%20Followee">Finding the Oldest Followee</a>
+
+</li><li>
+<a href="03_lib_spark.html#Calculating%20In-Degree%20and%20Out-Degree">Calculating In-Degree and Out-Degree</a>
+
+</li></ul>
+</li><li>
+<a href="03_lib_spark.html#AlphaGo%20Tweet%20Analytics">AlphaGo Tweet Analytics</a>
+
+<ul>
+<li>
+<a href="03_lib_spark.html#Loading%20Data%20and%20Creating%20a%20DataFrame">Loading Data and Creating a DataFrame</a>
+
+</li><li>
+<a href="03_lib_spark.html#Mapping%20Data%20to%20Vertices%20and%20Edges">Mapping Data to Vertices and Edges</a>
+
+</li><li>
+<a href="03_lib_spark.html#Creating%20the%20Graph%20and%20Running%20Algorithms">Creating the Graph and Running Algorithms</a>
+
+</li></ul>
+</li></ul>
+</li></ul>
 </li></ul>
 <hr>
 
@@ -783,6 +890,631 @@ MSE is also calculated manually for demonstration purposes.
 
 </li></ul>
 </li></ol>
+<div id="Librerías/Componentes de Spark-GraphX"><h2 id="GraphX" class="header"><a href="#Librerías/Componentes de Spark-GraphX">GraphX</a></h2></div>
+
+<p>
+This summary provides an introduction to graph processing and the Spark GraphX framework.
+</p>
+
+<div id="Librerías/Componentes de Spark-GraphX-Introduction to Graph Processing"><h3 id="Introduction to Graph Processing" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Introduction to Graph Processing">Introduction to Graph Processing</a></h3></div>
+
+<p>
+Graph processing involves analysing and manipulating graph structures, which consist of vertices (nodes) connected by edges. This field has long been crucial in industries like logistics, transportation, and social networking, with applications ranging from route optimisation to social network analysis.
+</p>
+
+<p>
+The importance of graph processing has surged with the rise of the internet, social media, and large datasets. Applications now include analysing research collaborations, understanding social behaviour in animal populations, and investigating financial networks like the Panama Papers.
+</p>
+
+<div id="Librerías/Componentes de Spark-GraphX-Graph Processing Systems"><h3 id="Graph Processing Systems" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Graph Processing Systems">Graph Processing Systems</a></h3></div>
+
+<p>
+There are two main categories of graph-based systems:
+</p>
+
+<ul>
+<li>
+<span id="Librerías/Componentes de Spark-GraphX-Graph Processing Systems-Graph processing systems"></span><strong id="Graph processing systems">Graph processing systems</strong> excel at executing complex algorithms on large graph datasets. Examples include Spark GraphX, Pregel BSP, and GraphLab.
+
+</li><li>
+<span id="Librerías/Componentes de Spark-GraphX-Graph Processing Systems-Graph databases"></span><strong id="Graph databases">Graph databases</strong>, like AllegroGraph, Titan, Neo4j, and RDF stores, are designed for efficient graph-based queries.
+
+</li></ul>
+ 
+<p>
+Organisations with extensive graph-based applications often employ both a graph database and a graph processing system as part of a larger data processing workflow
+</p>
+
+<div id="Librerías/Componentes de Spark-GraphX-Challenges of Graph Processing"><h3 id="Challenges of Graph Processing" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Challenges of Graph Processing">Challenges of Graph Processing</a></h3></div>
+
+<p>
+Traditional relational database systems struggle with complex graph algorithms due to their iterative and recursive nature, which often span the entire graph. Partitioning data across multiple systems, common in database systems, is suboptimal for graph algorithms, particularly for "long-tail" graphs with many sparsely connected nodes.
+</p>
+
+<p>
+Frameworks like MapReduce, based on data parallelism and disk-based partitioning, also face challenges in efficiently representing and processing graphs, especially when dealing with the numerous edge cuts inherent in long-tail graphs.
+</p>
+
+<div id="Librerías/Componentes de Spark-GraphX-Spark GraphX"><h3 id="Spark GraphX" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Spark GraphX">Spark GraphX</a></h3></div>
+
+<p>
+Spark GraphX addresses these challenges by offering graph parallelism over data parallelism and utilising Spark's data-distributed RDD mechanism. This approach combines the strengths of both data and graph parallelism, enabling efficient processing of complex graph algorithms on large datasets.
+</p>
+
+<p>
+GraphX provides various partitioning and storage schemes to optimise performance and allows for tuning based on specific application requirements and data characteristics. While GraphX excels at computation, the new GraphFrames API integrates DataFrames with graphs to facilitate powerful graph queries.
+</p>
+
+<div id="Librerías/Componentes de Spark-GraphX-Spark GraphX-GraphX Architecture"><h4 id="GraphX Architecture" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Spark GraphX-GraphX Architecture">GraphX Architecture</a></h4></div>
+
+<p>
+GraphX is built on top of Spark and leverages its distributed processing capabilities, algorithms, and versioned computation graph. Some machine learning algorithms within Spark also utilise GraphX APIs.
+GraphX offers a rich computational model, built-in algorithms, and APIs for developing custom algorithms. It provides functionalities for:
+</p>
+
+<ul>
+<li>
+Graph creation
+
+</li><li>
+Structure queries
+
+</li><li>
+Attribute transformers
+
+</li><li>
+Structure transformers
+
+</li><li>
+Connection mining primitives
+
+</li></ul>
+<div id="Librerías/Componentes de Spark-GraphX-Spark GraphX-GraphX Computational Model"><h4 id="GraphX Computational Model" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Spark GraphX-GraphX Computational Model">GraphX Computational Model</a></h4></div>
+
+<p>
+GraphX uses a property graph model, where:
+</p>
+
+<ol>
+<li>
+Vertices are connected by edges.
+
+</li><li>
+Both vertices and edges can have arbitrary objects as properties, accessible to the APIs.
+
+</li><li>
+It is a directed multigraph, meaning edges have direction, and multiple edges can exist between vertices.
+
+</li></ol>
+<p>
+This model supports various graph types, including bipartite and tripartite graphs. Each vertex consists of a unique ID (64-bit integer) and a property object, while edges comprise source and destination vertex IDs and a property object.
+</p>
+
+<div id="Librerías/Componentes de Spark-GraphX-Spark GraphX-Building Graphs with GraphX"><h4 id="Building Graphs with GraphX" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Spark GraphX-Building Graphs with GraphX">Building Graphs with GraphX</a></h4></div>
+
+<p>
+There are four ways to create a graph in GraphX:
+</p>
+
+<ul>
+<li>
+Loading an edge list file using <code>GraphLoader.edgeListFile(...)</code>.
+
+</li><li>
+Loading edge tuples from RDDs using <code>fromEdgeTuples()</code>.
+
+</li><li>
+Creating a graph from a list of edges using <code>fromEdges()</code>.
+
+</li><li>
+Creating a graph using edge and vertex RDDs.
+
+</li></ul>
+<p>
+The last method offers flexibility, especially when manipulating user-defined objects for vertices and edges
+</p>
+
+<div id="Librerías/Componentes de Spark-GraphX-Spark GraphX-GraphX API Landscape"><h4 id="GraphX API Landscape" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Spark GraphX-GraphX API Landscape">GraphX API Landscape</a></h4></div>
+
+<p>
+The GraphX APIs are organized into different categories:
+</p>
+
+<ul>
+<li>
+Objects: Edge, EdgeRDD, and others reside under org.apache.spark.graphx.
+
+</li><li>
+Graph Object: Contains APIs like triplets, persist, subgraph, etc..
+
+</li><li>
+Graph Algorithms: Separated under the GraphOps object to distinguish algorithms from graph implementation.
+
+</li><li>
+Analytic Functions: Functions like SVD++, ShortestPath, and others are located under lib
+
+</li></ul>
+<div id="Librerías/Componentes de Spark-GraphX-Spark GraphX-Structural APIs"><h4 id="Structural APIs" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Spark GraphX-Structural APIs">Structural APIs</a></h4></div>
+
+<p>
+GraphX provides structural APIs for analysing graph structure, such as:
+</p>
+
+<ul>
+<li>
+numEdges and numVertices for getting the number of edges and vertices.
+
+</li><li>
+triplets for accessing edge and connected vertex information together.
+
+</li><li>
+inDegrees and outDegrees for retrieving incoming and outgoing edge counts for vertices.
+
+</li><li>
+subgraph for extracting subgraphs based on edge and vertex property predicates.
+
+</li></ul>
+<div id="Librerías/Componentes de Spark-GraphX-Spark GraphX-Community Detection and Analysis"><h4 id="Community Detection and Analysis" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Spark GraphX-Community Detection and Analysis">Community Detection and Analysis</a></h4></div>
+
+<p>
+GraphX offers algorithms for exploring network connections and communities, with applications in areas like fraud detection and security. Some key algorithms include:
+</p>
+
+<ul>
+<li>
+<code>triangleCount</code> for identifying and counting triangles within the graph, useful for spam detection and community ranking.
+
+</li><li>
+<code>connectedComponents</code> for finding groups of vertices connected by paths.
+
+</li><li>
+<code>stronglyConnectedComponents</code> for identifying communities with bidirectional connections between all members
+
+</li></ul>
+<div id="Librerías/Componentes de Spark-GraphX-Spark GraphX-GraphX Algorithms"><h4 id="GraphX Algorithms" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Spark GraphX-GraphX Algorithms">GraphX Algorithms</a></h4></div>
+
+<p>
+GraphX includes various built-in algorithms for graph analysis:
+</p>
+
+<table>
+<thead>
+<tr>
+<th>
+Algorithm Type
+</th>
+<th>
+GraphX Method/Exmaple
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Graph-Parallel Computation
+</td>
+<td>
+<code>aggregateMessages(), Pregel()</code>
+</td>
+</tr>
+<tr>
+<td>
+PageRank
+</td>
+<td>
+<code>PageRank(), staticPageRank(), personalizedPageRank()</code>
+</td>
+</tr>
+<tr>
+<td>
+Shortest Paths and SVD++
+</td>
+<td>
+<code>ShortestPaths(), SVD++</code>
+</td>
+</tr>
+<tr>
+<td>
+Label Propagation (LPA)
+</td>
+<td>
+<code>LabelPropagation()</code>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+PageRank is a prominent algorithm for ranking the importance of vertices, with variations for static iterations, dynamic convergence, and personalized ranking based on a specified vertex.
+</p>
+
+<div id="Librerías/Componentes de Spark-GraphX-Spark GraphX-Graph Parallel Computation APIs"><h4 id="Graph Parallel Computation APIs" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Spark GraphX-Graph Parallel Computation APIs">Graph Parallel Computation APIs</a></h4></div>
+
+<p>
+GraphX provides two primary APIs for implementing custom graph algorithms:
+</p>
+
+<ul>
+<li>
+aggregateMessages(): A versatile API for aggregating information from neighbouring edges and vertices, operating similarly to a MapReduce paradigm on the graph.
+
+</li><li>
+Pregel(): A more general API that encompasses aggregateMessages() and offers greater flexibility in algorithm design.
+
+</li></ul>
+<div id="Librerías/Componentes de Spark-GraphX-Spark GraphX-Partition Strategies"><h4 id="Partition Strategies" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Spark GraphX-Partition Strategies">Partition Strategies</a></h4></div>
+
+<p>
+Efficient partitioning of large graphs is crucial for performance in distributed processing. GraphX offers different partition strategies to address the challenges of long-tail graphs and minimise communication overhead:
+</p>
+
+<ul>
+<li>
+Edge cut: Partitions vertices across machines, with communication cost proportional to the number of edges cut.
+
+</li><li>
+Vertex cut: Partitions edges, potentially duplicating vertices, with cost proportional to the number of machines spanned by each vertex.
+
+</li></ul>
+ 
+<p>
+GraphX defaults to a vertex cut strategy to mitigate hotspot issues caused by uneven distribution of connections. It offers four main strategies: RandomVertexCut, CanonicalRandomVertexCut, EdgePartition1D, and EdgePartition2D.
+</p>
+
+<div id="Librerías/Componentes de Spark-GraphX-Case Study: AlphaGo Tweet Analytics"><h3 id="Case Study: AlphaGo Tweet Analytics" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Case Study: AlphaGo Tweet Analytics">Case Study: AlphaGo Tweet Analytics</a></h3></div>
+
+<p>
+The source provides a case study applying GraphX to analyse a retweet network of tweets related to the AlphaGo project. It outlines a data pipeline for collecting, processing, and analysing tweets to understand user rankings, locations, time zones, and follower-followee relationships.
+</p>
+
+<p>
+The case study demonstrates the process of modelling the retweet network as a graph, defining vertices as users, edges as retweets, and creating objects to store user and tweet attributes. It then showcases using GraphX to create the graph from the processed tweet data and apply algorithms like PageRank to analyse user influence within the retweet network.
+</p>
+
+<div id="Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source"><h3 id="Code Examples in the GraphX Source" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source">Code Examples in the GraphX Source</a></h3></div>
+
+<div id="Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Building a Simple Graph"><h4 id="Building a Simple Graph" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Building a Simple Graph">Building a Simple Graph</a></h4></div>
+
+<p>
+The source demonstrates building a graph representing a "Giraffe Graph" with two strongly connected groups (cliques) linked by a weak connection.
+</p>
+
+<div id="Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Building a Simple Graph-Defining Vertices and Edges"><h5 id="Defining Vertices and Edges" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Building a Simple Graph-Defining Vertices and Edges">Defining Vertices and Edges</a></h5></div>
+
+<p>
+The first step involves defining the vertices and edges, along with their associated properties:
+</p>
+
+<pre java="">case class Person(name:String,age:Int)
+val defaultPerson = Person("NA",0)
+val vertexList = List( (1L, Person("Alice", 18)), (2L, Person("Bernie", 17)), (3L, Person("Cruz", 15)), (4L, Person("Donald", 12)), (5L, Person("Ed", 15)), (6L, Person("Fran", 10)), (7L, Person("Genghis",854)) )
+val edgeList = List( Edge(1L, 2L, 5), Edge(1L, 3L, 1), Edge(3L, 2L, 5), Edge(2L, 4L, 12), Edge(4L, 5L, 4), Edge(5L, 6L, 2), Edge(6L, 7L, 2), Edge(7L, 4L, 5), Edge(6L, 4L, 4) )
+</pre>
+
+<ul>
+<li>
+<code>case class Person(name:String,age:Int)</code>: Defines a case class to represent a person with attributes for name and age. This will be used as the vertex property.
+
+</li><li>
+<code>defaultPerson</code>: Creates an instance of Person with default values, used for vertices not explicitly defined in vertexList but present in edgeList.
+
+</li><li>
+<code>vertexList</code>: A list of tuples, where each tuple represents a vertex. The first element of the tuple is the vertex ID (a long integer), and the second is a Person object.
+
+</li><li>
+<code>edgeList</code>: A list of Edge objects, where each Edge represents a connection between two vertices. The Edge constructor takes the source vertex ID, destination vertex ID, and an integer representing "betweenness centrality" as arguments.
+
+</li></ul>
+<div id="Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Building a Simple Graph-Creating RDDs and the Graph"><h5 id="Creating RDDs and the Graph" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Building a Simple Graph-Creating RDDs and the Graph">Creating RDDs and the Graph</a></h5></div>
+
+<p>
+Next, the code creates RDDs from the vertex and edge lists and constructs the graph:
+</p>
+
+<pre java="">val vertexRDD = sc.parallelize(vertexList) 
+val edgeRDD = sc.parallelize(edgeList) 
+val graph = Graph(vertexRDD, edgeRDD,defaultPerson)
+</pre>
+
+<ul>
+<li>
+<code>sc.parallelize(...)</code>: The parallelize method of the SparkContext (sc) creates an RDD from the provided list.
+
+</li><li>
+<code>Graph(vertexRDD, edgeRDD, defaultPerson)</code>: This constructs the graph using the vertex RDD, edge RDD, and the <code>defaultPerson</code> object for handling missing vertices.
+
+</li></ul>
+<div id="Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Structural APIs"><h4 id="Structural APIs" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Structural APIs">Structural APIs</a></h4></div>
+
+<p>
+The source presents examples using structural APIs to query the graph:
+</p>
+
+<pre java="">graph.numEdges 
+graph.numVertices 
+val vertices = graph.vertices 
+vertices.collect.foreach(println) 
+val edges = graph.edges 
+edges.collect.foreach(println) 
+val triplets = graph.triplets 
+triplets.take(3) 
+triplets.map(t=&gt;t.toString).collect().foreach(println)
+</pre>
+
+<ul>
+<li>
+<code>numEdges</code> and <code>numVertices</code>: These methods return the number of edges and vertices in the graph, respectively.
+
+</li><li>
+<code>vertices</code> and <code>edges</code>: These properties provide access to the RDDs containing the vertices and edges of the graph.
+
+</li><li>
+<code>collect</code>: This action retrieves all elements of an RDD to the driver program.
+
+</li><li>
+<code>foreach(println)</code>: Iterates through the collected elements and prints each one.
+
+</li><li>
+<code>triplets</code>: This property returns an RDD of EdgeTriplet objects, each representing an edge along with its source and destination vertices and their properties.
+
+</li><li>
+<code>take(3)</code>: Retrieves the first three elements of the RDD.
+
+</li><li>
+<code>map(t =&gt; t.toString)</code>: Transforms each EdgeTriplet into a string representation.
+
+</li></ul>
+<div id="Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Structural APIs-Extracting Subgraphs"><h5 id="Extracting Subgraphs" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Structural APIs-Extracting Subgraphs">Extracting Subgraphs</a></h5></div>
+
+<p>
+The source demonstrates extracting subgraphs based on edge and vertex properties:
+</p>
+
+<pre java="">val inDeg = graph.inDegrees 
+inDeg.collect() 
+val outDeg = graph.outDegrees 
+outDeg.collect() 
+val allDeg = graph.degrees 
+allDeg.collect() 
+val g1 = graph.subgraph(epred = (edge) =&gt; edge.attr &gt; 4) 
+g1.triplets.collect.foreach(println)
+val g2 = graph.subgraph(vpred = (id, person) =&gt; person.age &gt; 21) 
+g2.triplets.collect.foreach(println)
+</pre>
+
+<ul>
+<li>
+<code>inDegrees</code>, <code>outDegrees</code>, <code>degrees</code>: These methods calculate the incoming, outgoing, and total degrees for each vertex, respectively.
+
+</li><li>
+<code>subgraph(epred = ..., vpred = ...)</code>: This method creates a subgraph by applying predicates to filter edges and vertices.
+
+<ul>
+<li>
+<code>epred</code> is a function that takes an Edge object and returns a boolean indicating whether to include the edge.
+
+</li><li>
+<code>vpred</code> is a function that takes a vertex ID and its corresponding property object and returns a boolean indicating whether to include the vertex.
+
+</li></ul>
+</li></ul>
+<div id="Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Community Detection"><h4 id="Community Detection" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Community Detection">Community Detection</a></h4></div>
+
+<p>
+The source shows examples of using GraphX algorithms for community detection:
+</p>
+
+<pre java="">val cc = graph.connectedComponents() 
+cc.triplets.collect 
+graph.connectedComponents.vertices.map(_.swap).groupByKey.map(_._2).collect 
+cc.vertices.map(_._2).collect.distinct.size 
+cc.vertices.groupBy(_._2).map(p=&gt;(p._1,p._2.size)).sortBy(x=&gt;x._2,false).collect() 
+val ccS = graph.stronglyConnectedComponents(10) 
+ccS.triplets.collect 
+ccS.vertices.map(_.swap).groupByKey.map(_._2).collect 
+ccS.vertices.map(_._2).collect.distinct.size 
+val triCounts = graph.triangleCount() 
+val triangleCounts = triCounts.vertices.collect 
+</pre>
+
+<ul>
+<li>
+<code>connectedComponents()</code>: This algorithm finds groups of vertices connected by paths, returning a new graph where each vertex is assigned the ID of its connected component.
+
+</li><li>
+<code>stronglyConnectedComponents(10)</code>: This algorithm identifies strongly connected components, where bidirectional paths exist between all members. The argument 10 specifies the maximum number of iterations.
+
+</li><li>
+<code>triangleCount()</code>: This algorithm counts the number of triangles each vertex participates in.
+
+</li></ul>
+<p>
+These code snippets showcase various operations on the resulting graphs, such as collecting triplets, grouping vertices, and counting connected components.
+</p>
+
+<div id="Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-PageRank Calculation"><h4 id="PageRank Calculation" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-PageRank Calculation">PageRank Calculation</a></h4></div>
+
+<pre java="">val ranks = graph.pageRank(0.1).vertices 
+ranks.collect().foreach(println) 
+val topVertices = ranks.sortBy(_._2,false).collect.foreach(println)
+</pre>
+
+<ul>
+<li>
+<code>pageRank(0.1)</code>: This algorithm calculates the PageRank for each vertex in the graph. The argument 0.1 specifies the damping factor.
+
+</li><li>
+<code>sortBy(_._2, false)</code>: Sorts the PageRank results in descending order based on the PageRank value <code>(_._2)</code>.
+
+</li></ul>
+<div id="Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Aggregate Messages API"><h4 id="Aggregate Messages API" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Aggregate Messages API">Aggregate Messages API</a></h4></div>
+
+<p>
+The source provides examples using the aggregateMessages() API to perform computations on the graph:
+</p>
+
+<div id="Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Aggregate Messages API-Finding the Oldest Follower"><h5 id="Finding the Oldest Follower" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Aggregate Messages API-Finding the Oldest Follower">Finding the Oldest Follower</a></h5></div>
+
+<pre java="">val oldestFollower = graph.aggregateMessages[Int]( 
+  edgeContext =&gt; edgeContext.sendToDst(edgeContext.srcAttr.age),
+  (x,y) =&gt; math.max(x,y) 
+) 
+oldestFollower.collect()
+</pre>
+
+<ul>
+<li>
+<code>aggregateMessages[Int](...)</code>: This API aggregates values from neighbouring vertices and edges. It takes two functions as arguments:
+
+</li><li>
+<code>sendMsg</code>: A function that operates on each edge context (EdgeContext) and sends messages to either the source or destination vertex. In this case, it sends the age of the source vertex (srcAttr.age) to the destination vertex using sendToDst.
+
+</li><li>
+<code>mergeMsg</code>: A function that combines messages received at each vertex. Here, it uses math.max to determine the oldest age among the received messages.
+
+</li></ul>
+<div id="Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Aggregate Messages API-Finding the Oldest Followee"><h5 id="Finding the Oldest Followee" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Aggregate Messages API-Finding the Oldest Followee">Finding the Oldest Followee</a></h5></div>
+
+<pre java="">val oldestFollowee = graph.aggregateMessages[Int]( 
+  edgeContext =&gt; edgeContext.sendToSrc(edgeContext.dstAttr.age),
+  (x,y) =&gt; math.max(x,y) 
+) 
+oldestFollowee.collect()
+</pre>
+
+<p>
+This example is similar to the previous one but uses <code>sendToSrc</code> to send the age of the destination vertex (dstAttr.age) to the source vertex.
+</p>
+
+<div id="Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Aggregate Messages API-Calculating In-Degree and Out-Degree"><h5 id="Calculating In-Degree and Out-Degree" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-Aggregate Messages API-Calculating In-Degree and Out-Degree">Calculating In-Degree and Out-Degree</a></h5></div>
+
+<pre java="">var iDegree = graph.aggregateMessages[Int]( 
+  edgeContext =&gt; edgeContext.sendToDst(1),
+  (x,y) =&gt; x+y 
+) 
+iDegree.collect() 
+graph.inDegrees.collect() 
+
+val oDegree = graph.aggregateMessages[Int]( 
+  edgeContext =&gt; edgeContext.sendToSrc(1),
+  (x,y) =&gt; x+y 
+) 
+oDegree.collect() 
+graph.outDegrees.collect()
+</pre>
+
+<p>
+These examples demonstrate implementing the <code>inDegrees</code> and <code>outDegrees</code> functionality using the <code>aggregateMessages()</code> API. They send a message of 1 to either the destination (for in-degree) or source (for out-degree) vertex for each edge and then sum the messages received at each vertex using <code>x + y</code>.
+</p>
+
+<div id="Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-AlphaGo Tweet Analytics"><h4 id="AlphaGo Tweet Analytics" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-AlphaGo Tweet Analytics">AlphaGo Tweet Analytics</a></h4></div>
+
+<p>
+We present a case study using GraphX to analyse a retweet network of tweets related to the AlphaGo project. The provided code snippets focus on data loading and transformation to create the graph:
+</p>
+
+<div id="Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-AlphaGo Tweet Analytics-Loading Data and Creating a DataFrame"><h5 id="Loading Data and Creating a DataFrame" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-AlphaGo Tweet Analytics-Loading Data and Creating a DataFrame">Loading Data and Creating a DataFrame</a></h5></div>
+
+<pre java="">import org.apache.spark.SparkContext 
+import org.apache.spark.SparkConf 
+import org.apache.spark.graphx._
+println(new java.io.File( "." ).getCanonicalPath) 
+println(s"Running Spark Version ${sc.version}") 
+val df = sqlContext.read.format("com.databricks.spark.csv").option("header", "false").option("inferSchema", "true").option("delimiter","|").load("file:/Users/ksankar/fdps-v3/data/reTweetNetwork-small.psv") 
+df.show(5) 
+df.count() 
+case class User(name:String, location:String, tz : String, fr:Int,fol:Int) 
+case class Tweet(id:String,count:Int)
+val graphData = df.rdd 
+println("--- The Graph Data ---") 
+graphData.take(2).foreach(println)
+</pre>
+
+<ul>
+<li>
+Import statements: Import necessary classes from Spark and GraphX.
+
+</li><li>
+Print statements: Print the current directory and Spark version.
+
+</li><li>
+<code>sqlContext.read...</code>: Reads the data from a pipe-separated value (PSV) file into a DataFrame using the spark-csv package.
+
+</li><li>
+<code>case class User(...)</code> and <code>case class Tweet(...)</code>: Define case classes to represent user and tweet data.
+
+</li><li>
+<code>graphData = df.rdd</code>: Extracts the underlying RDD from the DataFrame.
+
+</li></ul>
+<div id="Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-AlphaGo Tweet Analytics-Mapping Data to Vertices and Edges"><h5 id="Mapping Data to Vertices and Edges" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-AlphaGo Tweet Analytics-Mapping Data to Vertices and Edges">Mapping Data to Vertices and Edges</a></h5></div>
+
+<pre java="">val vert1 = graphData.map(row =&gt; (row(3).toString.toLong,User(row(4).toString,row(5).toString,row(6).toString,row(7).toString.toInt,row(8).toString.toInt))) 
+println("--- Vertices-1 ---") 
+vert1.count() 
+vert1.take(3).foreach(println)
+val vert2 = graphData.map(row =&gt; (row(9).toString.toLong,User(row(10).toString,row(11).toString,row(12).toString,row(13).toString.toInt,row(14).toString.toInt))) 
+println("--- Vertices-2 ---") 
+vert2.count() 
+vert2.take(3).foreach(println)
+val vertX = vert1.++(vert2) 
+println("--- Vertices-combined ---") 
+vertX.count()
+val edgX = graphData.map(row =&gt; (Edge(row(3).toString.toLong,row(9).toString.toLong,Tweet(row(0).toString,row(1).toString.toInt)))) 
+println("--- Edges ---") 
+edgX.take(3).foreach(println)
+</pre>
+
+<ul>
+<li>
+<code>vert1</code> and <code>vert2</code>: These variables use map transformations on the graphData RDD to extract user data from different columns of the data and create RDDs of vertices.
+
+</li><li>
+<code>vertX = vert1.++(vert2)</code>: Combines the two vertex RDDs.
+
+</li><li>
+<code>edgX</code>: Uses a map transformation to extract tweet data and create an RDD of edges.
+
+</li></ul>
+<div id="Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-AlphaGo Tweet Analytics-Creating the Graph and Running Algorithms"><h5 id="Creating the Graph and Running Algorithms" class="header"><a href="#Librerías/Componentes de Spark-GraphX-Code Examples in the GraphX Source-AlphaGo Tweet Analytics-Creating the Graph and Running Algorithms">Creating the Graph and Running Algorithms</a></h5></div>
+
+<pre java="">val rtGraph = Graph(vertX,edgX) 
+val ranks = rtGraph.pageRank(0.1).vertices 
+println("--- Page Rank ---") 
+ranks.take(2) 
+println("--- Top Users ---") 
+val topUsers = ranks.sortBy(_._2,false).take(3).foreach(println) 
+val topUsersWNames = ranks.join(rtGraph.vertices).sortBy(_._2._1,false).take(3).foreach(println) 
+println("--- How Big ? ---") 
+rtGraph.vertices.count 
+rtGraph.edges.count 
+println("--- How many retweets ? ---") 
+val iDeg = rtGraph.inDegrees 
+val oDeg = rtGraph.outDegrees 
+iDeg.sortBy(_._2,false).take(3).foreach(println) 
+oDeg.sortBy(_._2,false).take(3).foreach(println) 
+println("--- Max retweets ---") 
+val topRT = iDeg.join(rtGraph.vertices).sortBy(_._2._1,false).take(3).foreach(println) 
+val topRT1 = oDeg.join(rtGraph.vertices).sortBy(_._2._1,false).take(3).foreach(println)
+</pre>
+
+<ul>
+<li>
+<code>rtGraph = Graph(vertX, edgX)</code>: Constructs the graph from the vertex and edge RDDs.
+
+</li><li>
+<code>pageRank(0.1)</code>: Calculates PageRank.
+
+</li><li>
+<code>sortBy(...)</code>: Sorts results.
+
+</li><li>
+<code>join(...)</code>: Joins RDDs to combine data.
+
+</li><li>
+<code>inDegrees</code> and <code>outDegrees</code>: Calculate in-degree and out-degree values.
+
+</li></ul>
 </div>
   
 
