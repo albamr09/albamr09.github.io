@@ -1,0 +1,329 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/custom.css">
+    <title>Configuración, monitorización y optimización de Spark</title>
+  <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Configuración, monitorización y optimización de Spark"><h1 id="Configuración, monitorización y optimización de Spark" class="header"><a href="#Configuración, monitorización y optimización de Spark">Configuración, monitorización y optimización de Spark</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="04_monitorization.html#Monitoring%20Spark%20Applications">Monitoring Spark Applications</a>
+
+<ul>
+<li>
+<a href="04_monitorization.html#What%20to%20monitor">What to monitor</a>
+
+</li><li>
+<a href="04_monitorization.html#Monitoring%20the%20Driver%20and%20Executors">Monitoring the Driver and Executors</a>
+
+</li><li>
+<a href="04_monitorization.html#Monitoring%20Queries%20and%20Tasks">Monitoring Queries and Tasks</a>
+
+</li><li>
+<a href="04_monitorization.html#Spark%20Logs">Spark Logs</a>
+
+</li><li>
+<a href="04_monitorization.html#Spark%20UI">Spark UI</a>
+
+</li><li>
+<a href="04_monitorization.html#Spark%20REST%20API">Spark REST API</a>
+
+</li><li>
+<a href="04_monitorization.html#Spark%20UI%20History%20Server">Spark UI History Server</a>
+
+</li><li>
+<a href="04_monitorization.html#Debugging%20and%20Spark%20First%20Aid">Debugging and Spark First Aid</a>
+
+</li><li>
+<a href="04_monitorization.html#Code%20Examples">Code Examples</a>
+
+</li></ul>
+</li></ul>
+<hr>
+
+<div id="Configuración, monitorización y optimización de Spark-Monitoring Spark Applications"><h2 id="Monitoring Spark Applications" class="header"><a href="#Configuración, monitorización y optimización de Spark-Monitoring Spark Applications">Monitoring Spark Applications</a></h2></div>
+
+<p>
+This document explains how to monitor Spark applications using logs and the Spark UI. It covers the different components involved in a Spark application and what to monitor to ensure its smooth execution.
+</p>
+
+<div id="Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-What to monitor"><h3 id="What to monitor" class="header"><a href="#Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-What to monitor">What to monitor</a></h3></div>
+
+<p>
+When monitoring a Spark application, it's essential to monitor the following:
+</p>
+
+<ul>
+<li>
+Processes: Monitor processes running your application at the level of CPU usage, memory usage etc.
+
+</li><li>
+Query Execution: Keep track of jobs, tasks and other aspects of query execution.
+
+</li></ul>
+<div id="Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-Monitoring the Driver and Executors"><h3 id="Monitoring the Driver and Executors" class="header"><a href="#Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-Monitoring the Driver and Executors">Monitoring the Driver and Executors</a></h3></div>
+
+<ul>
+<li>
+Importance: The driver holds the application's state and executors run individual jobs. It's crucial to monitor both to ensure their stability.
+
+</li><li>
+Metrics System: Spark provides a configurable metrics system based on the Dropwizard Metrics Library to monitor driver and executor states.
+
+</li><li>
+Configuration: The metrics system can be configured using a configuration file located at $SPARK_HOME/conf/metrics.properties.
+
+</li><li>
+Output Sinks: The metrics can be output to various sinks, including cluster monitoring solutions like Ganglia.
+
+</li></ul>
+<div id="Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-Monitoring Queries and Tasks"><h3 id="Monitoring Queries and Tasks" class="header"><a href="#Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-Monitoring Queries and Tasks">Monitoring Queries and Tasks</a></h3></div>
+
+<ul>
+<li>
+Granular Monitoring: Spark allows you to monitor individual queries, jobs, stages, and tasks.
+
+</li><li>
+Performance Tuning: This granular information helps you with performance tuning and debugging.
+
+</li></ul>
+<div id="Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-Spark Logs"><h3 id="Spark Logs" class="header"><a href="#Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-Spark Logs">Spark Logs</a></h3></div>
+
+<ul>
+<li>
+Detailed Monitoring: Spark logs offer a detailed way to monitor applications, highlighting strange events or errors that might cause job failures.
+
+</li><li>
+Integrated Logging: If you use the application template provided in this book, your application logs will appear alongside Spark's logs. This makes it easy to correlate the two.
+
+</li><li>
+Changing Log Level: You can change Spark's log level to adjust the detail of the logs.
+
+</li><li>
+Log Location: Logs are either printed to standard error in local mode or saved to files by your cluster manager when running Spark on a cluster.
+
+</li><li>
+Benefits of Log Collection: Collecting logs helps you debug issues and can be referenced in the future if an application crashes.
+
+</li></ul>
+<div id="Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-Spark UI"><h3 id="Spark UI" class="header"><a href="#Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-Spark UI">Spark UI</a></h3></div>
+
+<ul>
+<li>
+Visual Monitoring: The Spark UI provides a visual interface for monitoring running applications and viewing metrics about your Spark workload.
+
+</li><li>
+Accessibility: Each Spark Context launches a web UI, by default on port 4040, accessible via your web browser. Multiple applications will launch web UIs on increasing port numbers (4041, 4042...).
+
+</li><li>
+UI Tabs: The UI includes tabs for Jobs, Stages, Storage, Environment, SQL, and Executors, providing information on the corresponding aspects of your Spark application.
+
+</li></ul>
+<p>
+Example: This document walks through an example using the SQL tab to trace a query execution, providing a visual representation of the job, stages and tasks. The example shows how to:
+</p>
+
+<ul>
+<li>
+Navigate to the SQL tab in the Spark UI after running a SQL query.
+
+</li><li>
+Interpret aggregate statistics about the query, such as submission time, duration, and number of jobs.
+
+</li><li>
+Understand the Directed Acyclic Graph (DAG) of Spark stages, where each blue box represents a stage of Spark tasks, forming a job.
+
+</li><li>
+Examine each stage to understand its function.
+
+</li><li>
+Analyse the job's execution in the Jobs tab, breaking down stages and tasks.
+
+</li><li>
+Click individual stages to view detailed information about their execution.
+
+</li><li>
+Review the Summary Metrics section, which provides statistics about various metrics.
+
+</li><li>
+Examine per-executor details to identify any struggling executors.
+
+</li><li>
+Access and understand the more detailed metrics by clicking "Show Additional Metrics."
+
+</li></ul>
+<p>
+Other Tabs:
+</p>
+
+<ul>
+<li>
+Storage: Shows information about cached RDDs/DataFrames on the cluster, helpful for seeing if data has been evicted from the cache.
+
+</li><li>
+Environment: Shows information about the runtime environment, including Scala, Java, and configured Spark properties.
+
+</li><li>
+Configuration: You can configure the Spark UI using network configurations and behaviour settings. Refer to the relevant table on Spark UI Configurations in the Spark documentation.
+
+</li></ul>
+<div id="Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-Spark REST API"><h3 id="Spark REST API" class="header"><a href="#Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-Spark REST API">Spark REST API</a></h3></div>
+
+<ul>
+<li>
+Programmatic Access: The Spark REST API offers programmatic access to Spark's status and metrics.
+
+</li><li>
+Location: The REST API is available at <a href="http://localhost:4040/api/v1.">http://localhost:4040/api/v1.</a>
+
+</li><li>
+Purpose: The REST API enables the building of visualisations and monitoring tools on top of Spark.
+
+</li><li>
+Data: It exposes similar information to the web UI, except for SQL-related information.
+
+</li><li>
+Use: The API is valuable for building custom reporting solutions. For a list of API endpoints, consult the relevant table on REST API Endpoints in the Spark documentation.
+
+</li></ul>
+<div id="Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-Spark UI History Server"><h3 id="Spark UI History Server" class="header"><a href="#Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-Spark UI History Server">Spark UI History Server</a></h3></div>
+
+<ul>
+<li>
+Post-Execution Access: The Spark UI History Server provides access to the Spark UI and REST API even after an application ends or crashes.
+
+</li><li>
+Requirement: The application must be configured to save an event log using spark.eventLog.enabled and spark.eventLog.dir settings.
+
+</li><li>
+Usage: Once events are logged, you can run the history server as a standalone application to reconstruct the web UI. Some cluster managers and cloud services configure logging automatically and run a history server by default.
+
+</li><li>
+Additional Configurations: You can further configure the history server, details of which can be found in the Spark History Server Configurations table in the Spark documentation.
+
+</li></ul>
+<div id="Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-Debugging and Spark First Aid"><h3 id="Debugging and Spark First Aid" class="header"><a href="#Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-Debugging and Spark First Aid">Debugging and Spark First Aid</a></h3></div>
+
+<p>
+The source outlines various issues and their possible solutions that you might encounter when working with Spark, such as:
+</p>
+
+<ul>
+<li>
+Spark Jobs Not Starting: This section explains potential reasons why your Spark jobs may not be starting and offers possible solutions. These include verifying network configurations, resource allocation, and cluster setup.
+
+</li><li>
+Errors Before Execution: This part focuses on debugging errors that occur even before your Spark job starts execution. The source suggests scrutinising your code for errors, checking network connectivity, and troubleshooting library or classpath issues.
+
+</li><li>
+Errors During Execution: The document addresses issues arising during the execution of a Spark job. It recommends checking for data consistency, schema correctness, and logic errors in your code.
+
+</li><li>
+Slow Tasks or Stragglers: This section focuses on identifying and addressing slow tasks, often termed "stragglers." The source attributes these to uneven data distribution, skewed keys, or hardware problems. It suggests solutions like repartitioning data, increasing memory allocation, and identifying problematic executors.
+
+</li><li>
+Slow Aggregations: This section focuses on slow aggregations, recommending solutions such as increasing partitions, executor memory, and optimising data handling, specifically related to null values.
+
+</li><li>
+Slow Joins: Similar to slow aggregations, this section deals with slow join operations. It suggests exploring different join types, optimising join order, and using broadcast joins when possible.
+
+</li><li>
+Slow Reads and Writes: This part addresses slow input/output (I/O) operations, particularly with network file systems. It suggests enabling speculation to mitigate transient issues, ensuring adequate network bandwidth, and utilising locality-aware scheduling.
+
+</li><li>
+Driver OutOfMemoryError or Driver Unresponsive: This section explains the critical issue of driver failure due to insufficient memory. It suggests avoiding collecting large datasets to the driver, controlling broadcast join sizes, and optimising memory usage.
+
+</li><li>
+Executor OutOfMemoryError or Executor Unresponsive: This section deals with executor failures due to memory issues. It recommends increasing executor memory, optimising data partitioning and null value handling, and using Java monitoring tools to identify problematic objects.
+
+</li><li>
+Unexpected Nulls in Results: This part focuses on unexpected null values, recommending validating data formats, using accumulators to count parsing errors, and ensuring that transformations result in valid query plans.
+
+</li><li>
+No Space Left on Disk Errors: This section addresses disk space issues, suggesting increasing storage capacity, repartitioning data to avoid skew, and managing log and shuffle files.
+
+</li><li>
+Serialization Errors: This part explains serialization errors, typically encountered with custom logic using UDFs or RDDs. It suggests ensuring that all required data and code can be serialized and properly registering classes when using Kryo serialization.
+
+</li></ul>
+<div id="Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-Code Examples"><h3 id="Code Examples" class="header"><a href="#Configuración, monitorización y optimización de Spark-Monitoring Spark Applications-Code Examples">Code Examples</a></h3></div>
+
+<p>
+The source provides one code example to demonstrate how to use the Spark UI for monitoring and debugging. Here is the code snippet and an explanation:
+</p>
+
+<pre python=""># in Python
+spark.read\
+  .option("header", "true")\
+  .csv("/data/retail-data/all/online-retail-dataset.csv")\
+  .repartition(2)\
+  .selectExpr("instr(Description, 'GLASS') &gt;= 1 as is_glass")\
+  .groupBy("is_glass")\
+  .count()\
+  .collect()
+</pre>
+
+<p>
+This code snippet performs a series of operations on a CSV file using PySpark, Spark's Python API:
+</p>
+
+<ul>
+<li>
+<code>spark.read.option("header", "true").csv(...)</code>: This line reads a CSV file located at <code>/data/retail-data/all/online-retail-dataset.csv</code>, specifying that the file has a header row.
+
+</li><li>
+<code>.repartition(2)</code>: The data is repartitioned into two partitions. This action is explicitly taken to demonstrate how the number of partitions affects task distribution in the Spark UI.
+
+</li><li>
+<code>.selectExpr("instr(Description, 'GLASS') &gt;= 1 as is_glass")</code>: This line adds a new column named <code>is_glass</code>. It uses the <code>instr</code> function to check if the <code>Description</code> column contains the word "GLASS". If the word is found, the <code>is_glass</code> column is set to <code>True</code>; otherwise, it's set to <code>False</code>.
+
+</li><li>
+<code>.groupBy("is_glass").count()</code>: The data is grouped by the <code>is_glass</code> column, and the count for each group is calculated.
+
+</li><li>
+<code>.collect()</code>: This action collects the results of the count operation to the driver node.
+
+</li></ul>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="jQuery library"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/fuse.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
