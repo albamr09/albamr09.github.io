@@ -50,9 +50,9 @@
 Sabemos que la función de coste:
 </p>
 
-\[%align
+\begin{align}
 J(\Theta) = - \frac{1}{m} \left\{ \sum_{j=1}^m\sum_{i=1}^c (y_{ij}\cdot \log(h_\Theta(x_j)_i)) + [(1-y_{ij})\log(1-h_\Theta(x_j)_i)]\right\}
-\]
+\end{align}
 
 <p>
 Donde \(\theta_{it}^{(k)}\) es el peso que conecta el nodo \(i\) de la capa \(k\) con el nodo \(t\) de la capa \((k-1)\), es decir, es el elemento en la fila \(i\) columna \(t\) de la matriz de pesos de la capa \(k\), \(\Theta^{(k)}\).
@@ -72,41 +72,41 @@ Por la regla de la cadena, separamos la derivada de la función del coste en fun
 Procedemos a calcular la derivada:
 </p>
 
-\[%align
+\begin{align}
 \frac{\delta J(\Theta)}{\delta \theta_{it}^{(k)}} = \frac{\delta}{\delta \theta_{it}^{(k)}} \left(- \frac{1}{m}\right) \left\{ \sum_{j=1}^m\sum_{i=1}^c (y_{ij}\cdot \log(h_\Theta(x_j)_i)) + [(1-y_{ij})\log(1-h_\Theta(x_j)_i)]\right\}
-\]
+\end{align}
 
 <p>
 Sacamos el término constante de la derivada y aplicamos la propiedad: "La derivada de una suma equivale a la suma de las derivadas"
 </p>
 
-\[%align
+\begin{align}
 \frac{\delta J(\Theta)}{\delta \theta_{it}^{(k)}} = \left(- \frac{1}{m}\right)  \sum_{j=1}^m\sum_{i=1}^c \frac{\delta}{\delta \theta_{it}^{(k)}} \left\{(y_{ij}\cdot \log(h_\Theta(x_j)_i)) + [(1-y_{ij})\log(1-h_\Theta(x_j)_i)]\right\}
-\]
+\end{align}
 
 <p>
 Sea \(h_\Theta(x_j) = a^{(k)}_j\), es decir la salida de la última capa para el ejemplo \(j\).
 </p>
 
-\[%align
+\begin{align}
 \frac{\delta J(\Theta)}{\delta \theta_{it}^{(k)}} = \left(- \frac{1}{m}\right)  \sum_{j=1}^m\sum_{i=1}^c \frac{\delta}{\delta \theta_{it}^{(k)}} \left\{(y_{ij}\cdot \log(a^{(k)}_{ij})) + [(1-y_{ij})\log(1-a^{(k)}_{ij})]\right\}
-\]
+\end{align}
 
 <p>
 Sacaremos el término \(y_{ij}\) de la derivada y juntemos todas las expresiones:
 </p>
 
-\[%align
+\begin{align}
 \frac{\delta J(\Theta)}{\delta \theta_{it}^{(k)}} = \left(- \frac{1}{m}\right)  \sum_{j=1}^m\sum_{i=1}^c  \left\{y_{ij} \left(\frac{\delta}{\delta \theta_{it}^{(k)}} \log(a^{(k)}_{ij}) \right) + (1-y_{ij}) \left(\frac{\delta}{\delta \theta_{it}^{(k)}} \log(1-a^{(k)}_{ij})\right)\right\}
-\]
+\end{align}
 
 <p>
 Aplicamos la regla de la cadena sobre el logaritmo:
 </p>
 
-\[%align
+\begin{align}
 \frac{\delta J(\Theta)}{\delta \theta_{it}^{(k)}} = \left(- \frac{1}{m}\right)  \sum_{j=1}^m\sum_{i=1}^c  \left\{y_{ij} \left(\frac{\delta \log(a_{ij}^{(k)})}{\delta a_{ij}^{(k)}}  \frac{\delta a_{ij}^{(k)}}{\delta \theta_{it}^{(k)}} \right) + (1-y_{ij}) \left(\frac{\delta \log(1-a^{(k)}_{ij})}{\delta (1-a^{(k)}_{ij})} \frac{\delta (1-a^{(k)}_{ij})}{\delta \theta_{it}^{(k)}} \right)\right\}
-\]
+\end{align}
 
 <p>
 Como sabemos:
@@ -124,33 +124,33 @@ Como sabemos:
 Entonces
 </p>
 
-\[%align
+\begin{align}
 \frac{\delta J(\Theta)}{\delta \theta_{it}^{(k)}} = \left(- \frac{1}{m}\right)  \sum_{j=1}^m\sum_{i=1}^c  \left\{y_{ij} \left(\frac{\delta \log(a_{ij}^{(k)})}{\delta a_{ij}^{(k)}}  \frac{\delta a_{ij}^{(k)}}{\delta \theta_{it}^{(k)}} \right) + (1-y_{ij}) \left((-1)\frac{\delta \log(1-a^{(k)}_{ij})}{\delta (1-a^{(k)}_{ij})} \frac{\delta a^{(k)}_{ij}}{\delta \theta_{it}^{(k)}} \right)\right\}
-\]
+\end{align}
 
 <p>
 Sacamos \(\frac{\delta a_{ij}^{(k)}}{\delta \theta_{it}^{(k)}}\) como factor común y aplicamos el \((-1)\):
 </p>
 
-\[%align
+\begin{align}
 \frac{\delta J(\Theta)}{\delta \theta_{it}^{(k)}} = \left(- \frac{1}{m}\right)  \sum_{j=1}^m\sum_{i=1}^c  \frac{\delta a_{ij}^{(k)}}{\delta \theta_{it}^{(k)}}\left\{y_{ij} \frac{\delta \log(a_{ij}^{(k)})}{\delta a_{ij}^{(k)}} -  \left((1-y_{ij})\frac{\delta \log(1-a^{(k)}_{ij})}{\delta (1-a^{(k)}_{ij})} \right)\right\}
-\]
+\end{align}
 
 <p>
 Sustituimos \(\frac{\delta E^{(k)}}{\delta a_{ij}^{(k)}} = \left\{y_{ij} \frac{\delta \log(a_{ij}^{(k)})}{\delta a_{ij}^{(k)}} -  \left((1-y_{ij})\frac{\delta \log(1-a^{(k)}_{ij})}{\delta (1-a^{(k)}_{ij})} \right)\right\}\)
 </p>
 
-\[%align
+\begin{align}
 \frac{\delta J(\Theta)}{\delta \theta_{it}^{(k)}} = \left(- \frac{1}{m}\right)  \sum_{j=1}^m\sum_{i=1}^c \frac{\delta E^{(k)}}{\delta a_{ij}^{(k)}} \frac{\delta a_{ij}^{(k)}}{\delta \theta_{it}^{(k)}} 
-\]
+\end{align}
 
 <p>
 Si resolvemos las derivadas de los logaritmos obtenemos:
 </p>
 
-\[%align
+\begin{align}
 \frac{\delta E^{(k)}}{\delta a_{ij}^{(k)}} = y_{ij} \frac{\delta \log(a_{ij}^{(k)})}{\delta a_{ij}^{(k)}} - (1-y_{ij})\frac{\delta \log(1-a_{ij}^{(k)})}{\delta (1-a_{ij}^{(k)})}
-\]
+\end{align}
 
 <hr>
 
@@ -166,61 +166,61 @@ Sabemos que, vectorizando la operación, \(a^{(k)}_j = g(z^{(k)}_j)\), donde \(g
 Además:
 </p>
 
-\[%align
+\begin{align}
 z^{(k)}_j = \Theta^{k} \cdot a^{(k-1)}_j
-\]
+\end{align}
 
 <p>
 Por lo tanto, para cada nodo \(i\) en la última capa \(k\):
 </p>
 
-\[%align
+\begin{align}
 z^{(k)}_{ij} = \sum_{l=1}^{S_{(k-1)}} \theta^{(k)}_{il} \cdot a^{(k-1)}_{lj}
-\]
+\end{align}
 
 <p>
 Donde \(S_{(k-1)}\) es el número de nodos en la capa \(k-1\). Entonces, aplicamos de nuevo la regla de la cadena:
 </p>
 
-\[%align
+\begin{align}
 \frac{\delta a_{ij}^{(k)}}{\delta \theta_{it}^{(k)}} =  \frac{\delta g(z_{ij}^{(k)})}{\delta z_{ij}^{(k)}} \frac{\delta z_{ij}^{(k)}}{\delta \theta_{it}^{(k)}}
-\]
+\end{align}
 
 <p>
 Resolvemos la derivada para el segundo término:
 </p>
 
-\[%align
+\begin{align}
 \frac{\delta z_{ij}^{(k)}}{\delta \theta_{it}^{(k)}} = \sum_{l=1}^{S_{(k-1)}} \frac{\delta}{\delta \theta_{it}^{(k)}} \theta^{(k)}_{il} \cdot a^{(k-1)}_{lj}
-\]
+\end{align}
 
 <p>
 Tal que:
 </p>
 
-\[%align
+\begin{align}
 \frac{\delta}{\delta \theta_{it}^{(k)}} \theta^{(k)}_{il} \cdot a^{(k-1)}_{lj} =
 \begin{cases}
 a_{lj}^{(k-1)}, &amp; t = l \\
 0, &amp; t \neq l \\
 \end{cases}
-\]
+\end{align}
 
 <p>
 Por lo tanto, como sólo hay un \(l\) con \(l = t\) donde \(1 \leq l \leq S_{(k-1)}\), entonces:
 </p>
 
-\[%align
+\begin{align}
 \frac{\delta z_{ij}^{(k)}}{\delta \theta_{it}^{(k)}} = a_{lj}^{(k-1)} = a_{tj}^{(k-1)}
-\]
+\end{align}
 
 <p>
 Juntamos ambos términos de la derivada inicial, con \(\frac{\delta g(z_{ij}^{(k)})}{\delta z_{ij}^{k}} = \sigma'(z_{ij}^{(k)})\)
 </p>
 
-\[%align
+\begin{align}
 \frac{\delta a_{ij}^{(k)}}{\delta \theta_{it}^{(k)}} =  \frac{\delta g(z_{ij}^{(k)})}{\delta z_{ij}^{(k)}} \frac{\delta z_{ij}^{(k)}}{\delta \theta_{it}^{(k)}} = \sigma'(z_{ij}^{(k)}) a_{tj}^{(k-1)}
-\]
+\end{align}
 
 <hr>
 
@@ -236,9 +236,9 @@ Vamos a resumir lo que tenemos hasta ahora. Por la regla de la cadena, separamos
 Si sustituimos ambos términos, para la capa de salida \(k\):
 </p>
 
-\[%align
+\begin{align}
 \frac{\delta J(\Theta)}{\delta \theta_{it}^{(k)}} = \left(- \frac{1}{m}\right)  \sum_{j=1}^m\sum_{i=1}^c  \sigma'(z_{ij}^{(k)}) a_{tj}^{(k-1)}\left\{ \frac{y_{ij}}{a_{ij}^{(k)}} -  \left(\frac{(1-y_{ij})}{(1-a^{(k)}_{ij})} \right)\right\}
-\]
+\end{align}
 </div>
   
 

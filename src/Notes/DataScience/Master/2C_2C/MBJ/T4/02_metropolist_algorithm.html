@@ -132,9 +132,9 @@ For simplicity, we illustrate the Metropolis algorithm with the simple example o
 At each step, it is easy to calculate the density ratio:
 </p>
 
-\[
+\begin{align}
 r = \frac{\text{N}(\theta^*|0, I)}{\text{N}(\theta^{t-1}|0, I)}
-\]
+\end{align}
 
 <p>
 It is clear from the form of the normal distribution that the jumping rule is symmetric. <a href="01_gibbs_sampler.html#Introduction">Figure 11.1</a> displays five simulation runs starting from different points. We have purposely set the scale of this jumping algorithm to be too small, relative to the target distribution, so that the algorithm will run inefficiently and its random-walk aspect will be obvious in the figure.

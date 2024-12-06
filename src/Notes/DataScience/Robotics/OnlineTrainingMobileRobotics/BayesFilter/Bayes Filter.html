@@ -90,9 +90,9 @@ State Estimation means we want to estimate the state of the system based on sens
 Thus, given observations \(z\) and control commands \(u\), estimate the current state \(x\) at time \(t\):
 </p>
 
-\[
+\begin{align}
 p(x_t|z_{1:t}, u_{1:t})
-\]
+\end{align}
 
 <div id="Bayes Filter-Recursive State Estimation"><h2 id="Recursive State Estimation" class="header"><a href="#Bayes Filter-Recursive State Estimation">Recursive State Estimation</a></h2></div>
 
@@ -146,33 +146,33 @@ We receive yet another measurement \(z\), again we have that \(p(z|x)\) is large
 The belief at time \(t\) is given by:
 </p>
 
-\[
+\begin{align}
 bel(x_t) = p(x_t | z_{1:t}, u_{1:t})
-\]
+\end{align}
 
 <p>
 That is, where am I at moment \(t\), given all previous observations \(z_{1:t}\) and control commands \(u_{1:t}\). We now apply Bayes rule, to swap \(x_t\) and \(z_t\) on the conditional probability:
 </p>
 
-\[
+\begin{align}
 = \eta \cdot p(z_t | x_t, z_{1:t-1}, u_{1:t}) \cdot p(x_t|z_{1:t-1}, u_{1:t})
-\]
+\end{align}
 
 <p>
 Where \(\eta\) is a normalization constant. Now, let's pay attention to \(p(z_t | x_t, z_{1:t-1}, u_{1:t})\). By the Markov assumption we are going to assume that the current state \(x_t\) and the previous observations and control commands are conditionally independent. That is, they do not give any information about the likelihood of the observation \(z_t\). Thus, we drop them from the equation:
 </p>
 
-\[
+\begin{align}
 = \eta \cdot p(z_t | x_t) \cdot p(x_t|z_{1:t-1}, u_{1:t})
-\]
+\end{align}
 
 <p>
 For \(p(x_t|z_{1:t-1}, u_{1:t})\) we are going to use the law of Total Probability to add a new variable, so we integrate over this new variable. More concretely to add \(x_{t-1}\), which will allow us to introduce recursion to our expression:
 </p>
 
-\[
+\begin{align}
 = \eta \cdot p(z_t | x_t) \cdot \int p(x_t | x_{t-1}, z_{1:t-1}, u_{1:t}) \cdot p(x_{t-1}|z_{1:t-1},u_{1:t}) dx_{t-1}
-\]
+\end{align}
 
 <p>
 We could interpret this rewritten expression as:
@@ -194,33 +194,33 @@ by \(p(x_{t-1}|z_{1:t-1},u_{1:t})\), the probability of being in the state \(x_{
 Once again we apply the Markov assumption over \(p(x_t | x_{t-1}, z_{1:t-1}, u_{1:t})\), because knowing where I am at moment \(t-1\), we assume the observations \(z_{1:t-1}\) do not add any information. However note the control command does indeed hold valuable information, as it tells us action last executed that moved us from \(x_{t-1}\) to \(x_t\). So we simplify the expression as follows:
 </p>
 
-\[
+\begin{align}
 = \eta \cdot p(z_t | x_t) \cdot \int p(x_t | x_{t-1}, u_{1:t}) \cdot p(x_{t-1}|z_{1:t-1},u_{1:t}) dx_{t-1}
-\]
+\end{align}
 
 <p>
 We now suppose that knowing what action or command is executed in the future does not tell us anything about the present. Hence we ignore the latest control command \(u_t\), so the expression becomes:
 </p>
 
-\[
+\begin{align}
 = \eta \cdot p(z_t | x_t) \cdot \int p(x_t | x_{t-1}, u_{1:t}) \cdot p(x_{t-1}|z_{1:t-1},u_{1:t-1}) dx_{t-1}
-\]
+\end{align}
 
 <p>
 Note that we have finally derived a recursive expression for our belief, given:
 </p>
 
-\[
+\begin{align}
 bel(x_{t-1}) = p(x_{t-1}|z_{1:t-1}, u_{1:t-1})
-\]
+\end{align}
 
 <p>
 We substitute this expression in the belief at time \(t\):
 </p>
 
-\[
+\begin{align}
 = \eta \cdot p(z_t | x_t) \cdot \int p(x_t | x_{t-1}, u_{1:t}) \cdot bel(x_{t-1}) dx_{t-1}
-\]
+\end{align}
 
 <div id="Bayes Filter-Recursive Bayes Filter-Prediction and Correction Step"><h3 id="Prediction and Correction Step" class="header"><a href="#Bayes Filter-Recursive Bayes Filter-Prediction and Correction Step">Prediction and Correction Step</a></h3></div>
 
@@ -235,9 +235,9 @@ Prediction step: estimates where the future state is based on the control comman
 <ul>
 <li>
 Motion model: \(p(x_t | x_{t-1}, u_{1:t})\)
-\[
+\begin{align}
 \hat{bel}(x_t) = \int p(x_t | x_{t-1}, u_{1:t}) \cdot bel(x_{t-1}) dx_{t-1}
-\]
+\end{align}
 
 </li></ul>
 </li><li>
@@ -246,9 +246,9 @@ Correction step: we get an observation that we use to correct potential mistakes
 <ul>
 <li>
 Observation model: \(p(z_t | x_t)\)
-\[
+\begin{align}
 bel(x_t) = \eta \cdot p(z_t | x_t) \cdot \hat{bel}(x_t)
-\]
+\end{align}
 
 </li></ul>
 </li></ul>

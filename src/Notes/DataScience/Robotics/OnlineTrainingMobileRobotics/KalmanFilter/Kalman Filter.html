@@ -141,9 +141,9 @@ The marginal and conditional distribution of a Gaussian is a Gaussian
 What does it mean when we say the Kalman Filter uses linear models? This means that both the motion model and the observation model can be expressed through a linear function, that is:
 </p>
 
-\[
+\begin{align}
 f(x) = Ax + b
-\]
+\end{align}
 
 <p>
 One important property is that if a Gaussian distribution is transformed through a linear function it stays Gaussian.
@@ -159,9 +159,9 @@ Also, we introduce noise by using a zero mean Gaussian distribution.
 The motion model is defined as follows:
 </p>
 
-\[
+\begin{align}
 \overline{x}_t = A_t x_{t-1} + B_tu_t + \epsilon_t
-\]
+\end{align}
 
 <p>
 Where \(x_{t-1}\) is the previous state estimate, \(u_t\) is the control command at time \(t\) and \(\epsilon_t\) is Gaussian noise. Let's dive a little deeper:
@@ -182,9 +182,9 @@ Where \(x_{t-1}\) is the previous state estimate, \(u_t\) is the control command
 The observation model is defined as follows:
 </p>
 
-\[
+\begin{align}
 z_t = C_t \overline{x}_t + \delta_t
-\]
+\end{align}
 
 <p>
 Where \(\overline{x}_t\) is the estimated state and \(\delta_t\) is Gaussian noise.
@@ -204,17 +204,17 @@ Where \(\overline{x}_t\) is the estimated state and \(\delta_t\) is Gaussian noi
 Now that we have defined our linear models, we are going to show how to express the motion under a Gaussian:
 </p>
 
-\[
+\begin{align}
 p(x_t|x_{t-1}, u_t) = \det(2\pi R_t)^{-\frac{1}{2}} \exp(-\frac{1}{2}(x_t - A_tx_{t-1} - B_tu_t)^TR^{-1}_t(x_t - A_tx_{t-1} - B_tu_t))
-\]
+\end{align}
 
 <p>
 Which means we are obtaining the value of a probability distribution that incorporates our linear model for the prediction:
 </p>
 
-\[
+\begin{align}
 p(x_t|x_{t-1}, u_t) \sim \mathcal{N}(A_tx_{t-1} + B_tu_t, R_t)
-\]
+\end{align}
 
 <div id="Kalman Filter-Linear Model-Linear Observation Model"><h3 id="Linear Observation Model" class="header"><a href="#Kalman Filter-Linear Model-Linear Observation Model">Linear Observation Model</a></h3></div>
 
@@ -222,17 +222,17 @@ p(x_t|x_{t-1}, u_t) \sim \mathcal{N}(A_tx_{t-1} + B_tu_t, R_t)
 We will apply the same reasoning to obtain the observation model under a Gaussian:
 </p>
 
-\[
+\begin{align}
 p(z_t|x_t) = \det(2\pi Q_t)^{-\frac{1}{2}} \exp(-\frac{1}{2}(z_t - C_t\overline{x}_t)^TQ^{-1}_t(z_t - C_t\overline{x}_t))
-\]
+\end{align}
 
 <p>
 Which means we are obtaining the difference between the observation \(z_t\) and what I expect to observe \(\overline{x}_{t}\) (\(z_t - C\overline{x}_t\)) while also taking the uncertainty into account \(Q_t^{-1}\). We compute this incorporating our linear model for the correction step:
 </p>
 
-\[
+\begin{align}
 p(z_t|x_t) \sim \mathcal{N}(C_t\overline{x}_t, Q_t)
-\]
+\end{align}
 
 <div id="Kalman Filter-Gaussian World"><h2 id="Gaussian World" class="header"><a href="#Kalman Filter-Gaussian World">Gaussian World</a></h2></div>
 
@@ -248,9 +248,9 @@ As we have said, we are assuming everything is Gaussian. Up until now we have de
 If we suppose \(\overline{bel}(x_t)\) is Gaussian, then \(bel(x_t)\) is Gaussian because the product of Gaussian distribution is a Gaussian distribution. Therefore we need to show that \(\overline{bel}(x_t)\) is also Gaussian. That is:
 </p>
 
-\[
+\begin{align}
 \overline{bel}(x_t) = \int p(x_t|u_t,x_{t-1})bel(x_{t-1})dx_{t-1}
-\]
+\end{align}
 
 <p>
 We know, by its definition, that \(p(x_t|u_t,x_{t-1})\) is Gaussian, and also we can prove by mathematical induction that \(bel(xx_{t-1})\) is Gaussian. Because if we start from a Gaussian distributed belief and everything stays Gaussian then the belief at time \(t-1\) will also be Gaussian.
@@ -260,9 +260,9 @@ We know, by its definition, that \(p(x_t|u_t,x_{t-1})\) is Gaussian, and also we
 Noting that the convolution of two Gaussian stays Gaussian we conclude that \(\overline{bel}(x_t)\) is Gaussian and thus \(bel(t)\) is also Gaussian. Let's show however that the integral preserves the Gaussian. Note that we can express the predicted belief by using our linear models as follows:
 </p>
 
-\[
+\begin{align}
 \overline{bel}(x_t) = \int p(x_t|u_t,x_{t-1}) bel(x_{t-1})dx_{t-1} 
-\]
+\end{align}
 
 \[
 = \int \det(2\pi R_t)^{-\frac{1}{2}} \exp(-\frac{1}{2}(x_t - A_tx_{t-1} - B_tu_t)^TR^{-1}_t(x_t - A_tx_{t-1} - B_tu_t))bel(x_{t-1})dx_{t-1}

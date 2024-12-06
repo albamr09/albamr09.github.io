@@ -80,25 +80,25 @@
 What happens if we are dealing with non-linear dynamic systems, such that we do not use our linear models anymore:
 </p>
 
-\[
+\begin{align}
 x_t = A_tx_{t-1} + B_tu_t + \epsilon_t
-\]
+\end{align}
 
-\[
+\begin{align}
 z_t = C_t x_t + \delta_t
-\]
+\end{align}
 
 <p>
 But we introduce new functions that need not be linear:
 </p>
 
-\[
+\begin{align}
 x_t = g(u_t, x_{t-1}) + \epsilon_t
-\]
+\end{align}
 
-\[
+\begin{align}
 z_t = h(x_t) + \delta_t
-\]
+\end{align}
 
 <p>
 Before, when we transformed our belief (a Gaussian) with a linear transformation, something like the following happened:
@@ -130,9 +130,9 @@ In order to perform local linearization what we do is approximate the non-linear
 The linearization for prediction step consists of linearizing around our previous state \(x_{t-1} = (\mu_{t-1}, \Sigma_{t-1})\)and is described as follows:
 </p>
 
-\[
+\begin{align}
 g(u_t, x_{t-1}) \approx g(u_t, \mu_{t-1}) + \frac{\delta g(u_t, \mu_{t-1})}{\delta x_{t-1}}(x_{t-1} - \mu_{t-1})
-\]
+\end{align}
 
 <ul>
 <li>
@@ -149,9 +149,9 @@ g(u_t, x_{t-1}) \approx g(u_t, \mu_{t-1}) + \frac{\delta g(u_t, \mu_{t-1})}{\del
 For the correction step we linearize around our predicted state \(\overline{x}_t = (\overline{\mu}_t, \overline{\Sigma}_t)\):
 </p>
 
-\[
+\begin{align}
 h(x_t) \approx h(\overline{\mu}_t) + \frac{\delta h(\overline{\mu}_t)}{\delta x_t} (x_t - \overline{\mu}_t)
-\]
+\end{align}
 
 <ul>
 <li>
@@ -170,13 +170,13 @@ h(x_t) \approx h(\overline{\mu}_t) + \frac{\delta h(\overline{\mu}_t)}{\delta x_
 Given a function \(f: \mathbb{R}^n \rightarrow \mathbb{R}^m\), such that given \(x \in \mathbb{R}^n\), \(x \mapsto f(x) \in \mathbb{R}^{m}\). Then the Jacobian has the following shape:
 </p>
 
-\[
+\begin{align}
 J = \begin{bmatrix}
 \frac{\delta f_1}{\delta x_1} &amp; \frac{\delta f_1}{\delta x_2} &amp; \cdots &amp; \frac{\delta f_1}{\delta x_n}  \\
 \vdots &amp; \cdots &amp; \cdots &amp; \vdots \\
 \frac{\delta f_m}{\delta x_1} &amp; \frac{\delta f_m}{\delta x_2} &amp; \cdots &amp; \frac{\delta f_m}{\delta x_n} 
 \end{bmatrix} \in \mathbb{R}^{m \times n}
-\]
+\end{align}
 
 <p>
 And we can illustrate it graphically:
@@ -228,55 +228,55 @@ The uncertainty of our original Gaussian distribution. Because the larger the un
 We defined our linear motion model as follows:
 </p>
 
-\[
+\begin{align}
 p(x_t|x_{t-1}, u_t) = \det(2\pi R_t)^{-\frac{1}{2}} \exp(-\frac{1}{2}(x_t - A_tx_{t-1} - B_tu_t)^TR^{-1}_t(x_t - A_tx_{t-1} - B_tu_t))
-\]
+\end{align}
 
 <p>
 If our world is non-linear we substitute 
 </p>
 
-\[
+\begin{align}
 x_t = A_tx_{t-1} + B_tu_t + \epsilon_t
-\]
+\end{align}
 
 <p>
 for
 </p>
 
-\[
+\begin{align}
 x_t = g(u_t, x_{t-1}) + \epsilon_t
-\]
+\end{align}
 
 <p>
 Therefore the motion model is expressed as follows:
 </p>
 
-\[
+\begin{align}
 p(x_t|x_{t-1}, u_t) = \det(2\pi R_t)^{-\frac{1}{2}} \exp(-\frac{1}{2}(x_t - g(u_t, x_{t-1}))^TR^{-1}_t(x_t - g(u_t, x_{t-1})))
-\]
+\end{align}
 
 <p>
 Finally we find a linear approximation, such that:
 </p>
 
-\[
+\begin{align}
 g(u_t, x_{t-1}) \approx g(u_t, \mu_{t-1}) + \frac{\delta g(u_t, \mu_{t-1})}{\delta x_{t-1}}(x_{t-1} - \mu_{t-1}) = g(u_t, \mu_{t-1}) + G_t(x_{t-1} - \mu_{t-1})
-\]
+\end{align}
 
 <p>
 And the linearized motion model becomes:
 </p>
 
-\[
+\begin{align}
 p(x_t|x_{t-1}, u_t) = \det(2\pi R_t) ^{-\frac{1}{2}} \cdot
-\]
-\[
+\end{align}
+\begin{align}
 \cdot \exp(-\frac{1}{2}(x_t - g(u_t, \mu_{t-1}) - G_t(x_{t-1} - \mu_{t-1}))^TR^{-1}_t \cdot
-\]
-\[
+\end{align}
+\begin{align}
 \cdot (x_t - g(u_t, \mu_{t-1}) - G_t(x_{t-1} - \mu_{t-1})))
-\]
+\end{align}
 
 <p>
 Where \(R^{-1}_t\) describes the motion noise.
@@ -288,55 +288,55 @@ Where \(R^{-1}_t\) describes the motion noise.
 We defined our linear observation model as follows:
 </p>
 
-\[
+\begin{align}
 p(z_t|x_t) = \det(2\pi Q_t)^{-\frac{1}{2}} \exp(-\frac{1}{2}(z_t - C_tx_t)^TQ^{-1}_t(z_t - C_tx_t))
-\]
+\end{align}
 
 <p>
 If our world is non-linear we substitute 
 </p>
 
-\[
+\begin{align}
 z_t = C_t x_t + \delta_t
-\]
+\end{align}
 
 <p>
 for
 </p>
 
-\[
+\begin{align}
 z_t = h(x_t) + \delta_t = h(\overline{\mu}_t) + \delta_t
-\]
+\end{align}
 
 <p>
 Note that \(x_t = \overline{\mu}_t\) here refers to our best estimation up until now, that comes from the prediction step. Therefore the observation model is expressed as follows:
 </p>
 
-\[
+\begin{align}
 p(z_t|x_t) = \det(2\pi Q_t)^{-\frac{1}{2}} \exp(-\frac{1}{2}(z_t - h(\overline{\mu}_{t}))^TQ^{-1}_t(z_t - h(\overline{\mu}_{t})))
-\]
+\end{align}
 
 <p>
 Finally we find a linear approximation, such that:
 </p>
 
-\[
+\begin{align}
 h(x_t) \approx h(\overline{\mu}_t) + \frac{\delta h(\overline{\mu}_t)}{\delta x_t} (x_t - \overline{\mu}_t) = h(\overline{\mu}_t) + H_t (x_t - \overline{\mu}_t)
-\]
+\end{align}
 
 <p>
 And the linearized observation model becomes:
 </p>
 
-\[
+\begin{align}
 p(z_t|x_t) = \det(2\pi Q_t)^{-\frac{1}{2}} \cdot
-\]
-\[
+\end{align}
+\begin{align}
 \cdot \exp(-\frac{1}{2}(z_t - h(\overline{\mu}_t) - H_t (x_t - \overline{\mu}_t))^TQ^{-1}_t \cdot
-\]
-\[
+\end{align}
+\begin{align}
 \cdot (z_t - h(\overline{\mu}_t) - H_t (x_t - \overline{\mu}_t)))
-\]
+\end{align}
 
 <p>
 Where \(Q^{-1}_t\) describes the measurement noise.
@@ -375,57 +375,57 @@ We do the same thing for the uncertainty \(\Sigma_t\).
 Suppose you have a perfect sensor, that is we trust completely the values given by this sensor and thus we set the measurement noise to be equal to zero (\(Q_t = 0\)). Then, the Kalman Gain becomes:
 </p>
 
-\[
+\begin{align}
 K_t = \overline{\Sigma}_t H_t^T \cdot (H_t \overline{\Sigma}_t H_t^T + Q_t)^{-1}
-\]
+\end{align}
 
-\[
+\begin{align}
 K_t = \overline{\Sigma}_t H_t^T \cdot (H_t \overline{\Sigma}_t H_t^T + 0)^{-1}
-\]
+\end{align}
 
-\[
+\begin{align}
 K_t = \overline{\Sigma}_t H_t^T \cdot (H_t^T)^{-1} \overline{\Sigma}_t^{-1} H_t^{-1}
-\]
+\end{align}
 
-\[
+\begin{align}
 K_t = \overline{\Sigma}_t I \overline{\Sigma}_t^{-1} H_t^{-1}
-\]
+\end{align}
 
-\[
+\begin{align}
 K_t = I H_t^{-1} = H_t^{-1}
-\]
+\end{align}
 
 <p>
 So, when we perform the correction over the mean of our belief:
 </p>
 
-\[
+\begin{align}
 \mu_t = \overline{\mu}_t + K_t (z_t - h(\overline{\mu}_t))
-\]
+\end{align}
 
-\[
+\begin{align}
 \mu_t = \overline{\mu}_t + H_t^{-1} (z_t - h(\overline{\mu}_t))
-\]
+\end{align}
 
-\[
+\begin{align}
 \mu_t = \overline{\mu}_t + H_t^{-1} z_t - H_t^{-1}h(\overline{\mu}_t)
-\]
+\end{align}
 
 <p>
 With \(H_t^{-1}h(\overline{\mu}_t)\) what we are doing is, first computing \(h(\overline{\mu}_t)\) to map \(\overline{\mu}_t\) to the observation space, and the undoing this mapping with \(H_t^{-1}\), which means:
 </p>
 
-\[
+\begin{align}
 \mu_t = \overline{\mu}_t + H_t^{-1} z_t - \overline{\mu}_t
-\]
+\end{align}
 
-\[
+\begin{align}
 \mu_t = \overline{\mu}_t - \overline{\mu}_t + H_t^{-1} z_t 
-\]
+\end{align}
 
-\[
+\begin{align}
 \mu_t = H_t^{-1} z_t 
-\]
+\end{align}
 
 <p>
 Where \(H_t^{-1}\) maps \(z_t\) from the observation space to the state space, and this means in this update we trust our observation completely, and therefore our estate equals the observation.
@@ -435,29 +435,29 @@ Where \(H_t^{-1}\) maps \(z_t\) from the observation space to the state space, a
 On the contrary, suppose the sensor is very unreliable, and so the noise is set to be infinity. Then the correction step is executed as follows:
 </p>
 
-\[
+\begin{align}
 K_t = \overline{\Sigma}_t H_t^T \cdot (H_t \overline{\Sigma}_t H_t^T + Q_t)^{-1}
-\]
+\end{align}
 
-\[
+\begin{align}
 K_t = \overline{\Sigma}_t H_t^T \cdot (H_t \overline{\Sigma}_t H_t^T + \infty)^{-1}
-\]
+\end{align}
 
 <p>
 Because we are dividing by infinity, \(K_t = 0\). So the mean of our belief is computed as follows:
 </p>
 
-\[
+\begin{align}
 \mu_t = \overline{\mu}_t + K_t (z_t - h(\overline{\mu}_t))
-\]
+\end{align}
 
-\[
+\begin{align}
 \mu_t = \overline{\mu}_t + 0 (z_t - h(\overline{\mu}_t))
-\]
+\end{align}
 
-\[
+\begin{align}
 \mu_t = \overline{\mu}_t
-\]
+\end{align}
 
 <p>
 Hence, if the measurement is too noisy, we only take into account our predicted state.
