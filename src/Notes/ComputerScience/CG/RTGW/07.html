@@ -79,6 +79,20 @@
 </li><li>
 <a href="07.html#Texture%20Wrapping">Texture Wrapping</a>
 
+<ul>
+<li>
+<a href="07.html#CLAMP_TO_EDGE">CLAMP TO EDGE</a>
+
+</li><li>
+<a href="07.html#REPEAT">REPEAT</a>
+
+</li><li>
+<a href="07.html#MIRRORED_REPEAT">MIRRORED REPEAT</a>
+
+</li></ul>
+</li><li>
+<a href="07.html#Using%20Multiple%20Textures">Using Multiple Textures</a>
+
 </li></ul>
 <hr>
 
@@ -363,6 +377,84 @@ Texture wrapping describes the behavior of the sampler when the texture coordina
 
 <pre javascript="">gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
 gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+</pre>
+
+<div id="Textures-Texture Wrapping-CLAMP_TO_EDGE"><h3 id="CLAMP_TO_EDGE" class="header"><a href="#Textures-Texture Wrapping-CLAMP_TO_EDGE">CLAMP_TO_EDGE</a></h3></div>
+
+<p>
+This wrap mode rounds any texture coordinates greater than \(1\) down to \(1\); any coordinates lower than \(0\) are rounded up to \(0\), clamping the values to the \((0, 1)\) range. Visually, this has the effect of repeating the texture's border pixels indefinitely once the coordinates go out of the \((0, 1)\) range. 
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/clamp_to_edge.png" alt="Clamp to Edge Filter Mode">
+</p>
+
+<div id="Textures-Texture Wrapping-REPEAT"><h3 id="REPEAT" class="header"><a href="#Textures-Texture Wrapping-REPEAT">REPEAT</a></h3></div>
+
+<p>
+This is the default wrap mode. It ignores the integer part of the texture coordinate. This creates the visual effect of the texture repeating as you move outside of the \((0, 1)\) range. 
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/repeat_wrap_filter.png" alt="Repeat Filter Mode">
+</p>
+
+<div id="Textures-Texture Wrapping-MIRRORED_REPEAT"><h3 id="MIRRORED_REPEAT" class="header"><a href="#Textures-Texture Wrapping-MIRRORED_REPEAT">MIRRORED_REPEAT</a></h3></div>
+
+<p>
+If the coordinate's integer portion is even, the texture coordinates will be the same as they were with REPEAT. If the integer portion of the coordinate is odd, the resulting coordinate is \(1\) minus the fractional portion of the coordinate. This results in a texture that "flip-flops" as it repeats.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/mirrored_repeat.png" alt="Mirrored Repeat Filter Mode">
+</p>
+
+<div id="Textures-Using Multiple Textures"><h2 id="Using Multiple Textures" class="header"><a href="#Textures-Using Multiple Textures">Using Multiple Textures</a></h2></div>
+
+<p>
+There are times when we may want to have multiple textures contribute to a fragment. In such cases, we can use WebGL's ability to access multiple textures in a single draw call, commonly referred to as <span id="Textures-Using Multiple Textures-multi-texturing"></span><strong id="multi-texturing">multi-texturing</strong>.
+</p>
+
+<p>
+When talking about exposing a texture to a shader as a sampler uniform, we used the following code:
+</p>
+
+<pre javascript="">gl.activeTexture(gl.TEXTURE0);
+gl.bindTexture(gl.TEXTURE_2D, texture);
+</pre>
+
+<p>
+We use it to tell the WebGL state machine which texture we're going to use in subsequent texture functions. If we want to attach a different texture to the second texture unit, we would use gl.TEXTURE1 instead.
+</p>
+
+<p>
+It may be more convenient to specify the texture unit programmatically or find a need to refer to a texture unit above \(31\). In such situations, you can always substitute <code>gl.TEXTURE0 + i</code> for
+<code>gl.TEXTUREi</code>, as in the following example:
+</p>
+
+<pre javascript="">gl.TEXTURE0 + 2 === gl.TEXTURE2;
+</pre>
+
+<p>
+Accessing multiple textures in a shader is as simple as declaring multiple samplers:
+</p>
+
+<pre javascript="">uniform sampler2D uSampler;
+uniform sampler2D uOtherSamp
+</pre>
+
+<p>
+When setting up your draw call, tell the shader which texture is associated with which sampler by providing the texture unit to <code>gl.uniform1i</code>.
+</p>
+
+<pre javascript="">// bind the first texture
+gl.activeTexture(gl.TEXTURE0);
+gl.bindTexture(gl.TEXTURE_2D, texture);
+gl.uniform1i(program.uSampler, 0);
+// bind the second texture
+gl.activeTexture(gl.TEXTURE1);
+gl.bindTexture(gl.TEXTURE_2D, otherTexture);
+gl.uniform1i(program.uOtherSampler, 1);
 </pre>
 </div>
   
