@@ -72,6 +72,76 @@
 <a href="04_monitorization.html#Code%20Examples">Code Examples</a>
 
 </li></ul>
+</li><li>
+<a href="04_monitorization.html#Optimising%20Spark%20Application%20Performance">Optimising Spark Application Performance</a>
+
+<ul>
+<li>
+<a href="04_monitorization.html#Indirect%20Performance%20Enhancements">Indirect Performance Enhancements</a>
+
+<ul>
+<li>
+<a href="04_monitorization.html#Design%20Choices">Design Choices</a>
+
+</li><li>
+<a href="04_monitorization.html#Cluster%20Configurations">Cluster Configurations</a>
+
+</li><li>
+<a href="04_monitorization.html#Data%20at%20Rest">Data at Rest</a>
+
+</li><li>
+<a href="04_monitorization.html#Shuffle%20Configurations">Shuffle Configurations</a>
+
+</li><li>
+<a href="04_monitorization.html#Memory%20Pressure%20and%20Garbage%20Collection">Memory Pressure and Garbage Collection</a>
+
+</li></ul>
+</li><li>
+<a href="04_monitorization.html#Direct%20Performance%20Enhancements">Direct Performance Enhancements</a>
+
+<ul>
+<li>
+<a href="04_monitorization.html#Parallelism">Parallelism</a>
+
+</li><li>
+<a href="04_monitorization.html#Improved%20Filtering">Improved Filtering</a>
+
+</li><li>
+<a href="04_monitorization.html#Repartitioning%20and%20Coalescing">Repartitioning and Coalescing</a>
+
+</li><li>
+<a href="04_monitorization.html#Custom%20Partitioning">Custom Partitioning</a>
+
+<ul>
+<li>
+<a href="04_monitorization.html#User-Defined%20Functions%20%28UDFs%29">User-Defined Functions  UDFs</a>
+
+</li><li>
+<a href="04_monitorization.html#Temporary%20Data%20Storage%20%28Caching%29">Temporary Data Storage  Caching</a>
+
+</li></ul>
+</li><li>
+<a href="04_monitorization.html#Joins">Joins</a>
+
+</li><li>
+<a href="04_monitorization.html#Aggregations">Aggregations</a>
+
+</li><li>
+<a href="04_monitorization.html#Broadcast%20Variables">Broadcast Variables</a>
+
+</li></ul>
+</li><li>
+<a href="04_monitorization.html#Code%20Examples">Code Examples</a>
+
+<ul>
+<li>
+<a href="04_monitorization.html#Code%20Example%201%3A%20Registering%20Classes%20for%20Kryo%20Serialisation">Code Example 1  Registering Classes for Kryo Serialisation</a>
+
+</li><li>
+<a href="04_monitorization.html#Code%20Example%202%3A%20Caching%20a%20DataFrame">Code Example 2  Caching a DataFrame</a>
+
+</li></ul>
+</li></ul>
 </li></ul>
 <hr>
 
@@ -318,6 +388,234 @@ This code snippet performs a series of operations on a CSV file using PySpark, S
 <code>.collect()</code>: This action collects the results of the count operation to the driver node.
 
 </li></ul>
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance"><h2 id="Optimising Spark Application Performance" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance">Optimising Spark Application Performance</a></h2></div>
+
+<p>
+This note summarises ways to improve the performance of Spark applications based on the source document. It covers both indirect enhancements and direct performance enhancements.
+</p>
+
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Indirect Performance Enhancements"><h3 id="Indirect Performance Enhancements" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Indirect Performance Enhancements">Indirect Performance Enhancements</a></h3></div>
+
+<p>
+These are enhancements you can apply to improve Spark jobs generally, rather than focusing on specific jobs or stages.
+</p>
+
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Indirect Performance Enhancements-Design Choices"><h4 id="Design Choices" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Indirect Performance Enhancements-Design Choices">Design Choices</a></h4></div>
+
+<p>
+The choices you make when designing your applications can significantly impact performance. Here are a few things to consider:
+</p>
+
+<ul>
+<li>
+Choice of language: Spark's Structured APIs perform similarly across languages like Scala, Java, Python, and R. However, if custom transformations are needed, using Scala or Java is recommended for UDFs as they offer better performance and type safety compared to Python or R.
+
+</li><li>
+Using DataFrames/SQL/Datasets: These offer better performance compared to RDDs due to Spark's SQL engine optimisations. If you have to use UDFs, Scala or Java will perform better than Python or R.
+
+</li><li>
+Object Serialisation in RDDs: Kryo serialisation is recommended over Java serialisation as it's more compact and efficient. Register the classes you want to serialise with Kryo
+
+</li></ul>
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Indirect Performance Enhancements-Cluster Configurations"><h4 id="Cluster Configurations" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Indirect Performance Enhancements-Cluster Configurations">Cluster Configurations</a></h4></div>
+
+<p>
+Optimising cluster configurations can yield significant performance gains. Monitoring machine performance is crucial, especially in shared cluster environments. Consider the following:
+</p>
+
+<ul>
+<li>
+Resource Allocation: Dynamic allocation allows applications to adjust resources based on workload, enabling efficient resource sharing in a cluster.
+
+</li><li>
+Scheduling: Using scheduler pools for parallel job execution and dynamic allocation or setting max-executor-cores can optimise resource usage.
+
+</li></ul>
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Indirect Performance Enhancements-Data at Rest"><h4 id="Data at Rest" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Indirect Performance Enhancements-Data at Rest">Data at Rest</a></h4></div>
+
+<p>
+Efficient data storage is key to fast data reads. Opting for structured binary formats and utilising features like data partitioning can optimise read performance. Here are some points to consider:
+</p>
+
+<ul>
+<li>
+File Format: Use structured, binary formats like Apache Parquet as they are faster to parse than formats like CSV.
+
+</li><li>
+Splittable File Types: Use splittable file types like gzip, bzip2, or lz4 (especially when compressed) for parallel data reads. Avoid non-splittable formats like ZIP or TAR.
+
+</li><li>
+Table Partitioning: Partition data based on frequently used filter keys like date or customer ID to improve query performance by reducing data reads.
+
+</li><li>
+Bucketing: Bucketing "pre-partitions" data based on potential joins or aggregations, enhancing performance and stability by ensuring consistent data distribution.
+
+</li><li>
+Number of Files: Aim for a balance between the number and size of files. Too many small files increase overhead while fewer large files limit parallelism. An ideal size for files is a few tens of megabytes.
+
+</li><li>
+Data Locality: Spark can schedule tasks close to data blocks if the storage system supports locality hints (like HDFS), reducing network overhead.
+
+</li><li>
+Statistics Collection: Collecting statistics on tables (both table-level and column-level) allows the cost-based optimizer to make informed decisions for operations like joins and aggregations.
+
+</li></ul>
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Indirect Performance Enhancements-Shuffle Configurations"><h4 id="Shuffle Configurations" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Indirect Performance Enhancements-Shuffle Configurations">Shuffle Configurations</a></h4></div>
+
+<p>
+The external shuffle service can improve performance by allowing nodes to read shuffle data from remote machines even when those machines are busy. Consider tuning shuffle configurations like the number of concurrent connections per executor. Using Kryo serialisation for RDD-based jobs and optimising the number of shuffle partitions can also enhance performance.
+</p>
+
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Indirect Performance Enhancements-Memory Pressure and Garbage Collection"><h4 id="Memory Pressure and Garbage Collection" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Indirect Performance Enhancements-Memory Pressure and Garbage Collection">Memory Pressure and Garbage Collection</a></h4></div>
+
+<p>
+Excessive garbage collection can hinder performance. Strategies for mitigating this include:
+</p>
+
+<ul>
+<li>
+Using Structured APIs: Structured APIs reduce memory pressure by avoiding the creation of JVM objects.
+
+</li><li>
+Monitoring Garbage Collection: Track garbage collection frequency and duration by adding JVM options like -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps to the spark.executor.extraJavaOptions configuration.
+
+</li><li>
+Garbage Collection Tuning: Tune garbage collection based on insights from the gathered statistics. The Spark documentation provides detailed guidance on tuning parameters.
+
+</li></ul>
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements"><h3 id="Direct Performance Enhancements" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements">Direct Performance Enhancements</a></h3></div>
+
+<p>
+These enhancements focus on specific Spark jobs or stages and may require individual inspection and optimisation.
+</p>
+
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Parallelism"><h4 id="Parallelism" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Parallelism">Parallelism</a></h4></div>
+
+<p>
+Increasing parallelism is a key strategy for speeding up stages that process substantial amounts of data. Aim for at least 2-3 tasks per CPU core. Adjust the spark.default.parallelism and spark.sql.shuffle.partitions properties accordingly.
+</p>
+
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Improved Filtering"><h4 id="Improved Filtering" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Improved Filtering">Improved Filtering</a></h4></div>
+
+<p>
+Filtering data as early as possible in the data processing pipeline significantly reduces the amount of data processed, improving performance. Utilise push-down predicates to filter data at the source level. Leveraging partitioning and bucketing also facilitates efficient filtering.
+</p>
+
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Repartitioning and Coalescing"><h4 id="Repartitioning and Coalescing" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Repartitioning and Coalescing">Repartitioning and Coalescing</a></h4></div>
+
+<p>
+Repartitioning, which incurs a shuffle, can improve data balancing across the cluster. However, coalescing, which merges partitions on the same node, is a more efficient option when reducing the number of partitions as it avoids a shuffle. Repartitioning can be beneficial before joins or caching.
+</p>
+
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Custom Partitioning"><h4 id="Custom Partitioning" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Custom Partitioning">Custom Partitioning</a></h4></div>
+
+<p>
+While rarely necessary, custom partitioning at the RDD level provides granular control over data organisation across the cluster, potentially optimising performance and stability.
+</p>
+
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Custom Partitioning-User-Defined Functions (UDFs)"><h5 id="User-Defined Functions (UDFs)" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Custom Partitioning-User-Defined Functions (UDFs)">User-Defined Functions (UDFs)</a></h5></div>
+
+<p>
+Minimising the use of UDFs is recommended as they introduce overhead by requiring data representation as JVM objects. Prioritise the use of Structured APIs for efficient transformations. Explore options like Vectorized UDFs for Python, which process data in batches using Pandas data frames.
+</p>
+
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Custom Partitioning-Temporary Data Storage (Caching)"><h5 id="Temporary Data Storage (Caching)" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Custom Partitioning-Temporary Data Storage (Caching)">Temporary Data Storage (Caching)</a></h5></div>
+
+<p>
+Caching stores frequently accessed datasets in memory or on disk, reducing the need to recompute them. However, consider the cost of serialisation, deserialization, and storage when deciding whether to cache. Caching is particularly beneficial for iterative operations or when reusing datasets multiple times.
+</p>
+
+<p>
+Spark offers various storage levels for caching, each with different performance characteristics. Refer to Table 19-1 in the source for details on the available storage levels.
+</p>
+
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Joins"><h4 id="Joins" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Joins">Joins</a></h4></div>
+
+<p>
+Understanding the different types of joins and their execution mechanisms is crucial for optimisation. Prefer equi-joins as they are easily optimised by Spark. Strategically filtering data and ordering joins can also improve performance. Use broadcast join hints to guide Spark's query planning. Minimise the use of Cartesian joins or full outer joins as they can often be replaced with more efficient filtering-style joins.
+</p>
+
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Aggregations"><h4 id="Aggregations" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Aggregations">Aggregations</a></h4></div>
+
+<p>
+Optimise aggregations by filtering data beforehand and ensuring sufficient parallelism. When using RDDs, choose aggregation methods like reduceByKey over groupByKey for improved speed and stability.
+</p>
+
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Broadcast Variables"><h4 id="Broadcast Variables" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Direct Performance Enhancements-Broadcast Variables">Broadcast Variables</a></h4></div>
+
+<p>
+Broadcast variables can improve performance by distributing read-only copies of large datasets used across multiple UDF calls to all nodes, reducing data transfer overhead. This technique is beneficial for datasets like lookup tables or machine learning models.
+</p>
+
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Code Examples"><h3 id="Code Examples" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Code Examples">Code Examples</a></h3></div>
+
+<p>
+The provided source document offers two code examples that focus on:
+</p>
+
+<ul>
+<li>
+Registering classes for Kryo serialisation: This snippet demonstrates how to configure Spark to use Kryo for object serialisation in RDD transformations, which can be more efficient than the default Java serialisation.
+
+</li><li>
+Caching a DataFrame: This example illustrates how to use the <code>cache()</code> method to store a DataFrame in memory for faster access in subsequent operations, showcasing a simple performance optimisation technique.
+
+</li></ul>
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Code Examples-Code Example 1: Registering Classes for Kryo Serialisation"><h4 id="Code Example 1: Registering Classes for Kryo Serialisation" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Code Examples-Code Example 1: Registering Classes for Kryo Serialisation">Code Example 1: Registering Classes for Kryo Serialisation</a></h4></div>
+
+<pre java="">conf.registerKryoClasses(Array(classOf[MyClass1], classOf[MyClass2]))
+</pre>
+
+<p>
+This code snippet, presented in the context of optimising object serialisation in RDDs, demonstrates how to register specific classes (<code>MyClass1</code> and <code>MyClass2</code>) with the Kryo serialiser. Kryo is a more efficient serialisation library compared to Java's default serialisation mechanism, offering both compactness and speed advantages.
+</p>
+
+<p>
+To enable Kryo serialisation, you need to set the <code>spark.serializer</code> configuration property to <code>org.apache.spark.serializer.KryoSerializer</code>. After enabling Kryo, you can register the classes you'll be working with using the <code>registerKryoClasses</code> method on the <code>SparkConf</code> object.
+</p>
+
+<p>
+By registering these classes, you instruct Kryo to handle their serialisation and deserialization, potentially leading to improved performance in RDD transformations that involve these custom data types.
+</p>
+
+<div id="Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Code Examples-Code Example 2: Caching a DataFrame"><h4 id="Code Example 2: Caching a DataFrame" class="header"><a href="#Configuración, monitorización y optimización de Spark-Optimising Spark Application Performance-Code Examples-Code Example 2: Caching a DataFrame">Code Example 2: Caching a DataFrame</a></h4></div>
+
+<pre python=""># in Python
+# Original loading code that does *not* cache DataFrame
+DF1 = spark.read.format("csv")\
+  .option("inferSchema", "true")\
+  .option("header", "true")\
+  .load("/data/flight-data/csv/2015-summary.csv")
+DF2 = DF1.groupBy("DEST_COUNTRY_NAME").count().collect()
+DF3 = DF1.groupBy("ORIGIN_COUNTRY_NAME").count().collect()
+DF4 = DF1.groupBy("count").count().collect()
+DF1.cache()
+DF1.count()
+# in Python
+DF2 = DF1.groupBy("DEST_COUNTRY_NAME").count().collect()
+DF3 = DF1.groupBy("ORIGIN_COUNTRY_NAME").count().collect()
+DF4 = DF1.groupBy("count").count().collect()
+</pre>
+
+<p>
+This code example demonstrates the use of caching to optimise the repeated use of a DataFrame.
+</p>
+
+<ul>
+<li>
+Initial DataFrame Loading: The first code block loads a DataFrame (<code>DF1</code>) from a CSV file. Three subsequent DataFrames (<code>DF2</code>, <code>DF3</code>, and <code>DF4</code>) are derived from <code>DF1</code>, each performing a <code>groupBy</code> and <code>count</code> operation. Without caching, these operations would repeatedly read and parse the original CSV file, leading to redundant work.
+
+</li><li>
+Caching the DataFrame: The second code block introduces the <code>cache()</code> method applied to DF1. This instructs Spark to store the DataFrame in memory after its first computation. The <code>count()</code> action is used to trigger the caching process as caching is a lazy operation in Spark.
+
+</li><li>
+Benefit of Caching: The final code block re-executes the groupBy and count operations for <code>DF2</code>, <code>DF3</code>, and <code>DF4</code>. Due to caching, these operations now access the DataFrame from memory, significantly reducing processing time by avoiding the repeated file reads and parsing.
+
+</li></ul>
+ 
+<p>
+This example highlights how caching can substantially improve performance in scenarios where a dataset is reused multiple times. The <code>persist()</code> method, which provides more control over storage levels (memory, disk, or both), is also mentioned as an alternative to <code>cache()</code>.
+</p>
 </div>
   
 
