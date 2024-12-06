@@ -1,0 +1,491 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Concurrency</title>
+  <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Concurrency"><h1 id="Concurrency" class="header"><a href="#Concurrency">Concurrency</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="12.html#Why%20Concurrency%3F">Why Concurrency</a>
+
+</li><li>
+<a href="12.html#Myths%20and%20Misconceptions">Myths and Misconceptions</a>
+
+</li><li>
+<a href="12.html#Challenges">Challenges</a>
+
+</li><li>
+<a href="12.html#Concurrency%20Defense%20Principles">Concurrency Defense Principles</a>
+
+<ul>
+<li>
+<a href="12.html#Single%20Responsibility%20Principle">Single Responsibility Principle</a>
+
+</li><li>
+<a href="12.html#Limit%20the%20Scope%20of%20the%20Data">Limit the Scope of the Data</a>
+
+</li><li>
+<a href="12.html#Use%20Copies%20of%20Data">Use Copies of Data</a>
+
+</li><li>
+<a href="12.html#Threadds%20Should%20Be%20as%20Independent%20as%20Possible">Threadds Should Be as Independent as Possible</a>
+
+</li></ul>
+</li><li>
+<a href="12.html#Know%20Your%20Execution%20Models">Know Your Execution Models</a>
+
+<ul>
+<li>
+<a href="12.html#Producer-Consumer">Producer-Consumer</a>
+
+</li><li>
+<a href="12.html#Readers-Writers">Readers-Writers</a>
+
+</li><li>
+<a href="12.html#Dining%20Philosofers">Dining Philosofers</a>
+
+</li></ul>
+</li><li>
+<a href="12.html#Beware%20Dependencies%20Between%20Synchronized%20Methods">Beware Dependencies Between Synchronized Methods</a>
+
+</li><li>
+<a href="12.html#Keep%20Synchronized%20Sections%20Small">Keep Synchronized Sections Small</a>
+
+</li><li>
+<a href="12.html#Writing%20Correct%20Shut-Down%20Code%20Is%20Hard">Writing Correct Shut-Down Code Is Hard</a>
+
+</li><li>
+<a href="12.html#Testing%20Threaded%20Code">Testing Threaded Code</a>
+
+<ul>
+<li>
+<a href="12.html#Make%20Your%20Threaded%20Code%20Pluggable">Make Your Threaded Code Pluggable</a>
+
+</li><li>
+<a href="12.html#Run%20with%20More%20Threads%20Than%20Processors">Run with More Threads Than Processors</a>
+
+</li><li>
+<a href="12.html#Run%20on%20Different%20Platforms">Run on Different Platforms</a>
+
+</li><li>
+<a href="12.html#Instrument%20Your%20Code%20to%20Try%20and%20Force%20Failures">Instrument Your Code to Try and Force Failures</a>
+
+<ul>
+<li>
+<a href="12.html#Hand-coded">Hand-coded</a>
+
+</li><li>
+<a href="12.html#Automated">Automated</a>
+
+</li></ul>
+</li></ul>
+</li></ul>
+<hr>
+
+<p>
+Writing clean concurrent programs is hard, very hard. It is much easier to write code that executes in a single thread. It is also easy to write multithreaded code that looks fine on the surface but is broken at a deeper level. Such code works fine until the system is placed under stress.
+</p>
+
+<div id="Concurrency-Why Concurrency?"><h2 id="Why Concurrency?" class="header"><a href="#Concurrency-Why Concurrency?">Why Concurrency?</a></h2></div>
+
+<p>
+Concurrency is a decoupling strategy. It helps us decouple what gets done from when it gets done.
+</p>
+
+<div id="Concurrency-Myths and Misconceptions"><h2 id="Myths and Misconceptions" class="header"><a href="#Concurrency-Myths and Misconceptions">Myths and Misconceptions</a></h2></div>
+
+<p>
+Consider these common myths and misconceptions:
+</p>
+
+<ul>
+<li>
+Concurrency always improves performance: only when there is a lot of wait time that can be shared between multiple threads or multiple processors.
+
+</li><li>
+Design does not change when writing concurrent program: the design of a concurrent algorithm can be remarkably different from the design of a single-threaded system.
+
+</li><li>
+Understanding concurrency issues is not important when working with a container
+
+</li></ul>
+<p>
+Here are a few more balanced sound bites regarding writing concurrent software:
+</p>
+
+<ul>
+<li>
+Concurrency incurs some overhead, both in performance as well as writing additional code.
+
+</li><li>
+Correct concurrency is complex, even for simple problems.
+
+</li><li>
+Concurrency bugs aren’t usually repeatable, so they are often ignored as one-offs instead of the true defects they are.
+
+</li><li>
+Concurrency often requires a fundamental change in design strategy.
+
+</li></ul>
+<div id="Concurrency-Challenges"><h2 id="Challenges" class="header"><a href="#Concurrency-Challenges">Challenges</a></h2></div>
+
+<p>
+What makes concurrent programming so difficult? Consider the following trivial class:
+</p>
+
+<pre java="">public class X {
+  private int lastIdUsed;
+  
+  public int getNextId() {
+    return ++lastIdUsed;
+  }
+</pre>
+
+<p>
+Let’s say we create an instance of X, set the lastIdUsed field to 42, and then share the instance between two threads. Now suppose that both of those threads call the method <code>getNextId()</code>. Then one possible outcome is that thread one gets the value 43, thread two gets the value 43 and <code>lastIdUsed</code> is 43.
+</p>
+
+<p>
+This surprising result occurs when the two threads step on each other. This happens because there are many possible paths that the two threads can take through that one line of Java code, and some of those paths generate incorrect results.
+</p>
+
+<div id="Concurrency-Concurrency Defense Principles"><h2 id="Concurrency Defense Principles" class="header"><a href="#Concurrency-Concurrency Defense Principles">Concurrency Defense Principles</a></h2></div>
+
+<p>
+What follows is a series of principles and techniques for defending your systems from the problems of concurrent code.
+</p>
+
+<div id="Concurrency-Concurrency Defense Principles-Single Responsibility Principle"><h3 id="Single Responsibility Principle" class="header"><a href="#Concurrency-Concurrency Defense Principles-Single Responsibility Principle">Single Responsibility Principle</a></h3></div>
+
+<p>
+ Concurrency design is complex enough to be a reason to change in it’s own right and therefore deserves to be separated from the rest of the code. Here are a few things to consider:
+</p>
+ 
+<ul>
+<li>
+Concurrency-related code has its own life cycle of development.
+
+</li><li>
+Concurrency-related code has its own challenges
+
+</li></ul>
+ 
+<p>
+Recommendation: Keep your concurrency-related code separate from other code.
+</p>
+
+<div id="Concurrency-Concurrency Defense Principles-Limit the Scope of the Data"><h3 id="Limit the Scope of the Data" class="header"><a href="#Concurrency-Concurrency Defense Principles-Limit the Scope of the Data">Limit the Scope of the Data</a></h3></div>
+
+<p>
+As we saw, two threads modifying the same field of a shared object can interfere with each other, causing unexpected behavior. It is important to restrict the number of such critical sections.
+</p>
+
+<p>
+Recommendation: Take data encapsulation to heart; severely limit the access of any data that may be shared.
+</p>
+
+<div id="Concurrency-Concurrency Defense Principles-Use Copies of Data"><h3 id="Use Copies of Data" class="header"><a href="#Concurrency-Concurrency Defense Principles-Use Copies of Data">Use Copies of Data</a></h3></div>
+
+<p>
+A good way to avoid shared data is to avoid sharing the data in the first place. If there is an easy way to avoid sharing objects, the resulting code will be far less likely to cause problems. You might be concerned about the cost of all the extra object creation. It is worth experimenting to find out if this is in fact a problem. However, if using copies of objects allows the code to avoid synchronizing, the savings in avoiding the intrinsic lock will likely make up for the additional creation and garbage collection overhead.
+</p>
+
+<div id="Concurrency-Concurrency Defense Principles-Threadds Should Be as Independent as Possible"><h3 id="Threadds Should Be as Independent as Possible" class="header"><a href="#Concurrency-Concurrency Defense Principles-Threadds Should Be as Independent as Possible">Threadds Should Be as Independent as Possible</a></h3></div>
+
+<p>
+Consider writing your threaded code such that each thread exists in its own world, sharing no data with any other thread.
+</p>
+
+<p>
+Recommendation: Attempt to partition data into independent subsets than can be operated on by independent threads, possibly in different processors.
+</p>
+
+<div id="Concurrency-Know Your Execution Models"><h2 id="Know Your Execution Models" class="header"><a href="#Concurrency-Know Your Execution Models">Know Your Execution Models</a></h2></div>
+
+<p>
+We need to understand some basic definitions.
+</p>
+
+<ul>
+<li>
+Bound resources: Resources of a fixed size or number used in a concurrent environment.
+
+</li><li>
+Mutual exclusion: Only one thread can access shared data or a shared resource at a time.
+
+</li><li>
+Starvation: One thread or a group of threads is prohibited from proceeding for an excessively long time or forever.
+
+</li><li>
+Deadlock: Two or more threads waiting for each other to finish. Each thread has a resource that the other thread requires and neither can finish until it gets the other resource.
+
+</li><li>
+Livelock: Threads in lockstep, each trying to do work but finding another “in the way.” 
+
+</li></ul>
+<p>
+Threads in lockstep, each trying to do work but finding another “in the way.”
+</p>
+
+<div id="Concurrency-Know Your Execution Models-Producer-Consumer"><h3 id="Producer-Consumer" class="header"><a href="#Concurrency-Know Your Execution Models-Producer-Consumer">Producer-Consumer</a></h3></div>
+
+<p>
+One or more producer threads create some work and place it in a buffer or queue. One or more consumer threads acquire that work from the queue and complete it. The queue between the producers and consumers is a bound resource.
+</p>
+
+<div id="Concurrency-Know Your Execution Models-Readers-Writers"><h3 id="Readers-Writers" class="header"><a href="#Concurrency-Know Your Execution Models-Readers-Writers">Readers-Writers</a></h3></div>
+
+<p>
+Coordinating readers so they do not read something a writer is updating and vice versa is a tough balancing act. Writers tend to block many readers for a long period of time, thus causing throughput issues.
+</p>
+
+<p>
+A simple strategy makes writers wait until there are no readers before allowing the writer to perform an update. If there are continuous readers, however, the writers will be starved. On the other hand, if there are frequent writers and they are given priority, throughput will suffer. Finding that balance and avoiding concurrent update issues is what the problem addresses.
+</p>
+
+<div id="Concurrency-Know Your Execution Models-Dining Philosofers"><h3 id="Dining Philosofers" class="header"><a href="#Concurrency-Know Your Execution Models-Dining Philosofers">Dining Philosofers</a></h3></div>
+
+<p>
+Imagine a number of philosophers sitting around a circular table. A fork is placed to the left of each philosopher. There is a big bowl of spaghetti in the center of the table. The philosophers spend their time thinking unless they get hungry. Once hungry, they pick up the forks on either side of them and eat. A philosopher cannot eat unless he is holding two forks.
+</p>
+
+<p>
+Replace philosophers with threads and forks with resources and this problem is similar to many enterprise applications in which processes compete for resources. Unless carefully designed, systems that compete in this way can experience deadlock, livelock, throughput, and efficiency degradation.
+</p>
+
+<div id="Concurrency-Beware Dependencies Between Synchronized Methods"><h2 id="Beware Dependencies Between Synchronized Methods" class="header"><a href="#Concurrency-Beware Dependencies Between Synchronized Methods">Beware Dependencies Between Synchronized Methods</a></h2></div>
+
+<p>
+There will be times when you must use more than one method on a shared object. When this is the case, there are three ways to make the code correct:
+</p>
+
+<ul>
+<li>
+Client-Based Locking—Have the client lock the server before calling the first method and make sure the lock’s extent includes code calling the last method.
+
+</li><li>
+Server-Based Locking—Within the server create a method that locks the server, calls all the methods, and then unlocks. Have the client call the new method.
+
+</li><li>
+Adapted Server—create an intermediary that performs the locking.
+
+</li></ul>
+<div id="Concurrency-Keep Synchronized Sections Small"><h2 id="Keep Synchronized Sections Small" class="header"><a href="#Concurrency-Keep Synchronized Sections Small">Keep Synchronized Sections Small</a></h2></div>
+
+<p>
+Locks are expensive because they create delays and add overhead. So we want to design our code with as few critical sections as possible.
+</p>
+
+<p>
+Recommendation: Keep your synchronized sections as small as possible.
+</p>
+
+<div id="Concurrency-Writing Correct Shut-Down Code Is Hard"><h2 id="Writing Correct Shut-Down Code Is Hard" class="header"><a href="#Concurrency-Writing Correct Shut-Down Code Is Hard">Writing Correct Shut-Down Code Is Hard</a></h2></div>
+
+<p>
+Writing a system that is meant to stay live and run forever is different from writing something that works for awhile and then shuts down gracefully. Graceful shutdown can be hard to get correct. Common problems involve deadlock, with threads waiting for a signal to continue that never comes.
+</p>
+
+<p>
+Recommendation: Think about shut-down early and get it working early.
+</p>
+
+<div id="Concurrency-Testing Threaded Code"><h2 id="Testing Threaded Code" class="header"><a href="#Concurrency-Testing Threaded Code">Testing Threaded Code</a></h2></div>
+
+<p>
+Recommendation: Write tests that have the potential to expose problems and then run them frequently, with different programatic configurations and system configurations and load. If tests ever fail, track down the failure. Don’t ignore a failure just because the tests pass on a subsequent run.
+</p>
+
+<p>
+Here are a few more fine-grained recommendations:
+</p>
+
+<ul>
+<li>
+Treat spurious failures as candidate threading issues.
+
+</li><li>
+Get your nonthreaded code working first
+
+</li><li>
+Make your threaded code pluggable.
+
+</li><li>
+Make your threaded code tunable.
+
+</li><li>
+Run with more threads than processors.
+
+</li><li>
+Run on different platforms.
+
+</li><li>
+Instrument your code to try and force failures.
+
+</li></ul>
+<div id="Concurrency-Testing Threaded Code-Make Your Threaded Code Pluggable"><h3 id="Make Your Threaded Code Pluggable" class="header"><a href="#Concurrency-Testing Threaded Code-Make Your Threaded Code Pluggable">Make Your Threaded Code Pluggable</a></h3></div>
+
+<p>
+Write the concurrency-supporting code such that it can be run in several configurations:
+</p>
+
+<ul>
+<li>
+One thread, several threads, varied as it executes
+
+</li><li>
+Threaded code interacts with something that can be both real or a test double.
+
+</li><li>
+Execute with test doubles that run quickly, slowly, variable.
+
+</li><li>
+Configure tests so they can run for a number of iterations.
+
+</li></ul>
+<div id="Concurrency-Testing Threaded Code-Run with More Threads Than Processors"><h3 id="Run with More Threads Than Processors" class="header"><a href="#Concurrency-Testing Threaded Code-Run with More Threads Than Processors">Run with More Threads Than Processors</a></h3></div>
+
+<p>
+Things happen when the system switches between tasks. To encourage task swapping, run with more threads than processors or cores.
+</p>
+
+<div id="Concurrency-Testing Threaded Code-Run on Different Platforms"><h3 id="Run on Different Platforms" class="header"><a href="#Concurrency-Testing Threaded Code-Run on Different Platforms">Run on Different Platforms</a></h3></div>
+
+<p>
+Different operating systems have different threading policies, each of which impacts the code’s execution. Multithreaded code behaves differently in different environments. You should run your tests in every potential deployment environment.
+</p>
+
+<div id="Concurrency-Testing Threaded Code-Instrument Your Code to Try and Force Failures"><h3 id="Instrument Your Code to Try and Force Failures" class="header"><a href="#Concurrency-Testing Threaded Code-Instrument Your Code to Try and Force Failures">Instrument Your Code to Try and Force Failures</a></h3></div>
+
+<p>
+It is normal for flaws in concurrent code to hide. Simple tests often don’t expose them. Indeed, they often hide during normal processing. How might you increase your chances of catching such rare occurrences? You can instrument your code and force it to run in different orderings.
+</p>
+
+<p>
+There are two options for code instrumentation:
+</p>
+
+<ul>
+<li>
+Hand-coded
+
+</li><li>
+Automated
+
+</li></ul>
+<div id="Concurrency-Testing Threaded Code-Instrument Your Code to Try and Force Failures-Hand-coded"><h4 id="Hand-coded" class="header"><a href="#Concurrency-Testing Threaded Code-Instrument Your Code to Try and Force Failures-Hand-coded">Hand-coded</a></h4></div>
+
+<p>
+You can insert calls to <code>wait()</code>, <code>sleep()</code>, <code>yield()</code>, and <code>priority()</code> in your code by hand. Here is an example of doing just that:
+</p>
+
+<pre java="">public synchronized String nextUrlOrNull() {
+  if(hasNext()) {
+    String url = urlGenerator.next();
+    Thread.yield(); // inserted for testing.
+    updateHasNext();
+    return url;
+  }
+  return null;
+}
+</pre>
+
+<p>
+The inserted call to <code>yield()</code> will change the execution pathways taken by the code and possibly cause the code to fail where it did not fail before. There are many problems with this approach:
+</p>
+
+<ul>
+<li>
+You have to manually find appropriate places to do this.
+
+</li><li>
+How do you know where to put the call and what kind of call to use?
+
+</li><li>
+Leaving such code in a production environment unnecessarily slows the code down.
+
+</li><li>
+You may or may not find flaws.
+
+</li></ul>
+<p>
+What we need is a way to do this during testing but not in production. We also need to easily mix up configurations.
+</p>
+
+<div id="Concurrency-Testing Threaded Code-Instrument Your Code to Try and Force Failures-Automated"><h4 id="Automated" class="header"><a href="#Concurrency-Testing Threaded Code-Instrument Your Code to Try and Force Failures-Automated">Automated</a></h4></div>
+
+<p>
+You could use tools like an Aspect-Oriented Framework to programmatically instrument your code. For example, you could use a class with a single method:
+</p>
+
+<pre java="">public class ThreadJigglePoint {
+  public static void jiggle() {
+  }
+}
+</pre>
+
+<p>
+You can add calls to this in various places within your code:
+</p>
+
+<pre java="">You can add calls to this in various places within your code:
+public synchronized String nextUrlOrNull() {
+  if(hasNext()) {
+    ThreadJiglePoint.jiggle();
+    String url = urlGenerator.next();
+    ThreadJiglePoint.jiggle();
+    updateHasNext();
+    ThreadJiglePoint.jiggle();
+    return url;
+  }
+  return null;
+}
+</pre>
+
+<p>
+Now you use a simple aspect that randomly selects among doing nothing, sleeping, or yielding. Or imagine that the ThreadJigglePoint class has two implementations. The first implements jiggle to do nothing and is used in production. The second generates a random number to choose between sleeping, yielding, or just falling through. If you run your tests a thousand times with random jiggling, you may root out some flaws.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="jQuery library"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/fuse.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
