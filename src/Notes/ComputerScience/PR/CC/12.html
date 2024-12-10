@@ -463,8 +463,7 @@ You could use tools like an Aspect-Oriented Framework to programmatically instru
 You can add calls to this in various places within your code:
 </p>
 
-<pre java="">You can add calls to this in various places within your code:
-public synchronized String nextUrlOrNull() {
+<pre java="">public synchronized String nextUrlOrNull() {
   if(hasNext()) {
     ThreadJiglePoint.jiggle();
     String url = urlGenerator.next();
