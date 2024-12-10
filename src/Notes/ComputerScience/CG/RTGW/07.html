@@ -93,6 +93,9 @@
 </li><li>
 <a href="07.html#Using%20Multiple%20Textures">Using Multiple Textures</a>
 
+</li><li>
+<a href="07.html#Cube%20Maps">Cube Maps</a>
+
 </li></ul>
 <hr>
 
@@ -456,6 +459,100 @@ gl.activeTexture(gl.TEXTURE1);
 gl.bindTexture(gl.TEXTURE_2D, otherTexture);
 gl.uniform1i(program.uOtherSampler, 1);
 </pre>
+
+<div id="Textures-Cube Maps"><h2 id="Cube Maps" class="header"><a href="#Textures-Cube Maps">Cube Maps</a></h2></div>
+
+<p>
+A cube map is a cube of textures. Six individual textures are created, each assigned to a different face of the cube. The graphics hardware can sample them as a single entity, by using a 3D texture coordinate.
+</p>
+
+<p>
+The faces of the cube are identified by the axis they face and whether they are on the positive or negative side of that axis:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/cube_map.png" alt="Cube Map">
+</p>
+
+<p>
+Cube mapping introduces a few new texture targets that indicate we are working with cube maps. These targets also indicate which face of the cube map we're manipulating:
+</p>
+
+<ul>
+<li>
+<code>TEXTURE_CUBE_MAP</code>
+
+</li><li>
+<code>TEXTURE_CUBE_MAP_POSITIVE_X</code>
+
+</li><li>
+<code>TEXTURE_CUBE_MAP_NEGATIVE_X</code>
+
+</li><li>
+<code>TEXTURE_CUBE_MAP_POSITIVE_Y</code>
+
+</li><li>
+<code>TEXTURE_CUBE_MAP_NEGATIVE_Y</code>
+
+</li><li>
+<code>TEXTURE_CUBE_MAP_POSITIVE_Z</code>
+
+</li><li>
+<code>TEXTURE_CUBE_MAP_NEGATIVE_Z</code>
+
+</li></ul>
+<p>
+Cube maps are created like a normal texture, but binding and property manipulation happen with the <code>TEXTURE_CUBE_MAP</code> target:
+</p>
+
+<pre javascript="">const cubeTexture = gl.createTexture();
+gl.bindTexture(gl.TEXTURE_CUBE_MAP, cubeTexture);
+gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+</pre>
+
+<p>
+When uploading the image data for the texture, you need to specify the side that you are manipulating:
+</p>
+
+<pre javascript="">gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_X, 0, gl.RGBA, gl.RGBA,
+gl.UNSIGNED_BYTE, positiveXImage);
+gl.texImage2D(gl.TEXTURE_CUBE_MAP_NEGATIVE_X, 0, gl.RGBA, gl.RGBA,
+gl.UNSIGNED_BYTE, negativeXImage);
+gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_Y, 0, gl.RGBA, gl.RGBA,
+gl.UNSIGNED_BYTE, positiveYImage);
+</pre>
+
+<p>
+Exposing the cube map texture to the shader is done in the same way as a normal texture, just with the cube map target:
+</p>
+
+<pre javascript="">gl.activeTexture(gl.TEXTURE0);
+gl.bindTexture(gl.TEXTURE_CUBE_MAP, cubeTexture);
+gl.uniform1i(program.uCubeSampler, 0);
+</pre>
+
+<p>
+However, the uniform type within the shader is specific to cube maps:
+</p>
+
+<pre javascript="">uniform samplerCube uCubeSampler;
+</pre>
+
+<p>
+When sampling from the cube map, you also use a cube map-specific function:
+</p>
+
+<pre javascript="">texture(uCubeSampler, vCubeTextureCoords);
+</pre>
+
+<p>
+The 3D coordinates you provide are normalized by the graphics hardware into a unit vector, which specifies a direction from the center of the "cube." A ray is traced along that vector, and where it intersects the cube face is where the texture is sampled:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/cube_map_coordinate_resolution.png" alt="Cube Map Coordinate Resolution">
+</p>
 </div>
   
 
