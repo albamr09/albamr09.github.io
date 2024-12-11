@@ -1,0 +1,152 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/custom.css">
+    <title>Procesamiento de streams: Apache Spark Streaming</title>
+  <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Procesamiento de streams: Apache Spark Streaming"><h1 id="Procesamiento de streams: Apache Spark Streaming" class="header"><a href="#Procesamiento de streams: Apache Spark Streaming">Procesamiento de streams: Apache Spark Streaming</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="03.html#What%20is%20Spark%20Streaming%3F">What is Spark Streaming</a>
+
+</li><li>
+<a href="03.html#How%20Spark%20Streaming%20Works">How Spark Streaming Works</a>
+
+</li><li>
+<a href="03.html#Key%20Features">Key Features</a>
+
+</li><li>
+<a href="03.html#Using%20Spark%20Streaming">Using Spark Streaming</a>
+
+</li><li>
+<a href="03.html#Additional%20Features">Additional Features</a>
+
+</li></ul>
+<hr>
+
+<p>
+This summary will help you understand Spark Streaming, a system for processing large streams of data in real time. It's based on Apache Spark, a powerful engine for handling big data.
+</p>
+
+<div id="Procesamiento de streams: Apache Spark Streaming-What is Spark Streaming?"><h2 id="What is Spark Streaming?" class="header"><a href="#Procesamiento de streams: Apache Spark Streaming-What is Spark Streaming?">What is Spark Streaming?</a></h2></div>
+
+<p>
+Spark Streaming is a component of Apache Spark designed for real-time data processing. It takes continuous data streams and processes them in small batches called micro-batches. This approach is based on defining data windows that collect data from the stream and are then processed.
+</p>
+
+<p>
+One of the key benefits of Spark Streaming is that it extends the familiar Spark API, meaning the syntax is almost identical. This allows developers to work with streaming data using the same tools and concepts they use for batch processing.
+</p>
+
+<p>
+Spark Streaming is versatile in terms of data sources and outputs. It can ingest data from various sources like Kafka, Flume, Twitter, and network sockets. Similarly, it can write processed data to various destinations like HDFS, databases, and dashboards.
+</p>
+
+<div id="Procesamiento de streams: Apache Spark Streaming-How Spark Streaming Works"><h2 id="How Spark Streaming Works" class="header"><a href="#Procesamiento de streams: Apache Spark Streaming-How Spark Streaming Works">How Spark Streaming Works</a></h2></div>
+
+<p>
+The basic workflow of Spark Streaming involves:
+</p>
+
+<ol>
+<li>
+Creating Micro-Batches: The incoming data stream is divided into micro-batches. The default is timestamp-based windows without overlap, and you specify the window size in seconds.
+
+</li><li>
+Processing as RDDs: Each micro-batch is treated as an RDD (Resilient Distributed Dataset), the fundamental data structure in Spark. You can apply the same actions and transformations used in regular Spark operations.
+
+</li><li>
+Managing with DStreams: The sequence of micro-batches is stored in a DStream (Discretized Stream), which provides additional functionality specific to stream processing. Essentially, a DStream represents a continuous stream of RDDs.
+
+</li></ol>
+<div id="Procesamiento de streams: Apache Spark Streaming-Key Features"><h2 id="Key Features" class="header"><a href="#Procesamiento de streams: Apache Spark Streaming-Key Features">Key Features</a></h2></div>
+
+<ul>
+<li>
+High-level Abstraction: Spark Streaming hides the complexities of stream processing from the user, simplifying development.
+
+</li><li>
+Code Reusability: Since micro-batches are processed as RDDs, you can reuse existing Spark code, including SparkSQL and MLlib libraries.
+
+</li><li>
+Micro-batch Approach: This offers advantages like high throughput (processing more instances per unit of time) but comes with increased latency as the minimum processing time is limited by the batch window size.
+
+</li><li>
+Architecture Fit: Spark Streaming is highly suited for Lambda architectures where Spark handles offline processing, and Spark Streaming manages online processing. However, it might not be ideal for Kappa architectures that aim for purely stream-based processing.
+
+</li></ul>
+<div id="Procesamiento de streams: Apache Spark Streaming-Using Spark Streaming"><h2 id="Using Spark Streaming" class="header"><a href="#Procesamiento de streams: Apache Spark Streaming-Using Spark Streaming">Using Spark Streaming</a></h2></div>
+
+<ol>
+<li>
+Create a Streaming Context: This is done using the Spark Context and specifies the duration of each micro-batch.
+
+</li><li>
+Define Data Input: Spark Streaming supports basic inputs like files, sockets, and RDD queues. It also has advanced input options using libraries for sources like Kafka, Flume, and Kinesis. Custom inputs can also be created using ad-hoc connectors.
+
+</li><li>
+Apply Transformations: DStreams support various transformations similar to RDDs like <code>map</code>, <code>flatMap</code>, <code>filter</code>, <code>reduce</code>, and <code>count</code>. These allow you to manipulate and process data within each micro-batch.
+
+</li><li>
+Define Data Output: Output can be directed to the standard output using <code>dstream.pprint()</code>, saved to external storage with <code>dstream.saveAsTextFiles()</code>, or processed using custom functions applied to each RDD via <code>dstream.foreachRDD()</code>.
+
+</li><li>
+Start and Manage Processing: The <code>ssc.start()</code> command initiates data processing without blocking the program. To keep the script running until the stream processing is finished, use <code>ssc.awaitTermination()</code>.
+
+</li></ol>
+<div id="Procesamiento de streams: Apache Spark Streaming-Additional Features"><h2 id="Additional Features" class="header"><a href="#Procesamiento de streams: Apache Spark Streaming-Additional Features">Additional Features</a></h2></div>
+
+<ul>
+<li>
+Sliding Windows: Spark Streaming provides the <code>window()</code> function to create sliding windows across multiple RDDs. This allows you to analyse data over a larger time frame while still processing in micro-batches.
+
+</li><li>
+Stateful Operations: For operations that need to keep track of previous states, Spark Streaming offers the <code>updateStateByKey()</code> function. This is useful for tasks like accumulating counts or maintaining averages.
+
+</li><li>
+Checkpointing: When using stateful operations, it's essential to activate checkpointing. This periodically backs up the state and metadata to fault-tolerant storage (like HDFS) to ensure recovery in case of failures.
+
+</li></ul>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="jQuery library"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/fuse.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
