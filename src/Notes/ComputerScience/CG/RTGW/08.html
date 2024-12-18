@@ -57,6 +57,18 @@
 </li><li>
 <a href="08.html#Assigning%20One%20Color%20per%20Object%20in%20the%20Scene">Assigning One Color per Object in the Scene</a>
 
+</li><li>
+<a href="08.html#Rendering%20to%20an%20Offscreen%20Framebuffer">Rendering to an Offscreen Framebuffer</a>
+
+</li><li>
+<a href="08.html#Clicking%20on%20the%20Canvas">Clicking on the Canvas</a>
+
+</li><li>
+<a href="08.html#Reading%20Pixels%20from%20the%20Offscreen%20Framebuffer">Reading Pixels from the Offscreen Framebuffer</a>
+
+</li><li>
+<a href="08.html#Looking%20for%20Hits">Looking for Hits</a>
+
 </li></ul>
 <hr>
 
@@ -153,6 +165,60 @@ We will pick an object based on its primitive color, we need to make sure that t
 
 <p>
 <img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/color_based_picking.png" alt="Color Based Picking">
+</p>
+
+<div id="Picking-Rendering to an Offscreen Framebuffer"><h2 id="Rendering to an Offscreen Framebuffer" class="header"><a href="#Picking-Rendering to an Offscreen Framebuffer">Rendering to an Offscreen Framebuffer</a></h2></div>
+
+<p>
+In order to perform object selection using the offscreen framebuffer, we need to ensure that both framebuffers are synchronized. The following diagram shows the behavior of the render function:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/offscreen_renderization_pipeline.png" alt="Offscreen Renderization Pipeline">
+</p>
+
+<div id="Picking-Clicking on the Canvas"><h2 id="Clicking on the Canvas" class="header"><a href="#Picking-Clicking on the Canvas">Clicking on the Canvas</a></h2></div>
+
+<p>
+The next step is to capture and read the mouse coordinates. The following diagram shows how we use the offset calculation to obtain the clicked <code>canvas</code> coordinates:
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/ComputerScience/CG/RTGW/canvas_click_algo.png" alt="How to detect click on the canvas">
+</p>
+
+<div id="Picking-Reading Pixels from the Offscreen Framebuffer"><h2 id="Reading Pixels from the Offscreen Framebuffer" class="header"><a href="#Picking-Reading Pixels from the Offscreen Framebuffer">Reading Pixels from the Offscreen Framebuffer</a></h2></div>
+
+<p>
+WebGL allows us to read back from a framebuffer using the <code>readPixels</code> function:
+</p>
+
+<pre javascript="">gl.readPixels(x, y, width, height, format, type, pixels);
+</pre>
+
+<p>
+We need to ensure that the offscreen framebuffer that we want to read from is the currently bound one. To do so, we bind it by using <code>bindFramebuffer</code>:
+</p>
+
+<pre javascript="">// read one pixel
+const readout = new Uint8Array(1 * 1 * 4);
+gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
+gl.readPixels(coords.x, coords.y, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, readout);
+gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+</pre>
+
+<p>
+Here, the size of the readout array is \(1 \cdot 1 \cdot 4\). This means that it has one pixel of width times one pixel height times four channels, since the format is <code>RGBA</code>.
+</p>
+
+<div id="Picking-Looking for Hits"><h2 id="Looking for Hits" class="header"><a href="#Picking-Looking for Hits">Looking for Hits</a></h2></div>
+
+<p>
+Now, we will check whether the color obtained from the offscreen framebuffer matches any of the objects in our scene. When looking for hits, we compare each object's diffuse color with the label obtained from the offscreen framebuffer. There is, however, an additional step to consider: each color channel comes back in a \([0, 255]\) range while the object diffuse colors are in a \([0, 1]\) range.
+</p>
+
+<p>
+We do not need to compare the alpha channel. If we had two objects with the same color but a different alpha channel, we could use the alpha channel in the comparison, but this is not the case in our example. Also, it’s important to note that the comparison is not precise, as we are dealing with decimal values in the \([0, 1]\) range. Because of that, we introduce a fudge factor by assuming that we have a hit after rescaling the colors and subtract the readout (object label) – the difference is less than one. 
 </p>
 </div>
   
