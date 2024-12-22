@@ -1,0 +1,282 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../src/style/custom.css">
+    <title>Smells and Heuristics</title>
+  <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="index.html">Back</a>
+</p>
+
+<div id="Smells and Heuristics"><h1 id="Smells and Heuristics" class="header"><a href="#Smells and Heuristics">Smells and Heuristics</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="17.html#Comments">Comments</a>
+
+</li><li>
+<a href="17.html#Environment">Environment</a>
+
+</li><li>
+<a href="17.html#Functions">Functions</a>
+
+</li><li>
+<a href="17.html#General">General</a>
+
+</li></ul>
+<hr>
+
+<div id="Smells and Heuristics-Comments"><h2 id="Comments" class="header"><a href="#Smells and Heuristics-Comments">Comments</a></h2></div>
+
+<p>
+<span id="Smells and Heuristics-Comments-Innapropiate Information"></span><strong id="Innapropiate Information">Innapropiate Information</strong>
+</p>
+
+<p>
+It is inappropriate for a comment to hold information better held in a different kind of system such as your source code control system, your issue tracking system, or any other record-keeping system. Comments should be reserved for technical notes about the code and design.
+</p>
+
+<p>
+<span id="Smells and Heuristics-Comments-Obsolete Comment"></span><strong id="Obsolete Comment">Obsolete Comment</strong>
+</p>
+
+<p>
+A comment that has gotten old, irrelevant, and incorrect is obsolete. If you find an obsolete comment, it is best to update it or get rid of it as quickly as possible.
+</p>
+
+<p>
+<span id="Smells and Heuristics-Comments-Redundant Comment"></span><strong id="Redundant Comment">Redundant Comment</strong>
+</p>
+
+<p>
+A comment is redundant if it describes something that adequately describes itself. Comments should say things that the code cannot say for itself.
+</p>
+
+<p>
+<span id="Smells and Heuristics-Comments-Poorly Written Comment"></span><strong id="Poorly Written Comment">Poorly Written Comment</strong>
+</p>
+
+<p>
+A comment worth writing is worth writing well. Be brief.
+</p>
+
+<p>
+<span id="Smells and Heuristics-Comments-Commented-Out Code"></span><strong id="Commented-Out Code">Commented-Out Code</strong>
+</p>
+
+<p>
+When you see commented-out code, delete it! Don’t worry, the source code control system still remembers it.
+</p>
+
+<div id="Smells and Heuristics-Environment"><h2 id="Environment" class="header"><a href="#Smells and Heuristics-Environment">Environment</a></h2></div>
+
+<p>
+<span id="Smells and Heuristics-Environment-Build Requires More Than One Step"></span><strong id="Build Requires More Than One Step">Build Requires More Than One Step</strong>
+</p>
+
+<p>
+You should not need a sequence of arcane commands or context dependent scripts in order to build the individual elements. You should be able to check out the system with one simple command and then issue one other simple command to build it.
+</p>
+
+<p>
+<span id="Smells and Heuristics-Environment-Tests Require More Than One Step"></span><strong id="Tests Require More Than One Step">Tests Require More Than One Step</strong>
+</p>
+
+<p>
+You should be able to run all the unit tests with just one command.
+</p>
+
+<div id="Smells and Heuristics-Functions"><h2 id="Functions" class="header"><a href="#Smells and Heuristics-Functions">Functions</a></h2></div>
+
+<p>
+<span id="Smells and Heuristics-Functions-Too Many Arguments"></span><strong id="Too Many Arguments">Too Many Arguments</strong>
+</p>
+
+<p>
+Functions should have a small number of arguments.
+</p>
+
+<p>
+<span id="Smells and Heuristics-Functions-Output Arguments"></span><strong id="Output Arguments">Output Arguments</strong>
+</p>
+
+<p>
+Output arguments are counterintuitive. Readers expect arguments to be inputs, not outputs.
+</p>
+
+<p>
+<span id="Smells and Heuristics-Functions-Flag Arguments"></span><strong id="Flag Arguments">Flag Arguments</strong>
+</p>
+
+<p>
+Boolean arguments loudly declare that the function does more than one thing. They are confusing and should be eliminated.
+</p>
+
+<p>
+<span id="Smells and Heuristics-Functions-Dead Function"></span><strong id="Dead Function">Dead Function</strong>
+</p>
+
+<p>
+Methods that are never called should be discarded, your source code control system still remember it.
+</p>
+
+<div id="Smells and Heuristics-General"><h2 id="General" class="header"><a href="#Smells and Heuristics-General">General</a></h2></div>
+
+<p>
+<span id="Smells and Heuristics-General-Multiple Languages in One Source File"></span><strong id="Multiple Languages in One Source File">Multiple Languages in One Source File</strong>
+</p>
+
+<p>
+The ideal is for a source file to contain one, and only one, language. Realistically, we will probably have to use more than one. But we should take pains to minimize both the number and extent of extra languages in our source files.
+</p>
+
+<p>
+<span id="Smells and Heuristics-General-Obvious Behaviour Is Unimplemented"></span><strong id="Obvious Behaviour Is Unimplemented">Obvious Behaviour Is Unimplemented</strong>
+</p>
+
+<p>
+Following "The Principle of Least Surprise",  any function or class should implement the behaviors that another programmer could reasonably expect.
+</p>
+
+<p>
+<span id="Smells and Heuristics-General-Incorrect Behaviour at the Boundaries"></span><strong id="Incorrect Behaviour at the Boundaries">Incorrect Behaviour at the Boundaries</strong>
+</p>
+
+<p>
+It seems obvious to say that code should behave correctly. The problem is that we seldom realize just how complicated correct behavior is. Don’t rely on your intuition. Look for every boundary condition and write a test for it.
+</p>
+
+<p>
+<span id="Smells and Heuristics-General-Overriden Safeties"></span><strong id="Overriden Safeties">Overriden Safeties</strong>
+</p>
+
+<p>
+It is risky to override safeties. Turning off failing tests and telling yourself you’ll get them to pass later is bad.
+</p>
+
+<p>
+<span id="Smells and Heuristics-General-Duplication"></span><strong id="Duplication">Duplication</strong>
+</p>
+
+<p>
+Every time you see duplication in the code, it represents a missed opportunity for abstraction. Abide by the DRY principle (Don't Repeat Yourself).
+</p>
+
+<p>
+<span id="Smells and Heuristics-General-Code at Wrong Level of Abstraction"></span><strong id="Code at Wrong Level of Abstraction">Code at Wrong Level of Abstraction</strong>
+</p>
+
+<p>
+It is important to create abstractions that separate higher level general concepts from lower
+level detailed concepts. We need to make sure that the separation is complete. We want all the lower level concepts to be in the derivatives and all the higher level concepts to be in the base class.
+</p>
+
+<p>
+Good software design requires that we separate concepts at different levels and place them in different containers. We don’t want lower and higher level concepts mixed together.
+</p>
+
+<p>
+<span id="Smells and Heuristics-General-Base Classes Depending on Their Derivatives"></span><strong id="Base Classes Depending on Their Derivatives">Base Classes Depending on Their Derivatives</strong>
+</p>
+
+<p>
+The most common reason for partitioning concepts into base and derivative classes is so that the higher level base class concepts can be independent of the lower level derivative class concepts. Therefore, when we see base classes mentioning the names of their derivatives, we suspect a problem. In general, base classes should know nothing about their derivatives.
+</p>
+
+<p>
+<span id="Smells and Heuristics-General-Too Much Information"></span><strong id="Too Much Information">Too Much Information</strong>
+</p>
+
+<p>
+Well-defined modules have very small interfaces that allow you to do a lot with a little.
+</p>
+
+<p>
+Good software developers learn to limit what they expose at the interfaces of their classes and modules. The fewer methods a class has, the better. The fewer variables a function knows about, the better. The fewer instance variables a class has, the better.
+</p>
+
+<p>
+<span id="Smells and Heuristics-General-Dead Code"></span><strong id="Dead Code">Dead Code</strong>
+</p>
+
+<p>
+Dead code is code that isn’t executed. Dead code is not completely updated when designs change. It still compiles, but it does not follow newer conventions or rules. Delete it.
+</p>
+
+<p>
+<span id="Smells and Heuristics-General-Vertical Separation"></span><strong id="Vertical Separation">Vertical Separation</strong>
+</p>
+
+<p>
+Variables and function should be defined close to where they are used. Local variables should be declared just above their first usage and should have a small vertical scope. Private functions should be defined just below their first usage.
+</p>
+
+<p>
+<span id="Smells and Heuristics-General-Inconsistency"></span><strong id="Inconsistency">Inconsistency</strong>
+</p>
+
+<p>
+If you do something a certain way, do all similar things in the same way.
+</p>
+
+<p>
+<span id="Smells and Heuristics-General-Artificial Coupling"></span><strong id="Artificial Coupling">Artificial Coupling</strong>
+</p>
+
+<p>
+Things that don’t depend upon each other should not be artificially coupled. In general an artificial coupling is a coupling between two modules that serves no direct purpose. It is a result of putting a variable, constant, or function in a temporarily convenient, though inappropriate, location. This is lazy and careless.
+</p>
+
+<p>
+<span id="Smells and Heuristics-General-Feature Envy"></span><strong id="Feature Envy">Feature Envy</strong>
+</p>
+
+<p>
+When a method uses accessors and mutators of some other object to manipulate the data within that object, then it envies the scope of the class of that other object. It wishes that it were inside that other class so that it could have direct access to the variables it is manipulating.
+</p>
+
+<p>
+<span id="Smells and Heuristics-General-Selector Arguments"></span><strong id="Selector Arguments">Selector Arguments</strong>
+</p>
+
+<p>
+Not only is the purpose of a selector argument difficult to remember, each selector argument combines many functions into one. Selector arguments are just a lazy way to avoid splitting a large function into several smaller functions.
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="jQuery library"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/fuse.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
