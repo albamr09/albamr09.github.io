@@ -1,0 +1,245 @@
+<html><head>
+    <!-- Normal styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/index.css">
+    <!-- Custom styling from vimwiki -->
+    <link rel="Stylesheet" type="text/css" href="../../../../../../../src/style/custom.css">
+    <title>Proveedores de soluciones: AWS</title>
+  <link rel="icon" type="image/svg+xml" href="https://albamr09.github.io/public/icon.svg" data-description="Page icon"><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=es6" id="latex_script" data-description="Support for latex"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" data-description="Support for latex"></script><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/search.css" data-description="Styling for search"><link rel="Stylesheet" type="text/css" href="https://albamr09.github.io/src/style/atom-one-light.min.css" data-description="Code highlight"></head>
+  <body>
+    <a href="https://albamr09.github.io/" style="
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 3px 6px;
+        border-radius: 3px;
+        background-color: #1e90ff;
+        text-transform: uppercase;
+      ">Index</a>
+    <form id="search_form" class="search-form">
+      <input required="" type="search" id="search_term" class="searchTerm">
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <div id="search-background" class="search-background">
+      <div id="search-result" class="search-result-hide"></div>
+      <div id="search-form-modal" class="search-form-modal">
+        <form id="search-form-in-modal">
+          <input required="" type="search" id="search-input-in-modal" class="search-input-in-modal" placeholder="Search whatever...">
+          <button type="submit" class="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="content">
+<p>
+<a href="../index.html">Back</a>
+</p>
+
+<div id="Proveedores de soluciones: AWS"><h1 id="Proveedores de soluciones: AWS" class="header"><a href="#Proveedores de soluciones: AWS">Proveedores de soluciones: AWS</a></h1></div>
+
+<hr>
+
+<div id="Contents" class="toc"><h2 id="Contents" class="header"><a href="#Contents">Contents</a></h2></div>
+<ul>
+<li>
+<a href="01.html#Casos%20de%20Uso">Casos de Uso</a>
+
+<ul>
+<li>
+<a href="01.html#Casos%20de%20Uso%20I%3A%20Consultas%20en%20un%20Data%20Lake%20de%20Amazon%20S3">Casos de Uso I  Consultas en un Data Lake de Amazon S3</a>
+
+</li><li>
+<a href="01.html#Casos%20de%20Uso%20II%3A%20An%E1lisis%20de%20Datos%20de%20Registros%20en%20su%20Almac%E9n%20de%20Datos">Casos de Uso II  An lisis de Datos de Registros en su Almac n de Datos</a>
+
+</li><li>
+<a href="01.html#Casos%20de%20Uso%20III%3A%20Canalizaciones%20de%20ETL%20Determinadas%20por%20Eventos">Casos de Uso III  Canalizaciones de ETL Determinadas por Eventos</a>
+
+</li></ul>
+</li><li>
+<a href="01.html#Amazon%20Web%20Services">Amazon Web Services</a>
+
+<ul>
+<li>
+<a href="01.html#Amazon%20EMR">Amazon EMR</a>
+
+</li><li>
+<a href="01.html#Spot%20Instances">Spot Instances</a>
+
+</li><li>
+<a href="01.html#Amazon%20Kinesis">Amazon Kinesis</a>
+
+<ul>
+<li>
+<a href="01.html#Tipos">Tipos</a>
+
+</li></ul>
+</li></ul>
+</li></ul>
+<hr>
+
+<p>
+Data Lake: repositorio de información donde se almacena información de muchos tipos (datos estructurados, no estructurados, multimedia, etc.).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/DataScience/Master/3C_1C/ICPDM/aws_big_data_picture.png" alt="Big Data Picture">
+</p>
+
+<p>
+Vemos en la figura superior que varios servicios acceden al Data Lake. Por un lado tenemos los servicios centrados en la analítica y la definición de modelo a través de aprendizaje automático. Por otra parte tenemos el moviemiento o consumo/generación de datos en tiempo real.
+</p>
+
+<div id="Proveedores de soluciones: AWS-Casos de Uso"><h2 id="Casos de Uso" class="header"><a href="#Proveedores de soluciones: AWS-Casos de Uso">Casos de Uso</a></h2></div>
+
+<div id="Proveedores de soluciones: AWS-Casos de Uso-Casos de Uso I: Consultas en un Data Lake de Amazon S3"><h3 id="Casos de Uso I: Consultas en un Data Lake de Amazon S3" class="header"><a href="#Proveedores de soluciones: AWS-Casos de Uso-Casos de Uso I: Consultas en un Data Lake de Amazon S3">Casos de Uso I: Consultas en un Data Lake de Amazon S3</a></h3></div>
+
+<p>
+En este caso en concreto, tenemos que se alamcenan los datos "en crudo" en un Bucket dentro de Amazon S3. Podemos utilizar las herramientas de <span id="Proveedores de soluciones: AWS-Casos de Uso-Casos de Uso I: Consultas en un Data Lake de Amazon S3-AWS Glue"></span><strong id="AWS Glue">AWS Glue</strong> que nos permiten estructurar y catalogar estes datos (ver la figura inferior).
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/DataScience/Master/3C_1C/ICPDM/aws_use_case_1.png" alt="Use Case 1">
+</p>
+
+<p>
+A partir del catálogo generado por AWS Glue podemos utilizar distintas herramientas como Amazon Athena, Amazon Redshift o Amazon EMR (basado en el esquema MapReduce) para analizar y hacer consultas sobre los datos.
+</p>
+
+<p>
+Finalmente, Amazon posee otra herramienta: Amazon QuickSigth, que lleva a cabo reportes de manera automática sobre los datos.
+</p>
+
+<div id="Proveedores de soluciones: AWS-Casos de Uso-Casos de Uso II: Análisis de Datos de Registros en su Almacén de Datos"><h3 id="Casos de Uso II: Análisis de Datos de Registros en su Almacén de Datos" class="header"><a href="#Proveedores de soluciones: AWS-Casos de Uso-Casos de Uso II: Análisis de Datos de Registros en su Almacén de Datos">Casos de Uso II: Análisis de Datos de Registros en su Almacén de Datos</a></h3></div>
+
+<p>
+Para este otro caso, tenemos como mayor diferencia que en lugar de utilizar como datos de entrada sólo un Bucket en AWS S3, podemos utilizar distintas fuentes de datos como Amazon Redshift, Amazon RDS o una base de datos relacional cualquiera ejecutándose dentro de Amazon EC2 (servicio de máquinas virtuales). 
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/DataScience/Master/3C_1C/ICPDM/aws_use_case_2.png" alt="Use Case 2">
+</p>
+
+<p>
+A partir de estas fuentes de datos utilizamos AWS Glue para catalogar los datos y para aplicar transformaciones si es necesario (AWS Glue ETL).
+</p>
+
+<p>
+Los pasos siguientes son los mismos que para el caso anterior.
+</p>
+
+<div id="Proveedores de soluciones: AWS-Casos de Uso-Casos de Uso III: Canalizaciones de ETL Determinadas por Eventos"><h3 id="Casos de Uso III: Canalizaciones de ETL Determinadas por Eventos" class="header"><a href="#Proveedores de soluciones: AWS-Casos de Uso-Casos de Uso III: Canalizaciones de ETL Determinadas por Eventos">Casos de Uso III: Canalizaciones de ETL Determinadas por Eventos</a></h3></div>
+
+<p>
+Para este caso, lo que se ilustra es que podemos definir funciones/script AWS Lambda que son accionados por eventos (p.ej. inserción de nuevos datos). Estas funciones lambda pueden hacer que se cataloguen los nuevos datos, o pueden ejecutar un script ETL y almacenar el resultado en AWS S3 o Amazon Redshift.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/DataScience/Master/3C_1C/ICPDM/aws_use_case_3.png" alt="Use Case 3">
+</p>
+
+<div id="Proveedores de soluciones: AWS-Amazon Web Services"><h2 id="Amazon Web Services" class="header"><a href="#Proveedores de soluciones: AWS-Amazon Web Services">Amazon Web Services</a></h2></div>
+
+<p>
+En la siguiente imagen se ilustra la secuencia de fases por las que pasan, o pueden pasar, los datos en AWS indicando las herramientas que podemos utilizar en cada una de las fases.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/DataScience/Master/3C_1C/ICPDM/amazon_web_services.png" alt="Amazon Web Services">
+</p>
+
+<ol>
+<li>
+<span id="Proveedores de soluciones: AWS-Amazon Web Services-Recolección y almacenamiento de datos"></span><strong id="Recolección y almacenamiento de datos">Recolección y almacenamiento de datos</strong>: Los datos pueden ser directamente almacenados mayormente en AWS S3. También tenemos el servicio Kinesis que se basa en streaming.
+
+</li><li>
+<span id="Proveedores de soluciones: AWS-Amazon Web Services-Procesamiento de eventos"></span><strong id="Procesamiento de eventos">Procesamiento de eventos</strong>: El procesamiento de eventos puede conllevar el definir funciones lambda en Amazon AWS que accionen otras operaciones como vimos anteriormenete. También se puede aplicar EMR sobre los eventos, entre otros.
+
+</li><li>
+<span id="Proveedores de soluciones: AWS-Amazon Web Services-Procesamiento de los datos"></span><strong id="Procesamiento de los datos">Procesamiento de los datos</strong>: como hemos visto en los casos de uso anteriores podemos utilizar AWS Glue para procesar (catalogar) los datos almacenados. También podemos utilizar EMR que se trata de un servicio basado en MapReduce y también tenemos la aplicabilidad de algoritmos de aprendizaje automático sobre los datos. Por otro lado podemos simplemente almacenar los datos en el Data Lake por defecto en AWS que es Amazon Redshift.
+
+</li><li>
+<span id="Proveedores de soluciones: AWS-Amazon Web Services-Análisis de los datos"></span><strong id="Análisis de los datos">Análisis de los datos</strong>: fuera del alcance de esta asignatura.
+
+</li></ol>
+<p>
+En esta asignatura nos centraremos en el procesamiento de datos utilizando EMR.
+</p>
+
+<div id="Proveedores de soluciones: AWS-Amazon Web Services-Amazon EMR"><h3 id="Amazon EMR" class="header"><a href="#Proveedores de soluciones: AWS-Amazon Web Services-Amazon EMR">Amazon EMR</a></h3></div>
+
+<p>
+Este servicio se ejecuta en un clúster Spark-Hadoop, por lo tanto podremos utilizar tanto Hadoop como Spark dentro del mismo. En la siguiente figura se ilustra cómo utilizar esta herramienta.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/DataScience/Master/3C_1C/ICPDM/amazon_emr.png" alt="Amazon EMR">
+</p>
+
+<ol>
+<li>
+Subimos nuestros datos a un bucket en AWS S3.
+
+</li><li>
+Creamos un clúster EMR, configurado de la manera que se crea precisa.
+
+</li><li>
+Una vez creado podemos utilizar herramientas de monitorización para supervisar el clúster.
+
+</li></ol>
+<div id="Proveedores de soluciones: AWS-Amazon Web Services-Spot Instances"><h3 id="Spot Instances" class="header"><a href="#Proveedores de soluciones: AWS-Amazon Web Services-Spot Instances">Spot Instances</a></h3></div>
+
+<p>
+Amazon EMR al final es una instancia de Amazon EC2 preconfigurada que simplifica considerablemente el proceso de configuración/instalación del clúster para poder utilizar Hadoop o Spark.
+</p>
+
+<p>
+Las <span id="Proveedores de soluciones: AWS-Amazon Web Services-Spot Instances-spot instances"></span><strong id="spot instances">spot instances</strong> lo que nos permiten es definir estas máquinas virtuales de tal manera que sólo se ejecuten cuando es preciso, en lugar de estar ejecutándose de forma continua (ver la <a href="https://aws.amazon.com/es/ec2/spot/use-case/emr/">documentación</a> para más información)
+</p>
+
+<div id="Proveedores de soluciones: AWS-Amazon Web Services-Amazon Kinesis"><h3 id="Amazon Kinesis" class="header"><a href="#Proveedores de soluciones: AWS-Amazon Web Services-Amazon Kinesis">Amazon Kinesis</a></h3></div>
+
+<p>
+Se trata de un servicio que trabaja con datos en streaming que ofrece alta eficiencia es escalable y autogestionado. Como es de esperar está integrado con Amazon ERM y con otras soluciones de almacenamiento como son Amazon S3, Redshift, DynamoDB, etc.
+</p>
+
+<div id="Proveedores de soluciones: AWS-Amazon Web Services-Amazon Kinesis-Tipos"><h4 id="Tipos" class="header"><a href="#Proveedores de soluciones: AWS-Amazon Web Services-Amazon Kinesis-Tipos">Tipos</a></h4></div>
+
+<p>
+<span id="Proveedores de soluciones: AWS-Amazon Web Services-Amazon Kinesis-Tipos-Amazon Kinesis Video Streams"></span><strong id="Amazon Kinesis Video Streams">Amazon Kinesis Video Streams</strong>: los datos de entrada son datos multimedia, como son los vídeos. Una vez procesados con Kinesis estes pueden ser consumidos por otras herramientas de IA como son Amazon Rekognition Video, Amazon SageMaker, entre otros.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/DataScience/Master/3C_1C/ICPDM/amazon_kinesis_video_streams.png" alt="Amazon Kinesis Video Streams">
+</p>
+
+<p>
+<span id="Proveedores de soluciones: AWS-Amazon Web Services-Amazon Kinesis-Tipos-Amazon Kinesis Data Streams"></span><strong id="Amazon Kinesis Data Streams">Amazon Kinesis Data Streams</strong>: trabaja sobre datos tanto estructurados como no estructurados, que, tras ser procesados pueden utilizarse como entrada para otras herramientas como <span id="Proveedores de soluciones: AWS-Amazon Web Services-Amazon Kinesis-Tipos-Amazon Kinesis Data Analytics"></span><strong id="Amazon Kinesis Data Analytics">Amazon Kinesis Data Analytics</strong>, <span id="Proveedores de soluciones: AWS-Amazon Web Services-Amazon Kinesis-Tipos-Spark on EMR"></span><strong id="Spark on EMR">Spark on EMR</strong>, <span id="Proveedores de soluciones: AWS-Amazon Web Services-Amazon Kinesis-Tipos-AWS Lambda"></span><strong id="AWS Lambda">AWS Lambda</strong>, entre otros.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/DataScience/Master/3C_1C/ICPDM/amazon_kinesis_data_streams.png" alt="Amazon Kinesis Data Streams">
+</p>
+
+<p>
+<span id="Proveedores de soluciones: AWS-Amazon Web Services-Amazon Kinesis-Tipos-Amazon Kinesis Data Firehose"></span><strong id="Amazon Kinesis Data Firehose">Amazon Kinesis Data Firehose</strong>: se trata de la evolución de la herramienta anterior que simplifica el procesamiento. Realmente se puede entender como un distribuidor de información que pude ser posteriormente almacenada en S3, Redshift o utilizada en herramientas como Elasticsearch Service.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/DataScience/Master/3C_1C/ICPDM/amazon_kinesis_data_firehose.png" alt="Amazon Kinesis Data Firehose">
+</p>
+
+<p>
+<span id="Proveedores de soluciones: AWS-Amazon Web Services-Amazon Kinesis-Tipos-Amazon Kinesis Data Analytics"></span><strong id="Amazon Kinesis Data Analytics">Amazon Kinesis Data Analytics</strong>: no se trata de otro tipo per se. Se trata de una herramienta que permite llevar a cabo análisis sobre los datos en tiempo real. Como podemos ver en la figura inferior, en la primera fase utilizamos los servicios de ingesta de datos en streaming de Kinesis (Amazon Kinesis Data Firehose, Amazon Kinesis Data Streams) que envían los datos a Amazon Kinesis Data Analytics para llevar a cabo el análisis.
+</p>
+
+<p>
+<img src="https://albamr09.github.io/public/images/DataScience/Master/3C_1C/ICPDM/amazon_kinesis_data_analytics.png" alt="Amazon Kinesis Data Analytics">
+</p>
+</div>
+  
+
+<script type="text/javascript" src="https://albamr09.github.io/src/lib/highlight.min.js" id="js_highlight" data-description="Support sytax highlighting on code"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/zepto.min.js" id="zepto" data-description="jQuery library"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/search.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" src="https://albamr09.github.io/src/lib/fuse.js" id="search" data-description="Library to perform search"></script><script type="text/javascript" id="search" data-description="Entrypoint for hightlihgting">
+  $("pre").each(function (index, item) {
+    $(item).html("<code>" + $(item).html() + "</code>");
+  });
+  hljs.highlightAll();
+</script></body></html>
