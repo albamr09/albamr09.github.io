@@ -26,7 +26,7 @@ A completely opaque color will have an alpha value of $1.0$, whereas a completel
   <meta itemprop="name" content="Colors, Depth Testing, and Alpha Blending">
   <meta itemprop="description" content="Using Colors in WeblGL WebGL supplies a fourth attribute to the RGB model. This attribute is called the alpha channel. The extended model then is known as the RGBA model, where A stands for alpha. The alpha channel contains a value between the range of $0.0$ to $1.0$.
 A completely opaque color will have an alpha value of $1.0$, whereas a completely transparent color will have an alpha value of $0.0$. This is the general case, but as we will see, we need to take other factors into account when we obtain translucent colors.">
-  <meta itemprop="wordCount" content="3063">
+  <meta itemprop="wordCount" content="3062">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Colors, Depth Testing, and Alpha Blending">
   <meta name="twitter:description" content="Using Colors in WeblGL WebGL supplies a fourth attribute to the RGB model. This attribute is called the alpha channel. The extended model then is known as the RGBA model, where A stands for alpha. The alpha channel contains a value between the range of $0.0$ to $1.0$.
@@ -2200,12 +2200,11 @@ We could try something such as this, but will not work:</p>
   
 </div>
 <p>So now the effect of lamberTerm is not as straight forward, and it does not increasig &ldquo;linearly&rdquo; but by the means of a power function:</p>
-<p>$$
+$$
 \begin{aligned}
 f(x) = \text{lambert term}^{10 \text{cutoff}}
 \end{aligned}
-$$</p>
-<p>This is illustrated of the following figure:</p>
+$$<p>This is illustrated of the following figure:</p>
 <p>
     <img src=".././assets/attenuation_factor_function.png" alt="Attenuation Factor" loading="lazy" /></p>
 <h2>Use of Color in the Scene<span class="hx-absolute -hx-mt-20" id="use-of-color-in-the-scene"></span>

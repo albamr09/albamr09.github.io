@@ -34,7 +34,7 @@ Scene graph
   <meta itemprop="name" content="Animations">
   <meta itemprop="description" content="WebGL Matrix Naming Conventions Before we go any further, let’s take a moment to quickly summarize some of the conventions around matrix-naming:
 World Matrix: Sometimes referred to as the Model matrix, this is a matrix that takes the vertices of a model and moves them to world space. Camera Matrix: This matrix positions the camera in the world. You can also think of it as the World matrix for the camera. View Matrix: This matrix moves everything else in the world in front of the camera. As we’ve seen, this is the inverse of the Camera matrix. Projection Matrix: This is the matrix that converts a frustum of space into clip space. You can also think of it as the matrix returned by your matrix math library’s perspective or orthographic function. Local Matrix: The matrix is used in scene graphs, where the matrix, at any particular node on the graph, is used before multiplying with any other nodes. Scene graph This is a data structure, commonly used by vector-based graphics-editing applications and modern computer games, that arranges the logical and often spatial representation of a graphical scene. A scene graph is a collection of nodes in a graph or tree structure.">
-  <meta itemprop="wordCount" content="861">
+  <meta itemprop="wordCount" content="860">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Animations">
   <meta name="twitter:description" content="WebGL Matrix Naming Conventions Before we go any further, let’s take a moment to quickly summarize some of the conventions around matrix-naming:
@@ -1894,12 +1894,11 @@ World Matrix: Sometimes referred to as the Model matrix, this is a matrix that t
     <a href="#parametric-curves" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>There are many situations where we don&rsquo;t know the exact position of an object at a given time, but we do know an equation that describes its movement. These equations are known as <strong>parametric curves</strong>. The following diagram shows the parametric equation that describes the free-fall motion:</p>
 <p>
     <img src=".././assets/parametric_curves_example.png" alt="Parametric Curves" loading="lazy" /></p>
-<p>$$
+$$
 \begin{aligned}
 h = H_0 + V_0t - \frac{1}{2}gt^2
 \end{aligned}
-$$</p>
-<p>where $g$ is the gravity at $9.8 m/s$, $V_0$ is the initial velocity, $H_0$ is the initial position, $t$ is the time and $h$ is the position at $t$.</p>
+$$<p>where $g$ is the gravity at $9.8 m/s$, $V_0$ is the initial velocity, $H_0$ is the initial position, $t$ is the time and $h$ is the position at $t$.</p>
 <h2>Optimizing Batch Performance<span class="hx-absolute -hx-mt-20" id="optimizing-batch-performance"></span>
     <a href="#optimizing-batch-performance" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>WebGL 2 adds some interesting features, such as <strong>geometry-instancing</strong>. This feature allows us to render the same instance of a single mesh with differing shader attributes using instancing and only one render call. Though instancing is limited, as it’s based on the same mesh only, it’s still a great way to improve performance if you have to draw the same meshes multiple times, especially if combined with shaders.</p>
 <h2>Interpolation<span class="hx-absolute -hx-mt-20" id="interpolation"></span>

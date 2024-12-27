@@ -47,11 +47,11 @@ The intersection of the first three rows with the first three columns defines th
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 m_1 & m_2 & m_3 \\
 m_5 & m_6 & m_7 \\
 m_9 & m_{10} & m_{11}
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 
@@ -61,9 +61,9 @@ The intersection of the first three rows with the last column defines a three-co
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 m_{13} & m_{14} & m_{15}
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 

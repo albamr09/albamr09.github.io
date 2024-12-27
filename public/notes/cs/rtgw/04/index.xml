@@ -41,18 +41,16 @@ If $w == 0$, then the vector $(x,y,z,0)$ is a direction.&lt;/p&gt;
 &lt;p&gt;Homogeneous coordinates make it possible to solve a system of linear equations where each equation represents a line that is parallel with all the others in the system. Remember that in Euclidian Space, a system like that does not have solutions, because there are no intersections. However, in Projective Space, this system has a solution—the lines will intersect at infinity. This fact is represented by the perspective component having a value of $0$.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../assets/projection_space.png&#34; alt=&#34;Projective Space&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;It&amp;rsquo;s easy to convert from Homogeneous coordinates to non-Homogeneous, old-fashioned, Euclidean coordinates by dividing each coordinate by $w$:&lt;/p&gt;
-&lt;p&gt;$$
+$$
 \begin{aligned}
 h(x, y, z, w) = v(\frac{x}{w}, \frac{y}{w}, \frac{z}{w})
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;Consequently, if you want to go from Euclidean to Projective space, you add the fourth component, $w$, and make it $1$:&lt;/p&gt;
-&lt;p&gt;$$
+$$&lt;p&gt;Consequently, if you want to go from Euclidean to Projective space, you add the fourth component, $w$, and make it $1$:&lt;/p&gt;
+$$
 \begin{aligned}
 v(x, y, z) = h(x, y, z, 1)
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;In fact, this is what we&amp;rsquo;ve been doing throughout the first three chapters:&lt;/p&gt;
+$$&lt;p&gt;In fact, this is what we&amp;rsquo;ve been doing throughout the first three chapters:&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
   
 
@@ -99,91 +97,87 @@ $$&lt;/p&gt;
 &lt;h3&gt;Transformations&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;transformations&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#transformations&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;h4&gt;Translation Matrices&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;translation-matrices&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#translation-matrices&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;These are the most simple tranformation matrices to understand. A translation matrix look like this:&lt;/p&gt;
-&lt;p&gt;$$
+$$
 \begin{aligned}
-\begin{pmatrix}
-1 &amp;amp; 0 &amp;amp; 0 &amp;amp; X \
-0 &amp;amp; 1 &amp;amp; 0 &amp;amp; Y \
-0 &amp;amp; 0 &amp;amp; 1 &amp;amp; Z \
-0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \
-\end{pmatrix}
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; X \\
+0 &amp; 1 &amp; 0 &amp; Y \\
+0 &amp; 0 &amp; 1 &amp; Z \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;where $X,Y,Z$ are the values that you want to add to your position.&lt;/p&gt;
+$$&lt;p&gt;where $X,Y,Z$ are the values that you want to add to your position.&lt;/p&gt;
 &lt;p&gt;So if we want to translate the vector $(10,10,10,1)$ of $10$ units in the X direction, we get:&lt;/p&gt;
-&lt;p&gt;$$
+$$
 \begin{aligned}
-\begin{pmatrix}
-1 &amp;amp; 0 &amp;amp; 0 &amp;amp; 10 \
-0 &amp;amp; 1 &amp;amp; 0 &amp;amp; 0 \
-0 &amp;amp; 0 &amp;amp; 1 &amp;amp; 0 \
-0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \
-\end{pmatrix}
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 10 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}
 *
-\begin{pmatrix}
-10 \
-10 \
-10 \
-1 \
-\end{pmatrix} =
-\begin{pmatrix}
-1 ** 10 + 0 ** 10 + 0 ** 10 + 10 ** 1 \
-0 ** 10 + 1 ** 10 + 0 ** 10 + 0 ** 1 \
-0 ** 10 + 0 ** 10 + 1 ** 10 + 0 ** 1 \
-0 ** 10 + 0 ** 10 + 0 ** 10 + 1 ** 1 \
-\end{pmatrix} =
-\begin{pmatrix}
-20 \
-10 \
-10 \
-1 \
-\end{pmatrix}
+\begin{bmatrix}
+10 \\
+10 \\
+10 \\
+1 \\
+\end{bmatrix} =
+\begin{bmatrix}
+1 ** 10 + 0 ** 10 + 0 ** 10 + 10 ** 1 \\
+0 ** 10 + 1 ** 10 + 0 ** 10 + 0 ** 1 \\
+0 ** 10 + 0 ** 10 + 1 ** 10 + 0 ** 1 \\
+0 ** 10 + 0 ** 10 + 0 ** 10 + 1 ** 1 \\
+\end{bmatrix} =
+\begin{bmatrix}
+20 \\
+10 \\
+10 \\
+1 \\
+\end{bmatrix}
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;and we get a $(20,10,10,1)$ homogeneous vector! Remember, the $1$ means that it is a position, not a direction. So our transformation didn’t change the fact that we were dealing with a position, which is good.&lt;/p&gt;
+$$&lt;p&gt;and we get a $(20,10,10,1)$ homogeneous vector! Remember, the $1$ means that it is a position, not a direction. So our transformation didn’t change the fact that we were dealing with a position, which is good.&lt;/p&gt;
 &lt;h4&gt;Scaling matrices&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;scaling-matrices&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#scaling-matrices&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Scaling matrices are quite easy too:&lt;/p&gt;
-&lt;p&gt;$$
+$$
 \begin{aligned}
-\begin{pmatrix}
-x &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 \
-0 &amp;amp; y &amp;amp; 0 &amp;amp; 0 \
-0 &amp;amp; 0 &amp;amp; z &amp;amp; 0 \
-0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \
-\end{pmatrix}
+\begin{bmatrix}
+x &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; y &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; z &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;So if you want to scale a vector (position or direction, it doesn’t matter) by $2.0$ in all directions:&lt;/p&gt;
-&lt;p&gt;$$
+$$&lt;p&gt;So if you want to scale a vector (position or direction, it doesn’t matter) by $2.0$ in all directions:&lt;/p&gt;
+$$
 \begin{aligned}
-\begin{pmatrix}
-2 &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 \
-0 &amp;amp; 2 &amp;amp; 0 &amp;amp; 0 \
-0 &amp;amp; 0 &amp;amp; 2 &amp;amp; 0 \
-0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \
-\end{pmatrix}
+\begin{bmatrix}
+2 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 2 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 2 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}
 *
-\begin{pmatrix}
-x \
-y \
-z \
-w \
-\end{pmatrix} =
-\begin{pmatrix}
-2 ** x + 0 ** y + 0 ** z + 0 ** w \
-0 ** x + 2 ** y + 0 ** z + 0 ** w \
-0 ** x + 0 ** y + 2 ** z + 0 ** w \
-0 ** x + 0 ** y + 0 ** z + 1 ** w \
-\end{pmatrix} =
-\begin{pmatrix}
-2x \
-2y \
-2z \
-w \
-\end{pmatrix}
+\begin{bmatrix}
+x \\
+y \\
+z \\
+w \\
+\end{bmatrix} =
+\begin{bmatrix}
+2 ** x + 0 ** y + 0 ** z + 0 ** w \\
+0 ** x + 2 ** y + 0 ** z + 0 ** w \\
+0 ** x + 0 ** y + 2 ** z + 0 ** w \\
+0 ** x + 0 ** y + 0 ** z + 1 ** w \\
+\end{bmatrix} =
+\begin{bmatrix}
+2x \\
+2y \\
+2z \\
+w \\
+\end{bmatrix}
 \end{aligned}
-$$&lt;/p&gt;
-&lt;h4&gt;Rotation Matrices&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;rotation-matrices&#34;&gt;&lt;/span&gt;
+$$&lt;h4&gt;Rotation Matrices&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;rotation-matrices&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#rotation-matrices&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;&lt;a href=&#34;https://www.opengl-tutorial.org/intermediate-tutorials/tutorial-17-quaternions/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;TBC&lt;/a&gt;&lt;/p&gt;
 &lt;h4&gt;Cumulating transformations&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;cumulating-transformations&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#cumulating-transformations&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;So now we know how to rotate, translate, and scale our vectors. It would be great to combine these transformations. This is done by multiplying the matrices together:&lt;/p&gt;
@@ -191,7 +185,7 @@ $$&lt;/p&gt;
   
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;TransformedVector&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nx&#34;&gt;TranslationMatrix&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;**&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;RotationMatrix&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;**&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ScaleMatrix&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;OriginalVector&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nx&#34;&gt;TranslationMatrix&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;RotationMatrix&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ScaleMatrix&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;OriginalVector&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
     title=&#34;Copy code&#34;
@@ -254,25 +248,23 @@ $$&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../assets/spatial_world_encoding.png&#34; alt=&#34;Spatial World Encoding&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;h4&gt;Rotation Matrix&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;rotation-matrix&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#rotation-matrix&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;The intersection of the first three rows with the first three columns defines the 3x3 Rotation matrix. This matrix contains information about rotations around the standard axis.&lt;/p&gt;
-&lt;p&gt;$$
+$$
 \begin{aligned}
-\begin{pmatrix}
-m_1 &amp;amp; m_2 &amp;amp; m_3 \
-m_5 &amp;amp; m_6 &amp;amp; m_7 \
-m_9 &amp;amp; m_{10} &amp;amp; m_{11}
-\end{pmatrix}
+\begin{bmatrix}
+m_1 &amp; m_2 &amp; m_3 \\
+m_5 &amp; m_6 &amp; m_7 \\
+m_9 &amp; m_{10} &amp; m_{11}
+\end{bmatrix}
 \end{aligned}
-$$&lt;/p&gt;
-&lt;h4&gt;Translation Vector&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;translation-vector&#34;&gt;&lt;/span&gt;
+$$&lt;h4&gt;Translation Vector&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;translation-vector&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#translation-vector&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;The intersection of the first three rows with the last column defines a three-component Translation vector.&lt;/p&gt;
-&lt;p&gt;$$
+$$
 \begin{aligned}
-\begin{pmatrix}
-m_{13} &amp;amp; m_{14} &amp;amp; m_{15}
-\end{pmatrix}
+\begin{bmatrix}
+m_{13} &amp; m_{14} &amp; m_{15}
+\end{bmatrix}
 \end{aligned}
-$$&lt;/p&gt;
-&lt;h4&gt;The Mysterious Fourth Row&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;the-mysterious-fourth-row&#34;&gt;&lt;/span&gt;
+$$&lt;h4&gt;The Mysterious Fourth Row&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;the-mysterious-fourth-row&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#the-mysterious-fourth-row&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;The fourth row does not have any special meaning.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The $m_4$, $m_8$, and $m_{12}$ elements are always $0$.&lt;/li&gt;
@@ -343,77 +335,64 @@ $$&lt;/p&gt;
         
         &lt;h3&gt;Calculating the Normal Matrix&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;calculating-the-normal-matrix&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#calculating-the-normal-matrix&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Two vectors are perpendicular if their dot product is $0$. In our example&lt;/p&gt;
-&lt;p&gt;$$
+$$
 \begin{aligned}
-&amp;lt;N, S&amp;gt; = 0
+&lt;N, S&gt; = 0
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;Here, $S$ is the surface vector and can be calculated as the difference of two vertices. Let $M$ be the Model-View matrix. We can use $M$ to transform $S$ as follows:&lt;/p&gt;
-&lt;p&gt;$$
+$$&lt;p&gt;Here, $S$ is the surface vector and can be calculated as the difference of two vertices. Let $M$ be the Model-View matrix. We can use $M$ to transform $S$ as follows:&lt;/p&gt;
+$$
 \begin{aligned}
-S&amp;rsquo; = MS
+S&#39; = MS
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;We want to find a matrix, $K$, that allows us to transform normals in a similar way. For the $N$ normal, we want the following:&lt;/p&gt;
-&lt;p&gt;$$
+$$&lt;p&gt;We want to find a matrix, $K$, that allows us to transform normals in a similar way. For the $N$ normal, we want the following:&lt;/p&gt;
+$$
 \begin{aligned}
-N&amp;rsquo; = KN
+N&#39; = KN
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;For the scene to be consistent after obtaining $N&amp;rsquo;$ and $S&amp;rsquo;$, these two need to keep the perpendicularity that the original vectors $N$ and $S$ had.&lt;/p&gt;
-&lt;p&gt;$$
+$$&lt;p&gt;For the scene to be consistent after obtaining $N&amp;rsquo;$ and $S&amp;rsquo;$, these two need to keep the perpendicularity that the original vectors $N$ and $S$ had.&lt;/p&gt;
+$$
 \begin{aligned}
-&amp;lt;N&amp;rsquo;, S&amp;rsquo;&amp;gt; = 0
+&lt;N&#39;, S&#39;&gt; = 0
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;Substituting $N&amp;rsquo;$ and $S&amp;rsquo;$:&lt;/p&gt;
-&lt;p&gt;$$
+$$&lt;p&gt;Substituting $N&amp;rsquo;$ and $S&amp;rsquo;$:&lt;/p&gt;
+$$
 \begin{aligned}
-&amp;lt;KN, MS&amp;gt; = 0
+&lt;KN, MS&gt; = 0
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;$$
+$$$$
 \begin{aligned}
 (KN)^T(MS) = 0
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;$$
+$$$$
 \begin{aligned}
 N^TK^TMS = 0
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;$$
+$$$$
 \begin{aligned}
 N^T(K^TM)S = 0
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;Now, remember that $&amp;lt;N, S&amp;gt; = 0$ so $N^TS = 0$. This means that in the previous equation, $(K^TM)$ needs to be the identity matrix, $I$, so the original condition of N and S being perpendicular holds:&lt;/p&gt;
-&lt;p&gt;$$
+$$&lt;p&gt;Now, remember that $&amp;lt;N, S&amp;gt; = 0$ so $N^TS = 0$. This means that in the previous equation, $(K^TM)$ needs to be the identity matrix, $I$, so the original condition of N and S being perpendicular holds:&lt;/p&gt;
+$$
 \begin{aligned}
 K^TM = I
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;$$
+$$$$
 \begin{aligned}
 K^TMM^{-1} = IM^{-1} = M^{-1}
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;$$
+$$$$
 \begin{aligned}
 K^T = M^{-1}
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;$$
+$$$$
 \begin{aligned}
 (K^T)^T = (M^{-1})^T
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;$$
+$$$$
 \begin{aligned}
 K = (M^{-1})^T
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;$K$ is obtained by transposing the inverse of the Model-View matrix ($M$, in this example). We need to use $K$ to multiply the normal vectors so that they keep being perpendicular to the surface when transformed.&lt;/p&gt;
+$$&lt;p&gt;$K$ is obtained by transposing the inverse of the Model-View matrix ($M$, in this example). We need to use $K$ to multiply the normal vectors so that they keep being perpendicular to the surface when transformed.&lt;/p&gt;
 
       </description>
     </item>

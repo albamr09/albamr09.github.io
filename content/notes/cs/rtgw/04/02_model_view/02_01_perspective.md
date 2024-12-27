@@ -148,12 +148,12 @@ We can encode this equation in matrix form if we replace the first and third coe
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 \frac{2n}{r - l} & 0 & \frac{r + l}{r - l} & 0 \\
 \cdots & \cdots & \cdots & \cdots \\
 \cdots & \cdots & \cdots & \cdots \\
 0 & 0 & -1 & 0
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 
@@ -161,18 +161,18 @@ So computing $P_{sx}$ yields:
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 \frac{2n}{r - l} & 0 & \frac{r + l}{r - l} & 0 \\
 \cdots & \cdots & \cdots & \cdots \\
 \cdots & \cdots & \cdots & \cdots \\
 0 & 0 & -1 & 0
-\end{pmatrix} \cdot
-\begin{pmatrix}
+\end{bmatrix} \cdot
+\begin{bmatrix}
 P_x \\
 P_y \\
 P_z \\
 P_w \\
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 
@@ -276,12 +276,12 @@ Therefore, now our projection matrix has the following shape:
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 \frac{2n}{r - l} & 0 & \frac{r + l}{r - l} & 0 \\
 0 & \frac{2n}{t - b} & \frac{t + b}{t - b} & 0 \\
 \cdots & \cdots & \cdots & \cdots \\
 0 & 0 & -1 & 0
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 
@@ -289,18 +289,18 @@ Computing $P_{s_y}$ using this matrix gives:
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 \frac{2n}{r - l} & 0 & \frac{r + l}{r - l} & 0 \\
 0 & \frac{2n}{t - b} & \frac{t + b}{t - b} & 0 \\
 \cdots & \cdots & \cdots & \cdots \\
 0 & 0 & -1 & 0
-\end{pmatrix} \cdot
-\begin{pmatrix}
+\end{bmatrix} \cdot
+\begin{bmatrix}
 x \\
 y \\
 w \\
 z \\
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 
@@ -332,12 +332,12 @@ We know that the $x$ and $y$ coordinates of $P$ don't contribute to the calculat
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 \frac{2n}{r - l} & 0 & \frac{r + l}{r - l} & 0 \\
 0 & \frac{2n}{t - b} & \frac{t + b}{t - b} & 0 \\
 0 & 0 & A & B \\
 0 & 0 & -1 & 0
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 
@@ -474,12 +474,12 @@ We can replace the solutions we found for A and B in our matrix, and we finally 
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 \frac{2n}{r - l} & 0 & \frac{r + l}{r - l} & 0 \\
 0 & \frac{2n}{t - b} & \frac{t + b}{t - b} & 0 \\
 0 & 0 & -\frac{f + n}{f - n}& -\frac{2fn}{f - n} \\
 0 & 0 & -1 & 0
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 

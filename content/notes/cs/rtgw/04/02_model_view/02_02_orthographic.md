@@ -88,12 +88,12 @@ To represent this transformation in matrix form:
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 \frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l} \\
 0 & 1 & 0 & 0 \\
 0 & 0 & 1 & 0 \\
 0 & 0 & 0 & 1 \\
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 
@@ -101,24 +101,24 @@ So:
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 \frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l} \\
 0 & 1 & 0 & 0 \\
 0 & 0 & 1 & 0 \\
 0 & 0 & 0 & 1 \\
-\end{pmatrix} \cdot
-\begin{pmatrix}
+\end{bmatrix} \cdot
+\begin{bmatrix}
 x \\
 y \\
 z \\
 1 \\
-\end{pmatrix} =
-\begin{pmatrix}
+\end{bmatrix} =
+\begin{bmatrix}
 \frac{2x}{r - l} - \frac{r + l}{r - l} \\
 y \\
 z \\
 1 \\
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 
@@ -186,12 +186,12 @@ Which yields the following transformation matrix:
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 \frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l} \\
 0 & \frac{2}{t - b} & 0 & -\frac{t + b}{t - b} \\
 0 & 0 & 1 & 0 \\
 0 & 0 & 0 & 1 \\
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 
@@ -199,24 +199,24 @@ So:
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 \frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l} \\
 0 & \frac{2}{t - b} & 0 & -\frac{t + b}{t - b} \\
 0 & 0 & 1 & 0 \\
 0 & 0 & 0 & 1 \\
-\end{pmatrix} \cdot
-\begin{pmatrix}
+\end{bmatrix} \cdot
+\begin{bmatrix}
 x \\
 y \\
 z \\
 1 \\
-\end{pmatrix} =
-\begin{pmatrix}
+\end{bmatrix} =
+\begin{bmatrix}
 \frac{2x}{r - l} - \frac{r + l}{r - l} \\
 \frac{2y}{t - b} - \frac{t + b}{t - b} \\
 z \\
 1 \\
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 
@@ -278,12 +278,12 @@ Now we add this to the matrix:
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 \frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l} \\
 0 & \frac{2}{t - b} & 0 & -\frac{t + b}{t - b} \\
 0 & 0 & -\frac{2}{f - n} & -\frac{n + f}{n - f} \\
 0 & 0 & 0 & 1 \\
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 
@@ -291,24 +291,24 @@ So:
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 \frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l} \\
 0 & \frac{2}{t - b} & 0 & -\frac{t + b}{t - b} \\
 0 & 0 & -\frac{2}{f - n} & -\frac{n + f}{n - f} \\
 0 & 0 & 0 & 1 \\
-\end{pmatrix} \cdot
-\begin{pmatrix}
+\end{bmatrix} \cdot
+\begin{bmatrix}
 x \\
 y \\
 z \\
 1 \\
-\end{pmatrix} =
-\begin{pmatrix}
+\end{bmatrix} =
+\begin{bmatrix}
 \frac{2x}{r - l} - \frac{r + l}{r - l} \\
 \frac{2y}{t - b} - \frac{t + b}{t - b} \\
 \frac{-2z}{f - n} - \frac{f + n}{f - n} \\
 1 \\
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 

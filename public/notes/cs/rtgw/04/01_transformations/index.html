@@ -35,7 +35,7 @@ Homogeneous Coordinates
   <meta itemprop="description" content="Vertex Transformations Each transformation is encoded by a $4$x$4$ matrix. We multiply vertices that have three components, $(x, y, z)$, by this $4$x$4$ matrix by adding a fourth component to each vertex called the Homogeneous coordinate.
 This article has a great visualization for each space:
 World Space Camera Space Clip Space Homogeneous Coordinates Until now, we only considered 3D vertices as a $(x,y,z)$ triplet. Let’s introduce $w$. Homogeneous coordinates make it possible to represent affine transformations (such as rotation, scaling, shear, and translation) and projective transformations as $4$x$4$ matrices.">
-  <meta itemprop="wordCount" content="1067">
+  <meta itemprop="wordCount" content="1061">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Transformations">
   <meta name="twitter:description" content="Vertex Transformations Each transformation is encoded by a $4$x$4$ matrix. We multiply vertices that have three components, $(x, y, z)$, by this $4$x$4$ matrix by adding a fourth component to each vertex called the Homogeneous coordinate.
@@ -1843,18 +1843,16 @@ If $w == 0$, then the vector $(x,y,z,0)$ is a direction.</p>
 <p>Homogeneous coordinates make it possible to solve a system of linear equations where each equation represents a line that is parallel with all the others in the system. Remember that in Euclidian Space, a system like that does not have solutions, because there are no intersections. However, in Projective Space, this system has a solution—the lines will intersect at infinity. This fact is represented by the perspective component having a value of $0$.</p>
 <p><img src="../../assets/projection_space.png" alt="Projective Space" loading="lazy" /></p>
 <p>It&rsquo;s easy to convert from Homogeneous coordinates to non-Homogeneous, old-fashioned, Euclidean coordinates by dividing each coordinate by $w$:</p>
-<p>$$
+$$
 \begin{aligned}
 h(x, y, z, w) = v(\frac{x}{w}, \frac{y}{w}, \frac{z}{w})
 \end{aligned}
-$$</p>
-<p>Consequently, if you want to go from Euclidean to Projective space, you add the fourth component, $w$, and make it $1$:</p>
-<p>$$
+$$<p>Consequently, if you want to go from Euclidean to Projective space, you add the fourth component, $w$, and make it $1$:</p>
+$$
 \begin{aligned}
 v(x, y, z) = h(x, y, z, 1)
 \end{aligned}
-$$</p>
-<p>In fact, this is what we&rsquo;ve been doing throughout the first three chapters:</p>
+$$<p>In fact, this is what we&rsquo;ve been doing throughout the first three chapters:</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
   
 
@@ -1901,91 +1899,87 @@ $$</p>
 <h3>Transformations<span class="hx-absolute -hx-mt-20" id="transformations"></span>
     <a href="#transformations" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><h4>Translation Matrices<span class="hx-absolute -hx-mt-20" id="translation-matrices"></span>
     <a href="#translation-matrices" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>These are the most simple tranformation matrices to understand. A translation matrix look like this:</p>
-<p>$$
+$$
 \begin{aligned}
-\begin{pmatrix}
-1 &amp; 0 &amp; 0 &amp; X \
-0 &amp; 1 &amp; 0 &amp; Y \
-0 &amp; 0 &amp; 1 &amp; Z \
-0 &amp; 0 &amp; 0 &amp; 1 \
-\end{pmatrix}
+\begin{bmatrix}
+1 & 0 & 0 & X \\
+0 & 1 & 0 & Y \\
+0 & 0 & 1 & Z \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<p>where $X,Y,Z$ are the values that you want to add to your position.</p>
+$$<p>where $X,Y,Z$ are the values that you want to add to your position.</p>
 <p>So if we want to translate the vector $(10,10,10,1)$ of $10$ units in the X direction, we get:</p>
-<p>$$
+$$
 \begin{aligned}
-\begin{pmatrix}
-1 &amp; 0 &amp; 0 &amp; 10 \
-0 &amp; 1 &amp; 0 &amp; 0 \
-0 &amp; 0 &amp; 1 &amp; 0 \
-0 &amp; 0 &amp; 0 &amp; 1 \
-\end{pmatrix}
+\begin{bmatrix}
+1 & 0 & 0 & 10 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
 *
-\begin{pmatrix}
-10 \
-10 \
-10 \
-1 \
-\end{pmatrix} =
-\begin{pmatrix}
-1 ** 10 + 0 ** 10 + 0 ** 10 + 10 ** 1 \
-0 ** 10 + 1 ** 10 + 0 ** 10 + 0 ** 1 \
-0 ** 10 + 0 ** 10 + 1 ** 10 + 0 ** 1 \
-0 ** 10 + 0 ** 10 + 0 ** 10 + 1 ** 1 \
-\end{pmatrix} =
-\begin{pmatrix}
-20 \
-10 \
-10 \
-1 \
-\end{pmatrix}
+\begin{bmatrix}
+10 \\
+10 \\
+10 \\
+1 \\
+\end{bmatrix} =
+\begin{bmatrix}
+1 ** 10 + 0 ** 10 + 0 ** 10 + 10 ** 1 \\
+0 ** 10 + 1 ** 10 + 0 ** 10 + 0 ** 1 \\
+0 ** 10 + 0 ** 10 + 1 ** 10 + 0 ** 1 \\
+0 ** 10 + 0 ** 10 + 0 ** 10 + 1 ** 1 \\
+\end{bmatrix} =
+\begin{bmatrix}
+20 \\
+10 \\
+10 \\
+1 \\
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<p>and we get a $(20,10,10,1)$ homogeneous vector! Remember, the $1$ means that it is a position, not a direction. So our transformation didn’t change the fact that we were dealing with a position, which is good.</p>
+$$<p>and we get a $(20,10,10,1)$ homogeneous vector! Remember, the $1$ means that it is a position, not a direction. So our transformation didn’t change the fact that we were dealing with a position, which is good.</p>
 <h4>Scaling matrices<span class="hx-absolute -hx-mt-20" id="scaling-matrices"></span>
     <a href="#scaling-matrices" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>Scaling matrices are quite easy too:</p>
-<p>$$
+$$
 \begin{aligned}
-\begin{pmatrix}
-x &amp; 0 &amp; 0 &amp; 0 \
-0 &amp; y &amp; 0 &amp; 0 \
-0 &amp; 0 &amp; z &amp; 0 \
-0 &amp; 0 &amp; 0 &amp; 1 \
-\end{pmatrix}
+\begin{bmatrix}
+x & 0 & 0 & 0 \\
+0 & y & 0 & 0 \\
+0 & 0 & z & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<p>So if you want to scale a vector (position or direction, it doesn’t matter) by $2.0$ in all directions:</p>
-<p>$$
+$$<p>So if you want to scale a vector (position or direction, it doesn’t matter) by $2.0$ in all directions:</p>
+$$
 \begin{aligned}
-\begin{pmatrix}
-2 &amp; 0 &amp; 0 &amp; 0 \
-0 &amp; 2 &amp; 0 &amp; 0 \
-0 &amp; 0 &amp; 2 &amp; 0 \
-0 &amp; 0 &amp; 0 &amp; 1 \
-\end{pmatrix}
+\begin{bmatrix}
+2 & 0 & 0 & 0 \\
+0 & 2 & 0 & 0 \\
+0 & 0 & 2 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
 *
-\begin{pmatrix}
-x \
-y \
-z \
-w \
-\end{pmatrix} =
-\begin{pmatrix}
-2 ** x + 0 ** y + 0 ** z + 0 ** w \
-0 ** x + 2 ** y + 0 ** z + 0 ** w \
-0 ** x + 0 ** y + 2 ** z + 0 ** w \
-0 ** x + 0 ** y + 0 ** z + 1 ** w \
-\end{pmatrix} =
-\begin{pmatrix}
-2x \
-2y \
-2z \
-w \
-\end{pmatrix}
+\begin{bmatrix}
+x \\
+y \\
+z \\
+w \\
+\end{bmatrix} =
+\begin{bmatrix}
+2 ** x + 0 ** y + 0 ** z + 0 ** w \\
+0 ** x + 2 ** y + 0 ** z + 0 ** w \\
+0 ** x + 0 ** y + 2 ** z + 0 ** w \\
+0 ** x + 0 ** y + 0 ** z + 1 ** w \\
+\end{bmatrix} =
+\begin{bmatrix}
+2x \\
+2y \\
+2z \\
+w \\
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<h4>Rotation Matrices<span class="hx-absolute -hx-mt-20" id="rotation-matrices"></span>
+$$<h4>Rotation Matrices<span class="hx-absolute -hx-mt-20" id="rotation-matrices"></span>
     <a href="#rotation-matrices" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p><a href="https://www.opengl-tutorial.org/intermediate-tutorials/tutorial-17-quaternions/" target="_blank" rel="noopener">TBC</a></p>
 <h4>Cumulating transformations<span class="hx-absolute -hx-mt-20" id="cumulating-transformations"></span>
     <a href="#cumulating-transformations" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>So now we know how to rotate, translate, and scale our vectors. It would be great to combine these transformations. This is done by multiplying the matrices together:</p>
@@ -1993,7 +1987,7 @@ $$</p>
   
 
 <div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">TransformedVector</span> <span class="o">=</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">TranslationMatrix</span> <span class="o">**</span> <span class="p">(</span><span class="nx">RotationMatrix</span> <span class="o">**</span> <span class="nx">ScaleMatrix</span><span class="p">)</span> <span class="o">*</span> <span class="nx">OriginalVector</span><span class="p">;</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+</span></span><span class="line"><span class="cl">  <span class="nx">TranslationMatrix</span> <span class="o">*</span> <span class="p">(</span><span class="nx">RotationMatrix</span> <span class="o">*</span> <span class="nx">ScaleMatrix</span><span class="p">)</span> <span class="o">*</span> <span class="nx">OriginalVector</span><span class="p">;</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"

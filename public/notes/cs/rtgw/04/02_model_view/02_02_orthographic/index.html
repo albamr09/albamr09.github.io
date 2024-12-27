@@ -26,7 +26,7 @@ The aim of the orthographic projection matrix is to remap all coordinates within
   <meta itemprop="name" content="Orthografic Matrix">
   <meta itemprop="description" content="Intro In this chapter, we will explore how to construct a matrix that projects a point from camera space onto the image plane of an orthographic camera.
 The aim of the orthographic projection matrix is to remap all coordinates within a specific 3D space bounding box to the canonical viewing volume. For that we need to know the scene’s bounding box, that is the bounding box that encompasses all the objects on the scene. The orthographic matrix then aims to remap this box to a canonical view volume, defined by minimum and maximum extents of $(-1, -1, -1)$ and $(1, 1, 1)$.">
-  <meta itemprop="wordCount" content="1222">
+  <meta itemprop="wordCount" content="1190">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Orthografic Matrix">
   <meta name="twitter:description" content="Intro In this chapter, we will explore how to construct a matrix that projects a point from camera space onto the image plane of an orthographic camera.
@@ -1836,247 +1836,215 @@ The aim of the orthographic projection matrix is to remap all coordinates within
     <a href="#derivation" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>We will refer to these screen coordinates as $l$, $r$, $t$, and $b$, which stand for left, right, top, and bottom, respectively.</p>
 <h3>Projection of $x$<span class="hx-absolute -hx-mt-20" id="projection-of-x"></span>
     <a href="#projection-of-x" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Now, we need to remap the left and right screen coordinates $(l, r)$ to $-1$ and $1$, and apply the same remapping to the top and bottom coordinates $(t, b)$. Assuming $x$ is any point within the range $[l ,r]$, we can state:</p>
-<p>$$
+$$
 \begin{aligned}
 l \leq x \leq r
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 0 \leq x - l \leq r - l
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 0 \leq \frac{x - l}{r - l} \leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 0 \leq 2\frac{x - l}{r - l} \leq 2
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq 2\frac{x - l}{r - l} -1 \leq 1
 \end{aligned}
-$$</p>
-<p>Now, the middle term falls within the range $[-1, 1]$, successfully remapping it. To further develop this formula:</p>
-<p>$$
+$$<p>Now, the middle term falls within the range $[-1, 1]$, successfully remapping it. To further develop this formula:</p>
+$$
 \begin{aligned}
 -1 \leq \frac{2x - 2l - r + l}{r - l} \leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq \frac{2x - l - r}{r - l} \leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq \frac{2x}{r - l} - \frac{r + l}{r - l} \leq 1
 \end{aligned}
-$$</p>
-<p>This yields the transformation formula for $x$:</p>
-<p>$$
+$$<p>This yields the transformation formula for $x$:</p>
+$$
 \begin{aligned}
-x&rsquo; = \frac{2x}{r - l} - \frac{r + l}{r - l}
+x' = \frac{2x}{r - l} - \frac{r + l}{r - l}
 \end{aligned}
-$$</p>
-<p>To represent this transformation in matrix form:</p>
-<p>$$
+$$<p>To represent this transformation in matrix form:</p>
+$$
 \begin{aligned}
-\begin{pmatrix}
-\frac{2}{r - l} &amp; 0 &amp; 0 &amp; -\frac{r + l}{r - l} \
-0 &amp; 1 &amp; 0 &amp; 0 \
-0 &amp; 0 &amp; 1 &amp; 0 \
-0 &amp; 0 &amp; 0 &amp; 1 \
-\end{pmatrix}
+\begin{bmatrix}
+\frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l} \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<p>So:</p>
-<p>$$
+$$<p>So:</p>
+$$
 \begin{aligned}
-\begin{pmatrix}
-\frac{2}{r - l} &amp; 0 &amp; 0 &amp; -\frac{r + l}{r - l} \
-0 &amp; 1 &amp; 0 &amp; 0 \
-0 &amp; 0 &amp; 1 &amp; 0 \
-0 &amp; 0 &amp; 0 &amp; 1 \
-\end{pmatrix} \cdot
-\begin{pmatrix}
-x \
-y \
-z \
-1 \
-\end{pmatrix} =
-\begin{pmatrix}
-\frac{2x}{r - l} - \frac{r + l}{r - l} \
-y \
-z \
-1 \
-\end{pmatrix}
+\begin{bmatrix}
+\frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l} \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix} \cdot
+\begin{bmatrix}
+x \\
+y \\
+z \\
+1 \\
+\end{bmatrix} =
+\begin{bmatrix}
+\frac{2x}{r - l} - \frac{r + l}{r - l} \\
+y \\
+z \\
+1 \\
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<h3>Projection of $y$<span class="hx-absolute -hx-mt-20" id="projection-of-y"></span>
+$$<h3>Projection of $y$<span class="hx-absolute -hx-mt-20" id="projection-of-y"></span>
     <a href="#projection-of-y" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>The process for the y-coordinate is the same. You just need to replace $r$ and $l$ with $t$ and $b$ (top and bottom).</p>
-<p>$$
+$$
 \begin{aligned}
 b \leq y \leq t
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 0 \leq y - b \leq t - b
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 0 \leq \frac{y - b}{t - b} \leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 0 \leq 2\frac{y - b}{t - b} \leq 2
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq 2\frac{y - b}{t - b} - 1 \leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq \frac{2y - 2b - t + b}{t - b} \leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq \frac{2y - b - t}{t - b} \leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq \frac{2y}{t - b} - \frac{t + b}{t - b} \leq 1
 \end{aligned}
-$$</p>
-<p>So the transformation formula for $y$ is as follows:</p>
-<p>$$
+$$<p>So the transformation formula for $y$ is as follows:</p>
+$$
 \begin{aligned}
-y&rsquo; = \frac{2y}{t - b} - \frac{t + b}{t - b}
+y' = \frac{2y}{t - b} - \frac{t + b}{t - b}
 \end{aligned}
-$$</p>
-<p>Which yields the following transformation matrix:</p>
-<p>$$
+$$<p>Which yields the following transformation matrix:</p>
+$$
 \begin{aligned}
-\begin{pmatrix}
-\frac{2}{r - l} &amp; 0 &amp; 0 &amp; -\frac{r + l}{r - l} \
-0 &amp; \frac{2}{t - b} &amp; 0 &amp; -\frac{t + b}{t - b} \
-0 &amp; 0 &amp; 1 &amp; 0 \
-0 &amp; 0 &amp; 0 &amp; 1 \
-\end{pmatrix}
+\begin{bmatrix}
+\frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l} \\
+0 & \frac{2}{t - b} & 0 & -\frac{t + b}{t - b} \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<p>So:</p>
-<p>$$
+$$<p>So:</p>
+$$
 \begin{aligned}
-\begin{pmatrix}
-\frac{2}{r - l} &amp; 0 &amp; 0 &amp; -\frac{r + l}{r - l} \
-0 &amp; \frac{2}{t - b} &amp; 0 &amp; -\frac{t + b}{t - b} \
-0 &amp; 0 &amp; 1 &amp; 0 \
-0 &amp; 0 &amp; 0 &amp; 1 \
-\end{pmatrix} \cdot
-\begin{pmatrix}
-x \
-y \
-z \
-1 \
-\end{pmatrix} =
-\begin{pmatrix}
-\frac{2x}{r - l} - \frac{r + l}{r - l} \
-\frac{2y}{t - b} - \frac{t + b}{t - b} \
-z \
-1 \
-\end{pmatrix}
+\begin{bmatrix}
+\frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l} \\
+0 & \frac{2}{t - b} & 0 & -\frac{t + b}{t - b} \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix} \cdot
+\begin{bmatrix}
+x \\
+y \\
+z \\
+1 \\
+\end{bmatrix} =
+\begin{bmatrix}
+\frac{2x}{r - l} - \frac{r + l}{r - l} \\
+\frac{2y}{t - b} - \frac{t + b}{t - b} \\
+z \\
+1 \\
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<h3>Projection of $z$<span class="hx-absolute -hx-mt-20" id="projection-of-z"></span>
+$$<h3>Projection of $z$<span class="hx-absolute -hx-mt-20" id="projection-of-z"></span>
     <a href="#projection-of-z" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>And finally, to complete our orthographic projection matrix, we need to remap the z-coordinates from $-1$ to $1$. We start with the following condition:</p>
-<p>$$
+$$
 \begin{aligned}
 n \leq -z \leq f
 \end{aligned}
-$$</p>
-<p>Don&rsquo;t forget that the $z$-coordinates of all points visible to the camera are negative, which is why we use $-z$ instead of $z$.</p>
-<p>$$
+$$<p>Don&rsquo;t forget that the $z$-coordinates of all points visible to the camera are negative, which is why we use $-z$ instead of $z$.</p>
+$$
 \begin{aligned}
 0 \leq -z - n\leq f - n
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 0 \leq \frac{-z - n}{f - n} \leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 0 \leq 2\frac{-z - n}{f - n} \leq 2
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq 2\frac{-z - n}{f - n} - 1 \leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq \frac{-2z - 2n -f + n}{f - n} \leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq \frac{-2z - n - f}{f - n} \leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq \frac{-2z}{f - n} - \frac{n + f}{n - f}{f - n} \leq 1
 \end{aligned}
-$$</p>
-<p>Now we add this to the matrix:</p>
-<p>$$
+$$<p>Now we add this to the matrix:</p>
+$$
 \begin{aligned}
-\begin{pmatrix}
-\frac{2}{r - l} &amp; 0 &amp; 0 &amp; -\frac{r + l}{r - l} \
-0 &amp; \frac{2}{t - b} &amp; 0 &amp; -\frac{t + b}{t - b} \
-0 &amp; 0 &amp; -\frac{2}{f - n} &amp; -\frac{n + f}{n - f} \
-0 &amp; 0 &amp; 0 &amp; 1 \
-\end{pmatrix}
+\begin{bmatrix}
+\frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l} \\
+0 & \frac{2}{t - b} & 0 & -\frac{t + b}{t - b} \\
+0 & 0 & -\frac{2}{f - n} & -\frac{n + f}{n - f} \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<p>So:</p>
-<p>$$
+$$<p>So:</p>
+$$
 \begin{aligned}
-\begin{pmatrix}
-\frac{2}{r - l} &amp; 0 &amp; 0 &amp; -\frac{r + l}{r - l} \
-0 &amp; \frac{2}{t - b} &amp; 0 &amp; -\frac{t + b}{t - b} \
-0 &amp; 0 &amp; -\frac{2}{f - n} &amp; -\frac{n + f}{n - f} \
-0 &amp; 0 &amp; 0 &amp; 1 \
-\end{pmatrix} \cdot
-\begin{pmatrix}
-x \
-y \
-z \
-1 \
-\end{pmatrix} =
-\begin{pmatrix}
-\frac{2x}{r - l} - \frac{r + l}{r - l} \
-\frac{2y}{t - b} - \frac{t + b}{t - b} \
-\frac{-2z}{f - n} - \frac{f + n}{f - n} \
-1 \
-\end{pmatrix}
+\begin{bmatrix}
+\frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l} \\
+0 & \frac{2}{t - b} & 0 & -\frac{t + b}{t - b} \\
+0 & 0 & -\frac{2}{f - n} & -\frac{n + f}{n - f} \\
+0 & 0 & 0 & 1 \\
+\end{bmatrix} \cdot
+\begin{bmatrix}
+x \\
+y \\
+z \\
+1 \\
+\end{bmatrix} =
+\begin{bmatrix}
+\frac{2x}{r - l} - \frac{r + l}{r - l} \\
+\frac{2y}{t - b} - \frac{t + b}{t - b} \\
+\frac{-2z}{f - n} - \frac{f + n}{f - n} \\
+1 \\
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<h2>Note<span class="hx-absolute -hx-mt-20" id="note"></span>
+$$<h2>Note<span class="hx-absolute -hx-mt-20" id="note"></span>
     <a href="#note" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>This section is kinda important, up until now we have define this projection matrix on what we call <a href="https://en.mdpedia.org/wiki/Row-_and_column-major_order" target="_blank" rel="noopener">row-major order</a>. However, WebGL expects us to use matrices defined on <a href="https://en.mdpedia.org/wiki/Row-_and_column-major_order" target="_blank" rel="noopener">column-major order</a>. See <a href="../../01_transformations#transposing-transformation-or-projection-matrices" >Transposing Transformation or Projection Matrices</a> on how to correctly defined these matrices.</p>
 <h2>References<span class="hx-absolute -hx-mt-20" id="references"></span>
     <a href="#references" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><ol>

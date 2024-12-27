@@ -24,7 +24,7 @@
 
   <meta itemprop="name" content="Perspective Matrix">
   <meta itemprop="description" content="Fundamentals Let’s now examine how points are projected in OpenGL (or WebGL). A line is drawn from the camera’s origin to the point $P$ that we want to project, and the intersection of this line with the image plane determines the position of the projected point $P_s$. It’s important to note that in OpenGL, the image plane is situated on the near clipping plane.">
-  <meta itemprop="wordCount" content="2141">
+  <meta itemprop="wordCount" content="2075">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Perspective Matrix">
   <meta name="twitter:description" content="Fundamentals Let’s now examine how points are projected in OpenGL (or WebGL). A line is drawn from the camera’s origin to the point $P$ that we want to project, and the intersection of this line with the image plane determines the position of the projected point $P_s$. It’s important to note that in OpenGL, the image plane is situated on the near clipping plane.">
@@ -1841,376 +1841,320 @@
     <a href="#fundamentals" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>Let&rsquo;s now examine how points are projected in OpenGL (or WebGL). A line is drawn from the camera&rsquo;s origin to the point $P$ that we want to project, and the intersection of this line with the image plane determines the position of the projected point $P_s$. It&rsquo;s important to note that in OpenGL, the image plane is situated on the near clipping plane.</p>
 <p><img src="../../../assets/perspective_projection.png" alt="Perspective Projection" loading="lazy" /></p>
 <p>The triangles $\Delta ABC$ and $\Delta DEF$ are similar. Thus, we can express:</p>
-<p>$$
+$$
 \begin{aligned}
 \frac{AB}{DE} = \frac{BC}{EF}
 \end{aligned}
-$$</p>
-<p>By substituting $AB$ with $n$ (the near clipping plane), $DE$ with $P_z$ (the z-coordinate of $P$), and $EF$ with $P_y$ (the y-coordinate of $P$), we can rewrite this equation as:</p>
-<p>$$
+$$<p>By substituting $AB$ with $n$ (the near clipping plane), $DE$ with $P_z$ (the z-coordinate of $P$), and $EF$ with $P_y$ (the y-coordinate of $P$), we can rewrite this equation as:</p>
+$$
 \begin{aligned}
 \frac{n}{-P_z} = \frac{BC}{P_y}
 \end{aligned}
-$$</p>
-<p>And solving for $BC$ we obtain:</p>
-<p>$$
+$$<p>And solving for $BC$ we obtain:</p>
+$$
 \begin{aligned}
 BC = P_{sy} \frac{n \cdot P_y}{-P_z}
 \end{aligned}
-$$</p>
-<p>Note that since the camera is oriented along the negative z-axis, $P_z$ is negative, so, to maintain the sign of the y-coordinate, we negate $P_z$. Following the same logic, we derive the x-coordinate of the projected point with the following equation:</p>
-<p>$$
+$$<p>Note that since the camera is oriented along the negative z-axis, $P_z$ is negative, so, to maintain the sign of the y-coordinate, we negate $P_z$. Following the same logic, we derive the x-coordinate of the projected point with the following equation:</p>
+$$
 \begin{aligned}
 P_{s_x} = \frac{n \cdot P_x}{-P_z}
 \end{aligned}
-$$</p>
-<p>Following the same reasoning for $P_y$, we obtain:</p>
-<p>$$
+$$<p>Following the same reasoning for $P_y$, we obtain:</p>
+$$
 \begin{aligned}
 P_{s_y} = \frac{n \cdot P_y}{-P_z}
 \end{aligned}
-$$</p>
-<h2>Derivation<span class="hx-absolute -hx-mt-20" id="derivation"></span>
+$$<h2>Derivation<span class="hx-absolute -hx-mt-20" id="derivation"></span>
     <a href="#derivation" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>We need to figure out how $P_{sx}$ and $P_{sy}$ correlate with the WebGL perspective matrix. The purpose of a projection matrix is to remap the values projected onto the image plane to a unit cube (defined by minimum $(-1, -1, -1)$ and maximum $(1, 1, 1)$).</p>
 <h3>Projected X<span class="hx-absolute -hx-mt-20" id="projected-x"></span>
     <a href="#projected-x" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Once the point $P$ is projected onto the image plane (near clipping plane), is considered visible if its and coordinates fall within the range $[left, right]$ for $x$ and $[bottom, top]$ for $y$, as depicted in Figure 2.</p>
 <p><img src="../../../assets/frustrum.png" alt="Frustrum" loading="lazy" /></p>
 <p>Such that:</p>
-<p>$$
+$$
 \begin{aligned}
 l \leq P_{sx} \leq r
 \end{aligned}
-$$</p>
-<p>where $l$ and $r$ are the left and right coordinates respectively. Our objective is to remap so that its final value resides within the range $[-1, 1]$:</p>
-<p>$$
+$$<p>where $l$ and $r$ are the left and right coordinates respectively. Our objective is to remap so that its final value resides within the range $[-1, 1]$:</p>
+$$
 \begin{aligned}
 0 \leq P_{sx} - l \leq r - l
 \end{aligned}
-$$</p>
-<p>normalizing by dividing by $r - l$ gives:</p>
-<p>$$
+$$<p>normalizing by dividing by $r - l$ gives:</p>
+$$
 \begin{aligned}
 0 \leq \frac{P_{sx} - l}{r - l} \leq 1
 \end{aligned}
-$$</p>
-<p>multiplying all terms by $2$:</p>
-<p>$$
+$$<p>multiplying all terms by $2$:</p>
+$$
 \begin{aligned}
 0 \leq 2 \frac{P_{sx} - l}{r - l} \leq 2
 \end{aligned}
-$$</p>
-<p>substracting $1$ from all terms results in:</p>
-<p>$$
+$$<p>substracting $1$ from all terms results in:</p>
+$$
 \begin{aligned}
 -1 \leq 2 \frac{P_{sx} - l}{r - l} - 1 \leq 1
 \end{aligned}
-$$</p>
-<p>Now the central term on the inequality is defined to exist on the range $[-1, 1]$, which is what we wanted. With some further rearrangement:</p>
-<p>$$
+$$<p>Now the central term on the inequality is defined to exist on the range $[-1, 1]$, which is what we wanted. With some further rearrangement:</p>
+$$
 \begin{aligned}
 -1 \leq 2 \frac{P_{sx} - l}{r - l} - \frac{r - l}{r - l} \leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq \frac{2P_{sx} - 2l - r + l}{r - l}\leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq \frac{2P_{sx} - r - l}{r - l}\leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq \frac{2P_{sx}}{r - l} - \frac{r + l}{r - l}\leq 1
 \end{aligned}
-$$</p>
-<p>The two central terms are quite similar to the first two terms of the first row in the WebGL perspective projection matrix. If we replace $P_{sx}$ from the previous equation with</p>
-<p>$$
+$$<p>The two central terms are quite similar to the first two terms of the first row in the WebGL perspective projection matrix. If we replace $P_{sx}$ from the previous equation with</p>
+$$
 \begin{aligned}
 P_{sx} = \frac{n P_x}{-P_z}
 \end{aligned}
-$$</p>
-<p>we get:</p>
-<p>$$
+$$<p>we get:</p>
+$$
 \begin{aligned}
 -1 \leq \frac{2nP_x}{-P_z(r - l)} - \frac{r + l}{r - l}\leq 1
 \end{aligned}
-$$</p>
-<p>We can encode this equation in matrix form if we replace the first and third coefficients of the matrix&rsquo;s first row with the first and second term of this formula:</p>
-<p>$$
+$$<p>We can encode this equation in matrix form if we replace the first and third coefficients of the matrix&rsquo;s first row with the first and second term of this formula:</p>
+$$
 \begin{aligned}
-\begin{pmatrix}
-\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \
-\cdots &amp; \cdots &amp; \cdots &amp; \cdots \
-\cdots &amp; \cdots &amp; \cdots &amp; \cdots \
-0 &amp; 0 &amp; -1 &amp; 0
-\end{pmatrix}
+\begin{bmatrix}
+\frac{2n}{r - l} & 0 & \frac{r + l}{r - l} & 0 \\
+\cdots & \cdots & \cdots & \cdots \\
+\cdots & \cdots & \cdots & \cdots \\
+0 & 0 & -1 & 0
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<p>So computing $P_{sx}$ yields:</p>
-<p>$$
+$$<p>So computing $P_{sx}$ yields:</p>
+$$
 \begin{aligned}
-\begin{pmatrix}
-\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \
-\cdots &amp; \cdots &amp; \cdots &amp; \cdots \
-\cdots &amp; \cdots &amp; \cdots &amp; \cdots \
-0 &amp; 0 &amp; -1 &amp; 0
-\end{pmatrix} \cdot
-\begin{pmatrix}
-P_x \
-P_y \
-P_z \
-P_w \
-\end{pmatrix}
+\begin{bmatrix}
+\frac{2n}{r - l} & 0 & \frac{r + l}{r - l} & 0 \\
+\cdots & \cdots & \cdots & \cdots \\
+\cdots & \cdots & \cdots & \cdots \\
+0 & 0 & -1 & 0
+\end{bmatrix} \cdot
+\begin{bmatrix}
+P_x \\
+P_y \\
+P_z \\
+P_w \\
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<p>such that:</p>
-<p>$$
+$$<p>such that:</p>
+$$
 \begin{aligned}
 P_{sx} = \frac{2n}{r - l} P_x + \frac{r + l}{r - l} P_z
 \end{aligned}
-$$</p>
-<p>And since $P_{sx}$ will be divided at the end of the process by $-P_z$ when we convert from homogeneous to Cartesian coordinates, we get:</p>
-<p>$$
+$$<p>And since $P_{sx}$ will be divided at the end of the process by $-P_z$ when we convert from homogeneous to Cartesian coordinates, we get:</p>
+$$
 \begin{aligned}
 P_{sx} = \frac{\frac{2n}{r - l} P_x}{-P_z} + \frac{\frac{r + l}{r - l} P_z}{-P_z} = \frac{2nP_x}{-P_z(r - l)} - \frac{r + l}{r - l}
 \end{aligned}
-$$</p>
-<p>This is the first coordinate of the projected point $P_{s}$ computed using the WebGL perspective matrix.</p>
+$$<p>This is the first coordinate of the projected point $P_{s}$ computed using the WebGL perspective matrix.</p>
 <h3>Projected Y<span class="hx-absolute -hx-mt-20" id="projected-y"></span>
     <a href="#projected-y" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>The derivation for $P_{sy}$ is analogous, replacing $l$ and $r$ with and $b$ and $t$, such that:</p>
-<p>$$
+$$
 \begin{aligned}
 b \leq P_{s_y} \leq t
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 0 \leq P_{s_y} - b \leq t - b
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 0 \leq \frac{P_{s_y} - b}{t - b} \leq 1
 \end{aligned}
-$$</p>
-<p>We multiply by $2$:</p>
-<p>$$
+$$<p>We multiply by $2$:</p>
+$$
 \begin{aligned}
 0 \leq 2\frac{P_{s_y} - b}{t - b} \leq 2
 \end{aligned}
-$$</p>
-<p>And we substract $1$:</p>
-<p>$$
+$$<p>And we substract $1$:</p>
+$$
 \begin{aligned}
 -1 \leq 2\frac{P_{s_y} - b}{t - b} - 1 \leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq 2\frac{P_{s_y} - b}{t - b} - \frac{t - b}{t - b} \leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq \frac{2P_{s_y} - 2b - t + b}{t - b} \leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq \frac{2P_{s_y} - b - t}{t - b} \leq 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -1 \leq \frac{2P_{s_y}}{t - b} - \frac{t + b}{t - b} \leq 1
 \end{aligned}
-$$</p>
-<p>Given we know that:</p>
-<p>$$
+$$<p>Given we know that:</p>
+$$
 \begin{aligned}
 P_{s_y} = \frac{n P_y}{-P_z}
 \end{aligned}
-$$</p>
-<p>then:</p>
-<p>$$
+$$<p>then:</p>
+$$
 \begin{aligned}
 -1 \leq \frac{2n P_y}{-P_z(t - b)} - \frac{t + b}{t - b} \leq 1
 \end{aligned}
-$$</p>
-<p>Therefore, now our projection matrix has the following shape:</p>
-<p>$$
+$$<p>Therefore, now our projection matrix has the following shape:</p>
+$$
 \begin{aligned}
-\begin{pmatrix}
-\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \
-0 &amp; \frac{2n}{t - b} &amp; \frac{t + b}{t - b} &amp; 0 \
-\cdots &amp; \cdots &amp; \cdots &amp; \cdots \
-0 &amp; 0 &amp; -1 &amp; 0
-\end{pmatrix}
+\begin{bmatrix}
+\frac{2n}{r - l} & 0 & \frac{r + l}{r - l} & 0 \\
+0 & \frac{2n}{t - b} & \frac{t + b}{t - b} & 0 \\
+\cdots & \cdots & \cdots & \cdots \\
+0 & 0 & -1 & 0
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<p>Computing $P_{s_y}$ using this matrix gives:</p>
-<p>$$
+$$<p>Computing $P_{s_y}$ using this matrix gives:</p>
+$$
 \begin{aligned}
-\begin{pmatrix}
-\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \
-0 &amp; \frac{2n}{t - b} &amp; \frac{t + b}{t - b} &amp; 0 \
-\cdots &amp; \cdots &amp; \cdots &amp; \cdots \
-0 &amp; 0 &amp; -1 &amp; 0
-\end{pmatrix} \cdot
-\begin{pmatrix}
-x \
-y \
-w \
-z \
-\end{pmatrix}
+\begin{bmatrix}
+\frac{2n}{r - l} & 0 & \frac{r + l}{r - l} & 0 \\
+0 & \frac{2n}{t - b} & \frac{t + b}{t - b} & 0 \\
+\cdots & \cdots & \cdots & \cdots \\
+0 & 0 & -1 & 0
+\end{bmatrix} \cdot
+\begin{bmatrix}
+x \\
+y \\
+w \\
+z \\
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 P_{s_y} = 0 \cdot x + \frac{2n}{t - b} P_y + \frac{t + b}{t - b}P_z + 0
 \end{aligned}
-$$</p>
-<p>and after the divsion by $-P_z$:</p>
-<p>$$
+$$<p>and after the divsion by $-P_z$:</p>
+$$
 \begin{aligned}
 P_{s_y} = \frac{\frac{2n}{t - b}P_y}{-P_z}  + \frac{\frac{t + b}{t - b}P_z}{-P_z}
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 = \frac{2n P_y}{-P_z(t - b)}  - \frac{t + b}{t - b}
 \end{aligned}
-$$</p>
-<h3>Projected Z<span class="hx-absolute -hx-mt-20" id="projected-z"></span>
+$$<h3>Projected Z<span class="hx-absolute -hx-mt-20" id="projected-z"></span>
     <a href="#projected-z" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>All that&rsquo;s left to do to complete it is find a way to remap the z-coordinate of the projected points to the range $[-1,1]$</p>
 <p>We know that the $x$ and $y$ coordinates of $P$ don&rsquo;t contribute to the calculation of the projected point&rsquo;s z-coordinate. Thus, the first and second coefficients of the matrix&rsquo;s third row are necessarily zero. We are left with the following matrix:</p>
-<p>$$
+$$
 \begin{aligned}
-\begin{pmatrix}
-\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \
-0 &amp; \frac{2n}{t - b} &amp; \frac{t + b}{t - b} &amp; 0 \
-0 &amp; 0 &amp; A &amp; B \
-0 &amp; 0 &amp; -1 &amp; 0
-\end{pmatrix}
+\begin{bmatrix}
+\frac{2n}{r - l} & 0 & \frac{r + l}{r - l} & 0 \\
+0 & \frac{2n}{t - b} & \frac{t + b}{t - b} & 0 \\
+0 & 0 & A & B \\
+0 & 0 & -1 & 0
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<p>If we write the equation to compute $P_{s_z}$ using this matrix, we get:</p>
-<p>$$
+$$<p>If we write the equation to compute $P_{s_z}$ using this matrix, we get:</p>
+$$
 \begin{aligned}
 P_{s_z} = \frac{0 \cdot P_x + 0 \cdot P_y + A \cdot P_z + B \cdot P_w}{P_{s_w} = - P_z}
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 \frac{A \cdot P_z + B}{P_{s_w} = -P_z}
 \end{aligned}
-$$</p>
-<p>Note that we are dividing $P_{s_z}$ by $P_{s_w}$ when the point is converted from homogeneous to Cartesian coordinates, and that $P_w = 1$.</p>
+$$<p>Note that we are dividing $P_{s_z}$ by $P_{s_w}$ when the point is converted from homogeneous to Cartesian coordinates, and that $P_w = 1$.</p>
 <p>We need to find the values of $A$ and $B$. We know that when $P_z$ is on the near clipping plane, $P_{s_z}$ needs to be remapped to $-1$, and when $P_z$ is on the far clipping plane, $P_{s_z}$needs to be remapped to $1$.</p>
 <p>So, when $P_z$ is on the near plane, the previous equation is as follows:</p>
-<p>$$
+$$
 \begin{aligned}
 \frac{A \cdot (P_z = -n) + B}{(-P_z = -(-n) = n)} = -1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 \frac{A \cdot -n + B}{n} = -1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -nA + B = -n
 \end{aligned}
-$$</p>
-<p>And when $P_z$ is on the far plane:</p>
-<p>$$
+$$<p>And when $P_z$ is on the far plane:</p>
+$$
 \begin{aligned}
 \frac{A \cdot (P_z = -f) + B}{(-P_z = -(-f) = f)} = 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 \frac{A \cdot -f + B}{f} = 1
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 -fA + B = f
 \end{aligned}
-$$</p>
-<p>These two equations form the following system of equations:</p>
-<p>$$
+$$<p>These two equations form the following system of equations:</p>
+$$
 \begin{aligned}
 \begin{cases}
--nA + B = -n \
+-nA + B = -n \\
 -fA + B = f
 \end{cases}
 \end{aligned}
-$$</p>
-<p>We solve the first equation for $B$:</p>
-<p>$$
+$$<p>We solve the first equation for $B$:</p>
+$$
 \begin{aligned}
 B = -n + An
 \end{aligned}
-$$</p>
-<p>And we substitute on the second equation:</p>
-<p>$$
+$$<p>And we substitute on the second equation:</p>
+$$
 \begin{aligned}
 -fA + (-n + An) = f
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 A (n - f) = f + n
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 A= -\frac{f + n}{f - n}
 \end{aligned}
-$$</p>
-<p>Finding $B$ is straightforward. We just replace $A$ in the first equation:</p>
-<p>$$
+$$<p>Finding $B$ is straightforward. We just replace $A$ in the first equation:</p>
+$$
 \begin{aligned}
 B = -n + (-\frac{f + n}{f - n})n
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 B = -n(1 + \frac{f + n}{f - n})
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 B = -n(\frac{f + n + f - n}{f - n})
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 B = -n(\frac{2f}{f - n})
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 B = -\frac{2fn}{f - n}
 \end{aligned}
-$$</p>
-<p>We can replace the solutions we found for A and B in our matrix, and we finally get:</p>
-<p>$$
+$$<p>We can replace the solutions we found for A and B in our matrix, and we finally get:</p>
+$$
 \begin{aligned}
-\begin{pmatrix}
-\frac{2n}{r - l} &amp; 0 &amp; \frac{r + l}{r - l} &amp; 0 \
-0 &amp; \frac{2n}{t - b} &amp; \frac{t + b}{t - b} &amp; 0 \
-0 &amp; 0 &amp; -\frac{f + n}{f - n}&amp; -\frac{2fn}{f - n} \
-0 &amp; 0 &amp; -1 &amp; 0
-\end{pmatrix}
+\begin{bmatrix}
+\frac{2n}{r - l} & 0 & \frac{r + l}{r - l} & 0 \\
+0 & \frac{2n}{t - b} & \frac{t + b}{t - b} & 0 \\
+0 & 0 & -\frac{f + n}{f - n}& -\frac{2fn}{f - n} \\
+0 & 0 & -1 & 0
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<h2>The Field of View and Image Aspect Ratio<span class="hx-absolute -hx-mt-20" id="the-field-of-view-and-image-aspect-ratio"></span>
+$$<h2>The Field of View and Image Aspect Ratio<span class="hx-absolute -hx-mt-20" id="the-field-of-view-and-image-aspect-ratio"></span>
     <a href="#the-field-of-view-and-image-aspect-ratio" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>The field of view and the image aspect ratio are somehow related to the projection process. The construction of the matrix relies on six parameters: the left, right, bottom, and top coordinates, as well as the near and far clipping planes. The user provides the values for the near and far clipping planes, but how about the left, right, bottom, and top coordinates? What are these, where do they come from, and how do we calculate them?</p>
 <p>Observing the following figure, you can see that these coordinates correspond to the lower-left and upper-right corners of the frustum front face, where the image of the 3D scene is projected:</p>
 <p><img src="../../../assets/frustrum.png" alt="Frustrum" loading="lazy" /></p>
@@ -2219,67 +2163,56 @@ $$</p>
     <a href="#computing-the-coordinates" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>To compute the top coordinate, we look at the right-angled triangle $ABC$ on the following image.</p>
 <p><img src="../../../assets/camera_side_view.png" alt="Camera Side View" loading="lazy" /></p>
 <p>The angle between by $AB$ and $AC$ is half the FOV. Also, the adjacent side of the triangle is the value for the near-clipping plane. Using <a href="../../../../Math/Pre-Calculus/AGAA/08_03.md" >trigonometry</a>, we can express this as:</p>
-<p>$$
+$$
 \begin{aligned}
 \tan(\frac{FOVY}{2}) = \frac{opposite}{adyacent} = \frac{BC}{AB} = \frac{top}{near}
 \end{aligned}
-$$</p>
-<p>Therefore:</p>
-<p>$$
+$$<p>Therefore:</p>
+$$
 \begin{aligned}
 top = \tan(\frac{FOVY}{2}) \cdot near
 \end{aligned}
-$$</p>
-<p>And since the bottom half of the camera is symmetrical to the upper half, we can state that:</p>
-<p>$$
+$$<p>And since the bottom half of the camera is symmetrical to the upper half, we can state that:</p>
+$$
 \begin{aligned}
 bottom = -top
 \end{aligned}
-$$</p>
-<p><img src="../../../assets/aspect_ratio.png" alt="Aspect Ratio" loading="lazy" /></p>
+$$<p><img src="../../../assets/aspect_ratio.png" alt="Aspect Ratio" loading="lazy" /></p>
 <p>In Figure 5, two scenarios are considered: the image can either be square or rectangular. For a square camera, it&rsquo;s straightforward: the left and bottom coordinates are the same, the right and top coordinates are also the same. Therefore:</p>
-<p>$$
+$$
 \begin{aligned}
 top = \tan(\frac{FOVY}{2}) \cdot near
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 left = bottom = -top
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 right = top
 \end{aligned}
-$$</p>
-<p>For a non-square camera, as shown in the right inside of figure 5, the bottom and top coordinates remain the same, but the left and right coordinates are scaled by the aspect ratio, defined as the image width over the image height. The general formulas for computing the left, right, and bottom coordinates are:</p>
-<p>$$
+$$<p>For a non-square camera, as shown in the right inside of figure 5, the bottom and top coordinates remain the same, but the left and right coordinates are scaled by the aspect ratio, defined as the image width over the image height. The general formulas for computing the left, right, and bottom coordinates are:</p>
+$$
 \begin{aligned}
 aspect ratio = \frac{width}{heigth}
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 top = \tan(\frac{FOVY}{2}) \cdot near
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 bottom = -top
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 right = top \cdot aspect ratio
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 left = bottom \cdot aspect ratio
 \end{aligned}
-$$</p>
-<h2>Note<span class="hx-absolute -hx-mt-20" id="note"></span>
+$$<h2>Note<span class="hx-absolute -hx-mt-20" id="note"></span>
     <a href="#note" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>This section is kinda important, up until now we have define this projection matrix on what we call <a href="https://en.mdpedia.org/wiki/Row-_and_column-major_order" target="_blank" rel="noopener">row-major order</a>. However, WebGL expects us to use matrices defined on <a href="https://en.mdpedia.org/wiki/Row-_and_column-major_order" target="_blank" rel="noopener">column-major order</a>. See <a href="./01_transformations.md#Transposing%20Transformation%20or%20Projection%20Matrices" >Transposing Transformation or Projection Matrices</a> on how to correctly defined these matrices.</p>
 <h2>References<span class="hx-absolute -hx-mt-20" id="references"></span>
     <a href="#references" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><ol>

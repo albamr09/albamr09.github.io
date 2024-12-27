@@ -744,30 +744,26 @@
 &lt;p&gt;
     &lt;img src=&#34;../assets/lambertian_light_model.png&#34; alt=&#34;Lambertian Reflection Model&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The light-direction vector is the vector that starts on the surface and ends on the light source position. It is essentially the vector that maps the light&amp;rsquo;s position to the surface of the geometry.&lt;/p&gt;
-&lt;p&gt;$$
+$$
 \begin{aligned}
 F = C_lC_m(-L \circ N)
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;Where $F$ is the final diffuse color, $C_l$ is the light diffuse color and $C_m$ is the material diffuse color. Given:&lt;/p&gt;
-&lt;p&gt;$$
+$$&lt;p&gt;Where $F$ is the final diffuse color, $C_l$ is the light diffuse color and $C_m$ is the material diffuse color. Given:&lt;/p&gt;
+$$
 \begin{aligned}
 -L \cot N = |-L||N| \circ \emptyset
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;If $L$ and $N$ are normalized then $|-L| = |N| = 1$, thus:&lt;/p&gt;
-&lt;p&gt;$$
+$$&lt;p&gt;If $L$ and $N$ are normalized then $|-L| = |N| = 1$, thus:&lt;/p&gt;
+$$
 \begin{aligned}
 -L \cot N = \cos \emptyset
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;And the final color is computed as:&lt;/p&gt;
-&lt;p&gt;$$
+$$&lt;p&gt;And the final color is computed as:&lt;/p&gt;
+$$
 \begin{aligned}
 F = C_lC_m(\cos \emptyset)
 \end{aligned}
-$$&lt;/p&gt;
-&lt;h4&gt;Phong Reflection Model&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;phong-reflection-model&#34;&gt;&lt;/span&gt;
+$$&lt;h4&gt;Phong Reflection Model&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;phong-reflection-model&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#phong-reflection-model&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;The Phong reflection model describes the way a surface reflects the light as the sum of three types of reflection.&lt;/p&gt;
 &lt;p&gt;
     &lt;img src=&#34;../assets/phong_reflection_model.png&#34; alt=&#34;Phong Reflection Model&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
@@ -780,19 +776,17 @@ $$&lt;/p&gt;
 &lt;p&gt;
     &lt;img src=&#34;../assets/specular_color.png&#34; alt=&#34;Specular Color&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;So the specular color is computed as follows:&lt;/p&gt;
-&lt;p&gt;$$
+$$
 \begin{aligned}
 F_s = C_lC_m (R \circ E)^n
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;where $F_s$ is the final specular color, $C_l$ is the light specular color, $C_l$ is the material specular color, and $n$ is the shininess factor.&lt;/p&gt;
+$$&lt;p&gt;where $F_s$ is the final specular color, $C_l$ is the light specular color, $C_l$ is the material specular color, and $n$ is the shininess factor.&lt;/p&gt;
 &lt;p&gt;If $R$ and $E$ are normalized, then $R \circ E = \cos \emptyset$:&lt;/p&gt;
-&lt;p&gt;$$
+$$
 \begin{aligned}
 F_s = C_lC_m (\cos \emptyset)^n
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;We know that the maximum value of $\cos \theta$ is $1$, and it is reached when $\theta = 0$, that is when $R$ and $E$ have the same direction.&lt;/p&gt;
+$$&lt;p&gt;We know that the maximum value of $\cos \theta$ is $1$, and it is reached when $\theta = 0$, that is when $R$ and $E$ have the same direction.&lt;/p&gt;
 &lt;h3&gt;Summary&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;summary&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#summary&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;
     &lt;img src=&#34;../assets/shading_lighting_methods_summary.png&#34; alt=&#34;Shading and Lighting Methods Summary&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
@@ -868,12 +862,11 @@ of components.&lt;/li&gt;
     &lt;a href=&#34;#goraud-shading-with-phong-reflection-model&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Different from the Lambertian reflection model, the Phong reflection model considers three properties: the &lt;strong&gt;ambient&lt;/strong&gt;, &lt;strong&gt;diffuse&lt;/strong&gt;, and &lt;strong&gt;specular&lt;/strong&gt;, and ultimately yields a more realistic reflection. So now both light and material have three properties: the ambient, diffuse, and specular colors.&lt;/p&gt;
 &lt;h3&gt;Vertex Shader&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;vertex-shader&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#vertex-shader&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Let&amp;rsquo;s cover a sample vertex shader. In this example we are applying Goraud Shading (we compute the color on the vertex shader and the pass it as a &lt;code&gt;varying&lt;/code&gt; to the fragment shader). And in order to compute the color we use the Phong reflection model. That is the color is computed as follows:&lt;/p&gt;
-&lt;p&gt;$$
+$$
 \begin{aligned}
 F_s = C_lC_m (R \circ E) = C_lC_m (|R||E| \cos \emptyset) = C_l C_m (\cos \emptyset)^n
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;Where:&lt;/p&gt;
+$$&lt;p&gt;Where:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;uLightDiffuse&lt;/code&gt; is $C_l$&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;uMaterialDiffuse&lt;/code&gt; is $C_m$&lt;/li&gt;
@@ -1017,12 +1010,11 @@ void main() {
 &lt;p&gt;Remember that the value of the &lt;code&gt;vVertexColor&lt;/code&gt; varying will be different from the one calculated in the vertex shader since WebGL will interpolate it by taking the corresponding calculated colors for the vertices surrounding the correspondent fragment (pixel).&lt;/p&gt;
 &lt;h2&gt;Goraud Shading with Lambertian Reflection Model&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;goraud-shading-with-lambertian-reflection-model&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#goraud-shading-with-lambertian-reflection-model&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The Lambertian reflection model only considers the interaction of diffuse material and diffuse light properties. In short, we assign the final color as follows:&lt;/p&gt;
-&lt;p&gt;$$
+$$
 \begin{aligned}
 F_d = C_lC_m (-L \circ N) = C_lC_m (|-L||N| \cos \emptyset) = C_l C_m (\cos \emptyset)
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;Where:&lt;/p&gt;
+$$&lt;p&gt;Where:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;uLightDiffuse&lt;/code&gt; is $C_l$&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;uMaterialDiffuse&lt;/code&gt; is $C_m$&lt;/li&gt;
@@ -1652,12 +1644,11 @@ void main(void) {
     &lt;a href=&#34;#parametric-curves&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;There are many situations where we don&amp;rsquo;t know the exact position of an object at a given time, but we do know an equation that describes its movement. These equations are known as &lt;strong&gt;parametric curves&lt;/strong&gt;. The following diagram shows the parametric equation that describes the free-fall motion:&lt;/p&gt;
 &lt;p&gt;
     &lt;img src=&#34;.././assets/parametric_curves_example.png&#34; alt=&#34;Parametric Curves&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;$$
+$$
 \begin{aligned}
 h = H_0 + V_0t - \frac{1}{2}gt^2
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;where $g$ is the gravity at $9.8 m/s$, $V_0$ is the initial velocity, $H_0$ is the initial position, $t$ is the time and $h$ is the position at $t$.&lt;/p&gt;
+$$&lt;p&gt;where $g$ is the gravity at $9.8 m/s$, $V_0$ is the initial velocity, $H_0$ is the initial position, $t$ is the time and $h$ is the position at $t$.&lt;/p&gt;
 &lt;h2&gt;Optimizing Batch Performance&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;optimizing-batch-performance&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#optimizing-batch-performance&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;WebGL 2 adds some interesting features, such as &lt;strong&gt;geometry-instancing&lt;/strong&gt;. This feature allows us to render the same instance of a single mesh with differing shader attributes using instancing and only one render call. Though instancing is limited, as it’s based on the same mesh only, it’s still a great way to improve performance if you have to draw the same meshes multiple times, especially if combined with shaders.&lt;/p&gt;
 &lt;h2&gt;Interpolation&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;interpolation&#34;&gt;&lt;/span&gt;
@@ -1964,12 +1955,11 @@ We could try something such as this, but will not work:&lt;/p&gt;
   
 &lt;/div&gt;
 &lt;p&gt;So now the effect of lamberTerm is not as straight forward, and it does not increasig &amp;ldquo;linearly&amp;rdquo; but by the means of a power function:&lt;/p&gt;
-&lt;p&gt;$$
+$$
 \begin{aligned}
 f(x) = \text{lambert term}^{10 \text{cutoff}}
 \end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;This is illustrated of the following figure:&lt;/p&gt;
+$$&lt;p&gt;This is illustrated of the following figure:&lt;/p&gt;
 &lt;p&gt;
     &lt;img src=&#34;.././assets/attenuation_factor_function.png&#34; alt=&#34;Attenuation Factor&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
 &lt;h2&gt;Use of Color in the Scene&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;use-of-color-in-the-scene&#34;&gt;&lt;/span&gt;

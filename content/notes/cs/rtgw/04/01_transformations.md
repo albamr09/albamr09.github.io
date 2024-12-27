@@ -82,12 +82,12 @@ These are the most simple tranformation matrices to understand. A translation ma
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 1 & 0 & 0 & X \\
 0 & 1 & 0 & Y \\
 0 & 0 & 1 & Z \\
 0 & 0 & 0 & 1 \\
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 
@@ -97,31 +97,31 @@ So if we want to translate the vector $(10,10,10,1)$ of $10$ units in the X dire
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 1 & 0 & 0 & 10 \\
 0 & 1 & 0 & 0 \\
 0 & 0 & 1 & 0 \\
 0 & 0 & 0 & 1 \\
-\end{pmatrix}
+\end{bmatrix}
 *
-\begin{pmatrix}
+\begin{bmatrix}
 10 \\
 10 \\
 10 \\
 1 \\
-\end{pmatrix} =
-\begin{pmatrix}
+\end{bmatrix} =
+\begin{bmatrix}
 1 ** 10 + 0 ** 10 + 0 ** 10 + 10 ** 1 \\
 0 ** 10 + 1 ** 10 + 0 ** 10 + 0 ** 1 \\
 0 ** 10 + 0 ** 10 + 1 ** 10 + 0 ** 1 \\
 0 ** 10 + 0 ** 10 + 0 ** 10 + 1 ** 1 \\
-\end{pmatrix} =
-\begin{pmatrix}
+\end{bmatrix} =
+\begin{bmatrix}
 20 \\
 10 \\
 10 \\
 1 \\
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 
@@ -133,12 +133,12 @@ Scaling matrices are quite easy too:
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 x & 0 & 0 & 0 \\
 0 & y & 0 & 0 \\
 0 & 0 & z & 0 \\
 0 & 0 & 0 & 1 \\
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 
@@ -146,31 +146,31 @@ So if you want to scale a vector (position or direction, it doesn’t matter) by
 
 $$
 \begin{aligned}
-\begin{pmatrix}
+\begin{bmatrix}
 2 & 0 & 0 & 0 \\
 0 & 2 & 0 & 0 \\
 0 & 0 & 2 & 0 \\
 0 & 0 & 0 & 1 \\
-\end{pmatrix}
+\end{bmatrix}
 *
-\begin{pmatrix}
+\begin{bmatrix}
 x \\
 y \\
 z \\
 w \\
-\end{pmatrix} =
-\begin{pmatrix}
+\end{bmatrix} =
+\begin{bmatrix}
 2 ** x + 0 ** y + 0 ** z + 0 ** w \\
 0 ** x + 2 ** y + 0 ** z + 0 ** w \\
 0 ** x + 0 ** y + 2 ** z + 0 ** w \\
 0 ** x + 0 ** y + 0 ** z + 1 ** w \\
-\end{pmatrix} =
-\begin{pmatrix}
+\end{bmatrix} =
+\begin{bmatrix}
 2x \\
 2y \\
 2z \\
 w \\
-\end{pmatrix}
+\end{bmatrix}
 \end{aligned}
 $$
 
@@ -184,7 +184,7 @@ So now we know how to rotate, translate, and scale our vectors. It would be grea
 
 ```javascript
 TransformedVector =
-  TranslationMatrix ** (RotationMatrix ** ScaleMatrix) * OriginalVector;
+  TranslationMatrix * (RotationMatrix * ScaleMatrix) * OriginalVector;
 ```
 
 This actually performs the scaling FIRST, and THEN the rotation, and THEN the translation. This is how matrix multiplication works.

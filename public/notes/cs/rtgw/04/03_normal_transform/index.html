@@ -12,26 +12,22 @@
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
 <title>Normal Transform – Alba&#39;s Notes</title>
   <meta name="description" content="Calculating the Normal Matrix Two vectors are perpendicular if their dot product is $0$. In our example
-$$ \begin{aligned} &lt;N, S&gt; = 0 \end{aligned} $$
-Here, $S$ is the surface vector and can be calculated as the difference of two vertices. Let $M$ be the Model-View matrix. We can use $M$ to transform $S$ as follows:
-$$ \begin{aligned} S’ = MS \end{aligned} $$
-We want to find a matrix, $K$, that allows us to transform normals in a similar way. For the $N$ normal, we want the following:" /><link rel="canonical" href="//localhost:1313/notes/cs/rtgw/04/03_normal_transform/" itemprop="url" />
+$$ \begin{aligned} = 0 \end{aligned} $$Here, $S$ is the surface vector and can be calculated as the difference of two vertices. Let $M$ be the Model-View matrix. We can use $M$ to transform $S$ as follows:
+$$ \begin{aligned} S&#39; = MS \end{aligned} $$We want to find a matrix, $K$, that allows us to transform normals in a similar way. For the $N$ normal, we want the following:" /><link rel="canonical" href="//localhost:1313/notes/cs/rtgw/04/03_normal_transform/" itemprop="url" />
 
 <meta property="og:title" content="Normal Transform" />
 <meta property="og:description" content="Calculating the Normal Matrix
     Two vectors are perpendicular if their dot product is $0$. In our example
 $$
 \begin{aligned}
-&lt;N, S&gt; = 0
+ = 0
 \end{aligned}
-$$
-Here, $S$ is the surface vector and can be calculated as the difference of two vertices. Let $M$ be the Model-View matrix. We can use $M$ to transform $S$ as follows:
+$$Here, $S$ is the surface vector and can be calculated as the difference of two vertices. Let $M$ be the Model-View matrix. We can use $M$ to transform $S$ as follows:
 $$
 \begin{aligned}
-S&rsquo; = MS
+S&#39; = MS
 \end{aligned}
-$$
-We want to find a matrix, $K$, that allows us to transform normals in a similar way. For the $N$ normal, we want the following:" />
+$$We want to find a matrix, $K$, that allows us to transform normals in a similar way. For the $N$ normal, we want the following:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="//localhost:1313/notes/cs/rtgw/04/03_normal_transform/" /><meta property="article:section" content="notes" />
 
@@ -39,18 +35,14 @@ We want to find a matrix, $K$, that allows us to transform normals in a similar 
 
   <meta itemprop="name" content="Normal Transform">
   <meta itemprop="description" content="Calculating the Normal Matrix Two vectors are perpendicular if their dot product is $0$. In our example
-$$ \begin{aligned} &lt;N, S&gt; = 0 \end{aligned} $$
-Here, $S$ is the surface vector and can be calculated as the difference of two vertices. Let $M$ be the Model-View matrix. We can use $M$ to transform $S$ as follows:
-$$ \begin{aligned} S’ = MS \end{aligned} $$
-We want to find a matrix, $K$, that allows us to transform normals in a similar way. For the $N$ normal, we want the following:">
-  <meta itemprop="wordCount" content="272">
+$$ \begin{aligned} = 0 \end{aligned} $$Here, $S$ is the surface vector and can be calculated as the difference of two vertices. Let $M$ be the Model-View matrix. We can use $M$ to transform $S$ as follows:
+$$ \begin{aligned} S&#39; = MS \end{aligned} $$We want to find a matrix, $K$, that allows us to transform normals in a similar way. For the $N$ normal, we want the following:">
+  <meta itemprop="wordCount" content="118">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Normal Transform">
   <meta name="twitter:description" content="Calculating the Normal Matrix Two vectors are perpendicular if their dot product is $0$. In our example
-$$ \begin{aligned} &lt;N, S&gt; = 0 \end{aligned} $$
-Here, $S$ is the surface vector and can be calculated as the difference of two vertices. Let $M$ be the Model-View matrix. We can use $M$ to transform $S$ as follows:
-$$ \begin{aligned} S’ = MS \end{aligned} $$
-We want to find a matrix, $K$, that allows us to transform normals in a similar way. For the $N$ normal, we want the following:">
+$$ \begin{aligned} = 0 \end{aligned} $$Here, $S$ is the surface vector and can be calculated as the difference of two vertices. Let $M$ be the Model-View matrix. We can use $M$ to transform $S$ as follows:
+$$ \begin{aligned} S&#39; = MS \end{aligned} $$We want to find a matrix, $K$, that allows us to transform normals in a similar way. For the $N$ normal, we want the following:">
 
     <link href="/css/compiled/main.css" rel="stylesheet" />
 
@@ -1803,77 +1795,64 @@ We want to find a matrix, $K$, that allows us to transform normals in a similar 
           <h1>Normal Transform</h1>
           <h3>Calculating the Normal Matrix<span class="hx-absolute -hx-mt-20" id="calculating-the-normal-matrix"></span>
     <a href="#calculating-the-normal-matrix" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Two vectors are perpendicular if their dot product is $0$. In our example</p>
-<p>$$
+$$
 \begin{aligned}
-&lt;N, S&gt; = 0
+<N, S> = 0
 \end{aligned}
-$$</p>
-<p>Here, $S$ is the surface vector and can be calculated as the difference of two vertices. Let $M$ be the Model-View matrix. We can use $M$ to transform $S$ as follows:</p>
-<p>$$
+$$<p>Here, $S$ is the surface vector and can be calculated as the difference of two vertices. Let $M$ be the Model-View matrix. We can use $M$ to transform $S$ as follows:</p>
+$$
 \begin{aligned}
-S&rsquo; = MS
+S' = MS
 \end{aligned}
-$$</p>
-<p>We want to find a matrix, $K$, that allows us to transform normals in a similar way. For the $N$ normal, we want the following:</p>
-<p>$$
+$$<p>We want to find a matrix, $K$, that allows us to transform normals in a similar way. For the $N$ normal, we want the following:</p>
+$$
 \begin{aligned}
-N&rsquo; = KN
+N' = KN
 \end{aligned}
-$$</p>
-<p>For the scene to be consistent after obtaining $N&rsquo;$ and $S&rsquo;$, these two need to keep the perpendicularity that the original vectors $N$ and $S$ had.</p>
-<p>$$
+$$<p>For the scene to be consistent after obtaining $N&rsquo;$ and $S&rsquo;$, these two need to keep the perpendicularity that the original vectors $N$ and $S$ had.</p>
+$$
 \begin{aligned}
-&lt;N&rsquo;, S&rsquo;&gt; = 0
+<N', S'> = 0
 \end{aligned}
-$$</p>
-<p>Substituting $N&rsquo;$ and $S&rsquo;$:</p>
-<p>$$
+$$<p>Substituting $N&rsquo;$ and $S&rsquo;$:</p>
+$$
 \begin{aligned}
-&lt;KN, MS&gt; = 0
+<KN, MS> = 0
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 (KN)^T(MS) = 0
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 N^TK^TMS = 0
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 N^T(K^TM)S = 0
 \end{aligned}
-$$</p>
-<p>Now, remember that $&lt;N, S&gt; = 0$ so $N^TS = 0$. This means that in the previous equation, $(K^TM)$ needs to be the identity matrix, $I$, so the original condition of N and S being perpendicular holds:</p>
-<p>$$
+$$<p>Now, remember that $&lt;N, S&gt; = 0$ so $N^TS = 0$. This means that in the previous equation, $(K^TM)$ needs to be the identity matrix, $I$, so the original condition of N and S being perpendicular holds:</p>
+$$
 \begin{aligned}
 K^TM = I
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 K^TMM^{-1} = IM^{-1} = M^{-1}
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 K^T = M^{-1}
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 (K^T)^T = (M^{-1})^T
 \end{aligned}
-$$</p>
-<p>$$
+$$$$
 \begin{aligned}
 K = (M^{-1})^T
 \end{aligned}
-$$</p>
-<p>$K$ is obtained by transposing the inverse of the Model-View matrix ($M$, in this example). We need to use $K$ to multiply the normal vectors so that they keep being perpendicular to the surface when transformed.</p>
+$$<p>$K$ is obtained by transposing the inverse of the Model-View matrix ($M$, in this example). We need to use $K$ to multiply the normal vectors so that they keep being perpendicular to the surface when transformed.</p>
 
         </div>
         <div class="hx-mt-16"></div>

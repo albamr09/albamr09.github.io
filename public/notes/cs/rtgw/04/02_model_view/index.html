@@ -22,7 +22,7 @@ We’d like to be able to move this model (you just learnt to do so: translation
   <meta itemprop="name" content="Model, View and Projection Transform">
   <meta itemprop="description" content="The Model Matrix A model is defined by a set of vertices. The $X,Y,Z$ coordinates of these vertices are defined relative to the object’s center: that is, if a vertex is at $(0,0,0)$, it is at the center of the object.
 We’d like to be able to move this model (you just learnt to do so: translation**rotation**scale, and done. You apply this matrix to all your vertices at each frame and everything moves. Something that doesn’t move will be at the center of the world.">
-  <meta itemprop="wordCount" content="1340">
+  <meta itemprop="wordCount" content="1338">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Model, View and Projection Transform">
   <meta name="twitter:description" content="The Model Matrix A model is defined by a set of vertices. The $X,Y,Z$ coordinates of these vertices are defined relative to the object’s center: that is, if a vertex is at $(0,0,0)$, it is at the center of the object.
@@ -1884,25 +1884,23 @@ We’d like to be able to move this model (you just learnt to do so: translation
 <p><img src="../../assets/spatial_world_encoding.png" alt="Spatial World Encoding" loading="lazy" /></p>
 <h4>Rotation Matrix<span class="hx-absolute -hx-mt-20" id="rotation-matrix"></span>
     <a href="#rotation-matrix" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>The intersection of the first three rows with the first three columns defines the 3x3 Rotation matrix. This matrix contains information about rotations around the standard axis.</p>
-<p>$$
+$$
 \begin{aligned}
-\begin{pmatrix}
-m_1 &amp; m_2 &amp; m_3 \
-m_5 &amp; m_6 &amp; m_7 \
-m_9 &amp; m_{10} &amp; m_{11}
-\end{pmatrix}
+\begin{bmatrix}
+m_1 & m_2 & m_3 \\
+m_5 & m_6 & m_7 \\
+m_9 & m_{10} & m_{11}
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<h4>Translation Vector<span class="hx-absolute -hx-mt-20" id="translation-vector"></span>
+$$<h4>Translation Vector<span class="hx-absolute -hx-mt-20" id="translation-vector"></span>
     <a href="#translation-vector" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>The intersection of the first three rows with the last column defines a three-component Translation vector.</p>
-<p>$$
+$$
 \begin{aligned}
-\begin{pmatrix}
-m_{13} &amp; m_{14} &amp; m_{15}
-\end{pmatrix}
+\begin{bmatrix}
+m_{13} & m_{14} & m_{15}
+\end{bmatrix}
 \end{aligned}
-$$</p>
-<h4>The Mysterious Fourth Row<span class="hx-absolute -hx-mt-20" id="the-mysterious-fourth-row"></span>
+$$<h4>The Mysterious Fourth Row<span class="hx-absolute -hx-mt-20" id="the-mysterious-fourth-row"></span>
     <a href="#the-mysterious-fourth-row" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>The fourth row does not have any special meaning.</p>
 <ul>
 <li>The $m_4$, $m_8$, and $m_{12}$ elements are always $0$.</li>

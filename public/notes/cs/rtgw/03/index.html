@@ -29,7 +29,7 @@ Normals
   <meta itemprop="name" content="Lights">
   <meta itemprop="description" content="Positional Versus Directional Lights Light sources can be positional or directional. A light source is called positional when its location will affect how the scene is lit. Directional lights are lights that produce the same luminous result, regardless of their position. Directional lighting assumes that the light is coming uniformly from one direction.
 Normals Normals are vectors that are perpendicular to the surface we want to illuminate. Normals represent the orientation of the surface.">
-  <meta itemprop="wordCount" content="3946">
+  <meta itemprop="wordCount" content="3938">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Lights">
   <meta name="twitter:description" content="Positional Versus Directional Lights Light sources can be positional or directional. A light source is called positional when its location will affect how the scene is lit. Directional lights are lights that produce the same luminous result, regardless of their position. Directional lighting assumes that the light is coming uniformly from one direction.
@@ -1990,30 +1990,26 @@ Normals Normals are vectors that are perpendicular to the surface we want to ill
 <p>
     <img src="../assets/lambertian_light_model.png" alt="Lambertian Reflection Model" loading="lazy" /></p>
 <p>The light-direction vector is the vector that starts on the surface and ends on the light source position. It is essentially the vector that maps the light&rsquo;s position to the surface of the geometry.</p>
-<p>$$
+$$
 \begin{aligned}
 F = C_lC_m(-L \circ N)
 \end{aligned}
-$$</p>
-<p>Where $F$ is the final diffuse color, $C_l$ is the light diffuse color and $C_m$ is the material diffuse color. Given:</p>
-<p>$$
+$$<p>Where $F$ is the final diffuse color, $C_l$ is the light diffuse color and $C_m$ is the material diffuse color. Given:</p>
+$$
 \begin{aligned}
 -L \cot N = |-L||N| \circ \emptyset
 \end{aligned}
-$$</p>
-<p>If $L$ and $N$ are normalized then $|-L| = |N| = 1$, thus:</p>
-<p>$$
+$$<p>If $L$ and $N$ are normalized then $|-L| = |N| = 1$, thus:</p>
+$$
 \begin{aligned}
 -L \cot N = \cos \emptyset
 \end{aligned}
-$$</p>
-<p>And the final color is computed as:</p>
-<p>$$
+$$<p>And the final color is computed as:</p>
+$$
 \begin{aligned}
 F = C_lC_m(\cos \emptyset)
 \end{aligned}
-$$</p>
-<h4>Phong Reflection Model<span class="hx-absolute -hx-mt-20" id="phong-reflection-model"></span>
+$$<h4>Phong Reflection Model<span class="hx-absolute -hx-mt-20" id="phong-reflection-model"></span>
     <a href="#phong-reflection-model" class="subheading-anchor" aria-label="Permalink for this section"></a></h4><p>The Phong reflection model describes the way a surface reflects the light as the sum of three types of reflection.</p>
 <p>
     <img src="../assets/phong_reflection_model.png" alt="Phong Reflection Model" loading="lazy" /></p>
@@ -2026,19 +2022,17 @@ $$</p>
 <p>
     <img src="../assets/specular_color.png" alt="Specular Color" loading="lazy" /></p>
 <p>So the specular color is computed as follows:</p>
-<p>$$
+$$
 \begin{aligned}
 F_s = C_lC_m (R \circ E)^n
 \end{aligned}
-$$</p>
-<p>where $F_s$ is the final specular color, $C_l$ is the light specular color, $C_l$ is the material specular color, and $n$ is the shininess factor.</p>
+$$<p>where $F_s$ is the final specular color, $C_l$ is the light specular color, $C_l$ is the material specular color, and $n$ is the shininess factor.</p>
 <p>If $R$ and $E$ are normalized, then $R \circ E = \cos \emptyset$:</p>
-<p>$$
+$$
 \begin{aligned}
 F_s = C_lC_m (\cos \emptyset)^n
 \end{aligned}
-$$</p>
-<p>We know that the maximum value of $\cos \theta$ is $1$, and it is reached when $\theta = 0$, that is when $R$ and $E$ have the same direction.</p>
+$$<p>We know that the maximum value of $\cos \theta$ is $1$, and it is reached when $\theta = 0$, that is when $R$ and $E$ have the same direction.</p>
 <h3>Summary<span class="hx-absolute -hx-mt-20" id="summary"></span>
     <a href="#summary" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>
     <img src="../assets/shading_lighting_methods_summary.png" alt="Shading and Lighting Methods Summary" loading="lazy" /></p>
@@ -2114,12 +2108,11 @@ of components.</li>
     <a href="#goraud-shading-with-phong-reflection-model" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>Different from the Lambertian reflection model, the Phong reflection model considers three properties: the <strong>ambient</strong>, <strong>diffuse</strong>, and <strong>specular</strong>, and ultimately yields a more realistic reflection. So now both light and material have three properties: the ambient, diffuse, and specular colors.</p>
 <h3>Vertex Shader<span class="hx-absolute -hx-mt-20" id="vertex-shader"></span>
     <a href="#vertex-shader" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Let&rsquo;s cover a sample vertex shader. In this example we are applying Goraud Shading (we compute the color on the vertex shader and the pass it as a <code>varying</code> to the fragment shader). And in order to compute the color we use the Phong reflection model. That is the color is computed as follows:</p>
-<p>$$
+$$
 \begin{aligned}
 F_s = C_lC_m (R \circ E) = C_lC_m (|R||E| \cos \emptyset) = C_l C_m (\cos \emptyset)^n
 \end{aligned}
-$$</p>
-<p>Where:</p>
+$$<p>Where:</p>
 <ul>
 <li><code>uLightDiffuse</code> is $C_l$</li>
 <li><code>uMaterialDiffuse</code> is $C_m$</li>
@@ -2263,12 +2256,11 @@ void main() {
 <p>Remember that the value of the <code>vVertexColor</code> varying will be different from the one calculated in the vertex shader since WebGL will interpolate it by taking the corresponding calculated colors for the vertices surrounding the correspondent fragment (pixel).</p>
 <h2>Goraud Shading with Lambertian Reflection Model<span class="hx-absolute -hx-mt-20" id="goraud-shading-with-lambertian-reflection-model"></span>
     <a href="#goraud-shading-with-lambertian-reflection-model" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>The Lambertian reflection model only considers the interaction of diffuse material and diffuse light properties. In short, we assign the final color as follows:</p>
-<p>$$
+$$
 \begin{aligned}
 F_d = C_lC_m (-L \circ N) = C_lC_m (|-L||N| \cos \emptyset) = C_l C_m (\cos \emptyset)
 \end{aligned}
-$$</p>
-<p>Where:</p>
+$$<p>Where:</p>
 <ul>
 <li><code>uLightDiffuse</code> is $C_l$</li>
 <li><code>uMaterialDiffuse</code> is $C_m$</li>
