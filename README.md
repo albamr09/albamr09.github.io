@@ -12,8 +12,9 @@ Notes:
 
 Planner
 
+- [ ] Math
+
 Other:
 
 - [ ] Revisar todos los links .md
 - [ ] Cambiar todas las bmatrix por pmatrix y comprobar que funcionan bien
-- [ ] Avoid default github pages deploy on commit
