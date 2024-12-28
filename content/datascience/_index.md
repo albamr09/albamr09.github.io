@@ -1,6 +1,5 @@
 ---
 title: Data Science
-type: docs
 ---
 
 {{< cards >}}

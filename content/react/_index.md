@@ -1,6 +1,5 @@
 ---
 title: React
-type: docs
 ---
 
 {{< cards cols="1">}}
