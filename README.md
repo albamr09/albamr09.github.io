@@ -4,12 +4,6 @@ Static Notes Web Page
 
 ## TODO
 
-Planner
-
-- [ ] Math
-- [ ] Dev
-- [ ] Index
-
 Other:
 
 - [ ] Revisar todos los links .md
