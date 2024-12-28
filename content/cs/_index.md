@@ -1,5 +1,6 @@
 ---
 title: Computer Science
+toc: false
 ---
 
 ## Programming

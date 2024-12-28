@@ -54,6 +54,11 @@ params:
     logo:
       path: logo.svg
       dark: logo-dark.svg
+  search:
+    enable: true
+    type: flexsearch
+    flexsearch:
+      index: summary
 
   footer:
     displayCopyright: false

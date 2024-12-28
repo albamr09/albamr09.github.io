@@ -26,7 +26,7 @@ The Camera matrix transformation is the inverse of the Model-View matrix transfo
 
 ## Interpreting Transformations Using the Model-View Matrix
 
-![Rotation on the Model-View Matrix](../assets/rotations_with_model_view_matrix.png)
+![Rotation on the Model-View Matrix](../../assets/rotations_with_model_view_matrix.png)
 
 As we've just seen, understanding the rotation matrix (the $3 \times 3$ upper-left corner of the Model-View matrix) is simple: the first $3$ columns always tell us where the axis is.
 
@@ -48,7 +48,7 @@ end up looking to any position in the world. Thus, we need to know the direction
 
 Just like the Model-View matrix, the Camera matrix encodes information about the camera orientation. As we can see in the following diagram, the upper-left $3 \times 3$ matrix corresponds to the camera axes:
 
-![Camera Model](../assets/camera_model.png)
+![Camera Model](../../assets/camera_model.png)
 
 - The first column corresponds to the x-axis of the camera. We will call it `RightVector`.
 - The second column is the y-axis of the camera. This will be `UpVector`.
