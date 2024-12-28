@@ -1,0 +1,1285 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Alba&#39;s Notes – Calculus Ealy Transcendentals</title>
+    <link>//localhost:1313/notes/math/cet/</link>
+    <description>Recent content in Calculus Ealy Transcendentals on Alba&#39;s Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	  <atom:link href="//localhost:1313/notes/math/cet/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Functions and Models</title>
+      <link>//localhost:1313/notes/math/cet/01_functions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/notes/math/cet/01_functions/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;Four Ways to Represent a Function&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;four-ways-to-represent-a-function&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#four-ways-to-represent-a-function&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Representation of Functions&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;representation-of-functions&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#representation-of-functions&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We consider four different ways to represent a function:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Verbally: by a description in words.&lt;/li&gt;
+&lt;li&gt;Numerically: by a table of values.&lt;/li&gt;
+&lt;li&gt;Visually: by a graph.&lt;/li&gt;
+&lt;li&gt;Algebraically: by an explicit formula.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A function with an explicit formula that approximates the behavior of a given &amp;ldquo;true&amp;rdquo; function its called a &lt;strong&gt;mathematical model&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2&gt;Mathematical Models: A Catalog of Essential Functions&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;mathematical-models-a-catalog-of-essential-functions&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#mathematical-models-a-catalog-of-essential-functions&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Mathematical Model&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;mathematical-model&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#mathematical-model&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;A &lt;strong&gt;mathematical model&lt;/strong&gt; is a mathematical description (generally by the means of a function or an equation) of a real-world phenomenon. Its purpose is to understan the phenomenon and perhaps make predictions about future behaviour.&lt;/p&gt;
+&lt;p&gt;The process of mathematical modeling is a follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Formulate a mathematical model by identifying the independent and dependent variables and making assumptions that simplify the phenomenon.&lt;/li&gt;
+&lt;li&gt;Apply the mathematics that we know to derive mathematical conclusions.&lt;/li&gt;
+&lt;li&gt;Take those mathematics conclusions and interpret them as information about the original real-world phenomenon.&lt;/li&gt;
+&lt;li&gt;Test our predictions against real-world data.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This process is illustrated on the following figure.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/mathematical_modeling_process.png&#34; alt=&#34;Mathematical Modeling Process&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;If there is no physical law or principle to help us formulate a model, we construct an &lt;strong&gt;empirical model&lt;/strong&gt; that is a model that captures the basic trend of the data points.&lt;/p&gt;
+&lt;h3&gt;Algebraic Function&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;algebraic-function&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#algebraic-function&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;A function $f$ is an &lt;strong&gt;algebraic function&lt;/strong&gt; if it can be constructed using algebraic operations (such as addition, substraction, multiplication, division and taking roots).&lt;/p&gt;
+&lt;p&gt;Functions that are not algebraic are called &lt;strong&gt;transcendental&lt;/strong&gt;, these include trigonometric, exponential and logarithmic functions.&lt;/p&gt;
+&lt;h3&gt;Faimilies of Essential Functions and Their Graphs&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;faimilies-of-essential-functions-and-their-graphs&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#faimilies-of-essential-functions-and-their-graphs&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;On the following table we show a summary of graphs of some families of essential functions.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Function&lt;/th&gt;
+          &lt;th&gt;Form&lt;/th&gt;
+          &lt;th&gt;Graph&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Linear Function&lt;/td&gt;
+          &lt;td&gt;$f(x) = mx + b$&lt;/td&gt;
+          &lt;td&gt;
+    &lt;img src=&#34;.././assets/linear_function_graph.png&#34; alt=&#34;Linear Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Power Function&lt;/td&gt;
+          &lt;td&gt;$f(x) = x^n$&lt;/td&gt;
+          &lt;td&gt;
+    &lt;img src=&#34;.././assets/power_function_graph.png&#34; alt=&#34;Power Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Root Function&lt;/td&gt;
+          &lt;td&gt;$f(x) = \sqrt[n]{x}$&lt;/td&gt;
+          &lt;td&gt;
+    &lt;img src=&#34;.././assets/root_function_graph.png&#34; alt=&#34;Root Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Reciprocal Function&lt;/td&gt;
+          &lt;td&gt;$f(x) = \frac{1}{\sqrt[n]{x}}$&lt;/td&gt;
+          &lt;td&gt;
+    &lt;img src=&#34;.././assets/reciprocal_function_graph.png&#34; alt=&#34;Reciprocal Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Exponential Function&lt;/td&gt;
+          &lt;td&gt;$f(x) = b^x$&lt;/td&gt;
+          &lt;td&gt;
+    &lt;img src=&#34;.././assets/exponential_function_graph.png&#34; alt=&#34;Exponential Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Logarithmic Function&lt;/td&gt;
+          &lt;td&gt;$f(x) = \log_b x$&lt;/td&gt;
+          &lt;td&gt;
+    &lt;img src=&#34;.././assets/logarithmic_function_graph.png&#34; alt=&#34;Logarithmic Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Trigonimetric Functions&lt;/td&gt;
+          &lt;td&gt;$f(x) = \sin x$&lt;/td&gt;
+          &lt;td&gt;
+    &lt;img src=&#34;.././assets/sine_function_graph.png&#34; alt=&#34;Sine Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Trigonimetric Functions&lt;/td&gt;
+          &lt;td&gt;$f(x) = \cos x$&lt;/td&gt;
+          &lt;td&gt;
+    &lt;img src=&#34;.././assets/cosine_function_graph.png&#34; alt=&#34;Cosine Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Trigonimetric Functions&lt;/td&gt;
+          &lt;td&gt;$f(x) = \tan x$&lt;/td&gt;
+          &lt;td&gt;
+    &lt;img src=&#34;.././assets/tangent_function_graph.png&#34; alt=&#34;Tangent Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;New Functions from Old Functions&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;new-functions-from-old-functions&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#new-functions-from-old-functions&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;See the following for the theory on function transformations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../../agaa/02_graph_analysis#vertical-and-horizontal-shifts-of-graphs&#34; &gt;Vertical and Horizontal Shifts of Graphs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../agaa/02_graph_analysis#vertical-and-horizontal-shifts-of-graphsstretching-shrinking-and-reflecting-graphs&#34; &gt;Stretching, Shrinking and Reflecting Graphs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And for more information on &lt;a href=&#34;../../agaa/02_graph_analysis#composition-of-functions&#34; &gt;Operations and Composition&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Exponential Functions&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;exponential-functions&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#exponential-functions&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;The Number e&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;the-number-e&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-number-e&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Figures 12 and 13 show the tangent lines to the graphs of $y = 2^x$ and $y = 3^x$ at the point $(0, 1)$. The slopes for these tangent lines are $m \approx 0.7$ and $m \approx 1.1$ respectively.&lt;/p&gt;
+&lt;p&gt;Some formulas of calculus will be simplified if we choose the base $b$ so that the slope of the tangent line to $y = b^x$ at $(0, 1)$ is exactly $1$ (see Figure 14). Such a base is denoted by the letter $e$. This notation was chosen by the Swiss mathematician Leonhard Euler in 1727.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/the_number_e.png&#34; alt=&#34;The Number e&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h2&gt;Inverse Functions and Logarithms&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;inverse-functions-and-logarithms&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#inverse-functions-and-logarithms&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Inverse Functions&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;inverse-functions&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#inverse-functions&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We know that a function is &lt;a href=&#34;../../agaa/05_exp_functions#one-to-one-functions&#34; &gt;one-to-one&lt;/a&gt; graphically by applying the &lt;a href=&#34;../../agaa/05_exp_functions#horizontal-line-test&#34; &gt;horizontal line test&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Any function $f$ has an &lt;a href=&#34;../../agaa/05_exp_functions#inverse-function&#34; &gt;inverse&lt;/a&gt; if and only if $f$ is one-to-one.&lt;/p&gt;
+&lt;h4&gt;Cancellation Equations&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;cancellation-equations&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#cancellation-equations&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Given a function $f: A \rightarrow B$ whose inverse $f^{-1}$ exists, then its cancellation equations are defined as follows:&lt;/p&gt;
+$$
+\begin{aligned}
+f^{-1}(f(x)) = x, \forall x \in A
+\end{aligned}
+$$$$
+\begin{aligned}
+f(f^{-1}(x)) = x, \forall x \in B
+\end{aligned}
+$$&lt;p&gt;On the first cancellation equation $f^{-1}$ undoes what $f$ does, and viceversa for the second equation.&lt;/p&gt;
+&lt;h4&gt;Graphing the Inverse&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;graphing-the-inverse&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#graphing-the-inverse&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;The &lt;a href=&#34;../../agaa/05_exp_functions#finding-the-equation-of-the-inverse-of-y--%c6%92x&#34; &gt;process of finding the inverse&lt;/a&gt; gives us a method for obtaining the graph of $f^{-1}$ from the graph of $f$.&lt;/p&gt;
+&lt;p&gt;Since $f(a) = b$ if and only if $f^{-1}(b) = a$ then the point $(a, b)$ is on the graph of $f$ if and only if the point $(b, a)$ is on the graph $f^{-1}$. But we get the point $(b, a)$ from $(a, b)$ by reflecting about the line $y = x$ (See Figure 8).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/inverse_function_graph.png&#34; alt=&#34;Graph of the Inverse Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;So the graph of $f^{-1}$ is obtained by reflecting the graph of $f$ about the line $y = x$.&lt;/p&gt;
+&lt;h3&gt;Logarithmic Functions&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;logarithmic-functions&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#logarithmic-functions&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;If $b &amp;gt; 0$ and $b \neq 1$ then the exponential function $f(x) = b^x$ is either increasing or decreasing, and so it is one-to-one. Therefore its inverse exists and is called the logarithmic function with base $b$:&lt;/p&gt;
+$$
+\begin{aligned}
+\log_b x = y \leftrightarrow b^y = x
+\end{aligned}
+$$&lt;p&gt;If we apply the &lt;a href=&#34;#cancellation-equations&#34; &gt;cancellation equations&lt;/a&gt; we obtain:&lt;/p&gt;
+$$
+\begin{aligned}
+\log_b(b^x) = x, \forall x \in \mathbb{R}
+\end{aligned}
+$$$$
+\begin{aligned}
+b^{\log_b x} = x, \forall x &gt; 0
+\end{aligned}
+$$&lt;p&gt;The logarithmic function has domain $(0, \infty)$ and range $\mathbb{R}$. Its graph is the reflection of the graph of $y = b^x$ about the line $y = x$ (See Figure 11).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/inverse_log_function.png&#34; alt=&#34;Graph of the invserse of the exponential function&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;Natural Logarithms&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;natural-logarithms&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#natural-logarithms&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The logarithm with base $e$ is called the &lt;strong&gt;natural logarithm&lt;/strong&gt; and is denoted as:&lt;/p&gt;
+$$
+\begin{aligned}
+\log_e x = \ln x
+\end{aligned}
+$$&lt;p&gt;If we apply the &lt;a href=&#34;#cancellation-equations&#34; &gt;cancellation equations&lt;/a&gt; we obtain:&lt;/p&gt;
+$$
+\begin{aligned}
+\ln(e^x) = x, x \in \mathbb{R}
+\end{aligned}
+$$$$
+\begin{aligned}
+e^{\ln x} = x, x &gt; 0
+\end{aligned}
+$$&lt;p&gt;In particular if we set $x = 1$ we get:&lt;/p&gt;
+$$
+\begin{aligned}
+\ln e = 1
+\end{aligned}
+$$&lt;p&gt;Therefore:&lt;/p&gt;
+$$
+\begin{aligned}
+x^r = \left(e^{\ln(x)}\right)^r = e^{r \ln(x)}
+\end{aligned}
+$$&lt;h3&gt;Inverse Trigonometric Functions&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;inverse-trigonometric-functions&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#inverse-trigonometric-functions&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Trigonometric functions are not one-to-one, as their are periodic function. However if their domain to an interval that &amp;ldquo;lats&amp;rdquo; one period of the function then it is one-to-on.&lt;/p&gt;
+&lt;h4&gt;Inverse Sine Function&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;inverse-sine-function&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#inverse-sine-function&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;The inverse of the sine function is denoted by $\sin^{-1}$ or $\arcsin$, and it is defined as:&lt;/p&gt;
+$$
+\begin{aligned}
+\sin^{-1}(x) = y \leftrightarrow \sin y = x, -\frac{\pi}{2} \leq y \leq \frac{\pi}{2}
+\end{aligned}
+$$&lt;p&gt;As you can see the domain has been restricted to $[-\frac{\pi}{2}, \frac{-pi}{2}]$ (See Figure 18).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/restricted_sin_function.png&#34; alt=&#34;Restricted Sine Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;By the &lt;a href=&#34;#cancellation-equations&#34; &gt;cancellation equations&lt;/a&gt; we obtain:&lt;/p&gt;
+$$
+\begin{aligned}
+\sin^{-1}(\sin x) = x, -\frac{\pi}{2} \leq x \leq \frac{\pi}{2}
+\end{aligned}
+$$$$
+\begin{aligned}
+\sin(\sin^{-1} x) = x, -1 \leq x \leq 1
+\end{aligned}
+$$&lt;p&gt;The inverse sine function has domain $[-1, 1]$ and range $[-\frac{\pi}{2}, \frac{\pi}{2}]$ and its graph is shown on Figure 20.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/inverse_sine_function.png&#34; alt=&#34;Inverse Sine Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h4&gt;Inverse Cosine Function&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;inverse-cosine-function&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#inverse-cosine-function&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;The inverse of the cosine function is denoted by $\cos^{-1}$ or $\arccos$, and it is defined as:&lt;/p&gt;
+$$
+\begin{aligned}
+\cos^{-1}(x) = y \leftrightarrow \cos y = x, 0 \leq y \leq \pi
+\end{aligned}
+$$&lt;p&gt;As you can see the domain has been restricted to $[0, \pi]$ (See Figure 21).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/restricted_cosine_function.png&#34; alt=&#34;Restricted Cosine Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;By the &lt;a href=&#34;#Cancellation%20Equations&#34; &gt;cancellation equations&lt;/a&gt; we obtain:&lt;/p&gt;
+$$
+\begin{aligned}
+\cos^{-1}(\cos x) = x, 0 \leq x \leq \pi
+\end{aligned}
+$$$$
+\begin{aligned}
+\cos(\cos^{-1} x) = x, -1 \leq x \leq 1
+\end{aligned}
+$$&lt;p&gt;The inverse cosine function has domain $[-1, 1]$ and range $[0, \pi]$ and its graph is shown on Figure 22.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/inverse_cosine_function.png&#34; alt=&#34;Inverse Cosine Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h4&gt;Inverse Tangent Function&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;inverse-tangent-function&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#inverse-tangent-function&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;The inverse of the tangent function is denoted by $\tan^{-1}$ or $\arctan$, and it is defined as:&lt;/p&gt;
+$$
+\begin{aligned}
+\tan^{-1}(x) = y \leftrightarrow \tan y = x, -\frac{\pi}{2} \leq y \leq \frac{\pi}{2}
+\end{aligned}
+$$&lt;p&gt;As you can see the domain has been restricted to $[-\frac{\pi}{2}, \frac{\pi}{2}]$ (See Figure 23).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/restricted_tan_function.png&#34; alt=&#34;Restricted Tangent Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;By the &lt;a href=&#34;#Cancellation%20Equations&#34; &gt;cancellation equations&lt;/a&gt; we obtain:&lt;/p&gt;
+$$
+\begin{aligned}
+\tan^{-1}(\tan x) = x, -\frac{\pi}{2} \leq x \leq \frac{\pi}{2}
+\end{aligned}
+$$$$
+\begin{aligned}
+\tan(\tan^{-1} x) = x, -1 \leq x \leq 1
+\end{aligned}
+$$&lt;p&gt;The inverse tangent function has domain $[-1, 1]$ and range $[-\frac{\pi}{2}, \frac{\pi}{2}]$ and its graph is shown on Figure 25.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/inverse_tan_function.png&#34; alt=&#34;Inverse Tangent Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We know that the lines $x = \pm \frac{\pi}{2}$ are vertical asymptotes of the graph of the tangent function. Since the graph of $\tan^{-1}$ is obtained by reflecting the graph of the restricted tangnet function about the line $y = x$, the the lines $y = \frac{\pi}{2}$ and $y = -\frac{\pi}{2}$ are horizontal asymptotes of the graph of $\tan^{-1}$.&lt;/p&gt;
+&lt;h4&gt;Other Inverse Functions&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;other-inverse-functions&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#other-inverse-functions&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;&lt;a href=&#34;../../agaa/09_trig_identities#other-inverse-trigonometric-functions&#34; &gt;See&lt;/a&gt; for information about the remaning inverse trigonometric functions.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Limits and Derivatives</title>
+      <link>//localhost:1313/notes/math/cet/02_limits/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/notes/math/cet/02_limits/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;The Tangent and Velocity Problems&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;the-tangent-and-velocity-problems&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-tangent-and-velocity-problems&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;The Tangent Problem&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;the-tangent-problem&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-tangent-problem&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We can think of a tangent to a curve as a line that touches the curve an follows the same direction as the curve at the point of contact.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/tangent.png&#34; alt=&#34;Tangent&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s look at the next example, where we want to find an equation for the tangent line to the parabola $y = x^2$ at point $P(1, 1)$. To do so we only need to know the slope $m$, however to find the slope of the line we need two points on the curve, and as of now we only have $P(1, 1)$.&lt;/p&gt;
+&lt;p&gt;But observe that we can compute an approximation by choosing a nearby point $Q(x, x^2)$ (see Figure 2) and computing the slope $m_{PQ}$ of the secant line $PQ$. (A &lt;strong&gt;secant line&lt;/strong&gt; if a line that intersects a curve more than once):&lt;/p&gt;
+$$
+\begin{aligned}
+m_{PQ} = \frac{x^2 - 1}{x - 1}
+\end{aligned}
+$$&lt;p&gt;
+    &lt;img src=&#34;.././assets/slope_approximation.png&#34; alt=&#34;Slope Approximation&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;On the following tables we see that the closer $Q$ is to $P$, that is the closer $x$ is to $1$, then the closer $m_{PQ}$ is to $2$.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;$x$&lt;/th&gt;
+          &lt;th&gt;$m_{PQ}$&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$2$&lt;/td&gt;
+          &lt;td&gt;$3$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$1.5$&lt;/td&gt;
+          &lt;td&gt;$2.5$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$1.1$&lt;/td&gt;
+          &lt;td&gt;$2.1$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$1.01$&lt;/td&gt;
+          &lt;td&gt;$2.01$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$1.001$&lt;/td&gt;
+          &lt;td&gt;$2.001$&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;$x$&lt;/th&gt;
+          &lt;th&gt;$m_{PQ}$&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$0$&lt;/td&gt;
+          &lt;td&gt;$1$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$0.5$&lt;/td&gt;
+          &lt;td&gt;$1.5$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$0.9$&lt;/td&gt;
+          &lt;td&gt;$1.9$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$0.99$&lt;/td&gt;
+          &lt;td&gt;$1.99$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$0.999$&lt;/td&gt;
+          &lt;td&gt;$1.999$&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;This suggests that the slope of the tangent line is the &lt;strong&gt;limit&lt;/strong&gt; of the slopes of the secant lines:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{Q \rightarrow P} m_{PQ} = m
+\end{aligned}
+$$$$
+\begin{aligned}
+\lim_{x \rightarrow 1} \frac{x^2 - 1}{x - 1} = 2
+\end{aligned}
+$$&lt;p&gt;Assuming that the slope of the tangent is indeed $2$, we define the equation of the tangent line through $(1, 1)$ as:&lt;/p&gt;
+$$
+\begin{aligned}
+y - 1 = 2(x - 1)
+\end{aligned}
+$$$$
+\begin{aligned}
+y = 2x - 1
+\end{aligned}
+$$&lt;p&gt;Figure 3 illustrates the process that occurs on this example. As $Q$ approaches $P$ the secant lines rotate about $P$ and approach the tangent line $\mathcal{l}$.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/tangent_using_limits.png&#34; alt=&#34;Approximate the tangent using limits&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Another method to approximate the slope of the tangent line at $P$ is to measure the sides of a triangle $ABC$ as in Figure 5:&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/another_tangent_approximation.png&#34; alt=&#34;Another Way to Approximate the Tangent&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This gives an estimate of the slope of the tangent line as:&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;\frac{AB}{BC} \approx -\frac{8.0 - 5.4}{0.06 - 0.02} = -65.0
+\end{aligned}
+$$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;The Velocity Problem&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;the-velocity-problem&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-velocity-problem&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The &lt;strong&gt;instantaneous velocity&lt;/strong&gt; is defined to be the &lt;strong&gt;limiting value&lt;/strong&gt; of the average velocities over shorter and shorter time periods. Thus there is a close connection between the tangent problem and the velocity problem. If we draw the grapf of the distance function and we consider points $P(5, f(5))$ and $Q(5 + h, f(5 + h))$ (see Figure 6).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/the_velocity_problem.png&#34; alt=&#34;The Velocity Problem&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Then the slope of the secant line $PQ$ is:&lt;/p&gt;
+$$
+\begin{aligned}
+m_{PQ} = \frac{f(5 + h) - f(5)}{(5 + h) - 5}
+\end{aligned}
+$$&lt;p&gt;which is the same as the average velocity over the time interval $[5, 5 + h]$.&lt;/p&gt;
+&lt;h2&gt;The Limit of a Function&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;the-limit-of-a-function&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-limit-of-a-function&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Limits&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;limits&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#limits&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Suppose $f(x)$ is defined when $x$ is near the number $a$, then we write:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) = L
+\end{aligned}
+$$&lt;p&gt;If we can make the values of $f(x)$ arbitrarily close to $L$ by restricting $x$ to be sufficiently close to $a$ (on either side of $a$) but not equal to $a$ (See Figure 1).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/limit_of_function.png&#34; alt=&#34;Limit of a Function&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;An alternative notation is:&lt;/p&gt;
+$$
+\begin{aligned}
+f(x) \rightarrow L \text{ as } x \rightarrow a
+\end{aligned}
+$$&lt;p&gt;Notice that we never consider $x = a$. In fact, $f(x)$ need not even be defined when $x = a$. The only thing that matters is how $f$ is defined near $a$.&lt;/p&gt;
+&lt;h3&gt;One-Sided Limits&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;one-sided-limits&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#one-sided-limits&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The notation $t \rightarrow 0^{-}$ indicates that we consider only values of $t$ that are less than 0. Likewise, $t \rightarrow 0^{+}$ indicates that we consider only values of $t$ that are greater than 0.&lt;/p&gt;
+&lt;p&gt;We write:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a^{-}} f(x) = L
+\end{aligned}
+$$&lt;p&gt;and say that the &lt;strong&gt;left-hand limit&lt;/strong&gt; of $f(x)$ as $x$ approaches $a$ is equal to $L$ if we can make the values of $f(x)$ arbitrarily clsoe to $L$ by restricting $x$ to be sufficiently close to $a$ with $x$ less than $a$.&lt;/p&gt;
+&lt;p&gt;We write:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a^{+}} f(x) = L
+\end{aligned}
+$$&lt;p&gt;and say that the &lt;strong&gt;right-hand limit&lt;/strong&gt; of $f(x)$ as $x$ approaches $a$ is equal to $L$ if we can make the values of $f(x)$ arbitrarily clsoe to $L$ by restricting $x$ to be sufficiently close to $a$ with $x$ greater than $a$.&lt;/p&gt;
+&lt;p&gt;See Figure 6 for a graphical representation.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/one_sided_limit.png&#34; alt=&#34;One-Sided Limit&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;By both definitions, we see that the following is true:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) = L \leftrightarrow \lim_{x \rightarrow a^{-}} f(x) = L \text{ and } \lim_{x \rightarrow a^{+}} f(x) = L
+\end{aligned}
+$$&lt;h3&gt;How Can a Limit Fail to Exist?&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;how-can-a-limit-fail-to-exist&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#how-can-a-limit-fail-to-exist&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;A limit fails to exist at a number $a$ if the left- and right-hand limits are not equal.&lt;/p&gt;
+&lt;p&gt;When guessing the value of a limit it is easy to guess the wrong value if we use inapproapriate values of $x$. It is also hard to know when to stop calculating value (sometimes calculators and computers give the wrong values due to precission issues).&lt;/p&gt;
+&lt;h4&gt;Infinite Limits: Vertical Asymptotes&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;infinite-limits-vertical-asymptotes&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#infinite-limits-vertical-asymptotes&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Another way a limit at a number $a$ can fail to exist is when the function values grow arbitrarily large (in absolute value) as $x$ approaches $a$.&lt;/p&gt;
+&lt;p&gt;Let $f$ be a function defined on both sides of $a$, except possible at $a$ itself, then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) = \infty
+\end{aligned}
+$$&lt;p&gt;means that the values of $f(x)$ can be arbitrarily large by taking $x$ sufficiently close to $a$, but not equal to $a$ (See Figure 10).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/infinite_limit_vertical_asymptote.png&#34; alt=&#34;Infinite Limits: Vertical Asymptotes&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Let $f$ be a function defined on both sides of $a$, except possible at $a$ itself, then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) = -\infty
+\end{aligned}
+$$&lt;p&gt;means that the values of $f(x)$ can be arbitrarily large negative by taking $x$ sufficiently close to $a$, but not equal to $a$ (See Figure 11).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/infinite_limit_vertical_asymptote_negative.png&#34; alt=&#34;Infinite Limits: Vertical Asymptotes&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This does not mean that the limit exists, it simply expresses the particular way in which the limit does not exist.&lt;/p&gt;
+&lt;p&gt;Similar definitions can be given for one-sided limits:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a^{-}} f(x) = \infty
+\end{aligned}
+$$$$
+\begin{aligned}
+\lim_{x \rightarrow a^{-}} f(x) = -\infty
+\end{aligned}
+$$$$
+\begin{aligned}
+\lim_{x \rightarrow a^{+}} f(x) = \infty
+\end{aligned}
+$$$$
+\begin{aligned}
+\lim_{x \rightarrow a^{+}} f(x) = -\infty
+\end{aligned}
+$$&lt;p&gt;These are illustrated on the following figure:&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/infinite_onesided_limit_vertical_asymptote.png&#34; alt=&#34;Infinite One-Sided Limits: Vertical Asymptotes&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h4&gt;Vertical Asymptotes&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;vertical-asymptotes&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#vertical-asymptotes&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;The vertical line $x = a$ is called a &lt;strong&gt;vertical asymptotes&lt;/strong&gt; of the curve $y = f(x)$ if at least one of the following statements is true:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) = \infty
+\end{aligned}
+$$$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) = -\infty
+\end{aligned}
+$$$$
+\begin{aligned}
+\lim_{x \rightarrow a^{-}} f(x) = \infty
+\end{aligned}
+$$$$
+\begin{aligned}
+\lim_{x \rightarrow a^{-}} f(x) = -\infty
+\end{aligned}
+$$$$
+\begin{aligned}
+\lim_{x \rightarrow a^{+}} f(x) = \infty
+\end{aligned}
+$$$$
+\begin{aligned}
+\lim_{x \rightarrow a^{+}} f(x) = -\infty
+\end{aligned}
+$$&lt;h2&gt;Calculating Limits Using the Limits Laws&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;calculating-limits-using-the-limits-laws&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#calculating-limits-using-the-limits-laws&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Properties of Limits&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;properties-of-limits&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#properties-of-limits&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Supporse that $c$ is a constant and the limits:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x)
+\end{aligned}
+$$$$
+\begin{aligned}
+\lim_{x \rightarrow a} g(x)
+\end{aligned}
+$$&lt;p&gt;exist. Then:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sum Law&lt;/strong&gt;&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} [f(x) + g(x)] = \lim_{x \rightarrow a} f(x) + \lim_{x \rightarrow a} g(x)
+\end{aligned}
+$$&lt;p&gt;&lt;strong&gt;Difference Law&lt;/strong&gt;&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} [f(x) - g(x)] = \lim_{x \rightarrow a} f(x) - \lim_{x \rightarrow a} g(x)
+\end{aligned}
+$$&lt;p&gt;&lt;strong&gt;Constant Multiple Law&lt;/strong&gt;&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} [cf(x)] = c\lim_{x \rightarrow a} f(x)
+\end{aligned}
+$$&lt;p&gt;&lt;strong&gt;Product Law&lt;/strong&gt;&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} [f(x) g(x)] = \lim_{x \rightarrow a} f(x) \cdot \lim_{x \rightarrow a} g(x)
+\end{aligned}
+$$&lt;p&gt;&lt;strong&gt;Quotient Law&lt;/strong&gt;&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} [\frac{f(x)}{g(x)}] = \frac{\lim_{x \rightarrow a} f(x)}{\lim_{x \rightarrow a} g(x)}
+\end{aligned}
+$$&lt;p&gt;If we use the Product Law repeteadly with $g(x) = f(x)$, then we arrive at the &lt;strong&gt;Power Law&lt;/strong&gt;:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} \left[f(x)\right]^n = [\lim_{x \rightarrow a} f(x)]^n
+\end{aligned}
+$$&lt;p&gt;&lt;strong&gt;Root Law&lt;/strong&gt;&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} \sqrt[n]{f(x)} = \sqrt[n]{\lim_{x \rightarrow a} f(x)}
+\end{aligned}
+$$&lt;p&gt;Let&amp;rsquo;s now see two special limits:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} c = c
+\end{aligned}
+$$$$
+\begin{aligned}
+\lim_{x \rightarrow a} x = a
+\end{aligned}
+$$&lt;p&gt;If we now let $f(x) = x$ on the &lt;strong&gt;Power Law&lt;/strong&gt; and use $\lim_{x \rightarrow a} x = a$, then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} x^n = [\lim_{x \rightarrow a} x]^n = a^n
+\end{aligned}
+$$&lt;p&gt;If we now let $f(x) = x$ on the &lt;strong&gt;Root Law&lt;/strong&gt; and use $\lim_{x \rightarrow a} x = a$, then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} \sqrt[n]{x} = \sqrt[n]{\lim_{x \rightarrow a} x} = \sqrt[n]{a}
+\end{aligned}
+$$&lt;p&gt;where $n$ is a positive integer. Also, if $n$ is even then we assume that $a &amp;gt; 0$.&lt;/p&gt;
+&lt;h3&gt;Evaluating Limits by Direct Substitution&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;evaluating-limits-by-direct-substitution&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#evaluating-limits-by-direct-substitution&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The &lt;strong&gt;Limit Laws&lt;/strong&gt; prove that direct substitution can be used to obtain the value of a limit for polynomial and rational functions.&lt;/p&gt;
+&lt;p&gt;If $f$ is a polynomial or a rational function and $a$ is in the domain of $f$, then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) = f(a)
+\end{aligned}
+$$&lt;p&gt;Functions that satisfy this property are said to be &lt;strong&gt;continuous&lt;/strong&gt; at $a$. However, not all limits can be evaluated initially by direct substitution.&lt;/p&gt;
+&lt;h3&gt;Limit Equality&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;limit-equality&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#limit-equality&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;If $f(x) = g(x)$ when $x \neq a$, then $\lim_{x \rightarrow a} f(x) = \lim_{x \rightarrow a} g(a)$&lt;/p&gt;
+&lt;h3&gt;Using One-Sided Limits&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;using-one-sided-limits&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#using-one-sided-limits&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We say:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) = L
+\end{aligned}
+$$&lt;p&gt;if and only if&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a^{-}} f(x) = L = \lim_{x \rightarrow a^{+}} f(x)
+\end{aligned}
+$$&lt;h3&gt;The Squeeze Theorem&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;the-squeeze-theorem&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-squeeze-theorem&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The following two theorems describe how the limits of functions are related when the values of one function are greater than (or equal to) those of another.&lt;/p&gt;
+&lt;p&gt;If $f(x) \leq g(x)$ when $x$ is near $a$ (except possibly at $a$) and the limits of $f$ and $g$ both exist as $x$ approaches $a$, then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) \leq \lim_{x \rightarrow a} g(x)
+\end{aligned}
+$$&lt;p&gt;The &lt;strong&gt;Squeeze Theorem&lt;/strong&gt; states:&lt;/p&gt;
+&lt;p&gt;If $f(x) \leq g(x) \leq h(x)$ when $x$ is near $a$ (except possibly at $a$) and:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) = \lim_{x \rightarrow a} h(x) = L
+\end{aligned}
+$$&lt;p&gt;then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} g(x) = L
+\end{aligned}
+$$&lt;p&gt;This theorem is illustrated on Figure 7. It says that if $g(x)$ is squeezed between $f(x)$ and $h(x)$ near $a$, and if $f$ and $h$ have the same limit $L$ at $a$, then $g$ is forced to have the same limit $L$ at $a$.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/squeeze_theorem.png&#34; alt=&#34;The Squeeze Theorem&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h2&gt;The Precise Definition of a Limit&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;the-precise-definition-of-a-limit&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-precise-definition-of-a-limit&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;The Precise Definition of a Limit&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;the-precise-definition-of-a-limit-1&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-precise-definition-of-a-limit-1&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;As motivation consier the following function:&lt;/p&gt;
+$$
+\begin{aligned}
+f(x) = \begin{cases}
+2x - 1 &amp; \text{ if } x \neq 3 \\
+6 &amp; \text{ if } x = 3 \\
+\end{cases}
+\end{aligned}
+$$&lt;p&gt;Think about how close to $3$ does $x$ have to be so that $f(x)$ differs from $5$ less than $0.1$?&lt;/p&gt;
+&lt;p&gt;We know that the distance from $x$ to $3$ is $|x - 3|$ and the distance from $f(x)$ to $5$ is $|f(x) - 5|$, so out problem becomes:&lt;/p&gt;
+$$
+\begin{aligned}
+| f(x) - 5 | &lt; 0.1 \text{ if } 0 &lt; | x - 3 | &lt; \delta
+\end{aligned}
+$$&lt;p&gt;Notice that if:&lt;/p&gt;
+$$
+\begin{aligned}
+0 &lt; |x - 3| &lt; \frac{0.1}{2} = 0.5
+\end{aligned}
+$$&lt;p&gt;then:&lt;/p&gt;
+$$
+\begin{aligned}
+|f(x) - 5| = |(2x - 1) - 5| = |2x - 6| = 2|x - 3| &lt; 2(0.05) = 0.1
+\end{aligned}
+$$&lt;p&gt;that is:&lt;/p&gt;
+$$
+\begin{aligned}
+|f(x) - 5| &lt; 0.1 \text { if } 0 &lt; |x - 3| &lt; 0.05
+\end{aligned}
+$$&lt;p&gt;Thus an answer to the proposed problem is given by $\delta = 0.05$. However, if we change the limit $0.1$ to $0.01$ by using the same method we find that $\delta = 0.005$, such that:&lt;/p&gt;
+$$
+\begin{aligned}
+|f(x) - 5| &lt; 0.01 \text { if } 0 &lt; |x - 3| &lt; 0.005
+\end{aligned}
+$$&lt;p&gt;And similarly:&lt;/p&gt;
+$$
+\begin{aligned}
+|f(x) - 5| &lt; 0.001 \text { if } 0 &lt; |x - 3| &lt; 0.0005
+\end{aligned}
+$$&lt;p&gt;These values: $0.1, 0.01$ and $0.001$ are what we call &lt;strong&gt;error tolerances&lt;/strong&gt;. But to actually compute the limit we must be able to find a $\delta$ for any arbitrarily small positive number $\epsilon$:&lt;/p&gt;
+$$
+\begin{aligned}
+|f(x) - 5| &lt; \epsilon \text { if } 0 &lt; |x - 3| &lt; \delta = \frac{\epsilon}{2}
+\end{aligned}
+$$&lt;p&gt;This is the precise way of saying that $f(x)$ is close to $5$ when $x$ is close to $3$ because the previous statement says that we can make the values of $f(x)$ within an arbitrary distance $\epsilon$ from $5$ by restricting $x$ to be within a distance $\frac{\epsilon}{2}$ from $3$ (See Figure 1).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/precise_def_limit.png&#34; alt=&#34;Precise Definition of a Limit&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The precise definition of a limit is as follows:&lt;/p&gt;
+&lt;p&gt;Let $f$ be a function defined on some open interval that contains the number $a$, except possible at $a$ itself. Then we say that the limit of $f(x)$ as $x$ approaches $a$ is $L$ and we write:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) = L
+\end{aligned}
+$$&lt;p&gt;if for every number $\epsilon &amp;gt; 0$ there is a number $\delta &amp;gt; 0$ such that:&lt;/p&gt;
+$$
+\begin{aligned}
+\text{ if } 0 &lt; |x - a| &lt; \delta \text{ then } |f(x) - L| &lt; \epsilon
+\end{aligned}
+$$&lt;p&gt;We can reformulate this definition in terms of intervals:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) = L
+\end{aligned}
+$$&lt;p&gt;means that for every $\epsilon &amp;gt; 0$ we can find $\delta &amp;gt; 0$ such that if $x \in (a - \delta, a + \delta)$ and $x \neq a$, then $f(x) \in (L - \epsilon, L + \epsilon)$ (See Figure 3).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/interval_limit_definition.png&#34; alt=&#34;Interval Limit Definition&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Also we can interpret the definition geometrically in terms of the graph of a function. If $\epsilon &amp;gt; 0$ is given we draw horizontal lines $y = L + \epsilon$ and $y = L - \epsilon$ as well as the graph of $f$ (see Figure 4).&lt;/p&gt;
+&lt;p&gt;If $\lim_{x \rightarrow a} f(x) = L$ then we can find a number $\delta &amp;gt; 0$ such that if $x \in (a - \delta, a + \delta)$ and $x \neq a$, then the curve $y = f(x)$ lies between the lines $y = L - \epsilon$ and $y = L + \epsilon$ (see Figure 5). Once $\delta$ has been found, then any smaller $\delta$ will also work.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/geometric_interpretation_limit.png&#34; alt=&#34;Geometric Interpretation of a Limit&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Note that this process must work for every positive number $\epsilon$, no matter how small (See Figure 6).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/geometric_interpretation_limit_1.png&#34; alt=&#34;Geometric Interpretation of a Limit&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;One-Sided Limits&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;one-sided-limits-1&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#one-sided-limits-1&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;h4&gt;Precise Definition of Left-Hand Limit&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;precise-definition-of-left-hand-limit&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#precise-definition-of-left-hand-limit&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;$$
+\begin{aligned}
+\lim_{x \rightarrow a^{-}} f(x) = L
+\end{aligned}
+$$&lt;p&gt;if for every number $\epsilon &amp;gt; 0$ there is a number $\delta &amp;gt; 0$ such that:&lt;/p&gt;
+$$
+\begin{aligned}
+\text{ if } a - \delta &lt; x &lt; a \text{ then } |f(x) - L| &lt; \epsilon
+\end{aligned}
+$$&lt;p&gt;that is, $x$ is restricted to lie in the left half of the interval $(a - \delta, a + \delta)$.&lt;/p&gt;
+&lt;h4&gt;Precise Definition of Right-Hand Limit&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;precise-definition-of-right-hand-limit&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#precise-definition-of-right-hand-limit&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;$$
+\begin{aligned}
+\lim_{x \rightarrow a^{+}} f(x) = L
+\end{aligned}
+$$&lt;p&gt;if for every number $\epsilon &amp;gt; 0$ there is a number $\delta &amp;gt; 0$ such that:&lt;/p&gt;
+$$
+\begin{aligned}
+\text{ if } a &lt; x &lt; a + \delta \text{ then } |f(x) - L| &lt; \epsilon
+\end{aligned}
+$$&lt;p&gt;that is, $x$ is restricted to lie in the right half of the interval $(a - \delta, a + \delta)$.&lt;/p&gt;
+&lt;h3&gt;Limit Laws&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;limit-laws&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#limit-laws&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Up until now we have used the &lt;a href=&#34;#the-precise-definition-of-a-limit&#34; &gt;precise definition of a limit&lt;/a&gt; to compute the limit of a given function. However if we were given a more complicated funtion a proof would require a great deal of ingenuity.&lt;/p&gt;
+&lt;p&gt;Fortunately we can use the &lt;a href=&#34;#limit-laws&#34; &gt;Limit Laws&lt;/a&gt;, which can be proved using the definition of a limit. So the limits of complicated function can be found rigorously from the Limit Laws without resorting to the definition directly.&lt;/p&gt;
+&lt;h4&gt;Proof of the Sum Law&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;proof-of-the-sum-law&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#proof-of-the-sum-law&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;The Sum Law states that if the limits:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x)
+\end{aligned}
+$$$$
+\begin{aligned}
+\lim_{x \rightarrow a} g(x)
+\end{aligned}
+$$&lt;p&gt;exist. Then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} [f(x) + g(x)] = \lim_{x \rightarrow a} f(x) + \lim_{x \rightarrow a} g(x)
+\end{aligned}
+$$&lt;p&gt;&lt;strong&gt;Proof&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Let $\epsilon &amp;gt; 0$ be given, we must find $\delta &amp;gt; 0$ such that:&lt;/p&gt;
+$$
+\begin{aligned}
+\text{ if } 0 &lt; |x - a| &lt; \delta \text{ then } |f(x) + g(x) - (L + M)| &lt; \epsilon
+\end{aligned}
+$$&lt;p&gt;By the means of the Triangle Inequality:&lt;/p&gt;
+$$
+\begin{aligned}
+| f(x) + g(x) - (L + M) | = | (f(x) - L) + (g(x) - M) | \leq | f(x) - L | + | g(x) - M |
+\end{aligned}
+$$&lt;p&gt;We make $|f(x) + g(x) - (L + M)|$ less that $\epsilon$ by letting:&lt;/p&gt;
+$$
+\begin{aligned}
+| f(x) - L | &lt; \frac{\epsilon}{2}
+\end{aligned}
+$$&lt;p&gt;and&lt;/p&gt;
+$$
+\begin{aligned}
+| g(x) - M | &lt; \frac{\epsilon}{2}
+\end{aligned}
+$$&lt;p&gt;Since $\frac{\epsilon}{2} &amp;gt; 0$ and $\lim_{x \rightarrow a} f(x) = L$ there exists a number $\delta_1 &amp;gt; 0$ such that:&lt;/p&gt;
+$$
+\begin{aligned}
+\text{ if } 0 &lt; |x - a| &lt; \delta_1 \text{ then } |f(x) - L| &lt; \frac{\epsilon}{2}
+\end{aligned}
+$$&lt;p&gt;Similarly, since $\frac{\epsilon}{2} &amp;gt; 0$ and $\lim_{x \rightarrow a} g(x) = M$ there exists a number $\delta_2 &amp;gt; 0$ such that:&lt;/p&gt;
+$$
+\begin{aligned}
+\text{ if } 0 &lt; |x - a| &lt; \delta_2 \text{ then } |g(x) - M| &lt; \frac{\epsilon}{2}
+\end{aligned}
+$$&lt;p&gt;Let $\delta = \min{\delta_1, \delta_2}$, notice:&lt;/p&gt;
+$$
+\begin{aligned}
+\text{ if } 0 &lt; |x - a| &lt; \delta \text{ then } 0 &lt; |x - a| &lt; \delta_1 \text{ and } 0 &lt; |x - a| &lt; \delta_2
+\end{aligned}
+$$&lt;p&gt;and also:&lt;/p&gt;
+$$
+\begin{aligned}
+| f(x) - L | &lt; \frac{\epsilon}{2} \text{ and } | g(x) - M | &lt; \frac{\epsilon}{2}
+\end{aligned}
+$$&lt;p&gt;And, therefore by the triangle inequality we showed before:&lt;/p&gt;
+$$
+\begin{aligned}
+|f(x) + g(x) - (L + M)| \leq | f(x) - L | + | g(x) - M | &lt; \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+\end{aligned}
+$$&lt;p&gt;Thus, by the definition of a limit:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} [f(x) + g(x)] = L + M
+\end{aligned}
+$$&lt;h3&gt;Infinite Limits&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;infinite-limits&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#infinite-limits&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Let $f$ be a function defined on some open interval that contains the number $a$, except possibly at $a$ itself. Then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) = \infty
+\end{aligned}
+$$&lt;p&gt;means that for every postive number $M$ there is a positive number $\delta$ such that:&lt;/p&gt;
+$$
+\begin{aligned}
+\text{ if } 0 &lt; |x - a| &lt; \delta \text{ then } f(x) &gt; M
+\end{aligned}
+$$&lt;p&gt;This says that the values of $f(x)$ ca be made arbitrarily large (larger than any given number $M$) by requiring $x$ to be close enough to $a$ (See Figure 10).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/infinite_positive_limit.png&#34; alt=&#34;Infinite Positive Limit&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Let $f$ be a function defined on some open interval that contains the number $a$, except possibly at $a$ itself. Then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) = -\infty
+\end{aligned}
+$$&lt;p&gt;means that for every postive number $N$ there is a positive number $\delta$ such that:&lt;/p&gt;
+$$
+\begin{aligned}
+\text{ if } 0 &lt; |x - a| &lt; \delta \text{ then } f(x) &lt; N
+\end{aligned}
+$$&lt;p&gt;See Figure 11.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/infinite_negative_limit.png&#34; alt=&#34;Infinite Negative Limit&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h2&gt;Continuity&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;continuity&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#continuity&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Continuity of a Function&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;continuity-of-a-function&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#continuity-of-a-function&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;A function $f$ is &lt;strong&gt;continuous at a number&lt;/strong&gt; $a$ if:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x\rightarrow a} f(x) = f(a)
+\end{aligned}
+$$&lt;p&gt;This definition implicitly requires:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$f(a)$ is defined&lt;/li&gt;
+&lt;li&gt;$\lim_{x\rightarrow a} f(x)$ exists&lt;/li&gt;
+&lt;li&gt;$\lim_{x\rightarrow a} f(x) = f(a)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This definition says that $f$ is continuous at $a$ if $f(x)$ approaches $f(a)$ as $x$ approaches $a$.&lt;/p&gt;
+&lt;p&gt;And we say that $f$ is &lt;strong&gt;discontinuous&lt;/strong&gt; at $a$ if $f$ is not continuous at $a$. We distinguish three cases of discontinuity:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Removable discontinuity&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/removable_discontinuity.png&#34; alt=&#34;Removable Discontinuity&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Infinite discontinuity&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/infinite_discontinuity.png&#34; alt=&#34;Infinite Discontinuity&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Jump discontinuity&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/jump_discontinuity.png&#34; alt=&#34;Jump Discontinuity&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;A function $f$ &lt;strong&gt;continuous from the right at a number&lt;/strong&gt; $a$ if:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x\rightarrow a^{+}} f(x) = f(a)
+\end{aligned}
+$$&lt;p&gt;A function $f$ &lt;strong&gt;continuous from the left at a number&lt;/strong&gt; $a$ if:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x\rightarrow a^{-}} f(x) = f(a)
+\end{aligned}
+$$&lt;p&gt;A function $f$ &lt;strong&gt;is continuous on an interval&lt;/strong&gt; if it is continuous at every number on the interval.&lt;/p&gt;
+&lt;h3&gt;Properties of Continuous Functions&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;properties-of-continuous-functions&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#properties-of-continuous-functions&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;If $f$ and $g$ are continuous at a number $a$ and $c$ is constant, then the following functions are also continuous at $a$:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$f + g$&lt;/li&gt;
+&lt;li&gt;$f - g$&lt;/li&gt;
+&lt;li&gt;$cf$&lt;/li&gt;
+&lt;li&gt;$f\cdot g$&lt;/li&gt;
+&lt;li&gt;$\frac{f}{g}, g(a) \neq 0$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Proof&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Since $f$ and $g$ are continuous at $a$ we have that:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) = f(a)
+\end{aligned}
+$$&lt;p&gt;and&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} g(x) = g(a)
+\end{aligned}
+$$&lt;p&gt;by the &lt;a href=&#34;#properties-of-limits&#34; &gt;Properties of Limits&lt;/a&gt;:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} [f(x) + g(x)] = [\lim_{x \rightarrow a} f(x)] + [\lim_{x \rightarrow a} g(x)]
+\end{aligned}
+$$$$
+\begin{aligned}
+= f(a) + g(a) = (f + g)(a)
+\end{aligned}
+$$&lt;p&gt;And thus, $f + g$ is continuous at $a$.&lt;/p&gt;
+&lt;h3&gt;Continuity of Polynomial and Rational Functions&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;continuity-of-polynomial-and-rational-functions&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#continuity-of-polynomial-and-rational-functions&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Any polynomial functions is continuous on $\mathbb{R}$.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Proof&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A polynomial is a function of the form:&lt;/p&gt;
+$$
+\begin{aligned}
+P(x) = c_nx^n + c_{n-1}x^{n-1} + \cdots + c_1x + c_0
+\end{aligned}
+$$&lt;p&gt;where $c_i \in \mathbb{R}$, we know that:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} c_0 = c_0
+\end{aligned}
+$$&lt;p&gt;and&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} x^m = a^m, m = 1, 2, \cdots, n
+\end{aligned}
+$$&lt;p&gt;therefore:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} P(x) = \lim_{x \rightarrow a} c_nx^n + c_{n-1}x^{n-1} + \cdots + c_1x + c_0
+\end{aligned}
+$$&lt;p&gt;by the &lt;a href=&#34;#properties-of-limits&#34; &gt;Properties of Limits&lt;/a&gt;:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} P(x) = \sum_{i = 0}^n \lim_{x \rightarrow a} c_i x^{i}
+\end{aligned}
+$$$$
+\begin{aligned}
+= \left(\sum_{i = 1}^n \lim_{x \rightarrow a} c_i x^{i}\right) + \lim_{x \rightarrow} c_0
+\end{aligned}
+$$$$
+\begin{aligned}
+= \left(\sum_{i = 1}^n c_i a^i\right) + c_0
+\end{aligned}
+$$$$
+\begin{aligned}
+= P(a)
+\end{aligned}
+$$&lt;p&gt;Thus $P$ is continuous at $a$, where $a \in \mathbb{R}$.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Any ration function is continuous whenever it is defined, that is, it is continuous on its domain.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Proof&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A rational function is a function of the form:&lt;/p&gt;
+$$
+\begin{aligned}
+f(x) = \frac{P(x)}{Q(x)}
+\end{aligned}
+$$&lt;p&gt;where $P$ and $Q$ are polynomials. The domain of $f$ is $D = {x \in \mathbb{R} | Q(x) \neq 0}$. So we now, by the previous proof, that $P$ and $Q$ are continuous everywhere. Thus by the &lt;a href=&#34;#properties-of-continuous-functions&#34; &gt;Properties of Continuous Functions&lt;/a&gt; $f$ is continuous at every number in $D$ (its domain).&lt;/p&gt;
+&lt;h3&gt;Continuous Functions&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;continuous-functions&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#continuous-functions&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The following types of functions are continuous on their domains:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Polynomial functions&lt;/li&gt;
+&lt;li&gt;Rational functions&lt;/li&gt;
+&lt;li&gt;Root functions&lt;/li&gt;
+&lt;li&gt;Trigonometric functions&lt;/li&gt;
+&lt;li&gt;Inverse trigonometric functions&lt;/li&gt;
+&lt;li&gt;Exponential functions&lt;/li&gt;
+&lt;li&gt;Logarithmic functions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note that the inverse of a continuous one-to-one function is also continuous. Our geometric intuitions makes it seem plausible: we know that the graph of $f^{-1}$ is obtained by reflecting the graph of $f$ on the line $y = x$. So if the graph of $f$ has no break in it (the function is continuous), then the graph of $f^{-1}$ also has no break in it.&lt;/p&gt;
+&lt;h3&gt;Continuity of Composite Functions&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;continuity-of-composite-functions&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#continuity-of-composite-functions&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;If $f$ is continuous at $b$ and $\lim_{x \rightarrow a} g(x) = b$, then $\lim_{x \rightarrow a} f(g(x)) = b$, that is:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(g(x)) = f\left(\lim_{x \rightarrow a} g(x)\right)
+\end{aligned}
+$$&lt;p&gt;If $g$ is continuous at $a$ and $f$ is continuous at $g(a)$, then the composite function $f \circ g$, given by $(f \circ g)(x) = f(g(x))$ is continuous at $a$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Since $g$ is continuous at $a$ we have that:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} g(x) = g(a)
+\end{aligned}
+$$&lt;p&gt;Since $f$ is continuous at $b = g(a)$ we have that:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(g(x)) = f(b) = f(g(a))
+\end{aligned}
+$$&lt;p&gt;thus $f \circ g$ is continuous at $a$.&lt;/p&gt;
+&lt;h3&gt;The Intermediate Value Theorem&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;the-intermediate-value-theorem&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-intermediate-value-theorem&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Suppose that $f$ is continuous at the closed interval $[a, b]$ and let $N$ be any number between $f(a)$ and $f(b)$, where $f(a) \neq f(b)$. There there exists a number $c \in (a, b)$, such that $f(c) = N$.&lt;/p&gt;
+&lt;p&gt;The Intermediate Value Theorem states that a continuous functions takes on every intermediate value between the function values $f(a)$ and $f(b)$ (See Figure 8).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/intermediate_value_theorem.png&#34; alt=&#34;Intermediate Value Theorem&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h2&gt;Limits at Infinity. Horizontal Asymptotes&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;limits-at-infinity-horizontal-asymptotes&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#limits-at-infinity-horizontal-asymptotes&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Intuitive Definition of a Limit at Infinity&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;intuitive-definition-of-a-limit-at-infinity&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#intuitive-definition-of-a-limit-at-infinity&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Let $f$ be a function defined on some interval $(a, \infty)$, then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x\rightarrow \infty} f(x) = L
+\end{aligned}
+$$&lt;p&gt;means that the values of $f(x)$ can be made arbitrarily close to $L$ by requiring $x$ to be sufficiently large.&lt;/p&gt;
+&lt;p&gt;Geometric illustration of this defintion are shown in Figure $2$.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/intuitive_definition_limits_at_infinity.png&#34; alt=&#34;Intuitive Definition of Limits at Infinity&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Let $f$ be a function defined on some interval $(-\infty, a)$, then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x\rightarrow -\infty} f(x) = L
+\end{aligned}
+$$&lt;p&gt;means that the values of $f(x)$ can be made arbitrarily close to $L$ by requiring $x$ to be sufficiently large negative.&lt;/p&gt;
+&lt;p&gt;This definition is illustrated in Figure $3$.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/intuitive_definition_limits_at_negative_infinity.png&#34; alt=&#34;Intuitive Definition of Limits at Negative Infinity&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;Horizontal Asymptote&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;horizontal-asymptote&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#horizontal-asymptote&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The line $y = L$ is called a &lt;strong&gt;horizontal asymptote&lt;/strong&gt; of the curve $y = f(x)$ if either:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow \infty} f(x) = L
+\end{aligned}
+$$&lt;p&gt;or&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow -\infty} f(x) = L
+\end{aligned}
+$$&lt;p&gt;
+    &lt;img src=&#34;.././assets/horizontal_aysmptote.png&#34; alt=&#34;Horizontal Asymptote&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;Evaluating Limits at Infinity&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;evaluating-limits-at-infinity&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#evaluating-limits-at-infinity&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Most of the &lt;a href=&#34;#properties-of-limits&#34; &gt;Limit Laws&lt;/a&gt; also hold for limits at infinity, with the exception of Laws $10$ and $11$.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s see the following theorem on the limit at infinity of a rational function:&lt;/p&gt;
+&lt;p&gt;If $r &amp;gt; 0$ is a rational number, then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow \infty} \frac{1}{x^r} = 0
+\end{aligned}
+$$&lt;p&gt;If $r &amp;gt; 0$ is a rational number such that $x^r$ is defined for all $x$, then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow -\infty} \frac{1}{x^r} = 0
+\end{aligned}
+$$&lt;h3&gt;Infinite Limits at Infinity&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;infinite-limits-at-infinity&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#infinite-limits-at-infinity&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The notation:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow \infty} f(x) = \infty
+\end{aligned}
+$$&lt;p&gt;means that the values of $f(x)$ become large as $x$ becomes large. Similarly:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow -\infty} f(x) = \infty
+\end{aligned}
+$$$$
+\begin{aligned}
+\lim_{x \rightarrow \infty} f(x) = -\infty
+\end{aligned}
+$$$$
+\begin{aligned}
+\lim_{x \rightarrow -\infty} f(x) = -\infty
+\end{aligned}
+$$&lt;p&gt;In general, the &lt;a href=&#34;#properties-of-limits&#34; &gt;Limit Laws&lt;/a&gt; cannot be applied to infinite limits, because $\infty$ is not a number.&lt;/p&gt;
+&lt;h3&gt;Precise Definition of a Limit at Infinity&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;precise-definition-of-a-limit-at-infinity&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#precise-definition-of-a-limit-at-infinity&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Let $f$ be a function defined on some interval $(a, \infty)$, then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow \infty} f(x) = L
+\end{aligned}
+$$&lt;p&gt;means that for every $\epsilon &amp;gt; 0$ there is a corresponding number $N$ such that:&lt;/p&gt;
+$$
+\begin{aligned}
+\text{ if } x &gt; N \text{ then } |f(x) - L| &lt; \epsilon
+\end{aligned}
+$$&lt;p&gt;In words, this says that the values of $f(x)$ can be mace arbitrarily cloe to $L$ by requiring $x$ to be sufficiently lare.&lt;/p&gt;
+&lt;p&gt;Graphically it says that by keeping $x$ large enough we can make the graph of $f$ lie between the given horizontal lines $y = L - \epsilon$ and $y = L + \epsilon$ as in Figure 14.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/precise_definition_limit_at_infinity.png&#34; alt=&#34;Graphical Representation of a Limit at Infinity&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Let $f$ be a function defined on some interval $(-\infty, a)$, then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow -\infty} f(x) = L
+\end{aligned}
+$$&lt;p&gt;means that for every $\epsilon &amp;gt; 0$ there is a corresponding number $N$ such that:&lt;/p&gt;
+$$
+\begin{aligned}
+\text{ if } x &lt; N \text{ then } |f(x) - L| &lt; \epsilon
+\end{aligned}
+$$&lt;p&gt;This definition is illustrated on Figure 16.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/precise_definition_limit_at_negative_infinity.png&#34; alt=&#34;Graphical Representation of a Limit at Negateive Infinity&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;Precise Definition of an Infinite Limit at Infinity&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;precise-definition-of-an-infinite-limit-at-infinity&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#precise-definition-of-an-infinite-limit-at-infinity&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Let $f$ be a function defined on some interval $(a, \infty)$, then:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow \infty} f(x) = \infty
+\end{aligned}
+$$&lt;p&gt;means that for every positive number $M$ there is a corresponding positive number $N$ such that:&lt;/p&gt;
+$$
+\begin{aligned}
+\text{ if } x &gt; N \text{ then } f(x) &gt; M
+\end{aligned}
+$$&lt;p&gt;This definition is illustrated on Figure 19.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/precise_definition_inifinite_limit_at_infinity.png&#34; alt=&#34;Precise Definition of Infinite Limite at Infinity&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Similar definitions apply when the symbol $\infty$ is replaced by $-\infty$.&lt;/p&gt;
+&lt;h2&gt;Derivatives and Rates of Change&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;derivatives-and-rates-of-change&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#derivatives-and-rates-of-change&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Tangents&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;tangents&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#tangents&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The &lt;strong&gt;tangent line&lt;/strong&gt; to the curve $y = f(x)$ at the point $P(a, f(a))$ is the line through $P$ with slope:&lt;/p&gt;
+$$
+\begin{aligned}
+m = \lim_{x \rightarrow a} \frac{f(x) - f(a)}{x - a}
+\end{aligned}
+$$&lt;p&gt;Provided that this limit exists (See Figure 1).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/tangent_line.png&#34; alt=&#34;Tangent Line&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We sometimes refer to the slope of the tangent line to a curve at a point as the &lt;strong&gt;slope of the curve&lt;/strong&gt; at the point. If we zoom in far enough toward the point, the curve looks almost like a straight line (See Figure 2).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/slope_of_the_curve.png&#34; alt=&#34;Slope of the Curve&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;There is another expression for the slope of a tangent line. If $h = x - a$, then $x = a + h$, and so the slope of the secant line $PQ$ becomes:&lt;/p&gt;
+$$
+\begin{aligned}
+m_{PQ} = \frac{f(a + h) - f(a)}{h}
+\end{aligned}
+$$&lt;p&gt;See Figure 3.&lt;/p&gt;
+&lt;p&gt;Notice that as $x$ approaches $a$, then $h$ approaches $0$. Therefor3 the definition of the slope of the tangent line becomes:&lt;/p&gt;
+$$
+\begin{aligned}
+m = \lim_{h \rightarrow 0} \frac{f(a + h) - f(a)}{h}
+\end{aligned}
+$$&lt;p&gt;
+    &lt;img src=&#34;.././assets/slope_of_the_curve_1.png&#34; alt=&#34;Slope of the Curve&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;Velocities&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;velocities&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#velocities&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Suppose an object moves along a straight line following the equation $s = f(t)$, where $s$ is the displacement of the object from the origin at time $t$. The function $f$ that describes the motion is called &lt;strong&gt;position function&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;In the time interval from $t = a$ to $t = a + h$ the change is position is $f(a + h) - f(a)$ (See Figure 5).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/velocity_intervals.png&#34; alt=&#34;Velocity Intervals&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The average velocity over this time interval is:&lt;/p&gt;
+$$
+\begin{aligned}
+\text{average velocity} = \frac{\text{displacement}}{\text{time}} = \frac{f(a + h) - f(a)}{h}
+\end{aligned}
+$$&lt;p&gt;Now suppose we compute the average velocities over shorter and shorter time intervals, that is, we let $h$ approach $0$. We define the &lt;strong&gt;velocity&lt;/strong&gt; or &lt;strong&gt;instantaneous velocity&lt;/strong&gt; $v(a)$ at time $t = a$ to be the limit of these average velocities:&lt;/p&gt;
+$$
+\begin{aligned}
+v(a) = \lim_{h \rightarrow 0} \frac{f(a + h) - f(a)}{h}
+\end{aligned}
+$$&lt;p&gt;Provided that this limit exists.&lt;/p&gt;
+&lt;h3&gt;Derivatives&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;derivatives&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#derivatives&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Limits of the form:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{h \rightarrow 0} \frac{f(a + h) - f(a)}{h}
+\end{aligned}
+$$&lt;p&gt;arise whenever we calculate a rate of change in any of the sciences or engineering.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;derivative of a function&lt;/strong&gt; $f$ &lt;strong&gt;at a number&lt;/strong&gt; $a$, denoted by $f&amp;rsquo;(a)$ is:&lt;/p&gt;
+$$
+\begin{aligned}
+f&#39;(a) = \lim_{h \rightarrow 0} \frac{f(a + h) - f(a)}{h}
+\end{aligned}
+$$&lt;p&gt;if this limit exists.&lt;/p&gt;
+&lt;p&gt;Letting $x = a + h \leftrightarrow h = x - a$, then an equivalent way of this definition is:&lt;/p&gt;
+$$
+\begin{aligned}
+f&#39;(a) = \lim_{x \rightarrow a} \frac{f(x) - f(a)}{x - a}
+\end{aligned}
+$$&lt;p&gt;We defined the tangent line to the curve $y = f(x)$ at $P(a, f(a))$ to be the line that passes through $P$ and has slope $m$. By the previous definition this slope $m$ is the same as the derivative $f&amp;rsquo;(a)$.&lt;/p&gt;
+&lt;p&gt;If we use the point-slope form of the equation of a line, we can write an equation of the tangent line to the curve $y = f(x)$ at the point $(a, f(a))$:&lt;/p&gt;
+$$
+\begin{aligned}
+y - f(a) = f&#39;(a)(x - a)
+\end{aligned}
+$$&lt;h3&gt;Rates of Change&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;rates-of-change&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#rates-of-change&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Suppose that $y$ is a quantity that depends on another quantity $x$, we write $y = f(x)$. If $x$ changes to $x_1$ to $x_2$, then the change in $x$ is:&lt;/p&gt;
+$$
+\begin{aligned}
+\Delta x = x_2 - x_1
+\end{aligned}
+$$&lt;p&gt;And the corresponding change in $y$ is:&lt;/p&gt;
+$$
+\begin{aligned}
+\Delta y = f(x_2) - f(x_1)
+\end{aligned}
+$$&lt;p&gt;The difference quotient is given by:&lt;/p&gt;
+$$
+\begin{aligned}
+\frac{\Delta y}{\Delta x} = \frac{f(x_2) - f(x_1)}{x_2 - x_1}
+\end{aligned}
+$$&lt;p&gt;And is called the &lt;strong&gt;average rate of change of&lt;/strong&gt; $y$ &lt;strong&gt;with respect to&lt;/strong&gt; $x$ over the interval $[x_1, x_2]$. This can be interpreted as the slope of the secand line $PQ$ in Figure 8.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/average_rate_change.png&#34; alt=&#34;Average Rate of Change&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;By analogy with velocity, if we consider the average rate of change over smaller and smaller intervals, letting $\Delta x$ approach $0$. The limit of these average rates of change is called the (&lt;strong&gt;instantaneous&lt;/strong&gt;) &lt;strong&gt;rate of change of&lt;/strong&gt; $y$ &lt;strong&gt;with respect to&lt;/strong&gt; $x$ at $x = x_1$. This can be interpreted as the slope of the tangent to the curve $y = f(x)$ at $P(x_1, f(x_1))$:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{\Delta x \rightarrow 0} \frac{\Delta y}{\Delta x} = \lim_{x_2 \rightarrow x_1} \frac{f(x_2) - f(x_1)}{x_2 - x_1}
+\end{aligned}
+$$&lt;p&gt;We recognize this limit as the derivative $f&amp;rsquo;(x_1)$ so the derivative of $f&amp;rsquo;(x_1)$ is the instantaneous rate of change of $y = f(x)$ with respect to $x$ when $x = x_1$.&lt;/p&gt;
+&lt;p&gt;This means that when the derivative is large the curve is steep (as at the point $P$ in Figure 9), therefore the $y$-values change rapidly. However, when the derivative is small, the curve is relatively flat (as at point $Q$) and the $y$-values change slowly.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/derivative_rate_change.png&#34; alt=&#34;Derivatives Rate of Change&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Then $f&amp;rsquo;(a)$ is the velocity of a particle at time $t = a$ and its &lt;strong&gt;speed&lt;/strong&gt; is the absolute value of the velocity, $|f&amp;rsquo;(a)|$.&lt;/p&gt;
+&lt;h2&gt;The Derivative as a Function&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;the-derivative-as-a-function&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-derivative-as-a-function&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Other Notations&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;other-notations&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#other-notations&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Some common alternative notations for th derive are as follows:&lt;/p&gt;
+$$
+\begin{aligned}
+f&#39;(x) = y&#39; = \frac{dy}{dx} = \frac{df}{fx} = \frac{d}{dx} f(x) = Df(x) = D_x f(x)
+\end{aligned}
+$$&lt;p&gt;The symbols $D$ and $\frac{d}{dx}$ are called &lt;strong&gt;differentiation operators&lt;/strong&gt; because they indicate the operation of &lt;strong&gt;differentiation&lt;/strong&gt;. The symbol $\frac{dy}{dx}$ was introduced by Leibniz as a synonim for $f&amp;rsquo;(x)$. We can rewrite the definition of the derivative in Leibniz notation in the form:&lt;/p&gt;
+$$
+\begin{aligned}
+\frac{dy}{dx} = \lim_{\Delta x \rightarrow 0} \frac{\Delta y}{\Delta x}
+\end{aligned}
+$$&lt;p&gt;To indicate the value of a derivative $\frac{dy}{dx}$ in Leibniz notation at a specific number $a$, we use the notation:&lt;/p&gt;
+$$
+\begin{aligned}
+\left.\frac{dy}{dx}\right|_{x=a}
+\end{aligned}
+$$&lt;h3&gt;Theorems&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;theorems&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#theorems&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;A function $f$ is &lt;strong&gt;differentiable at&lt;/strong&gt; $a$ if $f&amp;rsquo;(a)$ exists. It is &lt;strong&gt;differentiable on an open interval&lt;/strong&gt; $(a, b)$ if it is differentiable at every number in the interval.&lt;/p&gt;
+&lt;p&gt;If $f$ is differentiable $a$, then $f$ is continuous at $a$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;We assume that $f$ is differentiable at $a$, so we have to prove that $f$ is continuous at $a$, that is we have to show:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) = f(a)
+\end{aligned}
+$$&lt;p&gt;We will do this by showing that the difference $f(x) - f(a)$ approaches $0$. Then, multiplying and dividing $f(x) - f(a)$ by $x - a$&lt;/p&gt;
+$$
+\begin{aligned}
+f(x) - f(a) = \frac{f(x) - f(a)}{x - a} (x - a)
+\end{aligned}
+$$&lt;p&gt;By the &lt;a href=&#34;#limit-laws&#34; &gt;Limit Laws&lt;/a&gt;:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} [f(x) - f(a)] = \lim_{x \rightarrow a} \frac{f(x) - f(a)}{x - a} (x - a)
+\end{aligned}
+$$$$
+\begin{aligned}
+= \lim_{x \rightarrow a} \frac{f(x) - f(a)}{x - a} \cdot \lim_{x \rightarrow a} (x - a)
+\end{aligned}
+$$&lt;p&gt;Because we know that $f$ is differentiable at $a$, then:&lt;/p&gt;
+$$
+\begin{aligned}
+f&#39;(a) = \lim_{x \rightarrow a} \frac{f(x) - f(a)}{x - a}
+\end{aligned}
+$$&lt;p&gt;exists, such that:&lt;/p&gt;
+$$
+\begin{aligned}
+= f&#39;(a) \cdot (a - a)= f&#39;(a) \cdot 0 = 0
+\end{aligned}
+$$&lt;p&gt;Now we use this result to prove that $f$ is continuous:&lt;/p&gt;
+$$
+\begin{aligned}
+\lim_{x \rightarrow a} f(x) = \lim_{x \rightarrow a} [f(a) + (f(x) - f(a))]
+\end{aligned}
+$$$$
+\begin{aligned}
+= \lim_{x \rightarrow a} f(a) + \lim_{x \rightarrow a} [f(x) - f(a)]
+\end{aligned}
+$$&lt;p&gt;From our previous lemma we know that $\lim_{x \rightarrow a} [f(x) - f(a)] = 0$. Then:&lt;/p&gt;
+$$
+\begin{aligned}
+= \lim_{x \rightarrow a} f(a) + 0 = f(a)
+\end{aligned}
+$$&lt;p&gt;Therefore $f$ is continuous at $a$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note that the converse of this theorem is false, that is, there are functions that are continuous but not differentiable.&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;How Can a Function Fail To Be Differentiable&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;how-can-a-function-fail-to-be-differentiable&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#how-can-a-function-fail-to-be-differentiable&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We consider three scenarios:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If the graph of a function $f$ has a corner or a kink in it, then the graph of $f$ has no tangent at this point and $f$ is not differentiable there.&lt;/li&gt;
+&lt;li&gt;By the contrapositive of &amp;ldquo;If $f$ is differentiable at $a$, then $f$ is continuous at $a$&amp;rdquo; we know that if $f$ is not continuous at $a$ then $f$ is not differentiable at $a$.&lt;/li&gt;
+&lt;li&gt;If the curve given by $f$ has a &lt;strong&gt;vertical tangent line&lt;/strong&gt; when $x = a$, $f$ is continuous at $a$ and $\lim_{x \rightarrow a} |f&amp;rsquo;(x)| = \infty$ then $f$ is not differentiable at $a$.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Figure 7 illustrates the three possibilities:&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;.././assets/no_derivative_possibilities.png&#34; alt=&#34;Three Possibilities for No Derivative&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;Higher Derivatives&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;higher-derivatives&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#higher-derivatives&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;If $f$ is a differentiable function, then its derivative $f&amp;rsquo;$ is also a function, so $f&amp;rsquo;$ may have a derivative of its own, denoted by $(f&amp;rsquo;)&amp;rsquo; = f&amp;rsquo;&amp;rsquo;$, called the &lt;strong&gt;second derivative&lt;/strong&gt; of $f$. Using Leibniz notation:&lt;/p&gt;
+$$
+\begin{aligned}
+\frac{d}{dx} \left(\frac{dy}{dx}\right) = \frac{d^2y}{dx^2}
+\end{aligned}
+$$&lt;p&gt;In general, we can interpret a second derivative as a rate of change of a rate of change. The most familiar example of this is acceleration. If $s(t)$ is the position function, we know that its first derivative represents the velocity $v(t)$:&lt;/p&gt;
+$$
+\begin{aligned}
+v(t) = s&#39;(t) = \frac{ds}{dt}
+\end{aligned}
+$$&lt;p&gt;The instantaneous rate of change of velocity with respect to time is called the &lt;strong&gt;acceleration&lt;/strong&gt; $a(t)$. Thus the acceleration function is the derivative of the velocity function, that is the second derivative of the position function:&lt;/p&gt;
+$$
+\begin{aligned}
+a(t) = v&#39;(t) = s&#39;&#39;(t)
+\end{aligned}
+$$&lt;p&gt;or in Leibniz notation:&lt;/p&gt;
+$$
+\begin{aligned}
+a = \frac{dv}{dt} = \frac{d^2s}{dt^2}
+\end{aligned}
+$$&lt;p&gt;The &lt;strong&gt;third derivative&lt;/strong&gt; $f&amp;rsquo;&amp;rsquo;&amp;rsquo;$ is the derivative of the second derivative $f&amp;rsquo;&amp;rsquo;&amp;rsquo; = (f&amp;rsquo;&amp;rsquo;)&amp;rsquo;$. It can be interpreted as the slope of the curve $y = f&amp;rsquo;&amp;rsquo;(x)$ or as the rante of change of $f&amp;rsquo;&amp;rsquo;(x)$. Alternative notations are:&lt;/p&gt;
+$$
+\begin{aligned}
+y&#39;&#39;&#39; = f&#39;&#39;&#39;(x) = \frac{d}{dx} \left( \frac{d^2y}{dx^2} \right) = \frac{d^3y}{dx^3}
+\end{aligned}
+$$&lt;p&gt;We can also interpret the third derivative physically. Given the position function $s(t)$ its third derivative is the derivative of the acceleration function and is called the &lt;strong&gt;jerk&lt;/strong&gt;:&lt;/p&gt;
+$$
+\begin{aligned}
+j = \frac{da}{dt} = \frac{d^3s}{dt^3}
+\end{aligned}
+$$&lt;p&gt;It represents the rate of change of acceleration. It is named like so because a large jerk means a sudden change in acceleration, which causes an abrupt movement.&lt;/p&gt;
+&lt;p&gt;In general, the $n$th derivative of $f$ is denoted by $f^{(n)}$ and is obtained from $f$ by differentiating $n$ times. If $y = f(x)$, we write:&lt;/p&gt;
+$$
+\begin{aligned}
+y^{(n)} = f^{(n)}(x) = \frac{d^n y}{dx^n}
+\end{aligned}
+$$
+      </description>
+    </item>
+    
+  </channel>
+</rss>

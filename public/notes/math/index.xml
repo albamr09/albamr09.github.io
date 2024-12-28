@@ -66,5 +66,38 @@
       </description>
     </item>
     
+    <item>
+      <title>Calculus Ealy Transcendentals</title>
+      <link>//localhost:1313/notes/math/cet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/notes/math/cet/</guid>
+      <description>
+        
+        
+        &lt;div class=&#34;hextra-cards hx-mt-4 hx-gap-4 hx-grid not-prose&#34; style=&#34;--hextra-cards-grid-cols: 3;&#34;&gt;
+&lt;a
+  class=&#34;hextra-card hx-group hx-flex hx-flex-col hx-justify-start hx-overflow-hidden hx-rounded-lg hx-border hx-border-gray-200 hx-text-current hx-no-underline dark:hx-shadow-none hover:hx-shadow-gray-100 dark:hover:hx-shadow-none hx-shadow-gray-100 active:hx-shadow-sm active:hx-shadow-gray-200 hx-transition-all hx-duration-200 hover:hx-border-gray-300 hx-bg-transparent hx-shadow-sm dark:hx-border-neutral-800 hover:hx-bg-slate-50 hover:hx-shadow-md dark:hover:hx-border-neutral-700 dark:hover:hx-bg-neutral-900&#34;href=&#34;01_functions&#34;
+    &gt;&lt;span class=&#34;hextra-card-icon hx-flex hx-font-semibold hx-items-start hx-gap-2 hx-p-4 hx-text-gray-700 hover:hx-text-gray-900 dark:hx-text-neutral-200 dark:hover:hx-text-neutral-50&#34;&gt;Functions and Models&lt;/span&gt;&lt;/a&gt;
+&lt;a
+  class=&#34;hextra-card hx-group hx-flex hx-flex-col hx-justify-start hx-overflow-hidden hx-rounded-lg hx-border hx-border-gray-200 hx-text-current hx-no-underline dark:hx-shadow-none hover:hx-shadow-gray-100 dark:hover:hx-shadow-none hx-shadow-gray-100 active:hx-shadow-sm active:hx-shadow-gray-200 hx-transition-all hx-duration-200 hover:hx-border-gray-300 hx-bg-transparent hx-shadow-sm dark:hx-border-neutral-800 hover:hx-bg-slate-50 hover:hx-shadow-md dark:hover:hx-border-neutral-700 dark:hover:hx-bg-neutral-900&#34;href=&#34;02_limits&#34;
+    &gt;&lt;span class=&#34;hextra-card-icon hx-flex hx-font-semibold hx-items-start hx-gap-2 hx-p-4 hx-text-gray-700 hover:hx-text-gray-900 dark:hx-text-neutral-200 dark:hover:hx-text-neutral-50&#34;&gt;Limits and Derivatives&lt;/span&gt;&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Limits and Derivatives&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./02_01.md&#34; &gt;The Tangent and Velocity Problems&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./02_02.md&#34; &gt;The Limit of a Function&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./02_03.md&#34; &gt;Calculating Limits Using the Limits Laws&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./02_04.md&#34; &gt;The Precise Definition of a Limit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./02_05.md&#34; &gt;Continuity&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./02_06.md&#34; &gt;Limits at Infinity. Horizontal Asymptotes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./02_07.md&#34; &gt;Derivatives and Rates of Change&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./02_08.md&#34; &gt;The Derivative as a Function&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
   </channel>
 </rss>
