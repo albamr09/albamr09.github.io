@@ -1,6 +1,7 @@
 ---
 title: Machine Learning Stanford Coursera
 toc: false
+math: true
 ---
 
 ## Apredizaje supervisado
