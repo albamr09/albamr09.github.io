@@ -7,10 +7,9 @@ toc: false
 
 {{< cards >}}
 {{< card link="aaii" title="Aprendizaje Automático II" icon="desktop-computer">}}
+{{< card link="dl" title="Deep Learning" icon="chart-square-bar">}}
 {{< /cards >}}
 
-- [Aprendizaje Automático II](./aaii/index.md)
-- [Deep Learning](./2C_2C/DL/index.md)
 - [Modelos Bayesianos Jerárquicos](./2C_2C/MBJ/index.md)
 
 ## 3C 1C

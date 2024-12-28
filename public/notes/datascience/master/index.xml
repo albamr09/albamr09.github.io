@@ -43,29 +43,35 @@
     </item>
     
     <item>
-      <title></title>
-      <link>//localhost:1313/notes/datascience/master/2c_2c/dl/</link>
+      <title>Deep Learning</title>
+      <link>//localhost:1313/notes/datascience/master/dl/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/notes/datascience/master/2c_2c/dl/</guid>
+      <guid>//localhost:1313/notes/datascience/master/dl/</guid>
       <description>
         
         
-        &lt;h1&gt;Deep Learning&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;./01_foundation.md&#34; &gt;Fundamentos de las Redes Neuronales Profundas&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Tipologías de las redes neuronales profundas&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./02/01_conv_nets.md&#34; &gt;Convolutional Nets&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./02/02_rnn.md&#34; &gt;Recurrent Neural Networks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./02/03_boltzmann.md&#34; &gt;Boltzmann Based Networks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./02/04_autoencoders.md&#34; &gt;Autoencoders&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Herramientas y estrategias de programación e implemetación de redes neuronales&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./03/01_frameworks.md&#34; &gt;Frameworks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./03/02_computacion_acelerada.md&#34; &gt;Computación Acelerada&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./03/03_proveedores.md&#34; &gt;Proveedores&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./04_cnn.md&#34; &gt;Redes Neuronales Convolucionales en Visión Artificial&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./05_rnn.md&#34; &gt;Redes Neuronales Recurrentes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./06_cloud_services.md&#34; &gt;Servicios y proveedores de Deep Learning en la nube&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
+        &lt;div class=&#34;hextra-cards hx-mt-4 hx-gap-4 hx-grid not-prose&#34; style=&#34;--hextra-cards-grid-cols: 3;&#34;&gt;
+&lt;a
+  class=&#34;hextra-card hx-group hx-flex hx-flex-col hx-justify-start hx-overflow-hidden hx-rounded-lg hx-border hx-border-gray-200 hx-text-current hx-no-underline dark:hx-shadow-none hover:hx-shadow-gray-100 dark:hover:hx-shadow-none hx-shadow-gray-100 active:hx-shadow-sm active:hx-shadow-gray-200 hx-transition-all hx-duration-200 hover:hx-border-gray-300 hx-bg-transparent hx-shadow-sm dark:hx-border-neutral-800 hover:hx-bg-slate-50 hover:hx-shadow-md dark:hover:hx-border-neutral-700 dark:hover:hx-bg-neutral-900&#34;href=&#34;01_foundation&#34;
+    &gt;&lt;span class=&#34;hextra-card-icon hx-flex hx-font-semibold hx-items-start hx-gap-2 hx-p-4 hx-text-gray-700 hover:hx-text-gray-900 dark:hx-text-neutral-200 dark:hover:hx-text-neutral-50&#34;&gt;T1. Fundamentos de las Redes Neuronales Profundas&lt;/span&gt;&lt;/a&gt;
+&lt;a
+  class=&#34;hextra-card hx-group hx-flex hx-flex-col hx-justify-start hx-overflow-hidden hx-rounded-lg hx-border hx-border-gray-200 hx-text-current hx-no-underline dark:hx-shadow-none hover:hx-shadow-gray-100 dark:hover:hx-shadow-none hx-shadow-gray-100 active:hx-shadow-sm active:hx-shadow-gray-200 hx-transition-all hx-duration-200 hover:hx-border-gray-300 hx-bg-transparent hx-shadow-sm dark:hx-border-neutral-800 hover:hx-bg-slate-50 hover:hx-shadow-md dark:hover:hx-border-neutral-700 dark:hover:hx-bg-neutral-900&#34;href=&#34;02_typologies&#34;
+    &gt;&lt;span class=&#34;hextra-card-icon hx-flex hx-font-semibold hx-items-start hx-gap-2 hx-p-4 hx-text-gray-700 hover:hx-text-gray-900 dark:hx-text-neutral-200 dark:hover:hx-text-neutral-50&#34;&gt;T2. Tipologías de las redes neuronales profundas&lt;/span&gt;&lt;/a&gt;
+&lt;a
+  class=&#34;hextra-card hx-group hx-flex hx-flex-col hx-justify-start hx-overflow-hidden hx-rounded-lg hx-border hx-border-gray-200 hx-text-current hx-no-underline dark:hx-shadow-none hover:hx-shadow-gray-100 dark:hover:hx-shadow-none hx-shadow-gray-100 active:hx-shadow-sm active:hx-shadow-gray-200 hx-transition-all hx-duration-200 hover:hx-border-gray-300 hx-bg-transparent hx-shadow-sm dark:hx-border-neutral-800 hover:hx-bg-slate-50 hover:hx-shadow-md dark:hover:hx-border-neutral-700 dark:hover:hx-bg-neutral-900&#34;href=&#34;03_tools&#34;
+    &gt;&lt;span class=&#34;hextra-card-icon hx-flex hx-font-semibold hx-items-start hx-gap-2 hx-p-4 hx-text-gray-700 hover:hx-text-gray-900 dark:hx-text-neutral-200 dark:hover:hx-text-neutral-50&#34;&gt;T3. Herramientas y estrategias de programación e implemetación de redes neuronales&lt;/span&gt;&lt;/a&gt;
+&lt;a
+  class=&#34;hextra-card hx-group hx-flex hx-flex-col hx-justify-start hx-overflow-hidden hx-rounded-lg hx-border hx-border-gray-200 hx-text-current hx-no-underline dark:hx-shadow-none hover:hx-shadow-gray-100 dark:hover:hx-shadow-none hx-shadow-gray-100 active:hx-shadow-sm active:hx-shadow-gray-200 hx-transition-all hx-duration-200 hover:hx-border-gray-300 hx-bg-transparent hx-shadow-sm dark:hx-border-neutral-800 hover:hx-bg-slate-50 hover:hx-shadow-md dark:hover:hx-border-neutral-700 dark:hover:hx-bg-neutral-900&#34;href=&#34;04_cnn&#34;
+    &gt;&lt;span class=&#34;hextra-card-icon hx-flex hx-font-semibold hx-items-start hx-gap-2 hx-p-4 hx-text-gray-700 hover:hx-text-gray-900 dark:hx-text-neutral-200 dark:hover:hx-text-neutral-50&#34;&gt;T4. Redes Neuronales Convolucionales en Visión Artificial&lt;/span&gt;&lt;/a&gt;
+&lt;a
+  class=&#34;hextra-card hx-group hx-flex hx-flex-col hx-justify-start hx-overflow-hidden hx-rounded-lg hx-border hx-border-gray-200 hx-text-current hx-no-underline dark:hx-shadow-none hover:hx-shadow-gray-100 dark:hover:hx-shadow-none hx-shadow-gray-100 active:hx-shadow-sm active:hx-shadow-gray-200 hx-transition-all hx-duration-200 hover:hx-border-gray-300 hx-bg-transparent hx-shadow-sm dark:hx-border-neutral-800 hover:hx-bg-slate-50 hover:hx-shadow-md dark:hover:hx-border-neutral-700 dark:hover:hx-bg-neutral-900&#34;href=&#34;05_rnn&#34;
+    &gt;&lt;span class=&#34;hextra-card-icon hx-flex hx-font-semibold hx-items-start hx-gap-2 hx-p-4 hx-text-gray-700 hover:hx-text-gray-900 dark:hx-text-neutral-200 dark:hover:hx-text-neutral-50&#34;&gt;T5. Redes Neuronales Recurrentes&lt;/span&gt;&lt;/a&gt;
+&lt;a
+  class=&#34;hextra-card hx-group hx-flex hx-flex-col hx-justify-start hx-overflow-hidden hx-rounded-lg hx-border hx-border-gray-200 hx-text-current hx-no-underline dark:hx-shadow-none hover:hx-shadow-gray-100 dark:hover:hx-shadow-none hx-shadow-gray-100 active:hx-shadow-sm active:hx-shadow-gray-200 hx-transition-all hx-duration-200 hover:hx-border-gray-300 hx-bg-transparent hx-shadow-sm dark:hx-border-neutral-800 hover:hx-bg-slate-50 hover:hx-shadow-md dark:hover:hx-border-neutral-700 dark:hover:hx-bg-neutral-900&#34;href=&#34;06_cloud_services&#34;
+    &gt;&lt;span class=&#34;hextra-card-icon hx-flex hx-font-semibold hx-items-start hx-gap-2 hx-p-4 hx-text-gray-700 hover:hx-text-gray-900 dark:hx-text-neutral-200 dark:hover:hx-text-neutral-50&#34;&gt;T6. Servicios y proveedores de Deep Learning en la nube&lt;/span&gt;&lt;/a&gt;
+&lt;/div&gt;
+
 
       </description>
     </item>

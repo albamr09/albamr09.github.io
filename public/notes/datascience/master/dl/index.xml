@@ -1,0 +1,967 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Alba&#39;s Notes – Deep Learning</title>
+    <link>//localhost:1313/notes/datascience/master/dl/</link>
+    <description>Recent content in Deep Learning on Alba&#39;s Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	  <atom:link href="//localhost:1313/notes/datascience/master/dl/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>T1. Fundamentos de las Redes Neuronales Profundas</title>
+      <link>//localhost:1313/notes/datascience/master/dl/01_foundation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/notes/datascience/master/dl/01_foundation/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;Deep networks&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;deep-networks&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#deep-networks&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;We could define deep learning as a class of &lt;strong&gt;machine learning techniques&lt;/strong&gt;, where &lt;strong&gt;information is processed&lt;/strong&gt; in hierarchical layers to understand representations and features from data in increasing levels of complexity.&lt;/p&gt;
+&lt;p&gt;In practice, all deep learning algorithms are neural networks.&lt;/p&gt;
+&lt;p&gt;With that in mind, let&amp;rsquo;s look at the main classes of neural networks. The following list is not exhaustive, but it represents the vast majority of algorithms in use today:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Multi-layer perceptrons (MLPs)&lt;/li&gt;
+&lt;li&gt;Convolutional neural networks (CNNs)&lt;/li&gt;
+&lt;li&gt;Recurrent networks&lt;/li&gt;
+&lt;li&gt;Autoencoders&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Training deep networks&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;training-deep-networks&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#training-deep-networks&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;We can use different algorithms to train a neural network. But in practice, we almost always use &lt;strong&gt;Stochastic Gradient Descent (SGD) and backpropagation&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;In the following section, we&amp;rsquo;ll introduce &lt;strong&gt;momentum&lt;/strong&gt;, the weight update rule is defined as follows:&lt;/p&gt;
+$$
+\begin{aligned}
+w \rightarrow w - \lambda \nabla (J(w))
+\end{aligned}
+$$&lt;p&gt;where $\lambda$ is the learning rate. First we calculate the weight update value&lt;/p&gt;
+$$
+\begin{aligned}
+\Delta w \rightarrow \mu\Delta w - \lambda (\nabla J(w))
+\end{aligned}
+$$&lt;p&gt;We see that the first component, $\mu\Delta w$, is the momentum. The $\Delta w$ represents the previous value of the weight update and $\mu$ is the coefficient, which wil determine how much the new value depends on the previous ones.&lt;/p&gt;
+&lt;p&gt;Then we update the weight:&lt;/p&gt;
+$$
+\begin{aligned}
+w \rightarrow w + \Delta w
+\end{aligned}
+$$&lt;p&gt;You may encounter other gradient descent optimizations, such as:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Nesterov momentum&lt;/li&gt;
+&lt;li&gt;ADADELTA&lt;/li&gt;
+&lt;li&gt;RMSProps&lt;/li&gt;
+&lt;li&gt;Adam&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;The reasons for deep learning&amp;rsquo;s popularity&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;the-reasons-for-deep-learnings-popularity&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-reasons-for-deep-learnings-popularity&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The first reason is, today, we have a &lt;strong&gt;lot more data&lt;/strong&gt; than in the past.&lt;/p&gt;
+&lt;p&gt;The second reason is the &lt;strong&gt;increased computing power&lt;/strong&gt;. This is most visible in the drastically increased processing capacity of &lt;strong&gt;Graphical Processing Units&lt;/strong&gt; (GPUs). Neural networks are organized in such a way as to take advantage of the GPU&amp;rsquo;s parallel architecture.&lt;/p&gt;
+&lt;h2&gt;Introducing popular open source libraries&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;introducing-popular-open-source-libraries&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#introducing-popular-open-source-libraries&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The basic unit for data storage is the &lt;strong&gt;tensor&lt;/strong&gt;. A tensor is a generalization of a matrix to higher dimensions.&lt;/p&gt;
+&lt;p&gt;Neural networks are represented as a &lt;strong&gt;computational graph of operations&lt;/strong&gt;. The &lt;strong&gt;nodes&lt;/strong&gt; of the graph represent the &lt;strong&gt;operations&lt;/strong&gt; (weighted sum, activation function, and so on). The &lt;strong&gt;edges represent the flow of data&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Some common libraries:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Tensorflow&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Keras&lt;/strong&gt;: is a high-level neural net Python library that runs on top of TensorFlow, CNTK or Theano.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pytorch&lt;/strong&gt;: is a deep learning library based on Torch.&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>T2. Tipologías de las redes neuronales profundas</title>
+      <link>//localhost:1313/notes/datascience/master/dl/02_typologies/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/notes/datascience/master/dl/02_typologies/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;Convolutional Nets&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;convolutional-nets&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#convolutional-nets&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Deep convolutional neural network&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;deep-convolutional-neural-network&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#deep-convolutional-neural-network&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;A deep convolutional neural network (DCNN) consists of many neural network layers.&lt;/p&gt;
+&lt;p&gt;Two different types of layers, &lt;strong&gt;convolutional&lt;/strong&gt; and &lt;strong&gt;pooling&lt;/strong&gt;, are typically alternated&lt;/p&gt;
+&lt;h3&gt;Local receptive fields&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;local-receptive-fields&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#local-receptive-fields&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;If we want to preserve spatial information, we represent each image with a matrix of pixels.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Convolution operation&lt;/strong&gt;: To &lt;strong&gt;encode the local structure&lt;/strong&gt; is to connect a &lt;strong&gt;submatrix of adjacent input neurons&lt;/strong&gt; (pixels) into one single hidden neuron belonging to the next layer. That single hidden neuron represents one &lt;strong&gt;local receptive field&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;We can encode more information by having &lt;strong&gt;overlapping submatrices&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/convolution.png&#34; alt=&#34;Convolution example&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;A &lt;strong&gt;feature map&lt;/strong&gt; is the result of applying the convolution on the input data, on the previous example the matrix on the right would be one feature map.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;kernel size&lt;/strong&gt; is the size of each the submatrices, in the previous example $3 \times 3$.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;stride&lt;/strong&gt; is the number of elements between each submatrix. With a stide of $1$ we obtain the following result:&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/convolution_1.png&#34; alt=&#34;Convolution example&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This convolutional layer is usually followed by a non-linear activation function (e.g. ReLU).&lt;/p&gt;
+&lt;h3&gt;Shared weights and bias&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;shared-weights-and-bias&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#shared-weights-and-bias&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;To detect the same feature independently from its location on the input we define the same weights for all the neurons on a layer. This way we force the neural net to search for relevant features everywhere on the input data, instead of searching for features on specific places on the input image.&lt;/p&gt;
+&lt;h3&gt;Pooling Layer&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;pooling-layer&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#pooling-layer&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;It consists on using the spatial contiguity of the output from a single feature map and &lt;strong&gt;aggregate the values into a single output&lt;/strong&gt;. On the following image &lt;strong&gt;max pooling&lt;/strong&gt; is being performed.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/max_pooling.png&#34; alt=&#34;Max pooling example&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Other common pooling operation is &lt;strong&gt;average pooling&lt;/strong&gt;.&lt;/p&gt;
+&lt;h3&gt;An example of DCNN — LeNet&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;an-example-of-dcnn--lenet&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#an-example-of-dcnn--lenet&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;It is a family of ConvNets trained for recognizing MNIST handwritten characters with robustness to simple geometric transformations and to distortion.&lt;/p&gt;
+&lt;p&gt;It is defined as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;On the &lt;strong&gt;low-layers&lt;/strong&gt; we alternate &lt;strong&gt;convolution operations&lt;/strong&gt; with &lt;strong&gt;max-pooling operations&lt;/strong&gt;. (using carefully chosen local receptive fields and and shared weights).&lt;/li&gt;
+&lt;li&gt;On higher levels are fully connected layers based on a traditional &lt;strong&gt;MLP with hidden layers&lt;/strong&gt; and &lt;strong&gt;softmax&lt;/strong&gt; as the output layer.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Understanding the power of deep learning&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;understanding-the-power-of-deep-learning&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#understanding-the-power-of-deep-learning&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Deep networks always outperform the simple network and the gap is bigger when the number of examples provided for training is progressively reduced.&lt;/p&gt;
+&lt;h2&gt;Recurrent Neural Nets&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;recurrent-neural-nets&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#recurrent-neural-nets&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;SimpleRNN cells&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;simplernn-cells&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#simplernn-cells&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;RNN cells incorporate this dependence by having a &lt;strong&gt;hidden state&lt;/strong&gt;, or memory. The value of the hidden state is a function of the value of the hidden state at the previous time step and the value of the input at the current time step.&lt;/p&gt;
+$$
+\begin{aligned}
+h_t = \phi(h_{t-1}, x_t)
+\end{aligned}
+$$&lt;p&gt;where $h_t$ and $h_{t-1}$ are the values of the hidden states at the time steps $t$ and $t-1$ and $x_t$ is the values of the input at time $t$. &lt;strong&gt;Note that the equation is recursive&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/rnn_unrolled.png&#34; alt=&#34;Unrolled RNN&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;At time $t$ the cell has an input $x_t$ and an output $y_t$. Part of the output $y_t$ (the hidden state $h_t$) is fed back into the cell for use at a later time step $t+1$. On the previous image we show the behaviour of a single cell unrolled.&lt;/p&gt;
+&lt;p&gt;Notice that the weight matrices $U$, $V$, and $W$ are shared across the steps. We can also describe the computations within an RNN in terms of equations:&lt;/p&gt;
+$$
+\begin{aligned}
+h_t = tanh(Wh_{t-1} + Ux_t)
+\end{aligned}
+$$$$
+\begin{aligned}
+y_t = sofmax(Vh_t)
+\end{aligned}
+$$&lt;h3&gt;RNN topologies&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;rnn-topologies&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#rnn-topologies&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;RNNs can be arranged in many ways to solve specific problems.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/rnn_topologies.png&#34; alt=&#34;RNN Topologies&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;In the basic topology, all input sequences are of the same length and an output is produced at each time step.&lt;/p&gt;
+&lt;p&gt;Another example of a many to many RNN could be a machine translation network shown on the &lt;strong&gt;many-to-many&lt;/strong&gt; topology. These take in a sequence and produces another sequence. For example, the input could be a sequence in English and the output could be the translation in Spanish.&lt;/p&gt;
+&lt;p&gt;Other variants are the &lt;strong&gt;one-to-many network&lt;/strong&gt;, an example of which could be an image captioning network, where the input is an image and the output a sequence of words.&lt;/p&gt;
+&lt;p&gt;Similarly, an example of a &lt;strong&gt;many-to-one network&lt;/strong&gt; could be a network that does sentiment analysis of sentences, where the input is a sequence of words and the output is a positive or negative sentiment.&lt;/p&gt;
+&lt;h3&gt;Vanishing and exploding gradients&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;vanishing-and-exploding-gradients&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#vanishing-and-exploding-gradients&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Training the RNN involves backpropagation, where the gradient at each output depends not only on the current time step, but also on the previous ones, this process is called &lt;strong&gt;backpropagation through time&lt;/strong&gt; (BPTT).&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/backpropagation_through_time.png&#34; alt=&#34;Backpropagation through time&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;During backpropagation (shown by dotted lines), the gradients of the loss with respect to the parameters $U$, $V$, and $W$ are computed at each time step and the parameters are updated with the sum of the gradients.&lt;/p&gt;
+&lt;p&gt;The following equation shows the gradient of the loss with respect to $W$:&lt;/p&gt;
+$$
+\begin{aligned}
+\frac{\delta L}{\delta W} = \sum_t \frac{\delta L_t}{\delta W}
+\end{aligned}
+$$&lt;p&gt;Let us now look at what happens to the gradient of the loss at the last time step ($t=3$)&lt;/p&gt;
+$$
+\begin{aligned}
+\frac{\delta L_3}{\delta W} = \frac{\delta L_3}{\delta y_3} \frac{\delta y_3}{\delta h_2} \frac{\delta h_2}{\delta_W}
+\end{aligned}
+$$&lt;p&gt;The previous equation is simply deriving by applying the chain rule, where:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The loss function $L_3$ is defined as a function of $y_3$,&lt;/li&gt;
+&lt;li&gt;Then $y_3 = softmax(Vh_2)$&lt;/li&gt;
+&lt;li&gt;And finally $h_2 = tanh(Wh_1 + Ux_1)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The gradient of the hidden state $h_2$ with respect to $W$ can be further decomposed as the sum of the gradient of each hidden state with respect to the previous one.&lt;/p&gt;
+$$
+\begin{aligned}
+\frac{\delta L_3}{\delta W} = \sum_{t=0}^2 \frac{\delta L_3}{\delta y_3} \frac{\delta y_3}{\delta h_2} \frac{\delta h_2}{\delta h_t}\frac{\delta h_t}{\delta_W}
+\end{aligned}
+$$&lt;p&gt;Finally, each gradient of the hidden state with respect to the previous one can be further decomposed as the product of gradients of the current hidden state against the previous one.&lt;/p&gt;
+$$
+\begin{aligned}
+\frac{\delta L_3}{\delta W} = \sum_{t=0}^2 \frac{\delta L_3}{\delta y_3} \frac{\delta y_3}{\delta h_2} \left(\prod_{j=t+1}^2 \frac{\delta h_j}{\delta h_{j-1}}\right)\frac{\delta h_t}{\delta_W}
+\end{aligned}
+$$&lt;p&gt;For example for $t = 3$:&lt;/p&gt;
+$$
+\begin{aligned}
+\frac{\delta L_4}{\delta W} = \frac{\delta L_4}{\delta y_4} \frac{\delta y_4}{\delta h_3} \left(\prod_{j=4}^2 \frac{\delta h_j}{\delta h_{j-1}}\right)\frac{\delta h_4}{\delta_W}
+\end{aligned}
+$$$$
+\begin{aligned}
+\frac{\delta L_4}{\delta W} = \frac{\delta L_4}{\delta y_4} \frac{\delta y_4}{\delta h_3} \left(\frac{\delta h_4}{\delta h_3}\frac{\delta h_3}{\delta h_2}\frac{\delta h_2}{\delta h_1}\right)\frac{\delta h_4}{\delta_W}
+\end{aligned}
+$$&lt;p&gt;On general:&lt;/p&gt;
+$$
+\begin{aligned}
+\frac{\delta L_i}{\delta W} = \sum_{t=0}^i \frac{\delta L_i}{\delta y_i} \frac{\delta y_i}{\delta h_{i-1}} \left(\prod_{j=t+1}^i \frac{\delta h_j}{\delta h_{j-1}}\right)\frac{\delta h_i}{\delta_W}
+\end{aligned}
+$$&lt;p&gt;Consider the case where the individual gradients of a hidden state with respect to the previous one is less than one. As we backpropagate across multiple time steps, the product of gradients get smaller and smaller, leading to the problem of &lt;strong&gt;vanishing gradients&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Similarly, if the gradients are larger than one, the products get larger and larger, leading to
+the problem of &lt;strong&gt;exploding gradients&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The effect of vanishing gradients is that the gradients from steps that are far away do not contribute anything to the learning process, so the RNN ends up not learning long range dependencies.&lt;/p&gt;
+&lt;p&gt;While there are a few approaches to minimize the problem of vanishing gradients, such as:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Proper initialization of the $W$ matrix&lt;/li&gt;
+&lt;li&gt;Using a ReLU instead of tanh layers&lt;/li&gt;
+&lt;li&gt;Pre-training the layers using unsupervised methods&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;The most popular solution is to use the LSTM or GRU architectures.&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;Long short term memory — LSTM&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;long-short-term-memory--lstm&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#long-short-term-memory--lstm&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The LSTM is a variant of RNN that is capable of learning long term dependencies.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/ltsm.png&#34; alt=&#34;Long Short Term Memory&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The line across the top of the diagram is the cell state c, and represents the internal memory of the unit.&lt;/p&gt;
+&lt;p&gt;The line across the bottom is the hidden state.&lt;/p&gt;
+&lt;p&gt;Also, $i$, $f$, and $o$ are the input, forget, and output gates.&lt;/p&gt;
+&lt;p&gt;The forget gate defines how much of the previous state $h_{t-1}$ you want to allow to pass through.&lt;/p&gt;
+&lt;p&gt;The input gate defines how much of the newly computed state for the current input $x_t$ you want to let through.&lt;/p&gt;
+&lt;p&gt;The output gate defines how much of the internal state you want to expose to the next layer.&lt;/p&gt;
+&lt;p&gt;The internal hidden state $g$ is computed based on the current input $x_t$ and the previous hidden state $h_{t-1}$.&lt;/p&gt;
+&lt;p&gt;Such that:&lt;/p&gt;
+$$
+\begin{aligned}
+i = \sigma(W_ih_{t-1} + U_ix_t)
+\end{aligned}
+$$$$
+\begin{aligned}
+f = \sigma(W_fh_{t-1} + U_fx_t)
+\end{aligned}
+$$$$
+\begin{aligned}
+o = \sigma(W_oh_{t-1} + U_ox_t)
+\end{aligned}
+$$$$
+\begin{aligned}
+g = \tanh(W_gh_{t-1} + U_gx_t)
+\end{aligned}
+$$$$
+\begin{aligned}
+c_t = (c_{t-1} \otimes f) \oplus (g \otimes i)
+\end{aligned}
+$$$$
+\begin{aligned}
+h_t = tanh(c_t) \otimes o
+\end{aligned}
+$$&lt;p&gt;One thing to realize is that an LSTM is a drop-in replacement for a SimpleRNN on the recurrent neural network.&lt;/p&gt;
+&lt;h3&gt;Gated recurrent unit — GRU&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;gated-recurrent-unit--gru&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#gated-recurrent-unit--gru&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;This type of cell has two gates, an &lt;strong&gt;update gate&lt;/strong&gt; $z$, and a &lt;strong&gt;reset gate&lt;/strong&gt; $r$.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/gru_rnn.png&#34; alt=&#34;GRU RNN&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The update gate defines how much previous memory to keep around.&lt;/p&gt;
+&lt;p&gt;The reset gate defines how to combine the new input with the previous memory.&lt;/p&gt;
+&lt;p&gt;The following equations define the gating mechanism in a GRU:&lt;/p&gt;
+$$
+\begin{aligned}
+z = \sigma(W_zh_{t-1} + U_z x_t)
+\end{aligned}
+$$$$
+\begin{aligned}
+r = \sigma(W_rh_{t-1} + U_r x_t)
+\end{aligned}
+$$$$
+\begin{aligned}
+c_t = tanh(W_c(h_{t-1} \otimes r) + U_cx_t)
+\end{aligned}
+$$$$
+\begin{aligned}
+h_t = (z \otimes c) \oplus ((1 - z) \otimes h_{t-1})
+\end{aligned}
+$$&lt;p&gt;GRU and LSTM have comparable performance, while GRUs are faster to train and need less data to generalize in situations where there is enough data, an LSTM&amp;rsquo;s greater expressive power may lead to better results.&lt;/p&gt;
+&lt;h2&gt;Boltzmann Based Networks&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;boltzmann-based-networks&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#boltzmann-based-networks&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Boltzmann Machines&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;boltzmann-machines&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#boltzmann-machines&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;They are fully connected artificial neural networks, but they are based on &lt;strong&gt;stochastic neurons&lt;/strong&gt;. The working of Boltzmann Machine is mainly inspired by the &lt;strong&gt;Boltzmann Distribution&lt;/strong&gt; which says that the current state of the system depends on the energy of the system and the temperature at which it is currently operating. These neurons output $1$ with some probability, given by the following equation:&lt;/p&gt;
+$$
+\begin{aligned}
+p(s_i^{\text{next step}} = 1) \sigma\left(\frac{\sum_{j=1}^N w_{i,j}s_j + b_i}{T}\right)
+\end{aligned}
+$$&lt;p&gt;Where:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$s_j$ is the $j$th neuron&amp;rsquo;s state ($0$ or $1$).&lt;/li&gt;
+&lt;li&gt;$w_{i,j}$ is the connection weight between the $i$th and $j$th neurons. Note that $w_{i,i}$ = 0.&lt;/li&gt;
+&lt;li&gt;$b_i$ is the ith neuron’s bias term.&lt;/li&gt;
+&lt;li&gt;$N$ is the number of neurons in the network.&lt;/li&gt;
+&lt;li&gt;$T$ is a number called the network’s temperature; the higher the temperature, the more random the output.&lt;/li&gt;
+&lt;li&gt;$\sigma$ is the logistic function.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Hence to implement these as Neural Networks, we use the &lt;strong&gt;Energy Models&lt;/strong&gt;. The energy term was equivalent to the deviation from the actual answer. The higher the energy, the more the deviation. It has been thus important to train the model until it reaches a low-energy point.&lt;/p&gt;
+&lt;p&gt;The nodes in Boltzmann Machines are simply categorized as visible and hidden nodes. The visible nodes take in the input. The same nodes which take in the input will return back the reconstructed input as the output.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/boltzmann_machine.png&#34; alt=&#34;Boltzmann Machine&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The energy function of the Boltzmann machine is defined as follows:&lt;/p&gt;
+$$
+\begin{aligned}
+E(v, h) = - \sum_{i} v_ib_i - \sum_k h_kb_k - \sum_{i, j}v_iv_jw_{i,j} \sum_{i,k}v_ih_kw_{i, k} - \sum_{k,l}h_kh_kw_{k,l}
+\end{aligned}
+$$&lt;p&gt;Where $v$ are the visible units, $h$ as the hidden units $b$ is the bias and $w_{i, j}$ are the weights between units $i$ and $j$.&lt;/p&gt;
+&lt;p&gt;The probability of a joint configuration over both the visible unit and the hidden unit is as follows:&lt;/p&gt;
+$$
+\begin{aligned}
+p(v,h) = \frac{e^{-E(v,h)}}{\sum\_{m, n} e^{-E(m, n)}}
+\end{aligned}
+$$&lt;p&gt;And, for example, the probability distribution of visible units is obtained by marginalizing out hidden units:&lt;/p&gt;
+$$
+\begin{aligned}
+p(v) = \frac{\sum_h e^{-E(v,h)}}{\sum\_{m, n} e^{-E(m, n)}}
+\end{aligned}
+$$&lt;p&gt;This can now be utilized to sample visible units.&lt;/p&gt;
+&lt;p&gt;Training a Boltzmann machine means finding the parameters that will make the network approximate the training set’s probability distribution. So we have to obtain the parameters tha maximize the likelihood of the observed data. The traning algorithm runs as described:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Obtain the log likelihood function of visible units, by marginalizing the hidden units:&lt;/li&gt;
+&lt;/ul&gt;
+$$
+\begin{aligned}
+l(v|w) = \log p(v|w) = \log \sum_h e^{-E_{v, h}} - \log \sum_{m, n} e^{-E_{m, n}}
+\end{aligned}
+$$&lt;ul&gt;
+&lt;li&gt;Take the derivative of the log likelihood function as a function of $w$:&lt;/li&gt;
+&lt;/ul&gt;
+$$
+\begin{aligned}
+\frac{\delta l(v|w)}{\delta w} = \frac{\delta \log \sum_h e^{-E_{v, h}}}{\delta \sum_h e^{-E_{v, h}}} \cdot \frac{\delta \sum_h e^{-E_{v, h}}}{\delta w} - \frac{\delta \log \sum_h e^{-E_{v, h}}}{\delta \sum_{m,n} e^{-E_{m, n}}} \cdot \frac{\delta \sum_{m,n} e^{-E_{m, n}}}{\delta w}
+\end{aligned}
+$$$$
+\begin{aligned}
+= \frac{1}{\sum_h e^{-E_{v, h}}} \cdot \sum_h \frac{\delta e^{-E_{v,h}}}{\delta w} - \frac{1}{\sum_{m,n} e^{-E_{m, n}}} \cdot \sum_{m,n} \frac{\delta e^{-E_{m,m}}}{\delta w}
+\end{aligned}
+$$$$
+\begin{aligned}
+= \frac{1}{\sum_h e^{-E_{v, h}}} \cdot \sum_h -e^{-E_{v,h}} \frac{\delta E_{v,h}}{\delta w} - \frac{1}{\sum_{m,n} e^{-E_{m, n}}} \cdot \sum_{m,n} -e^{E_{m,m}} \frac{\delta E_{m,m}}{\delta w}
+\end{aligned}
+$$$$
+\begin{aligned}
+= -\sum_h \frac{e^{-E_{v,h}}}{\sum_h e^{-E_{v, h}}} \frac{\delta E_{v,h}}{\delta w} + \sum_{m,n} \frac{e^{E_{m,m}}}{\sum_{m,n} e^{-E_{m, n}}} \frac{\delta E_{m,m}}{\delta w}
+\end{aligned}
+$$&lt;p&gt;We know that:&lt;/p&gt;
+$$
+\begin{aligned}
+p(h|v) = \frac{p(v, h)}{p(v)} = \frac{\frac{e^{-E_{v, h}}}{\sum_{m,n} e^{-E_{m, n}}}}{\frac{\sum_h e^{-E_{v, h}}}{\sum_{m,n} e^{-E_{m, n}}}}
+\end{aligned}
+$$&lt;p&gt;By removing both $\sum_{m,n} e^{-E_{m, n}}$, we obtain:&lt;/p&gt;
+$$
+\begin{aligned}
+ = \frac{e^{-E_{v, h}}}{\sum_h e^{-E_{v, h}}}
+\end{aligned}
+$$&lt;p&gt;Such that:&lt;/p&gt;
+$$
+\begin{aligned}
+= -\sum_h p(h|v) \frac{\delta E_{v,h}}{\delta w} + \sum_{m,n} p(m,n) \frac{\delta E_{m,m}}{\delta w}
+\end{aligned}
+$$&lt;p&gt;And by de definition of the expected value $\mathbb{E}(x) = \sum_x x p(x)$:&lt;/p&gt;
+$$
+\begin{aligned}
+= - \mathbb{E}_{p(h|v)}[\frac{\delta E_{v,h}}{\delta w}] + \mathbb{E}_{p(m,n)}[\frac{\delta E_{m,m}}{\delta w}]
+\end{aligned}
+$$&lt;p&gt;Computing these expectations is in general an &lt;strong&gt;intractable problem&lt;/strong&gt;. he general approach for solving this problem is to use &lt;a href=&#34;https://towardsdatascience.com/monte-carlo-methods-and-simulations-explained-in-real-life-modeling-insomnia-f49685b321d0&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Markov chain Monte Carlo&lt;/a&gt; (MCMC) to approximate these quantities:&lt;/p&gt;
+$$
+\begin{aligned}
+\frac{\delta l(v|w)}{\delta w} = -{\langle s_i, s_j\rangle}_{p(h_{data}|v_{data})} + {\langle s_i, s_j\rangle}_{p(h_{model}|v_{model})}
+\end{aligned}
+$$&lt;p&gt;Here $\langle\cdot, \cdot\rangle$ denotes the expectation.&lt;/p&gt;
+&lt;h3&gt;Restricted Boltzmann Machines&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;restricted-boltzmann-machines&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#restricted-boltzmann-machines&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;An RBM is a Boltzmann machine that only has connections between visible and hidden units.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/rbm_structure.png&#34; alt=&#34;Restricted Boltzmann Machine&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The energy function of the RBM is defined as follows:&lt;/p&gt;
+$$
+\begin{aligned}
+E(v, h) = - \sum_i v_ib_i - \sum_k h_kb_k - \sum_{i,k} v_i h_k w_{i,k}
+\end{aligned}
+$$&lt;h4&gt;Contrastive Divergence&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;contrastive-divergence&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#contrastive-divergence&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;This is a very efficient training algorithm for Boltzmann machines. Here is how it works:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;For each training instance $x$, the algorithm starts by feeding it to the network by setting the state of the visible units to $x_1, \cdots, x_n$.&lt;/li&gt;
+&lt;li&gt;Compute the state of the hidden units by applying the output formula for a hidden neuron (see ), which gives us the vector $h$, where $h_i$ is the output of the ith neuron.&lt;/li&gt;
+&lt;li&gt;Next you compute the state of the visible units, by applying the same stochastic equation, which gives you vector $x&amp;rsquo;$.&lt;/li&gt;
+&lt;li&gt;Once again you compute the state of the hidden units, which gives you a vector $h&amp;rsquo;$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now you can update each connection weight by applying:&lt;/p&gt;
+$$
+\begin{aligned}
+w_{i, j} = w_{i, j} + \eta (xh^T - x&#39;h&#39;^T)
+\end{aligned}
+$$&lt;p&gt;The great benefit of this algorithm is that it does not require waiting for the network to reach thermal equilibrium.&lt;/p&gt;
+&lt;h3&gt;Deep Belief Nets&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;deep-belief-nets&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#deep-belief-nets&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;A Deep Belief Net is an RBM where several layers of RBMs can be stacked. Such that the hidden units of the first-level RBM serve as the visible units for the second-layer RBM.&lt;/p&gt;
+&lt;p&gt;You can train DBNs one layer at a time using Contrastive Divergence, starting with the lower layers.&lt;/p&gt;
+&lt;p&gt;Their lower layers learn low-level features in the input data, while higher layers learn high-level features. Thus it learns information in a hierarchical way.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/deep_belief_nets.png&#34; alt=&#34;Deep Belief Network&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Just like RBMs, DBNs are fundamentally unsupervised, but you can also train them in a semi-supervised manner by adding some visible units to represent the labels.&lt;/p&gt;
+&lt;p&gt;The following describes the training process:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;RBM 1 is trained without supervision.&lt;/li&gt;
+&lt;li&gt;RBM 2 is trained with RBM 1’s hidden units as inputs without supervision&lt;/li&gt;
+&lt;li&gt;RBM 3 is trained using RBM 2’s hidden units as inputs, as well as extra visible units used to represent the target labels&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;One advantage of this semisupervised approach is that you don&amp;rsquo;t need much labeled training data.&lt;/p&gt;
+&lt;p&gt;DBNs can also work in reverse. If you activate one of the label units, the signal will propagate up to the hidden units of RBM 3, then down to RBM 2, and then RBM 1, and a new instance will be output by the visible units of RBM 1.&lt;/p&gt;
+&lt;p&gt;This &lt;strong&gt;generative capability&lt;/strong&gt; of DBNs is quite powerful. For example, it has been used to automatically generate captions for images, and vice versa: first a DBN is trained (without supervision) to learn features in images, and another DBN is trained (again without supervision) to learn features in sets of captions (e.g., &amp;ldquo;car&amp;rdquo; often comes with &amp;ldquo;automobile&amp;rdquo;). Then an RBM is stacked on top of both DBNs and trained with a set of images along with their captions; it learns to associate high-level features in images with high-level features in captions. Next, if you feed the image DBN an image of a car, the signal will propagate through the network, up to the top-level RBM, and back down to the bottom of the caption DBN, producing a caption. Due to the stochastic nature of RBMs and DBNs, the caption will keep changing randomly&lt;/p&gt;
+&lt;p&gt;A DBN, however, suffers from the following problems:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Inference in DBNs is a problem because of the &amp;ldquo;explaining away&amp;rdquo; effect&lt;/li&gt;
+&lt;li&gt;A DBN can only use greedy retraining and no joint optimization over all layers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Deep Boltzmann Machines&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;deep-boltzmann-machines&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#deep-boltzmann-machines&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;The distinction between DBM and DBN from the previous section is that DBM information flows on bidirectional connections in the bottom layers.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/deep_boltzmann_machines.png&#34; alt=&#34;Deep Boltzmann Machine&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;You can also train a DBM using contrastive divergence.&lt;/p&gt;
+&lt;h2&gt;Autoencoders&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;autoencoders&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#autoencoders&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Autoencoders&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;autoencoders-1&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#autoencoders-1&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;An autoencoder is a type of artificial neural network used to learn efficient codings of unlabeled data (unsupervised learning).&lt;/p&gt;
+&lt;p&gt;An autoencoder learns two functions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;An &lt;strong&gt;encoding function&lt;/strong&gt; that transforms the input data&lt;/li&gt;
+&lt;li&gt;A &lt;strong&gt;decoding function&lt;/strong&gt; that recreates the input data from the encoded representation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The autoencoder learns dense representations (encoding) for a set of data.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/autoencoder.png&#34; alt=&#34;Autoencoder&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We can force the network to learn useful features adding different types of constraints, for example:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Defining the dense representation such that is has a lower dimensionality than the input data.&lt;/li&gt;
+&lt;li&gt;Adding noise to the input data (&lt;a href=&#34;#denoising-autoencoders&#34; &gt;Denoising Autoencoders&lt;/a&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;The number of neurons in the output layer must be equal to the number of inputs.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The outputs are often called the &lt;strong&gt;reconstructions&lt;/strong&gt; because
+The cost function contains a &lt;strong&gt;reconstruction loss&lt;/strong&gt; that penalizes the model when the reconstructions are different from the inputs.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Undercomplete autoencoder&lt;/strong&gt;: the internal representation has a lower dimensionality than the input data.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Overcomplete autoencoder&lt;/strong&gt;: the internal representation has a higher dimensionality than the input data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Stacked Autoencoders&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;stacked-autoencoders&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#stacked-autoencoders&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;Stacked autoencoders&lt;/strong&gt; are said to be autoencoders that have multiple hidden layers.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/stacked_autoencoder.png&#34; alt=&#34;Stacked Autoencoder&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h4&gt;Tying weights&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;tying-weights&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#tying-weights&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;An autoencoder with &lt;strong&gt;tied weights&lt;/strong&gt; has decoder weights that are the transpose of the encoder weights&lt;/p&gt;
+&lt;p&gt;This reduces the number of parameters of the model, thus speeds up training and limits the risk of overfitting.&lt;/p&gt;
+&lt;h4&gt;Convolutional Autoencoders&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;convolutional-autoencoders&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#convolutional-autoencoders&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Used with image data.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The encoder is a regular CNN composed of convolutional layers and pooling layers. It reduces the spatial dimensionality of the inputs (i.e., height and width) while increasing the depth (i.e., the number of feature maps).&lt;/li&gt;
+&lt;li&gt;The decoder must do the reverse (upscale the image and reduce its depth back to the original dimensions).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Recurrent Autoencoders&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;recurrent-autoencoders&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#recurrent-autoencoders&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Used with sequential data.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;encoder&lt;/strong&gt; is typically a sequence-to-vector RNN, which compresses the input sequence down to a single vector.&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;decoder&lt;/strong&gt; is a vector-to-sequence RNN that does the reverse&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Denoising Autoencoders&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;denoising-autoencoders&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#denoising-autoencoders&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;We want to add noise to the input data, and then train the network to be able to recover the original noise-free inputs.&lt;/p&gt;
+&lt;p&gt;The noise can be pure Gaussian noise added to the inputs, or it can be randomly switched-off inputs, just like in dropout.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/denoising_autoencoders.png&#34; alt=&#34;Denoising Autoencoders&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h4&gt;Sparse Autoencoders&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;sparse-autoencoders&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#sparse-autoencoders&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;A sparse autoencoder is an autoencoder whose training criterion involves a sparsity penalty.&lt;/p&gt;
+&lt;p&gt;In most cases, we would construct our loss function by penalizing activations of hidden layers so that only a few nodes are encouraged to activate when a single sample is fed into the network.&lt;/p&gt;
+&lt;h4&gt;Variational Autoencoders&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;variational-autoencoders&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#variational-autoencoders&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;They are probabilistic autoencoders as well as generative models.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Instead of directly producing a coding for a given input, the encoder produces a mean coding $\mu$ and a standard deviation $\sigma$.&lt;/li&gt;
+&lt;li&gt;The actual coding is then sampled randomly from a Gaussian distribution with mean $\mu$ and standard deviation $\sigma$.&lt;/li&gt;
+&lt;li&gt;After that the decoder decodes the sampled coding normally.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/variational_autoencoder.png&#34; alt=&#34;Variational Autoencoder&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;Generative Adversarial Networks&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;generative-adversarial-networks&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#generative-adversarial-networks&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;GANs are composed of two neural networks:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &lt;strong&gt;generator&lt;/strong&gt; that tries to generate data that looks similar to the training data&lt;/li&gt;
+&lt;li&gt;A &lt;strong&gt;discriminator&lt;/strong&gt; that tries to tell real data from fake data. Takes either a fake image from the generator or a real image from the training set as input, and &lt;strong&gt;must guess whether the input image is fake or real&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Each training iteration is divided into two phases:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;We train the discriminator. A batch of data where half are real real images and the other half are fake images produced by the generator. The labels are set to $0$ for fake images and $1$ for real images, and the discriminator is trained on this labeled batch for one step. Backpropagation only optimizes the weights of the discriminator.&lt;/li&gt;
+&lt;li&gt;We train the generator: we only add fake images to the data, and all the labels are set to $1$ (real). We want the generator to produce images that the discriminator will believe to be real. Backpropagation only affects the weights of the generator.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The generator and the discriminator compete against each other during training.&lt;/p&gt;
+&lt;h4&gt;The Difficulties of Traning GANs&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;the-difficulties-of-traning-gans&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-difficulties-of-traning-gans&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;It has been demonstrated that a GAN can only reach a single &lt;a href=&#34;https://en.mdpedia.org/wiki/Nash_equilibrium&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Nash equilibrium&lt;/a&gt; (we assume the training process to be finished): that’s when the generator produces perfectly realistic images, and the discriminator is forced to guess ($50%$ real, $50%$ fake). Nothing guarantees that the equilibrium will ever be reached.&lt;/p&gt;
+&lt;p&gt;The biggest difficulty is called &lt;strong&gt;mode collapse&lt;/strong&gt;: this is when the generator’s outputs gradually become less diverse. Such that the generator gets very good at generating data of a concrete kind, good enough to fool the discriminator, however it progressively start representing data of another kind and then forgets about the previous class of data.&lt;/p&gt;
+&lt;p&gt;Moreover, because the generator and the discriminator are constantly pushing against each other, their parameters may end up &lt;strong&gt;oscillating&lt;/strong&gt; and becoming unstable. And since many factors affect these complex dynamics, GANs are very &lt;strong&gt;sensitive to the hyperparameters&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;There are some techniques that aim to avoid this behaviour like: experience replay and mini-batch discrimination.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Experience replay&lt;/strong&gt;: stores images on a buffer and the discriminator uses the images on this buffer as input for fake images. Old images are then progressively replaces by newer images.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mini-batch discrimination&lt;/strong&gt;: it measures how similar are images on the batch, the discriminator uses this statistic to decide whether to reject the whole batch or not.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Deep Convolutional GANs&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;deep-convolutional-gans&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#deep-convolutional-gans&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;These are GANs &lt;strong&gt;based on deeper convolutional&lt;/strong&gt; nets for larger images.&lt;/p&gt;
+&lt;h4&gt;Progressive Growing of GANs&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;progressive-growing-of-gans&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#progressive-growing-of-gans&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;It begins by generating images at low resolution, such as $4 \times 4$ pixels.&lt;/li&gt;
+&lt;li&gt;The model is first trained on low-resolution images. Once training stabilizes at this resolution, additional layers are added to the generator and discriminator to allow for the generation of higher-resolution images.&lt;/li&gt;
+&lt;li&gt;After adding new layers, there is usually a transition phase where the model is trained on a mixture of images at the old and new resolutions. This gradual transition allows the model to adapt to the increased resolution without destabilizing the training process.&lt;/li&gt;
+&lt;li&gt;Once the training stabilizes at the new resolution, the transition phase ends, and the model continues to train exclusively on images at the higher resolution.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/progressive_growing_gans.png&#34; alt=&#34;Progressive Growing of GANs&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/progressive_growing_gans_transition.png&#34; alt=&#34;Transition on Progressive Growing of GANs&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Increasing the resolution progressively allows the model to learn to capture both global and local features of the images more effectively.&lt;/p&gt;
+&lt;h4&gt;Style GANs&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;style-gans&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#style-gans&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;What sets StyleGANs apart is the introduction of &amp;ldquo;style&amp;rdquo; into the generation process. In traditional GANs, the generator takes random noise as input and directly generates images. In StyleGANs, the generator learns to separate the &amp;ldquo;content&amp;rdquo; of the image (e.g., facial features) from the &amp;ldquo;style&amp;rdquo; (e.g., lighting, color, texture). This allows for more fine-grained control over the generated images.&lt;/p&gt;
+&lt;p&gt;The StyleGAN generator and discriminator models are trained using the progressive growing GAN training method.&lt;/p&gt;
+&lt;p&gt;StyleGANs consist of two main components: a mapping network and a synthesis network.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;mapping network&lt;/strong&gt; takes as input a latent vector (random noise) and maps it to an intermediate latent space, which controls the style of the generated image.&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;synthesis network&lt;/strong&gt; then takes the intermediate latent representation and generates the final image.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/style_gans.png&#34; alt=&#34;Style GANs&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>T3. Herramientas y estrategias de programación e implemetación de redes neuronales</title>
+      <link>//localhost:1313/notes/datascience/master/dl/03_tools/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/notes/datascience/master/dl/03_tools/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;Frameworks para Deep Learning&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;frameworks-para-deep-learning&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#frameworks-para-deep-learning&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Tensorflow&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;tensorflow&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#tensorflow&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;h4&gt;Arquitectura Tensorflow&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;arquitectura-tensorflow&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#arquitectura-tensorflow&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Presenta un núcleo de bajo nivel (C++/CUDA). Además se define un API Python sencillo para definir el gráfico computacional, así como APIs de alto nivel (TF-Learn, Keras, etc)&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/tensorflow_architecture.png&#34; alt=&#34;Tensorflow Architecture&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h4&gt;Tensorflow vs Numpy&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;tensorflow-vs-numpy&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#tensorflow-vs-numpy&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;Numpy no dispone de funciones/métodos para la creación de funciones de tensores y no computa automáticamente sus derivadas.&lt;/li&gt;
+&lt;li&gt;NumPy no tiene soporte para GPU.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Modelo Computacional de Tensorflow&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;modelo-computacional-de-tensorflow&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#modelo-computacional-de-tensorflow&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Tensorflow construye grafos donde cada nodo es un tensor y cada arista es una operación entre los tensores. De tal manera que, como vemos en la figura inferior, se pueden repartir las computaciones entre distintas GPUs.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/tensorflow_computational_graph.png&#34; alt=&#34;Tensorflow Computational Graph&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h5&gt;Lazy Evaluation&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;lazy-evaluation&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#lazy-evaluation&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;p&gt;Este grafo sólo encompasa la definición de las operaciones, de tal manera que no requiere de su ejecución. Si no que la ejecución sólo se produce durante el entrenamiento.&lt;/p&gt;
+&lt;h4&gt;Tensorflow Hub&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;tensorflow-hub&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#tensorflow-hub&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Se trata de un repositorio de modelo pre-entrenados.&lt;/p&gt;
+&lt;h4&gt;Operaciones&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;operaciones&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#operaciones&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;A continuación mostramos una serie de operaciones soportadas por Tensorflow:&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/tensorflow_operations.png&#34; alt=&#34;Tensorflow Operations&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;Theano&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;theano&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#theano&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Se trata de otro framework, pionero en el uso de grafos computacionales. Es una herramienta generalista, tal que podemos implementar cualquier tipo de algoirtmo sobre el framework. Además se puede especificar como backend a utilizar en Keras, en lugar de Tensorflow.&lt;/p&gt;
+&lt;p&gt;Sin embargo, finalizó su desarrollo a partir de la versión 1.0.&lt;/p&gt;
+&lt;p&gt;Librerías que usan Theano&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Keras&lt;/li&gt;
+&lt;li&gt;blocks&lt;/li&gt;
+&lt;li&gt;lasagne&lt;/li&gt;
+&lt;li&gt;sklearn-theano&lt;/li&gt;
+&lt;li&gt;PyMC 3&lt;/li&gt;
+&lt;li&gt;theano-rnn&lt;/li&gt;
+&lt;li&gt;Morb&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Además presenta las siguientes características:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Permite la evaluación lazy del grafo (precursor de esta ténica).&lt;/li&gt;
+&lt;li&gt;Da soporte para GPU&amp;rsquo;s.&lt;/li&gt;
+&lt;li&gt;Permite la diferenciación simbólica.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Keras&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;keras&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#keras&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Keras puede ser utilizado con tensorflow o también como una librería adicional. Además presenta las siguientes ventajas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Sencilla para comenzar, y sencilla para avanzar&lt;/li&gt;
+&lt;li&gt;Se ejecuta sobre Theano y TensorFlow&lt;/li&gt;
+&lt;li&gt;Disponibilidad de herramientas de visualización (Tensorboard)&lt;/li&gt;
+&lt;li&gt;Escrita de forma modular: fácil de expandir&lt;/li&gt;
+&lt;li&gt;Suficientemente potente para escribir modelos serios&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Pero también presenta las siguiente desventajas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Menos flexible&lt;/li&gt;
+&lt;li&gt;Menos tipos: no hay modelos RBM, por ejemplo.&lt;/li&gt;
+&lt;li&gt;Menos proyectos disponibles online que Caffe&lt;/li&gt;
+&lt;li&gt;Soporte Multi-GPU no del 100%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;La idea general para la creación de modelos/algoritmos sigue el siguiente esquema:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Preparar los tensores de entrada y salida&lt;/li&gt;
+&lt;li&gt;Crear la primera capa (layer) para manejar el tensor de entrada&lt;/li&gt;
+&lt;li&gt;Crear la última capa (layer) para manejar el tensor de salida (targets)&lt;/li&gt;
+&lt;li&gt;Construir virtualmente cualquier modelo entre estas dos capas (hidden layers)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Las definiciones de los modelos pueden ser guardados y recuperados en formato &lt;code&gt;json&lt;/code&gt; y en formato &lt;code&gt;yaml&lt;/code&gt;. Los parámetros también pueden ser guardados y recuperados en formato &lt;code&gt;h5&lt;/code&gt;.&lt;/p&gt;
+&lt;h4&gt;Tipos de Modelos&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;tipos-de-modelos&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#tipos-de-modelos&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Keras soporta dos tipos de modelos:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Modelo Secuencial&lt;/li&gt;
+&lt;li&gt;API funcional: Se usa para definir modelos complejos: modelos multi-output, grafos acíclicos dirigidos (graph) o modelos con capa compartidas&lt;/li&gt;
+&lt;li&gt;Grafo (deprecado)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Caffe&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;caffe&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#caffe&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Construido sobre C++, CUDA.&lt;/li&gt;
+&lt;li&gt;Presenta una gran cantidad de modelos pre-entrenados&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;La definición de modelos de hace de forma declarativa:&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/caffe_declarative_models.png&#34; alt=&#34;Caffe Declarative Models&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Cuáles son sus aplicaciones?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Object Detection&lt;/li&gt;
+&lt;li&gt;Pixelwise Prediction&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Torch&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;torch&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#torch&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Su backend está basado en C y en CUDA.&lt;/li&gt;
+&lt;li&gt;Su frontend está escrito sobre Lua.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;PyTorch&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;pytorch&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#pytorch&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Torch en python.&lt;/p&gt;
+&lt;h3&gt;Fast.AI&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;fastai&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#fastai&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Es muy similar a Keras, Fast.AI permite generar herramientas y modelos pre-entranados de manera muy sencilla.&lt;/p&gt;
+&lt;h3&gt;Aplicaciones de DL&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;aplicaciones-de-dl&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#aplicaciones-de-dl&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Visión&lt;/li&gt;
+&lt;li&gt;Speech Recognition&lt;/li&gt;
+&lt;li&gt;NLP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Computación Acelerada&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;computación-acelerada&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#computaci%c3%b3n-acelerada&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Diferencias CPU/GPU&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;diferencias-cpugpu&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#diferencias-cpugpu&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Una CPU tiene un número limitado de cores, mientras que una GPU tiene un número muy elevado de cores.&lt;/li&gt;
+&lt;li&gt;Una GPU tiene procesadores menos potentes (menos operaciones por ciclo), sin embargo tiene muchas más unidades lógicas-aritméticas (ALU), por lo que tiene más capacidad de cálculo a coste de tener menos capacidad de manejo de almacenamiento.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Proveedores&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;proveedores&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#proveedores&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Nvidia: se basa en la arquitecture Compute Unified Device Architecture (CUDA).&lt;/li&gt;
+&lt;li&gt;AMD: se basa en una arquitectura más abierta, Heterogeneous System Architecture (HSA), que es multiplataforma. Su arquitectura se puede utilizar con distintos proveedores, p.ej. Nvidia.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Flujo de Procesamiento en CUDA&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;flujo-de-procesamiento-en-cuda&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#flujo-de-procesamiento-en-cuda&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;
+    &lt;img src=&#34;../assets/CUDA_processing_flow.png&#34; alt=&#34;CUDA Processing Flow&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h4&gt;Plataformas&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;plataformas&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#plataformas&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;
+    &lt;img src=&#34;../assets/CUDA_platforms.png&#34; alt=&#34;CUDA Platfroms&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;TPU&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;tpu&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#tpu&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Diseñado por Google especialmente diseñado para operaciones matriciales y tensores. Su uso fundamental es en el entrenamiento de redes neuronales y la inferencia.&lt;/p&gt;
+&lt;h4&gt;Por qué utilizar TPUs?&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;por-qué-utilizar-tpus&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#por-qu%c3%a9-utilizar-tpus&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Según Google:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Son 30x más rápidos que GPUs y CPUs.&lt;/li&gt;
+&lt;li&gt;Presentan una gran eficiencia energética.&lt;/li&gt;
+&lt;li&gt;Las NN desarrolladas con Tensorflow requieren muy pocas líneas de código.&lt;/li&gt;
+&lt;li&gt;Requieren menos tiempo -&amp;gt; menos dinero.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Cuándo deberíamos utilizar una TPU?&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;cuándo-deberíamos-utilizar-una-tpu&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#cu%c3%a1ndo-deber%c3%adamos-utilizar-una-tpu&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;
+    &lt;img src=&#34;../assets/TPU_usage_recommendation.png&#34; alt=&#34;TPU Usage Recommendation&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h4&gt;Versiones&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;versiones&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#versiones&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Hay dos versiones:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;V2: HBM de 8 GB/TPU core. 1MXU (128x128) por core. TPU pod, hasta 512 cores (4TB de memoria)&lt;/li&gt;
+&lt;li&gt;V3: HBM de 16 GB/TPU core. 2 MXU (128x128) por core. TPU pod, hasta 2048 cores (32 TB de memoria)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Flujo de Ejecución de TPUs&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;flujo-de-ejecución-de-tpus&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#flujo-de-ejecuci%c3%b3n-de-tpus&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;
+    &lt;img src=&#34;../assets/TPU_execution_flow.png&#34; alt=&#34;TPU Execution Flow&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h2&gt;Proveedores&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;proveedores-1&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#proveedores-1&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Deep Cognition&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;deep-cognition&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#deep-cognition&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Se trata de una plataforma que incorpora un IDE visual que permite definir una red neuronal. Se puede utilizar:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;En la nube&lt;/li&gt;
+&lt;li&gt;En local&lt;/li&gt;
+&lt;li&gt;En una máquina virtual&lt;/li&gt;
+&lt;li&gt;En una máquina de azure&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/deep_congnition.png&#34; alt=&#34;Deep Cognition&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;H2O.AI&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;h2oai&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#h2oai&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Su arquitecture se detalla en la siguiente imagen:&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/h2o_architecture.png&#34; alt=&#34;H2O Architecture&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En la parte superior vemos los lenguajes que soporta:&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/h2o_architecture_1.png&#34; alt=&#34;H2O Architecture&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Seguidamente tenemos un bloque de tradcutores (Rapids en C++ y Scala en Java):&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/h2o_architecture_2.png&#34; alt=&#34;H2O Architecture&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;A continuación tenemos los algoritmos definidos así como la herramienta de predcción para H2O:&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/h2o_architecture_3.png&#34; alt=&#34;H2O Architecture&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En la siguiente imagen tenemos la parte de la gestión de la computación que se lleva a cabo encima de clusters Spark/Hadoop o sobre la distribución standalone de H2O:&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/h2o_architecture_4.png&#34; alt=&#34;H2O Architecture&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h4&gt;Auto ML&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;auto-ml&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#auto-ml&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Permite evaluar modelos dado un conjunto de datos en base a una serie de métricas:&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/auto_ml.png&#34; alt=&#34;Auto ML&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h4&gt;Driverless AI&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;driverless-ai&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#driverless-ai&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Permite desarrollar el pipeline completo de H2O de forma visual, tal que permite automatizar tareas.&lt;/p&gt;
+&lt;h3&gt;Big ML&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;big-ml&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#big-ml&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Se trata de una empresa española. Define algoritmos de clasificación, regresión, análisis de clusters, detección de anomalías, descubrimiento de asociación y modelado. Destaca sobretodo en el preprocesamiento de datos, visualización y en la evaluación de modelo.&lt;/p&gt;
+&lt;p&gt;No soporta ni CNN (no soporta capas de convolución ni de pooling) ni RNN.&lt;/p&gt;
+&lt;p&gt;Los parámetros soportados son los siguientes:&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/big_ml_deepnets_limitations.png&#34; alt=&#34;Big ML Limitations&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>T4. Redes Neuronales Convolucionales en Visión Artificial</title>
+      <link>//localhost:1313/notes/datascience/master/dl/04_cnn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/notes/datascience/master/dl/04_cnn/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;Clasificación de Imágenes&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;clasificación-de-imágenes&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#clasificaci%c3%b3n-de-im%c3%a1genes&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Una CNN para clasificación de imágenes está conformada por dos bloques:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Conjunto de capas que llevan a cabo la extracción de caracterísitcas&lt;/li&gt;
+&lt;li&gt;Clasificador que toma como entrada las características extraídas por la red neuronal&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/cnn_structure.png&#34; alt=&#34;Structure of CNN&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Este tipo de redes necesita una gran cantidad de datos. En caso de no poseer un volumen elevado de datos se puede hacer uso de técnicas como el aumento de muestras y el uso de redes pre-entrenadas.&lt;/p&gt;
+&lt;h3&gt;Aumento de Muestras&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;aumento-de-muestras&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#aumento-de-muestras&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Consiste en crear nuevas muestras a partir de muestras existentes utilizando transformaciones aleatorias:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Rotaciones y translaciones.&lt;/li&gt;
+&lt;li&gt;Recorte o zoom.&lt;/li&gt;
+&lt;li&gt;Voltear horizontalmente (si no hay suposiciones de simetría horizontal).&lt;/li&gt;
+&lt;li&gt;Añadir pequeñas cantidades de ruido.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;En Keras esto se puede llevar a cabo utilizando &lt;code&gt;ImageDataGenerator&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;Redes Pre-entrenadas&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;redes-pre-entrenadas&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#redes-pre-entrenadas&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Si la red ha sido entrenada sobre un conjunto de datos lo suficientemente grande y general entonces, entonces podemos utilizarlo sobre clases no utilizadas en el entrenamiento original. Existen dos técnicas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Extracción de de características&lt;/strong&gt;: utiliza la red pre-entrenada para extraer características de los nuevos datos. Con las nuevas características se entrena un clasificador desde cero.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ajuste fino&lt;/strong&gt;: utiliza unas cuantas capas de la red pre-entrenada y las entrena conjuntamente con el nuevo clasificador.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Extracción de Características&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;extracción-de-características&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#extracci%c3%b3n-de-caracter%c3%adsticas&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Se puede hacer de dos maneras:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Aplicar la base convolutiva sobre el conjunto de datos y utlizarla para entrenar el clasificador. &lt;strong&gt;No permite el aumento de datos&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Extender la base convolutiva con un nuevo clasificador y entrenar todo el conjunto. Es mucho más lenta per &lt;strong&gt;permite el aumento de datos&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Ajuste Fino&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;ajuste-fino&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#ajuste-fino&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Se lleva a cabo como sigue:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Se añade la nueva red sobre la CNN pre-entrenada&lt;/li&gt;
+&lt;li&gt;Se bloquea la red pre-entrenada, de manera que sus pesos no cambian&lt;/li&gt;
+&lt;li&gt;Se entrena la nueva red&lt;/li&gt;
+&lt;li&gt;Se desbloquean algunas capas superior (que extraer las características de más alto nivel), tal que sus pesos sí se pueden entrenar&lt;/li&gt;
+&lt;li&gt;Entrenar estas capas y la nueva red&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Detección de Objetos&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;detección-de-objetos&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#detecci%c3%b3n-de-objetos&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Un sistema de detección de objetos debe producir el nombre de la clase asignada a la imagen, una caja de abarque (bounding box) y generalmente la probabilidad de que el objeto pertenezca a la clase.&lt;/p&gt;
+&lt;p&gt;Se presentan los siguientes retos a la hora de llevar a cabo la detección: oclusiones, cambios de puntos de vista y tamaños, objetos no rígidos y desenfoque por movimiento&lt;/p&gt;
+&lt;h3&gt;Métodos&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;métodos&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#m%c3%a9todos&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Antes del desarrollo de las redes neuronales se empleaban las &lt;strong&gt;Cascadas de Haar&lt;/strong&gt;, que extraer características por convolución con kernels suma de píxeles en negro menos en blanco que seguidamente se pasan a un clasificador entrenado.&lt;/p&gt;
+&lt;p&gt;Por otra parte, tenemos la detección basada en CNN que consiste en modificar nuestras redes CNN para no sólo clasificar, si no también obtener la caja de abarque y la forma del objeto. Dentro de estes distinguimos dos tipos:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Detectores de dos etapas, como por ejemeplo Region CNN. Son letos y no permiten su aplicación en tiempo real.&lt;/li&gt;
+&lt;li&gt;Detectore de una etapa, como por ejemplo Single Shot Multibox Detector. Sí que permiten su aplicación en tiempo real.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;RegionCNN&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;regioncnn&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#regioncnn&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;Se generan una serie de propuestas de caja de abarque a distintas escalas.&lt;/li&gt;
+&lt;li&gt;Se procesan las cajas utilizando una CNN pre-entrenada&lt;/li&gt;
+&lt;li&gt;Se clasifican utilizando un clasificador como SVM&lt;/li&gt;
+&lt;li&gt;Se procesan las cajas utilizando regresión lineal para ajustar las coordenadas&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/region_cnn.png&#34; alt=&#34;Region CNN&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h2&gt;Segmentación Semántica&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;segmentación-semántica&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#segmentaci%c3%b3n-sem%c3%a1ntica&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;En la segmentación clásica el objetivo consiste en agrupar píxeles contiguos de una categoría similar.&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/classic_segmentation.png&#34; alt=&#34;Example of Classic Segmentation&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;La segmentación semántica se distingue de la segmentación clásica en que intenta particionar la imagen en partes con significado y clasificarlas.&lt;/p&gt;
+&lt;h3&gt;Métodos&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;métodos-1&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#m%c3%a9todos-1&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Se utiliza una especie de GAN, ya que tienen una red codificadora pre-entrenada seguida de una red decodificadora:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;La red codificadora aprende características distintivas a baja resolución&lt;/li&gt;
+&lt;li&gt;La red decodificadora proyecta semánticamente las características en el espacio de píxeles (alta resolución)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/cnn_semantic_segmentation.png&#34; alt=&#34;Semantic Segmentation&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h2&gt;Aplicaciones&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;aplicaciones&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#aplicaciones&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Aprendizaje de similaridad.&lt;/li&gt;
+&lt;li&gt;Subtitulado de imágenes.&lt;/li&gt;
+&lt;li&gt;Generación de imágenes.&lt;/li&gt;
+&lt;li&gt;Seguimiento en secuencias de imágenes.&lt;/li&gt;
+&lt;li&gt;Todo lo comentado aplicado a vídeo y a imagen 3D.&lt;/li&gt;
+&lt;li&gt;Robots: odometría y localización y creación de mapas (SLAM) usando cámaras.&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>T5. Redes Neuronales Recurrentes</title>
+      <link>//localhost:1313/notes/datascience/master/dl/05_rnn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/notes/datascience/master/dl/05_rnn/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;Introducción a las aplicaciones del Deep Learning para el NLP&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;introducción-a-las-aplicaciones-del-deep-learning-para-el-nlp&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#introducci%c3%b3n-a-las-aplicaciones-del-deep-learning-para-el-nlp&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Comparación entre enfoques clásico y de Deep Learning&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;comparación-entre-enfoques-clásico-y-de-deep-learning&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#comparaci%c3%b3n-entre-enfoques-cl%c3%a1sico-y-de-deep-learning&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;h4&gt;Enfoque Clásico&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;enfoque-clásico&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#enfoque-cl%c3%a1sico&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;El enfoque clásico se compone de los siguientes pasos:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Detección de idioma&lt;/li&gt;
+&lt;li&gt;Pre-procesado&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Tokenizado&lt;/li&gt;
+&lt;li&gt;Etiquetado gramatical (POS)&lt;/li&gt;
+&lt;li&gt;Eliminación de stop-words&lt;/li&gt;
+&lt;li&gt;etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Modelado&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Extracción de características (entidades (NER), categorías (POS) &amp;hellip;)&lt;/li&gt;
+&lt;li&gt;Aplicación de algoritmos de ML&lt;/li&gt;
+&lt;li&gt;etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;Salida&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Análisis de sentimientos&lt;/li&gt;
+&lt;li&gt;Clasificación de textos&lt;/li&gt;
+&lt;li&gt;Traducción&lt;/li&gt;
+&lt;li&gt;etc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Enfoque Deep Learning&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;enfoque-deep-learning&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#enfoque-deep-learning&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Mientas que el enfoque basado en Deep Learning se compone de los siguientes pasos:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Pre-procesado&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Tokenizado&lt;/li&gt;
+&lt;li&gt;Etiquetado gramatical (POS)&lt;/li&gt;
+&lt;li&gt;Eliminación de stop-words&lt;/li&gt;
+&lt;li&gt;etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Representaciones distribuidas (word embeddings): transformación de palabras/secuencias en vectores que es la entrada que aceptan las redes neuronales. Para ello se distinguen métodos como: word2vec, Glove, etc.&lt;/li&gt;
+&lt;li&gt;Procesamiento en capas ocultas: no permite generar representación comprimida de la entradas.&lt;/li&gt;
+&lt;li&gt;Capa de salida&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Análisis de sentimientos&lt;/li&gt;
+&lt;li&gt;Clasificación de textos&lt;/li&gt;
+&lt;li&gt;Traducción&lt;/li&gt;
+&lt;li&gt;etc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/NLP_pipeline_comparation.png&#34; alt=&#34;NLP Pipeline Comparation&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;h3&gt;Arquitecturas&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;arquitecturas&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#arquitecturas&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Para llevar a cabo Natural Languague Processing (NLP) con Deep Learning podemos utilizar las siguientes arquitecturas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Redes recurrentes (RNN)
+&lt;ul&gt;
+&lt;li&gt;LSTM (Long Short Term Memory)&lt;/li&gt;
+&lt;li&gt;GRU (Gated Recurrent Units)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Redes convolucionales (CNN)&lt;/li&gt;
+&lt;li&gt;Autoencoders&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Ejemplos de Deep Learning para Natural Language Processing&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;ejemplos-de-deep-learning-para-natural-language-processing&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#ejemplos-de-deep-learning-para-natural-language-processing&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Clasificación de Textos&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;clasificación-de-textos&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#clasificaci%c3%b3n-de-textos&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Para la clasificación de texto se define la siguiente estructura:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Capa de embedding: que transforma la secuencia de palabras en una tabla de vectores capturando la semántica de las mismas.&lt;/li&gt;
+&lt;li&gt;Componente de representación profunda: se utiliza RNN o CNN para obtener una representación comprimida de la entrada.&lt;/li&gt;
+&lt;li&gt;Parte totalmente conectada: transforma la representación comprimida en clases o puntuaciones para cada clase.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ver el capítulo Text Classification Using LSTM de Hands-On Natural Language Processing with Python.&lt;/p&gt;
+&lt;h3&gt;Generación de Textos&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;generación-de-textos&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#generaci%c3%b3n-de-textos&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Se utilizan RNNs para crear modelos generativos, tal que la generación se puede llevar a cabo en base a caracteres o a palabras. Estas son capaces de aprender dependencias a largo plazo.&lt;/p&gt;
+&lt;p&gt;Ver el capítulo Text Generation and Summarization Using GRUs de Hands-On Natural Language Processing with Python.&lt;/p&gt;
+&lt;h3&gt;Resumen de Textos&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;resumen-de-textos&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#resumen-de-textos&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Distinguimos entre dos tipos:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Extractivos&lt;/strong&gt;: se extraen frases o palabras clave. Son simples y robustos y no permiten la paráfrasis.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Abstractivos&lt;/strong&gt;: la salida contiene texto no contenido en el original manteniendo el significado.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ver el cap. Text Generation and Summarization Using GRUs de Hands-On Natural Language Processing with Python.&lt;/p&gt;
+&lt;h3&gt;Traducción&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;traducción&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#traducci%c3%b3n&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Distinguimos distintos sistemas que efectúan la traducción automática:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Sistemas expertos&lt;/strong&gt;: se definen reglas lingüísticas y sintácticas.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Traducción estadística&lt;/strong&gt;: se aprenden reglas estadísticamente a partir de un gran conjunto de datos bilingüe. Tal que define un modelo de traducción que mapea textos de un lenguaje a otro. Solo funciona bien traduciendo textos similares a los de entrenamiento y necesita gran cantidad de datos&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Traducción con redes neuronales&lt;/strong&gt;: utilizan un sólo modelo que trabaja sobre segmentos de texto, no sólo sobre palabras o frases.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ver el cap. Machine Translation Using the Attention-Based Model de Hands-On Natural Language Processing with Python.&lt;/p&gt;
+&lt;h3&gt;Búsqueda y Eliminación de Duplicados&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;búsqueda-y-eliminación-de-duplicados&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#b%c3%basqueda-y-eliminaci%c3%b3n-de-duplicados&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Se puede conseguir utilizando una CNN basada en caracteres, que proporciona la flexibilidad para entrenar modelos con caracteres desconocidos y ofrece mayor capacidad de generalición que los embeddings a nivel de palabra.&lt;/p&gt;
+&lt;p&gt;Ver el capítulo Searching and DeDuplicating Using CNNs de Hands-On Natural Language Processing with Python.&lt;/p&gt;
+&lt;h2&gt;Otras Aplicaciones&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;otras-aplicaciones&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#otras-aplicaciones&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Preguntas-respuestas y chatbots&lt;/li&gt;
+&lt;li&gt;Reconocimiento de voz&lt;/li&gt;
+&lt;li&gt;Texto a voz&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>T6. Servicios y Proveedores de Deep Learning en la Nube</title>
+      <link>//localhost:1313/notes/datascience/master/dl/06_cloud_services/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/notes/datascience/master/dl/06_cloud_services/</guid>
+      <description>
+        
+        
+        &lt;h2&gt;Características&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;características&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#caracter%c3%adsticas&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;IT Services Catalog&lt;/li&gt;
+&lt;li&gt;Global network access&lt;/li&gt;
+&lt;li&gt;Instant elasticity&lt;/li&gt;
+&lt;li&gt;Chargeback&lt;/li&gt;
+&lt;li&gt;Common IT-resouces pool&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Capacidades&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;capacidades&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#capacidades&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;SaaS (Software as a Service): Se utiliza/alquila un servicio concreto, p.ej. One Drive.&lt;/li&gt;
+&lt;li&gt;PaaS (Platform as a Service): Permite tener entornos preconfigurados para poder ejecutar ciertos conjuntos de aplicaciones.&lt;/li&gt;
+&lt;li&gt;IaaS (Infraestructure as a Service): Se da acceso a la infraestructura, tal que te permite utilizarla para ejecutar los servicios que tu convengas.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Modelos de Despliegue&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;modelos-de-despliegue&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#modelos-de-despliegue&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Como modelos de despliegue tenemos:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Private Cloud: se cierra el acceso para que sólo la propia infraestructura tenga acceso.&lt;/li&gt;
+&lt;li&gt;Community Cloud: conjunto de nubes públicas que comparten recursos.&lt;/li&gt;
+&lt;li&gt;Hybrid Cloud: tiene parte pública y tiene parte a la que se restringe el acceso.&lt;/li&gt;
+&lt;li&gt;Public Cloud: permite el acceso desde la nube pública de internet.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Google Cloud Platform&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;google-cloud-platform&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#google-cloud-platform&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;A continuación mostramos el ciclo completo de desarrollo de soluciones ML, y las herramientas de GCP asociadas y disponibles para cada una de ellas:&lt;/p&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/gcp_ml_solution_pipeline.png&#34; alt=&#34;Google Cloud Platform Machine Solution Pipeline&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En la fase de desarrollo se definen varias herramientas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Data labeling service: se encarga del etiquetamiento correcto de los datos de forma semiautomática.&lt;/li&gt;
+&lt;li&gt;Deep Learning VM Image: proporciona imágenes virtuales sobre las cuales llevar a cabo el procesamiento.&lt;/li&gt;
+&lt;li&gt;API Platform Notebook&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;AWM Machine Learning&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;awm-machine-learning&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#awm-machine-learning&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;La estructura se divide en tres bloques, de menor a mayor abstracción:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Infraestructura&lt;/li&gt;
+&lt;li&gt;Plataformas&lt;/li&gt;
+&lt;li&gt;Servicios&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+    &lt;img src=&#34;../assets/aws_architecture.png&#34; alt=&#34;AWSs Architecture&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=mDNhBLpT8Xg&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;How to use Amazon SageMaker&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -16,34 +16,6 @@
     
     <item>
       <title></title>
-      <link>//localhost:1313/notes/datascience/master/2c_2c/dl/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>//localhost:1313/notes/datascience/master/2c_2c/dl/</guid>
-      <description>
-        
-        
-        &lt;h1&gt;Deep Learning&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;./01_foundation.md&#34; &gt;Fundamentos de las Redes Neuronales Profundas&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Tipologías de las redes neuronales profundas&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./02/01_conv_nets.md&#34; &gt;Convolutional Nets&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./02/02_rnn.md&#34; &gt;Recurrent Neural Networks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./02/03_boltzmann.md&#34; &gt;Boltzmann Based Networks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./02/04_autoencoders.md&#34; &gt;Autoencoders&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Herramientas y estrategias de programación e implemetación de redes neuronales&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./03/01_frameworks.md&#34; &gt;Frameworks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./03/02_computacion_acelerada.md&#34; &gt;Computación Acelerada&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./03/03_proveedores.md&#34; &gt;Proveedores&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./04_cnn.md&#34; &gt;Redes Neuronales Convolucionales en Visión Artificial&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./05_rnn.md&#34; &gt;Redes Neuronales Recurrentes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;./06_cloud_services.md&#34; &gt;Servicios y proveedores de Deep Learning en la nube&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title></title>
       <link>//localhost:1313/notes/datascience/master/2c_2c/mbj/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       

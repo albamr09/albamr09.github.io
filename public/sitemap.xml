@@ -36,6 +36,8 @@
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/01/01_xml_config/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/datascience/master/dl/01_foundation/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/datascience/master/aaii/01_random_forests/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/rtgw/04/01_transformations/</loc>
@@ -51,6 +53,8 @@
     <loc>//localhost:1313/notes/cs/ecs/02/</loc>
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/node/02_core/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/datascience/master/dl/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/ecs/</loc>
   </url><url>
@@ -73,6 +77,8 @@
     <loc>//localhost:1313/notes/cs/rtgw/02/</loc>
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/02/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/datascience/master/dl/02_typologies/</loc>
   </url><url>
     <loc>//localhost:1313/notes/datascience/master/aaii/02_boosting/</loc>
   </url><url>
@@ -98,6 +104,8 @@
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/03_hibernate/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/datascience/master/dl/03_tools/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/datascience/master/aaii/03_combination/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/rtgw/04/</loc>
@@ -118,6 +126,8 @@
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/04_spring_rest/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/datascience/master/dl/04_cnn/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/datascience/master/aaii/04_unsupervised_ml/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/rtgw/05/</loc>
@@ -134,6 +144,8 @@
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/05_spring_boot/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/datascience/master/dl/05_rnn/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/cs/ecs/06/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/rtgw/06/</loc>
@@ -147,6 +159,8 @@
     <loc>//localhost:1313/notes/webdev/back/spring/06_thymeleaf/</loc>
   </url><url>
     <loc>//localhost:1313/notes/math/agaa/06_systems/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/datascience/master/dl/06_cloud_services/</loc>
   </url><url>
     <loc>//localhost:1313/notes/math/agaa/07_analytic_geometry/</loc>
   </url><url>
@@ -195,8 +209,6 @@
     <loc>//localhost:1313/notes/cs/ecs/12/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/cc/17/</loc>
-  </url><url>
-    <loc>//localhost:1313/notes/datascience/master/2c_2c/dl/</loc>
   </url><url>
     <loc>//localhost:1313/notes/datascience/master/2c_2c/mbj/</loc>
   </url><url>
