@@ -8,7 +8,6 @@ Notes:
 
 - [ ] Data Science
 - [ ] Math
-- [ ] Other
 
 Planner
 

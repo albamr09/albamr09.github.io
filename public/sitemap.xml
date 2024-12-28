@@ -20,6 +20,8 @@
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/01/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/other/mac_os/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/cs/cc/01/</loc>
   </url><url>
     <loc>//localhost:1313/notes/music/abpci/01_notation/</loc>
@@ -33,6 +35,8 @@
     <loc>//localhost:1313/notes/webdev/front/react/02_advanced/</loc>
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/docker/02_advanced/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/other/rices/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/ecs/02/</loc>
   </url><url>
@@ -179,6 +183,8 @@
     <loc>//localhost:1313/notes/webdev/back/node/</loc>
   </url><url>
     <loc>//localhost:1313/notes/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/other/</loc>
   </url><url>
     <loc>//localhost:1313/planner/</loc>
   </url><url>
