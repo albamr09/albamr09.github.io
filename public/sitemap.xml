@@ -24,6 +24,8 @@
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/01/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/datascience/master/mbj/01_intro/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/math/agaa/01_linear_functions/</loc>
   </url><url>
     <loc>//localhost:1313/notes/other/mac_os/</loc>
@@ -70,6 +72,8 @@
   </url><url>
     <loc>//localhost:1313/notes/cs/rtgw/04/02_model_view/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/datascience/master/mbj/02_models/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/cs/rtgw/04/02_model_view/02_02_orthographic/</loc>
   </url><url>
     <loc>//localhost:1313/notes/music/abpci/02_positions/</loc>
@@ -86,11 +90,15 @@
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/docker/03_containers/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/datascience/master/mbj/03_evaluation/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/music/abpci/03_intervals/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/rtgw/03/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/ecs/03/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/datascience/master/mbj/</loc>
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/node/03_modules/</loc>
   </url><url>
@@ -107,6 +115,8 @@
     <loc>//localhost:1313/notes/datascience/master/dl/03_tools/</loc>
   </url><url>
     <loc>//localhost:1313/notes/datascience/master/aaii/03_combination/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/datascience/master/mbj/04_computation/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/rtgw/04/</loc>
   </url><url>
@@ -133,6 +143,8 @@
     <loc>//localhost:1313/notes/cs/rtgw/05/</loc>
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/node/05_express_dev/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/datascience/master/mbj/05_appendix/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/ecs/05/</loc>
   </url><url>
@@ -209,8 +221,6 @@
     <loc>//localhost:1313/notes/cs/ecs/12/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/cc/17/</loc>
-  </url><url>
-    <loc>//localhost:1313/notes/datascience/master/2c_2c/mbj/</loc>
   </url><url>
     <loc>//localhost:1313/notes/datascience/master/3c_1c/icpdm/</loc>
   </url><url>

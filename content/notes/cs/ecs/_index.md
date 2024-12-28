@@ -12,7 +12,7 @@ prev: notes/cs
 {{< card link="cs/cg" title="Memory" icon="database" >}}
 {{< card link="cs/cg" title="Machine Language" icon="code" >}}
 {{< card link="cs/cg" title="Computer Architecture" icon="office-building" >}}
-{{< card link="cs/cg" title="Assembler" icon="cube" >}}
+{{< card link="cs/cg" title="Assembler" icon="chip" >}}
 {{< card link="cs/cg" title="Virtual Machine I: Processing" icon="filter" >}}
 {{< card link="cs/cg" title="Virtual Machine II: Control" icon="filter" >}}
 {{< card link="cs/cg" title="Compiler I: Syntax" icon="code" >}}
