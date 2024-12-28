@@ -20,6 +20,8 @@
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/01/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/math/agaa/01_linear_functions/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/other/mac_os/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/cc/01/</loc>
@@ -35,6 +37,8 @@
     <loc>//localhost:1313/notes/webdev/front/react/02_advanced/</loc>
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/docker/02_advanced/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/math/agaa/02_graph_analysis/</loc>
   </url><url>
     <loc>//localhost:1313/notes/other/rices/</loc>
   </url><url>
@@ -78,6 +82,8 @@
   </url><url>
     <loc>//localhost:1313/notes/webdev/front/react/03_performance_optimization/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/math/agaa/03_polynomial_functions/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/01/03_configuration_with_java/</loc>
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/03_hibernate/</loc>
@@ -94,6 +100,8 @@
   </url><url>
     <loc>//localhost:1313/notes/cs/ecs/04/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/math/agaa/04_special_functions/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/webdev/front/react/04_redux/</loc>
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/04_spring_rest/</loc>
@@ -103,6 +111,8 @@
     <loc>//localhost:1313/notes/webdev/back/node/05_express_dev/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/ecs/05/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/math/agaa/05_exp_functions/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/cc/05/</loc>
   </url><url>
@@ -122,6 +132,10 @@
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/06_thymeleaf/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/math/agaa/06_systems/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/math/agaa/07_analytic_geometry/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/cs/cc/07/</loc>
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/07_spring_maven/</loc>
@@ -136,6 +150,8 @@
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/08_spring_security/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/math/agaa/08_trigonometry/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/cs/cc/08/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/ecs/08/</loc>
@@ -143,6 +159,10 @@
     <loc>//localhost:1313/notes/cs/cc/09/</loc>
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/09_spring_aop/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/math/agaa/09_trig_identities/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/math/agaa/10_trig_applications/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/ecs/10/</loc>
   </url><url>
@@ -152,11 +172,17 @@
   </url><url>
     <loc>//localhost:1313/notes/cs/cc/11/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/math/agaa/11_further_topics/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/math/agaa/12_appendix/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/cs/cc/12/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/ecs/12/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/cc/17/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/math/agaa/</loc>
   </url><url>
     <loc>//localhost:1313/notes/music/abpci/</loc>
   </url><url>
@@ -175,6 +201,8 @@
     <loc>//localhost:1313/notes/webdev/front/graphql/</loc>
   </url><url>
     <loc>//localhost:1313/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/math/</loc>
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/mongodb/</loc>
   </url><url>
