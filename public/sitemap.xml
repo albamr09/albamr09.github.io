@@ -2,6 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>//localhost:1313/notes/datascience/master/aaii/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/webdev/front/graphql/01_backend/</loc>
   </url><url>
     <loc>//localhost:1313/notes/webdev/front/react/01_basics/</loc>
@@ -33,6 +35,8 @@
     <loc>//localhost:1313/notes/cs/rtgw/04/02_model_view/02_01_perspective/</loc>
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/01/01_xml_config/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/datascience/master/aaii/01_random_forests/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/rtgw/04/01_transformations/</loc>
   </url><url>
@@ -70,6 +74,8 @@
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/02/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/datascience/master/aaii/02_boosting/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/cs/cc/03/</loc>
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/docker/03_containers/</loc>
@@ -92,6 +98,8 @@
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/03_hibernate/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/datascience/master/aaii/03_combination/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/cs/rtgw/04/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/rtgw/04/04_camera/</loc>
@@ -109,6 +117,8 @@
     <loc>//localhost:1313/notes/webdev/front/react/04_redux/</loc>
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/spring/04_spring_rest/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/datascience/master/aaii/04_unsupervised_ml/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/rtgw/05/</loc>
   </url><url>
@@ -186,6 +196,12 @@
   </url><url>
     <loc>//localhost:1313/notes/cs/cc/17/</loc>
   </url><url>
+    <loc>//localhost:1313/notes/datascience/master/2c_2c/dl/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/datascience/master/2c_2c/mbj/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/datascience/master/3c_1c/icpdm/</loc>
+  </url><url>
     <loc>//localhost:1313/notes/math/agaa/</loc>
   </url><url>
     <loc>//localhost:1313/notes/music/abpci/</loc>
@@ -197,6 +213,10 @@
     <loc>//localhost:1313/categories/</loc>
   </url><url>
     <loc>//localhost:1313/notes/cs/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/datascience/</loc>
+  </url><url>
+    <loc>//localhost:1313/notes/datascience/master/</loc>
   </url><url>
     <loc>//localhost:1313/notes/webdev/back/django/</loc>
   </url><url>

@@ -14,5 +14,114 @@
       
     
     
+    <item>
+      <title></title>
+      <link>//localhost:1313/notes/datascience/master/2c_2c/dl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/notes/datascience/master/2c_2c/dl/</guid>
+      <description>
+        
+        
+        &lt;h1&gt;Deep Learning&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;./01_foundation.md&#34; &gt;Fundamentos de las Redes Neuronales Profundas&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Tipologías de las redes neuronales profundas&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./02/01_conv_nets.md&#34; &gt;Convolutional Nets&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./02/02_rnn.md&#34; &gt;Recurrent Neural Networks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./02/03_boltzmann.md&#34; &gt;Boltzmann Based Networks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./02/04_autoencoders.md&#34; &gt;Autoencoders&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Herramientas y estrategias de programación e implemetación de redes neuronales&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./03/01_frameworks.md&#34; &gt;Frameworks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./03/02_computacion_acelerada.md&#34; &gt;Computación Acelerada&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./03/03_proveedores.md&#34; &gt;Proveedores&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./04_cnn.md&#34; &gt;Redes Neuronales Convolucionales en Visión Artificial&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./05_rnn.md&#34; &gt;Redes Neuronales Recurrentes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./06_cloud_services.md&#34; &gt;Servicios y proveedores de Deep Learning en la nube&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>//localhost:1313/notes/datascience/master/2c_2c/mbj/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/notes/datascience/master/2c_2c/mbj/</guid>
+      <description>
+        
+        
+        &lt;h1&gt;Modelos Bayesianos Jerárquicos&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;./01_intro.md&#34; &gt;Introduccion a la Inferencia Bayesiana&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Modelos Jerarquicos&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./T2/01.md&#34; &gt;Constructing a Parametrized Prior Distribution&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./T2/02.md&#34; &gt;Exchangeability and Hierarchical Models&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./T2/03.md&#34; &gt;Bayesian Analysis of Conjugate Hierarchical Models&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./T2/04_normal_model.md&#34; &gt;Normal Model with Exchangeable Parameters&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./T2/05_example_normal.md&#34; &gt;Example: Parallel Experiments in Eight Schools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./T2/06_hierarchical_meta_analysis.md&#34; &gt;Hierarchical Modeling Applied to Meta-analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./T2/07_weakly_informative_priors.md&#34; &gt;Weakly Informative Priors&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Evaluación y Comparación de Modelos&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;T3/01_measure_precditive_accuracy&#34; &gt;Measures of Predictive Accuracy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;T3/02_information_criteria_and_crossvalidation&#34; &gt;Information Criteria and Cross-validation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;T3/03_model_comparison_based_on_predictive_performance&#34; &gt;Model Comparison Based on Predictive Performance&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;T3/04_model_comparison_using_bayes_factors&#34; &gt;Model Comparison Using Bayes Factors&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Aspectos Computacionales de la Inferencia Bayesiana&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./T4/01_gibbs_sampler&#34; &gt;Gibbs Sampler&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./T4/02_metropolist_algorithm&#34; &gt;Metropolis and Metropolis-Hastings Algorithms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./T4/03_using_gibbs_and_metropolis&#34; &gt;Using Gibbs and Metropolis as Buliding Blocks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./T4/04_inference_and_assesing_convergence&#34; &gt;Inference and Assessing Convergence&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./T4/05_effective_number_of_simulations&#34; &gt;Effective Number of Simulation Draws&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Appendix&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;appendix&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#appendix&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;T2&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;t2&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#t2&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Thanks to how little I understand this book i will use other sources in order to properly understand Bayesian Hierarchical Modeling, the contents on the following chapter explains how hierarchical Bayesian models came to be and its appeal. Then on section 2 it lays out Hierarchical Nolmal Modeling followed by an explanation on hierarchical Beta-Binomial modeling on section 3.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://bayesball.github.io/BOOK/bayesian-hierarchical-modeling.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Bayesian Hierarchical Modeling&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;./T2/11_introduction.md&#34; &gt;Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./T2/12_hierarchical_normal_modeling.md&#34; &gt;Hierarchical Normal Modeling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./T2/13_hierarchical_beta_binomial_modeling&#34; &gt;Hierarchical Beta-Binomial Modeling&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>//localhost:1313/notes/datascience/master/3c_1c/icpdm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/notes/datascience/master/3c_1c/icpdm/</guid>
+      <description>
+        
+        
+        &lt;h1&gt;Infraestructuras Computacionales para Procesamiento de Datos Masivos&lt;/h1&gt;&lt;h2&gt;Módulo 1&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;módulo-1&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#m%c3%b3dulo-1&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;./M01/01_intro.md&#34; &gt;Tema 1. Introducción a Big Data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./M01/02_hadoop.md&#34; &gt;Tema 2. El Núcleo de Hadoop&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./M01/03_mapreduce.md&#34; &gt;Tema 3. Programación MapReduce&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./M01/04_data.md&#34; &gt;Tema 4. Inyección Extracción y Serialización/Deserialización de los datos&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Módulo 2&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;módulo-2&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#m%c3%b3dulo-2&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;./M02/01_intro.md&#34; &gt;Tema 1. Introducción a Apache Spark&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./M02/02_prog_spark.md&#34; &gt;Tema 2. Programación en aplicaciones Spark&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./M02/03_lib_spark.md&#34; &gt;Tema 3. Librerías/Componentes de Spark&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./M02/04_monitorization.md&#34; &gt;Tema 4. Configuración, monitorización y optimización de Spark&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Módulo 3&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;módulo-3&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#m%c3%b3dulo-3&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;./M03/01.md&#34; &gt;Tema 1. Introducción a las arquitecturas de procesamiento de streams: Lambda y Kappa&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./M03/02.md&#34; &gt;Tema 2. Componentes tecnológicos de adquisición y transmisión/distribución de eventos: Kafka&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./M03/03.md&#34; &gt;Tema 3. Procesamiento de streams: Apache Spark Streaming&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Módulo 4&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;módulo-4&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#m%c3%b3dulo-4&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;./M04/01.md&#34; &gt;Tema 1. Proveedores de soluciones: AWS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
   </channel>
 </rss>

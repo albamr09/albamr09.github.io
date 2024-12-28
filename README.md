@@ -7,6 +7,9 @@ Static Notes Web Page
 Notes:
 
 - [ ] Data Science
+  - [ ] Master
+  - [ ] ML
+  - [ ] Robotics
 
 Planner
 
