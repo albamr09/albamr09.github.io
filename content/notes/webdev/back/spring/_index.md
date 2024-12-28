@@ -4,7 +4,7 @@ type: docs
 toc: false
 ---
 
-{{< cards >}}
+{{< cards cols="1" >}}
 {{< card link="01" title="Intro and Core Framework" >}}
 {{< card link="02" title="Spring MVC" >}}
 {{< card link="03_hibernate" title="Spring Hibernate" >}}

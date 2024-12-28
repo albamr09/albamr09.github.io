@@ -3,7 +3,7 @@ title: Deep Learning
 weight: 2
 ---
 
-{{< cards >}}
+{{< cards cols="1" >}}
 {{< card link="01_foundation" title="T1. Fundamentos de las Redes Neuronales Profundas">}}
 {{< card link="02_typologies" title="T2. Tipologías de las redes neuronales profundas">}}
 {{< card link="03_tools" title="T3. Herramientas y estrategias de programación e implemetación de redes neuronales">}}

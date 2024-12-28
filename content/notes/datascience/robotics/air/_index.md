@@ -3,7 +3,7 @@ title: Artificial Intelligence Robotics
 toc: false
 ---
 
-{{< cards >}}
+{{< cards cols="1" >}}
 {{< card link="01_localization" title="Localization" icon="location-marker">}}
 {{< card link="02_kf" title="Kalman Filters" icon="filter">}}
 {{< card link="03_pf" title="Parlicle Filters" icon="dots-circle-horizontal">}}

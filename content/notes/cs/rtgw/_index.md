@@ -3,7 +3,7 @@ title: Real-Time 3D Graphics with WebGL 2
 type: docs
 ---
 
-{{< cards >}}
+{{< cards cols="1" >}}
 {{< card link="01" title="Gettings Started" icon="one" >}}
 {{< card link="02" title="Rendering" icon="template" >}}
 {{< card link="03" title="Lights" icon="light-bulb" >}}

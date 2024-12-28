@@ -6,7 +6,7 @@ math: true
 
 ## Apredizaje supervisado
 
-{{< cards >}}
+{{< cards cols="1" >}}
 {{< card link="01_linear_regression" title="Regresión Lineal">}}
 {{< card link="02_logistic_regression" title="Regresión Logística">}}
 {{< card link="03_normal_equation" title="Ecuación Norma">}}
@@ -19,7 +19,7 @@ math: true
 
 En el aprendizaje no supervisado, los ejemplos de entrenamiento no tienen etiquetas ($y$). Se utilizan para buscar correlación y patrones en los ejemplos de entrenamiento.
 
-{{< cards >}}
+{{< cards cols="1" >}}
 {{< card link="08_clustering" title="Clustering">}}
 {{< card link="09_dimensionality_reduction" title="Dimensionality Reduction">}}
 {{< card link="10_em" title="Expectation-Maximization Algorithms">}}

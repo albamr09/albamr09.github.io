@@ -4,11 +4,6 @@ Static Notes Web Page
 
 ## TODO
 
-Notes:
-
-- [ ] Data Science
-  - [ ] Robotics
-
 Planner
 
 - [ ] Math
@@ -18,3 +13,4 @@ Planner
 Other:
 
 - [ ] Revisar todos los links .md
+- [ ] Own section for Spring?

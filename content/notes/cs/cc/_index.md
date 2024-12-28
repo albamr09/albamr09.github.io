@@ -6,7 +6,7 @@ weight: 1
 prev: notes/cs
 ---
 
-{{< cards >}}
+{{< cards cols="1" >}}
 {{< card link="01" title="Meaningful Names">}}
 {{< card link="02" title="Functions">}}
 {{< card link="03" title="Comments">}}

@@ -6,7 +6,7 @@ weight: 2
 prev: notes/cs
 ---
 
-{{< cards >}}
+{{< cards cols="1" >}}
 {{< card link="cs/cg" title="Boolean Logic" icon="puzzle" >}}
 {{< card link="cs/cg" title="Boolean Arithmetic" icon="variable" >}}
 {{< card link="cs/cg" title="Memory" icon="database" >}}

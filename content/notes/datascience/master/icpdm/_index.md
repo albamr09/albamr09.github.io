@@ -3,7 +3,7 @@ title: Infraestructuras Computacionales para Procesamiento de Datos Masivos
 weight: 4
 ---
 
-{{< cards >}}
+{{< cards cols="1" >}}
 {{< card link="01_hadoop" title="Ecosistema Big Data">}}
 {{< card link="02_techniques" title="Técnicas de procesamiento masivo">}}
 {{< card link="03_administration" title="Gestión de la información en tiempo real">}}

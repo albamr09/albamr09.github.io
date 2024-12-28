@@ -3,7 +3,7 @@ title: Modelos Bayesianos Jerárquicos
 weight: 3
 ---
 
-{{< cards >}}
+{{< cards cols="1" >}}
 {{< card link="01_intro" title="Introduccion a la Inferencia Bayesiana">}}
 {{< card link="02_models" title="Modelos Jerarquicos">}}
 {{< card link="03_evaluation" title="Evaluación y Comparación de Modelos">}}

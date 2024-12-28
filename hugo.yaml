@@ -15,8 +15,13 @@ markup:
       passthrough:
         delimiters:
           block:
+            - - \[
+              - \]
             - - $$
               - $$
+          inline:
+            - - \(
+              - \)
         enable: true
   # enable hextra syntax highlight
   highlight:
@@ -41,6 +46,8 @@ menu:
         icon: github
 
 params:
+  page:
+    width: full
   navbar:
     displayTitle: true
     displayLogo: true

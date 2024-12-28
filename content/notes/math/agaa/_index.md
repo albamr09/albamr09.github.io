@@ -4,7 +4,7 @@ weigth: 1
 type: docs
 ---
 
-{{< cards >}}
+{{< cards cols="1" >}}
 {{< card link="01_linear_functions" title="Linear Functions, Equations and Inequalities" >}}
 {{< card link="02_graph_analysis" title="Analysis of Graphs of Functions" >}}
 {{< card link="03_polynomial_functions" title="Polynomial Functions" >}}
