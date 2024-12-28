@@ -3,7 +3,7 @@ title: Data Science Master
 toc: false
 ---
 
-## 2C 2C
+## 2C
 
 {{< cards >}}
 {{< card link="aaii" title="Aprendizaje Automático II" icon="desktop-computer">}}
@@ -11,6 +11,8 @@ toc: false
 {{< card link="mbj" title="Modelos Bayesianos Jerárquicos" icon="cog">}}
 {{< /cards >}}
 
-## 3C 1C
+## 3C
 
-- [Infraestructuras Computacionales para Procesamiento de Datos Masivos](./3C_1C/ICPDM/index.md)
+{{< cards >}}
+{{< card link="icpdm" title="ICPDM" icon="cloud">}}
+{{< /cards >}}
