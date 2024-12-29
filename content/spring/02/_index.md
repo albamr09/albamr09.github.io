@@ -8,7 +8,7 @@ prev: notes/webdev/back/spring/01
 
 `Spring MVC` is a framework for building web applications in `Java` based on the Model-View-Controller design patter.
 
-![MVC Pattern](../assets/mvc_pattern.png)
+![MVC Pattern](./assets/mvc_pattern.png)
 
 - The Front Controller is known as `DispatcherServlet`:
   - It is part of the Spring Framework

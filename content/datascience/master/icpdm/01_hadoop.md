@@ -23,7 +23,7 @@ La magia del Cloud Computing ha ampliado las posibilidades del Big Data. En la n
 
 El machine learning está dentro de la inteligencia artificial, sin embargo, no toda inteligencia artifical es machine learning. De la misma forma podemos ver cómo el concepto de Big Data no está dentro de la inteligencia artificial, sino que tiene otras características.
 
-![Big Data Vs Machine Learning Vs Artificial Intelligence](../assets/big_data_vs_ai.png)
+![Big Data Vs Machine Learning Vs Artificial Intelligence](./assets/big_data_vs_ai.png)
 
 Aquella parte donde confluyen Machine Learning y Big data recibe el nombre de **Big Data Analytics**, un concepto relacionado con el dato puesto al servicio del entrenamiento de modelos con el fin de analizar patrones en los datos, predecir comportamientos, etc.
 
@@ -261,7 +261,7 @@ Esto permite una mejor utilización de los recursos del clúster y una mayor fle
 
 YARN consta de tres componentes principales: **Resource Manager**, **Node Manager** y **Application Master**.
 
-![Yarn Architecture](../assets/yarn_architecture.png)
+![Yarn Architecture](./assets/yarn_architecture.png)
 
 ##### Resource Manager
 
@@ -308,13 +308,13 @@ El flujo de procesamiento de MapReduce se divide en dos etapas: **Map** y **Redu
 3. **Reduce**: comienza cuando todos los datos han sido ordenados en **Shuffle & sort**. Recibe como entrada estes datos ordenados estructurados como pares clave valor agrupados por clave. Cada reducer toma los valores asociados a una clave y los agrega/procesa y devuelve el resultado como salida que se puede almacenar en HDFS o en otro sistema.
 4. Generalmente se concatenan varias fases de mapper-reducer para completar una tarea.
 
-![Map Reduce](../assets/map_reduce.png)
+![Map Reduce](./assets/map_reduce.png)
 
 #### Hadoop Streaming
 
 Hadoop Streaming se trata de una utilidad que permite ejecutar aplicaciones en Hadoop escritas en cualquier lenguaje, a pesar de que Hadoop este escrito en Java. Este proporciona un interfaz de entrada y de salida (stdin/stdout) que es consumida por las aplicaciones, tal que existe una pasarela de datos que actúa como comunicación entre Hadoop y la aplicación.
 
-![Hadoop Streaming](../assets/hadoop_streaming.png)
+![Hadoop Streaming](./assets/hadoop_streaming.png)
 
 En la imagen anterior se muestra el flujo de un trabajo MapReduce.
 
@@ -331,19 +331,19 @@ Como podemos ver en todas las fases del proceso de mantiene siempre la estructur
 
 Para ejemplificar MapReduce planteamos el siguiente problema: queremos obtener la frecuencia de cada palabra en un documento.
 
-![MapReduce Example](../assets/map_reduce_example_1.png)
+![MapReduce Example](./assets/map_reduce_example_1.png)
 
 - **Map**: dividimos el proceso en dos mappers (idealmente cada proceso mapper se debería de ejecutar en el nodo en el cual se encuentra el bloque de datos). Estes se encargan de obtener la frecuencia de las palabras en la "porción de texto" sobre el que trabajan.
 
-![MapReduce Example](../assets/map_reduce_example_2.png)
+![MapReduce Example](./assets/map_reduce_example_2.png)
 
 - **Shuffle & Sort**: se ordenan y se agrupan los valores por la clave, donde la clave en nuestro caso es la palabra y el valor su frecuencia.
 
-![MapReduce Example](../assets/map_reduce_example_3.png)
+![MapReduce Example](./assets/map_reduce_example_3.png)
 
 - **Reduce**: se ejecuta un reducer por cada clave presente en el resultado, que agrupa (en nuestro caso suma) los valores bajo cada clave, es decir las frecuencias asociadas a la palabra.
 
-![MapReduce Example](../assets/map_reduce_example_4.png)
+![MapReduce Example](./assets/map_reduce_example_4.png)
 
 #### Optimización: Combiners y Partitioner
 
@@ -397,7 +397,7 @@ Se encarga de ejecutar la tarea de consulta de forma distribuida y paralela en l
 
 Los datos deben estar almacenados en HDFS y generalmente se almacenan en un formato aceptado por bases de datos relacionalales (p.ej. csv) o formatos que se integran con Hive como Parquet o Avro.
 
-![Hive Architecture](../assets/hive_architecture.png)
+![Hive Architecture](./assets/hive_architecture.png)
 
 #### Estructura Interna
 
@@ -457,7 +457,7 @@ Las **particiones** son subdivisiones en una tabla Hive que permite la optimizac
 - **Particiones estáticas**: son definidas por parte del usuario pero no cambian en el tiempo.
 - **Particiones dinámicas**: Hive se ocupa de crear automáticamente las particiones basándose en los valores de la columna especificada.
 
-![Hive Partitions](../assets/hive_partitions.png)
+![Hive Partitions](./assets/hive_partitions.png)
 
 ```
 -- creación tabla con particiones
@@ -556,7 +556,7 @@ Se trata de un conjunto de componentes independientes que dirigen los eventos de
 - **Channels**: es el lugar temporal donde los datos llegan desde el source y se procesan o no, dependiendo del caso de uso, para transmitirlos al destino final (sink).
 - **Sinks**: Son los encargados de leer los datos de los canales y enviarlos al siguiente componente del sistema, que será u otro agente, o el destino final. Si los datos son consumidos por los sinks se eliminan de los canales.
 
-![Apache Flume Architecture](../assets/apache_flume_arch.png)
+![Apache Flume Architecture](./assets/apache_flume_arch.png)
 
 ##### Eventos
 
@@ -603,7 +603,7 @@ Un fichero está conformado por dos componentes:
 - Cabecera: contiene metadatos acerca del esquema de los datos entre otras cosas.
 - Uno o más bloques que pueden contener metadatos o datos. En todo fichero hay al menos un bloque de metadatos (ver Block 1 en la siguiente imagen).
 
-![File Structure](../assets/avro_file_structure.png)
+![File Structure](./assets/avro_file_structure.png)
 
 Avro sigue un formato basado en filas, tal que se agupan los datos en grupos de filas.
 
@@ -677,11 +677,11 @@ Los formatos que habíamos estado tratando guardan los datos en filas (CSV, Avro
 
 Por ejemplo, dada la siguiente tabla:
 
-![Example Table](../assets/apache_parquet_table.png)
+![Example Table](./assets/apache_parquet_table.png)
 
 La siguiente imagen nos ilustra las diferencia entre guardarla en formato fila y en formato columna:
 
-![Row vs Column Format](../assets/apache_parquet_row_vs_col.png)
+![Row vs Column Format](./assets/apache_parquet_row_vs_col.png)
 
 ##### Ventajas
 
@@ -704,4 +704,4 @@ Los ficheros Parquet tienen una **estructura jerarquizada**: encabezado, metadat
 - **Grupos de filas**: contienen los datos organizados por columnas. Cada grupo de filas tiene un subconjunto de la tabla, donde las columnas de cada grupo de filas se dividen en páginas, que son las unidades más pequeñas de almacenamiento. La subdivisión en páginas tiene como fin mejorar la eficiencia ya que admiten la compresión individual. Podemos encontrar páginas de datos, índices o de diccionario.
 - **Esquema**: define la estructura de los datos y los tipos de datos de cada columna. En caso de que los datos estén anidados también define la jerarquía de estos.
 
-![Apache Parquet File Structure](../assets/apache_parquet_file_structure.png)
+![Apache Parquet File Structure](./assets/apache_parquet_file_structure.png)

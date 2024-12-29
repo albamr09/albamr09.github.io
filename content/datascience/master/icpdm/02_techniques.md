@@ -28,7 +28,7 @@ math: true
   - **Driver Process**: The driver runs the `main()` function, maintains application information, interacts with the user, and schedules tasks across executors.
   - **Executor Processes**: Executors execute Spark code on data partitions distributed across the cluster.
 
-![Spark Architecture](../assets/spark_architecture.png)
+![Spark Architecture](./assets/spark_architecture.png)
 
 Spark supports multiple language APIs, including Python, Java, Scala, R, and SQL [5]. Developers can write applications in their preferred language.
 
