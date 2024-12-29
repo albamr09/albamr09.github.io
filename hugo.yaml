@@ -3,6 +3,10 @@ title: Alba's Notes
 
 # import hextra as module
 module:
+  hugoVersion:
+    extended: true
+    min: "0.140.0"
+
   imports:
     - path: github.com/imfing/hextra
 
@@ -63,6 +67,8 @@ params:
     enable: true
     displayCopyright: false
     displayPoweredBy: false
+  displayUpdatedDate: true
+  dateFormat: "January 2, 2006"
 
 defaultContentLanguage: en
 languages:

@@ -3,7 +3,10 @@ title: Math
 type: docs
 ---
 
-## First Year
+{{% details title="First Year" closed="true" %}}
+
+> [!TIP]
+> Finished!
 
 ### First semester
 
@@ -23,12 +26,17 @@ type: docs
   - [x] College Algebra by Kaufmann _(more begginer friendly)_
   - [ ] College Algebra by Blitzer
 
-## Second Year
+{{% /details %}}
+
+{{% details title="Second Year" closed="true" %}}
+
+> [!WARNING]
+> WIP
 
 ### First semester
 
 - [ ] **Pre-calculus** _(once you are done with college algebra. If you know some basic algebra you can skip the college algebra and start in this section)_
-  - [O] A Graphical Approach to Algebra and Trigonometry by Hornsby, Lial, and Rockswold. 6th edition _(Get the instructor's edition)_
+  - [x] A Graphical Approach to Algebra and Trigonometry by Hornsby, Lial, and Rockswold. 6th edition _(Get the instructor's edition)_
 
 ### Second semester
 
@@ -36,7 +44,9 @@ type: docs
   - [O] Calculus by James Stewart, 5th edition _(Very famous book, to learn basic calculus. It has a lot of problems. Used to teach calculus I, II and III)_
   - [ ] Calculus by Michael Spivak, 3rd edition _(It has less material but it is more advanced)_
 
-## Third Year
+{{% /details %}}
+
+{{% details title="Third Year" closed="true" %}}
 
 ### First semester
 
@@ -56,7 +66,9 @@ type: docs
   - [ ] Fundamentals of Complex Analysis by Saff and Snider, 3rd edition
   - [O] Complex Variables and Applications by Brown and Churchill, 7th edition
 
-## Fourth Year
+{{% /details %}}
+
+{{% details title="Fourth Year" closed="true" %}}
 
 ### First semester
 
@@ -81,3 +93,4 @@ type: docs
   - [ ] Functional Analysis by Kreyszig
 - [ ] **Graph Theory** _(optional)_
   - [ ] Graph Theory by Gould
+        {{% /details %}}
