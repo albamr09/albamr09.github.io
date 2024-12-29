@@ -35,7 +35,7 @@ type: docs
 
 ### First semester
 
-- [ ] **Pre-calculus** _(once you are done with college algebra. If you know some basic algebra you can skip the college algebra and start in this section)_
+- [x] **Pre-calculus** _(once you are done with college algebra. If you know some basic algebra you can skip the college algebra and start in this section)_
   - [x] A Graphical Approach to Algebra and Trigonometry by Hornsby, Lial, and Rockswold. 6th edition _(Get the instructor's edition)_
 
 ### Second semester
