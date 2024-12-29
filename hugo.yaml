@@ -59,8 +59,8 @@ params:
     type: flexsearch
     flexsearch:
       index: summary
-
   footer:
+    enable: true
     displayCopyright: false
     displayPoweredBy: false
 
