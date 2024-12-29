@@ -1,6 +1,6 @@
 ---
 title: Calculus Ealy Transcendentals
-weigth: 2
+weigth: 3
 type: docs
 ---
 
