@@ -193,3 +193,52 @@ Distinguimos las siguientes fases:
 - **Análisis**: Los datos preparados son analizados utilizando técnicas de procesamiento masivo, como Big Data Processing, que facilita cálculos extensivos y personalizados.
 - **Publicación**: Los resultados obtenidos del análisis batch se almacenan en sistemas como Data Warehousing o se integran con soluciones OLAP (Procesamiento Analítico en Línea) para que sean accesibles y listos para la consulta.
 - **Consumo**: Los datos analizados se ponen a disposición de herramientas como Power BI o sistemas de reportes personalizados, lo que permite a los usuarios explorar y extraer insights de manera visual e interactiva.
+
+### Databricks
+
+Databricks se trata de un servicio que simplifica el trabajo y la integración de los servicios de Azure con Spark. Como podemos ver en la siguiente figura se integra con distintas fuentes de datos: Azure Blob Storage, Azure Data Lake Storage, Azure SQL Data Warehouse, Apache Kafka o Hadoop Storage.
+
+![Azure Databricks](./assets/databricks.png)
+
+Por otro lado tenemos que el runtime de Databricks permtie utilizar distintas herramientas:
+
+- **Databricks Workspace**: Proporciona un entorno colaborativo donde científicos de datos, ingenieros y usuarios de negocio pueden trabajar juntos. Este espacio incluye notebooks compartidos y herramientas para el desarrollo y la visualización.
+- **Databricks Workflows**: Facilita la automatización de flujos de trabajo, como pipelines de datos.
+- **Databricks I/O**: Ofrece almacenamiento y gestión de datos de alta velocidad, optimizado para cargas de trabajo de big data.
+- **Databricks Serverless**: Permite a los usuarios ejecutar trabajos sin preocuparse por la gestión de infraestructura, escalando automáticamente según las necesidades.
+
+### Azure Streaming Analytics
+
+En la siguiente figure se muestra el flujo de trabajo estándar al utilizar la herramienta de Azure Streaming Analytics.
+
+![Azure Streaming Analytics](./assets/azure_streaming_analytics.png)
+
+En esta distinguimos cuatro fases principales:
+
+- **Producción de eventos (Event Production)**: Aquí se generan los datos en tiempo real desde diversas fuentes, como dispositivos IoT, aplicaciones, gateways o datos almacenados en blobs. Estas fuentes representan los eventos que serán procesados.
+- **Cola e ingesta de eventos (Event queuing & stream ingestion)**: Los datos generados son enviados a servicios como Event Hubs o IoT Hub, que actúan como intermediarios para manejar el flujo de datos entrantes de manera eficiente, asegurando que los eventos estén disponibles para su análisis en tiempo real.
+- **Análisis de streams (Stream Analytics)**: En esta etapa, Azure Stream Analytics procesa los datos en tiempo real. Esto puede incluir la aplicación de machine learning, transformaciones de datos o cálculos en tiempo real para extraer información útil de los eventos.
+- **Almacenamiento, presentación y acción (Storage, Presentation & Action)**: Los resultados del análisis pueden almacenarse en servicios como Azure Data Lake, Cosmos DB, o bases de datos SQL para análisis posteriores. Además, pueden integrarse con Azure Functions, Service Bus u otros servicios para automatizar flujos de trabajo. Finalmente, los datos procesados se presentan en dashboards en tiempo real utilizando herramientas como Power BI.
+
+### Machine Learning y AI
+
+En la siguiente imagen se muestran qué herramientas utilizar en base al objetivo/caso de uso:
+
+![Machine Learning and AI](./assets/ml_and_ai.png)
+
+#### Microsoft Azure AI
+
+- **Machine Learning Service**: Es un servicio en la nube diseñado para construir, entrenar, implementar y gestionar modelos de machine learning a escala.
+- **Machine Learning Studio**: Es una interfaz visual que permite crear y probar modelos de machine learning sin necesidad de codificar.
+
+#### Data Science Virtual Machine
+
+El servicio **Data Science Virtual Machine (DSVM)** de Azure es una máquina virtual preconfigurada con herramientas y entornos para proyectos de ciencia de datos, inteligencia artificial y aprendizaje automático. Incluye software como Python, R, Jupyter Notebooks, TensorFlow y PyTorch, facilitando el desarrollo, entrenamiento y despliegue de modelos sin necesidad de configurar desde cero.
+
+![Data Science Virtual Machine](./assets/data_science_virtual_machine.png)
+
+#### Machine Learning Studio
+
+**Azure Machine Learning Studio** es una herramienta visual basada en la nube que permite diseñar, entrenar y desplegar modelos de aprendizaje automático sin necesidad de programar extensamente. Con una interfaz drag-and-drop, los usuarios pueden conectar datos, aplicar transformaciones y configurar algoritmos de manera sencilla.
+
+![Machine Learning Studio](./assets/machine_learning_studio.png)
