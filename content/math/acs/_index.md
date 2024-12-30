@@ -1,6 +1,6 @@
 ---
 title: Algebra for College Students
-weigth: 1
+weight: 1
 type: docs
 ---
 
@@ -9,4 +9,7 @@ type: docs
 {{< card link="03_polynomials" title="Polynomials" >}}
 {{< card link="04_rational_expressions" title="Rational Expressions" >}}
 {{< card link="05_exponents_radicals" title="Exponents and Radicals" >}}
+{{< card link="06_quadratic_equations" title="Quadratic Equations and Inequalities" >}}
+{{< card link="07_linear_equations_two_vars" title="Linear Equations and Inequalities in Two Variables" >}}
+{{< card link="08_functions" title="Functions" >}}
 {{< /cards >}}

@@ -22,7 +22,7 @@ math: true
   \min_i (y_i - y_{i+1})^2
   $$
 
-- To optimize both, we include a parameter $\alpha$, to minimize the weigthed sum:
+- To optimize both, we include a parameter $\alpha$, to minimize the weighted sum:
 
 $$
 \min (x_i - y_i)^2 + \alpha (y_i - y_{i+1})^2

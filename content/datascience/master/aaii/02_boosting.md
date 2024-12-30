@@ -78,7 +78,7 @@ This classifier misses none of the points misclassified by $h_1$ and $h_2$.
 
 ##### Final Round
 
-The combined classifier $H$ is defiend as a weigthed vote between $h_1$, $h_2$ and $h_3$ where the weights are given by $\alpha_1$, $\alpha_2$ and $\alpha_3$.
+The combined classifier $H$ is defined as a weighted vote between $h_1$, $h_2$ and $h_3$ where the weights are given by $\alpha_1$, $\alpha_2$ and $\alpha_3$.
 
 ![Ada Boost Example](assets/ada_boost_example_2.png)
 
