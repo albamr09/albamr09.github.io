@@ -86,6 +86,65 @@ Se trata de un servicio que trabaja con datos en streaming que ofrece alta efici
 
 ![Amazon Kinesis Data Analytics](./assets/amazon_kinesis_data_analytics.png)
 
+## Proveedores de soluciones: Google Cloud
+
+### ML/AI en Producción
+
+Distinguimos varios niveles de abstracción en las interfaces ofrecidas por GCP:
+
+- **ML APIs**: se trata del nivel más alto de abstracción. Proporciona interfaces que proporcionan modelos ya entrenados para soluciones comunes a muchos casos de uso (p.ej. reconocimiento de objeto, traducción, etc).
+
+![Google ML APIs](./assets/google_ml_apis.png)
+
+- **AutoML**: es un servicio que automatiza el proceso de crear modelos de aprendizaje automático personalizados, pero permitiendo al usuario proporcionar sus propios datos para el entrenamiento. Este módulo se encarga de la selección del modelo óptimo en función del objetivo definido por el usuario, entrena dicho modelo y lo despliega/sirve para ser consumido por los usuarios/clientes finales.
+
+![Google Auto ML](./assets/google_auto_ml.png)
+
+- **ML Frameworks**: se refiere a la capacidad de utilizar frameworks populares de aprendizaje automático, como TensorFlow, PyTorch y Scikit-learn, en la infraestructura de Google. Tal que los entornos ya están preconfigurados para pode utilizar cada framework.
+
+![Google ML Frameworks](./assets/google_ml_frameworks.png)
+
+### Preparación de los datos
+
+Dividimos la preparación de los datos en streaming en tres fases:
+
+- **Ingesta**: necesitamos ser capaces de almacenar/recibir datos. Podemos utilizar el servicio _Cloud Pub/Sub_ que internamente hace uso de _Apache Kafka_.
+- **Transformación**: también debemos de ser capaces de transformar nuestros datos para que estén preparados para ser utilizados. En este caso tenemos a nuestro alcance el servicio _Cloud Dataflow_ que internamente utiliza _Apache Spark_.
+- **Etiquetación**: finalmente, los datos muchas veces necesitan ser clasificados para poder ser utilizados. Para ello hacemos uso del servicio _AI Platform Data Labeling_.
+
+![Google Streaming Data Preparation](./assets/google_streaming_data_preparation.png)
+
+### Procesamiento de los datos
+
+Google ofrece distintos servicios que facilitan el comenzar a trabajar sobre los datos:
+
+- **Configuración del entorno**: se ofrecen máquinas virtuales preconfiguradas con las herramientas necesarias en función del caso de uso (_Deep Learning VMs_)
+- **Modelos prefabricados**: se ofrecen modelos pre-definidos que facilitan un análisis inicial de los datos rápido (_AI/ML Cloud Platforms_).
+- **ML Pipelines**: se permite la definición de pipelines end-to-end, desde la ingesta de los datos hasta su publicación (_AI/ML Catalogs_).
+
+### Flujo de Trabajo
+
+Este flujo de trabajo en Google Cloud Platform se divide en cuatro fases principales que reflejan el proceso típico para gestionar y analizar datos:
+
+![Google Workflow](./assets/google_workflow.png)
+
+- **Ingestión**: En esta etapa, se capturan los datos provenientes de diversas fuentes como dispositivos móviles, web o IoT. Las herramientas utilizadas incluyen Pub/Sub o Apache Kafka, que permiten manejar flujos de datos en tiempo real y a gran escala.
+- **Transformación**: Una vez capturados, los datos pasan a ser procesados y transformados mediante frameworks como Apache Beam, Dataflow, o sistemas distribuidos como Apache Spark. Aquí se realizan tareas como limpieza, enriquecimiento y preparación de los datos para el análisis.
+- **Análisis**: Los datos transformados son analizados utilizando sistemas OLAP totalmente gestionados, plataformas de aprendizaje automático (AI/ML), o herramientas avanzadas como Kubeflow. Esto permite extraer información valiosa y generar predicciones basadas en machine learning.
+- **Visualización**: Finalmente, los resultados del análisis son presentados a los consumidores de datos mediante herramientas de inteligencia empresarial (BI), que facilitan la interpretación de los datos a través de gráficos y dashboards interactivos.
+
+#### Pipeline de producción
+
+El flujo de producción de Machine Learning en Google Cloud Platform incluye las siguientes fases principales:
+
+![Google ML Pipeline](./assets/google_ml_pipeline.png)
+
+- **Entrada de datos**: Los datos se recogen desde diversas fuentes, como bases de datos SQL, almacenamiento en la nube o flujos de datos en tiempo real. Herramientas como Beam, Spark, o Hadoop facilitan la gestión inicial de estos datos.
+- **Preprocesamiento y creación de características**: Los datos pasan por una etapa de limpieza, transformación y generación de características relevantes. Esto asegura que el modelo tenga datos estructurados y útiles para su entrenamiento.
+- **Entrenamiento del modelo**: En esta etapa, se entrena el modelo utilizando frameworks como TensorFlow con capacidades de entrenamiento distribuido y ajuste de hiperparámetros, aprovechando recursos como Kubeflow.
+- **Despliegue del modelo**: El modelo entrenado se despliega en la AI Platform, que soporta versionado y permite realizar predicciones a través de una API REST. Esta etapa incluye balanceo de carga y escalabilidad para manejar solicitudes en producción.
+- **Predicción**: Los clientes remotos pueden enviar variables de entrada a la API para obtener predicciones en tiempo real, con soporte para dispositivos como GPUs y TPUs para mayor eficiencia.
+
 ## Proveedores de soluciones: Microsoft Azure
 
 En la siguiente imagen se muestra el flujo y la arquitecture que define Azure para el procesamiento y análisis de los datos. Como podemos ver se permite el procesado de los datos tanto por lotes como en streaming, partiendo de la misma fuente de datos pero utilizando distintos módulos para consumir los datos de esta fuente.
