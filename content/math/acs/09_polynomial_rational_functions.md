@@ -88,7 +88,7 @@ is called a **polynomial euqation of degree \(n\)**.
 > Let \(a_nx^{n} + a_{n-1}x^{n-1} + \cdots + a_1 x + a_0 = 0\) be a polynomial equation with real coefficients.
 >
 > 1. The number of positive real solutions of the given equation either is equal to the number of variations in sign of the polynomial or is less than the number of variations by a positive even integer.
-> 2. The number of negative real solutions of the given equation either is equal to the number of variations in sign of the polynomial \(a*n(-x)^n + a*{n-1}(-x)^{n-1} + \cdots + a_1(-x) + a_0\) or is less than the number of variations by a positive even integer.
+> 2. The number of negative real solutions of the given equation either is equal to the number of variations in sign of the polynomial \(a_n(-x)^n + a_{n-1}(-x)^{n-1} + \cdots + a_1(-x) + a_0\) or is less than the number of variations by a positive even integer.
 
 ## Graphing Rational Functions
 
