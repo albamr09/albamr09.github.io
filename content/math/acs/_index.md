@@ -12,4 +12,6 @@ type: docs
 {{< card link="06_quadratic_equations" title="Quadratic Equations and Inequalities" >}}
 {{< card link="07_linear_equations_two_vars" title="Linear Equations and Inequalities in Two Variables" >}}
 {{< card link="08_functions" title="Functions" >}}
+{{< card link="09_polynomial_rational_functions" title="Polynomial and Rational Functions" >}}
+{{< card link="10_exponential_log_functions" title="Exponential and Logarithmic Functions" >}}
 {{< /cards >}}
