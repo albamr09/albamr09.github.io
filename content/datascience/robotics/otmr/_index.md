@@ -3,7 +3,7 @@ title: "Online Training: Mobile Robotics"
 toc: false
 ---
 
-> ![WARNING] **WIP**
+> [!WARNING] **WIP**
 
 **Source**
 
