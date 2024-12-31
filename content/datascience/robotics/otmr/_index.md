@@ -3,9 +3,7 @@ title: "Online Training: Mobile Robotics"
 toc: false
 ---
 
-{{< callout type="warning" >}}
-WIP
-{{< /callout >}}
+> ![WARNING] **WIP**
 
 **Source**
 

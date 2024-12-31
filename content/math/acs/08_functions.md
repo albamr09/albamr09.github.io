@@ -41,26 +41,26 @@ where \(a\), \(b\) and \(c\) are real numbers and \(a \neq 0 \) is called a **qu
 
 ![Quadratic Function](./assets/quadratic_function.png)
 
-> [!INFO] **Vertical Translation of a Quadratic Function**
+> [!NOTE] **Vertical Translation of a Quadratic Function**
 >
 > In general, the graph of a quadratic function of the form \(f(x) = x^2 + k\) is the same as the
 > graph of \(f(x) = x^2\), except that it is moved up or down \(|k|\) units, depending on
 > whether \(k\) is positive or negative. We say that the graph of \(f(x) = x^2 + k\) is a
 > **vertical translation** of the graph of \(f(x) = x^2\).
 
-> [!INFO] **Stretching a Quadratic Function**
+> [!NOTE] **Stretching a Quadratic Function**
 >
 > In general, the graph of a quadratic function of the form \(f(x) = ax^2\) has its vertex at the origin and opens upward if
 > \(a\) is positive and downward if \(a\) is negative. The parabola is narrower than the basic parabola if \(|a| > 1\) and wider if \(|a| > 1\).
 
-> [!INFO] **Horizontal Translation of a Quadratic Function**
+> [!NOTE] **Horizontal Translation of a Quadratic Function**
 >
 > In general, the graph of a quadratic function of the form \(f(x) = (x - h)^2\) is the same as
 > the graph of \(f(x) = x^2\), except that it is moved to the right \(h\) units if \(h\) is positive or
 > moved to the left \(|h|\) units if \(h\) is negative. We say that the graph of \(f(x) = (x - h)^2\)
 > is a **horizontal translation** of the graph of \(f(x) = x^2\).
 
-> [!INFO] **Transformation of a Quadratic Function**
+> [!NOTE] **Transformation of a Quadratic Function**
 >
 > In general, the graph of a quadratic function of the form \(f(x) = a(x - h)^2 + k\) has its
 > vertex at \((h, k)\) and opens upward if \(a\) is positive and downward if \(a\) is negative.
@@ -132,23 +132,23 @@ variations of these curves by using the concepts of translation and reflection.
 - Set up a table of ordered pairs that satisfy the equation.
 - Plot the points associated with the ordered pairs and connect them with a smooth curve.
 
-> [!INFO] **Vertical Translation**
+> [!NOTE] **Vertical Translation**
 >
 > The graph of \(y = f(x) + k\) is the graph of \(y = f(x)\) shifted \(k\) units upward if
 > \(k > 0\) or shifted \(|k|\) units downward if \(k < 0\).
 
-> [!INFO] **Horizontal Translation**
+> [!NOTE] **Horizontal Translation**
 >
 > The graph of \(y = f(x - h)\) is the graph of \(y = f(x)\) shifted \(h\) units to the right if
 > \(k > 0\) or shifted \(|k|\) units to the left if \(h < 0\).
 
 ### Reflections of the Basic Curves
 
-> [!INFO] **\(x\) Axis Reflection**
+> [!NOTE] **\(x\) Axis Reflection**
 >
 > The graph of \(y = -f(x)\) is the graph of \(y = f(x)\) reflected through the \(x\) axis.
 
-> [!INFO] **\(y\) Axis Reflection**
+> [!NOTE] **\(y\) Axis Reflection**
 >
 > The graph of \(y = f(-x)\) is the graph of \(y = f(x)\) reflected through the \(y\) axis.
 
@@ -158,7 +158,7 @@ Translations and reflections are called **rigid transformations** because the ba
 curve being transformed is not changed. In other words, only the positions of the graphs are
 changed.
 
-> [!INFO] **Vertical Stretching and Shrinking**
+> [!NOTE] **Vertical Stretching and Shrinking**
 >
 > The graph of \(y = cf(x)\) is obtained from the graph of \(y = f(x)\) by multiplying
 > the \(y\) coorindate for \(y = f(x)\) by \(c\). If \(|c|> 1\), the graph is said to be

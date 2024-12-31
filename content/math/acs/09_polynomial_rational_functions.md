@@ -7,7 +7,7 @@ math: true
 
 ## Synthetic Division
 
-> [!INFO] **Division Algorithm for Polynomials**
+> [!NOTE] **Division Algorithm for Polynomials**
 >
 > If \(f(x)\) and \(d(x)\) are polynomials and \(d(x) \neq 0\),then there exist unique polynomials \(q(x)\) and \(r(x)\) such that
 >
@@ -75,7 +75,7 @@ is called a **polynomial euqation of degree \(n\)**.
 >
 > Consider the polynomial equation
 >
-> $$ a_nx^{n} + a_{n-1}x^{n-1} + \cdots + a_1 x + a_0 = 0 $$
+> $$ a*nx^{n} + a*{n-1}x^{n-1} + \cdots + a_1 x + a_0 = 0 $$
 >
 > in which the coefficientes \(a_0, a_1, \cdots, a_n\) are integers. If the rational number \frac{c}{d}, reduced to lowest terms, is a solution of the equation, then \(c\) is a factor of the constant term \(a_0\), and \(d\) is a factor of the leading coefficient \(a_n\).
 
@@ -85,10 +85,10 @@ is called a **polynomial euqation of degree \(n\)**.
 
 > [!NOTE] **Property 9.6 Decartes' Rule of Signs**
 >
-> Let \(a_nx^{n} + a_{n-1}x^{n-1} + \cdots + a_1 x + a_0 = 0\) be a polynomial equation with real coefficients.
+> Let \(a*nx^{n} + a*{n-1}x^{n-1} + \cdots + a_1 x + a_0 = 0\) be a polynomial equation with real coefficients.
 >
 > 1. The number of positive real solutions of the given equation either is equal to the number of variations in sign of the polynomial or is less than the number of variations by a positive even integer.
-> 2. The number of negative real solutions of the given equation either is equal to the number of variations in sign of the polynomial \(a_n(-x)^n + a_{n-1}(-x)^{n-1} + \cdots + a_1(-x) + a_0\) or is less than the number of variations by a positive even integer.
+> 2. The number of negative real solutions of the given equation either is equal to the number of variations in sign of the polynomial \(a*n(-x)^n + a*{n-1}(-x)^{n-1} + \cdots + a_1(-x) + a_0\) or is less than the number of variations by a positive even integer.
 
 ## Graphing Rational Functions
 
