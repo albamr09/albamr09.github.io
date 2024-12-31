@@ -7,7 +7,7 @@ math: true
 
 ## Concept of a Function
 
-> [!INFO] **Vertical Line Test**
+> [!NOTE] **Vertical Line Test**
 >
 > If each vertical line intersects a graph in no more than one point, then the graph represents a function.
 

@@ -119,14 +119,14 @@ If two lines have slopes \(m_1\) and \(m_2\), respectively, then
 
 ## Graphic Nonlinear Equations
 
-> [!INFO] **\(y\) Axis Symmetry**
+> [!NOTE] **\(y\) Axis Symmetry**
 >
 > The graph of an equation is symmetric with respect to the \(y\) axis if replacing \(x\) with \(-x\) results in an equivalent equation.
 
-> [!INFO] **\(x\) Axis Symmetry**
+> [!NOTE] **\(x\) Axis Symmetry**
 >
 > The graph of an equation is symmetric with respect to the \(x\) axis if replacing \(y\) with \(-y\) results in an equivalent equation.
 
-> [!INFO] **Origin Axis Symmetry**
+> [!NOTE] **Origin Axis Symmetry**
 >
 > The graph of an equation is symmetric with respect to the origin if replacing \(x\) with \(-x\) and \(y\) with \(-y\) results in an equivalent equation.
