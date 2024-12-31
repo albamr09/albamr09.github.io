@@ -51,7 +51,7 @@ $$
 
 > [!NOTE] **Property 9.2 Factor Theorem**
 >
-> A polynomial \(f(x)\) has a factor \(x - c) if and only if \(f(c) = 0\).
+> A polynomial \(f(x)\) has a factor \(x - c\) if and only if \(f(c) = 0\).
 
 As we saw before when we divide \(f(x)\) by \(x - c\) we obtain \(f(c) = R\). For \(c\) to be the remainder \(R\) must be zero.
 
@@ -75,7 +75,7 @@ is called a **polynomial euqation of degree \(n\)**.
 >
 > Consider the polynomial equation
 >
-> $$ a*nx^{n} + a*{n-1}x^{n-1} + \cdots + a_1 x + a_0 = 0 $$
+> $$ a_nx^{n} + a_{n-1}x^{n-1} + \cdots + a_1 x + a_0 = 0 $$
 >
 > in which the coefficientes \(a_0, a_1, \cdots, a_n\) are integers. If the rational number \frac{c}{d}, reduced to lowest terms, is a solution of the equation, then \(c\) is a factor of the constant term \(a_0\), and \(d\) is a factor of the leading coefficient \(a_n\).
 
