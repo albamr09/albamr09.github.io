@@ -14,4 +14,5 @@ type: docs
 {{< card link="08_functions" title="Functions" >}}
 {{< card link="09_polynomial_rational_functions" title="Polynomial and Rational Functions" >}}
 {{< card link="10_exponential_log_functions" title="Exponential and Logarithmic Functions" >}}
+{{< card link="11_systems_of_equations" title="Systems of Equations" >}}
 {{< /cards >}}
