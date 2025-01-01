@@ -203,6 +203,24 @@ $$
 
 The Constant Multiple Rule, the Sum Rule, and the Difference Rule can be combined with the Power Rule to differentiate any polynomial.
 
+Let \(p(x) = a*n x^n + a*{n - 1}x^{n-1} + \cdots + a_1 x + a_0\), then:
+
+$$
+p'(x) = \frac{d}{dx}(a_n x^n + a_{n - 1}x^{n-1} + \cdots + a_1 x + a_0)
+$$
+
+By the Sum Rule and the Constant Multiple Rule:
+
+$$
+= \sum_{i=0}^n \frac{d}{dx} a_i x^i = \sum_{i=0}^n a_i \frac{d}{dx} x^i
+$$
+
+By the definition for the derivative of a power function:
+
+$$
+= \sum_{i=0}^n (a_i)(i)x^{i-1}
+$$
+
 **Example**
 
 $$
