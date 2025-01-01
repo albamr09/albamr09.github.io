@@ -160,3 +160,104 @@ By the [Limit Laws](../02_limits/#properties-of-limits):
 $$
 = c \lim_{h \rightarrow 0}\left[\frac{f(x + h) - f(x)}{h}\right] = cf'(x)
 $$
+
+> [!TIP] **Sum and Difference Rules**
+>
+> If \(f\) and \(g\) are both differentiable, then
+>
+> $$ \frac{d}{dx} [f(x) + g(x)] = \frac{d}{dx} f(x) + \frac{d}{dx} g(x) $$
+>
+> $$ \frac{d}{dx} [f(x) - g(x)] = \frac{d}{dx} f(x) - \frac{d}{dx} g(x) $$
+
+**Proof** To prove the **Sum Rule**, we let \(F(x) = f(x) + g(x)\). Then:
+
+$$
+F'(x) = \lim_{h \rightarrow 0} \frac{F(x + h) - F(x)}{h}
+$$
+
+$$
+= \lim_{h \rightarrow 0} \frac{[f(x + h) + g(x + h)] - [f(x) + g(x)]}{h}
+$$
+
+$$
+= \lim_{h \rightarrow 0} \left[\frac{f(x + h) - f(x)}{h} + \frac{g(x + h) - g(x)]}{h} \right]
+$$
+
+By the [Limit Laws](../02_limits/#properties-of-limits):
+
+$$
+= \left[\lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}\right] + \left[\lim_{h \rightarrow 0}\frac{g(x + h) - g(x)]}{h} \right]
+$$
+
+$$
+= f'(x) + g'(x)
+$$
+
+To prove the Difference Rule, we write \(f - g\) as \(f + (-1)g\) and apply the Sum Rule and the Constant Multiple Rule.
+
+The Sum Rule can be extended to the sum of any number of functions. For instance, using this theorem twice, we get
+
+$$
+(f + g + h)' = [(f + g) + h]' = (f + g)' + h' = f' + g' + h'
+$$
+
+The Constant Multiple Rule, the Sum Rule, and the Difference Rule can be combined with the Power Rule to differentiate any polynomial.
+
+**Example**
+
+$$
+\frac{d}{dx} (x^8 + 12x^5 - 4x^4 + 10x^3 - 6x + 5)
+$$
+
+$$
+= \frac{d}{dx} (x^8) + \frac{d}{dx} (12x^5) + \frac{d}{dx} (-4x^4) + \frac{d}{dx} (10x^3) + \frac{d}{dx} (-6x) + \frac{d}{dx} (5)
+$$
+
+$$
+= 8x^7 + (12)(5)x^4 + (-4)(4)x^3 + (10)(3)x^2 + -6 + 0
+$$
+
+### Exponential Functions
+
+Let’s try to compute the derivative of the exponential function \(f(x) = b^x\) using the definition of a derivative:
+
+$$
+f'(x) = \lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h} = \lim_{h \rightarrow 0} \frac{b^{x + h} - b^x}{h}
+$$
+
+$$
+= \lim_{h \rightarrow 0} \frac{b^xb^h - b^x}{h} = \lim_{h \rightarrow 0} \frac{b^x(b^h - 1)}{1}
+$$
+
+The factor \(b^x\) does not depend on \(h\), so we can take it in front of the limit:
+
+$$
+= b^x \lim_{h \rightarrow 0} \frac{b^h - 1}{h}
+$$
+
+Notice that the limit is thevalue of the derivative of \(f\) at \(0\):
+
+$$
+\lim_{h \rightarrow 0} \frac{b^h - 1}{h} = f'(0)
+$$
+
+Therefore we have shown that if the exponential function \(f(x) = b^x\) is differentiable at \(0\), then it is differentiable everywhere and:
+
+$$
+f'(x) = f'(0)b^x
+$$
+
+This equation says that _the rate of change of any exponential function is proportional to the function itself_.
+
+> [!TIP] **Number \(e\)**
+>
+> \(e\) is the number such that:
+>
+> $$ \lim{h \to 0} \frac{e^h - 1}{h} = 1 $$
+
+> [!TIP] **Derivative of the Natural Exponential Function**
+>
+> $$ \frac{d}{dx} (e^x) = e^x $$
+
+Thus the exponential function \(f(x) = e^x\) has the property that it is its own derivative.
+The geometrical significance of this fact is that the slope of a tangent line to the curve \(y = e^x\) at a point \((x, e^x)\) is equal to the \(y\)-coordinate of the point.
