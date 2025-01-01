@@ -253,7 +253,7 @@ $$
 = b^x \lim_{h \rightarrow 0} \frac{b^h - 1}{h}
 $$
 
-Notice that the limit is thevalue of the derivative of \(f\) at \(0\):
+Notice that the limit is the value of the derivative of \(f\) at \(0\), that is:
 
 $$
 \lim_{h \rightarrow 0} \frac{b^h - 1}{h} = f'(0)
