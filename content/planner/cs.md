@@ -3,18 +3,17 @@ title: Computer Science
 type: docs
 ---
 
-[Source](https://teachyourselfcs.com/#architecture)
+[Source](https://teachyourselfcs.com/)
 
 {{% details title="Programming" closed="true" %}}
 
-> [!TIP]
-> Finished!
+> [!TIP] **Finished!**
 
 ### Notes
 
-We recommend working through at least the first three chapters of SICP and doing the exercises. For additional practice, work through a set of small programming problems like those on [exercism](https://www.exercism.io).
+- [x] Work through at least the first three chapters of SICP and doing the exercises. For additional practice, work through a set of small programming problems like those on [exercism](https://www.exercism.io).
 
-### Alternatives
+### Additional
 
 Same course but with python instead of Scheme (Stk)
 
@@ -25,101 +24,63 @@ Same course but with python instead of Scheme (Stk)
 
 {{% details title="Computer Architecture" closed="true" %}}
 
-> [!WARNING]
-> WIP
+> [!WARNING] **WIP**
 
-### Resources
-
-#### Computer Systems: A Programmer's Perspective
-
-Most courses go from chapter 1 to 6. Do [this course](https://www.cs.cmu.edu/~213/)
-
-#### Nand2Tetris
-
-Each chapter involves building a small piece of the overall system, from writing elementary logic gates in HDL, through a CPU and assembler, all the way to an application the size of a Tetris game.
-
-[The Elements of Computing Systems (Nand2Tetris)](http://www.nand2tetris.org/)
+- [ ] _Computer Systems: A Programmer's Perspective_. Most courses go from chapter 1 to 6. Do [this course](https://www.cs.cmu.edu/~213/)
+- [x] [_The Elements of Computing Systems (Nand2Tetris)_](http://www.nand2tetris.org/). Each chapter involves building a small piece of the overall system, from writing elementary logic gates in HDL, through a CPU and assembler, all the way to an application the size of a Tetris game.
 
 {{% /details %}}
 
 {{% details title="Algorithms and Data Structures" closed="true" %}}
 
-| Books                       |
-| --------------------------- |
-| The Algorithm Design Manual |
+- [ ] [_The Algorithm Design Manual_](https://smile.amazon.com/Algorithm-Design-Manual-Steven-Skiena/dp/1848000693/) (book)
+- [ ] [Skiena's](https://www3.cs.stonybrook.edu/~skiena/373/videos/) or [Tim's on Coursera](https://www.coursera.org/specializations/algorithms) (video lectures)
 
-| Video Lectures                                                                                                                             |
-| ------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Skiena's](https://www3.cs.stonybrook.edu/~skiena/373/videos/) or [Tim's on Coursera](https://www.coursera.org/specializations/algorithms) |
+### Additional
 
-- Practice: [Leetcode](https://leetcode.com/)
-- Problem solving book after the manual: How to Solve It
+- [ ] [_Leetcode_](https://leetcode.com/)
+- [ ] Problem solving book after the manual: _How to Solve It_
 
 {{% /details %}}
 
 {{% details title="Mathematics for Computer Science" closed="true" %}}
 
-| Books             |
-| ----------------- |
-| MIT Lecture Notes |
-
-| Video Lectures                                                                                                                                                  |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [MIT Video Lectures](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-fall-2010/video-lectures/) |
+- [ ] [_MIT Lecture Notes_](https://cims.nyu.edu/~regev/teaching/discrete_math_fall_2005/dmbook.pdf) (book)
+- [ ] [MIT Video Lectures](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-fall-2010/video-lectures/) (video lecture)
 
 {{% /details %}}
 
 {{% details title="Operating Systems" closed="true" %}}
 
-| Books                                |
-| ------------------------------------ |
-| Operating Systems: Three Easy Pieces |
-
-- Labs: [xv6 labs](http://pages.cs.wisc.edu/~remzi/OSTEP/lab-projects-xv6.pdf)
+- [ ] [_Operating Systems: Three Easy Pieces_](http://pages.cs.wisc.edu/~remzi/OSTEP/) (book)
+- [ ] [xv6 labs](http://pages.cs.wisc.edu/~remzi/OSTEP/lab-projects-xv6.pdf) (labs)
 
 {{% /details %}}
 
 {{% details title="Computer Networking" closed="true" %}}
 
-| Books                                    |
-| ---------------------------------------- |
-| Computer Networking: A Top-Down Approach |
-
-| Video Lectures                                                                                                                    |
-| --------------------------------------------------------------------------------------------------------------------------------- |
-| [Standford: Introduction to Computer Networking course](https://www.youtube.com/playlist?list=PLoCMsyE1cvdWKsLVyf6cPwCLDIZnOj0NS) |
-
-- Labs: [Wireshark labs](http://www-net.cs.umass.edu/wireshark-labs/)
+- [ ] [_Computer Networking: A Top-Down Approach_](https://smile.amazon.com/Computer-Networking-Top-Down-Approach-7th/dp/0133594149/) (book)
+- [ ] [Standford: Introduction to Computer Networking course](https://www.youtube.com/playlist?list=PLoCMsyE1cvdWKsLVyf6cPwCLDIZnOj0NS) (video lectures)
+- [ ] [Wireshark labs](http://www-net.cs.umass.edu/wireshark-labs/) (labs)
 
 {{% /details %}}
 
 {{% details title="Databases" closed="true" %}}
 
-### Data Modelling
-
-- Book: Data and Reality: A Timeless Perspective on Perceiving and Managing Information in Our Imprecise World.
+- [ ] [_Data and Reality: A Timeless Perspective on Perceiving and Managing Information in Our Imprecise World._](https://www.amazon.com/Data-Reality-Perspective-Perceiving-Information/dp/1935504215) (book)
 
 {{% /details %}}
 
 {{% details title="Languages and Compilers" closed="true" %}}
 
-### Notes
-
-For introductory book: We suggest taking the time to work through the whole thing, attempting whichever of the "challenges" sustain your interest.
+- [ ] [_Crafting Interpreters_](https://craftinginterpreters.com/contents.html). Introductory book. (book)
+- [ ] [_Compilers: Principles, Techniques & Tools_](https://smile.amazon.com/Compilers-Principles-Techniques-Tools-2nd/dp/0321486811). More traditional recommendation. (book)
 
 {{% /details %}}
 
 {{% details title="Distributed Systems" closed="true" %}}
 
-| Books                                                    |
-| -------------------------------------------------------- |
-| Practice oriented: Designing Data-Intensive Applications |
-| More traditional: Distributed Systems, 3rd Edition       |
-
-{{% /details %}}
-
-{{% details title="AI and Machine Learning" closed="true" %}}
-
-Check the source.
+- [ ] [_Designing Data-Intensive Applications_](https://smile.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable-ebook/dp/B06XPJML5D/). Practice oriented. (book)
+- [ ] [_Distributed Systems, 3rd Edition_](https://www.distributed-systems.net/index.php/books/ds3/). More traditional. (book)
 
 {{% /details %}}

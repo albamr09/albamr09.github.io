@@ -5,8 +5,7 @@ type: docs
 
 {{% details title="First Year" closed="true" %}}
 
-> [!TIP]
-> Finished!
+> [!TIP] **Finished!**
 
 ### First semester
 
@@ -30,8 +29,7 @@ type: docs
 
 {{% details title="Second Year" closed="true" %}}
 
-> [!WARNING]
-> WIP
+> [!WARNING] **WIP**
 
 ### First semester
 
