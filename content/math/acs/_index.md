@@ -15,4 +15,6 @@ type: docs
 {{< card link="09_polynomial_rational_functions" title="Polynomial and Rational Functions" >}}
 {{< card link="10_exponential_log_functions" title="Exponential and Logarithmic Functions" >}}
 {{< card link="11_systems_of_equations" title="Systems of Equations" >}}
+{{< card link="12_matrices" title="Algebra of Matrices" >}}
+{{< card link="13_conic_sections" title="Conic Sections" >}}
 {{< /cards >}}
