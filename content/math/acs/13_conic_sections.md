@@ -242,3 +242,69 @@ $$
 By letting \(y = 0\), we the x intercepts, which are \(A(a, 0)\) and \(A'(a, 0)\), these are the **vertices** of the hyperbola, and the line segment \(\overline{AA'}\) is called the **transverse axis**; it is of length \(2a\) (see Figure 13.34). The midpoint of the transverse axis is called the **center** of the hyperbola; it is located at the origin. By letting \(x = 0\) we obtain \(y^2 = b^2\). This implies that there are no \(y\) intercepts.
 
 ![Hyperbola](./assets/hyperbola_1.png)
+
+The standard equation of a hyperbola with its center at (0, 0) and its transverse axis on the x axis is
+
+$$
+\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1
+$$
+
+where the foci are \((-c , 0)\) and \((c, 0)\), the vertices are at \((-a, 0)\) and \((a, 0)\) and \(c^2 = a^2 + b^2\).
+
+In conjunction with every hyperbola, there are two intersecting lines that pass through the center of the hyperbola. These lines, referred to as **asymptotes**. Their equations are easily determined by using the following type of reasoning. Solving the equation
+
+$$
+\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1
+$$
+
+for \(y\) produces:
+
+$$
+y = \pm \frac{b}{a} \sqrt{x^2 - a^2}
+$$
+
+$$
+y = \pm \frac{bx}{a} \sqrt{1 - \frac{a^2}{x^2}}
+$$
+
+Now suppose that we are going to determine some y values for very large values of \(x\). When \(x\) is very large, \(\frac{a^2}{x^2}\) will be close to zero, so the radicand will be close to \(1\). Therefore the \(y\) value will be close to either \(\frac{bx}{a}\) or \(-\frac{bx}{a}\).
+
+So the lines with equations
+
+$$
+y = \pn \frac{b}{a}x
+$$
+
+are the **asymptotes** of the hyperbola.
+
+An easy way to sketch the asymptotes is first to plot the vertices \(A(a, 0)\) and \(A'(a, 0)\) and the points \(B(0, b)\) and \(B'(0, b)\), as in Figure 13.35. The line segment is of length \(2b\) and is called the **conjugate axis** of the hyperbola. The horizontal line segments drawn through \(B\) and \(B'\), together with the vertical line segments drawn through \(A\) and \(A'\), form a rectangle. The diagonals of this rectangle have slopes \(\frac{b}{a}\) and (\(-\frac{b}{a}\)). Therefore, by extending the diagonals, we obtain the asymptotes \(y = \frac{b}{a}x\) and \(y = -\frac{b}{a}x\).
+
+![Hyperbola](./assets/hyperbola_2.png)
+
+### Hyperbolas with Foci on the \(y\) Axis
+
+The standard equation of a hyperbola with its center at (0, 0) and its transverse axis on the \(y\) axis is
+
+$$
+\frac{y^2}{b^2} - \frac{x^2}{a^2} = 1
+$$
+
+where the foci are \((0, -c)\) and \((0, c)\), the vertices \((0, -b)\) and \((0, b)\) and \(c^2 = a^2 + b^2\).
+
+The equations of the asymptotes are again \(y = \pm \frac{b}{a}x\)
+
+### Other Hyperbolas
+
+A hyperbola with center at \((h, k)\) and transverse axis on the horizontal line \(y = k\).
+
+$$
+\frac{(x - h)^2}{a^2} - \frac{(y - k)^2}{b^2} = 1
+$$
+
+A hyperbola with center at \((h, k)\) and transverse axis on the horizontal line \(x = h\).
+
+$$
+\frac{(y - k)^2}{b^2} - \frac{(x - h)^2}{a^2} = 1
+$$
+
+where \(c^2 = a^2 + b^2) on both cases.

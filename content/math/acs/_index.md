@@ -17,4 +17,5 @@ type: docs
 {{< card link="11_systems_of_equations" title="Systems of Equations" >}}
 {{< card link="12_matrices" title="Algebra of Matrices" >}}
 {{< card link="13_conic_sections" title="Conic Sections" >}}
+{{< card link="14_sequences_math_induction" title="Sequences and Mathematical Induction" >}}
 {{< /cards >}}
