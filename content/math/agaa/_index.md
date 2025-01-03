@@ -1,6 +1,6 @@
 ---
 title: A Graphical Approach to Algebra and Trigonometry
-weight: 2
+weight: 3
 type: docs
 ---
 
