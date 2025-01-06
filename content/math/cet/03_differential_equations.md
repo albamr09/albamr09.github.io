@@ -279,3 +279,81 @@ This equation says that _the rate of change of any exponential function is propo
 
 Thus the exponential function \(f(x) = e^x\) has the property that it is its own derivative.
 The geometrical significance of this fact is that the slope of a tangent line to the curve \(y = e^x\) at a point \((x, e^x)\) is equal to the \(y\)-coordinate of the point.
+
+## The Product and Quotient Rules
+
+### The Product Rule
+
+> [!TIP] **The Product Rule**
+>
+> If \(f\) and \(g\) are both differentiable, then
+>
+> $$\frac{d}{dx}[f(x)g(x)] = f(x)\frac{d}{dx}[g(x)] + g(x) \frac{d}{dx}[f(x)]$$
+
+**PROOF** We start by assuming that \(u = f(x)\) and \(v = g(x)\) are both positive differentiable functions. Then we can interpret the product \(uv\) as an area of a rectangle (see Figure 1).
+
+![Geometry of the Product Rule](./assets/geometry_of_product_rule.png)
+
+If \(x\) changes by and amount \(\Delta x\), then de corresponding changes in \(u\) and \(v\) are
+
+$$
+\Delta u = f(x + \Delta x) - f(x)
+$$
+
+$$
+\Delta v = g(x + \Delta x) - g(x)
+$$
+
+The change in the area of the rectangle is
+
+$$
+\Delta(uv) = (u + \Delta u)(v + \Delta v) - uv = u\Delta v + v \Delta u + \Delta u \Delta v
+$$
+
+where \((u + \Delta u)(v + \Delta v)\) can be interpreted as the area of the large rectangle in Figure 1. Whilst \(\Delta(uv)\) would be the sum of the tree shaded areas.
+
+If we divide by \(\Delta x\), we get:
+
+$$
+\frac{\Delta(uv)}{\Delta x} = u \frac{\Delta v}{\Delta x} + v \frac{\Delta u}{\Delta x} + \frac{\Delta u \Delta v}{\Delta x}
+$$
+
+If we now let \(\Delta x \rightarrow 0\) we get the derivative of \(uv\):
+
+$$
+\frac{\delta}{\delta x}(uv) = \lim_{\Delta x \to 0} \frac{\Delta (uv)}{\Delta x}
+$$
+
+$$
+= \lim_{\Delta x \to 0} \left(u \frac{\Delta v}{\Delta x} + v \frac{\Delta u}{\Delta x} + \frac{\Delta u \Delta v}{\Delta x}\right)
+$$
+
+$$
+= u \lim_{\Delta x \to 0} \frac{\Delta v}{\Delta x} + v \lim_{\Delta x \to 0} \frac{\Delta u}{\Delta x} + \left(\lim_{\Delta x \to 0} \Delta u \right)\left(\lim_{\Delta x \to 0} \frac{ \Delta v}{\Delta x}\right)
+$$
+
+Substituting by \(\Delta v = g(x + \Delta x) - g(x)\) and \(\Delta u = f(x + \Delta x) - f(x)\)
+
+$$
+= u \lim_{\Delta x \to 0} \frac{g(x + \Delta x) - g(x)}{\Delta x} + v \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x} + \left(\lim_{\Delta x \to 0} \Delta u \right)\left(\lim_{\Delta x \to 0} \frac{ \Delta v}{\Delta x}\right)
+$$
+
+Because $\lim_{\Delta x \to 0} \Delta u = 0$
+
+$$
+= u \lim_{\Delta x \to 0} \frac{g(x + \Delta x) - g(x)}{\Delta x} + v \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x} + 0 \cdot \left(\lim_{\Delta x \to 0} \frac{ \Delta v}{\Delta x}\right)
+$$
+
+$$
+= u \lim_{\Delta x \to 0} \frac{g(x + \Delta x) - g(x)}{\Delta x} + v \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}
+$$
+
+Although we started by assuming (for the geometric interpretation) that all the quantities are positive, we notice that The Power Rule is always true. (The algebra is valid whether $u$, $v$, $\Delta u$, and $\Delta v$ are positive or negative).
+
+### The Quotient Rule
+
+> [!TIP] **The Quotient Rule**
+>
+> If \(f\) and \(g\) are both differentiable, then
+>
+> $$\frac{d}{dx}\left[\frac{f(x)}{g(x)}\right] = \frac{g(x)\frac{d}{dx}[f(x)] - f(x) \frac{d}{dx}[g(x)]}{[g(x)]^2}$$
