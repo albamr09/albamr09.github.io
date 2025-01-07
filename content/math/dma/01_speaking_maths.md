@@ -167,3 +167,96 @@ The notation for an ordered $n$-tuple generalizes the notation for an ordered pa
 The elements of $A$ are called the **characters** of the string. The **null string** over $A$ is defined to be the string with no characters. It is often denoted $\lambda$ and is said to have length $0$.
 
 ## The Language of Relations and Functions
+
+The formal mathematical definition of relation was introduced by the American mathematician and logician [C.S. Peirce](https://es.wikipedia.org/wiki/Charles_Sanders_Peirce) in the nineteenth century.
+
+> [!TIP] **Relation**
+>
+> Let $A$ and $B$ be sets. A relation $R$ from $A$ to $B$ is a subset of $A \times B$.
+>
+> Given an ordered pair $(x, y)$ in $A \times B$, $x$ is related to $y$ by $R$, written $x R y$, if, and only if, $(x, y)$ is in $R$.
+
+The set $A$ is called the **domain** of $R$ and the set $B$ is called its **co-domain**.
+
+### Arrow Diagram of a Relation
+
+Suppose $R$ is a relation from a set $A$ to a set $B$. The arrow diagram for $R$ is obtained as follows:
+
+1. Represent the elements of $A$ as points in one region and the elements of $B$ as points in another region.
+2. For each $x$ in $A$ and $y$ in $B$, draw an arrow from $x$ to $y$ if, and only if, $x$ is related to $y$ by $R$.
+
+![Diagrams of Relations](./assets/diagrams_of_relations.png)
+
+### Functions
+
+> [!TIP] **Function**
+>
+> A function $F$ from a set $A$ to a set $B$ is a relation with domain $A$ and co-domain $B$ that satisfies the following two properties:
+>
+> 1. For every element $x$ in $A$, there is an element $y$ in $B$ such that $(x, y) \in F$.
+> 2. For all elements $x$ in $A$ and $y$ and $z$ in $B$,
+>
+> $$\text{ if } (x, y) \in F \text{ and } (x, z) \in F, \text{ then } y = z$$
+
+Properties (1) and (2) can be stated less formally as follows: A relation $F$ from $A$ to $B$ is a function if, and only if:
+
+1. Every element of $A$ is the first element of an ordered pair of $F$.
+2. No two distinct ordered pairs in $F$ have the same first element.
+
+More precisely, if $F$ is a function from a set $A$ to a set $B$, then given any element $x$ in $A$, property (1) from the function definition guarantees that there is at least one element of $B$ that is related to $x$ by $F$ and property (2) guarantees that there is at most one such element.
+
+> [!NOTE] **Function Notation**
+>
+> If $A$ and $B$ are sets and $F$ is a function from $A$ to $B$, then given any element $x$ in $A$, the unique element in $B$ that is related to $x$ by $F$ is denoted $F(x)$, which is read "$F$ of $x$."
+
+### Function Machines
+
+Another useful way to think of a function is as a machine. Suppose $f$ is a function from $X$ to $Y$ and an input $x$ of $X$ is given. Imagine $f$ to be a machine that processes $x$ in a certain way to produce the output $f(x)$. This is illustrated in Figure 1.3.1.
+
+![Function Machine](./assets/function_machine.png)
+
+### Functions Defined by Formulas
+
+A function is an entity in its own right. It can be thought of as a certain relationship between sets or as an input/output machine that operates according to a certain rule. It can be denoted by a single symbol or string of symbols.
+
+A relation is a subset of a Cartesian product and a function is a special kind of relation. Specifically, if $f$ and $g$ are functions from a set $A$ to a set $B$, then
+
+$$
+f = \{(x, y) \in A \times B | y = f(x)\} \text{ and } g = \{(x, y) \in A \times B| y = g(x)\}
+$$
+
+It follows that
+
+$$
+f \text{ equals } g, f = g, \text{ if and only if } f(x) = g(x), \forall x \in A
+$$
+
+## The Language of Graphs
+
+> [!TIP] **Graph**
+>
+> A graph $G$ consists of two finite sets: a nonempty set $V(G)$ of **vertices** and a set $E(G)$ of **edges**, where each edge is associated with a set consisting of either one or two vertices called its endpoints.
+
+The correspondence from edges to endpoints is called the **edge-endpoint function**.
+
+An with just one endpoint is called a **loop**, and two or more distinct edges with the same set of endpoints are said to be **parallel**.
+
+An edge is said to **connect** its endpoints; two vertices that are connected by an edge are called **adjacent**; and a vertex that is an endpoint of a loop is said to be **adjacent to itself**.
+
+An edge is said to be **incident on** each of its endpoints, and two edges incident on the same endpoint are called **adjacent**. A vertex on which no edges are incident is called **isolated**.
+
+Although a given pictorial representation uniquely determines a graph, a given graph may have more than one pictorial representation.
+
+![Graph Pictorial Representation](./assets/graph_pictorial_representation.png)
+
+> [!TIP] **Directed Graph**
+>
+> A **directed graph**, or **digraph**, consists of two finite sets: a nonempty set $V(G)$ of vertices and a set $D(G)$ of directed edges, where each is associated with an ordered pair of vertices called its **endpoints**. If edge $e$ is associated with the pair $(y, w)$ of vertices, then $e$ is said to be the **(directed) edge** from $y$ to $w$.
+
+![Directed Graph](./assets/directed_graph.png)
+
+> [!TIP] **Degree of a Vertex**
+>
+> Let $G$ be a graph and $y$ a vertex of $G$. The **degree of $v$**, denoted $deg(v)$, equals the number of edges that are incident on $y$, with an edge that is a loop counted twice.
+
+![Vertex Degree](./assets/vertex_degree.png)
