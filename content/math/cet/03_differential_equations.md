@@ -387,11 +387,11 @@ $$
 $$
 
 $$
-\lim_{\Delta x \to 0} \frac{v\frac{\Delta u}{\Delta x} - u\frac{\Delta v}{\Delta x}}{v(v + \Delta v)}
+=\lim_{\Delta x \to 0} \frac{v\frac{\Delta u}{\Delta x} - u\frac{\Delta v}{\Delta x}}{v(v + \Delta v)}
 $$
 
 $$
-\frac{d}{dx} \left(\frac{u}{v}\right) = \frac{v \lim_{\Delta x \to 0}\frac{\Delta u}{\Delta x} - u \lim_{\Delta x \to 0} \frac{\Delta v}{\Delta x}}{v \lim_{\Delta x \to 0} (v + \Delta v)}
+= \frac{v \lim_{\Delta x \to 0}\frac{\Delta u}{\Delta x} - u \lim_{\Delta x \to 0} \frac{\Delta v}{\Delta x}}{v \lim_{\Delta x \to 0} (v + \Delta v)}
 $$
 
 Substituting by \(\Delta v = g(x + \Delta x) - g(x)\) and \(\Delta u = f(x + \Delta x) - f(x)\)
