@@ -357,3 +357,61 @@ Although we started by assuming (for the geometric interpretation) that all the 
 > If \(f\) and \(g\) are both differentiable, then
 >
 > $$\frac{d}{dx}\left[\frac{f(x)}{g(x)}\right] = \frac{g(x)\frac{d}{dx}[f(x)] - f(x) \frac{d}{dx}[g(x)]}{[g(x)]^2}$$
+
+**PROOF** If $x$, $u$, and $v$ change by amounts $\Delta x$, $\Delta u$ and $\Delta v$, the corresponding change in the quotient $\frac{u}{v}$ is
+
+$$
+\Delta \left(\frac{u + \Delta u}{v + \Delta v}\right) - \frac{u}{v} =
+$$
+
+$$
+= \frac{(u + \Delta u)v - u(v + \Delta v)}{v(v + \Delta v)}
+$$
+
+$$
+= \frac{uv + v \Delta u - uv - u\Delta v}{v(v + \Delta v)}
+$$
+
+$$
+= \frac{v \Delta u - u\Delta v}{v(v + \Delta v)}
+$$
+
+Therefore
+
+$$
+\frac{d}{dx} \left(\frac{u}{v}\right) = \lim_{\Delta x \to 0} \frac{\Delta \frac{u}{v}}{\Delta x} = \lim_{\Delta x \to 0} \frac{\frac{v \Delta u - u\Delta v}{v(v + \Delta v)}}{\Delta x}
+$$
+
+$$
+= \lim_{\Delta x \to 0} \frac{\frac{v \Delta u - u\Delta v}{\Delta x}}{v(v + \Delta v)}
+$$
+
+$$
+\lim_{\Delta x \to 0} \frac{v\frac{\Delta u}{\Delta x} - u\frac{\Delta v}{\Delta x}}{v(v + \Delta v)}
+$$
+
+$$
+\frac{d}{dx} \left(\frac{u}{v}\right) = \frac{v \lim_{\Delta x \to 0}\frac{\Delta u}{\Delta x} - u \lim_{\Delta x \to 0} \frac{\Delta v}{\Delta x}}{v \lim_{\Delta x \to 0} (v + \Delta v)}
+$$
+
+Substituting by \(\Delta v = g(x + \Delta x) - g(x)\) and \(\Delta u = f(x + \Delta x) - f(x)\)
+
+$$
+= \frac{v \lim_{\Delta x \to 0}\frac{f(x + \Delta x) - f(x)}{\Delta x} - u \lim_{\Delta x \to 0} \frac{g(x + \Delta x) - g(x)}{\Delta x}}{v \lim_{\Delta x \to 0} (v + \Delta v)}
+$$
+
+$$
+= \frac{v \frac{d}{dx} f(x) - u \frac{d}{dx} g(x)}{v \lim_{\Delta x \to 0} (v + \Delta v)}
+$$
+
+We know that as $\Delta x \rightarrow 0$ then $\Delta v \rightarrow 0$, therefore $\lim_{\Delta x \to 0} (v + \Delta v) = v + 0 = v$ and
+
+$$
+= \frac{v \frac{d}{dx} f(x) - u \frac{d}{dx} g(x)}{v^2}
+$$
+
+Given $u = f(x)$ and $v = g(x)$, then
+
+$$
+\frac{d}{dx} \left(\frac{f(x)}{g(x)}\right)= \frac{g(x) \frac{d}{dx} f(x) - f(x) \frac{d}{dx} g(x)}{[g(x)]^2}
+$$
