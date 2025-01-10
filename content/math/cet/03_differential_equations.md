@@ -415,3 +415,19 @@ Given $u = f(x)$ and $v = g(x)$, then
 $$
 \frac{d}{dx} \left(\frac{f(x)}{g(x)}\right)= \frac{g(x) \frac{d}{dx} f(x) - f(x) \frac{d}{dx} g(x)}{[g(x)]^2}
 $$
+
+## Derivative of Trigonometric Funcions
+
+If we sketch the graph of the function $f(x) = \sin(x)$ and use the interpretation of $f'(x)$ as the slope of the tangent to the sine curve in order to sketch the graph of $f'$ then it looks as if the graph of $f'$ may be the same as the cosine curve (see Figure 1).
+
+![Sine Derivative Graph](./assets/sine_derivative_graph.png)
+
+From the definition of a derivative, we have
+
+$$
+f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}
+$$
+
+$$
+= \lim_{h \to 0} \frac{\sin(x + h) - \sin x}{h}
+$$
