@@ -519,3 +519,15 @@ $$
 $$
 
 The contradiction rule is the logical heart of the method of proof by contradiction. A slight variation also provides the basis for solving many logical puzzles by eliminating contradictory answers: If an assumption leads to a contradiction, then that assumption must be false.
+
+## Application: Digital Logic Circuits
+
+In the late 1930s, a young M.I.T. graduate student named [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon) noticed an analogy between the operations of switching devices, such as telephone switching circuits, and the operations of logical connectives.
+
+Now consider the more complicated circuits of Figures 2.4.2(a) and 2.4.2(b).
+
+![Switches](./assets/switches.png)
+
+In the circuit of Figure 2.4.2(a) current flows and the light bulb turns on if, and only if, both switches P and Q are closed. The switches in this circuit are said to be **in series**. In the circuit of Figure 2.4.2(b) current flows and the light bulb turns on if, and only if, at least one of the switches P or Q is closed. The switches in this circuit are said to be **in parallel**. All possible behaviors of these circuits are described by Table 2.4.1.
+
+![Switches Truth Table](./assets/switches_truth_table.png)
