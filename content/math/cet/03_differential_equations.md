@@ -431,3 +431,225 @@ $$
 $$
 = \lim_{h \to 0} \frac{\sin(x + h) - \sin x}{h}
 $$
+
+By the [Sine Sum and Difference Identities](../../agaa/09_trig_identities#sine-and-tangent-sum-and-difference-identities)
+
+$$
+= \lim_{h \to 0} \left[\frac{\sin(x)\cos(h) + \sin(h)\cos(x) - \sin x}{h}\right]
+$$
+
+$$
+= \lim_{h \to 0} \left[\frac{\sin(x)\cos(h) - \sin(x)}{h} + \frac{\sin(h)\cos(x)}{h}\right]
+$$
+
+$$
+= \lim_{h \to 0} \left[\sin x \frac{\cos(h) - 1}{h} + \cos x \frac{\sin(h)}{h}\right]
+$$
+
+$$
+= \lim_{h \to 0} \sin x \lim_{h \to 0}\frac{\cos(h) - 1}{h} + \lim_{h \to 0}\cos x \lim_{h \to 0}\frac{\sin(h)}{h}
+$$
+
+Because we regard $x$ as a constant when computing a limit as $h \to 0$, we have
+
+$$
+\lim_{h \to 0} \sin x = \sin x
+$$
+
+and 
+
+$$
+\lim_{h \to 0} \cos x = \cos x
+$$
+
+Later we will prove that
+
+$$
+\lim_{h \to 0} \frac{\sin h}{h} = 1
+$$
+
+and
+
+$$
+\lim_{h \to 0} \frac{\cos h - 1}{h} = 0
+$$
+
+If we substitute these limits on our main equation we get
+
+$$
+= \sin x \cdot 0 + \cos x 1 = \cos x
+$$
+
+So we have proved the formula for the derivative of the sine function:
+
+$$
+\frac{\delta}{\delta x} \sin(x)= \cos x
+$$
+
+Using the same methods as in the previous proof, we can prove
+
+$$
+\frac{\delta}{\delta x} \cos(x)= -\sin x
+$$
+
+The tangent function can also be differentiated by using the definition of a derivative, but it is easier to use the [Quotient Rule](#the-quotient-rule)
+
+$$
+\frac{\delta}{\delta x} \tan x = \frac{\delta}{\delta x} \left(\frac{\sin x}{\cos x}\right)
+$$
+
+$$
+= \frac{\cos x \frac{\delta}{\delta x}\sin x - \sin x \frac{\delta}{\delta x} \cos x}{\cos^2 x}
+$$
+
+$$
+= \frac{\cos x \cos x - \sin x \sin x}{\cos^2 x}
+$$
+
+$$
+= \frac{\cos^2 x - \sin^2 x}{\cos^2 x}
+$$
+
+Given $\cos^2 x + \sin^2 x = 1$
+
+$$
+= \frac{1}{\cos^2 x} = \sec^2 x
+$$
+
+Therefore
+
+$$
+\frac{\delta}{\delta x} \tan x = \sec^2 x
+$$
+
+The derivatives of the remaining trigonometric functions, $\csc$, $\sec$, and $\cot$, can also be found easily using the [Quotient Rule](#the-quotient-rule). We collect all the differentiation formulas for trigonometric functions in the following table. **Remember that they are valid only when $x$ is measured in radians**.
+
+> [!NOTE] **Derivatives of Trigonometric Functions**
+> 
+> $$\frac{\delta}{\delta x} \sin x = \cos x$$
+> 
+> $$\frac{\delta}{\delta x} \cos x = -\sin x$$
+> 
+> $$\frac{\delta}{\delta x} \tan x = \sec^2 x$$
+> 
+> $$\frac{\delta}{\delta x} \csc x = -\csc x \cot x$$
+> 
+> $$\frac{\delta}{\delta x} \sec x = \sec x \tan x$$
+> 
+> $$\frac{\delta}{\delta x} \cot x = -\csc^2 x$$
+
+### Two Special Trigonometric Limits
+
+In proving the formula for the derivative of sine we used two special limits, which we now prove.
+
+$$
+\lim_{\theta \to 0} \frac{\sin \theta}{\theta} = 1
+$$
+
+**PROOF** Asumme first that $\theta$ lies between $0$ and $\frac{\pi}{2}$ (See Figure 6). By the definition of a [radian measure](../../agaa/08_trigonometry/#radian-measure), we have $s = arc AB = \theta$. Also $|BC| = |OB| \sin \theta = \sin \theta$.
+
+![Radian Measure](./assets/radian_measure.png)
+
+From the diagram we see that:
+
+$$
+|BC| < |AB| < arc AB
+$$
+
+Therefore
+
+$$
+\sin \theta = |BC| < arc AB = \theta
+$$
+
+so 
+
+$$
+\frac{\sin \theta}{\theta} < 1
+$$
+
+Let the tangent lines at $A$ and $B$ interset at $E$. You can see from Figure 6(b) that the circumference of a circle is smaller than the length of a circumscribed polygon, and so 
+
+$$
+arc AB < |AE| + |EB|
+$$
+
+Thus
+
+$$
+\theta = arc AB < |AE| + |EB|
+$$
+
+From the diagram $|EB| < |ED|$, as $ED$ is the hypothenuse of $BDE$.
+
+$$
+< |AE| + |ED|
+$$
+
+From the definition of [the tangent function](../../agaa/08_trigonometry/#trigonometric-functions)
+
+$$
+|AD| = |OA| \tan \theta
+$$
+
+$$
+= \tan \theta
+$$
+
+Therefore we have
+
+$$
+\theta < \frac{\sin \theta}{\cos \theta}
+$$
+
+so because we know $\frac{\sin \theta}{\theta} < 1$
+
+$$
+\cos \theta < \frac{\sin \theta}{\theta} < 1
+$$
+
+We know that $\lim_{\theta \to 0} 1 = 1$ and $\lim_{\theta \to 0} \cos \theta = 1$, so by [the Squeeze Theorem](../02_limits/#the-squeeze-theorem)
+
+$$
+\lim_{\theta \to 0^+} \frac{\sin \theta}{\theta} = 1, 0 < \theta < \frac{\pi}{2}
+$$
+
+But the function $\frac{\sin \theta}{\theta}$ is an even function, so its right and left limits must be equal. Hence we have
+
+$$
+\lim_{\theta \to 0} \frac{\sin \theta}{\theta} = 1
+$$
+
+The following special limit involves cosine.
+
+$$
+\lim_{\theta \to 0} \frac{\cos \theta - 1}{\theta} = 0
+$$
+
+**PROOF** We multiply numerator and denominator by $\cos \theta + 1$
+
+$$
+\lim_{\theta \to 0} \frac{\cos \theta - 1}{\theta} = \lim \left(\frac{\cos \theta - 1}{\theta} \cdot \frac{\cos \theta + 1}{\cos \theta + 1}\right)
+$$
+
+$$
+= \lim_{\theta \to 0} \frac{\cos^2 \theta - 1}{\theta (\cos \theta + 1)}
+$$
+
+Given $\sin^2 \theta + \cos^2 \theta = 1$
+
+$$
+= \lim_{\theta \to 0} \frac{-\sin^2 \theta}{\theta (\cos \theta + 1)}
+$$
+
+$$
+= -\lim_{\theta \to 0} \frac{\sin \theta}{\theta} \cdot \frac{\sin \theta}{\cos \theta + 1}
+$$
+
+$$
+= -\lim_{\theta \to 0} \frac{\sin \theta}{\theta} \cdot \lim_{\theta \to 0} \frac{\sin \theta}{\cos \theta + 1}
+$$
+
+$$
+= -1 \cdot \left(\frac{0}{1 + 1}\right) = 0
+$$
