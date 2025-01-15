@@ -71,11 +71,11 @@ $$
 \forall x \in D, Q(x)
 $$
 
- can be rewritten as
+can be rewritten as
 
- $$
- \forall x, \text{ if } x \text{ is in } D \text{ then } Q(x)
- $$
+$$
+\forall x, \text{ if } x \text{ is in } D \text{ then } Q(x)
+$$
 
 ### Bound Variables and Scope
 
@@ -92,17 +92,17 @@ As shown earlier, this statement is equivalent to a universal statement. However
 Existential quantification can also be implicit.
 
 > [!NOTE] **Implicit Conditional Statements**
-> 
+>
 > Let $P(x)$ and $Q(x)$ be predicates and suppose the common domain of $x$ is $D$
-> 
+>
 > The notation $P(x) \Rightarrow Q(x)$ means that every element in the truth set of $P(x)$ is in the truth set of $Q(x)$, or, equivalently, $\forall x, P(x) \rightarrow Q(x)$.
-> 
+>
 > The notation $P(x) \Leftrightarrow Q(x)$ means that $P(x)$ and $Q(x)$ have identical truth sets, or, equivalently, $\forall x, P(x) \leftrightarrow Q(x)$
 
 ## Predicates and Quantified Statements II
 
 > [!TIP] **Negation of a Universal Statement**
-> 
+>
 > The negation of a statement of the form
 >
 > $$\forall x \in D, Q(x)$$
@@ -118,9 +118,9 @@ Existential quantification can also be implicit.
 Note that when we speak of **logical equivalence for quantified statements**, we mean that the statements always have identical truth values no matter what predicates are substituted for the predicate symbols and no matter what sets are used for the domains of the predicate variables.
 
 > [!TIP] **Negation of an Existential Statement**
-> 
+>
 > The negation of a statement of the form
-> 
+>
 > $$\exists x \in D, \text{ such that } Q(x)$$
 >
 > is logically equivalent to a statement of the form
@@ -214,13 +214,175 @@ $$
 ### Necessary and Sufficient Conditions, Only If
 
 > [!NOTE] **Sufficient Condition**
-> 
+>
 > $\forall x, r(x)$ is a **sufficient condition** for $s(x)$ means $\forall x, \text{ if } r(x) \text{ then } s(x)$.
 
 > [!NOTE] **Necessary Condition**
-> 
+>
 > $\forall x, r(x)$ is a **necessary condition** for $s(x)$ means $\forall x, \text{ if } \sim r(x) \text{ then } \sim s(x)$.
 
 > [!NOTE] **Sufficient and Necessary Condition**
-> 
+>
 > $\forall x, r(x)$ **only if** $s(x)$ means $\forall x, \text{ if } \sim s(x) \text{ then } \sim r(x)$ or, equivalently $\forall x, \text{ if } r(x) \text{ then } s(x)$.
+
+## Statements with Multiple Quantifiers
+
+Because many important technical statements contain both $\exists$ and $\forall$, a convention has developed for interpreting them uniformly. **When a statement contains more than one kind of quantifier, we imagine the actions suggested by the quantifiers as being performed in the order in which the quantifiers occur.**
+
+> [!NOTE] **Interpreting Statements with Two Different Quantifiers**
+>
+> If you want to establish the truth of a statement of the form
+>
+> $$\forall x \in D, \exists y \in E \text{ such that } P(x, y)$$
+>
+> your challenge is to allow someone else to pick whatever element $x$ in $D$ they wish and then you must find an element $y$ in $E$ that “works” for that particular $x$.
+>
+> If you want to establish the truth of a statement of the form
+>
+> $$\exists x \in D, \text{ such that } \forall y \in E, P(x, y)$$
+>
+> your job is to find one particular $x$ in $D$ that will “work” no matter what $y$ in $E$ anyone might choose to challenge you with.
+
+### Negations of Statements with More Than One Quantifier
+
+You can use the same rules to negate statements with several quantifiers that you used to negate simpler quantified statements.
+
+$$
+\sim (\forall x \in D, \exists y \in E, \text{ such that } P(x, y)) \\ \equiv \exists x \in D, \text{ such that } \forall y \in E, \sim P(x, y)
+$$
+
+$$
+\sim (\exists x \in D, \text{ such that } \forall y \in E, P(x, y)) \\ \equiv \forall x \in D, \exists y \in E \text{ such that } \sim P(x, y)
+$$
+
+### Order of Quantifiers
+
+In a statement containing both $\exists$ and $\forall$, changing the order of the quantifiers can significantly change the meaning of the statement. Interestingly, however, if one quantifier immediately follows another quantifier of the same type, then the order of the quantifiers does not affect the meaning.
+
+### Formal Logical Notation
+
+In some areas of computer science, logical statements are expressed in purely symbolic notation. The notation involves using predicates to describe all properties of variables and omitting the words such that in existential statements.
+
+$$
+\forall x \in D, P(x) \leftrightarrow \forall x (x \in D \rightarrow P(x))
+$$
+
+$$
+\exists x \in D \text{ such that } P(x) \leftrightarrow \exists x (x \in D \wedge P(x))
+$$
+
+The disadvantage of the fully formal notation is that because it is complex and somewhat remote from intuitive understanding. The advantage, however, is that operations, such as taking negations, can be made completely mechanical and programmed on a computer.
+
+Taken together, the symbols for quantifiers, variables, predicates, and logical connectives make up what is known as the **language of first-order logic**.
+
+## Arguments with Quantified Statements
+
+> [!TIP] **Universal Instantiation**
+>
+> If a property is true of everything in a set, then it is true of any particular thing in the set.
+
+### Universal Modus Ponens
+
+The rule of universal instantiation can be combined with modus ponens to obtain the valid form of argument called universal modus ponens.
+
+$$
+\forall x, \text{ if } P(x) \text{ then } Q(x)
+$$
+
+$$
+P(a) \text{ for a particular } a
+$$
+
+$$
+\therefore Q(a)
+$$
+
+### Universal Modus Tollens
+
+Another crucially important rule of inference is universal modus tollens. Its validity results from combining universal instantiation with modus tollens. Universal modus tollens is the heart of proof of contradiction.
+
+$$
+\forall x, \text{ if } P(x) \text{ then } Q(x)
+$$
+
+$$
+\sim Q(a) \text{ for a particular } a
+$$
+
+$$
+\therefore \sim P(a)
+$$
+
+### Proving Validity of Arguments with Quantified Statements
+
+> [!TIP] **Valid Argument**
+>
+> To say that an argument form is **valid** means the following: No matter what particular predicates are substituted for the predicate symbols in its premises, if the resulting premise statements are all true, then the conclusion is also true. An argument is called **valid** if, and only if, its form is valid.
+
+> [!TIP] **Sound Argument**
+>
+> It is called sound if, and only if, its form is valid and its premises are true.
+
+### Converse Error
+
+$$
+\forall x, \text{ if } P(x) \text{ then } Q(x)
+$$
+
+$$
+Q(a) \text{ for a particular } a
+$$
+
+$$
+\therefore P(a)
+$$
+
+It would be valid if the major premise were replaced by its converse. But since a universal conditional statement is not logically equivalent to its converse, such a replacement cannot, in general, be made. We say that this argument exhibits the **converse error**.
+
+### Inverse Error
+
+The following form of argument would be valid if a conditional statement were logically equivalent to its inverse. But it is not, and the argument form is invalid. We say that it exhibits the **inverse error**.
+
+$$
+\forall x, \text{ if } P(x) \text{ then } Q(x)
+$$
+
+$$
+\sim P(a) \text{ for a particular } a
+$$
+
+$$
+\therefore \sim Q(a)
+$$
+
+### Creating Additional Forms of Argument
+
+Universal modus ponens and modus tollens were obtained by combining universal instantiation with modus ponens and modus tollens. In the same way, additional forms of arguments involving universally quantified statements can be obtained by combining universal instantiation with other of the valid argument forms.
+
+> [!NOTE] **Universa Transitivity**
+>
+> $$\forall x, P(x) \rightarrow Q(x)$$
+>
+> $$\forall x, Q(x) \rightarrow R(x)$$
+>
+> $$\therefore \forall x, P(x) \rightarrow R(x)$$
+
+### Remark on the Converse and Inverse Errors
+
+A variation of the converse error is a very useful reasoning tool, provided that it is used with caution. It is the type of reasoning that is used by doctors to make medical diagnoses and by auto mechanics to repair cars. It is the type of reasoning used to generate explanations for phenomena. It goes like this:
+
+If a statement of the form
+
+$$
+\forall x, P(x) \rightarrow Q(x)
+$$
+
+is true and if
+
+$$
+Q(a) \text{ is true, for a particular } a
+$$
+
+then check out the statement $P(a)$, it just might be true.
+
+This form of reasoning has been named **abduction** by researchers working in artificial intelligence.
