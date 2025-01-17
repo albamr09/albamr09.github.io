@@ -456,7 +456,7 @@ $$
 \lim_{h \to 0} \sin x = \sin x
 $$
 
-and 
+and
 
 $$
 \lim_{h \to 0} \cos x = \cos x
@@ -525,17 +525,17 @@ $$
 The derivatives of the remaining trigonometric functions, $\csc$, $\sec$, and $\cot$, can also be found easily using the [Quotient Rule](#the-quotient-rule). We collect all the differentiation formulas for trigonometric functions in the following table. **Remember that they are valid only when $x$ is measured in radians**.
 
 > [!NOTE] **Derivatives of Trigonometric Functions**
-> 
+>
 > $$\frac{\delta}{\delta x} \sin x = \cos x$$
-> 
+>
 > $$\frac{\delta}{\delta x} \cos x = -\sin x$$
-> 
+>
 > $$\frac{\delta}{\delta x} \tan x = \sec^2 x$$
-> 
+>
 > $$\frac{\delta}{\delta x} \csc x = -\csc x \cot x$$
-> 
+>
 > $$\frac{\delta}{\delta x} \sec x = \sec x \tan x$$
-> 
+>
 > $$\frac{\delta}{\delta x} \cot x = -\csc^2 x$$
 
 ### Two Special Trigonometric Limits
@@ -562,13 +562,13 @@ $$
 \sin \theta = |BC| < arc AB = \theta
 $$
 
-so 
+so
 
 $$
 \frac{\sin \theta}{\theta} < 1
 $$
 
-Let the tangent lines at $A$ and $B$ interset at $E$. You can see from Figure 6(b) that the circumference of a circle is smaller than the length of a circumscribed polygon, and so 
+Let the tangent lines at $A$ and $B$ interset at $E$. You can see from Figure 6(b) that the circumference of a circle is smaller than the length of a circumscribed polygon, and so
 
 $$
 arc AB < |AE| + |EB|
@@ -653,3 +653,19 @@ $$
 $$
 = -1 \cdot \left(\frac{0}{1 + 1}\right) = 0
 $$
+
+## The Chain Rule
+
+It turns out that the derivative of the composite function $f \circ g$ is the product of the derivatives of $f$ and $g$. This fact is one of the most important of the differentiation rules and is called the **Chain Rule**.
+
+If we let $y = f(u)$ and $u = g(x)$, then if $u$ changes twice as fast as $x$ and $y$ changes three times as fast as $u$, then it seems reasonable that $y$ changes six times as fast as $x$, and so we expect that $\frac{\delta y}{\delta x}$ is the product of $\frac{\delta y}{\delta u}$ and $\frac{\delta u}{\delta x}$.
+
+> [!TIP] **The Chain Rule**
+>
+> If $g$ is differentiable at $x$ and $f$ is differentiable at $g(x)$, then the composite function $F= f \circ g$ defined by $F(x) = f(g(x))$ is differentiable at $x$ and $F'$ is given by the product
+>
+> $$F'(x) = f'(g(x)) \cdot g'(x)$$
+>
+> In Leibniz notation if $y = f(u)$ and $u = g(x)$ are both differentiable functions, then
+>
+> $$\frac{\delta y}{\delta x} = \frac{\delta y}{\delta u} \frac{\delta u}{\delta x}$$
