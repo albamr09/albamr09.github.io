@@ -669,3 +669,147 @@ If we let $y = f(u)$ and $u = g(x)$, then if $u$ changes twice as fast as $x$ an
 > In Leibniz notation if $y = f(u)$ and $u = g(x)$ are both differentiable functions, then
 >
 > $$\frac{\delta y}{\delta x} = \frac{\delta y}{\delta u} \frac{\delta u}{\delta x}$$
+
+Note that in using the Chain Rule we work from the outside to the inside. We differentiate the outer function $f$ [at the inner function $g(x)$] and then we multiply by the derivative of the inner function.
+
+> [!NOTE] **The Power Rule Combined with the Chain Rule**
+>
+> If $n$ is any real number and $u = g(x)$ is differentiable, then
+>
+> $$\frac{\delta}{\delta x} (u^n) = nu^{n - 1} \frac{\delta u}{\delta x}$$
+>
+> Alternatively,
+>
+> $$\frac{\delta}{\delta x} [g(x)]^n = n[g(x)]^{n - 1}g'(x)$$
+
+The reason for the name _Chain Rule_ becomes clear when we make a longer chain by adding another link. Suppose that $y = f(u)$, $u = g(x)$, and $x = h(t)$ where $f$, $g$, and $h$ are differentiable functions. Then, to compute the derivative of $y$ with respect to $t$, we use the Chain Rule twice:
+
+$$
+\frac{\delta x}{\delta t} = \frac{\delta y}{\delta x} \frac{\delta x}{\delta t} = \frac{\delta y}{\delta u}\frac{\delta u}{\delta x}\frac{\delta x}{\delta t}
+$$
+
+### Derivatives of General Exponential Functions
+
+We can use the Chain Rule to differentiate an exponential function with any base $b > 0$. We can write
+
+$$
+b^x = \left(e^{\ln b}\right)^x = e^{(\ln b)x}
+$$
+
+and then the Chain Rule gives
+
+$$
+\frac{\delta}{\delta x} (b^x) = \frac{\delta }{\delta x} (e^{(\ln b)x})
+$$
+
+$$
+= \frac{\delta e^{(\ln b)x}}{\delta (\ln b)x} \frac{\delta (\ln b)x}{\delta x}
+$$
+
+$$
+e^{(\ln b)x} \ln b = b^x \ln b
+$$
+
+So we have the formula
+
+$$
+\frac{\delta}{\delta} (b^x) = b^x \ln b
+$$
+
+### How to Prove the Chain Rule
+
+Recall that if $y = f(x)$ and $x$ change from $a$ to $a + \Delta x$, we define the increment of $y$ as
+
+$$
+\Delta y = f(a + \Delta x) - f(a)
+$$
+
+According to the definition of a derivative we have
+
+$$
+\lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x} = f'(a)
+$$
+
+So if we denote the difference between $\frac{\Delta y}{\Delta x}$ and $f'(a)$ by $\epsilon$, we obtain
+
+$$
+\lim_{\Delta x \to 0} \epsilon = \lim_{\Delta x \to 0} \left(\frac{\Delta y}{\Delta x} - f'(a)\right)
+$$
+
+$$
+= \left(\lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x}\right) - \left(\lim_{\Delta x \to 0} f'(a)\right)= f'(a) - f'(a)
+$$
+
+But
+
+$$
+\epsilon = \frac{\Delta y}{\Delta x} - f'(a) \Rightarrow \Delta y = f'(a)\Delta x + \epsilon \Delta x
+$$
+
+If we define $\epsilon$ to be $0$, when $\Delta x = 0$, then $\epsilon$ becomes a continuous funcion of $\Delta x$ because, as we have seen before
+
+$$
+\lim_{\Delta x \to 0} \epsilon = 0 = \epsilon
+$$
+
+Therefore, by [the definition of a continuous function](../02_limits#continuity-of-a-function) we can say that $\epsilon$ is continuous. Thus for a differentiable function $f$, we can write
+
+$$
+\Delta y = f'(a)\Delta x + \epsilon \Delta x
+$$
+
+where $\epsilon \to 0$ as $\Delta x \to 0$. And $\epsilon$ is a continuous function of $\Delta x$. This property of differentiable functions is what enables us to prove the Chain Rule.
+
+**PROOF OF THE CHAIN RULE** Suppose $u = g(x)$ is differentiable at $a$ and $y = f(u)$ is differentiable at $b = g(a)$. If $\Delta x$ is an increment in $x$ and $\Delta u$ and $\Delta y$ are the corresponding increments in $u$ and $y$, we previously defined a generic $\Delta y$ as
+
+$$
+\Delta y = f'(a)\Delta x + \epsilon \Delta x
+$$
+
+So we can write
+
+$$
+\Delta u = g'(a) \Delta x + \epsilon_1 \Delta x = [g'(a) + \epsilon_1] \Delta x
+$$
+
+where $\epsilon_1 \to 0$ as $\Delta x \to 0$. Similarly
+
+$$
+\Delta y = f'(b) \Delta u + \epsilon_2 \Delta u = [f'(b) + \epsilon_2] \Delta u
+$$
+
+where $\epsilon_2 \to 0$ as $\Delta u \to 0$.
+
+If we substitute the expression for $\Delta u$ on this last equation
+
+$$
+\Delta y = [f'(b) + \epsilon_2] \Delta u = [f'(b) + \epsilon_2] [g'(a) + \epsilon_1] \Delta x
+$$
+
+$$
+\frac{\Delta y}{\Delta x} = [f'(b) + \epsilon_2] [g'(a) + \epsilon_1]
+$$
+
+We also know that $\Delta u \to 0$ as $\Delta x \to 0$ because of its defnition:
+
+$$
+\Delta u = [g'(a) + \epsilon_1] \Delta x
+$$
+
+So taking the limit as $\Delta x \to 0$, we get
+
+$$
+\frac{\delta y}{\delta x} = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x} = \lim_{\Delta x \to 0} [f'(b)+\epsilon_2][g'(a) + \epsilon_1]
+$$
+
+$$
+= \left(\lim_{\Delta x \to 0} [f'(b)+\epsilon_2]\right) \cdot \left(\lim_{\Delta x \to 0} [g'(a) + \epsilon_1]\right)
+$$
+
+By definition $\epsilon_1 \to 0$ and $\epsilon_2 \to 0$ as $\Delta x \to 0$, therefore
+
+$$
+= f'(b)g'(a) = f'(g(a))g'(a)
+$$
+
+This proves the Chain Rule.
