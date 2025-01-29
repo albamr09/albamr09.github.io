@@ -813,3 +813,43 @@ $$
 $$
 
 This proves the Chain Rule.
+
+## Implicit Differentiation
+
+Some functions are defined implicitly by a relation between x and y such as
+
+$$
+x^2 + y^2 = 25
+$$
+
+In some cases it is possible to solve such an equation for y as an explicit function (or several functions) of $x$ (See Figure 1.)
+
+$$
+y = \pm \sqrt{25 - x^2}
+$$
+
+![Implicit Functions](./assets/implicit_functions.png)
+
+Fortunately, we don’t need to solve an equation for $y$ in terms of $x$ in order to find the derivative of $y$. Instead we can use the method of **implicit differentiation**. This consists of differentiating both sides of the equation with respect to $x$ and then solving the resulting equation for $\frac{\delta y}{\delta x}$.
+
+> **EXAMPLE**
+>
+> Find $\frac{\delta y}{\delta x}$ for $x^2 + y^2 = 25$
+>
+> We start by differentiating both sides of the equation
+>
+> $$\frac{\delta}{\delta x} (x^2 + y^2) = \frac{\delta}{\delta x} 25$$
+>
+> $$\frac{\delta}{\delta x} (x^2) + \frac{\delta}{\delta x}(y^2) = 0$$
+>
+> Remembering that $y$ is a function of $x$, using the chain rule, we have
+>
+> $$\frac{\delta}{\delta x} (y^2) = \frac{\delta}{\delta y} (y^2) \frac{\delta y}{\delta x} = 2y \frac{\delta y}{\delta x}$$
+>
+> Thus
+>
+> $$2x + 2y \frac{\delta y}{\delta x} = 0$$
+>
+> Now we solve for $\frac{\delta y}{\delta x}$
+>
+> $$\frac{\delta y}{\delta x} = - \frac{x}{y}$$
