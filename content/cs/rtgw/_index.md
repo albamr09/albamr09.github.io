@@ -12,4 +12,5 @@ type: docs
 {{< card link="06" title="Colors, Depth Testing, and Alpha Blending" icon="color-swatch" >}}
 {{< card link="07" title="Textures" icon="cube-transparent" >}}
 {{< card link="08" title="Picking" icon="cursor-click" >}}
+{{< card link="09" title="Putting It All Together" icon="collection" >}}
 {{< /cards >}}
