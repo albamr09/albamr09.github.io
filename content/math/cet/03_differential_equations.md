@@ -816,13 +816,13 @@ This proves the Chain Rule.
 
 ## Implicit Differentiation
 
-Some functions are defined implicitly by a relation between x and y such as
+Some functions are defined implicitly by a relation between $x$ and $y$ such as
 
 $$
 x^2 + y^2 = 25
 $$
 
-In some cases it is possible to solve such an equation for y as an explicit function (or several functions) of $x$ (See Figure 1.)
+In some cases it is possible to solve such an equation for $y$ as an explicit function (or several functions) of $x$ (See Figure 1.)
 
 $$
 y = \pm \sqrt{25 - x^2}
