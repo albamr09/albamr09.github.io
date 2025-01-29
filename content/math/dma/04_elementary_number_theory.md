@@ -596,7 +596,7 @@ This shows that any statement that can be proved by contraposition can be proved
 > 
 > Squaring both sides of equation
 > 
-> $$2 = \frac{m^2}{n^2}
+> $$2 = \frac{m^2}{n^2}$$
 > 
 > Or, equivalently
 > 
@@ -617,3 +617,172 @@ This shows that any statement that can be proved by contraposition can be proved
 > Consequently, $n^2$ is even, and so $n$ is even. But we also know that $m$ is even. Hence both $m$ and $n$ have a common factor of $2$. But this contradicts the supposition that $m$ and $n$ have no common factors. 
 
 ### Are There Infinitely Many Prime Numbers?
+
+You know that a prime number is a positive integer that cannot be factored as a product of two smaller positive integers. Is the set of all such numbers infinite, or is there a largest prime number?
+
+> [!NOTE] For any integer $a$ and any prime number $p$, if $p | a$ then $p \mid (a + 1)$
+> 
+> Suppose not. That is, suppose there exist an integer a and $a$ prime number $p$ such that $p | a$ and $p | (a + 1)$. Then, by definition of divisibility, there exist integers $r$ and $s$ such that $a = pr$ and $a + 1= ps$. It follows that
+> 
+> $$1 = (a + 1) - a = ps - pr = p(s - r)$$
+> 
+> and so (since $s - r$ is an integer) $p | 1$. But the only integer divisors of $1$ are $1$ and $-1$, and $p > 1$ because $p$ is prime. Thus $p \leq 1$ and $p > 1$, which is a contradiction. 
+ 
+> [!NOTE] **Theorem: Infinitude of the Primes**
+> 
+> Suppose not. That is, suppose the set of prime numbers is finite. Then some prime number $p$ is the largest of all the prime numbers, and hence we can list the prime numbers in ascending order:
+> 
+> $$2, 3, 5, 7, \cdots, p$$
+> 
+> Let $N$ be tthe product of all the prime number plus $1$:
+> 
+> $$N = (2 \cdot 3 \cdot 5 \cdot 7 \cdots p) + 1$$
+> 
+> Then $N > 1$, and so $N$ is divisible by some prime number $q$. Because $q$ is prime, $q$ must equal one of the prime numbers $\2, 3, 5, 7, \cdots , p$. Thus, by definition of divisibility, $q$ divides $2 \cdot 3 \cdot 5 \cdot 7 \cdots p$, and so $q$ does not divide $(2 \cdot 3 \cdot 5 \cdot 7 \cdots p)$, which equals $N$. Hence $N$ is divisible by $q$ and $N$ is not divisible by $q$, and we have reached a contradiction.
+
+### When to Use Indirect Proof
+
+We have not provided a definitive answer to the question of when to prove a statement directly and when to prove it indirectly. Usually, however, when both types of proof are possible, indirect proof is clumsier than direct proof. In the absence of obvious clues suggesting indirect argument, try first to prove a statement directly.
+
+## Application: Then Handshake Theorem
+
+> [!TIP] **Degree of a Graph**
+> 
+> The total degree of a graph is the sum of the degrees of all the vertices of the graph.
+
+The handshake analogy is such an attractive way to understand the graph theory result that the theorem describing it is known as the handshake theorem.
+
+> [!NOTE] **The Handshake Theorem**
+> 
+> If $G$ is any graph, then the sum of the degrees of all the vertices of $G$ equals twice the number of edges of $G$. Specifically, if the vertices of $G$ are $v_1, v_2, \cdots, n_n$, where $n$ is a nonnegative integer, then
+> 
+> the total degree of $G = \text{deg}(v_1) + \text{deg}(v_2) + \cdots + \text{deg}(v_n)$
+> 
+> $$= 2 \cdot (\text{ the number of edges of } G)$$
+> 
+
+**PROOF**
+
+Let $G$ be a particular but arbitrarily chosen graph, and suppose that $G$ has $n$ vertices $v_1, v_2, \cdots, v_n$ and $m$ edges, where $n$ is a positive integer and $m$ is a nonnegative integer. We claim that each edge of $G$ contributes $2$ to the total degree of $G$. 
+
+For suppose $e$ is an arbitrarily chosen edge with endpoints $v_i$ and $v_j$. This edge contributes $1$ to the degree of $v_i$ and $1$ to the degree of $v_j$. As shown below, this is true even if $i = j$, because an edge that is a loop is counted twice in computing the degree of the vertex on which it is incident.
+
+![Handshake Theorem](./assets/handshake_theorem.png)
+
+Therefore, $e$ contributes $2$ to the total degree of $G$. Since $e$ was arbitrarily chosen, this shows that each edge of $G$ contributes $2$ to the total degree of $G$. Thus
+
+$$
+\text{ the total degree of } G = 2 \cdot (\text{ the number of edges of } G)
+$$
+
+The following corollary follows immediately from the handshake theorem.
+
+> [!NOTE] **Total Degree of a Graph**
+> 
+> The total degree of a graph is even.
+
+**PROOF**
+
+By the Handshake Theorem the total degree of $G$ equals $2$ times the number of edges of $G$, which is an integer, and so the total degree of $G$ is even.
+
+> [!NOTE] **Number of Vertices of Odd Dregree**
+> 
+> In any graph there is an even number of vertices of odd degree.
+
+**PROOF**
+
+Suppose $G$ is any graph, and suppose $G$ has $n$ vertices of odd degree and $m$ vertices of even degree, where $n$ is a positive integer and $m$ is a nonnegative integer. Let $E$ be the sum of the degrees of all the vertices of even degree, $O$ the sum of the degrees of all the vertices of odd degree, and $T$ the total degree of $G$. If $u_1, u_2, \cdots, u_m$ are the vertices of even degree and $v_1, v_2, \cdots, v_n$ are the vertices of odd degree, then
+
+$$
+E = \text{deg}(u_1) + \text{deg}(u_2) + \cdots + \text{deg}(u_m)
+$$
+
+$$
+O = \text{deg}(v_1) + \text{deg}(v_2) + \cdots + \text{deg}(v_n)
+$$
+
+$$
+T = \text{deg}(u_1) + \text{deg}(u_2) + \cdots + \text{deg}(u_m) + \text{deg}(v_1) + \text{deg}(v_2) + \cdots + \text{deg}(v_n) = E + O
+$$
+
+Now $T$, the total degree of $G$, is an even integer. Also $E$ is even since either $E$ is zero, which is even, or $E$ is a sum of even numbers. Now since
+
+$$
+T = E + O
+$$
+
+then
+
+$$
+O = T - E
+$$
+
+Hence $O$ is a difference of two even integers, and so $O$ is even.
+
+By assumption, $\text{deg}(v_i)$ is odd for every integer $i = 1, 2, \cdots, n$. Thus $O$, an even integer, is a sum of the $n$ odd integers $\text{deg}(v_1), \text{deg}(v_2), \cdots, \text{deg}(v_n)$. But if a sum of $n$ odd integers is even, then $n$ is even. Therefore, $n$ is even.
+
+### Special Graphs
+
+One important class of graphs consists of those that do not have any loops or parallel edges.
+
+> [!TIP] **Simple Graph**
+> 
+> A **simple graph** is a graph that does not have any loops or parallel edges. In a simple graph, an edge with endpoints $v$ and $w$ is denoted $\{v, w\}$.
+
+Another important class of graphs consists of those that are "complete" in the sense that each vertex in the graph is connected by exactly one edge to each other vertex in the graph.
+
+> [!TIP] **Complete Graph**
+> 
+> Let $n$ be a positive integer. A **complete graph on $n$ vertices**, denoted $K_n$, is a simple graph with $n$ vertices and exactly one edge connecting each pair of distinct vertices.
+
+![Complete Graphs](./assets/complete_graphs.png)
+
+In another class of graphs, called complete bipartite graphs, the vertex set can be separated into two subsets so that each vertex in one of the subsets is connected by exactly one edge to each vertex in the other subset but no vertex is connected by an edge to any other vertex in its own subset.
+
+> [!TIP] **Complete Bipartite Graph**
+> 
+> Let $m$ and $n$ be positive integers. A complete bipartite graph on $(m, n)$ vertices, denoted $K_{m, n}$ is a simple graph whose vertices are divided into two distinct subsets, $V$ with $m$ vertices and $W$ with $n$ vertices, in such a way that
+> 
+> 1. every vertex of $K_{m, n}$ belongs to one of $V$ or $W$, but no vertex belongs to both $V$ and $W$;
+> 2. there is exactly one edge from each vertex of $V$ to each vertex of $W$;
+> 3. there is no edge from any one vertex of $V$ to any other vertex of $V$;
+> 4. there is no edge from any one vertex of $W$ to any other vertex of $W$.
+
+![Complete Bipartite Graphs](./assets/complete_bipartite_graphs.png)
+
+## Application: Algorithms
+
+### The Division Algorithm
+
+For an integer $a$ and a positive integer $d$, the quotient-remainder theorem guarantees the existence of integers $q$ and $r$ such that
+
+$$
+a = dq + r, 0 \leq r < d
+$$
+
+> [!NOTE] **Division Algorithm**
+> 
+> [Given a nonnegative integer $a$ and a positive integer $d$, the aim of the algorithm is to find integers $q$ and $r$ that satisfy the conditions $a = dq + r$ and $0 \leq r < d$. This is done by subtracting $d$ repeatedly from a until the result is less than $d$ but is still nonnegative. 
+> 
+> $$0 \leq a - d - d - \cdots - d = a - dq < d$$
+> 
+> The total number of $d$ that are subtracted is the quotient $q$. The quantity $a - dq$ equals the remainder $r$.]
+> 
+> **Input**: $a$ [nonnegative integer], $d$ [positive integer]
+> 
+> **Algorithm Body**:
+> 
+> ```
+> r := a
+> q := 0
+> while r ≥ d
+>     r := r - d
+>     q := q + 1
+> end while
+> ```
+> 
+> **Output**: $q, r$ [nonnegative integers]
+
+### The Euclidean Algorithm
+
+The greatest common divisor of two integers $a$ and $b$ is the largest integer that divides both $a$ and $b$. 
