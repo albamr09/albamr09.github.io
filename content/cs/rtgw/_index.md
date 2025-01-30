@@ -13,4 +13,5 @@ type: docs
 {{< card link="07" title="Textures" icon="cube-transparent" >}}
 {{< card link="08" title="Picking" icon="cursor-click" >}}
 {{< card link="09" title="Putting It All Together" icon="collection" >}}
+{{< card link="10" title="Advanced Techniques" icon="trending-up" >}}
 {{< /cards >}}
