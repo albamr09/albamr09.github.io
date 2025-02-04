@@ -290,7 +290,49 @@ The geometrical significance of this fact is that the slope of a tangent line to
 >
 > $$\frac{d}{dx}[f(x)g(x)] = f(x)\frac{d}{dx}[g(x)] + g(x) \frac{d}{dx}[f(x)]$$
 
-**PROOF** We start by assuming that \(u = f(x)\) and \(v = g(x)\) are both positive differentiable functions. Then we can interpret the product \(uv\) as an area of a rectangle (see Figure 1).
+**PROOF 1**
+
+By [the definition of a derivative](../02_limits#derivatives) the derivative of any function $f$ is given by:
+
+$$
+\frac{\delta}{\delta x} f(x) = \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}
+$$
+
+Given two functions $f$ and $g$, we use the definition of the derivative for the product function $F = (f \cdot g)$:
+
+$$
+= \frac{\delta}{\delta x} F(x) = \lim_{\Delta x \to 0} \frac{F(x + \Delta x) - F(x)}{\Delta x}
+$$
+
+$$
+= \lim_{\Delta x \to 0} \frac{f(x + \Delta x)g(x + \Delta x) - f(x)g(x)}{\Delta x}
+$$
+
+We sum and substract $f(x + \Delta x)g(x)$
+
+$$
+= \lim_{\Delta x \to 0} [\frac{f(x + \Delta x)g(x + \Delta x) - f(x + \Delta x)g(x)] + [f(x + \Delta x)g(x) - f(x)g(x)]}{\Delta x}
+$$
+
+$$
+= \lim_{\Delta x \to 0} \left[\frac{f(x + \Delta x)g(x + \Delta x) - f(x + \Delta x)g(x)}{\Delta x}\right] + \left[\frac{f(x + \Delta x)g(x) - f(x)g(x)}{\Delta x}\right]
+$$
+
+$$
+= \lim_{\Delta x \to 0} \left[f(x + \Delta x)\frac{g(x + \Delta x) - g(x)}{\Delta x}\right] + \lim_{\Delta x \to 0}\left[g(x)\frac{f(x + \Delta x) - f(x)}{\Delta x}\right]
+$$
+
+$$
+= \left[\lim_{\Delta x \to 0}f(x + \Delta x) \lim_{\Delta x \to 0} \frac{g(x + \Delta x) - g(x)}{\Delta x}\right] + \left[\lim_{\Delta x \to 0} g(x) \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}\right]
+$$
+
+Given $\lim_{\Delta x \to 0} f(x + \Delta x) = f(x)$, then
+
+$$
+= f(x) \frac{\delta g(x)}{\delta x} + g(x) \frac{\delta f(x)}{\delta x}
+$$
+
+**PROOF 2** We start by assuming that \(u = f(x)\) and \(v = g(x)\) are both positive differentiable functions. Then we can interpret the product \(uv\) as an area of a rectangle (see Figure 1).
 
 ![Geometry of the Product Rule](./assets/geometry_of_product_rule.png)
 
@@ -358,7 +400,55 @@ Although we started by assuming (for the geometric interpretation) that all the 
 >
 > $$\frac{d}{dx}\left[\frac{f(x)}{g(x)}\right] = \frac{g(x)\frac{d}{dx}[f(x)] - f(x) \frac{d}{dx}[g(x)]}{[g(x)]^2}$$
 
-**PROOF** If $x$, $u$, and $v$ change by amounts $\Delta x$, $\Delta u$ and $\Delta v$, the corresponding change in the quotient $\frac{u}{v}$ is
+**PROOF 1**
+
+Given the quotient function $F = \frac{f}{g}$, then by [the definition of a derivative](../02_limits#derivatives)
+
+$$
+\frac{\delta F(x)}{\delta x} = \lim_{\Delta x \to 0} \frac{F(x + \Delta x) - F(x)}{\Delta x}
+$$
+
+$$
+= \lim_{\Delta x \to 0} \frac{\frac{f(x + \Delta x)}{g(x + \Delta x)} - \frac{f(x)}{g(x)}}{\Delta x}
+$$
+
+$$
+= \lim_{\Delta x \to 0} \frac{\frac{g(x)f(x + \Delta x) - f(x)g(x + \Delta x)}{g(x) \cdot g(x + \Delta x)}}{\Delta x}
+$$
+
+$$
+= \lim_{\Delta x \to 0} \frac{g(x)f(x + \Delta x) - f(x)g(x + \Delta x)}{\Delta x \cdot g(x) \cdot g(x + \Delta x)}
+$$
+
+We sum and substract $f(x)g(x)$ on the numerator
+
+$$
+= \lim_{\Delta x \to 0} \frac{[g(x)f(x + \Delta x) - f(x)g(x)] + [f(x)g(x) - f(x)g(x + \Delta x)]}{\Delta x \cdot g(x) \cdot g(x + \Delta x)}
+$$
+
+$$
+= \lim_{\Delta x \to 0} \frac{g(x)[f(x + \Delta x) - f(x)] + f(x)[g(x) - g(x + \Delta x)]}{\Delta x \cdot g(x) \cdot g(x + \Delta x)}
+$$
+
+$$
+= \lim_{\Delta x \to 0} \frac{g(x)[f(x + \Delta x) - f(x)] - f(x)[g(x + \Delta x) - g(x)]}{\Delta x \cdot g(x) \cdot g(x + \Delta x)}
+$$
+
+$$
+= \frac{\lim_{\Delta x \to 0} \frac{g(x)[f(x + \Delta x) - f(x)]}{\Delta x} - \lim_{\Delta x \to 0}\frac{f(x)[g(x + \Delta x) - g(x)]}{\Delta x}}{\lim_{\Delta x \to 0} g(x) \cdot g(x + \Delta x)}
+$$
+
+$$
+= \frac{g(x)\lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x} - f(x)\lim_{\Delta x \to 0}\frac{g(x + \Delta x) - g(x)}{\Delta x}}{\lim_{\Delta x \to 0} g(x) \cdot g(x + \Delta x)}
+$$
+
+Given $\lim_{\Delta x \to 0} g(x + \Delta x) = 0$
+
+$$
+= \frac{g(x) \frac{\delta f(x)}{\delta x} - f(x)\frac{\delta g(x)}{\delta x}}{(g(x))^2}
+$$
+
+**PROOF 2** If $x$, $u$, and $v$ change by amounts $\Delta x$, $\Delta u$ and $\Delta v$, the corresponding change in the quotient $\frac{u}{v}$ is
 
 $$
 \Delta \left(\frac{u + \Delta u}{v + \Delta v}\right) - \frac{u}{v} =
