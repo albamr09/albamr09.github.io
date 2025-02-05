@@ -986,7 +986,7 @@ This proves the Chain Rule.
 
 ## Implicit Differentiation
 
-Some functions are defined implicitly by a relation between $x$ and $y$ such as
+Some functions are defined implicitly by a relation between $x$ and $y$, where it is not easy to define the function as dependent only on $x$. For example:
 
 $$
 x^2 + y^2 = 25
@@ -1000,7 +1000,72 @@ $$
 
 ![Implicit Functions](./assets/implicit_functions.png)
 
-Fortunately, we don’t need to solve an equation for $y$ in terms of $x$ in order to find the derivative of $y$. Instead we can use the method of **implicit differentiation**. This consists of differentiating both sides of the equation with respect to $x$ and then solving the resulting equation for $\frac{\delta y}{\delta x}$.
+Fortunately, we don't need to solve an equation for $y$ in terms of $x$ in order to find the derivative of $y$. Instead we can use the method of **implicit differentiation**. This consists of 
+
+1. Differentiating both sides of the equation with respect to $x$ 
+2. Solving the resulting equation for $\frac{\delta y}{\delta x}$.
+
+### Preservation of Equality
+
+When we define a function implicitly we are stating that both sides of the equation are always equal. But how do we know that when we differentiate both sides this equality is maintained?. 
+
+Geometrically, you can imagine the two sides of the equation as two functions that always overlap. Therefore we could argue that the derivatives of functions that are equivalent must be equal.
+
+We could also prove it using limits, let's say we have an implicit function as follows:
+
+$$
+F(x, y) = G(x, y)
+$$
+
+where both $F$ and $G$ are functions dependent on $x$ and $y$. We must show that:
+
+$$
+\frac{\delta}{\delta x} F(x) = \frac{\delta}{\delta x} G(x)
+$$
+
+The derivatives for both functions are defined as:
+
+$$
+\frac{\delta}{\delta x} F(x, y) = \lim_{\Delta x \to 0} \frac{F(x + \Delta x, y + \Delta y) - F(x, y)}{\Delta x}
+$$
+
+$$
+\frac{\delta}{\delta x} G(x, y) = \lim_{\Delta x \to 0} \frac{G(x + \Delta x, y + \Delta y) - G(x, y)}{\Delta x}
+$$
+
+Note that for a change on $x$ given by $\Delta x$ we assume an implicit change on $y$ given by $\Delta y$. That is $\Delta y$ is the change on $y$ that happens because $y$ depends on $x$.
+
+Given $F(x, y) = G(x, y)$ for all $x$, then for any change $\Delta x$ it follows:
+
+$$
+F(x + \Delta x, y + \Delta y) = G(x + \Delta x, y + \Delta y)
+$$
+
+If we substract $F(x, y) = G(x, y)$ on both sides
+
+$$
+F(x + \Delta x, y + \Delta y) - F(x, y)= G(x + \Delta x, y + \Delta y) - G(x, y)
+$$
+
+And now we divide both sides by $\Delta x$
+
+$$
+\frac{F(x + \Delta x, y + \Delta y) - F(x, y)}{\Delta x}= \frac{G(x + \Delta x, y + \Delta y) - G(x, y)}{\Delta x}
+$$
+
+Therefore, if we take the limit
+
+$$
+\lim_{\Delta x \to 0} \frac{F(x + \Delta x, y + \Delta y) - F(x, y)}{\Delta x} = \lim_{\Delta x \to 0}\frac{G(x + \Delta x, y + \Delta y) - G(x, y)}{\Delta x}
+$$
+
+Which therefore proves:
+
+$$
+\frac{\delta}{\delta x} F(x, y) = \frac{\delta}{\delta x} G(x, y)
+$$
+
+### Example of Implicit Derivation
 
 > **EXAMPLE**
 >
