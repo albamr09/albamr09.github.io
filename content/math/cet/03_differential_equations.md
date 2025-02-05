@@ -290,7 +290,7 @@ The geometrical significance of this fact is that the slope of a tangent line to
 >
 > $$\frac{d}{dx}[f(x)g(x)] = f(x)\frac{d}{dx}[g(x)] + g(x) \frac{d}{dx}[f(x)]$$
 
-**PROOF 1**
+#### The Product Rule's Proof 1
 
 By [the definition of a derivative](../02_limits#derivatives) the derivative of any function $f$ is given by:
 
@@ -301,7 +301,7 @@ $$
 Given two functions $f$ and $g$, we use the definition of the derivative for the product function $F = (f \cdot g)$:
 
 $$
-= \frac{\delta}{\delta x} F(x) = \lim_{\Delta x \to 0} \frac{F(x + \Delta x) - F(x)}{\Delta x}
+\frac{\delta}{\delta x} F(x) = \lim_{\Delta x \to 0} \frac{F(x + \Delta x) - F(x)}{\Delta x}
 $$
 
 $$
@@ -332,7 +332,9 @@ $$
 = f(x) \frac{\delta g(x)}{\delta x} + g(x) \frac{\delta f(x)}{\delta x}
 $$
 
-**PROOF 2** We start by assuming that \(u = f(x)\) and \(v = g(x)\) are both positive differentiable functions. Then we can interpret the product \(uv\) as an area of a rectangle (see Figure 1).
+#### The Product Rule's Proof 2
+
+We start by assuming that \(u = f(x)\) and \(v = g(x)\) are both positive differentiable functions. Then we can interpret the product \(uv\) as an area of a rectangle (see Figure 1).
 
 ![Geometry of the Product Rule](./assets/geometry_of_product_rule.png)
 
@@ -400,7 +402,7 @@ Although we started by assuming (for the geometric interpretation) that all the 
 >
 > $$\frac{d}{dx}\left[\frac{f(x)}{g(x)}\right] = \frac{g(x)\frac{d}{dx}[f(x)] - f(x) \frac{d}{dx}[g(x)]}{[g(x)]^2}$$
 
-**PROOF 1**
+#### The Quotient Rule's Proof 1
 
 Given the quotient function $F = \frac{f}{g}$, then by [the definition of a derivative](../02_limits#derivatives)
 
@@ -448,7 +450,9 @@ $$
 = \frac{g(x) \frac{\delta f(x)}{\delta x} - f(x)\frac{\delta g(x)}{\delta x}}{(g(x))^2}
 $$
 
-**PROOF 2** If $x$, $u$, and $v$ change by amounts $\Delta x$, $\Delta u$ and $\Delta v$, the corresponding change in the quotient $\frac{u}{v}$ is
+#### The Quotient Rule's Proof 2
+
+If $x$, $u$, and $v$ change by amounts $\Delta x$, $\Delta u$ and $\Delta v$, the corresponding change in the quotient $\frac{u}{v}$ is
 
 $$
 \Delta \left(\frac{u + \Delta u}{v + \Delta v}\right) - \frac{u}{v} =
@@ -636,7 +640,9 @@ $$
 \lim_{\theta \to 0} \frac{\sin \theta}{\theta} = 1
 $$
 
-**PROOF** Asumme first that $\theta$ lies between $0$ and $\frac{\pi}{2}$ (See Figure 6). By the definition of a [radian measure](../../agaa/08_trigonometry/#radian-measure), we have $s = arc AB = \theta$. Also $|BC| = |OB| \sin \theta = \sin \theta$.
+#### Proof for the first fundamental limit 
+
+Asumme first that $\theta$ lies between $0$ and $\frac{\pi}{2}$ (See Figure 6). By the definition of a [radian measure](../../agaa/08_trigonometry/#radian-measure), we have $s = arc AB = \theta$. Also $|BC| = |OB| \sin \theta = \sin \theta$.
 
 ![Radian Measure](./assets/radian_measure.png)
 
@@ -646,7 +652,7 @@ $$
 |BC| < |AB| < arc AB
 $$
 
-Therefore
+[By definition](../../agaa/08_trigonometry#trigonometric-functions) we know that $\sin \theta = \frac{|BC|}{1} = |BC|$, therefore:
 
 $$
 \sin \theta = |BC| < arc AB = \theta
@@ -673,32 +679,46 @@ $$
 From the diagram $|EB| < |ED|$, as $ED$ is the hypothenuse of $BDE$.
 
 $$
-< |AE| + |ED|
+< |AE| + |ED| = |AD|
 $$
 
-From the definition of [the tangent function](../../agaa/08_trigonometry/#trigonometric-functions)
+Also, from the definition of [the tangent function](../../agaa/08_trigonometry/#trigonometric-functions)
 
 $$
-|AD| = |OA| \tan \theta
-$$
-
-$$
-= \tan \theta
+|AD| = |OA| \tan \theta = 1 \tan \theta = \tan \theta
 $$
 
 Therefore we have
 
 $$
-\theta < \frac{\sin \theta}{\cos \theta}
+\theta < |AD| = \tan \theta = \frac{\sin \theta}{\cos \theta}
 $$
 
-so because we know $\frac{\sin \theta}{\theta} < 1$
+Which we can rewrite as
+
+$$
+\cos \theta < \frac{\sin \theta}{\theta}
+$$
+
+so because we also know that $\frac{\sin \theta}{\theta} < 1$, then
 
 $$
 \cos \theta < \frac{\sin \theta}{\theta} < 1
 $$
 
-We know that $\lim_{\theta \to 0} 1 = 1$ and $\lim_{\theta \to 0} \cos \theta = 1$, so by [the Squeeze Theorem](../02_limits/#the-squeeze-theorem)
+We know that 
+
+$$
+\lim_{\theta \to 0} 1 = 1
+$$
+
+and 
+
+$$
+\lim_{\theta \to 0} \cos \theta = 1
+$$
+
+so by [the Squeeze Theorem](../02_limits/#the-squeeze-theorem)
 
 $$
 \lim_{\theta \to 0^+} \frac{\sin \theta}{\theta} = 1, 0 < \theta < \frac{\pi}{2}
@@ -710,13 +730,15 @@ $$
 \lim_{\theta \to 0} \frac{\sin \theta}{\theta} = 1
 $$
 
+#### Proof for the second fundamental limit
+
 The following special limit involves cosine.
 
 $$
 \lim_{\theta \to 0} \frac{\cos \theta - 1}{\theta} = 0
 $$
 
-**PROOF** We multiply numerator and denominator by $\cos \theta + 1$
+We multiply numerator and denominator by $\cos \theta + 1$
 
 $$
 \lim_{\theta \to 0} \frac{\cos \theta - 1}{\theta} = \lim \left(\frac{\cos \theta - 1}{\theta} \cdot \frac{\cos \theta + 1}{\cos \theta + 1}\right)
@@ -850,7 +872,65 @@ $$
 
 where $\epsilon \to 0$ as $\Delta x \to 0$. And $\epsilon$ is a continuous function of $\Delta x$. This property of differentiable functions is what enables us to prove the Chain Rule.
 
-**PROOF OF THE CHAIN RULE** Suppose $u = g(x)$ is differentiable at $a$ and $y = f(u)$ is differentiable at $b = g(a)$. If $\Delta x$ is an increment in $x$ and $\Delta u$ and $\Delta y$ are the corresponding increments in $u$ and $y$, we previously defined a generic $\Delta y$ as
+#### Chain Rule's Proof 1
+
+Given the composite function
+
+$$
+y = f(g(x))
+$$
+
+By [the definition of a derivative](../02_limits#derivatives)
+
+$$
+\frac{\delta y}{\delta x} = \lim_{\Delta x \to 0} \frac{f(g(x + \Delta x)) - f(g(x))}{\Delta x}
+$$
+
+Let's define the increment on $u$ as
+
+$$
+\Delta u = g(x + \Delta x) - g(x)
+$$
+
+Given $g$ is differentiable, when $\Delta x \to 0$, then $\Delta u \to 0$. We rewrite the derivative as
+
+$$
+= \lim_{\Delta x \to 0} \frac{f(g(x + \Delta x)) - f(g(x))}{\Delta u} \frac{\Delta u}{\Delta x}
+$$
+
+$$
+= \left(\lim_{\Delta x \to 0} \frac{f(g(x + \Delta x)) - f(g(x))}{\Delta u}\right) \left(\lim_{\Delta x \to 0} \frac{\Delta u}{\Delta x} \right)
+$$
+
+The first term is the derivative of $f$ with respecto to $u$ and the second term is the derivative of $u$ with respect to $x$. Given
+
+$$
+u = g(x)
+$$
+
+and
+
+$$
+\Delta u = g(x + \Delta x) - g(x) \Leftrightarrow  g(x + \Delta x) = g(x) + \Delta u = u + \Delta u
+$$
+
+Then
+
+$$
+= \left(\lim_{\Delta x \to 0} \frac{f(u + \Delta u) - f(u)}{\Delta u}\right) \left(\lim_{\Delta x \to 0} \frac{g(x + \Delta x) - g(x)}{\Delta x} \right)
+$$
+
+$$
+= \frac{\delta f(u)}{\delta u} \frac{\delta g(x)}{\delta x}
+$$
+
+$$
+= \frac{\delta f(g(x))}{\delta g(x)} \frac{\delta g(x)}{\delta x}
+$$
+
+#### Chain Rule's Proof 2
+
+Suppose $u = g(x)$ is differentiable at $a$ and $y = f(u)$ is differentiable at $b = g(a)$. If $\Delta x$ is an increment in $x$ and $\Delta u$ and $\Delta y$ are the corresponding increments in $u$ and $y$, we previously defined a generic $\Delta y$ as
 
 $$
 \Delta y = f'(a)\Delta x + \epsilon \Delta x
