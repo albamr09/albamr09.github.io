@@ -640,9 +640,19 @@ $$
 \lim_{\theta \to 0} \frac{\sin \theta}{\theta} = 1
 $$
 
-#### Proof for the first fundamental limit 
+#### Proof for the first fundamental limit
 
-Asumme first that $\theta$ lies between $0$ and $\frac{\pi}{2}$ (See Figure 6). By the definition of a [radian measure](../../agaa/08_trigonometry/#radian-measure), we have $s = arc AB = \theta$. Also $|BC| = |OB| \sin \theta = \sin \theta$.
+Given a unit circle, asumme first that $\theta$ lies between $0$ and $\frac{\pi}{2}$ (See Figure 6). By the definition of a [radian measure](../../agaa/08_trigonometry/#radian-measure)
+
+$$
+s = arc AB = \theta
+$$
+
+Also
+
+$$
+|BC| = |OB| \sin \theta = \sin \theta
+$$
 
 ![Radian Measure](./assets/radian_measure.png)
 
@@ -706,13 +716,13 @@ $$
 \cos \theta < \frac{\sin \theta}{\theta} < 1
 $$
 
-We know that 
+We know that
 
 $$
 \lim_{\theta \to 0} 1 = 1
 $$
 
-and 
+and
 
 $$
 \lim_{\theta \to 0} \cos \theta = 1
@@ -1000,14 +1010,14 @@ $$
 
 ![Implicit Functions](./assets/implicit_functions.png)
 
-Fortunately, we don't need to solve an equation for $y$ in terms of $x$ in order to find the derivative of $y$. Instead we can use the method of **implicit differentiation**. This consists of 
+Fortunately, we don't need to solve an equation for $y$ in terms of $x$ in order to find the derivative of $y$. Instead we can use the method of **implicit differentiation**. This consists of
 
-1. Differentiating both sides of the equation with respect to $x$ 
+1. Differentiating both sides of the equation with respect to $x$
 2. Solving the resulting equation for $\frac{\delta y}{\delta x}$.
 
 ### Preservation of Equality
 
-When we define a function implicitly we are stating that both sides of the equation are always equal. But how do we know that when we differentiate both sides this equality is maintained?. 
+When we define a function implicitly we are stating that both sides of the equation are always equal. But how do we know that when we differentiate both sides this equality is maintained?.
 
 Geometrically, you can imagine the two sides of the equation as two functions that always overlap. Therefore we could argue that the derivatives of functions that are equivalent must be equal.
 
@@ -1088,3 +1098,105 @@ $$
 > Now we solve for $\frac{\delta y}{\delta x}$
 >
 > $$\frac{\delta y}{\delta x} = - \frac{x}{y}$$
+
+## Derivatives of Logarithmic and Inverse Trigonometric Functions
+
+### Derivatives of Logarithmic Functions
+
+If $f$ is a one-to-one differentiable function, then its inverse function $f^{-1}$ is also differentiable. Note that if $f$ has a horizontal tangent at a point, then $f^{-1}$ has a vertical tangent at the corresponding reflected point and so $f^{-1}$ is not differentiable there.
+
+We now state and prove the formula for the derivative of a logarithmic function.
+
+$$
+\frac{\delta}{\delta x} (\log_b x) = \frac{1}{x \ln b}
+$$
+
+### Proof for the Derivative of a Logarithmic Function
+
+Let $y = \log_b x$, then:
+
+$$
+b^y = x
+$$
+
+Differentiating this equation implicitly with respecto to $x$ we get
+
+$$
+\frac{\delta}{\delta y} b^y \frac{\delta y}{\delta x} = 1
+$$
+
+$$
+b^y \ln b \frac{\delta y}{\delta x} = 1
+$$
+
+$$
+\frac{\delta y}{\delta x} = \frac{1}{b^y \ln b} = \frac{1}{x \ln b}
+$$
+
+Now, if we let $b = e$, then $\ln e = 1$ and so:
+
+$$
+\frac{\delta}{\delta x} \ln (x) = \frac{1}{x}
+$$
+
+The simplicity of the previous derivative is one of the main reasons that natural logarithms (logarithms with base $e$) are used in calculus.
+
+In general, if we combine the derivative of $e^x$ with the [Chain Rule](#the-chain-rule), then:
+
+$$
+\frac{\delta}{\delta x} [\ln g(x)] = \frac{1}{g(x)} \frac{\delta g(x)}{\delta x}
+$$
+
+### Logarithmic Differentiation
+
+The calculation of derivatives of complicated functions involving products, quotients, or powers can often be simplified by taking logarithms. This mehod is denoted **logarithmic differentiation**.
+
+1. Take natural logarithms of both sides of an equation $y = f(x)$ and use the Laws of Logarithms to expand the expression.
+2. Differentiate implicitly with respect to $x$
+3. Solve the resulting equation for $y'$ and replace $y$ by $f(x)$.
+
+### The Number $e$ as a limit
+
+We have shown that if $f(x) = \ln x$, then $\frac{\delta f(x)}{\delta x} = \frac{1}{x}$ and $\frac{f(1)}{\delta x} = 1$. From the definition of a derivative as a limit, we have:
+
+$$
+\frac{\delta f(1)}{\delta x} = \lim_{h \to 0} \frac{f(1 + h) - f(1)}{h}
+$$
+
+$$
+= \lim_{x \to 0} \frac{f(1 + x) - f(1)}{x}
+$$
+
+$$
+= \lim_{x \to 0} \frac{\ln (1 + x) - ln(1)}{x}
+$$
+
+Given $\ln(1) = 0$
+
+$$
+= \lim_{x \to 0} \frac{1}{x} \ln (1 + x)
+$$
+
+$$
+= \lim_{x \to 0} \ln (1 + x)^{\frac{1}{x}}
+$$
+
+Because $\frac{\delta f(1)}{\delta x} = 1$, then
+
+$$
+= \lim_{x \to 0} \ln (1 + x)^{\frac{1}{x}} = 1
+$$
+
+Then
+
+$$
+e = e^1 = e^{\lim_{x \to 0} \ln(1 + x)^{\frac{1}{1}}}
+$$
+
+$$
+= \lim_{x \to 0} e^{\ln(1 + x)^{\frac{1}{x}}}
+$$
+
+$$
+= \lim_{x \to 0} (1 + x)^{\frac{1}{x}}
+$$
