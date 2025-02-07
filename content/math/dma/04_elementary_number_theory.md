@@ -63,7 +63,7 @@ $$
 \exists x \in D, \text{ such that } P(x) \wedge \sim Q(x)
 $$
 
-> [!TIP] **Disproff by Counterexample**
+> [!TIP] **Disproof by Counterexample**
 >
 > To disprove a statement of the form $\forall x \in D, P(x) \rightarrow Q(x)$ find a value of $x$ in $D$ for which the hypothesis $P(x)$ is true and the conclusion $Q(x)$ is false. Such an $x$ is called a **counterexample**.
 
@@ -87,7 +87,7 @@ The point of having $x$ be arbitrarily chosen (or generic) is to make a proof th
 
 When the method of generalizing from the generic particular is applied to a property of the form "If $P(x)$ then $Q(x)$," the result is the method of **direct proof**.
 
-> [!NOTE] **Method of Direct Proff**
+> [!NOTE] **Method of Direct Proof**
 >
 > 1. Express the statement to be proved in the form "For every $x \in D$, if $P(x)$ then $Q(x)$.
 > 2. Start the proof by supposing $x$ is a particular but arbitrarily chosen element of $D$ for which the hypothesis $P(x)$ is true.
@@ -173,7 +173,7 @@ Another common error is not serious in itself, but it reflects imprecise thinkin
 
 > Suppose $p$ is a prime number. If $p$ is prime, then $p$ cannot be written as a product of two smaller positive integers.
 
-## Direct Proff and Counterexample III: Rational Numbers
+## Direct Proof and Counterexample III: Rational Numbers
 
 > [!TIP] **Rational and Irrational Number**
 >
@@ -211,7 +211,7 @@ Once a collection of statements has been proved directly from the definitions, a
 >
 > A **corollary** is a statement whose truth can be immediately deduced from a theorem that has already been proved.
 
-## Direct Proff and Counterexample IV: Divisibility
+## Direct Proof and Counterexample IV: Divisibility
 
 The notion of divisibility is the central concept of one of the most beautiful subjects in advanced mathematics: **number theory**, the study of properties of integers.
 
@@ -341,7 +341,7 @@ $$
 Hence $n$ is either even or odd, and, because of the uniqueness of $q$ and $r$, $n$ cannot be both even and odd.
 
 > [!TIP] **The Parity Property**
-> 
+>
 > The fact that any integer is either even or odd is called the **parity property**.
 
 ### Method of Proof by Division into Cases
@@ -369,132 +369,132 @@ This process shows that C is true regardless of which of $A_1, A_2, \cdots, A_n$
 ### Absolute Value and the Triangle Inequality
 
 > [!TIP] **Absolute Value**
-> 
+>
 > For any real number $x$, the absolute value of $x$, denoted $|x|$, is defined as follows:
-> 
+>
 > $$|x| = \begin{cases}x & \text{ if } x \geq 0 \\ -x & \text{ if } x < 0\end{cases}$$
 
 A **lemma** is a statement that does not have much intrinsic interest but is helpful in deriving other results
 
 > [!NOTE] **Lemma: For every real number $r$, $-|r| \leq r \leq |r|$**
-> 
+>
 > Suppose $r$ is any real number. We divide into cases according to whether $r = 0$, $r < 0$, or $r > 0$.
-> 
-> **Case 1 ($r = 0$)**  In this case, by definition of absolute value, $|r| = r = 0$. since $0 = -0$, we have that $-0 = - |r| = 0 = r = |r|$, and so it is true that
-> 
+>
+> **Case 1 ($r = 0$)** In this case, by definition of absolute value, $|r| = r = 0$. since $0 = -0$, we have that $-0 = - |r| = 0 = r = |r|$, and so it is true that
+>
 > $$-|r|\leq r \leq |r|$$
-> 
+>
 > **Case 2 ($r > 0$)** In this case, by definition of absolute value, $|r| = r$. Also, since $r$ is positive and $-|r|$ is negative, $-|r| < |r|$. Thus it is true that
-> 
+>
 > $$-|r| \leq r \leq |r|$$
-> 
+>
 > **Case 3 ($r < 0$)**: In this case, by definition of absolute value, $|r| = -r$. Multiplying both sides by $-1$ gives that $-|r| = r$. Also, since $r$ is negative and $|r|$ is positive, $r < |r|$. Thus it is also true in this case that
-> 
+>
 > $$-|r| \leq r \leq |r|$$
-> 
+>
 > Hence, in every case
-> 
+>
 > $$-|r| \leq r \leq |r|$$
- 
+
 > [!NOTE] **Lemma: For every real number $r$, $|-r| = |r|$.**
-> 
+>
 > Suppose $r$ is any real number. We know that if $r > 0$, then $-r < 0$, and if $r < $, then $-r > 0$. Thus
-> 
+>
 > $$|-r| = \begin{cases}-r & \text{ if } -r > 0 \\ 0 & \text{ if } -r = 0 \\ -(-r) & \text{ if } -r < 0\end{cases}$$
-> 
+>
 > $$= \begin{cases}-r & \text{ if } -r > 0 \\ 0 & \text{ if } r = 0 \\ r & \text{ if } -r < 0\end{cases}$$
-> 
+>
 > $$= \begin{cases}-r & \text{ if } r < 0 \\ 0 & \text{ if } r = 0 \\ r & \text{ if } r > 0\end{cases}$$
-> 
+>
 > $$= \begin{cases}r & \text{ if } r \geq 0 \\ -r & \text{ if } r < 0\end{cases}$$
-> 
+>
 > $$= |r|$$
- 
+
 > [!NOTE] **Theorem: The Triangle Inequality**
-> 
+>
 > For all real numbers $x$ and $y$, $|x + y| \leq |x| + |y|$.
-> 
+>
 > Suppose $x$ and $y$ are any real numbers.
-> 
+>
 > **Case 1 ($x+ y \geq 0$)**: In this case, $|x + y| = x + y$. We know that
-> 
+>
 > $$x \leq |x| \text{ and } y \leq |y|$$
-> 
+>
 > Hence
-> 
+>
 > $$|x + y| = x + y \leq |x| + |y|$$
-> 
+>
 > **Case 2 ($x + y < 0$)**: In this case, $|x + y| = - (x + y) = (-x) + (-y)$, and so
-> 
+>
 > $$-x \leq |-x| = |x| \text{ and } -y \leq |-y| = |y|$$
-> 
+>
 > Therefore, it follows
-> 
+>
 > $$|x + y| = (-x) + (-y) \leq |x| + |y|$$
-> 
+>
 > Hence in both cases $|x + y| \leq |x| + |y|$.
 
 ## Direct Proof and Counterexample VI: Floor and Ceiling
 
 > [!TIP] **Floor Function**
-> 
+>
 > Given any real number $x$, the **floor** of $x$, denoted $\lfloor x \rfloor$, is defined as follows:
-> 
+>
 > $$\lfloor x \rfloor = \text{ that unique integer } n \text{ such taht } n \leq x < n + 1$$
-> 
+>
 > Symbolically, if $x$ is a real number and $n$ is an integer, then
-> 
+>
 > $$\lfloor x \rfloor = n \Leftrightarrow n \leq x < n + 1$$
 
 > [!TIP] **Ceiling Function**
-> 
+>
 > Given any real number $x$, the **ceiling** of $x$, denoted $\lceil x \rceil$, is defined as follows:
-> 
+>
 > $$\lceil x \rceil = \text{ that unique integer } n \text{ such taht } n - 1 < x \leq n + 1$$
-> 
+>
 > Symbolically, if $x$ is a real number and $n$ is an integer, then
-> 
+>
 > $$\lceil x \rceil = n \Leftrightarrow n -1 < x \leq n + 1$$
 
 If $x$ and $y$ are positive and the sum of their fractional parts is less than $1$, then $\lfloor x + y \rfloor = \lfloor x \rfloor + \lfloor y \rfloor$. In particular, if $x$ is positive and $m$ is a positive integer, then $\lfloor x + m \rfloor = \lfloor x \rfloor + \lfloor m \rfloor = \lfloor x \rfloor + m$. (The fractional part of $m$ is $0$; hence the sum of the fractional parts of $x$ and $m$ equals the fractional part of $x$, which is less than $1$.)
 
 > [!NOTE] **Theorem: For every real number $x$ and every integer $m$, $\lfloor x + m \rfloor = \lfloor x \rfloor + m$.**
-> 
+>
 > Suppose any real number $x$ and any integer $m$ are given. Let $n = \lfloor x \rfloor$. By definition of floor, $n$ is an integer and
-> 
+>
 > $$n \leq x < n + 1$$
-> 
+>
 > Add $m$ to all three parts to obtain
-> 
+>
 > $$n + m \leq x + m < n + m + 1$$
-> 
+>
 > Now $n + m$ is an integer [_since $n$ and $m$ are integers and a sum of integers is an integer_], and so, by definition of floor, the left-hand side of the equation to be shown is
-> 
+>
 > $$\lfloor x + m \rfloor = n + m$$
-> 
+>
 > But $n = \lfloor x \rfloor$. Hence, by substitution,
-> 
+>
 > $$n + m = \lfloor x \rfloor + m$$
-> 
+>
 > which is the right-hand side of the equation to be shown. Thus $\lfloor x + m \rfloor = \lfloor x \rfloor + m$.
- 
+
 > [!NOTE] **Theorem: The Floor of $\frac{n}{2}$**
-> 
+>
 > For any integer $n$
-> 
+>
 > $$\lfloor \frac{n}{2} \rfloor = \begin{cases}\frac{n}{2} & \text{ if } n \text{ is even} \\ \frac{n - 1}{2} & \text{ if } n \text{ is odd }\end{cases}$$
-> 
+>
 > Suppose $n$ is a [_particular but arbitrarily chosen_] integer. By the quotient remainder theorem, either $n$ is odd or $n$ is even.
-> 
+>
 > **Case 1 ($n$ is odd)**: In this case, $n = 2k + 1$ for some integer $k$. But the left-hand side of the equation to be shown is
-> 
+>
 > $$\lfloor \frac{n}{2} \rfloor = \lfloor \frac{2k + 1}{2} \rfloor = \lfloor \frac{2k}{2} + \frac{1}{2} \rfloor = \lfloor k + \frac{1}{2} \rfloor = k$$
-> 
+>
 > because $k$ is an integer and $k \leq k + \frac{1}{2} < k + 1$. And the right-hand side of the equation to be shown is
-> 
+>
 > $$\frac{n - 1}{2} = \frac{(2k + 1) - 1}{2} = \frac{2k}{2} = k$$
-> 
-> also. So since both the left-hand and right-hand sides equal $k$, they are equal to each other. That is, $\lfloor \frac{n}{2} \rfloor = \frac{n - 1}{2}$ 
+>
+> also. So since both the left-hand and right-hand sides equal $k$, they are equal to each other. That is, $\lfloor \frac{n}{2} \rfloor = \frac{n - 1}{2}$
 
 Given any integer $n$ and any positive integer $d$, the quotient-remainder theorem guarantees the existence of unique integers $q$ and $r$ such that
 
@@ -529,24 +529,24 @@ One kind of indirect proof, **argument by contradiction**, is based on the fact 
 Proof by contradiction is indicated if you want to show that there is no object with a certain property, or if you want to show that a certain object does not have a certain property.
 
 > [!NOTE] **Theorem: There is no greatest integer**
-> 
+>
 > Suppose not. That is, suppose there is a greatest integer $N$. Then $N \geq n$ for every integer $n$. Let $M = N + 1$. Now $M$ is an integer since it is a sum of integers. Also $M > N$ since $M = N + 1$. Thus $M$ is an integer that is greater than $N$. So $N$ is the greatest integer and $N$ is not the greatest integer, which is a contradiction.
- 
-> [!NOTE] **Theorem: The sum of any rational number and any irrational number is irrational**
-> 
-> Suppose not. That is, suppose there is a rational number $r$ and an irrational number $s$ such that $r + s$ is rational. By definition of rational, $r = \frac{a}{b}$ and $r + s = \frac{c}{d}$ for some integers $a, b, c$, and $d$ with $b \neq 0$ and $d \neq 0$. By substitution,
-> 
-> $$\frac{a}{b} + s = \frac{c}{d}$$
-> 
-> and so
-> 
-> $$s = \frac{c}{d} - \frac{a}{b}$$
-> 
-> $$= \frac{bc - ad}{bd}$$
-> 
-> Now $bc - ad$ and $bd$ are both integers, and $bd \neq 0$ [_by the zero product property_]. Hence $s$ is a quotient of the two integers $bc - ad$ and $bd$ with $bd \neq 0$. Thus, by definition of rational, $s$ is rational, which contradicts the supposition that $s$ is irrational. 
 
-### Method of Proff by Contraposition
+> [!NOTE] **Theorem: The sum of any rational number and any irrational number is irrational**
+>
+> Suppose not. That is, suppose there is a rational number $r$ and an irrational number $s$ such that $r + s$ is rational. By definition of rational, $r = \frac{a}{b}$ and $r + s = \frac{c}{d}$ for some integers $a, b, c$, and $d$ with $b \neq 0$ and $d \neq 0$. By substitution,
+>
+> $$\frac{a}{b} + s = \frac{c}{d}$$
+>
+> and so
+>
+> $$s = \frac{c}{d} - \frac{a}{b}$$
+>
+> $$= \frac{bc - ad}{bd}$$
+>
+> Now $bc - ad$ and $bd$ are both integers, and $bd \neq 0$ [_by the zero product property_]. Hence $s$ is a quotient of the two integers $bc - ad$ and $bd$ with $bd \neq 0$. Thus, by definition of rational, $s$ is rational, which contradicts the supposition that $s$ is irrational.
+
+### Method of Proof by Contraposition
 
 A second form of indirect argument, argument by contraposition, is based on the logical equivalence between a statement and its contrapositive. The underlying reasoning is that since a conditional statement is logically equivalent to its contrapositive, if the contrapositive is true then the statement must also be true.
 
@@ -563,10 +563,10 @@ $$
 $$
 
 3. Prove the contrapositive by a direct proof
-    - Suppose $x$ is a (particular but arbitrarily chosen) element of $D$ such that $Q(x)$ is false.
-    - Show that $P(x)$ is false.
+   - Suppose $x$ is a (particular but arbitrarily chosen) element of $D$ such that $Q(x)$ is false.
+   - Show that $P(x)$ is false.
 
-We use the word proposition rather than theorem because although the word theorem can refer to any statement that has been proved, mathematicians often restrict it to especially important statements that have many and varied consequences. Then we use the word **proposition** to refer to a statement that is somewhat less consequential but nonetheless worth writing down. 
+We use the word proposition rather than theorem because although the word theorem can refer to any statement that has been proved, mathematicians often restrict it to especially important statements that have many and varied consequences. Then we use the word **proposition** to refer to a statement that is somewhat less consequential but nonetheless worth writing down.
 
 ### Relation between Proof by Contradiction and Proof by Contraposition
 
@@ -589,56 +589,56 @@ This shows that any statement that can be proved by contraposition can be proved
 ## Indirect Argument: Two Famous Theorems
 
 > [!NOTE] **Theorem Irrationality of $\sqrt{2}$**
-> 
+>
 > Suppose not. That is, suppose $\sqrt{2}$ is rational. Then there are integers $m$ and $n$ with no common factors such that
-> 
+>
 > $$\sqrt{2} = \frac{m}{n}$$
-> 
+>
 > Squaring both sides of equation
-> 
+>
 > $$2 = \frac{m^2}{n^2}$$
-> 
+>
 > Or, equivalently
-> 
+>
 > $$m^2 = 2n^2$$
-> 
+>
 > This equation implies that $m^2$ is even (by definition of even). It follows that $m$ is even. We file this fact away for future reference and also deduce (by definition of even) that
-> 
+>
 > $$m = 2k \text{ for some integer } k$$
-> 
+>
 > Subtituting
-> 
+>
 > $$m^2 = (2k)^2 = 4k^2 = 2n^2$$
-> 
+>
 > Dividing both side of the right-most equation by $2$ gives
-> 
+>
 > $$n^2 = 2k^2$$
-> 
-> Consequently, $n^2$ is even, and so $n$ is even. But we also know that $m$ is even. Hence both $m$ and $n$ have a common factor of $2$. But this contradicts the supposition that $m$ and $n$ have no common factors. 
+>
+> Consequently, $n^2$ is even, and so $n$ is even. But we also know that $m$ is even. Hence both $m$ and $n$ have a common factor of $2$. But this contradicts the supposition that $m$ and $n$ have no common factors.
 
 ### Are There Infinitely Many Prime Numbers?
 
 You know that a prime number is a positive integer that cannot be factored as a product of two smaller positive integers. Is the set of all such numbers infinite, or is there a largest prime number?
 
 > [!NOTE] For any integer $a$ and any prime number $p$, if $p | a$ then $p \mid (a + 1)$
-> 
+>
 > Suppose not. That is, suppose there exist an integer a and $a$ prime number $p$ such that $p | a$ and $p | (a + 1)$. Then, by definition of divisibility, there exist integers $r$ and $s$ such that $a = pr$ and $a + 1= ps$. It follows that
-> 
+>
 > $$1 = (a + 1) - a = ps - pr = p(s - r)$$
-> 
-> and so (since $s - r$ is an integer) $p | 1$. But the only integer divisors of $1$ are $1$ and $-1$, and $p > 1$ because $p$ is prime. Thus $p \leq 1$ and $p > 1$, which is a contradiction. 
- 
+>
+> and so (since $s - r$ is an integer) $p | 1$. But the only integer divisors of $1$ are $1$ and $-1$, and $p > 1$ because $p$ is prime. Thus $p \leq 1$ and $p > 1$, which is a contradiction.
+
 > [!NOTE] **Theorem: Infinitude of the Primes**
-> 
+>
 > Suppose not. That is, suppose the set of prime numbers is finite. Then some prime number $p$ is the largest of all the prime numbers, and hence we can list the prime numbers in ascending order:
-> 
+>
 > $$2, 3, 5, 7, \cdots, p$$
-> 
+>
 > Let $N$ be tthe product of all the prime number plus $1$:
-> 
+>
 > $$N = (2 \cdot 3 \cdot 5 \cdot 7 \cdots p) + 1$$
-> 
-> Then $N > 1$, and so $N$ is divisible by some prime number $q$. Because $q$ is prime, $q$ must equal one of the prime numbers $\2, 3, 5, 7, \cdots , p$. Thus, by definition of divisibility, $q$ divides $2 \cdot 3 \cdot 5 \cdot 7 \cdots p$, and so $q$ does not divide $(2 \cdot 3 \cdot 5 \cdot 7 \cdots p)$, which equals $N$. Hence $N$ is divisible by $q$ and $N$ is not divisible by $q$, and we have reached a contradiction.
+>
+> Then $N > 1$, and so $N$ is divisible by some prime number $q$. Because $q$ is prime, $q$ must equal one of the prime numbers $2, 3, 5, 7, \cdots , p$. Thus, by definition of divisibility, $q$ divides $2 \cdot 3 \cdot 5 \cdot 7 \cdots p$, and so $q$ does not divide $(2 \cdot 3 \cdot 5 \cdot 7 \cdots p)$, which equals $N$. Hence $N$ is divisible by $q$ and $N$ is not divisible by $q$, and we have reached a contradiction.
 
 ### When to Use Indirect Proof
 
@@ -647,23 +647,22 @@ We have not provided a definitive answer to the question of when to prove a stat
 ## Application: Then Handshake Theorem
 
 > [!TIP] **Degree of a Graph**
-> 
+>
 > The total degree of a graph is the sum of the degrees of all the vertices of the graph.
 
 The handshake analogy is such an attractive way to understand the graph theory result that the theorem describing it is known as the handshake theorem.
 
 > [!NOTE] **The Handshake Theorem**
-> 
+>
 > If $G$ is any graph, then the sum of the degrees of all the vertices of $G$ equals twice the number of edges of $G$. Specifically, if the vertices of $G$ are $v_1, v_2, \cdots, n_n$, where $n$ is a nonnegative integer, then
-> 
+>
 > the total degree of $G = \text{deg}(v_1) + \text{deg}(v_2) + \cdots + \text{deg}(v_n)$
-> 
+>
 > $$= 2 \cdot (\text{ the number of edges of } G)$$
-> 
 
 **PROOF**
 
-Let $G$ be a particular but arbitrarily chosen graph, and suppose that $G$ has $n$ vertices $v_1, v_2, \cdots, v_n$ and $m$ edges, where $n$ is a positive integer and $m$ is a nonnegative integer. We claim that each edge of $G$ contributes $2$ to the total degree of $G$. 
+Let $G$ be a particular but arbitrarily chosen graph, and suppose that $G$ has $n$ vertices $v_1, v_2, \cdots, v_n$ and $m$ edges, where $n$ is a positive integer and $m$ is a nonnegative integer. We claim that each edge of $G$ contributes $2$ to the total degree of $G$.
 
 For suppose $e$ is an arbitrarily chosen edge with endpoints $v_i$ and $v_j$. This edge contributes $1$ to the degree of $v_i$ and $1$ to the degree of $v_j$. As shown below, this is true even if $i = j$, because an edge that is a loop is counted twice in computing the degree of the vertex on which it is incident.
 
@@ -678,7 +677,7 @@ $$
 The following corollary follows immediately from the handshake theorem.
 
 > [!NOTE] **Total Degree of a Graph**
-> 
+>
 > The total degree of a graph is even.
 
 **PROOF**
@@ -686,7 +685,7 @@ The following corollary follows immediately from the handshake theorem.
 By the Handshake Theorem the total degree of $G$ equals $2$ times the number of edges of $G$, which is an integer, and so the total degree of $G$ is even.
 
 > [!NOTE] **Number of Vertices of Odd Dregree**
-> 
+>
 > In any graph there is an even number of vertices of odd degree.
 
 **PROOF**
@@ -726,13 +725,13 @@ By assumption, $\text{deg}(v_i)$ is odd for every integer $i = 1, 2, \cdots, n$.
 One important class of graphs consists of those that do not have any loops or parallel edges.
 
 > [!TIP] **Simple Graph**
-> 
+>
 > A **simple graph** is a graph that does not have any loops or parallel edges. In a simple graph, an edge with endpoints $v$ and $w$ is denoted $\{v, w\}$.
 
 Another important class of graphs consists of those that are "complete" in the sense that each vertex in the graph is connected by exactly one edge to each other vertex in the graph.
 
 > [!TIP] **Complete Graph**
-> 
+>
 > Let $n$ be a positive integer. A **complete graph on $n$ vertices**, denoted $K_n$, is a simple graph with $n$ vertices and exactly one edge connecting each pair of distinct vertices.
 
 ![Complete Graphs](./assets/complete_graphs.png)
@@ -740,9 +739,9 @@ Another important class of graphs consists of those that are "complete" in the s
 In another class of graphs, called complete bipartite graphs, the vertex set can be separated into two subsets so that each vertex in one of the subsets is connected by exactly one edge to each vertex in the other subset but no vertex is connected by an edge to any other vertex in its own subset.
 
 > [!TIP] **Complete Bipartite Graph**
-> 
+>
 > Let $m$ and $n$ be positive integers. A complete bipartite graph on $(m, n)$ vertices, denoted $K_{m, n}$ is a simple graph whose vertices are divided into two distinct subsets, $V$ with $m$ vertices and $W$ with $n$ vertices, in such a way that
-> 
+>
 > 1. every vertex of $K_{m, n}$ belongs to one of $V$ or $W$, but no vertex belongs to both $V$ and $W$;
 > 2. there is exactly one edge from each vertex of $V$ to each vertex of $W$;
 > 3. there is no edge from any one vertex of $V$ to any other vertex of $V$;
@@ -761,17 +760,17 @@ a = dq + r, 0 \leq r < d
 $$
 
 > [!NOTE] **Division Algorithm**
-> 
-> [Given a nonnegative integer $a$ and a positive integer $d$, the aim of the algorithm is to find integers $q$ and $r$ that satisfy the conditions $a = dq + r$ and $0 \leq r < d$. This is done by subtracting $d$ repeatedly from a until the result is less than $d$ but is still nonnegative. 
-> 
+>
+> [Given a nonnegative integer $a$ and a positive integer $d$, the aim of the algorithm is to find integers $q$ and $r$ that satisfy the conditions $a = dq + r$ and $0 \leq r < d$. This is done by subtracting $d$ repeatedly from a until the result is less than $d$ but is still nonnegative.
+>
 > $$0 \leq a - d - d - \cdots - d = a - dq < d$$
-> 
+>
 > The total number of $d$ that are subtracted is the quotient $q$. The quantity $a - dq$ equals the remainder $r$.]
-> 
+>
 > **Input**: $a$ [nonnegative integer], $d$ [positive integer]
-> 
+>
 > **Algorithm Body**:
-> 
+>
 > ```
 > r := a
 > q := 0
@@ -780,9 +779,95 @@ $$
 >     q := q + 1
 > end while
 > ```
-> 
+>
 > **Output**: $q, r$ [nonnegative integers]
 
 ### The Euclidean Algorithm
 
-The greatest common divisor of two integers $a$ and $b$ is the largest integer that divides both $a$ and $b$. 
+The greatest common divisor of two integers $a$ and $b$ is the largest integer that divides both $a$ and $b$.
+
+> [!TIP] **The Euclidean Theorem**
+>
+> Let $a$ and $b$ be integers that are not both zero. The **greatest common divisor** of $a$ and $b$, denoted $\text{gcd}(a,b)$ is that integer $d$ with the following properties:
+>
+> 1. $d$ is a common divisor of both $a$ and $b$
+> 2. For every integer $c$, if $c$ is a common divisor of both $a$ and $b$, then $c$ is less than or equal to $d$.
+
+> [!NOTE] **Lemma 4.10.1**
+>
+> If $r$ is a positive integer, then $\text{gcd}(r, 0) = r$
+
+**PROOF**
+
+Suppose $r$ is a positive integer. We know that $r$ is a common divisor of both $r$ and $0$ because it divides itself and $0$. Also, no integer larger than $r$ can be a common divisor of $r$ and $0$, since no integer larger than $r$ can divide $r$. Hence $r$ is the greatest common divisor of $r$ and $0$.
+
+> [!NOTE] **Lemma 4.10.2**
+>
+> If $a$ and $b$ are any integers not both zero, and if $q$ and $r$ are any integers such that
+>
+> $$a = bq + r$$
+>
+> then
+>
+> $$\text{gcd}(a, b) = gdc(b,r)$$
+
+**PROOF**
+
+First we will show that $\text{gcd}(a, b) \leq \text{gcd}(b, r)$. Let $a$ and $b$ be integers, not both zero, and let $c$ be a common divisor of $a$ and $b$. Then $c | a$ and $c | b$ and so by definition of divisility:
+
+$$
+a = nc
+$$
+
+and
+
+$$
+b = mc
+$$
+
+for some integers $n$ and $m$. If we substitute on
+
+$$
+a = bq + r
+$$
+
+we get
+
+$$
+nc = mcq + r
+$$
+
+and then we solve for $r$
+
+$$
+r = nc - mcq = c(n - mq)
+$$
+
+Where $n - mq$ is an integer and so by definition of [divisibility](#direct-proof-and-counterexample-iv-divisibility) $c | r$. Given $c | b$, we conclude that $c$ is a common divisor of $b$ and $r$.
+
+We know that the greatest common divisor of $a$ and $b$ is defined because $a$ and $b$ are not both zero. Also, as we showed previously, every common divisor of $a$ and $b$ is a common divisor of $b$ and $r$ and so the greatest common divisor of $a$ and $b$ is a common divisor of $b$ and $r$.
+
+But then $\text{gdc}(a, b)$, which is a common divisor of $b$ and $r$ is, by definition, necessarily less than or equal to the greatest common divisor of $b$ and $r$:
+
+$$
+\text{gcd}(a, b) \leq \text{gcd}(b, r)
+$$
+
+Secondly we show that $\text{gcd}(b, r) \leq \text{gcd}(a, b)$. By the first part of this proof we know that every common divisor of $b$ and $r$ is a common divisor of $a$ and $b$. Therefore it follows that $\text{gcd}(b, r)$ is a common divisor of $a$ and $b$ and, by definition, it is necessarily less or equal to the greatest common divisor of $a$ and $b$, that is
+
+$$
+\text{gcd}(b, r) \leq \text{gcd}(a, b)
+$$
+
+### Euclidean Algorithm
+
+1. Let $A$ and $B$ be integers with $A > B \geq 0$
+2. To find the greatest common divisor of $A$ and $B$, first check whether $B = 0$. If it is, then $\text{gcd}(A, B) = A$ by **Lemma 4.10.1**. If it isn't, then $B > 0$ and the quotient remainder theorem can be used to divide $A$ by $b$:
+
+$$
+A = Bq + r, \text{ where } 0 \leq r < B
+$$
+
+By **Lemma 4.10.2** $\text{gcd}(A, B) = \text{gcd}(B, r)$.
+
+3. Now, just repeat the process starting again at $(2)$ but use $B$ instead of $A$ and $r$ instead of $B$. The repetitions are guaranteed to terminate eventually with $r = 0$ because each new remainder is less than the preceding one.

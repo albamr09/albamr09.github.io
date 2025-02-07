@@ -9,4 +9,5 @@ type: docs
 {{< card link="02_logic_compound_statements" title="The Logic of Compound Statements" >}}
 {{< card link="03_logic_quantified_statements" title="The Logic of Quantified Statements" >}}
 {{< card link="04_elementary_number_theory" title="Elementary Number Theory" >}}
+{{< card link="05_sequences_induction_recursion" title="Sequences, Mathematical Induction, and Recursion" >}}
 {{< /cards >}}
