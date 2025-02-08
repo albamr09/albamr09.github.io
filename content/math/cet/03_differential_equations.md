@@ -1151,7 +1151,7 @@ $$
 
 The calculation of derivatives of complicated functions involving products, quotients, or powers can often be simplified by taking logarithms. This mehod is denoted **logarithmic differentiation**.
 
-1. Take natural logarithms of both sides of an equation $y = f(x)$ and use the Laws of Logarithms to expand the expression.
+1. Take natural logarithms of both sides of an equation $y = f(x)$ and use the [Laws of Logarithms](../../agaa/05_exp_functions/#properties-of-logarithms) to expand the expression.
 2. Differentiate implicitly with respect to $x$
 3. Solve the resulting equation for $y'$ and replace $y$ by $f(x)$.
 
@@ -1193,7 +1193,7 @@ $$
 e = e^1 = e^{\lim_{x \to 0} \ln(1 + x)^{\frac{1}{x}}}
 $$
 
-By the continuity of the exponential function and [the continuity of composite functions](../02_limits#continuity-of-composite-functions):
+By the continuity of the exponential function and [the continuity properties for composite functions](../02_limits#continuity-of-composite-functions):
 
 $$
 f(\lim_{x \to 0} g(x)) = \lim_{x \to 0} f(g(x))
@@ -1211,7 +1211,7 @@ $$
 
 ### Derivatives of Inverse Trigonometric Functions
 
-Because the trigonometric functions—with the restricted domains that we used to define their inverses—are oneto-one and differentiable, it follows that the inverse trigonometric functions are also differentiable.
+Because the trigonometric functions, with the restricted domains that we used to define their inverses, are one-to-one and differentiable, it follows that the inverse trigonometric functions are also differentiable.
 
 Let's start with the arcsine function, defined as:
 
@@ -1225,7 +1225,7 @@ $$
 \cos(y) \frac{\delta y}{\delta x} = 1 \Leftrightarrow \frac{\delta y}{\delta x} = \frac{1}{\cos(y)}
 $$
 
-We know that $y \geq 0$ because $-\frac{\pi}{2} \leq y \leq \frac{\pi}{2}$, so
+We know that $\cos y \geq 0$ because $-\frac{\pi}{2} \leq y \leq \frac{\pi}{2}$, so
 
 $$
 \cos y = \sqrt{1 - \sin^2 y} = \sqrt{1 - x^2}
