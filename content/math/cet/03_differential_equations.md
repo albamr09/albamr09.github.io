@@ -1184,19 +1184,73 @@ $$
 Because $\frac{\delta f(1)}{\delta x} = 1$, then
 
 $$
-= \lim_{x \to 0} \ln (1 + x)^{\frac{1}{x}} = 1
+\frac{\delta f(1)}{\delta x} = \lim_{x \to 0} \ln (1 + x)^{\frac{1}{x}} = 1
 $$
 
 Then
 
 $$
-e = e^1 = e^{\lim_{x \to 0} \ln(1 + x)^{\frac{1}{1}}}
+e = e^1 = e^{\lim_{x \to 0} \ln(1 + x)^{\frac{1}{x}}}
 $$
 
+By the continuity of the exponential function and [the continuity of composite functions](../02_limits#continuity-of-composite-functions):
+
 $$
-= \lim_{x \to 0} e^{\ln(1 + x)^{\frac{1}{x}}}
+f(\lim_{x \to 0} g(x)) = \lim_{x \to 0} f(g(x))
+$$
+
+where $f(x) = e^x$ and $g(x) = \ln(1 + x)^{\frac{1}{x}}$
+
+$$
+e^{\lim_{x \to 0} \ln(1 + x)^{\frac{1}{x}}} = \lim_{x \to 0} e^{\ln(1 + x)^{\frac{1}{x}}}
 $$
 
 $$
 = \lim_{x \to 0} (1 + x)^{\frac{1}{x}}
 $$
+
+### Derivatives of Inverse Trigonometric Functions
+
+Because the trigonometric functions—with the restricted domains that we used to define their inverses—are oneto-one and differentiable, it follows that the inverse trigonometric functions are also differentiable.
+
+Let's start with the arcsine function, defined as:
+
+$$
+y = \sin^{-1}x \Leftrightarrow \sin y = x \text{ and } -\frac{\pi}{2} \leq y \leq \frac{\pi}{2}
+$$
+
+We differentiate $\sin y = x$ implicitly
+
+$$
+\cos(y) \frac{\delta y}{\delta x} = 1 \Leftrightarrow \frac{\delta y}{\delta x} = \frac{1}{\cos(y)}
+$$
+
+We know that $y \geq 0$ because $-\frac{\pi}{2} \leq y \leq \frac{\pi}{2}$, so
+
+$$
+\cos y = \sqrt{1 - \sin^2 y} = \sqrt{1 - x^2}
+$$
+
+$$
+\frac{\delta y}{\delta x} = \frac{1}{\cos y} = \frac{1}{\sqrt{1 - x^2}}
+$$
+
+Therefore
+
+$$
+\frac{\delta}{\delta x} (\sin^{-1}x) = \frac{1}{\sqrt{1 - x^2}}
+$$
+
+> [!NOTE] **Derivatives of Inverse Trigonimetric Functions**
+>
+> $$\frac{\delta}{\delta x} (\sin^{-1}) = \frac{1}{\sqrt{1 - x^2}}$$
+>
+> $$\frac{\delta}{\delta x} (\cos^{-1}) = -\frac{1}{\sqrt{1 - x^2}}$$
+>
+> $$\frac{\delta}{\delta x} (\tan^{-1}) = \frac{1}{1 - x^2}$$
+>
+> $$\frac{\delta}{\delta x} (\csc^{-1}) = -\frac{1}{x\sqrt{x^2 - 1}}$$
+>
+> $$\frac{\delta}{\delta x} (\sec^{-1}) = \frac{1}{x\sqrt{x^2 - 1}}$$
+>
+> $$\frac{\delta}{\delta x} (\cot^{-1}) = -\frac{1}{1 + x^2}$$
