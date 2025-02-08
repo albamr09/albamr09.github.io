@@ -62,7 +62,7 @@ params:
     enable: true
     type: flexsearch
     flexsearch:
-      index: summary
+      index: content
   footer:
     enable: true
     displayCopyright: false
