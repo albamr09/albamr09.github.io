@@ -1254,3 +1254,27 @@ $$
 > $$\frac{\delta}{\delta x} (\sec^{-1}) = \frac{1}{x\sqrt{x^2 - 1}}$$
 >
 > $$\frac{\delta}{\delta x} (\cot^{-1}) = -\frac{1}{1 + x^2}$$
+
+## Rates of Change in the Natural and Social Sciences
+
+### Example
+
+A current exists whenever electric charges move (See Figure 6).
+
+![Average Current](./assets/average_current.png)
+
+If $\Delta Q$ is the net charge that passes through the red surface during a time period $\Delta t$, then the average current during this time inverval is
+
+$$
+\text{averga current } = \frac{\Delta Q}{\Delta t} = \frac{Q_2 - Q_1}{t_2 - t_1}
+$$
+
+If we take the limite over smaller and smaller time intervals, we obtian what is called **current $I$** at a given time $t_1$:
+
+$$
+I = \lim_{\Delta t \to 0} \frac{\Delta Q}{\Delta t} = \frac{\delta Q}{\delta t}
+$$
+
+Thus the current is the rate at which charge flows through a surface. It is measure in units of charge per unit time (often coulombs per second, called amperes).
+
+Velocity, density, and current are not the only rates of change that are important in physics. Others include power (the rate at which work is done), the rate of heat flow, temperature gradient (the rate of change of temperature with respect to position), and the rate of decay of a radioactive substance in nuclear physics.
