@@ -441,3 +441,133 @@ The sequence of **Catalan numbers**, nambed after the Belgian mathematician [Eug
 $$
 C_n = \frac{1}{n + 1} \binom{2n}{n}
 $$
+
+### The Tower of Hanoi
+
+In 1883 a French mathematician, Édouard Lucas, invented a puzzle that he called the Tower of Hanoi. Those who played the game were supposed to move all the disks one by one from one pole to another, never placing a larger disk on top of a smaller one. 
+
+![Hanoi Tower](./assets/hanoi_tower.png)
+
+An elegant and efficient way to solve this problem is to think recursively.
+
+1. Transfer the top $k - 1$ disks from pole $A$ to pole $B$. When $k > 2$ the execution of this step will require more than one move.
+2. Move the bottom disk from pole $A$ to pole $C$
+3. Transfer the top $k - 1$ disks from $B$ to pole $C$.
+
+![Hanoi Tower Solution](./assets/solve_hanoi_tower.png)
+
+If $m_n$ is the minimum number of moves needed to transfer a tower of $n$ disks from one pole to another. Then 
+
+- Going from position $(a)$ to position $(b)$ requires $m_{k-1}$ moves
+- Going from position $(b)$ to position $(c)$ requires just one move
+- Going from position $(c)$ to position $(d)$  requires $m_{k-1}$
+
+Therefore
+
+$$
+m_k = m_{k-1} + 1 + m_{k-1} = 2m_{k-1} \text{ for every integer } k \geq 2
+$$
+
+The complete recursive specification is as follows:
+
+$$
+m_k = 2m_{k-1} + 1 \\
+m_1 = 1
+$$
+
+### The Fibonacci Numbers
+
+One of the earliest examples of a recursively defined sequence occurs in the writings of [Leonardo of Pisa, commonly known as Fibonacci](https://en.wikipedia.org/wiki/Fibonacci). In $1202$ Fibonacci posed the following problem:
+
+A single pair of rabbits (male and female) is born at the beginning of a year. Assume the following conditions:
+
+1. A single pair of rabbits (male and female) is born at the beginning of a year. Assume the following conditions:
+2. No rabbits die.
+
+The crucial observation is that the number of rabbit pairs born at the end of month $k$ is the same as the number of pairs alive at the end of month $k - 2$. Why? Because it is exactly the rabbit pairs that were alive at the end of month $k-2$ that were fertile during month $k$. The rabbits born at the end of month $k - 1$ were not.
+
+![Fibonacci Rabbits](./assets/fibonacci_rabbits.png)
+
+Then:
+
+$$
+\text{number of rabbit pairs alive at the end of month } k = \\ \text{the number of rabbit pairs alive and the end of month } k - 1 \\ + \text{ the number of rabbit pairs born at the end of month } k
+$$
+
+$$
+= \text{ the number of rabbit pairs alive at the end of month } k - 1 + \\ \text{ the number of rabbit pairs alive at the end of month } k - 2
+$$
+
+For ech integer $n \geq 1$, let $F_n$ be the number of rabbit pairs alive at the end of month $n$ and let $F_0 = 1$ be the initial number of rabbit pairs. Therefor by substitution
+
+$$
+F_k = F_{k - 1} + F_{k - 2}
+$$
+
+### Recursive Definitions of Sum and Product
+
+> [!NOTE] **Binary Operations**
+>  
+> Addition and multiplication are called **binary operations** because only two numbers can be added or multiplied at a time.
+
+Given numbers $a_1, a_2, \cdots, a_n$ where $n$ is a positive integer, the **summation from $i = 1$ to $n$ of the $a_i$** denoted $\sum_{i=1}^n a_i$ is defined as follows:
+
+$$
+\sum_{i=1}^1 a_i = a_1 \text{ and } \sum_{i=1}^n a_i \left(\sum_{i=1}^{n - 1} = a_i\right) + a_n \text{ if } n > 1
+$$
+
+The **product from $i = 1$ to $n$ of the $a_i$** denoted $\prod_{i=1}^n a_i$ is defined as follows:
+
+$$
+\prod_{i=1}^1 a_i = a_1 \text{ and } \prod_{i=1}^n a_i \left(\prod_{i=1}^{n - 1} = a_i\right) + a_n \text{ if } n > 1
+$$
+
+## Solving Recurrence Relations by Iteration
+
+Suppose you have a sequence that satisfies a certain recurrence relation and initial conditions. It is often helpful to know an explicit formula for the sequence. Such an explicit formula is called a **solution** to the recurrence relation.
+
+### The Method of Iteration
+
+The most basic method for finding an explicit formula for a recursively defined sequence is **iteration**. Iteration works as follows: Given a sequence $a_0, a_1, a_2, \cdots$ defined by a recurrence relation and initial conditions. You start from the initial conditions and calculate successive terms of the sequence until you see a pattern developing. At that point you guess an explicit formula.
+
+### Arithmetic Sequence
+
+> [!TIP] **Arithmetic Sequence**
+> 
+> A sequence $a_0, a_1, \cdots$ is called an **arithmetic sequence** if, and only if, there is a constant $d$ such that
+> 
+> $$a_k = a_{k - 1} + d \text{ for each integer } k \geq 1$$
+> 
+> If follows that
+> 
+> $$a_n = a_0 + dn \text{ for every integer } n \geq 0$$
+
+### Geometric Sequence
+
+> [!TIP] **Geometric Sequence**
+> 
+> A sequence $a_0, a_1, \cdots$ is called an **geometric sequence** if, and only if, there is a constant $r$ such that
+> 
+> $$a_k = ra_{k - 1} \text{ for each integer } k \geq 1$$
+> 
+> If follows that
+> 
+> $$a_n = a_0 + r^n \text{ for every integer } n \geq 0$$
+
+### Checking the Correctness of a Formula by Mathematical Induction
+
+It is all too easy to make a mistake and come up with the wrong formula. That is why it is important to confirm your calculations by checking the correctness of your formula. The most common way to do this is to use [mathematical induction](#mathematical-induction-i-proving-formulas).
+
+#### An Explicit Formula for the Tower of Hanoi Sequence
+
+Recall that the Tower of Hanoi sequence satisfies the recurrence relation:
+
+$$
+m_k = 2m_{k - 1} + 1
+$$
+
+and has the initial condition
+
+$$
+m_1 = 1
+$$
