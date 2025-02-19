@@ -1278,3 +1278,73 @@ $$
 Thus the current is the rate at which charge flows through a surface. It is measure in units of charge per unit time (often coulombs per second, called amperes).
 
 Velocity, density, and current are not the only rates of change that are important in physics. Others include power (the rate at which work is done), the rate of heat flow, temperature gradient (the rate of change of temperature with respect to position), and the rate of decay of a radioactive substance in nuclear physics.
+
+## Exponential Growth and Decay
+
+In general, if $y(t)$ is the value of a quantity at time $t$, and if the rate of change of $y$ with respect to $t$ is proportional tos size $y(t)$ at any time, then
+
+$$
+\frac{\delta y(t)}{\delta t} = ky(t)
+$$
+
+where $k$ is a constant. This is sometimes called the **law of natural growth** (if $k > 0$) or the **law of natural decay** (if $k < 0$). It is called a **differential equation** because it involver an unknown function $y$ and its derivative $\frac{\delta y(t)}{\delta t}$
+
+Also note that any exponential function of the form $y(t) = Ce^{kt}$, where $C$ is a constant, satisfies:
+
+$$
+\frac{\delta y(t)}{\delta t} = C(ke^{kt}) = k(Ce^{kt}) = ky(t)
+$$
+
+To see the significance of the constant $C$, we observe that
+
+$$
+y(0) = Ce^{k\cdot 0} = C
+$$
+
+Therefore $C$ is the **initial value** for the function.
+
+### Population Growth
+
+In the context of population growth, where $P(t)$ is the size of a population at time $t$, we can write:
+
+$$
+\frac{\delta P(t)}{\delta t} = kP(t) \text{ or } \frac{\frac{\delta P(t)}{\delta t}}{P(t)} = k
+$$
+
+The right-side equation is called the **relative growth rate**. If the population at time $0$ is $P_0$, then the expression for the population is
+
+$$
+P(t) = P_0 e^{0.02t}
+$$
+
+### Radioactive Decay
+
+Radioactive substances decay by spontaneously emitting radiation. If $m(t)$ is the mass remaining from an initial mass $m_0$ ate time $t$, then the relative decay rate:
+
+$$
+-\frac{\frac{\delta m(t)}{\delta t}}{m(t)}
+$$
+
+has experimentally been found to be constant. It follows that
+
+$$
+\frac{\delta m(t)}{\delta t} = km(t)
+$$
+
+where $k$ is a negative constant. In other words, radioactive substances decay at a rate proportional to the remaining mass. Therefore
+
+$$
+m(t) = m_0 e^{kt}
+$$
+
+Physicists express the rate of decay in terms of **half-life**, the time required for half of any given quantity to decay.
+
+### Newton's Law of Cooling
+
+Newton's Law of Cooling states that the rate of cooling of an object is proportional to the temperature difference between the object and its surroundings, if this difference is not too large. If we let $T(t)$ be the temperature of the object at time $t$ and $T_s$ be the temperature of the surroundings, then
+
+$$
+\frac{\delta T(t)}{\delta t} = k(T - T_s)
+$$
+
+where $k$ is a constant.
