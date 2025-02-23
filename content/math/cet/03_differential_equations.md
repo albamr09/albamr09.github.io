@@ -1287,7 +1287,7 @@ $$
 \frac{\delta y(t)}{\delta t} = ky(t)
 $$
 
-where $k$ is a constant. This is sometimes called the **law of natural growth** (if $k > 0$) or the **law of natural decay** (if $k < 0$). It is called a **differential equation** because it involver an unknown function $y$ and its derivative $\frac{\delta y(t)}{\delta t}$
+where $k$ is a constant, called **relative growth rate**. This is sometimes called the **law of natural growth** (if $k > 0$) or the **law of natural decay** (if $k < 0$). It is called a **differential equation** because it involver an unknown function $y$ and its derivative $\frac{\delta y(t)}{\delta t}$
 
 Also note that any exponential function of the form $y(t) = Ce^{kt}$, where $C$ is a constant, satisfies:
 
@@ -1326,6 +1326,10 @@ $$
 $$
 
 has experimentally been found to be constant. It follows that
+
+$$
+\frac{\frac{\delta m(t)}{\delta t}}{m(t)} = k
+$$
 
 $$
 \frac{\delta m(t)}{\delta t} = km(t)
