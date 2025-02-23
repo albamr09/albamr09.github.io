@@ -1348,3 +1348,45 @@ $$
 $$
 
 where $k$ is a constant.
+
+### Continuously Compounded Interest
+
+In general, if an amount $A_0$ is invested at an interest rate $r$, then after $t$ years it is worth $A_0(1 + r)^t$. Usually, interest is compounded more frequently, say, $n$ times per year. Then in each compounding perior the rate is $\frac{r}{n}$, and there are $nt$ compounding periods in $t$ years. So the value of the investment is
+
+$$
+A = A_0 \left(1 + \frac{r}{n}\right)^{nt}
+$$
+
+If we let $n \to \infty$, then
+
+$$
+A(t) = \lim_{n \to \infty} A_0 \left(1 + \frac{r}{n}\right)^{nt}
+$$
+
+$$
+= \lim_{n \to \infty} A_0 \left[\left(1 + \frac{r}{n}\right)^{\frac{n}{r}}\right]^{rt}
+$$
+
+$$
+= A_0 \left[\lim_{n \to \infty} \left(1 + \frac{r}{n}\right)^{\frac{n}{r}}\right]^{rt}
+$$
+
+If we let $m = \frac{n}{r}$
+
+$$
+= A_0 \left[\lim_{m \to \infty} \left(1 + \frac{r}{n}\right)^m\right]^{rt}
+$$
+
+But, as we saw before, the limit in this expression is equal to the number $e$ (see [Number $e$ as a limit](#the-number-e-as-a-limit)). So witht continuous compounding of interest at interest rate $r$, the amount after $t$ years is
+
+$$
+A(t) = A_0e^{rt}
+$$
+
+If we differentiate this equation we get
+
+$$
+\frac{\delta A}{\delta t} = rA_0 e^{rt} = rA(t)
+$$
+
+Which says that the rate of increase of an investment is proportional to its size.
