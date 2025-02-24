@@ -1375,10 +1375,10 @@ $$
 = A_0 \left[\lim_{n \to \infty} \left(1 + \frac{r}{n}\right)^{\frac{n}{r}}\right]^{rt}
 $$
 
-If we let $m = \frac{n}{r}$
+If we let $m = \frac{r}{n}$
 
 $$
-= A_0 \left[\lim_{m \to \infty} \left(1 + \frac{r}{n}\right)^m\right]^{rt}
+= A_0 \left[\lim_{m \to \infty} \left(1 + m\right)^{\frac{1}{m}}\right]^{rt}
 $$
 
 But, as we saw before, the limit in this expression is equal to the number $e$ (see [Number $e$ as a limit](#the-number-e-as-a-limit)). So witht continuous compounding of interest at interest rate $r$, the amount after $t$ years is
