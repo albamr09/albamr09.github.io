@@ -1394,3 +1394,35 @@ $$
 $$
 
 Which says that the rate of increase of an investment is proportional to its size.
+
+## Related Rates
+
+If we are pumping air into a balloon, both the volume and the radius of the balloon are increasing and their rates of increase are related to each other. But it is much easier to measure directly the rate of increase of the volume than the rate of increase of the radius.
+
+In a related rates problem the idea is to compute the rate of change of one quantity in terms of the rate of change of another quantity (which may be more easily measured). The procedure is to find an equation that relates the two quantities and then use the Chain Rule to differentiate both sides with respect to time.
+
+> **Example 1**. Air is being pumped into a spherical balloon so that its volume increases at a rate of $100 \text{cm}^3/\text{s}$. How fast is the radius of the balloon increasing when the diameter is $50 \text{cm}$?
+>
+> Let $V$ be the volume of the balloon and let $r$ be its radius.
+>
+> $$\frac{\delta V}{\delta t} = 100 \text{cm}^3/\text{s}$$
+>
+> $$\frac{\delta r}{\delta t} \text{ when } r = 25$$
+>
+> We know that
+>
+> $$V = \frac{4}{3}\pi r^3$$
+>
+> In order to use the given information, we differentiate each side of this equation with respect to $t$.
+>
+> $$\frac{\delta V}{\delta r} = \frac{\delta V}{\delta r}\frac{\delta r}{\delta t} = 4\pi r^2 \frac{\delta r}{\delta t}$$
+>
+> Now we solve for the unknown quantity
+>
+> $$\frac{\delta r}{\delta t} = \frac{1}{4 \pi r^2} \frac{\delta V}{\delta t}$$
+>
+> If we let $r = 25$ and $\frac{\delta V}{\delta t} = 100$ we obtain
+>
+> $$\frac{\delta r}{\delta t} = \frac{1}{4 \pi (25)^2} 100 = \frac{1}{25\pi}$$
+>
+> So the radius of the balloon is increasing at the rate of $\frac{1}{25\pi} \approx 0.0127 \text{cm}/\text{s}$ when the diameter is $50 \text{cm}$.
