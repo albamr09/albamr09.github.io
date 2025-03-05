@@ -444,7 +444,7 @@ $$
 
 ### The Tower of Hanoi
 
-In 1883 a French mathematician, Édouard Lucas, invented a puzzle that he called the Tower of Hanoi. Those who played the game were supposed to move all the disks one by one from one pole to another, never placing a larger disk on top of a smaller one. 
+In 1883 a French mathematician, Édouard Lucas, invented a puzzle that he called the Tower of Hanoi. Those who played the game were supposed to move all the disks one by one from one pole to another, never placing a larger disk on top of a smaller one.
 
 ![Hanoi Tower](./assets/hanoi_tower.png)
 
@@ -456,11 +456,11 @@ An elegant and efficient way to solve this problem is to think recursively.
 
 ![Hanoi Tower Solution](./assets/solve_hanoi_tower.png)
 
-If $m_n$ is the minimum number of moves needed to transfer a tower of $n$ disks from one pole to another. Then 
+If $m_n$ is the minimum number of moves needed to transfer a tower of $n$ disks from one pole to another. Then
 
 - Going from position $(a)$ to position $(b)$ requires $m_{k-1}$ moves
 - Going from position $(b)$ to position $(c)$ requires just one move
-- Going from position $(c)$ to position $(d)$  requires $m_{k-1}$
+- Going from position $(c)$ to position $(d)$ requires $m_{k-1}$
 
 Therefore
 
@@ -507,7 +507,7 @@ $$
 ### Recursive Definitions of Sum and Product
 
 > [!NOTE] **Binary Operations**
->  
+>
 > Addition and multiplication are called **binary operations** because only two numbers can be added or multiplied at a time.
 
 Given numbers $a_1, a_2, \cdots, a_n$ where $n$ is a positive integer, the **summation from $i = 1$ to $n$ of the $a_i$** denoted $\sum_{i=1}^n a_i$ is defined as follows:
@@ -533,25 +533,25 @@ The most basic method for finding an explicit formula for a recursively defined 
 ### Arithmetic Sequence
 
 > [!TIP] **Arithmetic Sequence**
-> 
+>
 > A sequence $a_0, a_1, \cdots$ is called an **arithmetic sequence** if, and only if, there is a constant $d$ such that
-> 
+>
 > $$a_k = a_{k - 1} + d \text{ for each integer } k \geq 1$$
-> 
+>
 > If follows that
-> 
+>
 > $$a_n = a_0 + dn \text{ for every integer } n \geq 0$$
 
 ### Geometric Sequence
 
 > [!TIP] **Geometric Sequence**
-> 
+>
 > A sequence $a_0, a_1, \cdots$ is called an **geometric sequence** if, and only if, there is a constant $r$ such that
-> 
+>
 > $$a_k = ra_{k - 1} \text{ for each integer } k \geq 1$$
-> 
+>
 > If follows that
-> 
+>
 > $$a_n = a_0 + r^n \text{ for every integer } n \geq 0$$
 
 ### Checking the Correctness of a Formula by Mathematical Induction
