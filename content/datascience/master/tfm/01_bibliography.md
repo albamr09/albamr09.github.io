@@ -341,3 +341,275 @@ N = \{(x_i, x_n) | x_n \in X_b \setminus X_P\}
 $$
 
 That is the negative pairs for $x_i$ are defined as any sample that is not assignated to the same cluster as $x_i$ more than $\lfloor \frac{k}{2} \rfloor$ times, where $k$ is the number of feature subsets we clustered.
+
+## Attention Versus Contrastive Learning of Tabular Data: A Data-Centric Benchmarking
+
+### Introduction
+
+This article extensively evaluates state-of-the-art attention and contrastive learning methods on a wide selection of 28 tabular data sets (14 easy and 14 hard-to-classify) against traditional deep and machine learning.
+
+This paper identifies four deep tabular data learning strategies: 1) attention, 2) contrastive learning, 3) traditional deep learning, and 4) autoencoder with pretraining.
+
+### Background
+
+The SCARF (Self-Supervised Contrastive Learning with Random Feature Corruption) method is a constrastive learning method that masks $60\%$ of the features of each data sample and replaces masked values with those obtained from a random sample, termed random feature corruption.
+
+While Value Imputation and Mask Estimation (VIME) creates a mask using a Bernoulli distribution. Furthermore, VIME optimizes two loss terms: one to reconstruct the corrupted features and the other to estimate mask vectors
+
+### Methods
+
+This section presents thirteen methods we test on tabular datasets. These methods are grouped into four categories:
+
+- Baseline neural networks
+  - Fully connected Deep Neural Networks (DNN)
+  - DNN with Autoencoder pretraining (DNN-AE)
+- Attention-based neural networks:
+  - TabNet
+  - FT-Transformer (FTT)
+  - Non-Parametric Transformer (NPT)
+  - Self-Attention and Intersample Attention Transformer (SAINT)
+- Contrastive Learning methods (SCARF) using five corruption strategies
+  - Pass
+  - Additive noise
+  - Sampling from feature distribution
+  - Random Feature Corruption (RF)
+  - CutMix
+- Traditional machine learning:
+  - Logistic Regression (LR)
+  - Gradient Boosting Decision Trees (GBT).
+
+#### DNN with Autoencoder pretraining
+
+In a self-supervised pertaining setting, an autoencoder maps input data to a low-dimensional latent space, which is then trained to decode or reconstruct the input from the latent space. This self-supervised learning provides an effective initialization of the model’s trainable parameters.
+
+How does this pre-training work?
+
+You train the autoencoder on your data by making it learn how to reconstruct the input as accurately as possible. This process forces the encoder to learn useful features of the data. After pretraining, the decoder is no longer needed. You replace the decoder with a classifier (a layer that predicts categories).
+
+Instead of training a DNN from scratch, you start with a model that already understands the data structure.
+
+#### Attention-based learning
+
+**Attention-based training** is a way for neural networks to focus on the most important parts of the input data, rather than treating everything equally. Instead of processing all the input equally, they assign different importance (weights) to different parts based on how relevant they are. This helps models make better predictions, especially when dealing with long sequences (like sentences, time-series data, or images).
+
+A **Transformer** is made up of layers of attention and other operations. The two main parts are:
+
+- Encoder: Processes the input (e.g., a sentence in English).
+- Decoder: Generates the output (e.g., a translation in French).
+
+Each layer contains:
+
+- Self-Attention: Helps the model focus on the right words in a sentence.
+- Feedforward Layers: Adjusts and refines the attention-based results.
+
+Transformers were originally designed for text (like sentences), where words are turned into word embeddings—special numerical representations that help the model understand relationships between words. But when dealing with tabular data (like spreadsheets with columns and rows), we don’t have "words"—we have features (columns like "age," "salary," or "height").
+
+For Transformers to work well with tabular data, we need to convert these features into embeddings, just like words in text processing.
+
+**Feature-Tokenization** is a method where:
+
+- Each column (feature) is treated like a "word" in a sentence.
+- Each feature gets a special trainable embedding (numerical representation).
+- This changes the data shape from (rows $\times$ columns) → (rows $\times$ columns $\times$ embedding size).
+
+#### Contrastive Learning
+
+For contrastive methods, we investigate the effectiveness of five corruption strategies
+
+- Pass: No values are altered.
+- Noise: A value sampled from Gaussian distribution $\mathcal{N}(0, 1^2)$ is added to each masked value.
+- Sample: Features are assumed to be normally distributed with feature mean ($\mu$) and standard deviation ($\sigma$). Each masked value is replaced by a value sampled from corresponding feature distribution $\mathcal{N}(\mu, \sigma)$.
+- CutMix: Masked values of a sample are replaced using corresponding feature values of another random sample.
+- Random Feature Corruption (RFC): Each masked value in a sample is replaced with the same feature value taken from another random sample. The difference between RFC and CutMix is that CutMix selects a random sample to replace all the masked values of a given sample. In contrast, RFC replaces masked values of a sample using values taken from different random samples.
+- Proposed Within Cluster Replace (WCR): Given a data set with $K$ classes, k-mean clustering is used to obtain $K$ clusters. Instead of using a mask, all feature values of a sample are replaced using the corresponding feature values of another random sample within the same cluster.
+
+### Conclusion
+
+Leveraging the strength of attention and contrastive learning yields the best performance by far (SAINT), followed by NPT and FTT methods.
+
+## Explainable Multi-agent Network for Multi-classification in Small Tabular Data
+
+### Introduction
+
+We present an explainable multi-agent network for multi-classification of small tabular datasets, that uses a discrimination network, an attention block, and a classification network.
+
+### Method
+
+For each agent in training phase, the input consists of $n$ pairs that includes: $x_1$, instance
+that we want to classify, and $\hat{x}_i$, instance that will be used to measure the similarity
+to $x_1$, so that the input is: $(x_1, \hat{x}_i)$ with $i$ from $1$ to $n$.
+
+This input will be used by the first part of the network called **discriminator** to create an embedding representation $\text{emb}_1$ and $\hat{\text{emb}}_i$ for $x_1$ and $\hat{x}_i$ respectively. This part of the network uses cosine distance as a loss function.
+
+The second part of the network called classifier takes only $\text{emb}_1$ as input to predict if it belongs to the specific class of the agent or not. Essentially each agent will be trained to differentiate between one class and the rest, meaning that the model will have $N$ agents where $N$ is the number of classes in the dataset.
+
+All agents are trained in parallel, at the start of an episode the input \(\{x_1, \hat{x}_i\}_{i=1}^n\), the similarity label $_i$, and the class label $y_i$ are extracted. The similarity label is equal to $1$ if pairs are from the same class and $–1$ if not. Also, class label $y_i$ equals $1$ if the class is specific to the agent and $0$ if not.
+
+An episode has an inner epoch where the discriminator network will compare $x_1$ to each $\hat{x}_i$ , and the cosine loss is calculated using similarity labels and embedding outputs. Finally,
+the classification network uses the embedding output of $x_i$ to predict the class label $\hat{y}_i$ and the classification loss is calculated between $y_i$ and $\hat{y}_i$. The model is optimized using both classifier and discriminator losses.
+
+For validation and test phases, all agents work jointly with the same input $x$ and output a probability of $x$ being from the agent’s class, then a SoftMax function is performed on the joint probability tensor to predict the actual class of the input.
+
+## TabCLR: Contrastive Learning Representation of Tabular Data Classification for Indoor-Outdoor Detection
+
+### Introduction
+
+TabCLR utilizes contrastive learning representation tailored for tabular data classification using smartphone inertial sensors. It comprises data augmentation, a novel encoder network with self-attention, and an optimized contrastive loss function.
+
+Notably, TabCLR outperforms SCARF by $6\\%-7\\%$, indicating its effectiveness in capturing temporal feature representation patterns.
+
+TabCLR encapsulates three important steps in contrasting learning representation.
+
+- Firstly, in the augmentation phase, we randomly add corrupted features in the unlabeled dataset to generate positive pairs, fostering semantic similarity, while forming negative pairs by contrasting corrupted data with the remaining batch components.
+- Secondly, a novel encoder model incorporates self-attention for temporal representation extraction and spatial features from the base encoder.
+- Thirdly, we encapsulate a modified form of NXENT contrastive loss function from simCLR, called spatial-context contrastive loss (SCCL).
+- Finally, we also present a fine-tuning phase, where labeled inertial sensor data is classified into indoor-outdoor classification using a lightweight DNN-based classifier after getting feature representation from the pre-trained novel encoder.
+
+### Methodology
+
+#### Problem Formulation and Objective
+
+Given a dataset $D = \\{(x_i, y_i)\\}_{i=1}^N$ where $x_i$ represents the unlabeled inertial sensors data for the ith sample and $y_i$ is the corresponding label indicating whether the sample is from an indoor or outdoor environment ($y_i \in \\{I, O\\}$), which will used for fine-tuning after self-supervised learning. Our goal is to learn the inertial representation $f(x_i)$ that captures the spatio-temporal features crucial for indooroutdoor classification. Our objective is to optimize the following:
+
+$$
+\min_{\theta, \phi} \frac{1}{N} \sum_{i=1}^N \left[\log \frac{\exp(\text{sim}(f_\theta(x_i), f_\theta(x_j)))}{\sum_{k=1}^N \exp(\text{sim}(f_\theta(x_i), f_\theta(x_k)))}\right]
+$$
+
+Here $f_\theta$ denotes the encoding function parameterized by $\theta$, and $\text{sim}(\cdot)$ represents the similarity measure between representations.
+
+The dataset is divided into an unlabelled contrastive self-supervised learning phase and a labeled fine-tuning phase. During self-supervised learning, the objective is to minimize intra-cluster distances (dintra) between semantically similar data points and maximize inter-cluster distances (dinter ) between dissimilar points:
+
+$$
+d_{\text{intra}}(x_i, x_j) = ||f(x_i) - f(x_j)||_2 (\text{Intra-cluster distance})
+$$
+
+$$
+d_{\text{intra}}(x_i, x_k) = ||f(x_i) - f(x_k)||_2 (\text{Inter-cluster distance})
+$$
+
+The model aims to minimize the ratio of intra-cluster distance to inter-cluster distance:
+
+$$
+\text{Minimize} \frac{d_{\text{intra}}}{d_{\text{inter}}}
+$$
+
+#### Random Permutation Feature Corruption
+
+To create positive pairs, this mechanism corrupts a subset of features within the sensor data to generate positive pairs, while contrasting corrupted data within the remaining batch yields negative pairs. Then it utilizes empirical marginal distributions of features to guide the data augmentation process. Sampling from these distributions ensures the realism and representativeness of the augmented data, enhancing the quality of learned representations. The empirical sampling is mathematically represented as:
+
+$$
+x_{\text{augmented}} \sim \text{Uniform}(\text{features\_low}, \text{features\_high})
+$$
+
+Let $x$ be the input tensor of size $B \times M$ where $B$ is the batch size, and $M$ is the length of the input tensor. The corrupted tensor $x_c$ is expressed as:
+
+$$
+x_c = x \odot M_c + R \odot (1_{B \times M} - M_c)
+$$
+
+where $\odot$ represents elemt-wise multiplication and $1_{B \times M}$ is a tensor of ones with the same size as $x$.
+
+#### Proposal of SCCL Loss Function
+
+We propose spatial-context contrastive loss (SCCL). Incorporates a spatial consistency term, enhancing its effectiveness in capturing spatial relationships:
+
+$$
+\mathcal{L}_{\text{SCCL}} = - \frac{1}{2B} \sum_{i=1}^{2B} \log \left(\frac{e^{\text{sim}_{ii} / \tau}}{\sum_{j \neq i} e^{\text{sim}_{ij} / \tau}}\right) \\ + \alpha \frac{1}{B} \sum_{k=1}^B ||z_{ik} - z_{jk}||_2
+$$
+
+where $z_{ik}$ and $z_{jk}$ are embeddings of anchor and positive samples, and $\alpha$ is the weight parameter for the spatial consistency term.
+
+The first term aims to maximize the similarity between positive pairs (\(\text{sim}_{ii}\)) and minimize the similarity between negative pairs ($\text{sim}_{ij}$). The second term enforces consistency in feature representations across augmentations, promoting robustness and discriminative feature learning.
+
+#### TabCLR Framework
+
+For each mini-batch of examples from the unlabeled training data, a corrupted version $\hat{x}(i)$ is generated for each example $x(i)$. Both the original $x(i)$ and corrupted $\hat{x}(i)$ instances are passed through the encoder network ($f$), which incorporates self-attention ($t$) for temporal representation. The encoder network’s output is then processed through the pre-train head network ($g$), which normalizes the outputs to lie on the unit hypersphere.
+
+The resulting representations are denoted as $z(i)$ and $\hat{z}(i)$ for the original and corrupted instances, respectively. The training objective involves optimizing the parameters of both the encoder ($f $) with self-attention ($t$) and the pre-train head ($g$) networks through stochastic gradient descent (SGD).
+
+To facilitate downstream tasks, a classifier is fine-tuned. The encoder network ($f$) with self-attention ($t$) is retained, and a classification head ($h$) is attached to predict labels based on the output of the encoder. Crossentropy classification loss is optimized, and the parameter of both the encoder and classifier are tuned.
+
+Figure 3 provides a visual representation.
+
+![TabCLR Architecture](./assets/tabclr.png)
+
+## Tabular Data Contrastive Learning via Class-Conditioned and Feature-Correlation Based Augmentation
+
+### Introduction
+
+We propose a simple yet powerful improvement to this augmentation technique: corrupting tabular data conditioned on class identity. In recent years, contrastive learning has emerged as a highly popular pre-training technique frequently adapted in the self-supervised learning and semisupervised learning settings. Contrastive learning is mainly used to pre-train an encoder block. So it learns a lower-dimensional encoding using a contrastive strategy which is the used as the input for the encoder.
+
+To perform contrastive learning, as the first step, researchers engineer data augmentation techniques to create similar views on top of each original data point (often referred to as the anchor). A contrastive loss is then optimized, which minimizes a distance metric (i.e., cosine similarity) in the embedding space between the anchor and its corresponding views.
+
+We first propose an easy yet powerful improvement to the feature-value corruption technique, by
+incorporating the class information into the corruption procedure. Specifically, when corrupting a feature value on the anchor row, instead of sampling uniformly across the entire table for the replacement, we restrict the sampling within rows that belong to the same class as the anchor row. We refer to this improvement as **class-conditioned corruption**.
+
+Note that, as we do not have the target information for every row under the semi-supervised setting, we adopt the pseudolabeling technique to obtain estimations of targets.
+
+We further explore into another dimension of corruption strategy: where to corrupt. Specifically, to improve upon the current approach, we exploit feature correlations, and attempt to sample the subset of features based on the correlation structure, which we refer to as correlation-basedfeature masking.
+
+### Problem Formulation and Background
+
+Consider a tabular dataset $D = (D_{\text{train}}, D_{\text{test}})$, where \(D_{\text{train}} = \{(x_i, y_i)\}_{i=1}^{N_i} \cup \{x_i\}_{i=N_l + 1}^{N_l + N_u}\) consists of $N_l$ labeled samples and $N_u$ unlabeled samples for training; and \(D_{\text{test}} = \{(x_i, y_i)\}_{i = N_l + N_u + 1}^{N_l + N_u + N_t}\) consists of $N_t$ labeled samples for testing, with the testing labels $\\{y_i\\}_{i=N_l + N_u + 1}^{N_l + N_u + N_t}$ unknown to the model. Each sample input $x_i$ consists of $M$ features.
+
+We aim to learn a parametrized mapping $f_\theta(\cdot)$ that solves the classification task by mapping each input in the testing set to its class. We explore the use of a neural network for modeling $f_\theta$ which consists of three parts:
+
+- An encoder, with parameters denoted as $\theta_e$.
+- A pre-train head, with parameters denoted as $\theta_p$.
+- A classification head, with parameters denoted as $\theta_c$.
+
+We then have $\theta = \\{\theta_e, \theta_p, \theta_c\\}$ as the model parameters. The pre-train head $\theta_p$ is only included in the pre-training stage to allow for extra flexibility in the learned representations. It will be discarded in the down-stream fine-tuning stage.
+
+#### Contrastive Learning
+
+Contrastive learning is the process of pre-training the model to learn an embedding space which will be further used for down-stream classification or regression tasks. Let $g(\cdot)$ denote the data augmentation function. Given an anchor xi from the training set, a view is generated as follows:
+
+$$
+\hat{x}_i = g(x_i)
+$$
+
+With $g(\cdot)$ intended to be a semantic preserving operation, $\hat{x}_i$ should be highly similar to $x_i$. Therefore, their corresponding representations in the embedding space should also be close. After obtaining views as above, we compute the embeddings for the original data points as well as the views:
+
+$$
+z_i = f_{\theta_p}(f_{\theta_e}(x_i))
+$$
+
+$$
+\hat{x}_i = f_{\theta_p}(f_{\theta_e}(\hat{x}_i))
+$$
+
+Consider a sampled training batch $\\{x_i\\}^N_{i=1}$ with batch size $N$. We can obtain two sets of embeddings: $\\{z_i\\}^N_{i=1}$ and \(\{\hat{z}_i\}^N_{i=1}\). We denote the cosine similarity between any pair of embeddings $z_i$ and $z_j$ as follows:
+
+$$
+s_{i, j} = \frac{z_i^Tz_j}{||z_i||||z_j||}
+$$
+
+A contrastive loss is then defined on this training batch as follows:
+
+$$
+\mathcal{L} = \frac{1}{2N} \sum_{i=1}^{2N} - \log \left(\frac{e^{s_{i, i} / \tau}}{\sum_{j = 1}^{2N} 1_{[j \neq i]}e^{s_{i, i} / \tau}}\right)
+$$
+
+where $i'$ is the index of the pairing view (or anchor) embedding to the index $i$. By minimizing this equation, we gradually push closer pairs of anchor and view, and push away anchors and views across different pairs.
+
+After optimizing the model we will proceed to discard the pretrain head $\theta_p$, freeze the encoder portion $\theta_e$, and train the classification head $\theta_c$ taking the outputs from the encoder as inputs on the labeled training set.
+
+#### Data Augmentation via Random Corruption
+
+To describe the corruption procedure in details, let $p$ be the percentage of features to be corrupted, which is a hyperparameter. We would then have $\lceil M_p \rceil$ features to be corrupted. Let $M_{\text{crpt}}$ denote the subset of features to be corrupted. In the current literature, the $M_{\text{crpt}}$ features are randomly selected from the $M$ features for each anchor to be corrupted. Furthermore, for each feature within the Mcrpt features, the replacement value is also randomly selected from the feature column from the entire table.
+
+### Method
+
+We formally propose two improvements over the existing tabular data augmentation procedure.
+
+#### How to Corrupt: Class-Conditioned Corruption
+
+When corrupting each selected feature in the anchor, we only sample the feature value from rows that are under the same class as the anchor. The main challenge within the class-conditioned corruption process is to obtain class labels over the entire table. Conventionally, contrastive learning is a self-supervised learning approach that does not require any label. But, the assumption of semi-supervised learning, where a small set of labels is available, is more realistic.
+
+Under the semi-supervised learning setting, we adapt the popular pseudo labeling approachfor obtaining labels on the unlabeled training set. Specifically, a model is first trained on the small labeled set, and then utilized to run inference on the remaining unlabeled set. The model outputs are regarded as the pseudo targets for the unlabeled data.
+
+#### Where to Corrupt: Correlation-Based Feature Masking
+
+Instead of randomly selecting the subset of features to corrupt on each anchor, we hypothesize that incorporating the correlation information among features can improve the performance of contrastive learning. This technique can be regarded as selecting a subset of features that are highly correlated for corruption. The rationale behind this strategy follows that with each feature being corrupted, there exists correlated features left intact. Through reconstructing the corrupted features based on their correlated features, the model is encouraged to learn and utilize the knowledge of feature correlations.
+
+In this paper, we adopt a more general and flexible correlation measure, which is through fitting an XGBoost model and obtaining the feature importance scores as a proxy for feature correlation. Specifically, given the entire training set of tabular data, for each feature, we fit an XGBoost model to predict this feature (classification for categorical features; regression for numerical features) based on the remaining features. We then utilize the normalized feature importance scores as the indicator on how each of the remaining feature correlates to the feature to be predicted.
