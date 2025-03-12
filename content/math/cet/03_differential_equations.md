@@ -1426,3 +1426,65 @@ In a related rates problem the idea is to compute the rate of change of one quan
 > $$\frac{\delta r}{\delta t} = \frac{1}{4 \pi (25)^2} 100 = \frac{1}{25\pi}$$
 >
 > So the radius of the balloon is increasing at the rate of $\frac{1}{25\pi} \approx 0.0127 \text{cm}/\text{s}$ when the diameter is $50 \text{cm}$.
+
+## Linear Approximations and Differentials
+
+A curve lies very close to its tangent line near the point of tangency, which is the basis for a method of finding approximate values of functions.
+
+### Linearization and Approximation
+
+We use the tangent line at $(a, f(a))$ as an approximation to the curve $y = f(x)$ when $x$ is near $a$ (See Figure 1).
+
+![Tangent Line to a Curve](./assets/linear_approximation.png)
+
+The linear function whose graph is this tangent line is:
+
+$$
+L(x) = f(a) + f'(a)(x - a)
+$$
+
+This is called the **linearization** of $f$ at $a$. The approximation $f(x) \approx L(x)$ or:
+
+$$
+f(x) \approx f(a) + f'(a)(x - a)
+$$
+
+is called the **linear approximation** or **tangent line approximation** of $f$ at $a$.
+
+### Differentials
+
+If $y = f(x)$, where $f$ is a differentiable function, then the **differential** $dx$ is an independent variable, that is, $dx$ can be given the value of any real number. The **differential** $dy$ is then defined in terms of $dx$ by the equation
+
+$$
+f'(x) = \frac{dy}{dx} \Leftrightarrow dy = f'(x)dx
+$$
+
+So $dy$ is a dependent variable.
+
+The geometric mieaning of differentials is shown in Figure 5. Let $P(x, f(x))$ and $Q(x + \Delta x, f(x + \Delta x))$ be points on the graph of $f$ and let $dx = \Delta x$. Then the corresponding change in $y$ is
+
+$$
+\Delta y = f(x + \Delta x) - f(x)
+$$
+
+The slope of the tangent line $PR$ is the derivative $f'(x)$. Then $dy$ represents the amount that the tangent line rises or falls, that is the change predicted by the tangent line (a linear approximation). Whereas $\Delta y$ represents the amount that the curve $y = f(x)$ rises or falls, the actual change in the function's value when $x$ changes by an amount $dx$.
+
+![Differentials](./assets/differentials.png)
+
+In the notation of differentials, the linear approximation $f(x) \approx f(a) + f'(a)(x - a)$ can be re-written by taking $dx = x - a$ so $x = a + dx$
+
+$$
+f(a + dx) \approx f(a) + f'(a)dx
+$$
+
+Given $dy = f'(a)dx$
+
+$$
+f(a + dx) \approx f(a) + dy
+$$
+
+We can use differentials when estimating errors, for example the error that occurs because of approximate measurements. Although a better picture of the error is given by the **relative error**, which is computed by dividing the error by the value of the original function:
+
+$$
+\frac{\Delta f(x)}{f(x)}  \approx \frac{\delta f(x)}{f(x)}
+$$
