@@ -443,12 +443,14 @@ This input will be used by the first part of the network called **discriminator*
 
 The second part of the network called classifier takes only $\text{emb}_1$ as input to predict if it belongs to the specific class of the agent or not. Essentially each agent will be trained to differentiate between one class and the rest, meaning that the model will have $N$ agents where $N$ is the number of classes in the dataset.
 
-All agents are trained in parallel, at the start of an episode the input \(\{x_1, \hat{x}_i\}_{i=1}^n\), the similarity label $_i$, and the class label $y_i$ are extracted. The similarity label is equal to $1$ if pairs are from the same class and $–1$ if not. Also, class label $y_i$ equals $1$ if the class is specific to the agent and $0$ if not.
+All agents are trained in parallel, at the start of an episode the input \(\{x*1, \hat{x}\_i\}*{i=1}^n\), the similarity label $_i$, and the class label $y_i$ are extracted. The similarity label is equal to $1$ if pairs are from the same class and $–1$ if not. Also, class label $y_i$ equals $1$ if the class is specific to the agent and $0$ if not.
 
 An episode has an inner epoch where the discriminator network will compare $x_1$ to each $\hat{x}_i$ , and the cosine loss is calculated using similarity labels and embedding outputs. Finally,
 the classification network uses the embedding output of $x_i$ to predict the class label $\hat{y}_i$ and the classification loss is calculated between $y_i$ and $\hat{y}_i$. The model is optimized using both classifier and discriminator losses.
 
 For validation and test phases, all agents work jointly with the same input $x$ and output a probability of $x$ being from the agent’s class, then a SoftMax function is performed on the joint probability tensor to predict the actual class of the input.
+
+![Explainable MUlti-agent Network Architecture](./assets/explainable_multinetwork_arch.png)
 
 ## TabCLR: Contrastive Learning Representation of Tabular Data Classification for Indoor-Outdoor Detection
 
@@ -550,7 +552,7 @@ We further explore into another dimension of corruption strategy: where to corru
 
 ### Problem Formulation and Background
 
-Consider a tabular dataset $D = (D_{\text{train}}, D_{\text{test}})$, where \(D_{\text{train}} = \{(x_i, y_i)\}_{i=1}^{N_i} \cup \{x_i\}_{i=N_l + 1}^{N_l + N_u}\) consists of $N_l$ labeled samples and $N_u$ unlabeled samples for training; and \(D_{\text{test}} = \{(x_i, y_i)\}_{i = N_l + N_u + 1}^{N_l + N_u + N_t}\) consists of $N_t$ labeled samples for testing, with the testing labels $\\{y_i\\}_{i=N_l + N_u + 1}^{N_l + N_u + N_t}$ unknown to the model. Each sample input $x_i$ consists of $M$ features.
+Consider a tabular dataset $D = (D_{\text{train}}, D_{\text{test}})$, where \(D*{\text{train}} = \{(x_i, y_i)\}*{i=1}^{N*i} \cup \{x_i\}*{i=N*l + 1}^{N_l + N_u}\) consists of $N_l$ labeled samples and $N_u$ unlabeled samples for training; and \(D*{\text{test}} = \{(x*i, y_i)\}*{i = N*l + N_u + 1}^{N_l + N_u + N_t}\) consists of $N_t$ labeled samples for testing, with the testing labels $\\{y_i\\}*{i=N_l + N_u + 1}^{N_l + N_u + N_t}$ unknown to the model. Each sample input $x_i$ consists of $M$ features.
 
 We aim to learn a parametrized mapping $f_\theta(\cdot)$ that solves the classification task by mapping each input in the testing set to its class. We explore the use of a neural network for modeling $f_\theta$ which consists of three parts:
 

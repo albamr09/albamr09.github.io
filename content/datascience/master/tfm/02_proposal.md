@@ -11,25 +11,45 @@ Classification on with tabular using deep neural networks
 
 ## Possible solutions
 
-Given a tabular dataset use multimodal learning where the two modalities are as follows:
-
-- Image data: generated from tabular data.
-- Tabular data: raw dataset.
-
 ### First Approach
 
-- For the tabular data use contrastive learning, but how?
-  - Hypernetwork? Idk if the output of this type of network would merge good with output of CNN
-  - ReConTab: seems a good approximation as it obtains a lower dimensional represetation of the data that could be used (this could be combined with TabContrast for obtaining positive/negative pairs)
-- For the image data: use pretrained CNNs to extract useful information
-- Merge both approximations for classification. How are these datasets merged though?
-  - **Cross-modal transformers**: Allow interactions between modalities during fusion
-  - **Multimodal Transformer with Contrastive Objectives**:
-    - After encoding, you can feed the modality-specific embeddings into a multimodal transformer. You can use attention mechanisms within the transformer to allow the model to attend to the most important features from both modalities.
-    - You can then apply a contrastive loss at multiple stages of the transformer (either at the embedding level or after the attention mechanism), ensuring that the attention process is aligned with your goal of minimizing distances for similar instances and maximizing distances for dissimilar ones.
-- Classification: downstream the fused data into a classification model
-  - This could be a simple MLP, a more complex neural network, or even a traditional classifier
+#### Contrastive Learning for Tabular Data Pretraining
+
+Using a **TabContrast** approach:
+
+- Generate positive pairs by applying augmentations to your tabular data:
+- Implement an encoder architecture
+- Use NT-Xent loss:
+  - Maximize similarity between positive pairs
+  - Minimize similarity between negative pairs (other samples in batch)
+
+I mean I could use something else, but I think this method allows for more artifically generated training data that could be beneficial.
+
+_Maybe ReConTab + TabContrast but that may be too complex_
+
+#### Transforming Table Rows into Images
+
+- Use: REFINED, etc to convert to image data
+- Use pre-trained CNN to extract features.
+
+_Crazy to use contrast learning on this phase?_
+
+#### Merging the Two Information Sources
+
+Using an attention-based fusion approach:
+
+- For tabular data: Extract the lower-dimensional embeddings form our encoder.
+- For images: use our CNN to extract the lower-dimensional representation of the image.
+- Fusion:
+  - Project embeddings on the same dimension (this might require another head?)
+  - Implement cross-attention (... I don't know how this works)
+- Pass through a final MLP for classification
 
 ### Second Approach
 
-Use directly the approach presented on (../01_bibliography#best-of-both-worlds-multimodal-contrastive-learning-with-tabular-and-imaging-data)[Best of Both Worlds: Multimodal Contrastive Learning with Tabular and Imaging Data]
+Given a tabular dataset use multimodal learning where the two modalities are as follows:
+
+- Generate image data same as before, using REFINED, etc.
+- Tabular data: raw dataset.
+
+Use directly the approach presented on [Best of Both Worlds: Multimodal Contrastive Learning with Tabular and Imaging Data](../01_bibliography#best-of-both-worlds-multimodal-contrastive-learning-with-tabular-and-imaging-data)
