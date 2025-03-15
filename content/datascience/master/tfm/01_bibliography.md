@@ -615,3 +615,47 @@ Under the semi-supervised learning setting, we adapt the popular pseudo labeling
 Instead of randomly selecting the subset of features to corrupt on each anchor, we hypothesize that incorporating the correlation information among features can improve the performance of contrastive learning. This technique can be regarded as selecting a subset of features that are highly correlated for corruption. The rationale behind this strategy follows that with each feature being corrupted, there exists correlated features left intact. Through reconstructing the corrupted features based on their correlated features, the model is encouraged to learn and utilize the knowledge of feature correlations.
 
 In this paper, we adopt a more general and flexible correlation measure, which is through fitting an XGBoost model and obtaining the feature importance scores as a proxy for feature correlation. Specifically, given the entire training set of tabular data, for each feature, we fit an XGBoost model to predict this feature (classification for categorical features; regression for numerical features) based on the remaining features. We then utilize the normalized feature importance scores as the indicator on how each of the remaining feature correlates to the feature to be predicted.
+
+## VIME: Extending the Success of Self- and Semi-supervised Learning to Tabular Domain
+
+### Introduction
+
+In this paper, we fill this gap by proposing novel self- and semi-supervised learning frameworks for tabular data, which we refer to collectively as VIME (Value Imputation and Mask Estimation).
+
+### Problem Formulation
+
+Suppose we have a small labeled dataset \(\mathcal{D}_l = \{x_i, y_i\}^{N_l}_{i = 1}\) and a large unlabeled dataset \(\mathcal{D}_u = \{x_i\}^{N_l + N_u}_{i = N*l + 1}\), where $N_u >> N_l, x_i \in \mathcal{X} \subseteq \mathbb{R}^d$ and $y_i \in \mathcal{Y}$. The label $y_i$ is a scalar in single-task learning while it can be given as a multi-dimensional vector in multi-task learning. We assume every input feature $x_i$ in $\mathcal{D}_l$ and $\mathcal{D}_u$ is sampled i.i.d. from a feature distribution $p_X$, and the labeled data pairs $(x_i, y_i)$ in $\mathcal{D_l}$ are drawn from a joint distribution $p*{X, Y}$.
+
+#### Self-supervised learning
+
+Self-supervised learning aims to learn informative representations from unlabeled data. We define various self-supervised/pretext tasks for a pretext model to solve. In general, self-supervised learning constructs an encoder function $e: \mathcal{X} \leftarrow \mathcal{Z}$ that takes a sample $x \in \mathcal{X}$ and returns an informative representation $z = e(x) \in \mathcal{Z}$. The representation $z$ is optimized to solve a pretext task defined with a pseudo-label $y_s \in \mathcal{Y}_s$ and a self-supervised loss function $l_{ss}$. We define the pretext predictive model as $h: \mathcal{Z} \leftarrow \mathcal{Y}_s$, which is trained jointly with the encoder function $e$ by minimizing the expected self-supervised loss function lss as follows,
+
+$$
+\min_{e, h} \mathbb{E}_{(x_s, y_s) \sim p_{X_s, Y_s}}\left[l_{ss}(y_s, (h \circ e)(x_s))\right]
+$$
+
+### Method
+
+## Scarf: Self-supervised Contrastive Learning Using Random Feature Corruption
+
+### Introduction
+
+We propose SCARF, a simple, widely-applicable technique for contrastive learning, where views are formed by corrupting a random subset of features. We generate a view for a given input by selecting a random subset of its features and replacing them by random draws from the features’ respective empirical marginal distributions.
+
+Within the contrastive learning framework, the choice of loss function is significant. InfoNCE which can be interpreted as a non-parametric estimation of the entropy of the representation.
+
+Lastly, also similar to our work is VIME, which proposes the same corruption technique for tabular data that we do. They pre-train an encoder network on unlabeled data by attaching “mask estimator” and “feature estimator” heads on top of the encoder state and teaching the model to recover both the binary mask that was used for corruption as well as the original uncorrupted input, given the corrupted input. The pre-trained encoder network is subsequently used for semisupervised learning via attachment of a task-specific head and minimization of the supervised loss as well as an auto-encoder reconstruction loss. The key differences with our work is that we pre-train using a contrastive loss, which we show to be more effective than the denoising auto-encoder loss. Furthermore, after pre-training we fine-tune all model weights, including the encoder (unlike VIME, which only fine-tunes the task head), and we do so using task supervision only.
+
+### Method
+
+For each mini-batch of examples from the unlabeled training data, we generate a corrupted version $\hat{x}^{(i)}$ for each example $x^{(i)}$. To do so:
+
+1. We sample some fraction of the features uniformly at random and replace each of those features by a random draw from that feature’s empirical marginal distribution, which is defined as the uniform distribution over the values that feature takes on across the training dataset.
+2. We pass both $x^{(i)}$ and $\hat{x}^{(i)}$ through the encoder network $f$, whose output we pass through the pre-train head network $g$, to get $z^{(i)}$ and $\hat{z}^{(i)}$ respectively. Note that the pre-train head network $\mathcal{l}_2$-normalizes the outputs so that they lie on the unit hypersphere – **this has been found to be crucial in practice**.
+3. We train on the InfoNCE contrastive loss, encouraging $z^{(i)}$ and $\hat{z}^{(i)}$ to be close for all $i$ and $z^{(i)}$ and $\hat{z}^{(j)}$ to be far apart for $i \neq j$, and we optimize over the parameters of $f$ and $g$ via SGD.
+
+Then, to train a classifier for the task via fine-tuning, we take the encoder network $f$ and attach a classification head h which takes the output of $f$ as its input and predicts the label of the example. We optimize the cross-entropy classification loss and tune the parameters of both $f$ and $h$.
+
+See Figure 1 for a visual representation of the architecture.
+
+![SCARF](./assets/scarf.png)
