@@ -628,13 +628,50 @@ Suppose we have a small labeled dataset \(\mathcal{D}_l = \{x_i, y_i\}^{N_l}_{i 
 
 #### Self-supervised learning
 
-Self-supervised learning aims to learn informative representations from unlabeled data. We define various self-supervised/pretext tasks for a pretext model to solve. In general, self-supervised learning constructs an encoder function $e: \mathcal{X} \leftarrow \mathcal{Z}$ that takes a sample $x \in \mathcal{X}$ and returns an informative representation $z = e(x) \in \mathcal{Z}$. The representation $z$ is optimized to solve a pretext task defined with a pseudo-label $y_s \in \mathcal{Y}_s$ and a self-supervised loss function $l_{ss}$. We define the pretext predictive model as $h: \mathcal{Z} \leftarrow \mathcal{Y}_s$, which is trained jointly with the encoder function $e$ by minimizing the expected self-supervised loss function lss as follows,
+Self-supervised learning aims to learn informative representations from unlabeled data. We define various self-supervised/pretext tasks for a pretext model to solve. In general, self-supervised learning constructs an encoder function $e: \mathcal{X} \leftarrow \mathcal{Z}$ that takes a sample $x \in \mathcal{X}$ and returns an informative representation $z = e(x) \in \mathcal{Z}$. The representation $z$ is optimized to solve a pretext task defined with a pseudo-label \(y_s \in \mathcal{Y}\_s\) and a self-supervised loss function $l*{ss}$. We define the pretext predictive model as $h: \mathcal{Z} \rightarrow \mathcal{Y}_s$, which is trained jointly with the encoder function $e$ by minimizing the expected self-supervised loss function lss as follows,
 
 $$
 \min_{e, h} \mathbb{E}_{(x_s, y_s) \sim p_{X_s, Y_s}}\left[l_{ss}(y_s, (h \circ e)(x_s))\right]
 $$
 
+where $p_{X_s, Y_s}$ is a pretext distribution that generates pseudo-labeled samples $(x_s, y_s)$.
+
+#### Semi-supervised learning
+
+Semi-supervised learning optimizes the predictive model $f$ by minimizing the supervised loss function jointly with some unsupervised loss function defined over the output space $\mathcal{Y}$.
+
+$$
+\min_{f} \mathbb{E}_{(x, y) \sim p_{XY} \left[l(y, f(x))\right]} + \beta \cdot \mathbb{E}_{x \sim p_X, x' \sim \hat{p}_X(x', x)} \left[l_u (f(x), f(x'))\right]
+$$
+
+where $l_u: \mathcal{Y} \times \mathcal{Y} \leftarrow \mathbb{R}$ is an unsupervised loss function, and a hyperparameter $\beta \leq 0$ is introduced to control the trade-off between the supervised and unsupervised losses. $x'$ is a perturbed version of $x$ assumed to be drawn from a conditional distribution $\hat{p}_X(x'|x)$.
+
+The first term is estimated using the small labeled dataset $\mathcal{D}_l$, while the second term is estimated using all input features in $\mathcal{D}_u$.
+
 ### Method
+
+#### Self-supervised learning for tabular data
+
+We introduce two pretext tasks: feature vector estimation and mask vector estimation. Our goal is to optimize a pretext model to recover an input sample (a feature vector) from its corrupted variant, at the same time as estimating the mask vector that has been applied to the sample.
+
+In our framework, the two pretext tasks share a single pretext distribution $p_{X_s, Y_s}$. First, a mask vector generator outputs a binary mask vector $m = [m_1, \cdots, m_d]^T \in \\{0, 1\\}^d$ where $m_j$ is randomly sampled from a Bernoulli distribution with probability $p_m$ (i.e. $p_m = \prod_{j=1}^d \text{Bern}(m_j|p_m)$). Then a pretext generator $g_m: \mathcal{X} \times \\{0, 1\\}^d \leftarrow \mathcal{X}$ takes a sample $x$ from $D_u$ and a mask vector $m$ as input, and generates a masked sample $\hat{x}$.
+
+$$
+\hat{x} = g_m(x, m) = m \odot \hat{x} + (1 - m) \odot x
+$$
+
+where the $j$-th feature of $\hat{x}$ is sampled from the empirical distribution \(\hat{p}_{X_j} = \frac{1}{N_u} \sum_{i=N*l + 1}^{N_l + N_u} \delta (x_j = x*{i, j})\) where $x_{i, j}$ is the $j$-th feature of the $i$-th sample in $D_u$. The equation above ensures the corrupted sample ~ x is not only tabular but also similar to the samples in $\mathcal{D}_u$.
+
+The level of difficulty can be adjusted by changing the hyperparameter $p_m$, the probability in $\text{Bern}(\cdot|p_m)$, which controls the proportion of features that will be masked and corrupted.
+
+Following the convention of self-supervised learning, the encoder $e$ first transforms the masked and corrupted sample $\hat{x}$ to a representation $z$, then a pretext predictive model will be introduced to recover the original sample $x$ from $z$.
+
+To solve such a challenging task, we first divide it into two sub-tasks (pretext tasks):
+
+- _Mask vector estimation_: predict which features have been masked;
+- _Feature vector estimation_: predict the values of the features that have been corrupted.
+
+Both models operate on top of the representation $z$ given by the encoder $e$ and try to estimate $m$ and $x$ collaboratively.
 
 ## Scarf: Self-supervised Contrastive Learning Using Random Feature Corruption
 
