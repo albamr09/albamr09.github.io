@@ -1,5 +1,5 @@
 ---
-title: Bibliografía
+title: Bibliography
 weight: 1
 type: docs
 math: true
@@ -552,7 +552,19 @@ We further explore into another dimension of corruption strategy: where to corru
 
 ### Problem Formulation and Background
 
-Consider a tabular dataset $D = (D_{\text{train}}, D_{\text{test}})$, where \(D*{\text{train}} = \{(x_i, y_i)\}*{i=1}^{N*i} \cup \{x_i\}*{i=N*l + 1}^{N_l + N_u}\) consists of $N_l$ labeled samples and $N_u$ unlabeled samples for training; and \(D*{\text{test}} = \{(x*i, y_i)\}*{i = N*l + N_u + 1}^{N_l + N_u + N_t}\) consists of $N_t$ labeled samples for testing, with the testing labels $\\{y_i\\}*{i=N_l + N_u + 1}^{N_l + N_u + N_t}$ unknown to the model. Each sample input $x_i$ consists of $M$ features.
+Consider a tabular dataset $D = (D_{\text{train}}, D_{\text{test}})$, where
+
+$$
+D_{\text{train}} = \{(x_i, y_i)\}_{i=1}^{N_i} \cup \{x_i\}_{i=N_l + 1}^{N_l + N_u}
+$$
+
+such that it consists of $N_l$ labeled samples and $N_u$ unlabeled samples for training; and
+
+$$
+D_{\text{test}} = \{(x_i, y_i)\}_{i = N_l + N_u + 1}^{N_l + N_u + N_t}
+$$
+
+such that it consists of $N_t$ labeled samples for testing, with the testing labels $\\{y_i\\}_{i=N_l + N_u + 1}^{N_l + N_u + N_t}$ unknown to the model. Each sample input $x_i$ consists of $M$ features.
 
 We aim to learn a parametrized mapping $f_\theta(\cdot)$ that solves the classification task by mapping each input in the testing set to its class. We explore the use of a neural network for modeling $f_\theta$ which consists of three parts:
 
