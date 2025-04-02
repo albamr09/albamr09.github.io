@@ -572,6 +572,8 @@ We aim to learn a parametrized mapping $f_\theta(\cdot)$ that solves the classif
 - A pre-train head, with parameters denoted as $\theta_p$.
 - A classification head, with parameters denoted as $\theta_c$.
 
+![Architecture Diagram](./assets/tabular_cc_ssl_architecture.svg)
+
 We then have $\theta = \\{\theta_e, \theta_p, \theta_c\\}$ as the model parameters. The pre-train head $\theta_p$ is only included in the pre-training stage to allow for extra flexibility in the learned representations. It will be discarded in the down-stream fine-tuning stage.
 
 #### Contrastive Learning
