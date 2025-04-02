@@ -576,7 +576,7 @@ We then have $\theta = \\{\theta_e, \theta_p, \theta_c\\}$ as the model paramete
 
 #### Contrastive Learning
 
-Contrastive learning is the process of pre-training the model to learn an embedding space which will be further used for down-stream classification or regression tasks. Let $g(\cdot)$ denote the data augmentation function. Given an anchor xi from the training set, a view is generated as follows:
+Contrastive learning is the process of pre-training the model to learn an embedding space which will be further used for down-stream classification or regression tasks. Let $g(\cdot)$ denote the data augmentation function. Given an anchor $x_i$ from the training set, a view is generated as follows:
 
 $$
 \hat{x}_i = g(x_i)
@@ -589,7 +589,7 @@ z_i = f_{\theta_p}(f_{\theta_e}(x_i))
 $$
 
 $$
-\hat{x}_i = f_{\theta_p}(f_{\theta_e}(\hat{x}_i))
+\hat{z}_i = f_{\theta_p}(f_{\theta_e}(\hat{x}_i))
 $$
 
 Consider a sampled training batch $\\{x_i\\}^N_{i=1}$ with batch size $N$. We can obtain two sets of embeddings: $\\{z_i\\}^N_{i=1}$ and \(\{\hat{z}_i\}^N_{i=1}\). We denote the cosine similarity between any pair of embeddings $z_i$ and $z_j$ as follows:
@@ -601,7 +601,7 @@ $$
 A contrastive loss is then defined on this training batch as follows:
 
 $$
-\mathcal{L} = \frac{1}{2N} \sum_{i=1}^{2N} - \log \left(\frac{e^{s_{i, i} / \tau}}{\sum_{j = 1}^{2N} 1_{[j \neq i]}e^{s_{i, i} / \tau}}\right)
+\mathcal{L} = \frac{1}{2N} \sum_{i=1}^{2N} - \log \left(\frac{e^{s_{i, i'} / \tau}}{\sum_{j = 1}^{2N} 1_{[j \neq i]}e^{s_{i, j} / \tau}}\right)
 $$
 
 where $i'$ is the index of the pairing view (or anchor) embedding to the index $i$. By minimizing this equation, we gradually push closer pairs of anchor and view, and push away anchors and views across different pairs.
@@ -610,7 +610,7 @@ After optimizing the model we will proceed to discard the pretrain head $\theta_
 
 #### Data Augmentation via Random Corruption
 
-To describe the corruption procedure in details, let $p$ be the percentage of features to be corrupted, which is a hyperparameter. We would then have $\lceil M_p \rceil$ features to be corrupted. Let $M_{\text{crpt}}$ denote the subset of features to be corrupted. In the current literature, the $M_{\text{crpt}}$ features are randomly selected from the $M$ features for each anchor to be corrupted. Furthermore, for each feature within the Mcrpt features, the replacement value is also randomly selected from the feature column from the entire table.
+To describe the corruption procedure in details, let $p$ be the percentage of features to be corrupted, which is a hyperparameter. We would then have $\lceil M_p \rceil$ features to be corrupted. Let $M_{\text{crpt}}$ denote the subset of features to be corrupted. In the current literature, the $M_{\text{crpt}}$ features are randomly selected from the $M$ features for each anchor to be corrupted. Furthermore, for each feature within the $M_{\text{crpt}}$ features, the replacement value is also randomly selected from the feature column from the entire table.
 
 ### Method
 
