@@ -443,7 +443,13 @@ This input will be used by the first part of the network called **discriminator*
 
 The second part of the network called classifier takes only $\text{emb}_1$ as input to predict if it belongs to the specific class of the agent or not. Essentially each agent will be trained to differentiate between one class and the rest, meaning that the model will have $N$ agents where $N$ is the number of classes in the dataset.
 
-All agents are trained in parallel, at the start of an episode the input \(\{x*1, \hat{x}\_i\}*{i=1}^n\), the similarity label $_i$, and the class label $y_i$ are extracted. The similarity label is equal to $1$ if pairs are from the same class and $–1$ if not. Also, class label $y_i$ equals $1$ if the class is specific to the agent and $0$ if not.
+All agents are trained in parallel, at the start of an episode the input
+
+$$
+\{x_1, \hat{x}_i\}_{i=1}^n
+$$
+
+the similarity label $_i$, and the class label $y_i$ are extracted. The similarity label is equal to $1$ if pairs are from the same class and $–1$ if not. Also, class label $y_i$ equals $1$ if the class is specific to the agent and $0$ if not.
 
 An episode has an inner epoch where the discriminator network will compare $x_1$ to each $\hat{x}_i$ , and the cosine loss is calculated using similarity labels and embedding outputs. Finally,
 the classification network uses the embedding output of $x_i$ to predict the class label $\hat{y}_i$ and the classification loss is calculated between $y_i$ and $\hat{y}_i$. The model is optimized using both classifier and discriminator losses.
@@ -638,11 +644,33 @@ In this paper, we fill this gap by proposing novel self- and semi-supervised lea
 
 ### Problem Formulation
 
-Suppose we have a small labeled dataset \(\mathcal{D}_l = \{x_i, y_i\}^{N_l}_{i = 1}\) and a large unlabeled dataset \(\mathcal{D}_u = \{x_i\}^{N_l + N_u}_{i = N*l + 1}\), where $N_u >> N_l, x_i \in \mathcal{X} \subseteq \mathbb{R}^d$ and $y_i \in \mathcal{Y}$. The label $y_i$ is a scalar in single-task learning while it can be given as a multi-dimensional vector in multi-task learning. We assume every input feature $x_i$ in $\mathcal{D}_l$ and $\mathcal{D}_u$ is sampled i.i.d. from a feature distribution $p_X$, and the labeled data pairs $(x_i, y_i)$ in $\mathcal{D_l}$ are drawn from a joint distribution $p*{X, Y}$.
+Suppose we have a small labeled dataset \(\mathcal{D}_l = \{x_i, y_i\}^{N_l}_{i = 1}\) and a large unlabeled dataset
+
+$$
+\mathcal{D}_u = \{x_i\}^{N_l + N_u}_{i = N_l + 1}
+$$
+
+where $N_u >> N_l, x_i \in \mathcal{X} \subseteq \mathbb{R}^d$ and $y_i \in \mathcal{Y}$. The label $y_i$ is a scalar in single-task learning while it can be given as a multi-dimensional vector in multi-task learning. We assume every input feature $x_i$ in $\mathcal{D}_l$ and $\mathcal{D}_u$ is sampled i.i.d. from a feature distribution $p_X$, and the labeled data pairs $(x_i, y_i)$ in $\mathcal{D_l}$ are drawn from a joint distribution
+
+$$
+p_{X, Y}
+$$
 
 #### Self-supervised learning
 
-Self-supervised learning aims to learn informative representations from unlabeled data. We define various self-supervised/pretext tasks for a pretext model to solve. In general, self-supervised learning constructs an encoder function $e: \mathcal{X} \leftarrow \mathcal{Z}$ that takes a sample $x \in \mathcal{X}$ and returns an informative representation $z = e(x) \in \mathcal{Z}$. The representation $z$ is optimized to solve a pretext task defined with a pseudo-label \(y_s \in \mathcal{Y}\_s\) and a self-supervised loss function $l*{ss}$. We define the pretext predictive model as $h: \mathcal{Z} \rightarrow \mathcal{Y}_s$, which is trained jointly with the encoder function $e$ by minimizing the expected self-supervised loss function lss as follows,
+Self-supervised learning aims to learn informative representations from unlabeled data. We define various self-supervised/pretext tasks for a pretext model to solve. In general, self-supervised learning constructs an encoder function $e: \mathcal{X} \leftarrow \mathcal{Z}$ that takes a sample $x \in \mathcal{X}$ and returns an informative representation $z = e(x) \in \mathcal{Z}$. The representation $z$ is optimized to solve a pretext task defined with a pseudo-label
+
+$$
+y_s \in \mathcal{Y}\_s
+$$
+
+and a self-supervised loss function $l_{ss}$. We define the pretext predictive model as
+
+$$
+h: \mathcal{Z} \rightarrow \mathcal{Y}_{s}
+$$
+
+which is trained jointly with the encoder function $e$ by minimizing the expected self-supervised loss function $l_{ss}$ as follows,
 
 $$
 \min_{e, h} \mathbb{E}_{(x_s, y_s) \sim p_{X_s, Y_s}}\left[l_{ss}(y_s, (h \circ e)(x_s))\right]
@@ -674,7 +702,13 @@ $$
 \hat{x} = g_m(x, m) = m \odot \hat{x} + (1 - m) \odot x
 $$
 
-where the $j$-th feature of $\hat{x}$ is sampled from the empirical distribution \(\hat{p}_{X_j} = \frac{1}{N_u} \sum_{i=N*l + 1}^{N_l + N_u} \delta (x_j = x*{i, j})\) where $x_{i, j}$ is the $j$-th feature of the $i$-th sample in $D_u$. The equation above ensures the corrupted sample ~ x is not only tabular but also similar to the samples in $\mathcal{D}_u$.
+where the $j$-th feature of $\hat{x}$ is sampled from the empirical distribution
+
+$$
+\hat{p}_{X_j} = \frac{1}{N_u} \sum_{i=N_l + 1}^{N_l + N_u} \delta (x_j = x_{i, j})
+$$
+
+where $x_{i, j}$ is the $j$-th feature of the $i$-th sample in $D_u$. The equation above ensures the corrupted sample $\hat{x}$ is not only tabular but also similar to the samples in $\mathcal{D}_u$.
 
 The level of difficulty can be adjusted by changing the hyperparameter $p_m$, the probability in $\text{Bern}(\cdot|p_m)$, which controls the proportion of features that will be masked and corrupted.
 
