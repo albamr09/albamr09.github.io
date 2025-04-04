@@ -744,3 +744,32 @@ Then, to train a classifier for the task via fine-tuning, we take the encoder ne
 See Figure 1 for a visual representation of the architecture.
 
 ![SCARF](./assets/scarf.png)
+
+## SAINT: Improved Neural Networks for Tabular Data via Row Attention and Contrastive Pre-Training
+
+### Introduction
+
+SAINT (Self-Attention and Intersample Attention Transformer), performs attention over both rows and columns, and it includes an enhanced embedding method. We also study a new contrastive self-supervised pre-training method for use when labels are scarce.
+
+It projects all features (categorical and continuous) into a combined dense vector space. These projected values are passed as tokens into a transformer encoder which uses attention in the following two ways. First, there is "self-attention," which attends to individual features within each data sample. Second, we use "intersample attention,"" which enhances the classification of a row by relating it to other rows in the table. We also leverage self-supervised contrastive pre-training to boost performance for semi-supervised problems.
+
+### Model
+
+Suppose $\\{x_i, y_i\\}^m_{i = 1}$ is a tabular dataset with $m$ points, where each $x_i$ is a $n$-dimensional feature vector and $y_i$ is a label or target variable. We append a `[CLS]` token with a learned embedding to each data sample. Let $x_i = [\texttt{[CLS]}, f_i^{1}, f_i^{2}, \cdots, f_i^n]$ be a single data point with categorical or continuous features $f_i^j$, and let $\textbf{E}$ be the embedding layer that embeds each faeture into a $d$-dimensional space. Note that $\textbf{E}$ may use different embedding functions for different features. For a given $x_i \in \mathbb{R}^{(n + 1)}$, we get $\textbf{E}(x_i) \in \mathbb{R}^{(n + 1) \times d}$.
+
+In the tabular domain, different features can come from distinct distributions, necessitating a heterogeneous embedding approach. We use a separate single fully-connected layer with a ReLU nonlinearity for each continuous feature, thus projecting the $1$−dimensional input into $d$−dimensional space.
+
+#### Architecture
+
+SAINT is composed of a stack of $L$ identical stages. Each stage consists of one self-attention
+transformer block and one intersample attention transformer block. The self-attention transformer block has a multi-head self-attention layer (MSA) (with $h$ heads), followed by two fully-connected feed-forward (FF) layers with a GELU non-linearity. Each layer has a skip connection and layer normalization (LN). The intersample attention transformer block is similar to the self-attention transformer block, except that the self-attention layer is replaced by an intersample attention layer (MISA).
+
+The SAINT pipeline with a single stage $L = 1$ is as follows:
+
+$$
+z_i^{(1)} = LN(MSA(\textbf{E}(x_i))) + \textbf{E}(x_i)
+$$
+
+$$
+z_i^{(2)} = LN(FF_1(z_i^{(1)})) + z_i^{(1)}
+$$
