@@ -800,7 +800,7 @@ $$
 p'_i = \alpha \textbf{E}(x'_i) + (1 - \alpha) \textbf{E}(x'_b)
 $$
 
-where $x_a$, $x_b$ are random samples from the current batch, $x'_b$ is the CutMix version of $x_b$, $m$ is the binary mask vector sampled from a Bernoulli distribution with probability $p_{\text{cutmix}}$, and $\alpha$ is the mixup parameter.
+where $x_a$, $x_b$ are random samples from the current batch, \(x^{\prime}_{b}\) is the CutMix version of $x_b$, $m$ is the binary mask vector sampled from a Bernoulli distribution with probability $p_{\text{cutmix}}$, and $\alpha$ is the mixup parameter.
 
 Now that we have both the clean $p_i$ and mixed $p'_i$ embeddings, we pass them through SAINT, then through two projection heads to reduce dimensionality which improves results on tabular data.
 
