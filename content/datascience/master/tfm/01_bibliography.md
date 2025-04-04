@@ -773,3 +773,48 @@ $$
 $$
 z_i^{(2)} = LN(FF_1(z_i^{(1)})) + z_i^{(1)}
 $$
+
+$$
+z_i^{(3)} = LN(MISA(\{z_i^{(2)}\}^b_{i=1})) + z_i^{(2)}
+$$
+
+$$
+r_i = LN(FF_2(z_i^{(3)})) + z_i^{(3)}
+$$
+
+where $r_$ is SAINT's contextual representation output corresponding to data point $x_i$. A graphical overview of SAINT is presented in Figure 1(a).
+
+#### Intersample Attention
+
+We introduce intersample attention (a type of row attention) where the attention is computed across different data points. Specifically, we concatenated the embeddings of each feature for a single data point, then compute attention over samples. Intersample attention allows all features from different samples to communicate with each other. An illustration on how this works is shown on Figure 2.
+
+### Pre-training & Finetuning
+
+Standard contrastive methods in vision craft different “views” of images using crops and flips. We instead use CutMix to augment samples in the input space and we use mixup in the embedding space. Assume that only $l$ of $m$ data points are labeled. We denote the embedding layer by $\textbf{E}$, the SAINT network by $S$, and 2 projection heads as $g_1(\cdot)$ and $g_2(\cdot)$. The CutMix augmentation probability is denoted $p_{\text{cutmix}}$ and the mixup parameter is $\alpha$. Given point $x_i$, the original embedding is $p_i = \textbf{E}(x_i)$ while the augmented representation is generated as follows:
+
+$$
+x'_i=x_i \odot m + x_a \odot (1 - m)
+$$
+
+$$
+p'_i = \alpha \textbf{E}(x'_i) + (1 - \alpha) \textbf{E}(x'_b)
+$$
+
+where $x_a$, $x_b$ are random samples from the current batch, $x'_b$ is the CutMix version of $x_b$, $m$ is the binary mask vector sampled from a Bernoulli distribution with probability $p_{\text{cutmix}}$, and $\alpha$ is the mixup parameter.
+
+Now that we have both the clean $p_i$ and mixed $p'_i$ embeddings, we pass them through SAINT, then through two projection heads to reduce dimensionality which improves results on tabular data.
+
+We consider two losses for the pre-training phase
+
+1. The first is a contrastive loss that pushes the latent representations of two views of the same data point ($z_i$ and $z'_i$) close together and encourages different points ($z_i$ and $z_j$, $i \neq j$) to lie far apart. For this we use the InfoCNE loss.
+2. The second loss comes from a denoising task. For denoising, we try to predict the original data sample from a noisy view. We are given $r'_i$ and we reconstruct the inputs as $x''_i$ to minimize the difference between the original and the reconstruction.
+
+The combined pre-training loss is:
+
+$$
+\mathcal{L}_{\text{pre-training}} = - \sum={i=1}^m \log \frac{\exp(\frac{z_i \cdot z'_i}{\tau})}{\sum^m_{k=1}\exp(\frac{z_i \cdot z'_k}{\tau}} + \lambda_{pt} \sum_{i=1}^m \sum_{j=1}^m [\mathcal{L}_j(MLP(r'_i), x_i)]
+$$
+
+where $r_i = S(p_i)$, $r'_i = S(p'_i)$, $z_i = g_1(r_i)$, $z'_i = g_2(r'_i)$. $L_j$ is cross-entropy loss or mean squared error depending on the $j$th feature being categorical or continuous.
+
+Once SAINT is pre-trained on all unlabeled data, we finetune the model on the target prediction task using the $l$ labeled samples. The pipeline of this step is shown in Figure 1(b). For a given point $x_i$ , we learn the contextual embedding $r_i$. For the final prediction step, we pass the embedding corresponding only to the `[CLS]` token through a simple MLP with a single hidden layer with ReLU activation to get the final output. We evaluate cross-entropy loss on the outputs for classification tasks and mean squared error for regression tasks.
