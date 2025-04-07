@@ -818,3 +818,94 @@ $$
 where $r_i = S(p_i)$, $r'_i = S(p'_i)$, $z_i = g_1(r_i)$, $z'_i = g_2(r'_i)$. $L_j$ is cross-entropy loss or mean squared error depending on the $j$th feature being categorical or continuous.
 
 Once SAINT is pre-trained on all unlabeled data, we finetune the model on the target prediction task using the $l$ labeled samples. The pipeline of this step is shown in Figure 1(b). For a given point $x_i$ , we learn the contextual embedding $r_i$. For the final prediction step, we pass the embedding corresponding only to the `[CLS]` token through a simple MLP with a single hidden layer with ReLU activation to get the final output. We evaluate cross-entropy loss on the outputs for classification tasks and mean squared error for regression tasks.
+
+## TabNet: Attentive Interpretable Tabular Learning
+
+### Introduction
+
+- TabNet inputs raw tabular data without any preprocessing and is trained using gradient descent-based optimization.
+- TabNet uses sequential attention to choose which features to reason from at each decision step, enabling interpretability. This feature selection is instance-wise, e.g. it can be different for each input.
+- TabNet enables two kinds of interpretability: local interpretability that visualizes the importance of features and how they are combined, and global interpretability which quantifies the contribution of each feature to the trained model.
+
+### Model
+
+DTs are successful for learning from real-world tabular datasets. With a specific design, conventional DNN building blocks can be used to implement DT-like output manifold, (e.g. see Fig. 3).
+
+![DNNs as DTs](./assets/tabnet_dnn_dt.png)
+
+We pass the same $D$-dimensional features $f \in \mathbb{R}^{B \times D}$ to each decision step, where $B$ is the batch size. TabNet’s encoding is based on sequential multi-step processing with $N_{steps}$ decision steps. The $i$th step inputs the processed information from the $(i - 1)$th step to decide which features to use and outputs the processed feature representation to be aggregated into the overall decision. The architecture of this model is shown on Figure 4.
+
+![TabNet's Model Architecture](./assets/tabnet_architecture.png)
+
+#### Attentive Transformer — Selecting Features
+
+This is the attention mechanism that decides which features to look at next. It computes feature masks $M_t \in [0, 1]^d$ per decision step by applying a sparse transformation using the processed features on the previous step:
+
+$$
+a[i - 1] = M[i] = \text{sparsemax}(P[i - 1] \cdot h_i(a[i - 1]))
+$$
+
+where:
+
+- $P_t$ is the prior scale — keeps track of previously used features (to encourage sparsity).
+- Sparsemax instead of Softmax ensures some features get exactly zero attention (interpretability).
+
+The masked input for the current step becomes:
+
+$$
+x_t = M^{(t)} \odot x
+$$
+
+Also the feature usage prior is updated at each step:
+
+$$
+P[i] = P[i - 1] \odot (\gamma - M[i - 1])
+$$
+
+where $\gamma > 1$ is a relaxation factor to ensure exploration of new features. If $\gamma = 1$ then a feature is enforced to only be used at one decision step and as $\gamma$ increases, more flexibility is provided to use a feature at multiple decision steps.
+
+#### Feature Transformer
+
+It is defined as a block of fully connected layers (FCs), batch norms, and non-linearities where
+
+$$
+h_0 = x
+$$
+
+At step $t$:
+
+$$
+h_t = \text{FeatureTransformer}(x_t)
+$$
+
+This transformer can be shared or be decision-step specific. Then we split for the decision step output and information for the subsequent step (see Figure 4):
+
+$$
+[d[i], a[i]] = f_i(M[i] \cdot f)
+$$
+
+where $d[i] \in \mathbb{R}^{B \times N_d}$ and $a[i] \in \mathbb{R}^{B \times N_a}$. Finally, we construct the overall decision embedding as $d_{out} = \sum_{i = 1}^{N_{steps}} ReLU(d[i])$. We apply a linear mapping $W_{final} d_{out}$ to get the output mapping.
+
+#### Interpretability
+
+Because TabNet learns a feature mask $M[i]$ at every decision step, you can:
+
+- Visualize which features are used when,
+- Analyze the importance over time (decision steps),
+- Get row-level explanations.
+
+If $M_{b, j}[i]$, then $j$th feature of the $b$th sample should have no contribution to the decision. Combining the masks at different steps requires a coefficient that can weigh the relative importance of each step in the decision. We simply propose:
+
+$$
+\eta_b[i] = \sum_{c = 0}^{N_d} d_{b, c}[i]
+$$
+
+to denote the aggregate decision contribution at $i$th decision step for the $b$th sample. Intuitively, if $d_{b, c} < 0$, then all features at $i$th decision step should have $0$ contribution to the overall decision. As its value increases, it plays a higher role in the overall linear combination. We propose the aggregate feature importance mask:
+
+$$
+M_{agg-b,j} = \frac{\sum_{i = 1}^{N_{steps}}\eta_{b}[i]M_{b,j}[i]}{\sum_{j = 1}^D \sum_{i = 1}^{N_{steps}}\eta_{b}[i]M_{b,j}[i]}
+$$
+
+#### Tabular self-supervised learning
+
+We propose a decoder architecture to reconstruct tabular features from the TabNet encoded representations. We propose the task of prediction of missing feature columns from the others. Consider a binary mask $S \in \{0, 1\}^{B \times D}$. The TabNet encoder inputs $(1 - S) \cdot \hat{f}$ and the decoder outputs the reconstructed features, $S \cdot \hat{f}$.
