@@ -1488,3 +1488,113 @@ We can use differentials when estimating errors, for example the error that occu
 $$
 \frac{\Delta f(x)}{f(x)}  \approx \frac{\delta f(x)}{f(x)}
 $$
+
+## Hyperbolic Functions
+
+### Hyperbolic Functions and Their Derivatives
+
+Certain combinations of the exponential functions $e^x$ and $e^{-x}$ arise frequently in mathematics. They have the same relationship to the hyperbola that the trigonometric functions have to the circle. For this reason they are collectively called **hyperbolic functions** and individually called **hyperbolic sine**, **hyperbolic cosine**, and so on.
+
+> [!TIP] **Hyperbolic Functions**
+>
+> $$\sinh x = \frac{e^x - e^{-x}}{2}$$
+>
+> $$\cosh x = \frac{e^x + e^{-x}}{2}$$
+>
+> $$\tanh x = \frac{\sinh x}{\cosh x}$$
+>
+> $$\text{csch } x = \frac{1}{\sinh x}$$
+>
+> $$\text{sech } x = \frac{1}{\cosh x}$$
+>
+> $$\coth x = \frac{\cosh x}{\sinh x}$$
+
+The graphs of hyperbolic sine and hyperbolic cosine can be sketched using graphical addition as in Figures 1 and 2.
+
+![Hyperbolic Functions](./assets/hyperbolic_functions.png)
+
+Applications to science and engineering occur whenever an entity such as light, velocity, electricity, or radioactivity is gradually absorbed or extinguished because the decay can be represented by hyperbolic functions. The most famous application is the use of hyperbolic cosine to describe the shape of a hanging wire. It can be proved that if a heavy flexible cable (such as an overhead power line) is suspended between two points at the same height, then it takes the shape of a curve with equation
+
+$$
+y = c + a \cosh(\frac{x}{a})
+$$
+
+called a **catenary** (see Figure 4).
+
+![Catenary](./assets/catenary.png)
+
+Another application of hyperbolic functions occurs in the description of ocean waves: the velocity of a water wave with length $L$ moving across a body of water with depth $d$ is modeled by the function
+
+$$
+\nu = \sqrt{\frac{gL}{2 \pi} \tanh\left(\frac{2\pi d}{L}\right)}
+$$
+
+where $g$ is the acceleration due gravity (see Figure 5).
+
+![Wave Modelling](./assets/wave_modelling.png)
+
+> [!TIP] **Hyperbolic Identities**
+>
+> $$\sinh (-x) = - \sinh x$$
+>
+> $$\cosh (-x) = \cosh x$$
+>
+> $$\cosh^2 (-x) - \sinh^2 x = 1$$
+>
+> $$\sinh (x + y) = \sinh x \cosh y + \cosh x \sinh y$$
+>
+> $$\cosh (x + y) = \cosh x \cosh y + \sinh x \sinh y$$
+
+Let's reason out the name of "hyperbolic functions":
+
+If $t$ is any real number, then the point $P(\cos t, \sin t)$ lies on the unit circle $x^2 + y^2 = 1$ because $\cos^2 t + \sin^2 t = 1$. In fact, $t$ can be interpreted as the radian measure of $\angle POQ$ in Figure 6. For this reason the trigonometric functions are sometimes called **circular functions**.
+
+![Circular Functions](./assets/circular_functions.png)
+
+Likewise, if $t$ is any real number, then the point $P(\cosh t, \sinh t)$ lies on the right branch of the hyperbola $x^2 - y^2 = 1$ because $\cosh^2 t - \sinh^2 t = 1$ and $\cosh t \geq 1$. This time, $t$ does not represent the measure of an angle. However, it turns out that $t$ represents twice the area of the shaded hyperbolic sector in Figure 7, just as in the trigonometric case $t$ represents twice the area of the shaded circular sector in Figure 6.
+
+![Hyperbolic Functions](./assets/hyperbolic_functions_explained.png)
+
+> [!TIP] **Derivatives of Hyperbolic Functions**
+>
+> $$\frac{\delta}{\delta x} (\sinh x) = \cosh x$$
+>
+> $$\frac{\delta}{\delta x} (\cosh x) = -\sinh x$$
+>
+> $$\frac{\delta}{\delta x} (\tanh x) = \text{sech}^2 \text{ } x$$
+>
+> $$\frac{\delta}{\delta x} (\text{csch } x) = -\text{csch } x \coth x$$
+>
+> $$\frac{\delta}{\delta x} (\text{sech } x) = -\text{sech } x \tanh x$$
+>
+> $$\frac{\delta}{\delta x} (\coth x) = -\text{csch}^2 \text{ } x$$
+
+### Inverse Hyperbolic Functions and Their Derivatives
+
+You can see from Figures 1 and 3 that $\sinh$ and $\tanh$ are one-to-one functions and so they have inverse functions denoted by $\sinh^{-1}$ and $\tanh^{-1}$. Figure 2 shows that $\cosh$ is not oneto-one, but if we restrict the domain to the interval $[0, \infty]$, then the function $y = \cosh x$ is one-to-one and attains all the values in its range $[1, \infty]$. The inverse hyperbolic cosine function is defined as the inverse of this restricted function.
+
+> [!TIP] **Inverse Hyperbolic Functions**
+>
+> $$\sinh^{-1} x = \ln(x + \sqrt{x^ + 1}), x \in \mathbb{R}$$
+>
+> $$\cosh^{-1} x = \ln(x + \sqrt{x^ - 1}), x \geq 1$$
+>
+> $$\tanh^{-1} x = \frac{1}{2} \ln\left(\frac{1 + x}{1 - x}\right)$$
+
+We sketch the graphs of $\sinh^{-1}$, $\cosh^{-1}$, and $\tanh^{-1}$ in Figures 8, 9, and 10 by referring to Figures 1, 2, and 3
+
+![Inverse Hyperbolic Functions](./assets/inverse_hyperbolic_functions.png)
+
+> [!TIP] **Derivatives of Inverse Hyperbolic Functions**
+>
+> $$\frac{\delta}{\delta x} (\sinh^{-1} x) = \frac{1}{\sqrt{1 + x^2}}$$
+>
+> $$\frac{\delta}{\delta x} (\cosh^{-1} x) = \frac{1}{\sqrt{x^2 - 1}}$$
+>
+> $$\frac{\delta}{\delta x} (\tanh^{-1} x) = \frac{1}{1 - x^2}$$
+>
+> $$\frac{\delta}{\delta x} (\text{csch}^{-1} \text{ } x) = -\frac{1}{|x|\sqrt{x^2 + 1}}$$
+>
+> $$\frac{\delta}{\delta x} (\text{sech}^{-1} \text{ } x) = -\frac{1}{x\sqrt{1 - x^2}}$$
+>
+> $$\frac{\delta}{\delta x} (\coth^{-1} x) = \frac{1}{1 - x^2}$$
