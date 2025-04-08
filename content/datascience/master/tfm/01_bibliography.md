@@ -909,3 +909,56 @@ $$
 #### Tabular self-supervised learning
 
 We propose a decoder architecture to reconstruct tabular features from the TabNet encoded representations. We propose the task of prediction of missing feature columns from the others. Consider a binary mask $S \in \{0, 1\}^{B \times D}$. The TabNet encoder inputs $(1 - S) \cdot \hat{f}$ and the decoder outputs the reconstructed features, $S \cdot \hat{f}$.
+
+## TABERT
+
+### Introduction
+
+TABERT is a pretrained language model (like BERT) designed to understand both text (natural language) and tables (structured data). It’s useful for tasks like answering questions about tables or converting natural language questions into database queries.
+
+### Model
+
+TABERT is built on Transformers (like BERT) but adds special features to handle tables. The following Figure shows a diagram of the different parts that compose the model.
+
+![TABERT](./assets/tabert_model.png)
+
+#### Inputs
+
+- **A natural language (NL) question** (e.g., "Which city hosted the Olympics in 2008?").
+- A **table** (e.g., a database table with columns like "Year," "Host City," etc.).
+
+#### Content Snapshot
+
+Tables can be huge, so TABERT picks a few **relevant rows** (called a "snapshot") based on how much they overlap with the question (e.g., rows mentioning "2008" or "Olympics"). If no single row matches well, it creates a **synthetic row** by combining the most relevant cells from different rows (see Figure 1(A)).
+
+#### Row Linearization
+
+Each row in the snapshot is converted into a text sequence. For example:
+
+```
+Year | real | 2008 [SEP] Host City | text | Beijing [SEP]
+```
+
+Where the token `[SEP]` separates cells and the format is `Column Name | Data Type | Cell Value` (see Figure 1(B)).
+
+#### Transformer Encoding
+
+The NL question and linearized row are fed into a Transformer (like BERT). The Transformer outputs embeddings (vector representations) for each token in the question and each cell in the row.
+
+#### Vertical Attention Layer
+
+Since the snapshot may have multiple rows, TABERT uses vertical attention to share information across rows for the same column. For example, the "Year" column in row 1 (`2008`) and row 2 (`2012`) can influence each other. This is like self-attention in Transformers but applied column-wise (vertically) instead of token-wise (horizontally) (see Figure 1(C)).
+
+#### Output Representations
+
+**Column representations** are obtained by pooling (averaging) over all cell embeddings for a column (e.g., all "Year" cells). While **question token representations** are also obtained by pooling over embeddings of the same word across rows. These representations are used by downstream tasks (e.g., semantic parsing).
+
+### Training
+
+TABERT is pretrained on 26 million tables + surrounding text from Wikipedia and the web. It learns by solving three tasks:
+
+- **Masked Language Modeling (MLM)**: Predict masked words in the NL text (like BERT).
+- **Masked Column Prediction (MCP)**: Predict masked column names/types (e.g., guess "Year" is missing).
+- **Cell Value Recovery (CVR)**: Predict masked cell values (e.g., guess "2008" is missing in a cell).
+
+After pretraining, TABERT is fine-tuned for specific tasks (e.g., answering questions about tables).
