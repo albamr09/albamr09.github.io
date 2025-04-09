@@ -1247,7 +1247,7 @@ $$
 >
 > $$\frac{\delta}{\delta x} (\cos^{-1}) = -\frac{1}{\sqrt{1 - x^2}}$$
 >
-> $$\frac{\delta}{\delta x} (\tan^{-1}) = \frac{1}{1 - x^2}$$
+> $$\frac{\delta}{\delta x} (\tan^{-1}) = \frac{1}{1 + x^2}$$
 >
 > $$\frac{\delta}{\delta x} (\csc^{-1}) = -\frac{1}{x\sqrt{x^2 - 1}}$$
 >
@@ -1539,7 +1539,9 @@ where $g$ is the acceleration due gravity (see Figure 5).
 >
 > $$\cosh (-x) = \cosh x$$
 >
-> $$\cosh^2 (-x) - \sinh^2 x = 1$$
+> $$\cosh^2 x - \sinh^2 x = 1$$
+>
+> $$1 - \tanh^2 x = \text{sech}^2 x$$
 >
 > $$\sinh (x + y) = \sinh x \cosh y + \cosh x \sinh y$$
 >
@@ -1559,7 +1561,7 @@ Likewise, if $t$ is any real number, then the point $P(\cosh t, \sinh t)$ lies o
 >
 > $$\frac{\delta}{\delta x} (\sinh x) = \cosh x$$
 >
-> $$\frac{\delta}{\delta x} (\cosh x) = -\sinh x$$
+> $$\frac{\delta}{\delta x} (\cosh x) = \sinh x$$
 >
 > $$\frac{\delta}{\delta x} (\tanh x) = \text{sech}^2 \text{ } x$$
 >
