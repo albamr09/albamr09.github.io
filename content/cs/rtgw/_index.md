@@ -14,4 +14,5 @@ type: docs
 {{< card link="08" title="Picking" icon="cursor-click" >}}
 {{< card link="09" title="Putting It All Together" icon="collection" >}}
 {{< card link="10" title="Advanced Techniques" icon="trending-up" >}}
+{{< card link="11" title="WebGL Hightlights" icon="lightning-bolt" >}}
 {{< /cards >}}
