@@ -676,7 +676,9 @@ $$
 \min_{e, h} \mathbb{E}_{(x_s, y_s) \sim p_{X_s, Y_s}}\left[l_{ss}(y_s, (h \circ e)(x_s))\right]
 $$
 
-where $p_{X_s, Y_s}$ is a pretext distribution that generates pseudo-labeled samples $(x_s, y_s)$.
+where $p_{X_s, Y_s}$ is a pretext distribution that generates pseudo-labeled samples $(x_s, y_s)$. See Figure 1 for a visual representation of the model.
+
+![Self Supervised Framework](./assets/vime_self_supervised_framework.png)
 
 #### Semi-supervised learning
 
@@ -688,7 +690,9 @@ $$
 
 where $l_u: \mathcal{Y} \times \mathcal{Y} \leftarrow \mathbb{R}$ is an unsupervised loss function, and a hyperparameter $\beta \leq 0$ is introduced to control the trade-off between the supervised and unsupervised losses. $x'$ is a perturbed version of $x$ assumed to be drawn from a conditional distribution $\hat{p}_X(x'|x)$.
 
-The first term is estimated using the small labeled dataset $\mathcal{D}_l$, while the second term is estimated using all input features in $\mathcal{D}_u$.
+The first term is estimated using the small labeled dataset $\mathcal{D}_l$, while the second term is estimated using all input features in $\mathcal{D}_u$. See Figure 2 for a visual representation of the semi-supervised framework.
+
+![Semi Supervised Framework](./assets/vime_semi_supervised_framework.png)
 
 ### Method
 
