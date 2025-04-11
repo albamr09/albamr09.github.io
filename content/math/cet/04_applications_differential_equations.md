@@ -26,7 +26,7 @@ An absolute maximum or minimum is sometimes called a **global maximum or minimum
 
 The Extreme Value Theorem is illustrated in Figure 8.
 
-![Extreme Value Theorem](./assets/extreme_value_thorem.png)
+![Extreme Value Theorem](./assets/extreme_value_theorem.png)
 
 ### Critical Numbers and the Closed Interval Method
 
