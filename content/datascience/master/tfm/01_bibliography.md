@@ -788,9 +788,13 @@ $$
 
 where $r_$ is SAINT's contextual representation output corresponding to data point $x_i$. A graphical overview of SAINT is presented in Figure 1(a).
 
+![SAINT](./assets/saint_architecture.png)
+
 #### Intersample Attention
 
 We introduce intersample attention (a type of row attention) where the attention is computed across different data points. Specifically, we concatenated the embeddings of each feature for a single data point, then compute attention over samples. Intersample attention allows all features from different samples to communicate with each other. An illustration on how this works is shown on Figure 2.
+
+![SAINT Intersample Attention](./assets/saint_intersample_attention.png)
 
 ### Pre-training & Finetuning
 
