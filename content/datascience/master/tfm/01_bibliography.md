@@ -786,7 +786,7 @@ $$
 r_i = LN(FF_2(z_i^{(3)})) + z_i^{(3)}
 $$
 
-where $r_$ is SAINT's contextual representation output corresponding to data point $x_i$. A graphical overview of SAINT is presented in Figure 1(a).
+where $r_i$ is SAINT's contextual representation output corresponding to data point $x_i$. A graphical overview of SAINT is presented in Figure 1(a).
 
 ![SAINT](./assets/saint_architecture.png)
 
