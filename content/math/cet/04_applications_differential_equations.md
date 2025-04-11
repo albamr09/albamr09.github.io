@@ -55,7 +55,7 @@ $$
 Taking the right-hand limit of both sides we get
 
 $$
-\lim_{h \rightarrow 0^+} \frac{f(c + h) - f(c)}{h} \leq \lim_{h \rightarrow 0^0} = 0
+\lim_{h \rightarrow 0^+} \frac{f(c + h) - f(c)}{h} \leq \lim_{h \rightarrow 0^+} = 0
 $$
 
 Since $f'(0)$ exists, we have
