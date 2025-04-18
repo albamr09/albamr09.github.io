@@ -97,3 +97,147 @@ In terms of critical numbers, Fermat's Theorem can be rephared as follows:
 > 1. Find the values of $f$ at the critical numbers of $f$ in $(a, b)$
 > 2. Find the values of $f$ at the endpoints of the interval.
 > 3. The largest of the values from Steps 1 and 2 is the absolute maximum value; the samllest of these values is the absolute minimum value.
+
+## The Mean Value Theorem
+
+### Rolle's Theorem
+
+> [!TIP] **Rolle's Theorem**
+>
+> Let $f$ be a function that satisfies the following three hypotheses:
+>
+> 1. $f$ is continuous on the closed interval $[a, b]$
+> 2. $f$ is differentiable on the open interval $(a, b)$
+> 3. $f(a) = f(b)$
+>
+> The there is a number $c$ in $(a, b)$ such that $f'(c) = 0$
+
+**PROOF**: There are three cases:
+
+**Case 1** $f(x) = k$, a constant. Then $f'(x) = 0$, so the number $c$ can be taken to be any numer in $(a, b)$.
+
+**Case 2** $f(x) > f(a)$ for some $x \in (a, b)$. Then, by the Extreme Value Theorem (which we can apply by hypothesis 1), $f$ has a maximum value somewhere in $[a, b]$. Since $f(a) = f(b)$ it must attain this maximum value at a number $c$ in the open interval $(a, b)$. Then $f$ has a local maximum at $c$, and by hypothesis 2, $f$ is differentiable at $c$. Therefore $f'(c) = 0$ by Fermat's Theorem.
+
+**Case 3** $f(x) < f(a)$ for some $x \in (a, b)$. Then, by the Extreme Value Theorem (which we can apply by hypothesis 1), $f$ has a minimum value somewhere in $[a, b]$. Since $f(a) = f(b)$ it must attain this minimum value at a number $c$ in the open interval $(a, b)$. Then $f$ has a local minimum at $c$, and by hypothesis 2, $f$ is differentiable at $c$. Therefore $f'(c) = 0$ by Fermat's Theorem.
+
+Figure 1 shows the graphs of four such functions.
+
+![Rolle's Theorem](./assets/rolles_theorem.png)
+
+### The Mean Value Theorem
+
+> [!TIP] **The Mean Value Theorem**
+>
+> Let $f$ be a function that satisfies:
+>
+> 1. $f$ is continuous on the closed interval $[a, b]$
+> 2. $f$ is differentiable on the open interval $(a, b)$
+>
+> The there is a number $c$ in $(a, b)$ such that
+>
+> $$f'(c) = \frac{f(b) - f(a)}{b - a}$$
+>
+> or equivalently
+>
+> $$f(b) - f(a) = f'(c)(b - a)$$
+
+The Mean Value Theorem says that there is at least one point $P(c, f(c))$ on the graph where the slope of the tangent line is the same as the slope of the secant line $A, B$ (see Figures 3 and 4).
+
+![Mean Value Theorem](./assets/mean_value_theorem.png)
+
+**PROOF** We see the the equation of the line $AB$ can be written as:
+
+$$
+y - f(a) = m_{AB} (x - a)
+$$
+
+where $m_{AB} = \frac{f(b) - f(a)}{b - a}$, thus
+
+$$
+y = f(a) + \frac{f(b) - f(a)}{b - a}(x - a)
+$$
+
+![Mean Value Theorem Proof](./assets/mean_value_theorem_proof.png)
+
+So, as we can see on Figure 5:
+
+$$
+h(x) = f(x) - y
+$$
+
+$$
+h(x) = f(x) - f(a) - \frac{f(b) - f(a)}{b - a}(x - a)
+$$
+
+First, we must verify that $h$ satisfies the three hypotheses of [Rolle's Theorem](#rolles-theorem):
+
+1. The function $h$ is continuous on $[a, b]$ because it is the sum of $f$ and a first-degree polynomial both of which are continuous.
+2. The function $h$ is differentiable because both $f$ and the first degree polynomial are differentiable. Thus
+
+$$
+h'(x) = f'(x) - \frac{f(b) - f(a)}{b - a}
+$$
+
+3. We must show that $h(a) = h(b)$
+
+$$
+h(a) = f(a) - f(a) - \frac{f(b) - f(a)}{b - a}(a - a) = 0
+$$
+
+$$
+h(b) = f(b) - f(a) - \frac{f(b) - f(a)}{b - a}(b - a)
+$$
+
+$$
+= f(b) - f(a) - f(b) + f(a) = 0
+$$
+
+Which means $h(a) = h(b) = 0$.
+
+Since $h$ satisfies all the hypotheses of [Rolle's Theorem](#rolles-theorem), there exists a number $c$ in $(a, b)$ such that $h'(c) = 0$. Therefore
+
+$$
+h'(c) = f'(c) - \frac{f(b) - f(a)}{b - a} = 0
+$$
+
+So
+
+$$
+f'(c) = \frac{f(b) - f(a)}{b - a}
+$$
+
+In general, the Mean Value Theorem can be interpreted as saying that there is a number at which the instantaneous rate of change is equal to the average rate of change over an interval.
+
+The Mean Value Theorem can be used to establish some of the basic facts of differential calculus.
+
+> [!TIP] **Theorem**
+>
+> If $f'(x) = 0$ for all $x$ in an interval $(a, b)$, then $f$ is constant on $(a, b)$
+
+**PROOF**: Let $x_1$ and $x_2$ be any two numbers in $(a, b)$ with $x_1 < x_2$. Since $f$ is differentiable on $(a, b)$ it must be differentiable on $(x_1, x_2)$ and continuous on $[x_1, x_2]$. By applying the [Mean Value Theorem](#mean-value-theorem) to $f$ on the interval $[x_1, x_2]$, we get a number $c$ such that $x_1 < c < x_2$ and
+
+$$
+f(x_2) - f(x_1) = f'(c) (x_2 - x_1)
+$$
+
+Since $f'(x) = 0$ for all $x$, then $f'(c) = 0$ and therefore
+
+$$
+f(x_2) - f(x_1) = 0 \leftrightarrow f(x_2) = f(x_1)
+$$
+
+Thus $f$ has the same value at any two numbers $x_1$ and $x_2$ in $(a, b)$. This means that $f$ is constant on $(a, b)$.
+
+> [!TIP] **Corollary**
+>
+> If $f'(x) = g'(x)$ for all $x$ in an interval $(a, b)$, then $f - g$ is constant on $(a, b)$; that is, $f(x) = g(x) + c$ where $c$ is a constant.
+
+**PROOF**: Let $F(x) = f(x) - g(x)$. Then
+
+$$
+F'(x) = f'(x) - g'(x) = 0
+$$
+
+for all $x \in (a, b)$. Thus by the previous theorem $F$ is constant, that is $f - g$ is constant.
+
+This corollary says that if two functions have the same derivatives on an interval, then their graphs must be vertical trasnlation of each other.
