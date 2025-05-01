@@ -214,7 +214,7 @@ The Mean Value Theorem can be used to establish some of the basic facts of diffe
 >
 > If $f'(x) = 0$ for all $x$ in an interval $(a, b)$, then $f$ is constant on $(a, b)$
 
-**PROOF**: Let $x_1$ and $x_2$ be any two numbers in $(a, b)$ with $x_1 < x_2$. Since $f$ is differentiable on $(a, b)$ it must be differentiable on $(x_1, x_2)$ and continuous on $[x_1, x_2]$. By applying the [Mean Value Theorem](#mean-value-theorem) to $f$ on the interval $[x_1, x_2]$, we get a number $c$ such that $x_1 < c < x_2$ and
+**PROOF**: Let $x_1$ and $x_2$ be any two numbers in $(a, b)$ with $x_1 < x_2$. Since $f$ is differentiable on $(a, b)$ it must be differentiable on $(x_1, x_2)$ and continuous on $[x_1, x_2]$. By applying the [Mean Value Theorem](#the-mean-value-theorem-1) to $f$ on the interval $[x_1, x_2]$, we get a number $c$ such that $x_1 < c < x_2$ and
 
 $$
 f(x_2) - f(x_1) = f'(c) (x_2 - x_1)
@@ -241,3 +241,86 @@ $$
 for all $x \in (a, b)$. Thus by the previous theorem $F$ is constant, that is $f - g$ is constant.
 
 This corollary says that if two functions have the same derivatives on an interval, then their graphs must be vertical trasnlation of each other.
+
+## What Derivatives Tell Us about the Shape of a Graph
+
+### What Does $f'$ say about $f$?
+
+> [!NOTE] **Increasing/Decreasing Test**
+>
+> If $f'(x) > 0$ on an interval, then $f$ is increasing on that interval
+> If $f'(x) < 0$ on an interval, then $f$ is decreasin on that interval
+
+See Figure 1 for a graphical representation.
+
+![Increasing/Decreasing Test](./assets/increasing_decreasing_test.png)
+
+**PROOF**: Without loss of generality we let $x_1$ and $x_2$ be any two numbers on the interval with $x_1 < x_2$. According to the [definition of an increasing function](../../agaa/02_graph_analysis#increasing-decreasing-and-constant-functions) we have to show that $f(x_1) < f(x_2)$.
+
+Because we are given that $f'(x) > 0$, we know that $f$ is differentiable on $[x_1, x_2]$. So, by the [Mean Value Theorem](#the-mean-value-theorem-1), there is a number $c$ between $x_1$ and $x_2$ such that
+
+$$
+f(x_2) - f(x_1) = f'(c)(x_2 - x_1)
+$$
+
+We know that $f'(c) > 0$ by our initial assumption and $x_2 - x_1$ because $x_1 < x_2$, thus the right side of the previous equation must be positive:
+
+$$
+f(x_2) - f(x_1) > 0
+$$
+
+Which is equivalent to
+
+$$
+f(x_2) > f(x_1)
+$$
+
+This shows that $f$ is increasing.
+
+### The First Derivative Test
+
+> [!NOTE] **The First Derivative Test**
+>
+> Suppose $c$ is a critical number of a continuous function $f$.
+>
+> 1. If $f'$ changes from positive to negative at $c$, then $f$ has a local maximum at $c$
+> 2. If $f'$ changes from negative to positive at $c$, then $f$ has a local minimum at $c$
+> 3. If $f'$ is positive to the left and right of $c$, or negative to the left and right of $c$ then $f$ has no local maximum or minimum at $c$
+
+The First Derivative Test is illustrated in Figure 4.
+
+![The First Derivative Test](./assets/first_derivative_test.png)
+
+### What does $f''$ say about $f'$?
+
+> [!TIP] **Concavity of a Function**
+>
+> If the graph of $f$ lies above all of its tangents on an interval $I$, then $f$ is called **concave upward** on $I$.
+>
+> If the graph of $f$ lies below all of its tangents on an interval $I$, then $f$ is called **concave downward** on $I$.
+
+See Figure 7 for an illustration on the concavity of a function.
+
+![Concavity of a Function](./assets/concavity_of_function.png)
+
+In Figure 7(a) we see that the slope of the tangent increases. This means that the derivative $f'$ is an increasing function and therefore its derivative $f''$ is positive. Likewise, in Figure 7(b) the slope of the tangent decreases, so $f'$ decreases and therefore $f''$ is negative.
+
+> [!NOTE] **Concavity Test**
+>
+> 1. If $f''(x) > 0$ on an interval $I$, then the graph of $f$ is concave upward on $I$.
+> 2. If $f''(x) < 0$ on an interval $I$, then the graph of $f$ is concave downward on $I$.
+
+> [!TIP] **Inflection Point**
+>
+> A point $P$ on a curve $y = f(x)$ is called an **inflection point** if $f$ is continuous there and the curve changes from concave upward to concave downward or viceversa.
+
+### The Second Derivative Test
+
+> [!NOTE] **The Second Derivative Test**
+>
+> Suppose $f''$ is continuous near $c$
+>
+> 1. If $f'(c) = 0$ and $f''(x) > 0$, then $f$ has a local minimum at $c$
+> 2. If $f'(c) = 0$ and $f''(x) < 0$, then $f$ has a local maximum at $c$
+
+Note that The Second Derivative Test is inconclusive when $f''(c) = 0$ as there might be a maximum, a minimum or neither in that point. This test also fails when $f''(c)$ does not exist.
