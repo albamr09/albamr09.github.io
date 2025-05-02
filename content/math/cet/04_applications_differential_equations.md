@@ -249,6 +249,7 @@ This corollary says that if two functions have the same derivatives on an interv
 > [!NOTE] **Increasing/Decreasing Test**
 >
 > If $f'(x) > 0$ on an interval, then $f$ is increasing on that interval
+>
 > If $f'(x) < 0$ on an interval, then $f$ is decreasin on that interval
 
 See Figure 1 for a graphical representation.
@@ -320,7 +321,7 @@ In Figure 7(a) we see that the slope of the tangent increases. This means that t
 >
 > Suppose $f''$ is continuous near $c$
 >
-> 1. If $f'(c) = 0$ and $f''(x) > 0$, then $f$ has a local minimum at $c$
-> 2. If $f'(c) = 0$ and $f''(x) < 0$, then $f$ has a local maximum at $c$
+> 1. If $f'(c) = 0$ and $f''(c) > 0$, then $f$ has a local minimum at $c$
+> 2. If $f'(c) = 0$ and $f''(c) < 0$, then $f$ has a local maximum at $c$
 
 Note that The Second Derivative Test is inconclusive when $f''(c) = 0$ as there might be a maximum, a minimum or neither in that point. This test also fails when $f''(c)$ does not exist.
