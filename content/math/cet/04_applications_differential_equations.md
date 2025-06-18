@@ -333,7 +333,7 @@ Note that The Second Derivative Test is inconclusive when $f''(c) = 0$ as there 
 In general, if we have a limit of the form:
 
 $$
-\lim_{x \to a} \frac{f(a)}{g(a)}
+\lim_{x \to a} \frac{f(x)}{g(x)}
 $$
 
 where both $f(x) \to 0$ and $g(x) \to 0$ as $x \to a$, then this limit may or may not exist, and is called an **indeterminate form of type** $\frac{0}{0}$.
