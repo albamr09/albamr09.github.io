@@ -325,3 +325,127 @@ In Figure 7(a) we see that the slope of the tangent increases. This means that t
 > 2. If $f'(c) = 0$ and $f''(c) < 0$, then $f$ has a local maximum at $c$
 
 Note that The Second Derivative Test is inconclusive when $f''(c) = 0$ as there might be a maximum, a minimum or neither in that point. This test also fails when $f''(c)$ does not exist.
+
+## Indeterminate Forms and l'Hospital's Rule
+
+### Indeterminate Forms (Types $\frac{\infty}{\infty}$, $\frac{0}{0}$)
+
+In general, if we have a limit of the form:
+
+$$
+\lim_{x \to a} \frac{f(a)}{g(a)}
+$$
+
+where both $f(x) \to 0$ and $g(x) \to 0$ as $x \to a$, then this limit may or may not exist, and is called an **indeterminate form of type** $\frac{0}{0}$.
+
+In general, if we have a limit of the form:
+
+$$
+\lim_{x \to a} \frac{f(a)}{g(a)}
+$$
+
+where both $f(x) \to \infty$ (or $-\infty$) and $g(x) \to \infty$ (or $-\infty$) as $x \to a$, then this limit may or may not exist, and is called an **indeterminate form of type** $\frac{\infty}{\infty}$.
+
+### L'Hospital's Rule
+
+We introduce a systematic method for the evaluation of indeterminate forms of type $\frac{0}{0}$ or type $\frac{\infty}{\infty}$.
+
+> [!NOTE] **L'Hospital's Rule**
+>
+> Suppose $f$ and $g$ are differentiable and $g'(x) \neq 0$ on an open interval $I$ that contains $a$ (except possibly at $a$). Suppose that:
+>
+> $$\lim_{x \to a} f(x) = 0 \text{ and } \lim_{x \to a} g(x) = 0$$
+>
+> or that
+>
+> $$\lim_{x \to a} f(x) = \pm \infty \text{ and } \lim_{x \to a} g(x) = \pm \infty$$
+>
+> So we have an indeterminate form of type $\frac{0}{0}$ or $\frac{\infty}{\infty}$. Then:
+>
+> $$\lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}$$
+>
+> if the limit on the right side exists (or is $\infty$ or $-\infty$)
+
+Note:
+
+1. L'Hospital's Rule says that the limit of a quotient of function is equal to the limit of the quotient of their derivatives, provided that the conditions are satisfied.
+2. L'Hospital's Rule is also valid for one-sided limit, and for limits at infinity or negative infinity.
+3. For the special case in which $f(a) = g(a) = 0$, $f'$ and $g'$ are continuous and $g'(a) \neq 0$, it is easy to show why l'Hospital's Rule is true:
+
+Given [$f'$ and $g'$ are continuous](../02_limits#continuity-of-a-function):
+
+$$
+\lim_{x \to a} \frac{f'(x)}{g'(x)} = \frac{f'(a)}{g'(a)}
+$$
+
+[By the definition of a derivative](../02_limits#derivatives):
+
+$$
+\frac{f'(a)}{g'(a)} = \frac{\lim_{x \to a} \frac{f(x) - f(a)}{x - a}}{\lim_{x \to a} \frac{g(x) - g(a)}{x - a}}
+$$
+
+[By the properties of limits](../02_limits#properties-of-limits):
+
+$$
+\frac{\lim_{x \to a} \frac{f(x) - f(a)}{x - a}}{\lim_{x \to a} \frac{g(x) - g(a)}{x - a}} = \lim_{x \to a} \frac{\frac{f(x) - f(a)}{x - a}}{ \frac{g(x) - g(a)}{x - a}}
+$$
+
+$$
+\lim_{x \to a} \frac{\frac{f(x) - f(a)}{x - a}}{ \frac{g(x) - g(a)}{x - a}} = \lim_{x \to a} \frac{f(x) - f(a)}{g(x) - g(a)}
+$$
+
+Because $f(a) = g(a) = 0$
+
+$$
+\lim_{x \to a} \frac{f(x) - f(a)}{g(x) - g(a)} = \lim_{x \to a} \frac{f(x)}{g(x)}
+$$
+
+It is more difficult to prove the general version of l’Hospital’s Rule.
+
+### Indeterminate Products (Type $0 \cdot \infty$)
+
+If $\lim_{x \to a} f(x) = 0$ and $\lim_{x \to a} g(x) = \infty$ or ($- \infty$), then it isn't clear what the value of $\lim_{x \to a} [f(x)g(x)]$ will be.
+
+This kind of limit is called an **indeterminate form of type** $0 \cdot \infty$. We can deal with it by writing the product $fg$ as a quotient:
+
+$$
+fg = \frac{f}{\frac{1}{g}} \text{ or } fg = \frac{g}{\frac{1}{f}}
+$$
+
+This converts the given limit into an indeterminate form of type $\frac{0}{0}$ or $\frac{\infty}{\infty}$ so that we can use l'Hospital's Rule.
+
+### Indeterminate Differences (Type $\infty - \infty$)
+
+If $\lim_{x \to a} f(x) = \infty$ and $\lim_{x \to a} g(x) = \infty$, then the limit:
+
+$$
+\lim_{x \to a} [f(x) - g(x)]
+$$
+
+is called an **indeterminate form of type** $\infty - \infty$. There is a contest between $f$ and $g$. Will the answer be $\infty$ ($f$ wins), $-\infty$ ($g$ wins) or will they compromise on a finite number? To find out, we try to convert the difference into a quotient so that we can have an indeterminate form of type $\frac{0}{0}$ or $\frac{\infty}{\infty}$.
+
+### Indeterminate Powers (Types $0^0, \infty^0, 1^{\infty}$)
+
+Several indeterminate forms arise from the limit:
+
+$$
+\lim_{x \to a} [f(x)]^{g(x)}
+$$
+
+1. $\lim_{x \to a} f(x) = 0$ and $\lim_{x \to a} g(x) = 0$, type $0^0$
+2. $\lim_{x \to a} f(x) = \infty$ and $\lim_{x \to a} g(x) = 0$, type $\infty^0$
+3. $\lim_{x \to a} f(x) = 1$ and $\lim_{x \to a} g(x) = \pm \infty$, type $1^{\infty}$
+
+Each of these three cases can be treated either by taking the natural logarithm:
+
+$$
+\text{let } y = [f(x)]^{g(x)} \text{, then } \ln y = g(x) \ln f(x)
+$$
+
+or by writing the function as an exponential:
+
+$$
+\text{let } y = [f(x)]^{g(x)} \text{, then } y = e^{\ln y} = e^{g(x) \ln f(x)}
+$$
+
+In either method we are led to the indeterminate product $g(x) \ln f(x)$ which is of type $0 \cdot \infty$.
