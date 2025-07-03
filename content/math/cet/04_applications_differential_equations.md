@@ -436,16 +436,22 @@ $$
 2. $\lim_{x \to a} f(x) = \infty$ and $\lim_{x \to a} g(x) = 0$, type $\infty^0$
 3. $\lim_{x \to a} f(x) = 1$ and $\lim_{x \to a} g(x) = \pm \infty$, type $1^{\infty}$
 
-Each of these three cases can be treated either by taking the natural logarithm:
+Each of these three cases can be treated by taking the natural logarithm as follows:
 
 $$
 \text{let } y = [f(x)]^{g(x)} \text{, then } \ln y = g(x) \ln f(x)
 $$
 
-or by writing the function as an exponential:
+Now we calculate:
 
 $$
-\text{let } y = [f(x)]^{g(x)} \text{, then } y = e^{\ln y} = e^{g(x) \ln f(x)}
+\lim_{x \to a} g(x) \ln f(x)
 $$
 
-In either method we are led to the indeterminate product $g(x) \ln f(x)$ which is of type $0 \cdot \infty$.
+This limit is always an indeterminate product (indeterminate form of type $0 \cdot \infty$), and can be solved as one, which will require the application of L'Hospital's Rule.
+
+Once we get the value of the limit for $\ln y$, we can obtain the limit of $y$ by writing the logarithm of $y$ as an exponential:
+
+$$
+\lim_{x \to a} y = \lim_{x \to a} [f(x)]^{g(x)} = \lim_{x \to a} e^{\ln y} = \lim_{x \to a} e^{g(x) \ln f(x)} = e^{\lim_{x \to a} g(x) \ln f(x)}
+$$
