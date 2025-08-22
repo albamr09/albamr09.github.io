@@ -1,5 +1,5 @@
 ---
-title: Calculus Ealy Transcendentals
+title: Calculus Early Transcendentals
 weight: 4
 type: docs
 ---

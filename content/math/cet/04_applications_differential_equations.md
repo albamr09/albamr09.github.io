@@ -455,3 +455,40 @@ Once we get the value of the limit for $\ln y$, we can obtain the limit of $y$ b
 $$
 \lim_{x \to a} y = \lim_{x \to a} [f(x)]^{g(x)} = \lim_{x \to a} e^{\ln y} = \lim_{x \to a} e^{g(x) \ln f(x)} = e^{\lim_{x \to a} g(x) \ln f(x)}
 $$
+
+## Summary of Curve Sketching
+
+### Guidelines for Sketching a Curve
+
+The following checklist is intended as a guide to sketching a curve $y = f(x)$.
+
+1. **Domain**: Start by determining the domain $D$ of $f$.
+2. **Intercepts**:
+   - Find where the curve intersects the $y$-axis by evaluating $f(0)$.
+   - Find where the curve intersects the $x$-axis by solving $f(x) = 0$ for $x$.
+3. **Symmetry**:
+   - If $f(x) = f(-x)$ for all $x \in D$, then $f$ is an even function and the curve is symmetric about the $y$-axis.
+   - If $-f(x) = f(-x)$ for all $x \in D$, then $f$ is an odd function and the curve is symmetric about the origin.
+   - If $f(x) = f(x + p)$ for all $x \in D$, where $p$ is a positive constant then $f$ is a **periodic function** and the smallest such number $p$ is called the **period**.
+4. **Asymptotes**:
+   - Horizontal asymptotes: If either $\lim_{x \to \infty} f(x) = L$ or $\lim_{x \to -\infty} f(x) = L$, then the line $y = L$ is a horizontal asymptote of the curve $y = f(x)$.
+   - Vertical asymptotes: The line $x = a$ is a vertical asymptote if either $\lim_{x \to a^+} f(x) = \infty$ and $\lim_{x \to a^-} f(x) = \infty$ or $\lim_{x \to a^+} f(x) = -\infty$ and $\lim_{x \to a^-} f(x) = -\infty$.
+   - Slant asymptotes: these will be discussed later on.
+5. **Intervals of Increase or Decrease**: Use the [Increasing/Decreasing Test](#what-does-f-say-about-f) to find the intervals in which $f$ increases or decreases.
+6. **Local Maximum or Minimum Values**: Find the critical number of $f$, then use the [First Derivative Test](#the-first-derivative-test) to determine whether the critical numbers are maximum or minimum values for $f$.
+7. **Concavity and Points of Inflection**: Compute $f''(x)$ and use the [Concavity Test](#what-does-f-say-about-f-1) to determine where $f$ is concave upward and where $f$ is concave downward.
+8. **Sketch the Curve**: Using the information from the previous points, draw the graph of $f$.
+
+### Slant Asymptotes
+
+Some curve have asymptotes that are **oblique**. If:
+
+$$
+\lim_{x \to \infty} [f(x) - (mx + b)] = 0
+$$
+
+where $m \neq 0$, then the line $y = mx + b$ is called a **slant asymptote** because the vertical distance between the curve $y = f(x)$ and the line $y = mx + b$ approaches $0$ (see Figure 12). A similar situation exists is we let $x \to - \infty$.
+
+![Slant Asymptote](./assets/slant_asymptote.png)
+
+In the case of rational functions, slant asymptotes occur when the degree of the numerator is one more than the degree of the denominator. In such a case the equation of the slant asymptote can be found by long division.
