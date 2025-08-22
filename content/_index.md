@@ -6,12 +6,12 @@ toc: false
 ## Notes
 
 {{< cards >}}
-{{< card link="/notes/cs" title="Computer Science" icon="desktop-computer" >}}
-{{< card link="/notes/datascience" title="Data Science" icon="database" >}}
-{{< card link="/notes/math" title="Math" icon="variable" >}}
-{{< card link="/notes/music" title="Music" icon="music-note" >}}
-{{< card link="/notes/webdev" title="Web Development" icon="globe" >}}
-{{< card link="/notes/other" title="Other" icon="cog" >}}
+{{< card link="/cs" title="Computer Science" icon="desktop-computer" >}}
+{{< card link="/datascience" title="Data Science" icon="database" >}}
+{{< card link="/math" title="Math" icon="variable" >}}
+{{< card link="/music" title="Music" icon="music-note" >}}
+{{< card link="/webdev" title="Web Development" icon="globe" >}}
+{{< card link="/other" title="Other" icon="cog" >}}
 {{< /cards >}}
 
 ## Planner
