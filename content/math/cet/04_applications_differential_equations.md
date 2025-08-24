@@ -492,3 +492,57 @@ where $m \neq 0$, then the line $y = mx + b$ is called a **slant asymptote** bec
 ![Slant Asymptote](./assets/slant_asymptote.png)
 
 In the case of rational functions, slant asymptotes occur when the degree of the numerator is one more than the degree of the denominator. In such a case the equation of the slant asymptote can be found by long division.
+
+### Practical questions
+
+#### How to prove that a function is not periodic
+
+A function $f(x)$ is periodic if it exists $T > 0$ such that:
+
+$$
+f(x + T) = f(x) \forall x
+$$
+
+There are a few ways in which we could prove $f$ is not periodic:
+
+1. For simple functions you can **directly check whether a period $T > 0$ can exist** by solving:
+
+$$
+f(x + T) = f(x)
+$$
+
+2. Find a **contradiction with specific values**.
+   - Pick a generic $x_1$ and try to find a generic $T$ that satisfies $f(x + T) = f(x)$, if there is not such $T$, then $f$ is not periodic.
+   - If there is such a $T$, repeat the previous step with another generic $x_2$, repeat until you can disprove the periodicity (try with a sensible number of points).
+3. If the **function increases or decreases without bound** (i.e. it tends to $\pm \infty$), then we can assume there is no periodicity because the values of $f$ keep getting larger and larger and do not follow a pattern.
+4. If it is a composite function, where **one of the components is a non-periodic function**, then the composite function is also non-periodic.
+
+#### How to prove that a function does not have asymptotes
+
+To show **there exist no vertical asymptotes** for a function $f(x)$ we need to check limits near critical points:
+
+- For a rational function, find $x$ such that the denominator is $0$.
+- For logarithms, the argument of the function must be postive. So boundary points like $x = 0, \text{for} \ln(x)$ are candidates.
+- For square roots or even roots, its argument must be non-negative. So boundary points like $x < 0 \text{for} \sqrt{x}$ are candidates.
+- Any other undefined points.
+
+This is to say that if
+
+1. If $f$ is defined everywhere, then there is no vertical asymptote.
+2. If the limits on critical points where $f$ would be undefined are finite, than there is no vertical asymptote.
+
+To show **there exist no horizontal asymptotes** for a function $f(x)$ we have to study how the function behaves when $x$ increases or decreases without bound. If $f$ is infinite or does not exist when $x$ increases or decreases without bound, then there are no horizontal asymptotes.
+
+To show **there exist no oblique asymptotes** for a function $f(x)$ we must show that the limit:
+
+$$
+\lim_{x \to \infty} \frac{f(x)}{x} = m
+$$
+
+or
+
+$$
+\lim_{x \to \infty} (f(x) - mx) = n
+$$
+
+either do not exist, or one of them is infinite.
