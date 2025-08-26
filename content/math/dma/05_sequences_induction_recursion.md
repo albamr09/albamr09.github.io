@@ -845,3 +845,18 @@ When a set has been defined recursively, a version fo matehmatical induction, **
 > For the second step we suppose that $x$ is an arbitrarily chose element on $S$ for which $P(x)$ is true, then we must show that if $y$ is obtained from $x$ by applying a rule from the recursion for $S$, then $P(y)$ is true.
 >
 > **Conclusion**: because no objects other than those obtained from the base and recursion are contained in $S$, steps 1 and 2 prove that $P(x)$ is true for every object $x \in S$.
+
+> [!NOTE] **Length of a String**
+>
+> Given the set of all strings $S$ over a finite set $A$, the **length $L$ of a string in $S$** is defined as follows:
+>
+> 1. $L(\lambda) = 0$
+> 2. For every string $u$ in $S$ and for every character $a$ in $A$, the length of $ua$ is one more than the length of $u$. Symbolically:
+>
+> $$L(ua) = L(u) + 1 \text{ where } u \in S \text{ and } a \in A$$
+
+### Recursive Functions
+
+> [!NOTE] **Recursive Function**
+>
+> A function is said to be **recursive** if its rule of definition referst to itself.
