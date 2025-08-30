@@ -247,3 +247,61 @@ At a certain point, backward chaining might become difficult, but analysis of th
 > [!TIP] **Element Method for Proving a Set Equals the Empty Set**
 >
 > To prove that a set $X$ is equal to the empty set $\emptyset$, prove that $X$ has no elements. To do this, suppose $X$ has an element and derive a contradiction.
+
+## Disproofs and Algebraic Proofs
+
+To show that a universal statement is false, it suffices to find one example, called a **counterexample** for which it is false.
+
+### Problem-Solving Strategy
+
+How can you discover whether a given universal statement about sets is true or false? There are two basic approaches:
+
+1. Start trying to prove the statement.
+2. Try to find a set of conditions that must be fulfilled to construct a counterexample.
+
+With either approach the trick is to be ready to switch to the other if what you are working on does not look promisin.
+
+> [!TIP] **Intuition for The Number of Subsets of a Set**
+>
+> Suppose $X$ is a set and $z$ is an element of $X$
+>
+> 1. The subsets of $X$ can be split into two groups: those that do not contain $z$ and those that do contain $z$
+> 2. The subsets of $X$ that do not contain $z$ are the same as the subsets of $X - \{z\}$.
+> 3. The subsets of $X$ that do not contain $z$ can be matched up one for one with the subsets of $X$ by matching each subset $A$ that does not contain $z$ to the subset $A \cup \{z\}$ that contains $z$. Thus there are as many subsets of $X$ that contain $z$ as there are subsets of $X$ that do not contain $z$.
+>
+> ![Intuition for the Number of Subsets of a Set](./assets/n_elements_power_set.png)
+
+> [!NOTE] **The Number of Subsets of a Set**
+>
+> For every integer $n \geq 0$, if a set $X$ has $n$ elements, then $\mathcal{P}(X)$ has $2^n$ elements.
+>
+> **Proof** (by mathematical indcution): Let the property $P(n)$ be:
+>
+> Any set with $n$ elements has $2^n$ subsets.
+>
+> **Show that $P(0)$ is true**. We must show that:
+>
+> Any set with $0$ eleemnts ahs $2^0$ subsets.
+>
+> The only set with zero elements is the empty set, and the only subset of the empty set is itself. Thus a set with zero elements has one subset.
+>
+> **Show that for every integer $k \geq 0$, if $P(k)$ is strue then $P(k + 1)$ is also true**. Suppose that $k$ is any integer with $k \geq 0$, such that:
+>
+> Any set with $k$ elements has $2^k$ subsets.
+>
+> We must show that:
+>
+> Any set with $k + 1$ elements has $2^{k + 1}$ subsets.
+>
+> Let $X$ be a set with $k + 1$ elements. Since $k + 1 \geq 1$, we may pick an element $z$ in X. Observe that any subset of $X$ either contains $z$ or does not.
+>
+> 1. Any subset of $X$ that does not contain $z$ is a subset of $X - \{z\}$.
+> 2. Any subset $A$ of $X - \{z\}$ can be matched up with a subset $B$ equal to $A \cup \{z\}$ of $X$ that contains $z$.
+>
+> Consequently, there are as many subset of $X$ that contain $z$ as do not, and thus there are twice as many subsets of $X$ as there are subsets of $X - \{z\}$. If follows that since $X - \{z\}$ has $k$ elements, then, by inductive hypothesis, the number of subsets of $X - \{z\}$ is $2^k$.
+>
+> Therefore the number of subsets of $X$ is $2 \cdot 2^k = 2^{k + 1}$.
+
+### Algebraic Proofs of Set Identitites
+
+New properties can be derived from them algebraically without having to use element method arguments using known properties.
