@@ -179,7 +179,7 @@ $$
 >
 > $$(A^{C})^{C} = A$$
 >
-> 7. _Idemptotent Laws_: For every set $A$:
+> 7. _Idempotent Laws_: For every set $A$:
 >
 > $A \cup A = A$ and $A \cap A = A$
 >
@@ -193,7 +193,7 @@ $$
 >
 > $$(A \cup B)^{C} = A^{C} \cap B^{C}$$
 >
-> 10. _Absortion Laws_: For all sets $A$ and $B$:
+> 10. _Absorption Laws_: For all sets $A$ and $B$:
 >
 > $$A \cup (A \cap B) = A$$
 >
@@ -305,3 +305,112 @@ With either approach the trick is to be ready to switch to the other if what you
 ### Algebraic Proofs of Set Identitites
 
 New properties can be derived from them algebraically without having to use element method arguments using known properties.
+
+## Boolean Algebras, Russell's Paradox, and the Halting Problem
+
+The essential idea of a Boolean algebra was introduced by the English mathematician/logician George Boole in 1847 in a book entitled [_The Mathematical Analysis of Logic_](https://www.cambridge.org/core/books/mathematical-analysis-of-logic/BF7CDDC37F3F4FC698CEEE5F2FA0270C). In this section we show how to derive the various properties associated with a Boolean algebra from a set of five axioms.
+
+> [!NOTE] **Axioms for a Boolean Algebra**
+>
+> A **Boolean algebra** is a set $B$ together with two operations, generally denoted $+$ and $\cdot$, such that for all $a$ and $b$ in $B$ both $a + b$ and $a \cdot b$ are in $B$ and the following axioms are assumed to hold:
+>
+> 1. _Commutative Laws_: For all $a$ and $b$ in $B$,
+>
+> $$a + b = b + a \text{ and } a \cdot b = b \cdot a$$
+>
+> 2. _Associative Laws_: For all $a$, $b$ and $c$ in $B$,
+>
+> $$(a + b) + c = a + (b + c) \text{ and } (a \cdot b) \cdot c = a \cdot (b \cdot c)$$
+>
+> 3. _Distributive Laws_: For all $a$, $b$ and $c$ in $B$,
+>
+> $$a \cdot (b + c) = (a \cdot b) + (a \cdot c) \text{ and } a + (b \cdot c) = (a + b) \cdot (a + c)$$
+>
+> 4. _Identity Laws_: There exist distint elements $0$ and $1$ in $B$ such that for each $a$ in $B$,
+>
+> $$a + 0 = a \text{ and } a \cdot 1 = a$$
+>
+> 5. _Complement Laws_: For each $a$ in $B$, there exists an element in $B$, denoted $\bar{a}$ and called the **complement** or **negation** of f$a$, such taht:
+>
+> $$a + \bar{a} = 1 \text{ and } a \cdot \bar{a} = 0$$
+
+> [!NOTE] **Properties of a Boolean Algebra**
+>
+> Let $B$ be any Boolean algebra:
+>
+> 1. _Uniqueness of the Complement Laws_: For all $a$ and $x$ in $B$, if $a + x = 1$ and $a \cdot x = 0$, then $x = \bar{a}$.
+>
+> 2. _Uniqueness of $0$ and $1$_:
+>
+> - If there exists $x$ in $B$ such that $a + x = a$ for every $a$ in $B$, then $x = 0$
+> - If there exists $y$ in $B$ such that $a \cdot y = a$ for every $a$ in $B$, then $y = 1$
+>
+> 3. _Double Complement Law_: For every $a \in B, \bar{(\bar{a})} = a$
+>
+> 4. _Idempotent Laws_: For every $a \in B$,
+>
+> $$a + a = a \text{ and } a \cdot a = a$$
+>
+> 5. _Universal Bound Laws_: For every $a \in B$,
+>
+> $$a + 1 = 1 \text{ and } a \cdot 0 = 0$$
+>
+> 6. _De Morgan's Laws_: For all $a, b \in B$,
+>
+> $$\bar{a + b} = \bar{a} \cdot \bar{b} \text{ and } \bar{a \cdot b} = \bar{a} + \bar{b}$$
+>
+> 7. _Absorption Laws_: For all $a, b \in B$,
+>
+> $$(a + b) \cdot a = a \text{ and } (a \cdot b) + a = a$$
+>
+> 8. _Complements of $0$ and $1$_:
+>
+> $$\bar{0} = 1 \text{ and } \bar{1} = 0$$
+
+You might have noticed that all parts of the definition of a Boolean algebra and most of its stated properties contain paired statements. Each of the paired statements can be obtained from the other by interchanging all the $+$ and $\cdot$ signs, and interchanging $0$ and $1$. Such interchanges transform any Boolean identity into its **dual identity**. It can be proved that the dual of any Boolean identity is also an identity. This fact is often called the **duality principle** for a Boolean algebra.
+
+### Russell's Paradox
+
+By the beginning of the twentieth century, abstract set theory had gained such wide acceptance that a number of mathematicians were working hard to show that all of mathematics could be built upon a foundation of set theory. In the midst of this activity, the English mathematician and philosopher Bertrand Russell discovered a "paradox".
+
+**Russell's Paradox**: Let's imagine there exists a set that can be an element of itself (e.g. the set of all abstract ideas could be an abstract idea), we can let $S$ be the set of all sets that are not eleemnts of themselves:
+
+$$
+S = \{A | A \text{ is a set and } A \notin A\}
+$$
+
+Then, is $S$ an element of itself? The answer is both yes and no.
+
+1. Suppose $S \in S$, then $S$ must satisfy the defining property of $S$, that is $S \notin S$, which is a contradiction, therefore the assumption is false and $S \notin S$.
+2. Suppose $S \notin S$, then $S$ satisfies the definition of $S$, that is $S \in S$. Therefore the assumption is false and $S \in S$.
+
+Thus both $S \in S$ and $S \notin S$, which cannot happen because a statement is either true or false. Because of this we are forced to conlude that the situation decribed cannot exist in the world as we know it (see the [Barber Puzzle](https://en.wikipedia.org/wiki/Barber_paradox)).
+
+### The Halting Problem
+
+[Alan M. Turing](https://es.wikipedia.org/wiki/Alan_Turing) deduced a profound theorem about how computers would have to work. The argument he used is similar to that in Russell’s paradox. This theorem deals with the **Halting Problem**, which aims to clarify if there could exist an algorithm be written that will accept any algorithm $X$ an any data set $D$ as input and will then print "halts" or "loops forever" to indicate whether $X$ terminates in a finite number of steps. Turing proved that the answer to this question is **no**.
+
+> [!NOTE] **The Halting Problem**
+>
+> There is no computer algorithm that will accept any algorithm $X$ and data set $D$ as input and then will output "halts" or "loops forever" to indicate whether or not $X$ terminates in a finite number of steps when $X$ is run with data set $D$.
+>
+> **Proof** (by contradiction): Suppose there is an algorithm, CheckHalt, such that if an algorithm $X$ and a data set $D$ are input, then
+>
+> $\text{CheckHalt}(X, D)$ prints
+>
+> - "halts" if $X$ terminates in a finite number of steps when run with dataset $D$.
+> - "loops forever" if $X$ does not terminate in a finite number of steps when run with dataset $D$.
+>
+> Observe that the sequence of characters making up an algorithm $X$ can be regarded as a data set itself. Thus it is possible to consider running CheckHalt with input $(X, X)$. Define a new algorithm, Test, as follows: For any input algorithm $X$,
+>
+> - $\text{Test}(X)$ loops forever if $\text{CheckHalt}(X, X)$ prints "halts" or
+> - $\text{Test}(X)$ steps if $\text{CheckHalt}(X, X)$ prints "loops forever"
+>
+> Now run algorithm Test with input Test.
+>
+> - If $\text{Test}(\text{Test})$ terminates after a finite number of steps, then the value of $\text{CheckHalt}(\text{Test}, \text{Test})$ is "halts" and so $\text{Test}(\text{Test})$ loops forever.
+> - If $\text{Test}(\text{Test})$ does not terminate after a finite number of steps, then the value of $\text{CheckHalt}(\text{Test}, \text{Test})$ is "loops forever" and so $\text{Test}(\text{Test})$ terminates.
+>
+> This shows a contradiction, therefore the supposition must be false and there is no such algorithm like CheckHalt.
+
+The axioms introduced into set theory to avoid Russell’s paradox are not entirely adequate to deal with the full range of recursively defined objects in computer algorithms. One response has been to develop an extension of set theory that includes new objects called [hypersets](https://en.wikipedia.org/wiki/Non-well-founded_set_theory).
