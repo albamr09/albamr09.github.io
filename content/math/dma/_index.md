@@ -11,4 +11,5 @@ type: docs
 {{< card link="04_elementary_number_theory" title="Elementary Number Theory" >}}
 {{< card link="05_sequences_induction_recursion" title="Sequences, Mathematical Induction, and Recursion" >}}
 {{< card link="06_set_theory" title="Set Theory" >}}
+{{< card link="07_function_properties" title="Properties of Functions" >}}
 {{< /cards >}}
