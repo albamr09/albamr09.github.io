@@ -11,7 +11,7 @@ prev: notes/cs/rtgw/04/02_model_view
 Two vectors are perpendicular if their dot product is $0$. In our example
 
 $$
-<N, S> = 0
+\langle N, S \rangle = 0
 $$
 
 Here, $S$ is the surface vector and can be calculated as the difference of two vertices. Let $M$ be the Model-View matrix. We can use $M$ to transform $S$ as follows:
@@ -29,13 +29,13 @@ $$
 For the scene to be consistent after obtaining $N'$ and $S'$, these two need to keep the perpendicularity that the original vectors $N$ and $S$ had.
 
 $$
-<N', S'> = 0
+\langle N', S' \rangle = 0
 $$
 
 Substituting $N'$ and $S'$:
 
 $$
-<KN, MS> = 0
+\langle KN, MS \rangle = 0
 $$
 
 $$
