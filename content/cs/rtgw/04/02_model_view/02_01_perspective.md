@@ -579,7 +579,7 @@ $$
 
 ## Note
 
-This section is kinda important, up until now we have define this projection matrix on what we call [row-major order](https://en.mdpedia.org/wiki/Row-_and_column-major_order). However, WebGL expects us to use matrices defined on [column-major order](https://en.mdpedia.org/wiki/Row-_and_column-major_order). See [Transposing Transformation or Projection Matrices](./01_transformations.md#Transposing%20Transformation%20or%20Projection%20Matrices) on how to correctly defined these matrices.
+This section is kinda important, up until now we have define this projection matrix on what we call [row-major order](https://en.mdpedia.org/wiki/Row-_and_column-major_order). However, WebGL expects us to use matrices defined on [column-major order](https://en.mdpedia.org/wiki/Row-_and_column-major_order). See [Transposing Transformation or Projection Matrices](../../01_transformations#transposing-transformation-or-projection-matrices) on how to correctly defined these matrices.
 
 ## References
 
