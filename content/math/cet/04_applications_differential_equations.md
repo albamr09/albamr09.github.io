@@ -493,6 +493,28 @@ where $m \neq 0$, then the line $y = mx + b$ is called a **slant asymptote** bec
 
 In the case of rational functions, slant asymptotes occur when the degree of the numerator is one more than the degree of the denominator. In such a case the equation of the slant asymptote can be found by long division.
 
+**Example**
+
+Given a function $f(x) = xe^{-\frac{1}{x}}$, we obtain its slant asymptote, denoted by $y = mx + b$ by first finding the slope $m$ as:
+
+$$
+m = \lim_{x \to \pm \infty} \frac{f(x)}{x} = \frac{xe^{-\frac{1}{x}}}{x} = e^{-\frac{1}{x}} = e^{0} = 1
+$$
+
+Thus $m = 1$. Now we compute the value for the intercept $b$ as:
+
+$$
+b = \lim_{x \to \pm \infty} (f(x) - mx) = xe^{-\frac{1}{x}} - x = x \left(e^{-\frac{1}{x}} - 1\right) = \infty \cdot (1 - 1) = \infty \cdot 0
+$$
+
+We apply L'Hopital's Rule:
+
+$$
+= \lim_{x \to \pm \infty} \frac{e^{- \frac{1}{x}} - 1}{\frac{1}{x}} = -\frac{e^{- \frac{1}{x}}x^{-2}}{x^{-2}} = -e^{- \frac{1}{x}} = e^{0} = -1
+$$
+
+Such that the slant asymptote is given by $y = mx + b = x - 1$.
+
 ### Practical questions
 
 #### How to prove that a function is not periodic
@@ -542,7 +564,7 @@ $$
 or
 
 $$
-\lim_{x \to \infty} (f(x) - mx) = n
+\lim_{x \to \infty} (f(x) - mx) = b
 $$
 
 either do not exist, or one of them is infinite.
