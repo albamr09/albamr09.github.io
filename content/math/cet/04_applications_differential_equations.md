@@ -546,3 +546,13 @@ $$
 $$
 
 either do not exist, or one of them is infinite.
+
+## Graphing with Calculus and Techonology
+
+> [!TIP] **Faimily of Functions**
+>
+> A **family of functions** are a set of functions that are related to each other by a formula that contains one or more arbitrary constants. Each valus of the constant gives rise to a member of the family. For example
+>
+> $$f(x) = \frac{1}{x^2 + 2x + c}$$
+>
+> where $c$ is the constant that spans different family members.
