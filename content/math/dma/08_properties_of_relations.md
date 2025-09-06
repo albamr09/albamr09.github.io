@@ -346,7 +346,7 @@ Note that if $a$ is any element of an equivalence class $S$, then $S = [a]$. Hen
 >
 > Let $m$ and $n$ be integers and let $d$ be a positive integer. We say that **$m$ is congruent to $n$ modulo $d$** and write
 >
-> $$ m \equiv n (\text{mod } d)$$
+> $$ m \equiv n (\text{ mod } d)$$
 >
 > if, and only if,
 >
@@ -367,18 +367,18 @@ The first public-key cryptography system was developed in 1976–1977 by three m
 > Let $a, b$ and $n$ be any integers and suppose $n > 1$. The following statements are all equivalent:
 >
 > 1. $n | (a - b)$
-> 2. $a \equiv b (\text{mod } n)$
+> 2. $a \equiv b (\text{ mod } n)$
 > 3. $a = bk + n$, for some integer $k$
 > 4. $a$ and $b$ have the same (nonnegative) remainder when divided by $n$
-> 5. $a \text{mod } n = b \text{mod } n$
+> 5. $a \text{ mod } n = b \text{ mod } n$
 
 **Proof** We will show that $(1) \Rightarrow (2) \Rightarrow (3) \Rightarrow (4) \Rightarrow (5) \Rightarrow (1)$. It will follow by the transitivity of if-then that all five statements are equivalent.
 
 Let $a, b$ and $n$ be any integers with $n > 1$.
 
-**Proof that $(1) \Rightarrow (2)$**: Suppose $n | (a - b)$. By definition of congruence modulo $n$, we can immediately conclude that $a \equiv b (\text{mod } n)$.
+**Proof that $(1) \Rightarrow (2)$**: Suppose $n | (a - b)$. By definition of congruence modulo $n$, we can immediately conclude that $a \equiv b (\text{ mod } n)$.
 
-**Proof that $(2) \Rightarrow (3)$**: Suppose $ a \equiv b (\text{mod } n)$. By definition of congruence modulo $n$, $n | (a - b)$. Thus, by definition of divisibility $a - b = kn$ for some integer $k$ and thus $a = kn + b$.
+**Proof that $(2) \Rightarrow (3)$**: Suppose $ a \equiv b (\text{ mod } n)$. By definition of congruence modulo $n$, $n | (a - b)$. Thus, by definition of divisibility $a - b = kn$ for some integer $k$ and thus $a = kn + b$.
 
 **Proof that $(3) \Rightarrow (4)$**: Suppose that $a = b + kn$ for some integer $k$. Use the quotient remainder theorem to divide $a$ by $n$ to obtain
 
@@ -398,9 +398,9 @@ $$
 
 Now since $0 \leq r < n$, the uniqueness property of the quotient-remainder theorem guarantees that $r$ is also the remainder obtained when $b$ is divided by $n$. Thus $a$ and $b$ have the same remainder when divided by $n$.
 
-**Proof that $(4) \Rightarrow (5)$**: Suppose that $a$ and $b$ have the same remainder when divided by $n$. It follows immediately from the definition of the $\text{mod}$ function that $a \text{ mod } n = b \text{mod } n$.
+**Proof that $(4) \Rightarrow (5)$**: Suppose that $a$ and $b$ have the same remainder when divided by $n$. It follows immediately from the definition of the $\text{ mod }$ function that $a \text{ mod } n = b \text{ mod } n$.
 
-**Proof that $(5) \Rightarrow (1)$**: Suppose that $a \text{mod } n = b \text{mod } n$. By definition of the $\text{mod}$ function, $a$ and $b$ have the same remainder when divided by $n$. Thus, by the quotient remainder theorem, we can write
+**Proof that $(5) \Rightarrow (1)$**: Suppose that $a \text{ mod } n = b \text{ mod } n$. By definition of the $\text{mod }$ function, $a$ and $b$ have the same remainder when divided by $n$. Thus, by the quotient remainder theorem, we can write
 
 $$
 a = q_1 n + r, b = q_2 + r
@@ -418,7 +418,7 @@ Therefore, since $q_1 - q_2$ is an integer, $n | (a - b)$.
 
 > [!NOTE] **Residue of a Modulo $n$**
 >
-> Given integers $a$ and $n$ with $n > 1$, **the residue of $a$ modulo $n$** is $a \text{mod } n$, the nonnegative remainder obtained when $a$ is divided by $n$.
+> Given integers $a$ and $n$ with $n > 1$, **the residue of $a$ modulo $n$** is $a \text{ mod } n$, the nonnegative remainder obtained when $a$ is divided by $n$.
 
 > [!NOTE] **Complete Set of Residues Modulo $n$**
 >
@@ -432,13 +432,13 @@ Therefore, since $q_1 - q_2$ is an integer, $n | (a - b)$.
 >
 > If $n$ is any integer with $n > 1$, congruence modulo $n$ is an equivalence relation on the set of all integers. The distint equivalence classes of the relation are the sets $[0], [1], \cdots, [n - 1]$, where for each $a = 0, 1, 2, \cdots, n - 1$
 >
-> $$[a] = \{m \in Z | m \equiv a (\text{mod } n)\}$$
+> $$[a] = \{m \in Z | m \equiv a (\text{ mod } n)\}$$
 
 **Proof**. Suppose $n$ is an integer with $n > 1$. We must show that the congruence modulo $n$ is reflexive, symmetric and transitive.
 
-_Proof of reflexivity_: Suppose that $a$ is any integer, we must show that $a \equiv a \text{mod n}$. By definition of congruence modulo $n$ this means $n | (a - a)$, that is $(a - a) = nq \Leftrightarrow 0 = n 0$. Thus $a \equiv a \text{mod } n$.
+_Proof of reflexivity_: Suppose that $a$ is any integer, we must show that $a \equiv a \text{ mod n}$. By definition of congruence modulo $n$ this means $n | (a - a)$, that is $(a - a) = nq \Leftrightarrow 0 = n 0$. Thus $a \equiv a \text{ mod } n$.
 
-_Proof of symmetry_: Suppose $a$ and $b$ are any two integers such that $a \equiv b \text{mod } n$, we must show $b \equiv a \text{mod }n$. By definition of congrunce modulo $n$
+_Proof of symmetry_: Suppose $a$ and $b$ are any two integers such that $a \equiv b \text{ mod } n$, we must show $b \equiv a \text{ mod }n$. By definition of congrunce modulo $n$
 
 $$
 (a - b) = nk, k \in \mathbb{Z}
@@ -450,9 +450,9 @@ $$
 -(a - b) = -nk \Leftrightarrow (b - a) = n(-k)
 $$
 
-And, by definition of congrunce modulo $n$ $b \equiv a \text{mod } n$.
+And, by definition of congrunce modulo $n$ $b \equiv a \text{ mod } n$.
 
-_Proof of transitivity_: Let $a, b, c \in \mathbb{R}$ such that $a \equiv b \text{mod } n$ and $b \equiv c \text{mod } n$. We must show that $a \equiv c \text{mod } n$. By definition of congruence modulo $n$
+_Proof of transitivity_: Let $a, b, c \in \mathbb{R}$ such that $a \equiv b \text{ mod } n$ and $b \equiv c \text{ mod } n$. We must show that $a \equiv c \text{mod } n$. By definition of congruence modulo $n$
 
 $$
 (a - b) = nk, k \in \mathbb{Z}
@@ -480,7 +480,7 @@ $$
 a - c = nq + nk = n(q + k)
 $$
 
-Thus $n | (a - c)$ and $a \equiv c \text{mod } n$ by definition.
+Thus $n | (a - c)$ and $a \equiv c \text{ mod } n$ by definition.
 
 ### Modular Arithmetic
 
@@ -488,14 +488,14 @@ Thus $n | (a - c)$ and $a \equiv c \text{mod } n$ by definition.
 >
 > Let $a, b, c, d$ and $n$ be integers with $n > 1$, and suppose
 >
-> $$a \equiv c (\text{mod }n )$$
+> $$a \equiv c (\text{ mod }n )$$
 >
 > Then
 >
-> 1. $(a + b) \equiv (c + d) (\text{mod } n)$
-> 2. $(a - b) \equiv (c - d) (\text{mod } n)$
-> 3. $ab \equiv cd (\text{mod } n)$
-> 4. $a^m \equiv a^m (\text{mod } n)$ for every positive integer $m$
+> 1. $(a + b) \equiv (c + d) (\text{ mod } n)$
+> 2. $(a - b) \equiv (c - d) (\text{ mod } n)$
+> 3. $ab \equiv cd (\text{ mod } n)$
+> 4. $a^m \equiv a^m (\text{ mod } n)$ for every positive integer $m$
 
 The most practical use of modular arithmetic is to reduce computations involving large integers to computations involving smaller ones.
 
@@ -503,15 +503,15 @@ The most practical use of modular arithmetic is to reduce computations involving
 >
 > Let $a, b$ and $n$ be integers with $n > 1$. Then
 >
-> $$ab \equiv [(a \text{mod } n)(a \text{mod } n)](\text{mod } n)$$
+> $$ab \equiv [(a \text{ mod } n)(a \text{ mod } n)](\text{mod } n)$$
 >
 > or, equivalently
 >
-> $$ab \text{mod } n = [(a \text{mod } n)(a \text{mod } n)](\text{mod } n)$$
+> $$ab \text{ mod } n = [(a \text{ mod } n)(a \text{mod } n)](\text{mod } n)$$
 >
 > In particular, if $m$ is a positive integer, then
 >
-> $$a^m \equiv [(a \text{mod } n)^m](\text{mod } n)$$
+> $$a^m \equiv [(a \text{ mod } n)^m](\text{ mod } n)$$
 
 ### Extending the Euclidean Algorithm
 
@@ -603,7 +603,7 @@ We conclude that $c = d$. It follows that $d$, the greatest common divisor of $a
 
 > [!NOTE] **Inverse Modulo $n$**
 >
-> Given any integer $a$ and any positive integer $n$, if there exists an integer $s$ such that $as \equiv 1 (\text{mod } n)$ then $s$ is called **an inverse for $a$ modulo $n$**.
+> Given any integer $a$ and any positive integer $n$, if there exists an integer $s$ such that $as \equiv 1 (\text{ mod } n)$ then $s$ is called **an inverse for $a$ modulo $n$**.
 
 > [!NOTE] **Relative Primes**
 >
@@ -619,7 +619,7 @@ We conclude that $c = d$. It follows that $d$, the greatest common divisor of $a
 
 > [!TIP] **Existence of Inverses Modulo $n$**
 >
-> For all integers $a$ and $n$, if $\text{gcd}(a, n) = 1$, then there exists an integer $s$ such that $as \equiv 1 (\text{mod } n)$ and so $s$ is an inverse of $a$ modulo $n$.
+> For all integers $a$ and $n$, if $\text{gcd}(a, n) = 1$, then there exists an integer $s$ such that $as \equiv 1 (\text{ mod } n)$ and so $s$ is an inverse of $a$ modulo $n$.
 
 **Proof**. Suppose $a$ and $n$ are integers and $\text{gcd}(a, n) = 1$. Then by the previous corollary, there exist integers $s$ and $t$ such that
 
@@ -634,7 +634,7 @@ $$
 Thus, by defintion of congrunce modulo $n$
 
 $$
-as \equiv 1 (\text{mod } n)
+as \equiv 1 (\text{ mod } n)
 $$
 
 ### RSA Cryptography
@@ -652,7 +652,7 @@ $$
 Someone who wants to send Alice a message breaks the message into blocks, each consisting of a single letter, and finds the numeric equivalent for each block. The plaintext, $M$, in a block is converted into ciphertext, $C$, according to the following formula:
 
 $$
-C = M^e \text{mod } pq
+C = M^e \text{ mod } pq
 $$
 
 Note that because $(pq, e)$ is the public key, anyone who has it and knows modular arithmetic can encrypt a message to send to Alice.
@@ -660,10 +660,10 @@ Note that because $(pq, e)$ is the public key, anyone who has it and knows modul
 To decrypt the message, the **decryption key** must be computed. It is a number $d$ that is a positive inverse to e modulo $(p - 1)(q - 1)$. The plaintext $M$ is obtained from the ciphertext $C$ by the formula
 
 $$
-M = C^d \text{mod } pq \text{, where the number pair } (pq, d) \text{ is Alice's } \textbf{private key}
+M = C^d \text{ mod } pq \text{, where the number pair } (pq, d) \text{ is Alice's } \textbf{private key}
 $$
 
-Note that because $M + kpq \equiv M (\text{mod } pq)$, $M$ must be taken to be less than $pq$, as in the above example, in order for the decryption to be guaranteed to produce the original message. But because $p$ and $q$ are normally taken to be so large, this requirement does not cause problems.
+Note that because $M + kpq \equiv M (\text{ mod } pq)$, $M$ must be taken to be less than $pq$, as in the above example, in order for the decryption to be guaranteed to produce the original message. But because $p$ and $q$ are normally taken to be so large, this requirement does not cause problems.
 
 > [!TIP] **Euclid's Lemma**
 >
@@ -697,9 +697,9 @@ Thus $a | b$ by defintion of divisibility.
 
 > [!TIP] **Cancellation Theorem for Modular Congruence**
 >
-> For all integers $a, b, c$ and $n$ with $n > 1$, if $\text{gcd}(c, n) = 1$ and $ac \equiv bc (\text{mod } n)$, then $a \equiv b (\text{mod } n)$.
+> For all integers $a, b, c$ and $n$ with $n > 1$, if $\text{gcd}(c, n) = 1$ and $ac \equiv bc (\text{ mod } n)$, then $a \equiv b (\text{ mod } n)$.
 
-**Proof**. Suppose $a, b, c$ and $n$ are any integers $\text{gcd}(c, n) = 1$, and $ac \equiv bc (\text{mod } n)$. By definition of congruence modulo $n$
+**Proof**. Suppose $a, b, c$ and $n$ are any integers $\text{gcd}(c, n) = 1$, and $ac \equiv bc (\text{ mod } n)$. By definition of congruence modulo $n$
 
 $$
 n | (ac - bc)
@@ -726,14 +726,14 @@ $$
 and so, by defintion of congruence modulo $n$
 
 $$
-a \equiv b (\text{mod } n)
+a \equiv b (\text{ mod } n)
 $$
 
 ### Fermat's Little Theorem
 
 > [!NOTE] **Fermat's Little Theorem**
 >
-> If $p$ is any prime number and $a$ is any integer such that $p \not | a$, then $a^{p - 1} \equiv 1 (\text{mod } p)$.
+> If $p$ is any prime number and $a$ is any integer such that $p \not | a$, then $a^{p - 1} \equiv 1 (\text{ mod } p)$.
 
 **Proof**. Suppose $p$ is any prime number and $a$ is any integer such that $p \not | a$. Note that $a \neq 0$ because otherwise $p$ would divide $a$. Consider the set of integers
 
@@ -741,7 +741,7 @@ $$
 S = \{a, 2a, 3a, \cdots, (p - 1)a\}
 $$
 
-We claim that no two elements of $S$ are congruent modulo $p$. For suppose $sa \equiv ra (\text{mod } p)$ for some integers $s$ and $r$ with $1 \neq r < s \leq p - 1$. The by definiton of congruence modulo $p$
+We claim that no two elements of $S$ are congruent modulo $p$. For suppose $sa \equiv ra (\text{ mod } p)$ for some integers $s$ and $r$ with $1 \neq r < s \leq p - 1$. The by definiton of congruence modulo $p$
 
 $$
 p | (sa - ra) \Leftrightarrow p | (s - r)a
@@ -754,17 +754,281 @@ Consider the function $F$ from $S$ to the set $T = \\{1, 2, 3, \cdots, (p - 1)\\
 Hence $F$ is onto, and so the $p - 1$ residues of the $p - 1$ elements of $S$ are exactly the numbers $1, 2, 3, \cdots, (p - 1)$. It follows that
 
 $$
-a \cdot 2a \cdot 3d \cdots (p - 1)a \equiv [1 \cdot 2 \cdot 3 \cdots (p - 1)](\text{mod } p)
+a \cdot 2a \cdot 3d \cdots (p - 1)a \equiv [1 \cdot 2 \cdot 3 \cdots (p - 1)](\text{ mod } p)
 $$
 
 or equivalently
 
 $$
-a^{p - 1}(p - 1)! \equiv (p - 1)! (\text{mod } p)
+a^{p - 1}(p - 1)! \equiv (p - 1)! (\text{ mod } p)
 $$
 
 Now because $p$ is prime, $p$ and $(p - 1)!$ are relatively prime. Thus, by the cancellation theorem for modular congruence
 
 $$
-a^{p - 1} \equiv 1 (\text{mod } p)
+a^{p - 1} \equiv 1 (\text{ mod } p)
 $$
+
+### Why does the RSA Cipher Work?
+
+The formula
+
+$$
+M = C^d \text{ mod } (pq)
+$$
+
+is supposed to produce the original plaintext message, $M$, when the encrypted message is $C$. Recall that we require:
+
+- $M < pq$ and we know
+- $C = M^e \text{ mod } pq$
+
+By substitution
+
+$$
+C^d \text{ mod } (pq) = (M^e \text{ mod } (pq))^d \text{ mod } (pq)
+$$
+
+Because if $a \equiv c \text{ mod }(n)$ then $a^m \equiv c^m \text{ mod } n$, let $a = M^e \text{ mod }(pq)$, $c = M^e$ and $d = m$. Then, given
+
+$$
+M^e \text{ mod }(pq) \equiv  M^e \text{ mod } (pq)
+$$
+
+It follows that
+
+$$
+(M^e \text{ mod } (pq))^d \equiv M^{ed} (\text{ mod } (pq))
+$$
+
+Thus, substituting back $M^e \text{ mod } (pq)$ by $C$:
+
+$$
+C^d \text{ mod } (pq) \equiv M^{ed} (\text{ mod }(pq))
+$$
+
+Substituting back $C^d \text{ mod }(pq)$ by $M$:
+
+$$
+M \equiv M^{ed} (\text{ mod }(pq))
+$$
+
+and because $M < pq$ we can state that $M$ is equal to the residue of dividing $M^{ed}$ by $pq$:
+
+$$
+M = M^{ed} (\text{ mod }(pq))
+$$
+
+**Therefore, to prove the correctness of the RSA cipher we have to show that**
+
+$$
+M \equiv C^d \text{ mod } (pq)
+$$
+
+**by proving**
+
+$$
+M \equiv M^{ed} (\text{ mod }(pq)) \text{ and by our assumptions } M = M^{ed} (\text{ mod } pq)
+$$
+
+Recall that $d$ was chosen to be a positive inverse for $e$ modulo $(p - 1)(q - 1)$, which exists because $\text{gcd}(e, (p - 1)(q - 1)) = 1$ as we defined $e$ to be a [relative prime](/#finding-an-inverse-modulo-n) with respect to $(p - 1)(q - 1)$. In other words, by definition of positive inverse
+
+$$
+ed \equiv 1 (\text{ mod } (p - 1)(q - 1))
+$$
+
+or equivalently
+
+$$
+ed = 1 + k(p - 1)(q - 1) \text{ for some positive integer } k
+$$
+
+Therefore
+
+$$
+M^{ed} = M^{1 + k(p - 1)(q - 1)} = M(M^{k(p - 1)(q - 1)})
+$$
+
+If $p \not | M$, then by [Fermat's Little Theorem](#fermats-little-theorem), $M^{p - 1} \equiv 1 (\text{ mod } p)$ and so
+
+$$
+M^{ed} = M^{1 + k(p - 1)(q - 1)} = M(M^{(p - 1)})^{k(q - 1)} \equiv M(1)^{k(q - 1)} (\text{ mod } p)
+$$
+
+Given $1^{x} = 1, \forall x \in \mathbb{R}$
+
+$$
+M^{ed} \equiv M(1)^{k(q - 1)} (\text{ mod } p) = M (\text{ mod } p)
+$$
+
+Similarly if $q \not | M$, then by [Fermat's Little Theorem](#fermats-little-theorem), $M^{q - 1} \equiv 1 (\text{ mod } q)$ and so
+
+$$
+M^{ed} = M^{1 + k(p - 1)(q - 1)} = M(M^{(q - 1)})^{k(p - 1)} \equiv M(1)^{k(p - 1)} (\text{ mod } p) = M (\text{ mod } q)
+$$
+
+Thus if $M$ is relatively prime to $pq$,
+
+$$
+M^{ed} \equiv M (\text{ mod } p)
+$$
+
+and
+
+$$
+M^{ed} \equiv M (\text{ mod } q)
+$$
+
+If $M$ is not relatively prime to $pq$, then either $p | M$ or $q | M$.
+
+1. If $p | M$, then $M^{ed} \equiv 0 \equiv M (\text{ mod } p)$
+2. If $q | M$, then $M^{ed} \equiv 0 \equiv M (\text{ mod } q)$
+
+Thus, in all cases:
+
+$$
+M^{ed} \equiv M (\text{ mod } p) \text{ and } M^{ed} \equiv M (\text{ mod } q)
+$$
+
+By the definition of congruence of the modulo:
+
+$$
+p | (M^{ed} - M) \text{ and } q | (M^{ed} - M)
+$$
+
+And by defintiion of divisibility
+
+$$
+M^{ed} - M = pt, \text{ for some integer } t
+$$
+
+By substitution
+
+$$
+q | pt
+$$
+
+Since $q$ and $p$ are distinct prime numbers, Euclid's lemma gives
+
+$$
+q | t
+$$
+
+Thus, by definition of divisibility
+
+$$
+t = tu \text{ for some integer } u
+$$
+
+By substitution
+
+$$
+M - M^{ed} = pt = p(qu) = (pq)u
+$$
+
+Where $u$ is an integer, and so, by defintion of divisibility
+
+$$
+pq | (M - M^{ed})
+$$
+
+By defitnion of congruence of the modulo
+
+$$
+M - M^{-ed} \equiv 0 (\text{ mod } pq)
+$$
+
+Or equivalently
+
+$$
+M \equiv M^{ed} (\text{ mod } pq)
+$$
+
+Because $M < pq$, we know that $M$ is equal to the residue of dividing $M^{e}$ by $pq$, that is
+
+$$
+M = M^{ed} \text{ mod } pq
+$$
+
+And thus, the RSA cipher gives the correct result.
+
+## Partial Order Relations
+
+### Antisymmetry
+
+> [!NOTE] **Antisymmetric Relations**
+>
+> Let $R$ be a relation on a set $A$. $R$ is **antisymmetric** if, and onl if
+>
+> $$\forall a, b \in A, a R b \text{ and } b R a \rightarrow a = b$$
+
+By taking the negation of the definition, you can see that a relation $R$ is **not antisymmetric** if, and only if:
+
+$$
+\exist a, b \in A, \text{ such that } a R b \text{ and } b R a \text{ but } a \neq b
+$$
+
+### Partial Order Relations
+
+> [!NOTE] **Partial Order Relation**
+>
+> Let $R$ be a relation defined on a set $A$. $R$ is a **partial order relation** if, and only if $R$ is reflexive, antisymmetric and transitive.
+
+Two fundamental partial order relations are the **less than or equal to relation** on a set of real numbers and the **subset relation** on a set of sets.
+
+> [!TIP] **Notation: Partial Order Relation**
+>
+> Because of the special paradigmatic role played by the $\leq$ relation in the study of partial order relations, the symbol **$\preceq$, is often used to refer to a general partial order relation**.
+
+### Lexicographic Order
+
+To figure out which of two words comes first in an English dictionary, you compare their letters one by one from left to right. If all letters have been the same to a certain point and one word runs out of letters, that word comes first in the dictionary.
+
+If all letters up to a certain point are the same and the next letters differ, then the word whose next letter is located earlier in the alphabet comes first in the dictionary. This is the core idea of a **lexicographic order**.
+
+> [!NOTE] **Lexicographic Oder**
+>
+> Let $A$ be a set with a partial order relation $R$, and let $S$ be a set of strings over $A$. Define a relation $\preceq$ on $S$ as follows
+>
+> Let $s$ and $t$ be any strings in $S$ of lengths $m$ and $n$, repectively, where $m$ and $n$ are positive integers, and let $s_m$ and $t_m$ be the characters in the $m$th position for $s$ and $t$ repectively.
+>
+> 1. If $m \leq n$, and the first $m$ charactesr of $s$ and $t$ are the same, then $s \preceq t$
+> 2. If the first $m - 1$ character in $s$ are the same $s_m R t_m$ (that is $s_m \preceq t_m) $and $s_m \neq t_m$ then $s \preceq t$
+> 3. If $\lambda$ is the null string then $\lambda \preceq s$
+>
+> If no strings are related by $\preceq$ other than by these three conditions, then $\preceq$ is a partial order relation on $S$.
+>
+> This partial order relation is called the **lexicographic order for $S$** that corresponds to the partial order $R$ on $A$.
+
+### Hasse Diagrams
+
+A **Hasse diagram** (after [Helmut Hasse](https://es.wikipedia.org/wiki/Helmut_Hasse), a twentieth-century German number theorist), allows us to define a partial order relation defined on a finite set as a graph.
+
+To obtain a Hasse diagram, proceed as follows:
+
+Start with a directed graph of the relation, placing vertices on the page so that all arrows point upward. Then eliminate:
+
+1. the loops at all the vertices,
+2. all arrows whose existence is implied by the transitive property, and
+3. the direction indicators on the arrows.
+
+![Hasse Diagram](./assets/hasse_diagram.png)
+
+For this relation, the Hasse diagram is as follows:
+
+![Hasse Diagram](./assets/hasse_diagram_1.png)
+
+To recover the directed graph of a relation from the Hasse diagram, just reverse the instructions given previously, using the knowledge that the original directed graph was sketched so that all arrows pointed upward
+
+1. Reinsert the direction markers on the arrows making all arrows point upward.
+2. Add loops at each vertex.
+3. For each sequence of arrows from one point to a second and from that second point to a third, add an arrow from the first point to the third.
+
+### Partially and Totally Ordered Sets
+
+> [!NOTE] **Comparability**
+>
+> Suppose $\preceq$ is a partial order relation on a set $A$. Elements $a$ and $b$ of $A$ are sait to be **comparable** if, and only if, either $a \preceq b$ or $b \preceq a$. Otherwise $a$ and $b$ are called **noncomparable**.
+
+> [!NOTE] **Total Order Relation on a Set**
+>
+> If $R$ is a partial order relation on a set $A$, and for any two elements $a$ and $b$ in $A$ either $a R b$ or $b R a$, that is all elements are **comparable** then $R$ is a **total order relation** on $A$.
