@@ -1032,3 +1032,52 @@ To recover the directed graph of a relation from the Hasse diagram, just reverse
 > [!NOTE] **Total Order Relation on a Set**
 >
 > If $R$ is a partial order relation on a set $A$, and for any two elements $a$ and $b$ in $A$ either $a R b$ or $b R a$, that is all elements are **comparable** then $R$ is a **total order relation** on $A$.
+
+> [!NOTE] **Partially Ordered Set**
+>
+> A set $A$ is called a **partially ordered set** (or **poset**), with respect to a relation $\preceq$ if, and only if, $\preceq$ is a partial order relation on $A$.
+
+> [!NOTE] **Totally Ordered Set**
+>
+> A set $A$ is called a **totally ordered set** with respect to a relation $\preceq$ if, and only if, $A$ is partially ordered with respect to $\preceq$ and $\preceq$ is a total order.
+
+> [!NOTE] **Chain**
+>
+> Let $A$ be a set that is partially ordered with respect to a relation $\preceq$. A subset $B$ of $A$ is called a **chain** if, and only if, the elements in each pair or elements in $B$ are comparable.
+
+The **length of a chain** is one less than the number of elements in the chain.
+
+> [!TIP] **Elements on a partial relation $\preceq$**
+>
+> Let a set $A$ be partially ordered with respect to a relation $\preceq$.
+>
+> 1. An element $a \in A$ is called a **maximal element of $A$** if, and only if, for each $b$ in $A$, either $b \preceq a$ or $b$ and $a$ are not comparable.
+> 2. An element $a \in A$ is called the **greatest element of $A$** if, and only if, for each $b$ in $A$, $b \preceq a$.
+> 3. An element $a \in A$ is called a **minimal element of $A$** if, and only if, for each $b$ in $A$, either $a \preceq b$ or $b$ and $a$ are not comparable.
+> 4. An element $a \in A$ is called the **least element of $A$** if, and only if, for each $b$ in $A$, $a \preceq b$.
+
+Note that every finite subset of a totally ordered set has both a least element and a greatest element, as every pair of elements are comparable.
+
+Also, a set that is partially ordered with respect to a relation can have at most one greatest element and one least element.
+
+Finally, a greatest element is maximal, but a maximal element need not be a greatest element. Similarly, a least element is minimal, whilst a minimal element need not be a least element. These concepts are a generalization of maximum/minimum absolute/local values of a function.
+
+> [!NOTE] **Compatibility**
+>
+> Given partial order relations $\preceq$ and $\preceq '$ on a set $A$, $\preceq '$ is **comparable** with $\preceq$ if, and only if, for every $a$ and $b$ in $A$, if $a \preceq b$, then $a \preceq' b$.
+
+> [!NOTE] **Topological Sorting**
+>
+> Given partial order relations $\preceq$ and $\preceq'$ on a set $A$, $\preceq'$ is a **topological order** for $\preceq$ if and ony if $\preceq'$ is a total order that is compatible with $\preceq$.
+
+> [!TIP] **Constructing a Topological Sorting**
+>
+> Let $\preceq$ be a partial order relation on a nonempty finite set $A$. To construct a topological sorting:
+>
+> 1. Pick any minimal element $x \in A$.
+> 2. Set $A' := A - \\{x\\}$.
+> 3. Repeat steps $1$ to $3$ while $A' \neq \emptyset$
+>
+>    1. Pick any minimal element $y$ in $A'$.
+>    2. Define $x \preceq ' y$.
+>    3. Set $A' := A' - \\{y\\}$ and $x := y$.
