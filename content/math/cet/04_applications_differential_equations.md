@@ -568,3 +568,23 @@ $$
 $$
 
 either do not exist, or one of them is infinite.
+
+## Optimization Problems
+
+> [!TIP] **Steps to Solve Optimization Problems**
+>
+> 1. **Understand the problem**: indentify the main unknown variable, as well as other unknown quantities. Define which are the given conditions and restrictions of the problem.
+> 2. **Draw a diagram**: to identify and relate visually the main unknown variable with the other unknown quantities.
+> 3. **Introduce notation**: for the main unknown variable, which we'll denote by $Q$, as well as for other uknonw quantities (e.g. $a, b, c$, etc).
+> 4. **Express $Q$ in terms of other symbols**: define $Q$ as a function of the other variables presented on the problem (e.g. $Q(x, y) = x + y$).
+> 5. **Define relationships**: use the relationships between the other unknown quantities, which should be given by the restrictions and conditions laid out on the problem, to re-write $Q$ as a function of only one variable (e.g. $Q(x)$). Define the domain of $Q(x)$, this will be useful to both better understand the problem and to determine which method to apply.
+> 6. **Find critical points**:
+>    - If $Q(x)$ is constrained to an interval, use [The Closed Interval Method](#critical-numbers-and-the-closed-interval-method) to find the absolute minimum or maximum value of $Q(x)$,
+>    - else use [The First Derivative Test](#the-first-derivative-test) to find the critical points.
+
+> [!NOTE] **The First Derivate Test for Absolute Extreme Values**
+>
+> [The First Derivative Test](#the-first-derivative-test) can be used to find absolute extreme values if some conditions are met. Suppose $c$ is a critical point for a function $f$ defined on an interval $I$:
+>
+> - If $\forall x \in I, x < c, f'(x) < 0$ and $\forall x \in I, x > c, f'(x) > 0$, then $f$ has an absolute minimum at $x = C$.
+> - If $\forall x \in I, x < c, f'(x) >0 0$ and $\forall x \in I, x > c, f'(x) < 0$, then $f$ has an absolute maximum at $x = C$.
