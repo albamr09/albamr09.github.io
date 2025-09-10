@@ -587,4 +587,4 @@ either do not exist, or one of them is infinite.
 > [The First Derivative Test](#the-first-derivative-test) can be used to find absolute extreme values if some conditions are met. Suppose $c$ is a critical point for a function $f$ defined on an interval $I$:
 >
 > - If $\forall x \in I, x < c, f'(x) < 0$ and $\forall x \in I, x > c, f'(x) > 0$, then $f$ has an absolute minimum at $x = C$.
-> - If $\forall x \in I, x < c, f'(x) >0 0$ and $\forall x \in I, x > c, f'(x) < 0$, then $f$ has an absolute maximum at $x = C$.
+> - If $\forall x \in I, x < c, f'(x) > 0$ and $\forall x \in I, x > c, f'(x) < 0$, then $f$ has an absolute maximum at $x = C$.
