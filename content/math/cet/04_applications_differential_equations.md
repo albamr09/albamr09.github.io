@@ -588,3 +588,41 @@ either do not exist, or one of them is infinite.
 >
 > - If $\forall x \in I, x < c, f'(x) < 0$ and $\forall x \in I, x > c, f'(x) > 0$, then $f$ has an absolute minimum at $x = C$.
 > - If $\forall x \in I, x < c, f'(x) > 0$ and $\forall x \in I, x > c, f'(x) < 0$, then $f$ has an absolute maximum at $x = C$.
+
+**Proof (Absolute Minimum)**
+
+Suppose $f$ is a continuous differentiable function on an interval $I$, and let $c \in I$ be a critical point of $f$. Let us assume:
+
+$$
+\forall x \in I, \text{ where } x < c, f'(x) < 0 \text{ and } \forall x \in I, \text{ where } x > c, f'(x) > 0
+$$
+
+**(1)** Given any $x \in I$ with $x < c$, by [The Mean Value Theorem](#the-mean-value-theorem) there exists some $\xi \in (x, c)$ such that
+
+$$
+f'(\xi) = \frac{f(c) - f(x)}{c - x}
+$$
+
+Because $\xi < c$ we know that $f'(\xi) < 0$ by assumption. Also $c > x \leftrightarrow c - x > 0$. Hence
+
+$$
+f(c) - f(x) < 0 \leftrightarrow f(c) < f(x)
+$$
+
+That is, for every point $x$ to the left of $c$, $f(x)$ is bigger than $f(c)$.
+
+**(2)** Given any $x \in I$ with $x > c$, by [The Mean Value Theorem](#the-mean-value-theorem) there exists some $\nu \in (c, x)$ such that
+
+$$
+f'(\nu) = \frac{f(x) - f(c)}{x - c}
+$$
+
+Because $\nu > c$ we know that $f'(\nu) > 0$ by assumption. Also $x > c \leftrightarrow x - c > 0$. Hence
+
+$$
+f(x) - f(c) > 0 \leftrightarrow f(x) > f(x)
+$$
+
+That is, for every point $x$ to the right of $c$, $f(x)$ is bigger than $f(c)$.
+
+**(3)** By combining **(1)** and **(2)** we show that for all points on the interval $I$ that are not $c$, its value under $f$ is bigger than $f(c)$ thus we conclude that $f(c)$ is the abolute minimum of $f$ on the interval $I$.
