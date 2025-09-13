@@ -649,3 +649,117 @@ which is the result given by the equally likely probability formula.
 > Suppose the possible outcomes of an experiment, or random process, are real numbers $a_1, a_2, \cdots, a_n$, which occur with probabilities $p_1, p_2, \cdots, p_n$. The **expected value** of the process is
 >
 > $$\sum_{k = 1}^n a_k p_k = a_1 p_1 + \cdots + a_n p_n$$
+
+## Conditional Probability, Bayes' Formula and Independent Events
+
+### Conditional Probability
+
+Imagine a couple with two children, each of whom is equally likely to be a boy or a girl. Now, suppose you are given the information that one is a boy. What is the probability that the other child is a boy? The following figure shows four equally likely combinations of gender for the children.
+
+![Conditional Probability](./assets/conditional_probability.png)
+
+There are three combinations where one of the children is a boy, and in one of these three combinations the other child is also a boy. Given that you know one child is a boy, only these tree combinations could be the case. So you can think of the set of those outcomes as a new sample space with three elements, all of which are equally likely. It would be then reasonable to say that the likelihood that the other child is a boy, given that at least one is a boy is $\frac{1}{3}$. The following computation gives the same result
+
+$$
+\frac{P(\text{at least one child is a boy and the other child is also a boy})}{P(\text{at least one child is a boy})} \\[10pt] = \frac{\frac{1}{4}}{\frac{3}{4}} = \frac{1}{3}
+$$
+
+A generalization of this observaiton forms the basis for the following definition.
+
+> [!NOTE] **Conditional Probability**
+>
+> Let $A$ and $B$ be events in a sample space $S$. If $P(A) \neq 0$, then **the conditional probability of $B$ give $A$**, denoted by $P(B | A)$ is
+>
+> $$P(B | A) = \frac{P(A \cap B)}{P(A)}$$
+
+The formula for the conditional ca be re-state as
+
+$$
+P(A \cap B) = P(B | A) \cdot P(A)
+$$
+
+$$
+P(A) = \frac{P(A \cap B)}{P(B | A)}
+$$
+
+### Bayes' Theorem
+
+[Thomas Bayes](https://en.wikipedia.org/wiki/Thomas_Bayes) was an English Presbyterian minister who devoted much of his energies to mathematics. The theorem that bears his name was published posthumously in 1763.
+
+> [!NOTE] **Bayes' Theorem**
+>
+> Suppose a sample space $S$ is a union of mutually disjoint events $B_1, B_2, \cdots, B_n$, suppose $A$ is an event in $S$ and suppose both $A$ and each $B_k$ have nonzero probabilities for every integer $k$ with $1 \leq k \leq n$. Then
+>
+> $$P(B_k | A) = \frac{P(A|B_k) P(B_k)}{P(A|B_1)P(B_1) \cdots P(A|B_n)P(B_n)}$$
+>
+> $$P(B_k | A) = \frac{P(A|B_k) P(B_k)}{\prod_{j = 1}^n P(A|B_j)P(B_j)}$$
+
+### Independent Events
+
+Suppose a fair coin is tossed twice. It seems intuitive that the outcome of the first toss does not depend in any way on the outcome of the second toss. In other words, if, for instance, $A$ is the event that a head is obtained on the first toss and $B$ is the event that a head is obtained on the second toss, then if the coin is tossed randomly both times, events $A$ and $B$ should be **independent**. In the sense that $P(A|B) = P(A)$ and $P(B|A) = P(B)$.
+
+To obtain a more convenient form for the defintion of independence, observe that if $P(B) \neq 0$ and $P(A | B) = P(A)$, then
+
+$$
+P(A \cap B) = P(A | B) P(B) = P(A) P(B)
+$$
+
+By that same argument, if $P(A) \neq 0$ and $P(B|A) = P(B)$, then
+
+$$
+P(A \cap B) = P(B|A) P(A) = P(B) P(A)
+$$
+
+Conversely, if $P(A \cap B) = P(A) P(B)$ and $P(A) \neq 0$ then
+
+$$
+P(B|A) = P(B)
+$$
+
+and, if $P(A \cap B) = P(A) P(B)$ and $P(B) \neq 0$ then
+
+$$
+P(A|B) = P(A)
+$$
+
+> [!NOTE] **Independet Events**
+>
+> If $A$ and $B$ are events in a sample space $S$, then $A$ and $B$ are **independent** if, and only if,
+>
+> $$P(A \cap B) = P(A) \cdot P(B)$$
+
+> [!TIP] **Indepence over Disjoint Events**
+>
+> Let $A$ and $B$ be events in a sample space $S$, and suppose $A \cap B = \emptyset$, $P(A) \neq 0$ and $P(B) \neq 0$. Then
+>
+> $$P(A \cap B) \neq P(A) P(B)$$
+
+> [!TIP] **Properties of Independent Events**
+>
+> Suppose $A$ and $B$ are independent events in a sample space $S$. Then
+>
+> 1. $A$ and $B^C$ are also independent.
+> 2. $A^C$ and $B^C$ are also independent.
+
+> [!NOTE] **Pairwise and Mutually Independent Events**
+>
+> Let $A$, $B$ and $C$ be events in a sample space $S$. $A$, $B$ and $C$ are **pairwise independent** if, and only if, they satisfy conditions 1 to 3. They are **mutually independent** if, and only if, they satisfy all four conditions below.
+>
+> 1. $P(A \cap B) = P(A) \cdot P(B)$
+> 2. $P(A \cap C) = P(A) \cdot P(C)$
+> 3. $P(B \cap C) = P(B) \cdot P(C)$
+> 4. $P(A \cap B \cap C) = P(A) \cdot P(B) \cdot P(C)$
+
+In the following we state the generalization for mutually independent events
+
+> [!NOTE] **Mutually Independent Events**
+>
+> Events $A_1, A_2, \cdots, A_n$ in a sample space $S$ are **mutually independent** if, and only if, the probability of the intersection of any subset of the events is the product of the probabilities of the events in the subset.
+
+> [!TIP] **Binomial Probabilities**
+>
+> Probabilities of the form
+>
+> $$\binom{n}{k}p^{n - k}(1 - p)^k$$
+
+where $0 \leq p \leq 1$, are called **binomial probabilities**.
