@@ -583,3 +583,69 @@ $$
 $$
 
 as was to be shown.
+
+## Probability Axioms and Expected Value
+
+Sometimes coins are not fair and dice might not be balanced. How is it possible to calculate probabilities for these more general situations? The following axioms were formulated by [A. N. Kolmogorov](https://en.wikipedia.org/wiki/Andrey_Kolmogorov) in 1933.
+
+> [!NOTE] **Probability Axioms**
+>
+> Let $S$ be a sample space. A probability function $P$ from the set of all events in $S$ to the set of real numbers satisfies the following three axioms: For all events $A$ and $B$ in $S$:
+>
+> 1. $0 \leq P(A) \leq 1$
+> 2. $P(\emptyset) = 0$ and $P(S) = 1$
+> 3. If $A$ and $B$ are disjoint, then the probability of the union of $A$ and $B$ is
+>
+> $$P(A \cup B) = P(A) + P(B)$$
+
+It is important to check that Kolmogorov's probability axiom are consistent with the results obtained using the equally like probability formula (see [Introdcution to Probability](https://en.wikipedia.org/wiki/Andrey_Kolmogorov)). Let $S$ bea finite sample space with outcomes $a_1, a_2, \cdots, a_n$. It is clear that all the set $\\{a_1\\}, \\{a_2\\}, \cdots \\{a_n\\}$ are mutually disjoint and that their union is $S$. Since $P(S) = 1$, the probability axiom (3) can be applied multiple times to obtain
+
+$$
+P(\{a_1\} \cup \{a_2\} \cup \cdots \cup \{a_n\}) = \sum_{k = 1}^n P(\{a_k\}) = 1
+$$
+
+If all the outcomes are equally likely, there is a positive real number $c$ so that
+
+$$
+P(\{a_1\}) = P(\{a_2\}) = \cdots = P(\{a_n\}) = c
+$$
+
+Hence
+
+$$
+1 = \sum_{k = 1}^n c = n \cdot c
+$$
+
+And thus:
+
+$$
+c = \frac{1}{n}
+$$
+
+It follows that if $A$ is any event with outcomes $a_{i_1}, a_{i_2}, \cdots, a_{i_m}$, then
+
+$$
+P(A) = \sum_{k = 1}^m P(\{a_{i_k}\}) = \sum_{k = 1}^m \frac{1}{n} = \frac{m}{n} = \frac{N(A)}{N(S)}
+$$
+
+which is the result given by the equally likely probability formula.
+
+> [!TIP] **Probability of the Complement of an Event**
+>
+> If $A$ is any event in a sample space $S$, then
+>
+> $$P(A^C) = 1 - P(A)$$
+
+> [!TIP] **Probability of a General Union of Two Sets**
+>
+> If $S$ is any sample space and $A$ and $B$ are any events in $S$, then
+>
+> $$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
+
+### Expected Value
+
+> [!NOTE] **Expected Value**
+>
+> Suppose the possible outcomes of an experiment, or random process, are real numbers $a_1, a_2, \cdots, a_n$, which occur with probabilities $p_1, p_2, \cdots, p_n$. The **expected value** of the process is
+>
+> $$\sum_{k = 1}^n a_k p_k = a_1 p_1 + \cdots + a_n p_n$$
