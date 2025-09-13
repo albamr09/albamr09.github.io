@@ -578,6 +578,7 @@ either do not exist, or one of them is infinite.
 > $$f(x) = \frac{1}{x^2 + 2x + c}$$
 >
 > where $c$ is the constant that spans different family members.
+
 ## Optimization Problems
 
 > [!TIP] **Steps to Solve Optimization Problems**
