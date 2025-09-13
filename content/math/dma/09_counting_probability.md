@@ -340,3 +340,246 @@ The number of strings of $n - 1$ vertical bars and $r$ crosses is the number of 
 $$
 \binom{r + n - 1}{r}
 $$
+
+## Pascal's Formula and the Binomial Theorem
+
+### Pascal's Formula
+
+Pascal's formula, named after the seventeenth centry French mathematician and philosopher [Blaise Pascal](https://en.wikipedia.org/wiki/Blaise_Pascal) is one of the most famouse and useful in combinatorics. It relates the values of $\binom{r + 1}{r}$ to the values of $\binom{n}{r - 1}$ and $\binom{n}{r}$. Specifically, it says that:
+
+$$
+\binom{n + 1}{r} = \binom{n}{r - 1} + \binom{n}{r}
+$$
+
+Pascal's triangle is a geometric version of Pascal's formula (illustrated on the following image). Sometimes it is simply called the arithmetic triangle because it was used centuries before Pascal by Chinese and Persian mathematicians.
+
+![Pascal's Triangle](./assets/pascals_triangle.png)
+
+Pascal's formula translates into the fact that the entry in row $n + 1$, column $r$ equals the sum of th entry in row $n$, column $r - 1$ plus the entry in row $n$, column $r$.
+
+> [!NOTE] **Pascal's Formula**
+>
+> Let $n$ and $r$ be positive integers with $r \leq n$. Then
+>
+> $$\binom{n + 1}{r} = \binom{n}{r - 1} + \binom{n}{r}$$
+
+**Proof (algebraic version)**. Let $n$ and $r$ be positive integers with $r \leq n$. By the definition of a [$r$-combination](#counting-subsets-of-a-set-combinations):
+
+$$
+\binom{n}{r - 1} + \binom{n}{r} = \frac{n!}{(r - 1)!(n - (r - 1))!} + \frac{n!}{r!(n - r)!}
+$$
+
+$$
+= \frac{n!}{(r - 1)!(n - r + 1)!} + \frac{n!}{r!(n - r)!}
+$$
+
+To add these fractions, acommon denominator is needed, so we multiply by $\frac{r}{r}$ and $\frac{n - r + 1}{n - r + 1}$
+
+$$
+= \frac{n!}{(r - 1)!(n - r + 1)!} \frac{r}{r} + \frac{n!}{r!(n - r)!} \frac{n - r + 1}{n - r + 1}
+$$
+
+By the recursive defintion of factorial $r! = r (r - 1)!$. This also applies for $(n - r + 1)!  = (n - r + 1) (n - r)!$:
+
+$$
+= \frac{n!r}{r!(n - r + 1)!} + \frac{n! (n - r + 1)}{r!(n - r + 1)!}
+$$
+
+We now add both expressions:
+
+$$
+= \frac{n!r + n!(n - r + 1)}{r!(n - r + 1)!}
+$$
+
+Let's extract the common factor $n!$ on the numerator:
+
+$$
+= \frac{n! (r + n - r + 1)}{r!(n - r + 1)!}
+$$
+
+$$
+= \frac{n! (n + 1)}{r!(n - r + 1)!}
+$$
+
+By the definition of $n + 1$ factorial:
+
+$$
+= \frac{(n + 1)!}{r!(n - r + 1)!} = \binom{n + 1}{r}
+$$
+
+**Proof (combinatorial version)**. Let $n$ and $r$ be positive integers with $r \leq n$. Suppose $S$ is a set with $n + 1$ elements. The number of subsets of $S$ of size $r$ can be calculated by thinking of $S$ as consisting of two pieces: one with $n$ elements $\\{x_1, x_2, \cdots, x_n\\}$ and the other with one element $x_{n + 1}$.
+
+Any subset of $S$ with $r$ elements either contains $x_{n + 1}$ or it does not. If it contains $x_{r + 1}$ the it contains $r - 1$ elements from the set $\\{x_1, x_2, \cdots, x_n\\}$. If it does not contain $x_{n + 1}$, the it contains $r$ elements from the set $\\{x_1, x_2, \cdots, x_n\\}$.
+
+![Pascal's Formula](./assets/combinatorial_proof_pascals_formula.png)
+
+By the addition rule
+
+$$
+\begin{bmatrix}
+\text{the number of subsets of } \\
+\{x_1, x_2, \cdots, x_n, x_{n + 1}\} \\
+\text{of size } r
+\end{bmatrix} = \\[12pt]
+\begin{bmatrix}
+\text{the number of subsets of } \\
+\{x_1, x_2, \cdots, x_n\} \\
+\text{of size } r - 1
+\end{bmatrix} +
+\begin{bmatrix}
+\text{the number of subsets of } \\
+\{x_1, x_2, \cdots, x_n\} \\
+\text{of size } r
+\end{bmatrix}
+$$
+
+By the definition of a [$r$-combination](#counting-subsets-of-a-set-combinations), the set $\\{x_1, x_2, \cdots, x_n, x_{n + 1}\\}$ has $\binom{n + 1}{r}$ subsets of size $r$, the set $\\{x_1, x_2, \cdots, x_n\\}$ has $\binom{n}{r - 1}$ subsets of size $r - 1$, and the set $\\{x_1, x_2, \cdots, x_n\\}$ has $\binom{n}{r}$ subsets of size $r$. Thus
+
+$$
+\binom{n + 1}{r} = \binom{n}{r - 1} + \binom{n}{r}
+$$
+
+### The Binomial Theorem
+
+In algebra a sum of two terms, such as $a + b$, is called a **binomial**. The **binomial theorem** gives an expression for the powers of a binomial $(a + b)^n$ for each nonnegative integer $n$ and all real numbers $a$ and $b$.
+
+> [!NOTE] **The Binomial Theorem**
+>
+> Given any real numbers $a$ and $b$ and any nonengative integers $r$
+>
+> $$(a + b)^n = \sum_{k = 0}^n \binom{n}{k} a^{n - k} b^k$$
+>
+> $$ = a^n + \binom{n}{1} a^{n - 1} b + \binom{n}{2} a^{n - 2} b^2 + \cdots + \binom{n}{n - 1} a^{1} b^{n - 1} + b^n$$
+
+> [!TIP] **Binomial Coefficient**
+>
+> If $n$ and $r$ are nonnegative integers and $r \leq n$, then $\binom{n}{r}$ is called a **binomial coefficient** because it is one of the coefficients in the expansion of the binomial expression $(a + b)^n$.
+
+The proof for the binomial theorem requires a precise definition of integer power.
+
+> [!TIP] **Integer Power**
+>
+> For any real number $a$ and any nonnegative integer $n$, the **nonnegative integer powers of $a$** are defined as follows
+>
+> $$a^{n} = \begin{cases}1 & \text{ if } n = 0 \\ a \cdot a^{n - 1} \text{ if } n > 0\end{cases}$$
+
+**Proof of the Binomial Theorem (algebraic version)**. Suppose $a$ and $b$ are real numbers . We use mathematical induction and let the property $P(n)$ be the equation
+
+$$
+(a + b)^n = \sum_{k = 0}^n \binom{n}{k} a^{n - k}b^{k}
+$$
+
+We first show that $P(0)$ is true. When $n = 0$, the binomial theorem states that
+
+$$
+(a + b)^0 = \binom{0}{0} a^{0}b^{0} = \frac{0!}{0! (0 - 0)!} \cdot 1 \cdot 1 = \frac{1}{1 \cdot 1} = 1
+$$
+
+Hence $P(0)$ is true.
+
+Now we'll show that for each integer $m \geq 0$, if $P(m)$ is true then $P(m + 1)$ is true. Let $m$ be any integer with $m \geq 0$, and suppose $P(m)$ is true. That is, suppose
+
+$$
+(a + b)^m = \sum_{k = 0}^m \binom{m}{k} a^{m - k}b^k
+$$
+
+We need to show that $P(m + 1)$ is true:
+
+$$
+(a + b)^{m + 1} = \sum_{k = 0}^{m + 1} \binom{m + 1}{k} a^{m + 1 - k}b^k
+$$
+
+By definition of the $(m + 1)$st power:
+
+$$
+(a + b)^{m + 1} = (a + b)(a + b)^{m}
+$$
+
+So by substitution:
+
+$$
+(a + b)^{m + 1} = (a + b) \sum_{k = 0}^m \binom{m}{k} a^{m - k}b^k
+$$
+
+$$
+= a \sum_{k = 0}^m \binom{m}{k} a^{m - k}b^k + b \sum_{k = 0}^m \binom{m}{k} a^{m - k}b^k
+$$
+
+$$
+= \sum_{k = 0}^m \binom{m}{k} a^{m - k + 1}b^k + \sum_{k = 0}^m \binom{m}{k} a^{m - k}b^{k + 1}
+$$
+
+We transform the second summation on the right-hand side, by making the change of variable $j = k + 1$. When $k = 0$, then $j = 1$. When $k = m$, then $j = m + 1$. And sice $k = j -1$ the general term is:
+
+$$
+= \binom{m}{k} a^{m - k}b^{k + 1} = \binom{m}{j - 1} a^{m - (j - 1)} b^j = \binom{m}{j - 1} a^{m + 1 - j}b^j
+$$
+
+Hence the second summation on the right-hand side above is
+
+$$
+\sum_{j = 1}^{m + 1}  \binom{m}{j - 1} a^{m + 1 - j}b^j
+$$
+
+Substituting back we get
+
+$$
+= \sum_{k = 0}^m \binom{m}{k} a^{m - k + 1}b^k + \sum_{k = 1}^{m + 1}  \binom{m}{k - 1} a^{m - k + 1}b^k
+$$
+
+Thus
+
+$$
+(a + b)^{m + 1} = \binom{m}{0} a^{m + 1- 0}b^{0} + \\[10pt]
+\left[\sum_{k = 1}^m \binom{m}{k} a^{m - k + 1}b^k + \sum_{k = 1}^{m}  \binom{m}{k - 1} a^{m - k + 1}b^k\right] + \\[10pt]
+\binom{m}{(m + 1) - 1}a^{m + 1 -(m + 1)}b^{m + 1}
+$$
+
+We simplify some of the expressions:
+
+$$
+(a + b)^{m + 1} = a^{m + 1} + \\[10pt]
+\left[\sum_{k = 1}^m \binom{m}{k} a^{m - k + 1}b^k + \sum_{k = 1}^{m}  \binom{m}{k - 1} a^{m - k + 1}b^k\right] + \\[10pt]
+\binom{m}{m}b^{m + 1}
+$$
+
+Taking $a^{m - k + 1}b^k$ as a common factor on the sum:
+
+$$
+(a + b)^{m + 1} = a^{m + 1} + \\[10pt]
+\left[\sum_{k = 1}^m \left[\binom{m}{k} + \binom{m}{k - 1}\right] a^{m - k + 1}b^k\right] + \\[10pt]
+b^{m + 1}
+$$
+
+By Pascal's formula:
+
+$$
+\binom{m + 1}{k} = \binom{m}{k} + \binom{m}{k - 1}
+$$
+
+Hence
+
+$$
+(a + b)^{m + 1} = a^{m + 1} + \\[10pt]
+\left[\sum_{k = 1}^m \binom{m + 1}{k} a^{m - k + 1}b^k\right] + b^{m + 1}
+$$
+
+$$
+= \sum_{k = 0}^{m + 1} \binom{m + 1}{k} a^{(m + 1) - k}b^{k}
+$$
+
+This is what as to be shown.
+
+**Proof of The Binomial Theorem (combinatorial version)**. Let $a$ and $b$ be real numbers and $n$ an integer that is at least $1$. The expression $(a + b)^n$ can be expanded into products of $n$ letters, where each letter is either $a$ or $b$. For each $k = 0, 1, \cdots, n$, the product:
+
+$$
+a^{n - k}b^{k} = a \cdot a \cdot a \cdots b \cdot b \cdot b \cdots b
+$$
+
+occcurs as a term in the sum the number of times as there are ordering of $(n - k)$ $a$'s and $k$ $b$'s. But this number equals $\binom{n}{k}$, the number of ways to choose $k$ positions in which to place the $b$'s (the other $n - k$ positions will be filled by $a$'s). Hnece, when like terms are combined, the coefficient of $a^{n - k}b^{k}$ in the sum is $\binom{n}{k}$. Thus
+
+$$
+(a + b)^{n} = \sum_{k = 0}^n \binom{n}{k} a^{n - k}b^{k}
+$$
+
+as was to be shown.
