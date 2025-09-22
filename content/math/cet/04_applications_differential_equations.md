@@ -626,3 +626,55 @@ $$
 That is, for every point $x$ to the right of $c$, $f(x)$ is bigger than $f(c)$.
 
 **(3)** By combining **(1)** and **(2)** we show that for all points on the interval $I$ that are not $c$, its value under $f$ is bigger than $f(c)$ thus we conclude that $f(c)$ is the abolute minimum of $f$ on the interval $I$.
+
+## Newton's Method
+
+Suppose we want to solve an equation $f(x)$, then we need to find the $x$-intercepts of $f$ (labelled $r$ in the following figure). Newton's Method allows us to find an approximation of $r$ by following these steps:
+
+![Newton's Method](./assets/newtons_method_1.png)
+
+1. We start by defining a first approximation $x_1$ (by guesssing, from a sketch of the graph of $f$, etc.)
+2. Then, we find the tanget line of $f$ on $(x_1, f(x_1))$, that we will denote as $L$. The idea behind Newton's Method is that as $L$ is close to the curve, then its $x$-intercept, $x_2$, should be close to the $x$-intercept of $f$. And so we use $x_2$ as the next approximation to $r$.
+3. We keep repeting this process to obtain a sequence of approximations $x_1, x_2, \cdots$
+
+![Newton's Method](./assets/newtons_method_2.png)
+
+Because $L$ is a line, finding its $x$-intercept is easy. Let's find an expression that defines $x_2$ in terms of $x_1$. To do so we use [the equation of a line](/math/acs/07_linear_equations_two_vars#using-the-point-slope-form-to-write-equations-of-lines):
+
+$$
+y - f(x_1) = f'(x_1)(x - x_1)
+$$
+
+Where $f'(x_1)$ is the slope of $L$. Because we know that $(x_2, 0)$ is on $L$, then:
+
+$$
+0 - f(x_1) = f'(x_1)(x_2 - x_1) \Leftrightarrow -f(x_1) = f'(x_1)x_2 - f'(x_1) x_1
+$$
+
+$$
+f'(x_1)x_2 = f'(x_1) x_1 - f(x_1)
+$$
+
+$$
+x_2 = x_1 - \frac{f(x_1)}{f'(x_1)}
+$$
+
+> [!TIP] **Generalization of Newton's Method**
+>
+> In general, if the $n$-th approximation is $x_n$ and $f'(x_n) \neq 0$, then
+>
+> $$x_{n + 1} = x_n - \frac{f(x_n)}{f'(x_n)}$$
+
+If the approximations $x_n$ become closer and closer to $r$ as $n$ becomes larger and larger, then we say the sequence converges to $r$, that is:
+
+$$
+\lim_{n \to \infty} x_n = r
+$$
+
+However, in certain circumstances, the sequence may not converge. See the following figure, where you can see that the approximation $x_2$ is worse than $x_1$. **This is likely to be the case when $f'(x_n)$ is close to zero**, as the slope becomes smaller and the $x$-intercept for the linear approximation of $f$ moves far away.
+
+![Newton's Method Failure](./assets/newtons_method_fail.png)
+
+Then **Newton's Method fails and a better approximation $x_1$ should be chosen**.
+
+Suppose we want to achieve a given accuracy of $k$ decimals, how do we know when to stop? The rule of thumb is to keep iterating over Newton's Method until $x_n$ and $x_{n + 1}$ agree up to $k$ decimal places.
