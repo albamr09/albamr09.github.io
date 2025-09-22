@@ -14,4 +14,5 @@ type: docs
 {{< card link="07_function_properties" title="Properties of Functions" >}}
 {{< card link="08_properties_of_relations" title="Properties of Relations" >}}
 {{< card link="09_counting_probability" title="Counting and Probability" >}}
+{{< card link="10_graph_theory" title="Theory of Graphs and Trees" >}}
 {{< /cards >}}
