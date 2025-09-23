@@ -389,3 +389,68 @@ which equals the $ij$-th entry of $A^{k + 1}$. Hence
 $$
 \text{ the } ij \text{th entry of } A^{k + 1} = \text{ the number of walks of length } k + 1 \text{ from } v_i \text{ to } v_j
 $$
+
+## Isomorphisms of Graphs
+
+Two graphs that are the same except for the labeling of their vertices and edges are called **isomorphic**. The word isomorphism comes from the Greek, meaning "same form." Isomorphic graphs are those that **have essentially the same form**.
+
+> [!NOTE] **Isomorphic Graphs**
+>
+> Let $G$ and $G'$ be graphs with vertex sets $V(G)$ and $V(G')$ and edge sets $E(G)$ and $E(G')$, repectively. **$G$ is isomorphic to $G'$** if, and only if, there exist one-to-one correspondences $g: V(G) \to V(G')$ and $h: E(G) \to E(G')$ that preserve the edge-endpoint functions of $G$ and $G'$ in the sense that for each $v \in V(G)$ and $e \in E(G)$
+>
+> $$v \text{ is an endpoint of } e \Leftrightarrow g(v) \text{ is an endpoint of } h(e)$$
+
+In words, $G$ is isomorphic to $G'$ if, and only if, the vertices and edges of $G$ and $G'$ can be matched up by one-to-one, onto functions in such a way that the edges between corresponding vertices correspond to each other.
+
+It is not hard to show that **graph isomorphism is an equivalence relation on a set of graphs**; in other words, it is reflexive, symmetric, and transitive.
+
+> [!TIP] **Graph Isomorphism Is an Equivalence Relation**
+>
+> Let $S$ be a set of graphs and let $R$ be the relation of graph isomorphism on $S$. Then $R$ is an equivalence relation on $S$
+
+**Proof**.
+
+**$R$ is reflexive**: Given any graph $G$ is $S$, define a graph isomorphism from $G$ to $G$ by using the identify functions on the set of vertices and on the set of edges of $G$.
+
+**$R$ is symmetric**: Given any graphs $G$ and $G'$ in $S$ such that $G$ is isomorphic to $G'$, we must show that $G'$ is isomorphic to $G$.
+
+> This is true because if $g$ and $h$ are vertex and edge correspondences from $G$ to $G'$ that presere the edge-endpoint functions, then $g^{-1}$ and $h^{-1}$ are vertex and edge correspondences from $G'$ to $G$ that preserve the edge-endpoint functions.
+
+**$R$ is transitive**: Given any graphs $G$, $G'$ and $G''$ in $S$ such that $G$ is isomorphic to $G'$ and $G'$ is isomorphic to $G''$, we must show that $G$ is isomorphic to $G''$.
+
+> This follows from the fract that if $g_1$ and $h_1$ are vertex and edge correspondences from $G$ to $G'$ that preserve the edge-endpoint functions of $G$ And $G'$ and if $g_2$ and $h_2$ are vertex and edge correspondences from $G'$ to $G''$ that preserve the edge-endpoint functions of $G'$ and $G''$, then $g_2 \circ g_1$ and $h_2 \circ h_1$ are vertex and edge correspondences from $G$ to $G''$ that preserve the edge-endpiont function of $G$ and $G''$.
+
+Now consider the question, "Is there a general method to determine whether graphs $G$ and $G'$ are isomorphic?" In other words, is there some algorithm that will accept graphs $G$ and $G'$ as input and produce a statement as to whether they are isomorphic? In fact, there is such an algorithm. It consists of generating all one-to-one, onto functions from the set of vertices of $G$ to the set of vertices of $G'$ and from the set of edges of $G$ to the set of edges of $G'$ and checking each pair to determine whether it preserves the edge-endpoint functions of $G$ and $G'$. The problem with this algorithm is that it takes an unreasonably long time to perform.
+
+If $G$ and $G'$ each have $n$ vertices and $m$ edges, the number of one-to-one correspondences from vertices to vertices is $n!$ and the number of one-to-one correspondences from edges to edges is $m!$, so the total number of pairs of functions to check is $n! \cdot m!$.
+
+However, there are some simple tests that can be used to show that certain pairs of graphs are not isomorphic. For instance, if two graphs are isomorphic, then they have the same number of vertices (because there is a one-to-one correspondence from the vertex set of one graph to the vertex set of the other). More generally, a property that is preserved by graph isomorphism is called **an isomorphic invariant**.
+
+> [!NOTE] **Isomorphic Invariant Property**
+>
+> A property $P$ is called an **invariant for graph isomorphism** if, and only if, given any graphs $G$ and $G'$, if $G$ has property $P$ and $G'$ is isomorphic to $G$, then $G'$ has property $P$.
+
+> [!TIP] **Examples of Isomorphic Invariant Properties**
+>
+> Each of the following properties is an invariant for graph isomorphism, where $n, m$ and $k$ are all nonnegative integers:
+>
+> 1. has $n$ vertices
+> 2. has $m$ edges
+> 3. has a vertex of degree $k$
+> 4. has $m$ vertices of degree $k$
+> 5. has a circuit of length $k$
+> 6. has a simple circuit of length $k$
+> 7. has $m$ simple circuits of length $k$
+> 8. is connected
+> 9. has an [Euler circuit](#euler-circuits)
+> 10. has a [Hamiltonian circuit](#hamiltonian-circuits)
+
+### Graph Isomorphism for Simple Graphs
+
+When graphs $G$ and $G'$ are both simple, the definition of $G$ being isomorphic to $G'$ can be written without referring to the correspondence between the edges of $G$ and the edges of $G'$.
+
+> [!NOTE] **Graph Isomorphism for Simple Graphs**
+>
+> If $G$ and $G'$ are simple graphs, then **$G$ is isomorphic to $G'$** if, and only if, there exists a one-to-one correspondence $g$ from the vertex set $V(G)$ of $G$ to the vertex set $V(G')$ of $G'$ that preserves the edge-endpoint functions of $G$ and $G'$ in the ses that for all vertices $u$ and $v$ of $G$
+>
+> $$\{u, v\} \text{ is an edge in } G \Leftrightarrow \{g(u), g(v)\} \text{ is an edge in } G'$$
