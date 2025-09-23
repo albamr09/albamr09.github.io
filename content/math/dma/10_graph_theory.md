@@ -454,3 +454,173 @@ When graphs $G$ and $G'$ are both simple, the definition of $G$ being isomorphic
 > If $G$ and $G'$ are simple graphs, then **$G$ is isomorphic to $G'$** if, and only if, there exists a one-to-one correspondence $g$ from the vertex set $V(G)$ of $G$ to the vertex set $V(G')$ of $G'$ that preserves the edge-endpoint functions of $G$ and $G'$ in the ses that for all vertices $u$ and $v$ of $G$
 >
 > $$\{u, v\} \text{ is an edge in } G \Leftrightarrow \{g(u), g(v)\} \text{ is an edge in } G'$$
+
+## Trees: Examples and Basic Properties
+
+In mathematics, a tree is a connected graph that does not contain any circuits.
+
+> [!NOTE] **Tree**
+>
+> A graph is said to be **circuit-free** if, and only if, it has no circuits. A graph is called a **tree** if, and only if, it is circuit-free and connected.
+
+A **trivial tree** is a graph that consists of a single vertex.
+
+> [!NOTE] **Forest**
+>
+> A graph is called a **forest** if, and only if, it is circuit-free and not connected.
+
+On the following image we illustrate an example where mathematical trees are used. To be more concrete we show a **decision tree**:
+
+![Decision Tree](./assets/decision_tree.png)
+
+### A Parse Tree
+
+In the last 30 years, [Noam Chomsky](https://wikipedia.org/wiki/Noam_Chomsky) and others have developed new ways to describe the syntax (or grammatical structure) of natural languages such as English. This work has proved useful in constructing compilers for high-level computer languages. In the study of grammars, trees are often used to show the derivation of grammatically correct sentences from certain basic rules. Such trees are called syntactic **derivation trees or parse trees**.
+
+The rules of a grammar are called **productions**. It is customary to express them using the shorthand notation illustrated below. This notation, introduced by [John Backus](https://wikipedia.org/wiki/John_Backus) in 1959 and modified by [Peter Naur](https://wikipedia.org/wiki/Peter_Naur) in 1960, was used to describe the computer language Algol and is called **the Backus–Naur notation**. In the notation, the symbol $|$ represents the word or, and angle brackets $\langle \rangle$ are used to enclose terms to be defined.
+
+![Example of a Grammar](./assets/grammar_example.png)
+
+The derivation of the sentence “The young man caught the ball” from the above rules is described by the tree shown below.
+
+![Parse Tree Example](./assets/parse_tree_example.png)
+
+### Characterizing Trees
+
+There is a somewhat surprising relation between the number of vertices and the number of edges of a tree. It turns out that if $n$ is a positive integer, then any tree with $n$ vertices (no matter what its shape) has $n - 1$ edges.
+
+Perhaps even more surprisingly, a partial converse to this fact is also true. Any connected graph with $n$ vertices and $n - 1$ edges is a tree. It follows from these facts that if even one new edge (but no new vertex) is added to a tree, the resulting graph must contain a circuit.
+
+Also, from the fact that removing an edge from a circuit does not disconnect a graph, it can be shown that every connected graph has a subgraph that is a tree. It follows that if $n$ is a positive integer, any graph with $n$ vertices and fewer than $n - 1$ edges is not connected.
+
+> [!NOTE] **Terminal or Leaf Vertex**
+>
+> Let $T$ be a tree. If $T$ has at least two vertices, then a vertex of degree $1$ in $T$ is called a **leaf** (or a **terminal vertex**). The unique vertex in a trivial tree is also called a **leaf** or **terminal vertex**.
+
+> [!NOTE] **Internal or Branch Vertex**
+>
+> Let $T$ be a tree. If $T$ has at least two vertices, then a vertex of degree greater than $1$ in $T$ is called an **internal vertex** (or a **branch vertex**).
+
+> [!TIP] **Number of Vertices and Edges on a Tree**
+>
+> For any positive integer $n$, any tree with $n$ vertices has $n - 1$ edges.
+
+**Proof** (by mathematical induction).
+
+Let the property $P(n)$ be the sentence
+
+> Any tree with $n$ vertices has $n - 1$ edges.
+
+We use mathematical induction to show that this property is true for every integer with $n \geq 1$.
+
+**Show that $P(1)$ is true**: Let $T$ be any tree with one vertex. Then $T$ has zero edges. Since $0 = 1 - 1$ then $P(1)$ is true.
+
+**Show that for every integer $k \geq 1$, if $P(k)$ is true then $P(k + 1)$ is true**. Suppose $k$ is any positive integer for which $P(k)$ is true. In other words, suppose that
+
+> Any tree with $k$ vertices has $k - 1$ edges.
+
+We mush show that $P(k + 1)$ is true. In other words, we must show that
+
+> Any tree with $k + 1$ vertices has $(k + 1) - 1 = k$ edges.
+
+Let $T$ be a particular but arbitrarily chosen tree with $k + 1$ vertices. Since $k$ is a positive integer, $(k + 1) \geq 2$, and so $T$ has more than one vertex.
+
+Since any tree that has more than one vertex has at least one vertex of degree $1$, $T$ must have a vertex $v$ of degree $1$. Also, since $T$ has more than one vertex, there is at least one other vertex in $T$ besides $v$. Thus there is an edge $e$ connecting $v$ to the rest of $T$.
+
+Define a subgraph $T'$ of $T$ so that
+
+$$
+V(T') = V(T) - \{v\} \text{ and } E(T') = E(T) - \{e\}
+$$
+
+Then
+
+1. The number of vertices of $T'$ is $(k + 1) - 1 = k$
+2. $T'$ is circuit free, since $T$ is circuit free and removing an edge and a vertex cannot create a circuit
+3. $T'$ is connected
+
+Hence, by the definition of tree, $T'$ is a tree. Since $T'$ has $k$ vertices, by inductive hypothesis the number of edges of $T'$ is $k - 1$.
+
+It follows that the number of edges of $T$ is the number of edges of $T'$ plus the edge we removed:
+
+$$
+\text{ the number of edges of } T' + 1 = k - 1 + 1 = k
+$$
+
+This is what was to be shown.
+
+> [!TIP] **Connectivity and Circuits**
+>
+> If $G$ is any connected graph, $C$ is any circuit in $G$, and any one of the edges of $C$ is removed from $G$, then the graph that remains is connected.
+
+**Proof**. Suppose $G$ is a connected graph, $C$ is a circuit in $G$ and $e$ is an edge of $C$. Form a subgraph $G'$ of $G$ by removing $e$ from $G$. Thus
+
+$$
+V(G') = V(G) \\[5pt]
+E(G') = E(G) - \{e\}
+$$
+
+We must show that $G'$ is connected. Suppose $u$ and $w$ are any two vertices of $G'$. Since the vertex sets of $G$ and $G'$ are the same, because $u$ and $w$ are both vertices of $G$ and since $G$ is connected, there is a walk $W$ in $G$ from $u$ to $w$.
+
+**Case 1 ($e$ is not an edge of $W$)**: The only edge in $G$ that is not in $G'$ is $e$, so in this case $W$ is also a walk in $G'$. Hence $u$ is connected to $w$ by a walk in $G'$.
+
+**Case 2 ($e$ is an edge of $W$)**: In this case the walk $W$ from $u$ to $w$ includes a section of the circuit $C$ that contains $e$. Let $C$ be denoted as follows
+
+$$
+C: v_0e_1v_1e_2v_2\cdots e_nv_n(=v_0)
+$$
+
+Now $e$ is one of the edges of $C$, so, to be specific, let $e = e_k$. Then the walk $W$ contains either the sequence
+
+$$
+v_{k - 1}e_kv_k \text{ or } v_ke_kv_{k - 1}
+$$
+
+If $W$ contains $v_{k - 1}e_kv_k$, connect $v_k{k - 1}$ to $v_k$ by taking the counterclockwise walk $W'$ defined as follows
+
+$$
+W': v_{k - 1}e_{k - 1} v_{k - 2} \cdots v_0e_nv_{n - 1} \cdots e_{k + 1} v_{k}, \text{ where } v_n = v_0
+$$
+
+See the following figure for an example
+
+![Circuit Connectedness Example](./assets/circuit_connectedness_example.png)
+
+If $W$ contains $v_ke_kv_{k - 1}$, connect $v_k$ to $v_{k - 1}$ by takin the clockwise walk $W''$ defined as follows:
+
+$$
+W'': v_ke_{k + 1}v_{k + 1} \cdots v_ne_1v_1e_2 \cdots e_{k - 1}v_{k - 1}, \text{ where } v_n = v_0
+$$
+
+Now patch either $W'$ or $W''$ into $W$ to form a new walk from $u$ to $w$. For instance, to path $W'$ into $W$, start with the section of $W$ From $u$ to $v_{k - 1}$ then take $W'$ from $v_{k - 1}$ to $v_k$, and finally take the section of $W$ From $v_k$ to $w$. If this new walk still contains an ocurrence of $e$, just repeat the process describes previously untils all ocurrences are eliminted (This must happen eventually since the ocurrences of $e$ in $C$ are finite.). The result is a walk from $u$ to $w$ that does not contain $e$ and hence is a walk in $G'$.
+
+> [!NOTE] **The Tree Test**
+>
+> For any positive integer $n$, if $G$ is a connected graph with $n$ vertices and $n - 1$ edges, then $G$ is a tree.
+
+**Proof**. Let $n$ be a positive integer and suppose $G$ is a particular but artitrarily chosen graph that is connected and has $n$ vertices and $n - 1$ edges. Suppose $G$ is not circuit free. That is, suppose $G$ has a circuit $C$.
+
+We know that an edge of $C$ can be removed from $G$ to obtain a graph $G'$ that is connected. If $G'$ has a circuit, then repeat this process. Continue repeating the process of removing edges from circuits untils eventually a graph $G''$ is obtained that is connected and circuit-free.
+
+By definition $G''$ is a tree. Since no vertices were removed from $G$ To from $G''$, then $G''$ has $n$ vertices. Thus by the properties of a tree $G''$ has $n - 1$ edges. But the suppositiong that $G$ has a circuit implies that at least once edge of $G$ is removed to form $G''$. Hence $G''$ has no more than $(n - 1) - 1 = n - 2$ edges, which contradicts its having $n - 1$ edges. So the supposition is false and $G$ is circuit-free, and therefore $G$ is a tree.
+
+> [!NOTE] **The Circuit Test**
+>
+> If $G$ is any graph with $n$ vertices and $m$ edges, where $m$ and $n$ are positive integers and $m \geq n$, then $G$ has a circuit.
+
+**Proof** (by mathematical indcution). Suppose not. Suppose there is a graph $G$ with $n$ vertices and $m$ edges, where $m$ and $n$ are positive integers and $m \geq n$, and suppose $G$ does not have a circuit. Let $G_1, G_2, \cdots, G_k$ be the connected components of $G$, and let $n_1, n_2, \cdots, n_k$ be the number of vertices of $G_1, G_2, \cdots, G_k$ respectively. Because $G_1, G_2, \cdots, G_k$ are the connected components of $G$,
+
+$$
+\sum_{i = 1}^k n_i = n
+$$
+
+Since $G$ does not have a circuit, none of $G_1, G_2, \cdots, G_k$ have circuits either. So, since each is connected, each is a tree, therefore the number of edges of each $G_i$ is $n_i - 1$. Now because $G$ is compose of its connected components,
+
+$$
+\text{ the number of edges of } G = \sum_{i = 1}^k \text{ the number of edges of } G_i \\[10pt]
+= (n_1 - 1) + (n_2 - 1) + \cdots + (n_k - 1) \\[10pt]
+= (n_1 + n_2 + \cdots + n_k) - (1 + 1 + \cdots + 1) \\[10pt]
+= n - k < n
+$$
+
+Thus the number of edges of $G$ is less than $n$, which contradicts the hypothesis that the number of edges of $G$, namely $m$, is greater than or equal to $n$. Hence the supposition is false and $G$ has a circuit.
