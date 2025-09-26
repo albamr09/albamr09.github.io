@@ -302,3 +302,121 @@ $$
 $$
 
 Therefore, by the [theorem on polynomial orders](#order-of-polynomial-functions), $\frac{1}{2}n^2 + \frac{1}{2}n - 1$ the insertion sort algorithm has worst-case order $\Theta(n^2)$.
+
+## Exponential and Logarithmic Functions: Graphs and Orders
+
+Exponential and logarithmic functions are of great importance in mathematics in general and in computer science in particular. Several important computer algorithms have execution times that involve logarithmic functions of the size of the input data (which means they are relatively efficient for large data sets), and some have execution times that are exponential functions of the size of the input data (which means they are extremely inefficient for large data sets).
+
+We'll lay out some useful properties of logarithms and exponentials.
+
+> [!TIP] **Base $2$ Logarithms of Numbers between Two Consecutive Powers of $2$**
+>
+> If $k$ is an integer and $x$ is a real number with
+>
+> $$2^k \leq x < 2^{k + 1}$$
+>
+> then
+>
+> $$\lfloor \log_2 x \rfloor = k$$
+
+**Proof**. Suppose that $k$ is an integer and $x$ is a real number with
+
+$$
+2^k \leq x < 2^{k + 1}
+$$
+
+Because the logarithmic function with base $2$ is increasing, this implies that
+
+$$
+\log_2(2^k) \leq \log_2 x < \log_2(2^{k + 1})
+$$
+
+$$
+k \leq \log_2 x < k + 1
+$$
+
+By definition of [floor function](/math/dma/04_elementary_number_theory/#direct-proof-and-counterexample-vi-floor-and-ceiling), then
+
+$$
+\lfloor \log_2 x \rfloor = k
+$$
+
+### Application: Number of Bits Needed to Represent an Integer in Binary Notation
+
+Given a positive integer $n$, how many binary digits are needed to represent $n$? Note that any positive integer $n$ can be written in a unique way as
+
+$$
+n = 2^k + c_{k - 1} 2^{k - 1} + \cdots + c_2 2^2 + c_1 2 + c_0
+$$
+
+where $k$ is a nonnegative integer and each $c_0, c_1 , c_2, \cdots, c_{k - 1}$ is either $0$ or $1$. Then the binary representation of $n$ is
+
+$$
+1c_{k-1}c_{k - 1}\cdots c_2 c_1 c_0
+$$
+
+and so the number of binary digits needed to represent $n$ is $k + 1$. What is $k + 1$ as a function of $n$? Observe that since each $c_i \leq 1$,
+
+$$
+n = 2^k + c_{k - 1} 2^{k - 1} + \cdots + c_2 2^2 + c_1 2 + c_0 \leq 2^k + 2^{k - 1} + \cdots + 2^2 + 2 + 1
+$$
+
+Now, by the formula for the [sum of a geometric sequence](/math/agaa/11_further_topics/#geometric-series)
+
+$$
+2^k + 2^{k - 1} + \cdots + 2^2 + 2 + 1 = \frac{2^{k + 1} - 1}{2 - 1} = 2^{k + 1} -1
+$$
+
+Hence, by transivity of order
+
+$$
+n \leq 2^{k + 1} -1
+$$
+
+In addition, because each $c_i \geq 0$
+
+$$
+2^k \leq 2^k + c_{k - 1} 2^{k - 1} + \cdots + c_2 2^2 + c_1 2 + c_0  = n
+$$
+
+Putting these two inequalities together
+
+$$
+2^k \leq n < 2^{k + 1}
+$$
+
+Then
+
+$$
+k = \lfloor \log_2 n \rfloor
+$$
+
+and so the number of binary digits needed to represent $n$ is $\lfloor \log_2 n\rfloor + 1$.
+
+### Exponential and Logarithmic Orders
+
+Now consider the question “How do graphs of logarithmic and exponential functions compare with graphs of power functions?” It turns out that for large enough values of $x$, the graph of the logarithmic function with any base $b > 1$ lies below the graph of every power function with a positive exponent, and the graph of the exponential function with any base $b < 1$ lies above the graph of each of these power functions. In analytic terms, this says the following:
+
+> [!TIP] **Exponential and Logarithmic Orders**
+>
+> For all real numbers $b$ and $r$ with $b > 1$ and $r > 0$, there is a positive real number $s$ such that
+>
+> $$\log_b x \leq x^r \text{ for every real number } x \geq s$$
+>
+> and
+>
+> $$x^r \leq b^x \text{ for every real number } x \geq s$$
+
+These statements have the following implications for O-notation.
+
+For all real numbers $b$ and $r$ with $b > 1$ and $r > 0$,
+
+$$
+\log_b n \text{ is } O(n^r)
+$$
+
+and
+
+$$
+n^r \text{ is } O(b^n)
+$$
