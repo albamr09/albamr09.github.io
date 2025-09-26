@@ -120,7 +120,7 @@ The functions that are most commonly used for comparing algorithm efficiencies a
 **Proof**. Suppose $r$ and $s$ are real numbers with $r < s$ and $f$ is a function such that $f(n)$ is $O(n^r)$. By definition of O-notation, there exist positive real numbers $B$ and $b$ such that
 
 $$
-0 \leq f(n) \leq Bn^r \texxt{ for every integer } n \geq b
+0 \leq f(n) \leq Bn^r \text{ for every integer } n \geq b
 $$
 
 Now as $r < s$, we know that
@@ -223,3 +223,82 @@ We end this section by stating some theorems that give useful properties of orde
 > - If $f_1(n)$ is $\Theta(g(n))$ and $f_2(n)$ is $\Theta(g(n))$, then $(f_1(n) + f_2(n))$ is $\Theta(g(n))$.
 > - If $f_1(n)$ is $\Theta(g_1(n))$ and $f_2(n)$ is $\Theta(g_2(n))$, then $(f_1(n)f_2(n))$ is $\Theta(g_1(n)g_2(n))$.
 > - If $f_1(n)$ is $\Theta(g_1(n))$ and $f_2(n)$ is $\Theta(g_2(n))$ and if there is a real number $s$ so that $g_1(n) \leq g_2(n)$ for every integer $n \geq s$, then $(f_1(n) + f_2(n))$ is $\Theta(g_2(n))$.
+
+## Application: Analysis of Algorithm Efficiency I
+
+Starting in the late 1940s a number of mathematicians and computer scientists contributed to developing formal techniques for analyzing computer algorithms. [Alan Turing](https://en.wikipedia.org/wiki/Alan_Turing) may have been the first to suggest a concrete way for doing this. In the early 1960s, [Donald Knuth](https://en.wikipedia.org/wiki/Donald_Knuth) began the process of expanding upon his own work and the work of others into a series of volumes titled [The Art of Computer Programming](https://en.wikipedia.org/wiki/The_Art_of_Computer_Programming).
+
+### The Sequential Search Algorithm
+
+The object of a search algorithm is to hunt through an array of data in an attempt to find a particular item $x$. In a sequential search, $x$ is compared to the first item in the array, then to the second, then to the third, and so on. The search is stopped if a match is found at any stage. On the other hand, if the entire array is processed without finding a match, then $x$ is not in the array.
+
+Thus in the best case, the sequential search algorithm is $\Omega(1)$. (Note that $\Omega(1) = \Omega(n^0)$.) In the worst case, however, the algorithm requires n comparisons. This occurs when $x = a[n]$ or when $x$ does not appear in the array at all. Thus in the worst case, the sequential search algorithm is $\Theta(n)$. Finally, because $x$ is as likely to be in the first half of the array as in the second half, then algorithm requires an average of $\frac{n}{2}$ comparisons. Since $\frac{n}{2}$ is $\Theta(n)$, the algorithm's average-case performance is also $\Omega(n)$.
+
+### Measuring the Efficiency of an Algorithm
+
+Two aspects of algorithm efficiency are important: the amount of time required to execute the algorithm and the amount of memory space needed when it is run. In this chapter we introduce basic techniques for calculating time efficiency. Similar techniques exist for calculating space efficiency.
+
+How can the time efficiency of an algorithm be calculated? The answer depends on several factors. One is the size of the set of data that is input to the algorithm; for example, it takes longer for a sort algorithm to process 1,000,000 items than 100 items. Consequently, the execution time of an algorithm is generally expressed as a function of its input size.
+
+Roughly speaking, the analysis of an algorithm for time efficiency begins by trying to count the number of elementary operations that must be performed when the algorithm is executed with an input of size $n$ (in the best case, worst case, or average case). What is classified as an “elementary operation” may vary depending on the nature of the problem the algorithms being compared are designed to solve. For instance, to compare two algorithms for evaluating a polynomial, the crucial issue is the number of additions and multiplications that are needed, whereas to compare two algorithms for searching a list to find a particular element, the important distinction is the number of comparisons that are required. As is common, we will classify the following as elementary operations: addition, subtraction, multiplication, division, and comparisons that are indicated explicitly in an if-then statement.
+
+When algorithms are implemented in a particular programming language and run on a particular computer, some operations are executed faster than others, and, of course, there are differences in execution times from one machine to another. In certain practical situations these factors are taken into account when deciding which algorithm or which machine to use to solve a particular problem.
+
+Consider the example of two algorithms, $A$ and $B$, designed to do a certain job. Suppose that for an input of size $n$, the number of elementary operations needed to perform algorithm $A$ is between $10n$ and $20n$ (at least for large $n$), and the number of elementary operations needed to perform algorithm $B$ is between $2n^2$ and $4n^2$. Table 11.3.1 shows the differences between algorithms $A$ and $B$ for larger and larger values of $n$.
+
+![Example of Algorithm Efficency](./assets/example_algorithm_efficency.png)
+
+> [!NOTE] **Worst- and Best-case Order**
+>
+> Let $A$ be an algorithm.
+>
+> 1. Suppose the number of elementary operations performed when $A$ is executed for an input of size $n$ depends on $n$ alone and not on the nature of the input data; say it equals $f(n)$. If $f(n)$ is $\Theta(g(n))$, we say that $A$ is $\Theta(g(n))$ or **$A$ is of order $g(n)$**.
+> 2. Suppose the number of elementary operations performed when $A$ is executed for an input of size $n$ depends on the nature of the input data as well as on $n$.
+>    - Let $b(n)$ be the minimum number of elementary operations required to execute $A$ for all possible input sets of size $n$. If $b(n)$ is $\Theta(g(n))$, we say that **in the best case, $A$ is $\Theta(g(n))$** or **$A$ has a best-case order of $g(n)$**.
+>    - Let $w(n)$ be the maximum number of elementary operations required to execute $A$ for all possible input sets of size $n$. If $w(n)$ is $\Theta(g(n))$, we say that **in the worst case, $A$ is $\Theta(g(n))$** or **$A$ has a worst-case order of $g(n)$**.
+
+Some of the orders most commonly used to describe algorithm efficiencies are shown in Table 11.3.2.
+
+![Algorithm Efficency Orders](./assets/algorithm_efficency_orders.png)
+
+### The Insertion Sort Algorithm
+
+Insertion sort is an algorithm for arranging the items in an array into ascending order. Initially, the second item is compared to the first. If the second item is less than the first, their values are interchanged, and as a result the first two array items are in ascending order. The idea of the algorithm is gradually to lengthen the section of the array that is known to be in ascending order by inserting each subsequent array item into its correct position relative to the preceding ones.
+
+> [!TIP] **Insertion Sort**
+>
+> **Input**: $n$ [_a positive integer_], $a[1], a[2], a[3], \cdots, a[n]$ [_an array of data items capable of being ordered_]
+>
+> **Algorithm Body**:
+>
+> 1. for $k := 2$ to $n$
+>    1. $x := a[k]$
+>    2. $j := k - 1$
+>    3. while $(j \neq 0)$
+>       - if $x < a[j]$ then
+>         - $a[j + 1] := a[j]$
+>         - $a[j] := x$
+>         - $j := j - 1$
+>       - else $j := 0$
+>
+> **Otuput**: $a[1], a[2], a[3], cdots, a[n]$ [_in ascending order_]
+
+So, what would be the worst-case order for the Insertion Sort algorithm?
+
+In each iteration of the while loop, one explicit comparison is made to test whether $a[j] < x$. During the time that $a[k]$ is put into position relative to $a[1], a[2], \cdots, a[k - 1]$, the maximum number of attempted iterations of the while loop is $k$. This happens when $a[k]$ is less than every $a[1], a[2], \cdots, a[k - 1]$ and results in $k - 1$ comparisons. Then when the $k$th iteration is attempted, a comparison results in setting $j = 0$ and so the condition of the while loop is not satisfied.
+
+Thus the maximum number of comparisons for a given value of $k$ is $k - 1$. Now because $k$ goes from $2$ to $n$, the maximum total number of comparisons occurs when the items in the array are in reverse order, and it equals
+
+$$
+2 + 3 + \cdots + n = (1 + 2 + 3 + \cdots + n) - 1
+$$
+
+$$
+\frac{n(n + 1)}{2} - 1
+$$
+
+$$
+\frac{1}{2}n^2 + \frac{1}{2}n - 1
+$$
+
+Therefore, by the [theorem on polynomial orders](#order-of-polynomial-functions), $\frac{1}{2}n^2 + \frac{1}{2}n - 1$ the insertion sort algorithm has worst-case order $\Theta(n^2)$.
