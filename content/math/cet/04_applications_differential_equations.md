@@ -703,14 +703,14 @@ In simpler words: A basin of attraction is like a "territory" in the plane. Wher
 
 On the previous image you can see that the complexity is introduced at the boundaries of each basin. Let us define a boundary: Given any set (like a basin), a boundary point is one where, for any infinitely small circle, some points on the circle are inside the set while some other points on the circle are outside the set.
 
-![Newton's Fractals Boundaries](./assets/newtons_fractals_boundary.png)
+![Boundary](./assets/newtons_fractals_boundary.png)
 
-So, why do these fractal boundaries appear? One property that these boundaries must satisfy is: for any starting point that ends up at this boundary, it is not decisively attracted to one root. Instead infinitely close neighbors can be pulled to wildly different roots. That is the point itself is unstable: even the tiniest perturbation flips its destiny. That's why the boundaries look chaotic — they are made up of points that can be "attracted" to any of the possible roots.
+So, why do these fractal boundaries appear? One property that these boundaries must satisfy is: for any starting point that ends up at this boundary, it is not decisively attracted to one root. Instead infinitely close neighbors can be pulled to wildly different roots. This means that even the tiniest perturbation flips its destiny. That's why the boundaries look chaotic — they are made up of points that can be "attracted" to any of the possible roots.
 
 We can visualize this phenomenon by:
 
-1. Pick a cluster of nearby starting points. For the phenomenon to take place the cluster of points show be on the fractal boundaries.
-2. Apply Newton’s method step by step.
-3. Watch them scatter: some head to one root, others to another, depending on tiny differences in the start.
+1. Picking a cluster of nearby starting points. For the phenomenon to take place the cluster of points show be on the fractal boundaries.
+2. Applying Newton’s method step by step.
+3. Watching them scatter: some head to one root, others to another, depending on tiny differences in the start.
 
 ![Newton's Basins of Attraction](./assets/newtons_basins_of_attraction.gif)
