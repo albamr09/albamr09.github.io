@@ -721,7 +721,7 @@ We can visualize this phenomenon by:
 >
 > Given a function $f$, we say $f$ is an **antiderivative** of $f$ on an interval $I$ if
 >
-> $$F'(x) = f(x) \forall x \in I$$
+> $$F'(x) = f(x), \forall x \in I$$
 
 But is $F$ the only antiderivative for $f$? By the corollary of [The Mean Value Function](/math/cet/04_applications_differential_equations/#the-mean-value-theorem-1), given two functions $f$ and $g$, such that $f'(x) = g'(x)$, then
 
