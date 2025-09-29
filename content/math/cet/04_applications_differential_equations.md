@@ -745,7 +745,7 @@ On the following table we list some popular antiderivatives.
 
 > [!TIP] **Differential equations**
 >
-> We define a **differential equation** as any equation that involver the derivative of a function, for example:
+> We define a **differential equation** as any equation that involves the derivative of a function, for example:
 >
 > $$\frac{\delta y}{\delta x} = 2$$
 >
