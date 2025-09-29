@@ -705,12 +705,76 @@ On the previous image you can see that the complexity is introduced at the bound
 
 ![Boundary](./assets/newtons_fractals_boundary.png)
 
-So, why do these fractal boundaries appear? One property that these boundaries must satisfy is: for any starting point that ends up at this boundary, it is not decisively attracted to one root. Instead infinitely close neighbors can be pulled to wildly different roots. This means that even the tiniest perturbation flips its destiny. That's why the boundaries look chaotic — they are made up of points that can be "attracted" to any of the possible roots.
+So, why do these fractal boundaries appear? One property that these boundaries must satisfy is: for any starting point that ends up at this boundary, it is not decisively attracted to one root. Instead, infinitely close neighbors can be pulled to wildly different roots. This means that even the tiniest perturbation flips its destiny. That's why the boundaries look chaotic — they are made up of points that can be "attracted" to any of the possible roots.
 
 We can visualize this phenomenon by:
 
-1. Picking a cluster of nearby starting points. For the phenomenon to take place the cluster of points show be on the fractal boundaries.
+1. Picking a cluster of nearby starting points. For the phenomenon to take place the cluster of points shows be on the fractal boundaries.
 2. Applying Newton’s method step by step.
 3. Watching them scatter: some head to one root, others to another, depending on tiny differences in the start.
 
 ![Newton's Basins of Attraction](./assets/newtons_basins_of_attraction.gif)
+
+## Antiderivatives
+
+> [!NOTE] **Antiderivative**
+>
+> Given a function $f$, we say $f$ is an **antiderivative** of $f$ on an interval $I$ if
+>
+> $$F'(x) = f(x) \forall x \in I$$
+
+But is $F$ the only antiderivative for $f$? By the corollary of [The Mean Value Function](/math/cet/04_applications_differential_equations/#the-mean-value-theorem-1), given two functions $f$ and $g$, such that $f'(x) = g'(x)$, then
+
+$$
+f'(x) = g'(x) \leftrightarrow H(x) = f'(x) - g'(x) = 0 \leftrightarrow \\[5pt] H \text{ is a constant function, such that } H(x) = C, \text{ where } C \text{ is a constant}
+$$
+
+So, we would say that **the most general antiderivative** for a function $f$ is defined as:
+
+$$
+F(x) + C
+$$
+
+where $F$ is an antiderivative of $f$ on an interval $I$.
+
+### Antidifferentiation formulas
+
+On the following table we list some popular antiderivatives.
+
+![List of Popular Antiderivatives](./assets/list_of_antiderivatives.png)
+
+> [!TIP] **Differential equations**
+>
+> We define a **differential equation** as any equation that involver the derivative of a function, for example:
+>
+> $$\frac{\delta y}{\delta x} = 2$$
+>
+> Where we are relating the rate of change of $y$ with respect to $x$ to a concrete value, in this case the constant $2$.
+
+### Graphing Antiderivatives
+
+Given the graph of $f$ we should be able to sketch the graph for the general antiderivate $F$. To sketch $F$ we follow the shape of $f$ and what it tells us:
+
+1. Is $f$ increasing or decreasing based on the sign of $f$
+2. If $f$ has any root, then $F$ has critical points on those roots
+3. If $f$ has local maximums or local minimums, then $F$ has inflections points
+
+In the following figures we show an example on how to graph $F$ given the graph of $f$ and $F(0) = 2$.
+
+![Graph Antiderivative](./assets/graph_antiderivative.png)
+
+Note that the general form of the antiderivative is $F(x) + C$, that is, if we do not know any $(x, y)$ on $F$ there are infinitely possible graphs of $F$ given $f$, as $f$ only tells us the shape of $F$.
+
+![Graph Antiderivative](./assets/graph_antiderivative_1.png)
+
+### Linear Motion
+
+Given the position function $s(t)$, we know that the following relationships hold:
+
+1. The velocity function is defined as $v(t) = s'(t)$
+2. The acceleration function is defined as $a(t) = v'(t)$
+
+Therefore:
+
+1. The **velocity function is the antiderivative for the acceleration function**.
+2. The **position function is the antiderivative for the velocity function**.
