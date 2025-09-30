@@ -15,5 +15,6 @@ type: docs
 {{< card link="08_properties_of_relations" title="Properties of Relations" >}}
 {{< card link="09_counting_probability" title="Counting and Probability" >}}
 {{< card link="10_graph_theory" title="Theory of Graphs and Trees" >}}
-{{< card link="11_algorithm_efficency" title="Analysis of Algorithm Efficency" >}}
+{{< card link="11_algorithm_efficency" title="Analysis of Algorithm Efficiency" >}}
+{{< card link="12_regular_expressions_automatas" title="Regular Expressions and Finite-State Automata" >}}
 {{< /cards >}}
