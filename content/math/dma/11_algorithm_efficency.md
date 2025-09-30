@@ -420,3 +420,134 @@ and
 $$
 n^r \text{ is } O(b^n)
 $$
+
+## Application: Analysis of Algorithm Efficiency II
+
+> [!TIP] **Divide and Conquer**
+>
+> **Divide and Conquer** is a general strategy for problem-solving, which works as follows: To solve a problem, reduce it to a fixed number of smaller problems of the same kind, which can themselves be reduced to the same fixed number of smaller problems of the same kind, and so forth until easily resolved problems are obtained.
+
+It turns out that algorithms using a divide-and-conquer strategy are generally quite efficient and nearly always have orders involving logarithmic functions.
+
+### Binary Search
+
+Whereas a sequential search can be performed on an array whose elements are in any order, a binary search can be performed only on an array whose elements are arranged in ascending (or descending) order.
+
+To use binary search, first compare x to the “middle element” of the array. If the two are equal, the search is successful. If the two are not equal, then because the array elements are in ascending order, comparing the values of x and the middle array element narrows the search either to the lower subarray (consisting of all the array elements below the middle element) or to the upper subarray (consisting of all array elements above the middle element).
+
+The search continues by repeating this basic process over and over on successively smaller subarrays. It terminates either when a match occurs or when the subarray to which the search has been narrowed contains no elements. This process is illustrated in Figure 11.5.1.
+
+![Binary Search Example](./assets/binary_search_example.png)
+
+> [!TIP] **Algorithm: Binary Search**
+>
+> **Input**: $n$ [a positive integer], $a[1], a[2], \cdots, a[n]$ [an array of data items given in ascending order], $x$ [a data item of the same data type as the elements of the array]
+>
+> **Algorithm Body**
+>
+> 1. while $top \geq bot \text{and} index = 0$
+>    - $mid := \lfloor \frac{bot + top}{2} \rfloor$
+>    - if $a[mid] = x$ then $index := mid$
+>    - if $a[mid] > x$
+>      - then $top := mid - 1$
+>      - else $bot := mid + 1$
+>
+> **Output**: $index$ [a non-negative integer]
+
+### The Efficiency of the Binary Search Algorithm
+
+At each stage of the binary search process, the length of the new subarray to be searched is approximately half that of the previous one, and in the worst case, every subarray down to a subarray with a single element must be searched. Consequently, in the worst case, **the maximum number of iterations of the algorithm’s while loop is $1$ more than the number of times the original input array can be cut approximately in half**.
+
+Now if the length $n$ of this array is a power of $2$, then $n$ can be halved exactly $k = \log_2 n = \lfloor \log_2 n \rfloor$ times before an array of length $1$ is reached. If $n$ is not a power of $2$, then $n = 2^k + m$ for some integer $k$, where $m < 2^k$, and thus $n$ can be split approximately in half $k$ times also, and so in this case, $k = \lfloor \log_2 n \rfloor$ also.
+
+Thus, in the worst case, the maximum number of iteration of the while loop in the binary search algorithm is $\lfloor \log_2 n \rfloor + 1$. The derivation is concluded by noting that $\lfloor \log_2 n \rfloor + 1$ is $O(\log_2 n)$.
+
+### Merge Sort
+
+Can a divide-and-conquer approach be used to find an efficient sorting method? It turns out that the answer is an emphatic “yes.” One of these methods, **merge sort**, is obtained by thinking recursively. Imagine that an efficient way for sorting arrays of length less than $k$ is already known. How can such knowledge be used to sort an array of length $k$? One way is to suppose the array of length $k$ is split into two roughly equal parts and each part is sorted using the known method. Is there an efficient way to combine the parts into a sorted array? Sure. Just “merge” them.
+
+Figure 11.5.4 illustrates how a merge works. Imagine that the elements of two ordered subarrays—$2, 5, 6, 8$ and $3, 6, 7, 9$—are written on slips of paper. Place the slips for each subarray in two columns on a tabletop, one at the left and one at the right. Along the bottom of the tabletop, set up eight positions into which the slips will be moved. Then, one-by-one, bring down the slips from the bottoms of the columns. At each stage compare the numbers on the slips currently at the column bottoms, and move the slip containing the smaller number down into the next position in the array as a whole. If at any stage the two numbers are equal, take, say, the slip on the left to move into the next position. And if one of the columns is empty at any stage, just move all the slips from the other column into the correct positions one-by-one in order.
+
+![Merge Step for Merge Sort](./assets/merge_sort_merge_step.png)
+
+Specifically, merge sort works as follows.
+
+Given an array of elements that can be put into order, if the array consists of a single element, leave it as it is. It is already sorted. Otherwise:
+
+- Divide the array into two subarrays of as nearly equal length as possible.
+- Use merge sort to sort each subarray.
+- Merge the two subarrays together.
+
+Figure 11.5.5 illustrates a merge sort in a particular case.
+
+![Merge Sort Example](./assets/merge_sort_example.png)
+
+> [!TIP] **Algorithm: Merge Sort**
+>
+> **Input**: $r$ and $s$ [positive integers with $r \leq s$], $a[r], a[r 1 1], \cdots, a[s]$ [an array of data items that can be ordered]
+>
+> **Algorithm Body**
+>
+> $bot := r, top := s$
+>
+> - while $(bot < top)$
+>   - $mid := \lfloor \frac{bot + top}{2} \rfloor$
+>   - call **merge sort** with input $bot$, $mid$ and $$a[bot], a[bot + 1], \cdots, a[mid]$$
+>   - call **merge sort** with input $mid + 1$, $top$ and $$a[mid + 1] a[mid + 2], \cdots, a[top]$$
+>   - merge $a[bot], a[bot + 1], \cdots, a[mid]$ and $a[mid + 1] a[mid + 2], \cdots, a[top]$
+>
+> **Output**: $a[r], a[r + 1], \cdots, a[s]$ [an array with the same elements as the input array but in ascending order]
+
+To derive the efficiency of merge sort, let
+
+$$
+m_n = \text{ the maximum number of comparisons used} \\[5pt]
+\text{ when merge sort is applied to an array of length } n
+$$
+
+Then $m_1 = 0$ because no comparisons are used when merge sort is applied to an array of length $$1.
+
+Also for any integer $k > 1$, consider an array $a[bot], a[bot + 1], \cdots, a[top]$ of length $k$ that is split into two subarrays, $a[bot], a[bot + 1], \cdots, a[mid]$ and $a[mid + 1], a[mid + 2], \cdots, a[top]$, where $mid = \lfloor(bot + top) / 2 \rfloor$. We know that the right subarray has length $\lfloor frac{k}{2} \rfloor$ and the left subarray has length $\lfloor \frac{k}{2} \rfloor$. It is also known that to merge two subarrays into an array of length $k$, at most $k - 1$ comparison are needed. Consequently,
+
+$$
+\begin{bmatrix}
+\text{the number of comparisons} \\
+\text{when merge sort is applied} \\
+\text{to an array of length} k \\
+\end{bmatrix} =
+\begin{bmatrix}
+\text{the number of comparisons} \\
+\text{when merge sort is applied} \\
+\text{to an array of length} \lfloor k / 2 \rfloor \\
+\end{bmatrix} + \\[5pt]
+\begin{bmatrix}
+\text{the number of comparisons} \\
+\text{when merge sort is applied} \\
+\text{to an array of length} \lfloor k / 2 \rfloor \\
+\end{bmatrix} +
+\begin{bmatrix}
+\text{the number of comparisons} \\
+\text{used to merge two subarrays} \\
+\text{into an array of length } k \\
+\end{bmatrix}
+$$
+
+In other words:
+
+$$
+m_k = m_{\lfloor k/2 \rfloor} + m_{\lfloor k/2 \rfloor} + (k - 1), \text{ for every integer } k > 1
+$$
+
+### Tractable and Intractable Problems
+
+At an opposite extreme from an algorithm such as binary search, which has logarithmic order, is an algorithm with exponential order.
+
+> [!NOTE] **Class P Problems**
+>
+> Problems whose solutions can be found with algorithms whose worst-case order with respect to time is a polynomial are said to belong to **class P**. They are called polynomial-time algorithms and are said to be **tractable**.
+
+Problems that cannot be solved in polynomial time are called **intractable**. For certain problems, it is possible to check the correctness of a proposed solution with a polynomial-time algorithm, but it may not be possible to find a solution in polynomial time. Such problems are said to belong to **class NP**.
+
+The biggest open question in theoretical computer science is whether every problem in class NP belongs to class P. This is known as the P vs. NP problem.
+
+In recent years, computer scientists have identified a fairly large set of problems, called **NP-complete**, that all belong to class NP but are widely believed not to belong to class P. One of the NP-complete problems, commonly known as the traveling salesman problem.
