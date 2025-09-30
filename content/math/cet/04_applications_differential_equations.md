@@ -719,7 +719,7 @@ We can visualize this phenomenon by:
 
 > [!NOTE] **Antiderivative**
 >
-> Given a function $f$, we say $f$ is an **antiderivative** of $f$ on an interval $I$ if
+> Given a function $f$, we say $F$ is an **antiderivative** of $f$ on an interval $I$ if
 >
 > $$F'(x) = f(x), \forall x \in I$$
 
@@ -735,7 +735,7 @@ $$
 F(x) + C
 $$
 
-where $F$ is an antiderivative of $f$ on an interval $I$.
+where $F$ is an antiderivative of $f$ on an interval $I$. Note that when solving integrals or differential equations, we will always add $+C$ to account for all possible solutions.
 
 ### Antidifferentiation formulas
 
