@@ -87,3 +87,81 @@ Given a finite alphabet, every regular expression over the alphabet defines a fo
 > $$L(r^*) = L(r)^*$$
 >
 > 3. Restriction: The function $L$ is completely determined by I and II above.
+
+## Finite-State Automata
+
+> [!NOTE] **Combinational Circuit**
+>
+> A **combinational circuit** is characterized by the fact that its output is completely determined by its input/output table.
+
+> [!NOTE] **Sequential Circuit**
+>
+> The behavior of a **sequential circuit** is a function not only of the input to the circuit but also of the state the circuit is in when the input is received.
+
+A **finite-state automaton** is an idealized machine that embodies the essential idea of a sequential circuit. The basic theory of automata was developed to answer very theoretical questions about the foundations of mathematics posed by the great German mathematician [David Hillbert](https://wikipedia.org/wiki/David_Hilbert) in 1900. The ground-breaking work on automata was done in the mid-1930s by the English mathematician and logician [Alan Turing](https://wikipedia.org/wiki/Alan_Turing).
+
+### Definition of a Finite-State Automaton
+
+> [!NOTE] **Finite-State Automaton**
+>
+> A **finite-state automaton $A$** consists of five objects:
+>
+> 1. A finite set $I$, called the **input alphabet**, of input symbols.
+> 2. A finite set $S$ of **states** the automaton can assume.
+> 3. A designated state $s_0$ called the **initial state**.
+> 4. A designated set of states called the set of **accepting states**.
+> 5. A next-state function $N: S \times I \rightarrow S$ that associates a “next-state” to each ordered pair consisting of a “current state” and a “current input.” For each state $s$ in $S$ and input symbol $m$ in $I$, $N(s, m)$ is the state to which $A$ goes if $m$ is input to $A$ when $A$ is in state $s$.
+
+The operation of a finite-state automaton is commonly described by a diagram called a **(state-) transition diagram**.
+
+![Transition Diagram](./assets/transition_diagram.png)
+
+The **next-state table** for an automaton shows the values of the next-state function $N$ for all possible states $s$ and input symbols $i$. In the annotated next-state table, the initial state is indicated by an arrow and the accepting states are marked by double circles.
+
+![Next State Table](./assets/next_state_table.png)
+
+### The Language Accepted by an Automaton
+
+Now suppose a string of input symbols is fed into a finite-state automaton in sequence. At the end of the process, after each successive input symbol has changed the state of the automaton, the automaton ends up in a certain state, which may be either an accepting state or a non-accepting state.
+
+In this way, the action of a finite-state automaton separates the set of all strings of input symbols into two subsets: those that send the automaton to an accepting state and those that do not. Those strings that send the automaton to an accepting state are said to be accepted by the automaton.
+
+> [!NOTE] **The Language Accepted by an Automaton**
+>
+> Let $A$ be a finite-state automaton with set of input symbols $I$. Let $I*$ be the set of all strings over $I$, and let $w$ be a string in $I^*$. Then $w$ is accepted by $A$ if, and only if, $A$ goes to an accepting state when the symbols of $w$ are input to $A$ in sequence from left to right, starting when $A$ is in its initial state. The language accepted by $A$, denoted $L(A)$, is the set of all strings that are accepted by $A$.
+
+### The Eventual-State Function
+
+> [!NOTE] **The Eventual-State Function**
+>
+> Let $A$ be a finite-state automaton with set of input symbols $I$, set of states $S$, and next-state function $N: S \times I \leftarrow S$. Let $I*$ be the set of all strings over $I$, and define the **eventual-state function** $N*: S \times I* \rightarrow S$ as follows:
+>
+> For any state $s$ and for any input string $w$
+>
+> $$N^*(s, w) = \begin{bmatrix}\text{the state to which } A \text{ goes if the} \\ \text{symbols of } w \text{ are input to } A \text{ in sequence} \\ \text{ starting when } A \text{ is in state } s\end{bmatrix}$$
+
+The definitions of string and language accepted by an automaton can be restated symbolically using the eventual-state function. Suppose $A$ is a finite-state automaton with set of input symbols $I$ and next-state function $N$, and suppose that $I*$ is the set of all strings over $I$ and that $w$ is a string in $I*$.
+
+$$
+w \text{ is accepted by } A \Leftrightarrow N^*(s_0, w) \text{ is an accepting state of } A
+$$
+
+$$
+L(A) = \{w \in I^* | N^*(s_0, w) \text{ is an accepting state of } A\}
+$$
+
+### Finite-State Automata and Regular Expressions
+
+In the previous sections, each time we considered a language accepted by a finite-state automaton, we found a regular expression that defined the same language. [Stephen Kleene](https://wikipedia.org/wiki/Stephen_Kleene) showed that our ability to do this is not sheer coincidence.
+
+> [!TIP] **Kleene's Theorem, Part 1**
+>
+> Given any language that is accepted by a finite-state automaton, there is a regular expression that defines the same language.
+
+> [!TIP] **Kleene's Theorem, Part 2**
+>
+> Given any language defined by a regular expression, there is a finite-state automaton that accepts the same language.
+
+> [!NOTE] **Regular Language**
+>
+> A **regular language** is the language defined by a regular expression.
