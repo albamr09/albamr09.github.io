@@ -165,3 +165,102 @@ In the previous sections, each time we considered a language accepted by a finit
 > [!NOTE] **Regular Language**
 >
 > A **regular language** is the language defined by a regular expression.
+
+## Simplifying Finite-State Automata
+
+It often happens that when an automaton is created to do a certain job (as in compiler construction, for example), the automaton that emerges “naturally” from the development process is unnecessarily complicated. In this section we show how to take a given automaton and simplify it in the sense of finding an automaton with fewer states that accepts the same language.
+
+In general, simplification of a finite-state automaton involves identifying “equivalent states” that can be combined without affecting the action of the automaton on input strings. Mathematically speaking, this means defining an equivalence relation on the set of states of the automaton and forming a new automaton whose states are the equivalence classes of the relation.
+
+### \*-Equivalence of States
+
+> [!NOTE] **\*-Equivalence**
+>
+> Let $A$ be a finite-state automaton with next-state function $N$ and eventual-state function $N*$. Define a binary relation on the set of states of $A$ as follows: Given any states $s$ and $t$ of $A$, we say that $s$ and $t$ are **\*-equivalent** and write $s R* t$ if, and only if, for each input string $w$,
+>
+> $$\text{either both } N^*(s, w) \text{ and } N^*(t, w) \text{ are accepting state} \\[5pt] \text{or both are non-accepting states }$$
+
+In other words, states s and t are **\*-equivalent** if, and only if, for each input string $w$,
+
+$$
+N^*(s, w) \text{ is an accepting state } \Leftrightarrow N^*(t, w) \text{ is an accepting state}
+$$
+
+It follows immediately, that $R*$ is an equivalence relation on $S$, the set of states of $A$.
+
+### $k$-Equivalence of States
+
+From a procedural point of view, it is difficult to determine the \*-equivalence of two states using the definition directly. According to the definition, you must know the action of the automaton starting in states $s$ and $t$ on all input strings in order to tell whether $s$ and $t$ are equivalent. But since most languages have infinitely many input strings, you cannot check individually the effect of every string that is input to an automaton.
+
+> [!NOTE] **$k$-Equivalence**
+>
+> Let A be a finite-state automaton with next-state function N and eventual-state function $N*$. Define a relation on the set of states of $A$ as follows: Given any states $s$ and $t$ of $A$ and an integer $k \geq 0$, we say that $s$ is $k$-equivalent to $t$ and write $s R_k t$ if, and only if, for every input string $w$ of length less than or equal to $k$, either $N*(s, w)$ and $N*(t, w)$ are both accepting states or they are both non-accepting states.
+
+Certain useful facts follow quickly from the definition of $k$-equivalence:
+
+> [!TIP] **Properties of $k$-equivalences**
+>
+> - For each integer $k \geq 0$, $k$-equivalence is an equivalence relation.
+> - For each integer $k \geq 0$, the $k$-equivalence classes partition the set of all states of the automaton into a union of mutually disjoint subsets.
+> - For each integer $k \geq 1$, if two states are $k$-equivalent, then they are also $(k - 1)$ equivalent.
+> - For each integer $k \geq 1$, each $k$-equivalence class is a subset of a $(k - 1)$-equivalence class.
+> - Any two states that are $k$-equivalent for every integer $k \geq 0$ are \*-equivalent.
+
+The following theorem gives a recursive description of k-equivalence of states. It says, first, that any two states are $0$-equivalent if, and only if, either both are accepting states or both are non-accepting states and, second, that any two states are $k$-equivalent (for $k \geq 1$) if, and only if,
+
+- they are $(k - 1)$-equivalent and
+- for any input symbols their next-states are also $(k - 1)$-equivalent.
+
+> [!NOTE] **Recursive Definition of $k$-equivalence**
+>
+> Let $A$ be a finite-state automaton with next-state function $N$. Given any states $s$ and $t$ in $A$,
+>
+> 1.  $s$ is $0$-equivalent to $t$ $\Leftrightarrow$ $$\begin{bmatrix}\text{either } s \text{ and } t \text{ are both accepting states} \\ \text{or they are both non-accepting states}\end{bmatrix}$$
+> 2.  for every integer $k \geq 1$, $s$ is $k$-equivalent to $t$ $\Leftrightarrow$ $$\begin{bmatrix} s \text{ and } t \text{ are } (k - 1)-\text{equivalent, and} \\ \text{for any input symbol } m, N(s, m) \text{ and } \\ N(t, m) \text{ are also } (k - 1)-\text{equivalent}\end{bmatrix}$$
+
+### Finding the \*-Equivalence Classes
+
+The next theorem says that for some integer $K$, the set of \*-equivalence classes equals the set of $K$-equivalence classes.
+
+> [!NOTE] **K-Equivalence and \*-Equivalence**
+>
+> If $A$ is a finite-state automaton, then for some integer, $K \geq 0$, the set of $K$-equivalence classes of states of $A$ equals the set of $(K + 1)$-equivalence classes of states of $A$, and for all such $K$ these are both equal to the set of \*-equivalence classes of states of $A$.
+
+### The Quotient Automaton
+
+We next define the quotient automaton $\overline{A}$ of an automaton $A$. However, in order for all parts of the definition to make sense, we must make two observations.
+
+1. No \*-equivalence class of states of $A$ can contain both accepting and non-accepting states.
+2. If two states are \*-equivalent, then their next-states are also \*-equivalent for each input symbol $m$.
+
+> [!NOTE] **The Quotient Automaton**
+>
+> Let $A$ be a finite-state automaton with set of states $S$, set of input symbols $I$, and next-state function $N$. The quotient automaton $A$ is defined as follows:
+>
+> 1. The set of states, $S$, of $A$ is the set of \*-equivalence classes of states of $A$.
+> 2. The set of input symbols, $\overline{I}$, of $A$ equals $I$.
+> 3. The initial state of $\overline{A}$ is $[s_0]$, where $s_0$ is the initial state of $A$.
+> 4. The accepting states of $\overline{A}$ are the states of the form $[s]$, where s is an accepting state of $A$.
+> 5. The next-state function $\overline{N}: \overline{S} \times \overline{I} \rightarrow \ovelrine{S}$ is defined as follows:
+>
+> $$\text{For all states } [s] \text{ in } \overline{S} \text{ and input symbols } m \text{ in } I, \overline{N}([s], m) = [N(s, m)}$$
+
+By construction, a quotient automaton $\overline{A}$ accepts exactly the same strings as $A$.
+
+> [!NOTE] **Equivalence of the Quotient Automaton**
+>
+> If $A$ is a finite-state automaton, then the quotient automaton $A$ accepts exactly the same languages as $A$. In other words, if $L(A)$ denotes the language accepted by $A$ and $L(A)$ denotes the language accepted by $A$, then
+>
+> $$L(A) = L(\overline{A})$$
+
+### Equivalent Automata
+
+Two finite-state automata are called equivalent if they produce identical output signals for each input string. This implies that two finite-state automata are equivalent if, and only if, they accept the same language.
+
+> [!NOTE] **Equivalent Automata**
+>
+> Let $A$ and $A'$ be finite-state automata with the same set of input symbols $I$. Let $L(A)$ denote the language accepted by $A$ and $L(A')$ the language accepted by $A'$. Then $A$ is said to be equivalent to $A'$ if, and only if, $L(A) = L(A')$.
+
+In mathematics an object such as a finite-state automaton is called a structure. In general, when two mathematical structures are the same in all respects except for the labeling given to their elements, they are called **isomorphic**, which comes from the Greek words _isos_, meaning “same” or “equal,” and _morphe_, meaning “from.”
+
+It can be shown that two automata are equivalent if, and only if, their quotient automata are isomorphic, provided that “inaccessible states” have first been removed. Inaccessible states are those that cannot be reached by inputting any string of symbols to the automaton when it is in its initial state.
