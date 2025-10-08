@@ -19,6 +19,8 @@ W & W & h & W & W & W & h
 \end{matrix}
 $$
 
+This pattern is the way it is because it is the only way to perfectly combine the three most fundamental and stable intervals in all of music: **the Octave**, **the Perfect Fifth**, and **the Major Third**.
+
 ### $Do$ Major Scale
 
 Let's build a $Do$ Major Scale.
