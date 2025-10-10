@@ -751,6 +751,18 @@ On the following table we list some popular antiderivatives.
 >
 > Where we are relating the rate of change of $y$ with respect to $x$ to a concrete value, in this case the constant $2$.
 
+What does it mean to solve a differential equation? A **solution to a differential equation is a function for which the differential equation is satisfied**. The general solution is the form of any solution to the differential equation. For instance, the general solution to
+
+$$
+\frac{\delta y}{\delta x} = e^x
+$$
+
+is
+
+$$
+f(x) = e^x + C
+$$
+
 ### Graphing Antiderivatives
 
 Given the graph of $f$ we should be able to sketch the graph for the general antiderivate $F$. To sketch $F$ we follow the shape of $f$ and what it tells us:
