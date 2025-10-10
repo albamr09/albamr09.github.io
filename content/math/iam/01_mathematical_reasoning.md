@@ -165,3 +165,33 @@ The value assigned to the variable $x$ that makes $P(x)$ true and $Q(x)$ false i
 > [!TIP] **Necessary Condition**
 >
 > Also, if $P \Rightarrow Q$ is a true statement, we say that $Q$ is a necessary condition for $P$, meaning that $Q$ must be true in order for $P$ to be true.
+
+## Contrapositive and Converse
+
+### Contrapositive
+
+An alternative way to prove statements of the form $P \Rightarrow Q$ is to verify the statement $\lnot Q \Rightarrow \lnot P$. This would mean showing that whenever $Q$ is false then $P$ is false. Then it would follow that if $P$ is true, $Q$ could not be false (because $Q$ false implies $P$ false) and thus $Q$ is true. Another way to see this is to note that the statements $P \Rightarrow Q$ and $\lnot Q \Rightarrow \lnot P$ are logically equivalent.
+
+> [!NOTE] **Contrapositive**
+>
+> The statement $\lnot Q \Rightarrow \lnot P$ is called the **contrapositive** of the statement $P \Rightarrow Q$.
+
+### Converse
+
+> [!NOTE] **Converse**
+>
+> The statement $Q \Rightarrow P$ is called the **converse** of the statement $P \Rightarrow Q$.
+
+It is important to note that **an implication and its converse are NOT necessarily logically equivalent**. The truth of one does not imply the truth of the other.
+
+### Biconditional
+
+When a statement $P \Rightarrow Q$ and its converse $Q \Rightarrow P$ are both true, then $P$ and $Q$ are either both true or both false. Hence $P$ and $Q$ are logically equivalent.
+
+> [!NOTE] **Biconditional**
+>
+> Let $P$ and $Q$ be statements. The statement $P \Leftrightarrow Q$ is the statement $(P \Rightarrow Q) \land (Q \Rightarrow P)$. The symbol $\Leftrightarrow$ is called the **biconditional**.
+
+### Proof by Contradiction
+
+Recall that in order to prove an implication $P \Rightarrow Q$, we can prove its contrapositive $\lnot Q \Rightarrow \lnot P$ instead. Since $P$ is our hypothesis or premise and $Q$ is the conclusion that we wish to deduce from $P$, in effect what we are doing is assuming that our conclusion $Q$ is false and proving that our premise $P$ is false, thus getting a contradiction. The contradiction is that $P$ and $\lnot P$ cannot both be true. This approach is often called **proof by contradiction**.
