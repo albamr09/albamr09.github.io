@@ -19,7 +19,40 @@ W & W & h & W & W & W & h
 \end{matrix}
 $$
 
-This pattern is the way it is because it is the only way to perfectly combine the three most fundamental and stable intervals in all of music: **the Octave**, **the Perfect Fifth**, and **the Major Third**.
+### Mathematical Stability
+
+The previous pattern is the way it is because it is the only way to perfectly combine the three most fundamental and stable intervals in all of music: **the Octave**, **the Perfect Fifth**, and **the Major Third**.
+
+When you strike a piano key, it produces a frequency (a sound wave). When you strike two keys, your ear perceives the relationship between their two frequencies. **Consonance** (a pleasing, stable sound) happens when the frequencies are in simple, whole-number ratios.
+
+The most stable interval is the **Octave** ($Do$ to the next higher $Do$).
+
+- If the first $Do$ vibrates at 100Hz, the higher $Do$ vibrates at 200 Hz.
+- The 2:1 ratio is so simple that our brains perceive the two notes as fundamentally the same. The Octave is the boundary of the scale.
+
+The second most stable interval is the **Perfect Fifth** ($Do$ to $Sol$).
+
+- If $Do$ is 100Hz, $Sol$ is 150Hz.
+- The 3:2 ratio is what ancient Greek mathematicians like Pythagoras used to build the basis of music theory. This interval is so stable that it is the backbone of the scale.
+
+The third critical, stable ratio is the **Major Third** ($Do$ to $Mi$).
+
+- This interval (5:4) is the crucial mathematical relationship that gives the chord its bright, "major" quality.
+
+The Major Scale is essentially the collection of seven notes required to connect the C Major chord ($\mathbf{C}$, $\mathbf{E}$, $\mathbf{G}$) to the next **C** in the smoothest, most consonant way.
+
+If you start on the Tonic (I) and insist on placing the most stable notes (III, IV, V, VIII) in their correct positions, the pattern $W-W-H-W-W-W-H$ **is forced to emerge.**
+
+| Note  | Position in Scale | Why the Step is $\mathbf{W}$ or $\mathbf{H}$                                                                                                                                                  | Resulting Pattern        |
+| :---: | :---------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------- |
+| **C** |    $I$ (Tonic)    | The starting point.                                                                                                                                                                           | \-                       |
+| **D** |       $II$        | $W$ (Whole Step) is required for smooth connection.                                                                                                                                           | $\mathbf{W}$             |
+| **E** |       $III$       | **Must be a Major Third (stable** $5:4$ **ratio).** This placement _forces_ the steps from C to E to be $W-W$.                                                                                | $W-\mathbf{W}$           |
+| **F** |       $IV$        | **Must be a Perfect Fourth (stable** $4:3$ **ratio).** To maintain this highly consonant interval, the space between E and F must be the smallest possible step: a **Half Step**.             | $W-W-\mathbf{H}$         |
+| **G** |        $V$        | **Must be a Perfect Fifth (stable** $3:2$ **ratio).** This is the strongest support for the Tonic. The remaining distance from F must be $W$.                                                 | $W-W-H-\mathbf{W}$       |
+| **A** |       $VI$        | $W$ (Whole Step)                                                                                                                                                                              | $W-W-H-W-\mathbf{W}$     |
+| **B** |       $VII$       | $W$ (Whole Step)                                                                                                                                                                              | $W-W-H-W-W-\mathbf{W}$   |
+| **C** |      $VIII$       | **Must be the Octave (stable** $2:1$ **ratio).** This forces the seventh note (B) to be only a **Half Step** away, creating the necessary tension that pulls the ear to the final resolution. | $W-W-H-W-W-W-\mathbf{H}$ |
 
 ### $Do$ Major Scale
 
