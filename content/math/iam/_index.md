@@ -1,6 +1,6 @@
 ---
 title: An Introduction to Abstract Mathematics
-weight: 1
+weight: 2
 type: docs
 ---
 

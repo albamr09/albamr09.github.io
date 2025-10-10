@@ -127,3 +127,41 @@ The preceding truth table shows that the statement forms $\lnot(P \land Q)$ and 
 Sometimes a statement form will always be true no matter what statements are substituted for the variables. Such a statement form is called a **tautology**. A simple example is the statement form $P \lor \lnot P$.
 
 A statement form that is always false is called a **contradiction**. The statement form $P \land \lnot P$ is an example. A statement form is a contradiction if each of its truth table values is false.
+
+## Implications
+
+In the previous two sections, many of the statements we looked at took the form: "If ..., then ..." or "For all ..., if ..., then ...." The "if-then" part of such a statement is called an **implication**. The "if" part of the statement gives the premise or assumption that is made. The "then" part is the **conclusion** that is asserted to follow from the premise.
+
+> [!NOTE] **Implication**
+>
+> Let $P$ and $Q$ be statements. The **implication** $P \Rightarrow Q$ is the statement "If $P$ is true, then $Q$ is true".
+
+### Truth Table for an Implication
+
+The statement $P \Rightarrow Q$ simply means that in all circumstances under which $P$ is true, $Q$ is also true. Very loosely, whenever $P$ "happens," $Q$ also "happens". With this in mind, when would $P \Rightarrow Q$ be false? We would need $P$ to "happen" ($P$ true) and $Q$ not to "happen" ($Q$ false) . **This is the only case**.
+
+Seen another way, $P \Rightarrow Q$ can't be false (so must be true) if $P$ is false. Even if $P$ and $Q$ are both false the implication $P \Rightarrow Q$ is true. If $P$ is true, though, $Q$ must also be true for $P \Rightarrow Q$ to be true. The following table gives the truth values of the statement form $P \Rightarrow Q$.
+
+![Truth Table of an Implication](./assets/implication_truth_table.png)
+
+### Proving Statements Containing Implications
+
+Most often we will be interested in establishing the truth of (proving ) statements of the form $\forall x, P(x) \Rightarrow Q(x)$ where $P(x)$ and $Q(x)$ are open sentences. Since $P(x)$ and $Q(x)$ are not statements, the expression $P(x) \Rightarrow Q(x)$ is not a statement either. $P(x) \Rightarrow Q(x)$ is the open sentence in the variable $x$ that becomes the statement $P(a) \Rightarrow Q(a)$ when $x$ is assigned the value $a$. But recall that the expression $\forall x, P(x) \Rightarrow Q(x)$ is a statement because the variable $x$ has been quantified.
+
+Since, for an assigned value a of $x$, the statement $P(a) \Rightarrow Q(a)$ will always be true if $P(a)$ is false, we ne'ed not consider this case. Rather, we can assume that, if the variable $x$ is assigned a value $a$, then $P(a)$ is true and proceed from there to prove $Q(a)$. $P(a)$ is called the **hypothesis**, and $Q(a)$ the **conclusion**. We use a letter, in this case $a$, to denote the assigned value of the variable $x$ rather than give a specific value to $x$ like $0$ or $2$, since we must prove that $P(a) \Rightarrow Q(a)$ for every possible assigned value of $x$.
+
+### Negating an Implication: Counterexamples
+
+If $P$ and $Q$ are statement forms, then $\lnot (P \Rightarrow Q)$ is logically equivalent to $P \land \lor Q$. It follows then that if $P(x)$ and $Q(x)$ are open sentences, the negation of the statement "For all $x$, $P(x) \Rightarrow Q(x)$" is the statement "There exists $x$ such that $P(x) \land \lor Q(x)$".
+
+The value assigned to the variable $x$ that makes $P(x)$ true and $Q(x)$ false is called a **counterexample** to the statement "For all $x$, $P(x) \Rightarrow Q(x)$."
+
+### Necessary and Sufficient Conditions
+
+> [!TIP] **Sufficient Condition**
+>
+> Given statements $P$ and $Q$, the implication $P \Rightarrow Q$ means, as we have seen, that if $P$ is true, then $Q$ is true. We say then that $P$ is a sufficient condition for $Q$.
+
+> [!TIP] **Necessary Condition**
+>
+> Also, if $P \Rightarrow Q$ is a true statement, we say that $Q$ is a necessary condition for $P$, meaning that $Q$ must be true in order for $P$ to be true.

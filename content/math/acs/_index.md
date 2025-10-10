@@ -1,6 +1,6 @@
 ---
 title: Algebra for College Students
-weight: 2
+weight: 3
 type: docs
 ---
 
