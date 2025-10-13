@@ -94,3 +94,43 @@ We often want to determine if a given element is not in some set. We introduce t
 For convenience, if $U$ is a universal set, we will write $U - A = \bar{A}$, called simply the **complement of $A$**.
 
 We call a set with no elements **the empty set**, and we denote it $\emptyset$. Note that if $U$ is a universal set, then $\bar{U} = \emptyset$ and $\emptyset = \bar{U}$.
+
+## Combining Sets
+
+### Unions and Intersections
+
+It is possible to create new sets out of two or more given sets. The two most common ways of doing this are given in the following definition.
+
+> [!NOTE] **Union of Sets**
+>
+> Let $A$ and $B$ be sets. The **union of $A$ and $B$**, denoted $A \cup B$, is ${x | x \in A \lor x \in B}$.
+
+> [!NOTE] **Intersection of Sets**
+>
+> Let $A$ and $B$ be sets. The **intersection of $A$ and $B$**, denoted $A \cap B$, is ${x | x \in A \land x \in B}$.
+
+In order to visualize the union and intersection of sets, we often use the interiors of circles to represent a set. This type of representation is called a **Venn diagram**. Next we see the Venn diagrams for the union and intersection of two sets.
+
+![Venn Diagram](./assets/venn_diagram.png)
+
+It is clear from this picture that the order in which we write the union and intersection does not matter. In other words, for any sets $A$ and $B$, $A \cup B = B  \cup A$ and $A \cap B = B \cap A$.
+
+We list these properties of sets as well as some additional ones in the following proposition.
+
+> [!TIP] **Set Properties**
+>
+> The following statements are true for all sets $A$, $B$, and $C$.
+>
+> 1. $A \cup B = B \cup A$
+> 2. $A \cap B = B \cap A$
+> 3. $(A \cup B) \cup C = A \cup (B \cup C)$
+> 4. $(A \cap B) \cap C = A \cap (B \cap C)$
+> 5. $A \subseteq A \cup B$
+> 6. $A \cap B \subseteq A$
+> 7. $\emptyset \subseteq A$
+> 8. $A \cup \emptyset = A$
+> 9. $A \cap \emptyset = \emptyset$
+
+**Proof**: Properties $1$ through $4$ are clear from the appropriate Venn diagrams above. Similarly, Venn diagrams can be drawn to illustrate Properties $5$ and $6$.
+
+For $7$, a diagram is no help because we cannot draw the empty set. To prove that $\emptyset \subseteq A$, it is necessary to prove the statement $\forall x \in U P(x) \Rightarrow Q(x)$, where $P(x)$ is the open sentence "$x \in \emptyset$" and $Q(x)$ is the open sentence "$x \in A$." But for any choice of the variable $x$, the hypothesis $P(x)$ is false since $\emptyset$ contains no elements. Therefore, the implication $P(x) \Rightarrow Q(x)$ is always true. Hence $\emptyset \subseteq A$ for every set $A$.
