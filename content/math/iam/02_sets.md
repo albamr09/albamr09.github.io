@@ -91,9 +91,9 @@ We often want to determine if a given element is not in some set. We introduce t
 >
 > Let $A$, $B$ be sets. The **complement of $A$ in $B$**, denoted $B - A$, is $\\{b \in B | b \notin A\\}$.
 
-For convenience, if $U$ is a universal set, we will write $U - A = \bar{A}$, called simply the **complement of $A$**.
+For convenience, if $U$ is a universal set, we will write $U - A = \overline{A}$, called simply the **complement of $A$**.
 
-We call a set with no elements **the empty set**, and we denote it $\emptyset$. Note that if $U$ is a universal set, then $\bar{U} = \emptyset$ and $\emptyset = \bar{U}$.
+We call a set with no elements **the empty set**, and we denote it $\emptyset$. Note that if $U$ is a universal set, then $\overline{U} = \emptyset$ and $\emptyset = \overline{U}$.
 
 ## Combining Sets
 
@@ -134,3 +134,62 @@ We list these properties of sets as well as some additional ones in the followin
 **Proof**: Properties $1$ through $4$ are clear from the appropriate Venn diagrams above. Similarly, Venn diagrams can be drawn to illustrate Properties $5$ and $6$.
 
 For $7$, a diagram is no help because we cannot draw the empty set. To prove that $\emptyset \subseteq A$, it is necessary to prove the statement $\forall x \in U P(x) \Rightarrow Q(x)$, where $P(x)$ is the open sentence "$x \in \emptyset$" and $Q(x)$ is the open sentence "$x \in A$." But for any choice of the variable $x$, the hypothesis $P(x)$ is false since $\emptyset$ contains no elements. Therefore, the implication $P(x) \Rightarrow Q(x)$ is always true. Hence $\emptyset \subseteq A$ for every set $A$.
+
+> [!TIP] **Intersection and Unions Properties**
+>
+> Let $A$, $B$, and $C$ be sets. Then
+>
+> $$A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$$
+>
+> $$A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$$
+
+**Proof**: Let $x \in A \cap (B \cup C)$. Then $x \in A$ and $x \in B \cup C$, so $x \in B$ or $x \in C$.
+
+If $x \in B$, then since we know that $x \in A$, we have $x \in A \cap B$. Also we know that $A \cap B \subseteq (A \cap B) \caup (A \cap C)$ by Property 5, so $x \in (A \cap B) \cup (A \cap C)$.
+
+Similarly, if $x \in C$, we have that $x \in A \cap C$. And thus $x \in (A \cap B) \cup (A \cap C)$.
+
+We have therefore shown that $A \cap (B \cup C) \subseteq (A \cap B) \cup (A \cap C)$.
+
+To establish the reverse, let $x \in (A \cap B) \cup (A \cap C)$. Then $x \in A \cap B$ or $x \in A \cap C$.
+
+In the former case, we have $x \in A$ and $x \in B$, but since $B \subseteq B \cup C$, $x \in B \cup C$, so $x \in A \cap (B \cup C)$.
+
+A similar argument works in the latter case, so in either case we have $x \in A \cap (B \cup C)$.
+
+Therefore $(A \cap B) \cup (A \cup C) \subseteq A \cap (B \cup C)$.
+
+We have now proven that $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$.
+
+### DeMorgan's Laws
+
+> [!NOTE] **DeMorgan's Laws**
+>
+> Let $A$ and $B$ be sets contained in some universal set $U$. Then
+>
+> $$\overline{A \cup B} = \overline{A} \cap \overline{B}$$
+>
+> $$\overline{A \cap B} = \overline{A} \cup \overline{B}$$
+
+**Proof**. We need to show:
+
+1. $\overline{A \cup B} \subseteq \overline{A} \cap \overline{B}$
+2. $\overline{A} \cap \overline{B} \subseteq \overline{A \cup B}$
+
+To show that $\overline{A \cup B} \subseteq \overline{A} \cap \ovelrine {B}$ we start by letting $x \in \overline{A \cup B}$. This means that $x$ is not in $A \cup B$, so $x$ cannot be in either $A$ or $B$. Thus $x$ is not in $A$ and $x$ is not in $B$. Hence $x \in \overline{A}$ and $x \in \overline{B}$, or equivalently $x \in \overline{A} \cap \overline{B}$. This proves that $\overline{A \cup B} \subseteq \overline{A} \cup \overline{B}$.
+
+Conversely, let $x \in \overline{A} \cap \overline{B}$. Then $x \in \overline{A}$ and $x \in \overline{B}$, or equivalently $x \notin A$ and $x \notin B$. So $x$ is not in either $A$ or $B$, or in other words $x \notin A \cup B$. Hence $x \in \overline{A \cup B}$. Thus $\overline{A} \cap \overline{B} \subseteq \overline{A \cup B}$.
+
+It follows that $\overline{A \cup B} = \overline{A} \cap \overline{B}$.
+
+### Cartesian Products
+
+We now define a set that is the "product" of two sets in a very satisfactory way.
+
+> [!NOTE] **Cartesian Product**
+>
+> Let $A$ and $B$ be sets. The **Cartesian product** of $A$ and $B$, written $A \times B$ is
+>
+> $$\{(a, b) | a \in A \text{ and } b \in B\}$$
+
+Informally, $A \times B$ is a set of pairs of objects. The first object is chosen from $A$ and the second from $B$. Notice that we distinguish the order (these are commonly called **ordered pairs**).
