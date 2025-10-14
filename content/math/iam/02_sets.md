@@ -193,3 +193,87 @@ We now define a set that is the "product" of two sets in a very satisfactory way
 > $$\{(a, b) | a \in A \text{ and } b \in B\}$$
 
 Informally, $A \times B$ is a set of pairs of objects. The first object is chosen from $A$ and the second from $B$. Notice that we distinguish the order (these are commonly called **ordered pairs**).
+
+## Collection of Sets
+
+In this section we consider sets whose elements are themselves sets. For example, we could consider the collection of all sets of integers that contain the integer $1$. Such a collection, let's call it $S$, could be expressed in the following way: $S = \\{A \subseteq Z | 1 \in A\\}$. $S$ is a set whose elements are sets, specifically, sets of integers.
+
+### Power Set
+
+An important example of a set of sets is the power set of a setas follows:
+
+> [!NOTE] **Power Set**
+>
+> Let $A$ be a set. The **power set** of $A$, written $\mathcal{P}(A)$, is
+>
+> $$\{X | X \subseteq A\}$$
+
+The power set of $A$, then, is the set of all subsets of $A$. The elements of $\mathcal{P}(A)$ are themselves sets of elements of $A$.
+
+### Indexing Sets
+
+Suppose that we have a finite number of sets, $A_1, A_2, \cdots, A_n$, all contained in some universal set $U$. The collection of such sets would be written $\\{A_1, A_2, \cdots, A_n\\}$. The subscripts that are used to distinguish the sets in this collection form what is called the **indexing set** for the collection. If we denote this indexing set by $I$, then $I = \\{1, 2, \cdots, n\\}$ and this collection can be written $\\{A_i | i \in I\\}$.
+
+Suppose that we wanted to talk about the union of the sets in this collection. This would be the set $A_1 \cup A_2 \cup \cdots A_n = \\{x \in U | x \in A_i \text{ for some } i = 1, 2, \cdots n\\}$. A shorthand notation for this union is $\cup_{i=1}^n A_i$.
+
+> [!TIP] **Union of a Collection**
+>
+> Let $I$ be a set, and $\\{A_i | i \in I\\}$ a collection of sets. The **union** of the collection, denoted $\cup_{i \in I} A_i$ is
+>
+> $$\{a | a \in A_i, \text{ for some } i \in I\}$$
+
+> [!TIP] **Intersection of a Collection**
+>
+> Let $I$ be a set, and $\\{A_i | i \in I\\}$ a collection of sets. The **intersection** of the collection, denoted $\cap_{i \in I} A_i$ is
+>
+> $$\{a | a \in A_i, \text{ for all } i \in I\}$$
+
+Sometimes we may wish to discuss a collection of sets without actually specifying a particular indexing set. We may simply say: let $S$ be a collection of sets, and to denote the union and intersection we write $\cup_{A \in S} A$ and $\cap_{A \in S} A$.
+
+An example of this notation appears next in the definition of **partition**.
+
+### Partitions
+
+> [!NOTE] **Partition**
+>
+> Let $A$ be a set. A **partition** of $A$ is a subset $P$ of $\mathcal{P}(A)$ such that:
+>
+> 1. if $X \in P$ then $X \neq \emptyset$
+> 2. $\cup_{X \in P} X = A$
+> 3. if $X, Y \in P$ and $X \neq Y$, then $X \cap Y = \emptyset$
+
+That is, a partition of a set divides the set into different nonempty subsets so that every element of the set is in one of the subsets and no element is in more than one.
+
+### The Pigeonhole Principle
+
+Recall that if $A$ is a finite set, then $|A|$, the cardinality of $A$, is the number of elements in $A$. The following result, that the cardinality of the union of two finite disjoint sets is the sum of the cardinalities of the two sets, may seem obvious , as it should, but a rigorous proof requires a more formal definition of what it means for a set to be finite than we have presented here, so we simply state the result.
+
+> [!TIP] **Cardinality of the Union of two Disjoint Sets**
+>
+> Let $A$ and $B$ be finite disjoint sets. Then
+>
+> $$|A \cup B| = |A| + |B|$$
+
+The following corollary is an extension of the previous theorem.
+
+> [!TIP] **Cardinality of the Union of $n$ Disjoint Sets**
+>
+> Let $A_1, A_2, \cdots, A_n$ be a collection of finite mutually disjoint sets. Then
+>
+> $$|\cup_{i = 1}^n A_i| = \sum_{i=1}^n |A_i|$$
+
+> [!TIP] **Cardinality of the Union of two Sets**
+>
+> Let $A$ and $B$ be finite sets. Then
+>
+> $$|A \cup B| = |A| + |B| - |A \cap B|$$
+
+We can now discuss the **Pigeonhole Principle**. In its simplest form, the Pigeonhole Principle says that if $n$ objects are placed in $k$ containers and $n > k$, then at least one container will have more than one object in it.
+
+Let $A_1, A_2, \cdots, A_n$ be a collection of finite mutually disjoint sets. Let $A = \cup_{i = 1}^n A_i$. If $|A| = k$ and $k > n$, then, for some $i$, $|A_i| \geq 2$.
+
+A generalization of the Pigeonhole Principle is the following theorem.
+
+> [!TIP] **Generation of the Pigeonhole Principle**
+>
+> Let $A_1, A_2, \cdots, A_n$ be a collection of finite mutually disjoint sets. Let $A = \cup_{i=1}^n A_i$. Suppose that $|A| > nr$ for some positive integer $r$. Then, for some $i$, $|A_i| \geq r + 1$.
