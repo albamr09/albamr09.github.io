@@ -790,3 +790,105 @@ Therefore:
 
 1. The **velocity function is the antiderivative for the acceleration function**.
 2. The **position function is the antiderivative for the velocity function**.
+
+### Numerical Approximations
+
+Calculus provides us with the powerful definite integral, $\int_{a}^{b} f(x) dx$, which geometrically represents the exact area under a curve.
+
+While the Fundamental Theorem of Calculus (FTC) gives us an exact solution, it relies on being able to find an antiderivative $F(x)$ for the function $f(x)$. For many functions, especially those encountered in real-world data or complex models, finding an explicit antiderivative is impossible or extremely difficult.
+
+This is where **Riemann Sums, the Trapezoid Rule, and Simpson's Rule** come in. These are all methods of numerical approximation (or numerical integration), which means they calculate the definite integral using arithmetic, not by finding an antiderivative. They break the complex shape (the area under the curve) into simpler, measurable geometric shapes (rectangles, trapezoids, or parabolic segments) to get a result that is close to the true value.
+
+Similarly, in **Differential Equations (DEs)**, we seek the unknown function $y(x)$ that satisfies the diferential equation. As many DEs are too complex to solve analytically (with exact formulas), we use numerical methods for ODEs. This is the role of **Euler's Method**. It's a numerical technique that approximates the solution function y(x)
+
+#### Riemann Sum
+
+Riemann sums are a method for approximating the area under a curve (a definite integral) by dividing the area into a large number of simple shapes, usually rectangles, and summing their areas.
+
+To do so we would divide the interval $[a,b]$ into n subintervals of equal width, $\Delta x = \frac{b -a }{n}$. In each subinterval, construct a rectangle whose height is determined by the function's value at a specific point within that subinterval.
+
+The area would be computed as:
+
+$$
+\text{Area} \approx \sum_{i=1}^n f(x_i^*)\Delta x
+$$
+
+where $x_i^*$ is the chosen sample point (e.g., left endpoint, right endpoint, midpoint) in the $i$-th subinterval.
+
+![Riemann Sum, Midpoint Rule](./assets/riemann_sum_midpoint_rule.png)
+
+![Riemann Sum, Lefthand Rule](./assets/riemann_sum_lefthand_rule.png)
+
+#### Trapezoid Rule
+
+The Trapezoid Rule is an alternative to Riemann sums that usually provides a more accurate approximation for the definite integral. Instead of using rectangles (constant height), the area under the curve is approximated by dividing it into trapezoids. This means connecting the function values $f(x_i)$ and $f(x_{i + 1})$ with a straight line across each subinterval $\Delta x$.
+
+Given that the area of a trapezoid with height $h$ and parallel sides $b_1$ and $b_2$ is
+
+$$
+\frac{1}{2} h(b_1 + b_2).
+$$
+
+Here $h = \Delta x$ and the bases are $f(x_i)$ and $f(x_{i + 1})$. Thus the area under the curve would be approximated as:
+
+$$
+\int_{a}^{b} f(x) dx \approx \frac{\Delta x}{2} [f(x_0) + 2f(x_1) + 2f(x_2) + \cdots 2f(x_{n - 1}) + f(x_n)]
+$$
+
+where $\Delta x = \frac{b - a}{n}$.
+
+![Trapezoidal Rule](./assets/trapezoidal_rule.png)
+
+#### Simpson's Rule
+
+Simpson's Rule offers an even higher degree of accuracy by approximating the curve with **parabolas** (second-degree polynomials) instead of straight lines or constants. Instead of straight lines, the curve is approximated by quadratic functions over pairs of subintervals.
+
+Then the area under the curve would be approximated as:
+
+$$
+\int_{a}^{b} f(x) dx \approx \frac{\Delta x}{3} [f(x_0) + 4f(x_1) + 2f(x_2) + 4f(x_3) + \cdots + 4f(x_{n - 1}) + f(x_n)]
+$$
+
+where $\Delta x = \frac{b - a}{n}$
+
+![Trapezoidal Rule](./assets/simpsons_rule.png)
+
+#### Euler's Method
+
+To solve a differential equation means to find the unknown function $y(x)$ (or whatever the dependent variable is) that satisfies the equation. For example, for the differential equation
+
+$$
+\frac{dy}{dx} = 2x
+$$
+
+The general solution is found by integrating $y(x)$
+
+$$
+y(x) = x^2 + C
+$$
+
+If the initial condition is $y(0) = 5$, then the particular solution is
+
+$$
+y(x) = x^2 + 5
+$$
+
+Euler's method is a numerical technique used to **approximate the solution to a first-order ordinary differential equation (ODE)** with a given initial condition. It's often called the tangent line method.
+
+We have an ODE of the form $\frac{dy}{dx} = f(x, y)$ and an initial point $(x_0, y_0)$, and we want to estimate the value of $y$ at subsequent $x$ values.
+
+The idea is to use the DE to find the slope ($\frac{dy}{dx}$) at our current point. We then assume this slope remains constant over a small distance (the step size, $h$) and use the tangent line to predict the next point.
+
+![Euler's Method](./assets/eulers_method_explanation.png)
+
+Thus we start at a point $(x_i, y_i)$, and the next point $(x_{i + 1}, y_{i + 1})$ is calculated as:
+
+$$
+x_{i + 1} = x_i + h
+$$
+
+$$
+y_{i + 1} = y_i + h \cdot f(x_i, y_i)
+$$
+
+![Euler's Method](./assets/eulers_method.png)
