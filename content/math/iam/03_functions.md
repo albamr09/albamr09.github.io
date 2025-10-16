@@ -122,3 +122,39 @@ We can now conclude that $f^{-1}(W \cup Z) = f^{-1}(W) \cup f^{-1}(Z)$.
 **Proof**
 
 Let $A = {a_1, a_2, \cdots, a_n}$. Then the image of $f$ consists of the distinct elements from among $f(a_1), f(a_2), \cdots, f(a_n)$. Hence $\text{Im } f$ is a finite set with at most $n$ elements.
+
+## Surjective and Injective Functions
+
+### Surjective Functions
+
+> [!NOTE] **Surjective Function**
+>
+> Let $f: A \rightarrow B$ be a function. Then $f$ is **surjective** (or a **surjection**) if, the image of $[$ equals the codomain of $f$.
+
+In the diagram following the definition of a function, if $f: A \rightarrow B$ is surjective, the two ovals representing 1m [ and B would coincide. This leads many text authors (and many mathematicians) to use the word **onto** instead of surjective.
+
+Proving that a function $[$ is surjective, then, entails proving that two sets are equal.
+
+### Injective Functions
+
+> [!NOTE] **Injective Function**
+>
+> Let $f: A \rightarrow B$ be a function. Then $f$ is **injective** (or an **injection**) if whenever $a_1, a_2 \in A$ and $a_1 \neq a_2$, we have $f(a_1) \neq f(a_2)$.
+
+![Injective Function](./assets/injective_function.png)
+
+The accompanying diagram suggests the phrase **one-to-one**. As "onto" is used for surjective, this terminology is often used for injective.
+
+A proof that a function $f$ is injective usually should be done as follows. Let $a_1, a_2 \in A$, where $A$ is the domain of the function, and assume $f(a_1) = f(a_2)$. Starting with this assumption, then prove that $a_1 = a_2$.
+
+To prove that a function is not injective, we must resort to the negation of the definition. It follows that a function $f$ is not injective if $\exists a_1, a_2 \in A \text{ such that } a_1 \neq a_2 and f(a_1) = f(a_2)$. Note that this formulation fits our understanding of what it means for a function to be "not injective"; namely, $f$ maps two distinct elements of $A$ to the same element of $B$.
+
+### Bijective Functions
+
+> [!NOTE] **Bijective Function**
+>
+> A function that is both injective and surjectie is called **bijective** or a **bijection**.
+
+> [!NOTE] **Permutation**
+>
+> Let $A$ be any set. A bijection $f: A \rightarrow A$ is called a **permutation** of $A$.
