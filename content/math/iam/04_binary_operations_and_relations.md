@@ -100,7 +100,7 @@ As we mentioned before, we want to generalize equality and view two elements rel
 
 > [!NOTE] **Equivalence Class**
 >
-> If $R$ is an equivalence relation on $A$, and $a \in A$, the set $[a] = \{{x \in A | x \sim a\}}$ is called the **equivalence class** of $a$. Elements of the same class are said to be **equivalent**.
+> If $R$ is an equivalence relation on $A$, and $a \in A$, the set $[a] = \{\{x \in A | x \sim a\}\}$ is called the **equivalence class** of $a$. Elements of the same class are said to be **equivalent**.
 
 You may have sensed that an equivalence relation divides the set in question into classes; we have distinct collections of Cubs fans, of Dodgers fans, and so on. In fact, the set of baseball fans is partitioned into sets with allegiance to different teams, as the following theorem shows.
 
