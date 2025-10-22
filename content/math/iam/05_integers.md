@@ -145,3 +145,137 @@ Now since $x \neq 0$, $x \geq 1$. Multiplying both sides of the inequality $a > 
 If $- a \in \mathbb{Z}^+$, a similar proof shows that $a = - 1$. It now follows that if a has a multiplicative inverse in $\mathbb{Z}$, then $a = \pm 1$.
 
 Conversely, if $a = \pm 1$, then $a$ has a multiplicative inverse in $\mathbb{Z}$ since $(1)(1) = 1$ and $(-1)(- 1) = 1$.
+
+## Induction
+
+### Induction: A Method of Proof
+
+Induction is a method for proving statements about the positive integers. Let $P(n)$ be such a statement. $P(n)$ may be a formula, such as "the sum of the first $n$ positive integers is $n(n + 1)/2$" or "the sum of the first $n$ odd positive integers is a perfect square."
+
+The purpose of an induction proof is to show that a statement $P(n)$ is true for every positive integer $n$. The first step is to verify that $P(1)$ is true; that is, that the statement is true when $n = 1$. Once $P(1)$ is established to be true, we want to verify $P(2)$, $P(3)$, $P(4)$, and so on. Since there are an infinite number of these statements, they cannot all be verified separately.
+
+In an induction proof, we show that, given a positive integer $k$ for which $P(k)$ is true, it follows that the statement $P(k + 1)$ is true.
+
+Thus in an induction proof, there are two steps required: first, prove that $P(1)$ is true; and second, assuming $P(k)$ is true for a positive integer $k$, prove that $P(k + 1)$ is true.
+
+What follows is a formal proof of the induction principle, called the First Principle of Mathematical Induction.
+
+> [!NOTE] **First Principle of Mathematical Indcution**
+>
+> Let $P(n)$ be a statement about the positive integer $n$. Suppose that
+>
+> 1. $P(1)$ is true
+> 2. Whenever $k$ is a positive integer for which $P(k)$ is true, then $P(k + 1)$ is also true.
+>
+> Then $P(n)$ is true for every positive integer $n$.
+
+The assumption that $P(k)$ is true in condition 2 is called the **induction hypothesis**.
+
+**Proof**
+
+Let $S$ be the set of all positive integers for which $P(n)$ is false. If we can show that $S = \emptyset$, it will follow that $P(n)$ is true for all positive integers $n$. We will assume that $S \neq \emptyset$ and derive a contradiction.
+
+Since $S \neq \emptyset$, by the [Well-Ordering Principle](#the-well-ordering-principle), $S$ has a smallest element. Call it $k_0$. Now $1$ is not in $S$ since $P(1)$ is true, so $k_0 > 1$. Therefore $k_0 - 1$ is a positive integer and is not in $S$ by the choice of $k_0$ as the smallest element of $S$. Therefore $P(k_0 - 1)$ is true. But then by condition 2, $P(k_0 - 1 + 1) = P(k_0)$ is true. But $P(k_0)$ must be false since $k_0$ is in $S$.
+
+This gives us our contradiction and so $S = \emptyset$.
+
+### Some Other Forms of Induction
+
+Sometimes a statement $P(n)$ may be true not for all positive integers $n$ but rather for all integers beyond a certain point, say for all integers $n > 5$.
+
+> [!NOTE] **First Principle of Mathematical Induction, Modified Form**
+>
+> Let $P(n)$ be a statement about the integer $n$. Suppose there is an integer $n_0$ such that
+>
+> 1. $P(n_0)$ is true.
+> 2. Whenever $k \geq n_0$ is an integer for which $P(k)$ is true, then $P(k + 1)$ is also true.
+>
+> Then $P(n)$ is true for every integer $n \geq n_0$.
+
+Sometimes, in order to do a proof by induction, it is necessary to modify the induction hypothesis and assume more than just that $P(k)$ is true for a given $k$ but rather that $P(i)$ is true for all positive integers $i \leq k$ and then prove that $P(k + 1)$ is true. This stronger induction hypothesis is still sufficient to prove that $P(n)$ is true for all positive integers $n$.
+
+> [!NOTE] **Second Principle of Mathematical Induction**
+>
+> Let $P(n)$ be a statement about the positive integer $n$. Suppose that
+>
+> 1. $P(1)$ is true.
+> 2. If $k \in \mathbb{Z}^+$ and $P(i)$ is true for every positive integer $i \leq k$, then $P(k + 1)$ is true.
+>
+> Then $P(n)$ is true for every positive integer $n$.
+
+The Principle of Induction is often stated in the language of sets. The theorem that follows is a restatement of the First Principle of Mathematical Induction in set theory language. The other forms of induction may be restated in a similar way.
+
+> [!NOTE] **Theorem 5.2.4**
+>
+> Let $S$ be a subset of $\mathbb{Z}^+$. Suppose that
+>
+> 1. $1 \in S$
+> 2. If $k$ is a positive integer for which $k \in S$, then $k + 1 \in S$.
+>
+> Then $S = \mathbb{Z}^+$
+
+### The Binomial Theorem
+
+An important application of mathematical induction is the Binomial Theorem.
+
+> [!NOTE] **The Binomial Theorem**
+>
+> Let $n \in \mathbb{Z}^+$ and $r \in \mathbb{Z}$ such that $0 \leq r \leq n$. The **binomial coefficient** $binom{n}{r}$ is defined as
+>
+> $$\binom{n}{r} = \frac{n!}{r!(n - r)!}$$
+
+> [!NOTE] **Theorem 5.2.7**
+>
+> Let $a, b \in \mathbb{Z}$ and let $n \in \mathbb{Z}^+$. Then
+>
+> $$(a + b)^n = \sum_{k=0}^n \binom{n}{k} a^{n - k} b^k$$
+
+**Proof**
+
+We'll assume $a$ and $b$ are given and that, for each $n \in \mathbb{Z}^+$, $P(n)$ is the statement $(a + b)^n = \sum_{k=0}^n \binom{n}{k} a^{n - k}b^k$.
+
+It is easy to see that $P(1)$ is true. Now suppose that $n$ is a given positive integer and that $P(n)$ is true. We will prove that $P(n + 1)$ is true.
+
+$$
+(a + b)^{n + 1} = (a + b)(a + b)^n
+$$
+
+$$
+= a(a + b)^n + b(a + b)^n
+$$
+
+$$
+= a \left[\sum_{k = 0}^n \binom{n}{k} a^{n - k}b^k\right] + b\left[\sum_{k = 0}^n \binom{n}{k} a^{n - k}b^k\right]
+$$
+
+$$
+= \sum_{k = 0}^n \binom{n}{k} a^{n + 1 - k}b^k + \sum_{k = 0}^n \binom{n}{k} a^{n - k}b^{k + 1}
+$$
+
+$$
+= a^{n + 1}\sum_{k = 1}^n \binom{n}{k} a^{n + 1 - k}b^k + \sum_{k = 0}^{n - 1} \binom{n}{k} a^{n - k}b^{k + 1} + b^{n + 1}
+$$
+
+Now by a change of index, we can write
+
+$$
+\sum_{k = 0}^{n - 1} \binom{n}{k} a^{n - k}b^{k + 1} = \sum_{k = 1}^n \binom{n}{k - 1} a^{n + 1 - k}b^{k}
+$$
+
+Hence we have
+
+$$
+= a^{n + 1}\sum_{k = 1}^n \left[\binom{n}{k} + \binom{n}{k - 1}\right] a^{n + 1 - k}b^k + b^{n + 1}
+$$
+
+$$
+= a^{n + 1}\sum_{k = 1}^n \binom{n + 1}{k} a^{n + 1 - k}b^k + b^{n + 1}
+$$
+
+$$
+= \sum_{k = 0}^{n + 1} \binom{n + 1}{k} a^{n + 1 - k}b^k
+$$
+
+This proves $P(n + 1)$ and by induction it follows that $P(n)$ is true for all positive integers $n$.
+
+The Binomial Theorem is also true when $a$ and $b$ are real numbers. The reason is that the axioms of addition and multiplication that hold in $\mathbb{Z}$ (Axioms 1-8) also hold in $\mathbb{R}$.
