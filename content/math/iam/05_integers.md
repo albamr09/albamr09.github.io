@@ -28,7 +28,7 @@ Our starting point will be the familiar properties of addition and multiplicatio
 
 We do not prove these properties of $\mathbb{Z}$; rather we take them as **axioms**: statements we assume to be true about the integers.
 
-Note that $0$ is the only additive identity of $\mathbb{Z]$ and that $1$ is the only multiplicative identity.
+Note that $0$ is the only additive identity of $\mathbb{Z}$ and that $1$ is the only multiplicative identity.
 
 Note also that no mention is made in these properties of inverses with respect to multiplication. The reason as we have noted, is that only $1$ and $-1$ have multiplicative inverses in the set of integers.
 
