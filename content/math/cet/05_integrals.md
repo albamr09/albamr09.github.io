@@ -100,3 +100,84 @@ d = \lim_{n \to \infty} \sum_{i=1}^n \Delta t f(t_{i - 1}) = \lim_{n \to \infty}
 $$
 
 Because the previous equation has the same form as our expressions for the area under a region $S$, it follows that the distance traveled is equal to the area under the graph of the velocity function.
+
+## The Definite Integral
+
+> [!NOTE] **Definite Integral**
+>
+> If $f$ is a function defined for $a \leq x \leq b$, we divide the interval $[a, b]$ into $n$ subintervals of equal width $\Delta x = \frac{b - a}{n}$. We let
+>
+> - $x_0 (=a), x_1, x_2, \cdots, x_n(=b)$ be the endpoints of these subintervals and
+> - $x_1^\*, x_2^\*, \cdots, x_n^\*$ be any **sample points** in these subintervals, so $x_i^*$ lies in the $i$th subinterval $[x_{i-1}, x_i]$.
+>
+> Then the **definite integral of $f$ from $a$ to $b$** is
+>
+> $$\int_{a}^b f(x) dx = \lim_{n \to \infty} \sum_{i=1}^n f(x_i^*) \Delta x$$
+>
+> provided that this limit exists and gives the same value for all possible choices of sample points. If it does exist, we say that $f$ is **integrable** on $[a, b]$.
+
+The precise meaning of the limit for the definite integral is as follows:
+
+> For every number $\epsilon > 0$, there is an integer $N$ such that
+>
+> $$|\int_{a}^b f(x) dx - \sum_{i=1}^{n} f(x_i^*) \Delta x| < \epsilon$$
+>
+> for every integer $n > N$ and for every choice of $x_i^*$ in $[x_{i - 1}, x_i]$.
+
+This follows from the [definition of limits on the infinite](/math/cet/02_limits/#precise-definition-of-a-limit-at-infinity).
+
+> [!TIP] **Integral Notation**
+>
+> The symbol $\int$ was introduced by [Leibniz](https://wikipedia.org/wiki/Gottfried_Leibniz) and is called an **integral sign**. It was chosen becase an integral is a limit of sums.
+>
+> In the notation $\int_a^b f(x) dx$, $f(x)$ is called the **integrand** and $a$ and $b$ are called the **limits of integration**, where $a$ is the **lower limit** and $b$ is the **upper limit**. While the $dx$ simply indicates that the independent variable is $x$.
+>
+> The procedure of calculating an integral is called **integration**.
+
+**Note** that the definite integral $\int_a^b f(x) dx$ is a number, that is, it does not depend on $x$. In fact we could use any letter in place of $x$ without changin the value of the integral.
+
+**Also note** that the sum
+
+$$
+\sum_{i = 1}^n f(x_i^*) \Delta x
+$$
+
+is called a **Riemann sum** after the German mathematician [Berhard Riemann](https://wikipedia.org/wiki/Bernhard_Riemann). So the Definition of a Definite Integral says that the definite integral of an integrable function ca be approximated to within any desired degree of accuracy by a Riemann sum.
+
+We know that if $f$ happes to be positive, then the Riemann sum can be interpreted as the sum of areas of approximating rectangles (see Figure 1).
+
+![Riemann Sum](./assets/riemann_sum.png)
+
+If $f$ takes on both positive and negative values, as in Figure 3, then the Riemann sum is the sum of the areas of the rectangles that lie above the $x$-axis and the negatives of the areas of the rectangles that lie below the $x$-axis.
+
+![Riemann Sum](./assets/riemann_sum_negative.png)
+
+So, a definite integral can be interpreted as a **net area**, that is, a difference of areas:
+
+$$
+\int_a^b f(x) dx = A_1 - A_2
+$$
+
+where $A_1$ is the area of the region above the $x$-axis and below the graph of $f$, and $A_2$ is the area of the region below the $x$-axis and above the graph of $f$.
+
+Although we have defined $\int_a^b f(x) dx$ by dividing $[a, b]$ into subintervals of equal width, there are situations in which it is advantageous to work with subintervals of unequal width. If the subinterval widths are $\Delta x_1, \Delta x_2, \cdots, \Delta x_n$ we have to ensure that all these widths approach $0$ in the limiting process.
+
+This happens if the largest width, $\max \Delta x_i$, approaches $0$. **Why?** For the limit of the sums of rectangle areas to converge to the value of the integral, **we need the rectangles to be arbitrarily thin**. Imagine some subintervals stay wide, then the sum does not approximate necessarily the real area (the value of the integral). Because in this case, **a wide subinterval might enclose great variations on $f(x)$**, and so the rectangle defined by this subinterval does not "represent" $f(x)$ well enough. So the following must hold:
+
+$$
+\max_i \Delta x_i \to 0
+$$
+
+That is, the width of the widest subinterval tends to zero.
+
+So in this case the definition of a definite integral becomes
+
+$$
+\int_{a}^b f(x) dx = \lim_{\max \Delta x_i \to 0} \sum_{i = 1}^n f(x_i^*) \Delta x_i
+$$
+
+We have defined the definite integral for an integrable function, but not all functions are integrable.
+
+> [!TIP] **Condition for Integrability**
+>
+> If $f$ is continuous on $[a, b]$ or if $f$ has only a finite number of jump discontinuities, then $f$ is integrable on $[a, b]$; that is the definite integral $\int_a^b f(x) dx$ exists.
