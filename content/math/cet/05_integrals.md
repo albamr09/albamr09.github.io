@@ -103,6 +103,8 @@ Because the previous equation has the same form as our expressions for the area 
 
 ## The Definite Integral
 
+### Definite Integrals
+
 > [!NOTE] **Definite Integral**
 >
 > If $f$ is a function defined for $a \leq x \leq b$, we divide the interval $[a, b]$ into $n$ subintervals of equal width $\Delta x = \frac{b - a}{n}$. We let
@@ -181,3 +183,78 @@ We have defined the definite integral for an integrable function, but not all fu
 > [!TIP] **Condition for Integrability**
 >
 > If $f$ is continuous on $[a, b]$ or if $f$ has only a finite number of jump discontinuities, then $f$ is integrable on $[a, b]$; that is the definite integral $\int_a^b f(x) dx$ exists.
+
+**Why does $f$ is said to be integrable under such conditions?**
+
+Let's start by with **the condition of $f$ being continuous**. If $f$ is continuous, on very small subintervals (we know the subintervals tend to width zero) then $f$ does not "change abruptly". Thus any sample point $x_i^\*$ on that subinterval will resolve to a height of $f(x_i^*)$, which will be very similar to all the other possible heights for any other sample point on the subinterval.
+
+Thus the rectangles on the Riemann sums will be very similar for any arbitrary sample point. Therefore all the approximations for the area under $f$ tend to the same value.
+
+This makes he limit exists, and thus $f$ is integrable.
+
+**What if $f$ is not continuous but has a finite number of jump discontinuities?** In this case the discontinuities can create some local error on the Riemann sum. However the total error can be made arbitrarily small by making the subintervals smaller and smaller.
+
+To be more concrete, image an subinterval which contains the jump discontinuity (e.g. there is a jump discontinuity at $x = c$, such that $f(c^-) = 1$ and $f(c^+) = 3$). Then, no matter the sample point you choose, the area will not fully capture the behaviour of $f$ on that subinterval.
+
+![Riemann Sum Jump Discontinuities](./assets/riemann_sum_jump_discontinuities.png)
+
+Note, however, that the error on that rectangle depends on the width of the subinterval:
+
+$$
+\text{error} \approx \text{height differences} \times \text{width}
+$$
+
+If the width of the subinterval can be made infinitely smaller, then the error will tend to zero. But we do not know that the width of the subintervals do tend to zero, therefore the local error introduced by discontinuities also do tend to zero, and we can "assume" $f$ to be continuous.
+
+But you may ask, why does this not always hold with an infinite number of jump discontinuities? Another way to state Riemann's definition for integrability is:
+
+> A function $f$ on $[a, b]$ is integrable if and only if the set of all its jump discontinuities has **measure zero**.
+
+What does this mean for us? **The fact that $f$ has infinitely many jump discontinuities it is not itself a problem**. The problem arises when the measure of these jump discontinuities is not zero, then:
+
+- The difference of the upper and lower Riemann sums do not tend to zero, no matter how small the subintervals.
+- Thus the Riemann integral does not exist and $f$ is not integrable.
+
+![Riemann Sum Infinite Jump Discontinuities](./assets/riemann_sum_infinite_jump_discontinuities.png)
+
+The previous image illustrates this fenomenon. On the lefthand figure we can see that the function only has two jump discontinuities, whose contribution to the area can be forced to zero by making the subintervals that contain them have width zero.
+
+However, in the figure on the right, the function exhibits an infinite number of dense oscillations, effectively creating infinitely many discontinuities throughout the interval. As a result, the Riemann sums fail to converge, and the function is not integrable.
+
+To simplify the calculation of the integral we often take the sample points to be right endpoints. Then $x_i^\* = x_i$ and the definition of an integral is as follows.
+
+> [!NOTE] **Integral by Righthand Rule**
+>
+> If $f$ is integrable on $[a, b]$, then
+>
+> $$\int_a^b f(x) dx = \lim_{n \to \infty} \sum_{i = 1}^n f(x_i) \Delta x$$
+>
+> where $\Delta x = \frac{b - a}{n}$ and $x_i = a + i \Delta x$.
+
+### Evaluating Definite Integrals
+
+The following four equations give formulas for sums of powers of positive integers which we will use to help us on the evaluation of integrals.
+
+> [!TIP] **Sums of Powers**
+>
+> $$\sum_{i=1}^n 1 = n$$
+>
+> $$\sum_{i=1}^n i = \frac{n(n + 1)}{2}$$
+>
+> $$\sum_{i=1}^n i^2 = \frac{n(n + 1)(2n + 1)}{6}$$
+>
+> $$\sum_{i=1}^n i^3 = \left[\frac{n(n + 1)}{2}\right]^2$$
+
+The remaining formulas are simple rules for working with sigma notation:
+
+> [!TIP] **Properties of Sums**
+>
+> $$\sum_{i = 1}^n ca_i = c \sum_{i=1}^n a_i$$
+>
+> $$\sum_{i = 1}^n a_i + b_i = \sum_{i=1}^n a_i + \sum_{i=1}^n b_i$$
+>
+> $$\sum_{i = 1}^n a_i - b_i = \sum_{i=1}^n a_i - \sum_{i=1}^n b_i$$
+
+### The Midpoint Rule
+
+We often choose the sample point $x_i^\*$ to be the right endpoint of the $i$-the subinterval. But if the purpose is to find an approximation to an integral, it is usually better to choose $x_i^\*$ to be the midpoint of the interval, which we denote by $\overline{x}_i$.
