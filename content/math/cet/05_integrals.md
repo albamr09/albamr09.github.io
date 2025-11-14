@@ -184,29 +184,29 @@ We have defined the definite integral for an integrable function, but not all fu
 >
 > If $f$ is continuous on $[a, b]$ or if $f$ has only a finite number of jump discontinuities, then $f$ is integrable on $[a, b]$; that is the definite integral $\int_a^b f(x) dx$ exists.
 
-**Why does $f$ is said to be integrable under such conditions?**
+**Why is $f$ said to be integrable under such conditions?**
 
 Let's start by with **the condition of $f$ being continuous**. If $f$ is continuous, on very small subintervals (we know the subintervals tend to width zero) then $f$ does not "change abruptly". Thus any sample point $x_i^\*$ on that subinterval will resolve to a height of $f(x_i^*)$, which will be very similar to all the other possible heights for any other sample point on the subinterval.
 
 Thus the rectangles on the Riemann sums will be very similar for any arbitrary sample point. Therefore all the approximations for the area under $f$ tend to the same value.
 
-This makes he limit exists, and thus $f$ is integrable.
+This makes the limit exist, and thus $f$ is integrable.
 
-**What if $f$ is not continuous but has a finite number of jump discontinuities?** In this case the discontinuities can create some local error on the Riemann sum. However the total error can be made arbitrarily small by making the subintervals smaller and smaller.
+**What if $f$ is not continuous but has a finite number of jump discontinuities?** In this case the discontinuities can create some local error on the Riemann sum. However the total error can be made arbitrarily small by making the subintervals that contain these discontinuities smaller and smaller.
 
-To be more concrete, image an subinterval which contains the jump discontinuity (e.g. there is a jump discontinuity at $x = c$, such that $f(c^-) = 1$ and $f(c^+) = 3$). Then, no matter the sample point you choose, the area will not fully capture the behaviour of $f$ on that subinterval.
+To be more concrete, image an subinterval which contains a jump discontinuity (e.g. there is a jump discontinuity at $x = c$, such that $f(c^-) = 1$ and $f(c^+) = 3$). Then, no matter the sample point you choose, the area will not fully capture the behaviour of $f$ on that subinterval.
 
 ![Riemann Sum Jump Discontinuities](./assets/riemann_sum_jump_discontinuities.png)
 
-Note, however, that the error on that rectangle depends on the width of the subinterval:
+Note, however, that the error depends on the width of the subinterval:
 
 $$
 \text{error} \approx \text{height differences} \times \text{width}
 $$
 
-If the width of the subinterval can be made infinitely smaller, then the error will tend to zero. But we do not know that the width of the subintervals do tend to zero, therefore the local error introduced by discontinuities also do tend to zero, and we can "assume" $f$ to be continuous.
+If the width of the subinterval can be made infinitely smaller, then the error will tend to zero. And we do not know that the width of the subintervals do tend to zero, therefore the local error introduced by the discontinuities also do tend to zero, then the limit exists and $f$ is integrable.
 
-But you may ask, why does this not always hold with an infinite number of jump discontinuities? Another way to state Riemann's definition for integrability is:
+But you may ask, **why does this not always hold with an infinite number of jump discontinuities?** Another way to state Riemann's definition for integrability is:
 
 > A function $f$ on $[a, b]$ is integrable if and only if the set of all its jump discontinuities has **measure zero**.
 
@@ -258,3 +258,103 @@ The remaining formulas are simple rules for working with sigma notation:
 ### The Midpoint Rule
 
 We often choose the sample point $x_i^\*$ to be the right endpoint of the $i$-the subinterval. But if the purpose is to find an approximation to an integral, it is usually better to choose $x_i^\*$ to be the midpoint of the interval, which we denote by $\overline{x}_i$.
+
+This statement is numerically true because using the midpoint does reduce the approximation error when computing Riemann's sum, whilst using either the right or left endpoint does result in a bigger approximation error.
+
+What would happen if you were to choose the right endpoints? Then
+
+$$
+x^{*}_i = x_i
+$$
+
+Now, if $f$:
+
+- Increases on the $i$-the subinterval, using the right endpoint overestimates the area.
+- Decreases on the $i$-the subinterval, using the right endpoint underestimates the area.
+
+As you can see we are systematically introducing bias. However when we take the midpoint we neutralize this bias.
+
+The value of $f$ at $\overline{x}_i$ is generally closer to the mean value of $f$ on the $i$-th subinterval. This is based on the fact that **the mean value of a smooth function on a small interval approximates its value on its midpoint**. This can be shown by using Taylor's Polynomial.
+
+![Riemann Sum Right Endpoint Error](./assets/riemann_sum_right_endpoint_error.png)
+
+![Riemann Sum Midpoint Error](./assets/riemann_sum_midpoint_error.png)
+
+> [!NOTE] **Midpoint Rule**
+>
+> $$\int_a^b f(x) dx \approx \sum_{i=1}^n f(\overline{x}_i) \Delta x = \Delta x [f(\overline{x}_1) + \cdots + f(\overline{x}_n)]$$
+>
+> where $\Delta x = \frac{b - a}{n}$
+>
+> and $\overline{x}\_i = \frac{1}{2} (x_{i - 1} + x_i) = \text{midpoint of } [x_{i - 1}, x_i]$.
+
+### Properties of the Definite Integral
+
+When we defined the definite integral $\int_a^b f(x) dx$, we implicitly assumed that $a < b$. But the definition as a limit of Riemann sums makes sense even if $a > b$. Notice that if we interchange $a$ and $b$, then $\Delta x$ changes from $\frac{b - a}{n}$ to $\frac{a - b}{n}$. Therefore
+
+$$
+\int_b^a f(x) dx = - \int_a^b f(x) dx
+$$
+
+as $\Delta x_{ba} = - \Delta x_{ab}$. Also note that if $a = b$, then $\Delta x = 0$ and so:
+
+$$
+\int_a^a f(x) dx = 0
+$$
+
+We now develop some basic properties of integrals that will help us to evaluate integrals in a simple manner. We assume that $f$ and $g$ are continuous functions.
+
+> [!TIP] **Properties of the Integral**
+>
+> 1. $\int_a^b c dx = c(b - a)$, where $c$ is any constant.
+> 2. $\int_a^b [f(x) + g(x)]dx = \int_a^b f(x) dx + \int_a^b g(x)dx$
+> 3. $\int_a^b cf(x) dx = c \int_a^b f(x) dx$
+> 4. $\int_a^b [f(x) - g(x)]dx = \int_a^b f(x) dx - \int_a^b g(x)dx$
+
+**Property 1** says that the integral ofo a constante function $f(x) = c$ is the constant times the length of the interval. If $c > 0$ and $a < b$, this is to be expected because $c(b - a)$ is the area of the shaded rectangle in Figure 14.
+
+![Integral of a Constant Function](./assets/integral_of_constant_function.png)
+
+**Property 2** says that the integral of a sum is the sum of the integrals. For positive functions it says that the are under $f + g$ is the area under $f$ plus the area under $g$ (see Figure 15).
+
+![Integral of the Sum of Functions](./assets/integral_of_sum_of_functions.png)
+
+In general, Property 2 follows from [the definition of the value of a definite integral](/math/cet/05_integrals/#definite-integrals) and the fact that [the limit of a sum is the sum of the limits](/math/cet/02_limits/#properties-of-limits):
+
+$$
+\int_a^b [f(x) + g(x)] dx = \lim_{n \to \infty} \sum_{i = 1}^n [f(x_i) + g(x_i)] \Delta x
+$$
+
+$$
+= \lim_{n \to \infty} \left[\sum_{i = 1}^n f(x_i) \Delta x + \sum_{i = 1}^n g(x_i) \Delta x\right]
+$$
+
+$$
+= \lim_{n \to \infty} \sum_{i = 1}^n f(x_i) \Delta x + \lim_{n \to \infty} \sum_{i = 1}^n g(x_i) \Delta x
+$$
+
+$$
+= \int_a^b f(x) dx + \int_a^b g(x) dx
+$$
+
+**Property 3** can be proved in a similar manner and says that the integral of a constant times a function is the constant times the integral of the function. **Property 4** is proved by writing $f - g = f + (-g)$ and using Properties 2 and 3 with $c = -1$.
+
+The next property tells us how to combine integrals of the same function over adjacent intervals.
+
+> [!TIP] **Transitive Property for the Integral**
+>
+> 1. $\int_a^c f(x) dx + \int_c^b f(x) dx = \int_a^b f(x) dx$
+
+This is not easy to prove in general, but for the case where $f(x) \geq 0$ and $a < c < b$, this property can be seen from the geometric interpretation in Figure 16.
+
+![Transitivity of the Integral](./assets/transitivity_of_integral.png)
+
+Properties 1-5 are true whether $a < b, a = b$ or $a > b$. The following properties, in which we compare sizes of functions and sizes of integrals, **are true only if $a \leq b$**.
+
+> [!TIP] **Comparison Properties of the Integral**
+>
+> 1. If $f(x) \geq 0$ for $a \leq x \leq b$, then $\int_a^b f(x) dx \geq 0$
+> 2. If $f(x) \geq g(x)$ for $a \leq x \leq b$, then $\int_a^b f(x) dx \geq \int_a^b g(x) dx$
+> 3. If $m \leq f(x) \lew M$ for $a \leq x \leq b$, then
+>
+> $$m(b - a) \leq \int_a^b f(x) dx \leq M(a - b)$$
