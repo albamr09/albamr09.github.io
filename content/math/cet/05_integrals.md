@@ -343,7 +343,7 @@ The next property tells us how to combine integrals of the same function over ad
 
 > [!TIP] **Transitive Property for the Integral**
 >
-> 1. $\int_a^c f(x) dx + \int_c^b f(x) dx = \int_a^b f(x) dx$
+> 5. $\int_a^c f(x) dx + \int_c^b f(x) dx = \int_a^b f(x) dx$
 
 This is not easy to prove in general, but for the case where $f(x) \geq 0$ and $a < c < b$, this property can be seen from the geometric interpretation in Figure 16.
 
@@ -353,8 +353,80 @@ Properties 1-5 are true whether $a < b, a = b$ or $a > b$. The following propert
 
 > [!TIP] **Comparison Properties of the Integral**
 >
-> 1. If $f(x) \geq 0$ for $a \leq x \leq b$, then $\int_a^b f(x) dx \geq 0$
-> 2. If $f(x) \geq g(x)$ for $a \leq x \leq b$, then $\int_a^b f(x) dx \geq \int_a^b g(x) dx$
-> 3. If $m \leq f(x) \lew M$ for $a \leq x \leq b$, then
+> 6. If $f(x) \geq 0$ for $a \leq x \leq b$, then $\int_a^b f(x) dx \geq 0$
+> 7. If $f(x) \geq g(x)$ for $a \leq x \leq b$, then $\int_a^b f(x) dx \geq \int_a^b g(x) dx$
+> 8. If $m \leq f(x) \leq M$ for $a \leq x \leq b$, then
 >
 > $$m(b - a) \leq \int_a^b f(x) dx \leq M(a - b)$$
+
+**Proof of Property 6**
+
+Let $f$ be an integrable function such that $f(x) \geq 0, \forall x \in [a, b]$, then by the [definition of a definite integral](/math/cet/05_integrals/#the-definite-integral):
+
+$$
+\int_a^b f(x) dx = \lim_{n \to \infty} \sum_{i = 1}^n f(x^*_i) \Delta x
+$$
+
+Because $f(x) \geq 0, \forall x \in [a, b]$, then $f(x^*_i) \geq 0$. Also $a \leq b$, thus $\Delta x \geq 0$. Therefore:
+
+$$
+f(x^*_i)\Delta x \geq 0, \forall x^*_i
+$$
+
+By the properties of real numbers, we know that the sum of non-negative numbers results in a non-negative number, that is:
+
+$$
+\lim_{n \to \infty} \sum_{i = 1}^n f(x^*_i) \Delta x \geq 0
+$$
+
+Thus
+
+$$
+\int_a^b f(x) dx \geq 0
+$$
+
+**Proof of Property 7**
+
+Let $f$ and $g$ be integrable functions such that $f(x) \geq g(x), \forall x \in [a, b]$, then
+
+$$
+f(x^*_i) \geq g(x^*_i)
+$$
+
+By [the properties of inequalities](/math/acs/02_equations_inequalities/#multiplication-property-of-inequality), given $\Delta x \geq 0$:
+
+$$
+f(x^*_i) \Delta x \geq g(x^*_i) \Delta x
+$$
+
+where $x^\*_i$ are is an arbitrary sample point on the $i$-th subinterval. Therefore, by [the properties of limits](/math/cet/02_limits/#the-squeeze-theorem)
+
+$$
+\lim_{n \to \infty} \sum_{i = 1}^n f(x^*_i) \Delta x \geq \lim_{n \to \infty} \sum_{j = 1}^n g(x^*_j) \Delta x
+$$
+
+Thus, by the [definition of the definite integral](/math/cet/05_integrals/#the-definite-integral)
+
+$$
+\int_a^b f(x) dx \geq \int_a^b g(x) dx
+$$
+
+**Property 8** is illustrated by Figure 17 for the case where $f(x) \geq 0$.
+
+![Inequalities of the Integral](./assets/inequalities_of_the_integral.png)
+
+**Proof of Property 8**
+
+Since $m \leq f(x) \leq M$, Property 7 gives
+
+$$
+\int_a^b m dx \leq \int_a^b f(x) dx \leq \int_a^b M dx
+$$
+
+Using **Property 1** to evaluate the integrals of the constant functions
+
+$$
+m(b - a) \leq \int_a^b f(x) dx \leq M(b - a)
+$$
+
+**Property 8** is useful when all we want is a rough estimate of the size of an integral.
