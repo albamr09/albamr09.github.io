@@ -519,8 +519,8 @@ In this section we introduce the language of congruences.
 
 > [!TIP] **Proposition 5.5.1**
 >
-> Let $a, b, c \in Z$ and let $n E \mathbb{Z}^+$.
+> Let $a, b, c \in Z$ and let $n \in \mathbb{Z}^+$.
 >
-> 1. $a \equiv a (\mod n)$
-> 2. If $a \equiv b (\mod n)$, then $b \equiv a (\mod n)$
-> 3. If $a \equiv b (\mod n)$ and $b \equiv c(\mod n)$, then $a \equiv c (\mod n)$
+> 1. $a \equiv a \mod n$
+> 2. If $a \equiv b \mod n$, then $b \equiv a \mod n$
+> 3. If $a \equiv b \mod n$ and $b \equiv c \mod n$, then $a \equiv c \mod n$
