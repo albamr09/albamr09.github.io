@@ -524,3 +524,103 @@ In this section we introduce the language of congruences.
 > 1. $a \equiv a \mod n$
 > 2. If $a \equiv b \mod n$, then $b \equiv a \mod n$
 > 3. If $a \equiv b \mod n$ and $b \equiv c \mod n$, then $a \equiv c \mod n$
+
+> [!TIP] **Proposition 5.5.2**
+>
+> Let $a, b, c \in Z$ and let $n \in \mathbb{Z}^+$.
+>
+> 1. If $a \equiv b \mod n$ and $c \equiv d \mod n$, then $a + c \equiv b + d \mod n$ and $ac \equiv ac \mod n$.
+> 2. If $ab \equiv ac \mod n$ and $\text{gcd}(a, n) = 1$, then $b \equiv c \mod n$.
+
+Notice that the cancellation property in 2 of Proposition 5.5.2 does not necessarily hold if $a$ and $n$ are not relatively prime.
+
+> [!TIP] **Corollary 5.5.3**
+>
+> If $a \equiv b \mod n$, then $a^k \equiv b^k \mod n$ for every positive integer $k$.
+
+The following proposition is very useful for doing problems involving congruences.
+
+> [!TIP] **Proposition 5.5.4**
+>
+> Let $n \in \mathbb{Z}$, $n > 1$. If $a \in \mathbb{Z}$, then $a$ is congruent mod $n$ to exactly one of the integers $0, 1, 2, \cdots, n - 1$.
+
+**Proof**. Let $a \in \mathbb{Z}$. By the [Division Algorithm](#the-division-algorithms-and-greatest-common-divisors), there exist $q$, $r$ in $\mathbb{Z}$ such that $a = nq + r$, where $0 \leq r < n$.
+
+Thus $a - r$ is divisible by $n$, so $a \equiv r \mod n$. Hence $a$ is congruent to one of the integers $0, 1, 2, \cdots, n - 1$.
+
+If $a$ is also congruent to some $s$ where $0 \leq s < n$, then $r \equiv s \mod n$. But since $r$ and $s$ are both less than $n$, their difference cannot be divisible by $n$ unless $r = s$. Therefore $a$ is congruent mod $n$ to exactly one of the integers $0, 1, 2, \cdots, n - 1$.
+
+> [!NOTE] **Congruence Class**
+>
+> For each $a \in \mathbb{Z}$, we let $[a]$ be the equivalence class of a with respect to the equivalence relation of congruence $\mod n$:
+>
+> $$[a] = \{x \in \mathbb{Z} | x \equiv a \mod n\}$$
+>
+> We will call $[a]$ the **congruence class** of $a \mod n$.
+
+By Proposition 5.5.4, if $a \in \mathbb{Z}$, then $a \equiv r$ for exactly one integer $r$ such that $0 \leq r \leq n - 1$. Therefore $a \in [r]$. Thus there are exactly $n$ distinct congruence classes; namely, $[0], [1], [2], \cdots , [n - 1]$. To see which equivalence class a given integer $a$ is in, we just compute the remainder when $a$ is divided by $n$.
+
+In general, for congruences $\mod n$, $[a] = [b]$ if and only if $a \equiv b \mod n$.
+
+### The Set of Congruence Classes
+
+For $n \in \mathbb{Z}, n > 1$, we will let $\mathbb{Z}_n$ denote the set of congruence classes $\mod n$. Thus $\mathbb{Z}_n = {[0], [1], [2] , \cdots, [n - 1]}$.
+
+First we define addition on $\mathbb{Z}_n$ using the symbol $+$ as follows: if $[a], [b] \in Z_n$, then $[a] + [b] = [a + b]$, for any $a, b \in \mathbb{Z}$.
+
+If this definition gives a real binary operation, then the sum of the classes $[a]$ and $[b]$ should be the same if $a$ and $b$ are replaced by other integers representing the same classes. In that case we can say that addition is **well defined**.
+
+We must show that if $[a] = [a']$ and $[b] = [b']$, then $[a + b] = [a' + b']$. But if $[a] = [a ']$ and $[b] = [b']$, then $a \equiv a'$ and $b \equiv b' \mod n$. Now applying Proposition 5.5.2, we get that $a + b \equiv a' + b' \mod n$, which implies that $[a + b] = [a' + b']$. We have now proved that addition on $\mathbb{Z}_n$ is well defined.
+
+> [!TIP] **Theorem 5.5.5**
+>
+> Let $n \in \mathbb{Z}, n > 1$
+>
+> 1. Addition in $\mathbb{Z}_n$ is commutative: $[a] + [b] = [b] + [a]$ for all $a, b \in \mathbb{Z}$.
+> 2. Addition in $\mathbb{Z}_n$ is associative: $([a] + [b]) + [c] = [a] + ([b] + [c])$ for all $a, b, c \in \mathbb{Z}$.
+> 3. $[0]$ is the identity element of $\mathbb{Z}_n$ with respect to addition: $[a] + [0] = [a] = [0] + [a]$ for all $a \in \mathbb{Z}$.
+> 4. Every element of $\mathbb{Z}_n$ has an inverse with respect to addition. For any $a$ in $\mathbb{Z}$, the additive inverse of $[a]$ is $[-a]$.
+
+Next we define multiplication on $\mathbb{Z}_n$ by letting $[a][b] = [ab]$, for all $a, b \in \mathbb{Z}$.
+
+> [!TIP] **Theorem 5.5.6**
+>
+> Let $n \in \mathbb{Z}, n > 1$
+>
+> 1. Multiplication in $\mathbb{Z}_n$ is commutative: $[a][b] = [b][a]$ for all $a, b \in \mathbb{Z}$.
+> 2. Multiplication in $\mathbb{Z}_n$ is associative: $([a][b])[c] = [a]([b][c])$ for all $a, b,
+e \in \mathbb{Z}$.
+> 3. $[1]$ is the multiplicative identity of $\mathbb{Z}_n$: $[a][1] = [a] = [1][a]$ for all $a \in \mathbb{Z}$.
+> 4. The following distributive laws hold: $[a]([b] + [c]) = [a][b] + [a][c]$ and $([a] + [b])[c] = [a][c] + [b][c]$ for all $a, b, c \in \mathbb{Z}$.
+
+The following theorem gives an explicit criterion for an element of $\mathbb{Z}_n$ to have a multiplicative inverse.
+
+> [!TIP] **Theorem 5.5.7**
+>
+> Let $[a] \in \mathbb{Z}_n$. Then $[a]$ has a multiplicative inverse if and only if $a$ and $n$ are relatively prime.
+
+**Proof**
+
+If $[a]$ has a multiplicative inverse, then there exists an element $[x] \in \mathbb{Z}_n$ such that $[a][x] = [1]$. It follows that $[ax] = [1]$ and hence $ax \equiv 1 \mod n$.
+
+This implies that $n$ divides $ax - 1$, which means that $ax - 1 = nt$ for some $t \in \mathbb{Z}$. Hence $ax + n(-t) = 1$. By Theorem 5.3.8, $a$ and $n$ are relatively prime.
+
+Conversely, if $a$ and $n$ are relatively prime, there exist integers $x$ and $y$ such that $ax + ny = 1$. Hence $[1] = [ax + ny] = [ax] + [ny] = [a] [x] + [n] [y]$.
+
+But $[n] = [0]$, so we have $[a][x] = [1]$, and therefore $[x]$ is the multiplicative inverse of $[a]$.
+
+> [!TIP] **Theorem 5.5.8**
+>
+> Let $a, b, n \in \mathbb{Z}, n > 1$, and suppose that $\text{gcd}(a, n) = 1$. Then the congruence $ax \equiv b \mod n$ has a unique solution $\mod n$; that is, there is an integer $x$ such that $ax \mod b \mod n$, and if $y$ is another integer such that $ay \equiv b \mod n$, then $y \equiv x \mod n$.
+
+**Proof**. Since $\text{gcd}(a, n) = 1$, there are integers $t$ and $s$ such that $as + nt = 1$. Multiplying by $b$, we get $asb + ntb = b$. Letting $x = sb$, we have $ax \equiv b \mod n$. If $ay \equiv b \mod n$ for some $y$ in $\mathbb{Z}$, then $ax \equiv ay \mod n$, and $x \equiv y \mod n$.
+
+Notice that if $x$ is a solution to the congruence $ax \equiv b \mod n$, then the set of all solutions to the congruence is the congruence class $[x]$.
+
+> [!NOTE] **Fermat's Little Theorem**
+>
+> If $n$ is any integer and $p$ is a prime number, then $n^p - n$ is divisible by $p$. In congruence notation
+>
+> $$n^p \equiv n \mod p$$
+
+A corollary of Fermat's Little Theorem is that if $n$ is relatively prime to $p$, then $n^{p - 1} \equiv \mod p$.
