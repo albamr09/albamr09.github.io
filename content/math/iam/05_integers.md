@@ -624,3 +624,67 @@ Notice that if $x$ is a solution to the congruence $ax \equiv b \mod n$, then th
 > $$n^p \equiv n \mod p$$
 
 A corollary of Fermat's Little Theorem is that if $n$ is relatively prime to $p$, then $n^{p - 1} \equiv \mod p$.
+
+## Generalizing a Theorem
+
+One way that mathematicians have been able to discover new facts is by extending or generalizing the results of a known theorem by conjecturing and then proving a result that verifies more cases of the known theorem or that proves a theorem of which the known theorem is a special case.
+
+In this section, we illustrate this approach to discovering new facts by look at a theorem that says that for every integer $n$, $n$ is even if and only if $n^2$ is even. One way to extend this result would be to consider other exponents.
+
+> [!TIP] **Theorem 5.6.2**
+>
+> Let $k$ be a positive integer. Then for every integer $n$, $n$ is even if and only if $n^k$ is even.
+
+In proving the original theorem, we needed to use only simple algebraic properties of the integers. But in proving the more general result in Theorem 5.6.2, we needed to use [the Binomial Theorem](/math/agaa/11_further_topics/#the-binomial-theorem). It is usually the case in mathematics that extending a theorem often requires using more sophisticated methods or additional theorems and lemmas.
+
+There is another way to extend the result of the original theorem. To say that an integer $n$ is even is equivalent to saying that it is divisible by $2$. So it is natural to ask whether it can be extended to divisibility by $3$; that is, is it true that for every integer $n$, $n$ is divisible by $3$ if and only if $n^2$ is divisible by $3$?
+
+> [!TIP] **Proposition 5.6.3**
+>
+> For every integer $n$, $n$ is divisible by $3$ if, and only if, $n^2$ is divisible by $3$.
+
+The next case to consider is divisibility by $4$. A quick look at examples and we see that the statement
+
+> "For every integer $n$, $n$ is divisible by $4$ if and only if $n^2$ is divisible by $4$
+
+is false. Let $n = 2$. Then $n^2 = 4$ is divisible by $n2 = 4$ but $n$ is not.
+
+So we are led to the following question: For what positive integers $k$ is it true that for every integer $n$, $n$ is divisible by $k$ if and only if $n^2$ is divisible by $k$?
+
+It is easy to see that one of the implications is true for every positive integer $k$; namely, for every integer $n$, if n is divisible by $k$, then $n^2$ is divisible by $k$.
+
+It is the converse that is interesting. Let $S(k)$ be the statement
+
+> For every integer $n$, if $n^2$ is divisible by $k$, then $n$ is divisible by $k$.
+
+We would like to know for which positive integers $k$ the statement $S(k)$ is true.
+
+We know that $S(k)$ is true for $k = 1$, for $k = 2$, and for $k = 3$. It is false for $k = 4$. Since $2$ and $3$ are primes, we might conjecture that $S(k)$ is true if $k$ is prime and false if $k$ is not prime.
+
+> [!TIP] **Proposition 5.6.4**
+>
+> If $k$ is a primer number, the for every integer $n$, $n^2$ is divisible by $k$, then $n$ is divisible by $k$.
+
+Now what about composite values of $k$?
+
+> [!TIP] **Proposition 5.6.6**
+>
+> Let $p$ and $q$ be distinct primes and let $k = pq$. For every integer $n$, if $n^2$ is divisible by $k$, then $n$ is divisible by $k$.
+
+Next, let's consider how we may generalize Proposition 5.6.6 even more. A reasonable generalization would be to look at the product of more than two distinct primes. In fact, $S(k)$ is true whenever $k$ is a product of distinct primes.
+
+> [!TIP] **Proposition 5.6.9**
+>
+> Let $p_1, p_2, \cdots, p_m$ be distinct prime numbers. Let $k =  p_1 \cdot p_2 \cdots p_m$. For every integer $n$, if $n^2$ is divisible by $k$, then $n$ is divisible by $k$.
+
+Is it possible that $S(k)$ is true for other $k$ besides those $k$ that are the product of distinct primes?
+
+> [!TIP] **Proposition 5.6.10**
+>
+> $S(k)$ is false if $k$ is not the product of distinct primes.
+
+We summarize these results in the following theorem.
+
+> [!NOTE] **Theorem 5.6.11**
+>
+> If $k \geq 2$, then $S(k)$ is true if, and only if, $k$ is a product of distinct primes.
