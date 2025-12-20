@@ -10,4 +10,5 @@ type: docs
 {{< card link="03_functions" title="Functions" >}}
 {{< card link="04_binary_operations_and_relations" title="Binary Operations and Relations" >}}
 {{< card link="05_integers" title="The Integers" >}}
+{{< card link="06_infinite_sets" title="Infinite Sets" >}}
 {{< /cards >}}
