@@ -57,7 +57,7 @@ The most natural example of an infinite set, the one we first encounter in arith
 
 A set that is not countable is called **uncountable**.
 
-Any two countably infinite sets then have the same cardinality. We denote this cardinality by $\mathcal{N}_0$ (read "aleph zero" or "aleph naught"). $\mathcal{N}_0$ is our first example of an infinite cardinal number.
+Any two countably infinite sets then have the same cardinality. We denote this cardinality by $\aleph_0$ (read "aleph zero" or "aleph naught"). $\mathcal{N}_0$ is our first example of an infinite cardinal number.
 
 > [!TIP] **Theorem 6.1.4**
 >
@@ -178,3 +178,145 @@ Another set that is "bigger" than $\mathbb{Z}$ is the Cartesian product $\mathbb
 > Let $A_1, A_2, \cdots, A_k$ be a finite collection of countably infinite sets, all contained in some universal set $U$. Then the Cartesian product $A_1 \times A_2 \times \cdots \times A_k$ is a countably infinite set.
 
 So far we have only looked at in finite sets that are countable. There are indeed in finite sets that are not countable: the set $\mathbb{R}$ of real numbers is the outstanding example.
+
+## Uncontable Sets, Cantor's Theorem and the Schroeder-Bernstein Theorem
+
+Before beginning, though, we must recall some simple facts about the decimal expansion of real numbers. We will assume that any nonnegative real number $x$ can be written in decimal form
+
+$$
+x = a_0.a_1a_2a_3 \cdots = a_0 + \frac{a_1}{10} + \frac{a_2}{10^2} + \frac{a_3}{1000}
+$$
+
+where $a_0, a_1, a_2, a_3, \cdots$ are nonnegative integers and $a_1, a_2, a_3, \cdots$ are between $0$ and $9$.
+
+Every such expansion in fact represents a real number. Such an expansion is unique except for expansions like
+
+$$
+\frac{1}{2} = 0.5000 \cdots = 0.4999 \cdots
+$$
+
+That is, the decimal representation is unique unless the expansion ends in an infinite string of $9$s.
+
+### Uncountable Sets
+
+> [!TIP] **Theorem 6.2.1**
+>
+> The interval $[0, 1)$ is uncountable.
+
+**Proof**
+
+The proof is by contradiction. We assume that $[0, 1)$ is countable and derive a contradiction. If $[0, 1)$ is countable, then there is a bijection $f: \mathbb{Z}^+ \to [0, 1)$. For each $i \in \mathbb{Z}^+$ let $x_i = f(i)$. Now by the previous remarks, each $x_i$ has a decimal expansion of the form
+
+$$
+x_i = 0.a_1^ia_2^i \cdots
+$$
+
+where $a_1^i, a_2^i$ are integers between $0$ and $9$.
+
+We will derive our contradiction by constructing a real number $x$ in $[0 , 1)$ that is not equal to any $x_i$.
+
+Let $x = 0.b_1b_2b_3 \cdots$ where $b_i = 0$ if $a_i^i = 1$ and $b_i = 1$ if $a_i^i \neq 1$. This
+means that $x$ differs from $x_i$ in the first decimal place, differs from $x_2$ in the second decimal place, differs from $x_3$ in the third decimal place, and so on.
+
+Hence $x \neq x_i$ for all $i$. In other words, $x \neq f(i)$ for any $i \in \mathbb{Z}^+$. But this contradicts the fact that $f$ is surjective. Thus $[0, 1)$ cannot be countable and therefore must be uncountable.
+
+Since we now know that there are subsets of $\mathbb{R}$ that are uncountable, we will consider the question of the numerical equivalence of such sets. For example, it is not hard to prove that every closed interval $[a, b]$ is numerically equivalent to $[0, 1]$. It follows that any two closed intervals $[a, b]$ and $[e, d]$ are numerically equivalent. Similarly, any two bounded open intervals are numerically equivalent.
+
+Any two sets that are numerically equivalent to $\mathbb{R}$ have the same cardinality. We denote this cardinality by $c$, called the **power of the continuum**. $c$ is our second example of an infinite cardinal number. It follows from the previous remarks that every open or closed interval of real numbers has cardinality $c$.
+
+### Cantor's Theorem
+
+Since there is a natural ordering of the positive integers, it is possible to determine the larger of two finite cardinal numbers. What about the infinite cardinals? Since $\aleph_0$ is the cardinality of $\mathbb{Z}$ and $c$ is the cardinality of $\mathbb{R}$, it makes sense that $\aleph_0$ be a "smaller" cardinal number than $c$ because $\mathbb{Z}$ is a "smaller" set than $\mathbb{R}$: $\mathbb{Z}$ is a subset of $\mathbb{R}$ and $\mathbb{Z}$ is not numerically equivalent to $\mathbb{R}$. We are led to the following definition of what it means for one set to be "smaller" than another.
+
+> [!NOTE] **Cardinality Inequality**
+>
+> Let $A$ And $B$ be sets contained in some universal set $U$. We say that $A \prec B$ if there is an injection $f: A \to B$ but not bijection from $A$ to $B$.
+>
+> We say that $A \preceq B$ if $A \prec B$ or if $A$ is numerically equivalent to $B$.
+
+Now if we have two cardinal numbers, say $\textbf{x}$ and $\textbf{y}$, we will say that $\textbf{x} \prec \textbf{y}$ if $\textbf{x}$ is the cardinality of set $X$, $\textbf{y}$ is the cardinality of a set $Y$, and $X \prec Y$.
+
+Similarly, we will say that $\textbf{x} \preceq \textbf{y}$ if $\textbf{x}$ is the cardinality of set $X$, $\textbf{y}$ is the cardinality of a set $Y$, and $X \preceq Y$.
+
+> [!TIP] **Lemma 6.2.4**
+>
+> Let $A, B, C, D$ be sets contained in a universal set $U$. Suppose that $A \approx B$, $C \approx D$. If $A \prec C$, then $B \prec D$. If $A \preceq C$, then $B \preceq D$.
+
+So we can now say that $\aleph_0 \prec c$.
+
+We might ask if there are any infinite cardinal numbers $\textbf{x}$ such that $\textbf{x} \prec \aleph_0$. The answer is no since it can be shown, although it is difficult, that every infinite set contains a countably infinite subset.
+
+Are there other infinite cardinal numbers besides $\aleph_0$ and $c$? The answer is yes, and in fact there are an infinite number of infinite cardinals. The following result, known as Cantor's Theorem, explains why.
+
+> [!NOTE] **Cantor's Theorem**
+>
+> Let $A$ be a set contained in a universal set $U$. Let $\mathcal{P}(A)$ denote the power set of $A$. Then $A \prec \mathcal{P}(A)$.
+
+**Proof**
+
+We first need to show that there is an injection $f: A \to \mathcal{P}(A)$. Such an injection must map elements of $A$ to subsets of $A$. There is a natural way to do this. Let $a \in A$ and map a to the subset $\\{a\\}$; that is, $f(a) = \\{a\\}$. It is easy to see that $f$ is injective: for if $f(a) = f(b)$ for some $a, b \in A$, then $\\{a\\} = \\{b\\}$ and hence $a = b$.
+
+Now we will show that there is no surjective function from $A$ to $\mathcal{P}(A)$. Suppose, on the contrary, that there is a surjective function $g: A \to \mathcal{P}(A)$. We will derive a contradiction.
+
+If $a \in A$, then $g(a)$ is a subset of $A$. Now the element $a$ may or may not be an element of this subset; that is, for some $a$, we may have $a \in g(a)$ and for some $a$, we may have $a \notin g(a)$.
+
+Let $B = \\{a \in A | a \notin g(a)\\}$. $B$ is the set of elements a of $A$ that get mapped to a subset of $A$ that does not contain $a$.
+
+Since $g$ is surjective and $B$ is a subset of $A$, $B$ must be in the image of $g$. This will be true even if $B$ is the empty set. So there exists an element $a_0$ in $A$ such that $g(a_0) = B$. Now we consider the question: is $a_o \in B$ or not? Here is where we will derive a contradiction by showing that either possibility leads to an absurdity.
+
+Suppose $a_o \in B$. Then, by definition of $B$, $ao \notin g(a_o)$. But $g(a_o) = B$, so we are led to the contradictory statement that if $a_o \in B$, then $a_o \notin B$.
+
+Now suppose that $a_0 \notin B$. Then it follows that $a_o \in g(a_o) = B$. So if $a_o \notin B$, then $a_o \in B$! There is no way out of this contradiction except to conclude that $B$ is not in the image of $g$, contradicting the fact that $g$ is surjective. Therefore, no such surjective function can exist.
+
+We have thus proved that $A \prec \mathcal{P}(A)$.
+
+### The Continuum Hypothesis
+
+Question: Is there an infinite cardinal $\textbf{x}$ such that $\aleph_0 \prec \textbf{x} \prec c$? This problem has a long and interesting history. [Cantor](https://en.wikipedia.org/wiki/Georg_Cantor) conjectured that no such infinite cardinal $\textbf{x}$ exists. His conjecture has come to be known as **the Continuum Hypothesis**.
+
+The first real progress on the Continuum Hypothesis was made by [Kurt Godel](https://en.wikipedia.org/wiki/Kurt_G%c3%b6del) (1906-1978) in the 1930s when he proved that the Continuum Hypoth­esis was consistent with the axioms of set theory. In other words, using the commonly accepted
+axioms on which the theory of sets is based, it is impossible to disprove the
+Continuum Hypothesis.
+
+However, in 1963, [Paul Cohen](https://wikipedia.org/wiki/Paul_Cohen) (1934-2007) proved that the negation of the Continuum Hypothesis is also consistent with the axioms of set theory. Thus the Continuum Hypothesis is independent of the axioms of set theory and can be neither proved nor disproved from those axioms!
+
+### The Schroeder-Bernstein Theorem
+
+Note that $\preceq$ is a relation on $\mathcal{P}(U)$, where $U$ is a universal set. But what kind of a relation is it?
+
+> [!NOTE] **Schroeder-Bernstein Theorem**
+>
+> Let $A$ and $B$ bet sets, and suppose that $A \preceq B$ and $B \preceq A$. Then $A \approx B$.
+
+**Proof**
+
+Let $f: A \to B$ and $g: B \to A$ be injections. We need to construct a bijection $h: A \to B$, so let $a \in A$. The key is to trace a back as far as possible through $f$ and $g$. That is, if $a = a_1 \in g(B)$, let $b_1$ be the unique element of $B$ such that $a_1 = g(b_1)$; if $b_1 \in f(A)$, let $a_2$ be the unique element of $A$ such that $b_1 = f(a_2)$; if $a_2 \in g(B)$, let $b_2$ be the unique element of $B$ such that $a_2 = g(b_2)$; and so on. We might call this tracing the ancestry of $a$, and we can visualize it as follows:
+
+![Numerically Equivalency Tracing](./assets/numerically_equivalent_proof.png)
+
+We thus construct a set $\\{a = a_1, b_1, a_2, b_2, a_3, b_3\\}$ of ancestors of $a$. Now this may be a finite set: we may reach an oldest ancestor $a_i \notin g(B)$ or $b_i \notin f(A)$. Or the process may not stop, yielding an infinite set of ancestors. So let us define the following subsets of $A$:
+
+$$
+A_A = \{a \in A | a \text{ has an oldest ancestor } a_i \in A\}
+$$
+
+$$
+A_B = \{a \in A | a \text{ has an oldest ancestor } b_i \in B\}
+$$
+
+$$
+A_{\infty} = \{a \in A | a \text{ has no oldest ancestor }\}
+$$
+
+These sets are clearly pairwise disjoint and $A_A \cup A_B \cup A_{\infty} = A$; that is, every element of $A$ must satisfy exactly one of the three conditions.
+
+Finally, notice that we could perform the same analysis on $B$, and arrive at analogous subsets $B_B, B_A$, and $B_{\infty}$ of B. In fact, $f$ maps $A_A$ bijectively to $B_A$ and $A_{\infty}$, to $B_{\infty}$; similarly, $g$ maps $B_B$ bijectively to $A_B$.
+
+Thus we may construct the bijection $h$ as follows:
+
+$$
+h(a) = \begin{cases}
+f(a) & \text{ if } a \in A_A \cup A_{\infty} \\
+b & \text{ where } a = g(b), \text{ if } a \in A_B \\
+\end{cases}
+$$
