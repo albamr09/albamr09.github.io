@@ -690,3 +690,5 @@ This equation shows that if we begin with a function $F$, differentiate it to ge
 Taken together, these two symmetrical results provide the rigorous mathematical proof that differentiation and integration are inverse processes. This powerful relationship is what makes the theorem so central to the structure and application of calculus.
 
 The discovery and exploitation of this theorem transformed mathematics. It converted previously formidable problems of finding areas, volumes, and lengths of curves—challenges that were once accessible only to a "genius"—into a systematic and reliable method.
+
+{{< youtube 8oSZsP0Q2OE >}}
