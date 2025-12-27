@@ -430,3 +430,263 @@ m(b - a) \leq \int_a^b f(x) dx \leq M(b - a)
 $$
 
 **Property 8** is useful when all we want is a rough estimate of the size of an integral.
+
+## The Fundamental Theorem of Calculus
+
+Calculus was born from two big questions that, for centuries, seemed to have little to do with each other. The first was **the tangent problem**: how to find the slope of a curve at a single point. This question gave rise to differential calculus. The second was the **area problem**: how to find the exact area under a curve. This gave rise to integral calculus. For a long time, these were considered separate fields of study.
+
+![Tangent and Area Problems](./assets/tangent_and_area_problem.png)
+
+The **breakthrough came with the discovery of a profound and beautiful connection between them**. This connection is so central to the subject that it is called the Fundamental Theorem of Calculus.
+
+**The Fundamental Theorem of Calculus** is appropriately named because it establishes a connection between the two branches of calculus: **differential calculus** and **integral calculus**.
+
+This theorem reveals that the two problems are not separate at all. In fact, it shows that differentiation (finding slopes) and integration (finding areas) are **inverse processes**.
+
+Understanding this deep relationship is the key to unlocking a powerful and surprisingly simple method for solving complex area problems that had once stumped the greatest minds.
+
+To see how these two ideas are connected, we first need to look at a special kind of function—one that measures area as it accumulates.
+
+### The Fundamental Theorem of Calculus, Part 1
+
+#### Intuitive Basis of the Theorem
+
+The first part of the Fundamental Theorem of Calculus (FTC1) provides the initial, foundational link between the derivative and the integral. It achieves this by defining a function in terms of an integral and then demonstrating that the derivative of this new function is the original function being integrated. Let this function be as follows:
+
+$$
+g(x) = \int_{a}^x f(t) dt
+$$
+
+The function $g(x)$ can be understood intuitively as the accumulated area under the graph of the function $f$ from a starting point a to a variable endpoint $x$ (see Figure 1). To understand why the rate of change of this area at $x$ is simply the value of the function $f$ at $x$, consider a small change in $x$, denoted by $h$.
+
+![Area Under the Curve](./assets/function_area_under_curve.png)
+
+The quantity $g(x + h) - g(x)$ represents the area under the curve of $f$ over the small interval from $x$ to $x + h$. Consider the thin vertical strip of area under the curve between $x$ and $x+h$. For a sufficiently small width $h$, the height of the curve $f$ does not change significantly, and thus this sliver of area can be closely approximated by a rectangle of width $h$ and height $f(x)$. This can be visualized on the following Figure.
+
+![Approximated Area Under the Curve](./assets/integral_area_approximation.png)
+
+Therefore, we can state the approximation:
+
+$$
+g(x + h) - g(x) \approx h f(x)
+$$
+
+That is:
+
+$$
+\frac{g(x + h) - g(x)}{h} \approx f(x)
+$$
+
+Intuitively, as $h$ approaches zero, this approximation becomes an equality, suggesting that the instantaneous rate of change of the area function $g(x)$ (that is, its derivative) is precisely the height of the original function, $f(x)$.
+
+#### Formal Statement of the Theorem (FTC1)
+
+> [!NOTE] **The Fundamental Theorem of Calculus, Part 1**
+>
+> If $f$ is a function continuous on $[a, b]$, then the function $g$ defined by
+>
+> $$g(x) = \int_a^x f(t) dt$$
+>
+> for $a \leq x \leq b$, is continuous on [a, b] and differentiable on the open interval $(a, b)$, with its derivative given by:
+>
+> $$g'(x) = f(x)$$
+
+#### Formal Proof
+
+The formal proof of FTC1 rigorously confirms this intuition using established theorems. The logical flow proceeds as follows:
+
+1. **Express the Difference Quotient as an Integral**: The definition of the derivative of $g(x)$ begins with the difference quotient. If $x$ and $x + h$ are in $(a, b)$, then
+
+$$
+g(x + h) - g(x) = \int_a^{x + h} f(t) dt - \int_a^{x} f(t) dt
+$$
+
+By the [Properties of the Definite Integral](/math/cet/05_integrals/#properties-of-the-definite-integral):
+
+$$
+= \left(\int_a^{x} f(t) dt + \int_x^{x + h} f(t) dt \right) - \int_a^{x} f(t) dt
+$$
+
+$$
+= \int_x^{x + h} f(t) dt
+$$
+
+So, for $h \neq 0$
+
+$$
+g(x + h) - g(x) = \int_x^{x + h} f(t) dt
+$$
+
+$$
+\frac{g(x + h) - g(x)}{h} = \frac{1}{h}\int_x^{x + h} f(t) dt
+$$
+
+2. **Apply the Extreme Value Theorem**: Because $f$ is continuous on the interval $[x, x + h]$, by the [Extreme Value Theorem](/math/cet/04_applications_differential_equations/#absolute-and-local-extreme-values), there exist numbers $u$ and $v$ in $[x, x + h]$ such that $f(u) = m$ and $f(v) = M$, such that:
+
+$$
+m \leq f(x) \leq M
+$$
+
+Thus, by the [Properties of the Definite Integral](/math/cet/05_integrals/#properties-of-the-definite-integral):
+
+$$
+m(x + h - x) \leq \int_x^{x + h} f(t) dt \leq M(x + h - x)
+$$
+
+$$
+mh \leq \int_x^{x + h} f(t) dt \leq Mh
+$$
+
+3. **Apply the Squeeze Theorem**: Dividing the inequality by $h$ (for $h > 0$) and substituting the expression from step 1 yields an inequality for the difference quotient. Thus:
+
+$$
+m \leq \frac{1}{h}\int_x^{x + h} f(t) dt \leq M
+$$
+
+$$
+f(u) \leq \frac{1}{h}\int_x^{x + h} f(t) dt \leq f(v)
+$$
+
+As $h$ approaches $0$, the interval $[x, x + h]$ shrinks, forcing both $u$ and $v$ to approach $x$. Since $f$ is continuous, $f(u)$ and $f(v)$ must both approach $f(x)$. By the Squeeze Theorem, the difference quotient trapped between them must also approach $f(x)$.
+
+$$
+\lim_{h \to 0} f(u) = \lim_{u \to x} f(u) = f(x)
+$$
+
+and
+
+$$
+\lim_{h \to 0} f(v) = \lim_{v \to x} f(v) = f(x)
+$$
+
+Thus, by the Squeeze Theorem
+
+$$
+\lim_{h \to 0} \frac{1}{h}\int_x^{x + h} f(t) dt = \lim_{h \to 0} \frac{g(x + h) - g(x)}{h} = g'(x) = f(x)
+$$
+
+This concludes the proof that $g'(x) = f(x)$.
+
+#### Interpretation and Application
+
+Using Leibniz notation, FTC1 can be expressed with remarkable conciseness:
+
+$$
+\frac{\delta}{\delta x} \int_a^x f(t) dt = f(x)
+$$
+
+This equation provides a powerful statement: the process of differentiation "undoes" or inverts the process of integrating a function with respect to its upper limit. If we begin with a continuous function $f$, integrate it to define a new function, and then differentiate that new function, we recover the original function $f$.
+
+### The Fundamental Theorem of Calculus, Part 2
+
+The second part of the Fundamental Theorem of Calculus (FTC2) is the result that revolutionized the practical application of calculus. It provides a direct and efficient method for calculating the exact value of a definite integral, obviating the arduous process of computing the limit of Riemann sums.
+
+#### Formal Statement of the Theorem (FTC2)
+
+> [!NOTE] **The Fundamental Theorem of Calculus, Part 2**
+>
+> If $f$ is continuous on the closed interval $[a, b]$, then
+>
+> $$\int_a^b f(x) dx = F(b) - F(a)$$
+>
+> where $F$ is any antiderivative of $f$ (that is, a function such that $F' = f$).
+
+This result is remarkable. The definite integral on the left side of the equation is defined as a limit of sums that depends on all values of the function $f(x)$ across the entire interval from $a$ to $b$. Yet, FTC2 reveals that this value can be determined by simply finding an antiderivative, $F(x)$, and evaluating it at only two points: the endpoints of the interval, $a$ and $b$.
+
+![Visualization of FCT2](./assets/visualization_fundamental_calculus_theorem_2.png)
+
+The power of FTC2 comes with a critical condition: **the function $f(x)$ must be continuous over the entire interval $[a, b]$**. If this condition is violated, the theorem cannot be applied, and doing so leads to an incorrect result.
+
+#### Formal Proof
+
+Let $g(x) = \int_a^x f(t) dt$. We know from [Part 1](/math/cet/05_integrals/#the-fundamental-theorem-of-calculus-part-1) that $g'(x) = f(x)$. If $F$ is any other antiderivative of $f$ on $[a, b]$, then by [the definition of the general antiderivative](/math/cet/04_applications_differential_equations/#antiderivatives) we know that:
+
+$$
+F(x) = g(x) + C
+$$
+
+for $a < x < b$. But both $F$ and $g$ are continuous on $[a, b]$ and so, by taking limits of both sides (as $x \to a^+$ and $x \to b^-$), we see that it also holds when $x = a$ and $x = b$. So
+
+$$
+F(x) = g(x) + C
+$$
+
+for all $x \in [a, b]$. If we let $x = a$ in the formula for $g(x)$, we get
+
+$$
+g(a) = \int_a^a f(t) dt = 0
+$$
+
+So using the previous expression with $x = b$ and $x = a$, we have
+
+$$
+F(b) - F(a) = \left[g(b) + C\right] - \left[g(a) + C\right]
+$$
+
+$$
+g(b) - g(a) = g(b) = \int_a^b f(t) dt
+$$
+
+#### Interpretation and Application
+
+Although the theorem may be surprising at first glance, it becomes plausible if we interpret it in physical terms. If $v(t)$ is the velocity of an object and $s(t)$ is its position at time $t$, then $v(t) = s'(t)$, so $s$ is an antiderivative of $v$. We made the observation that the area under the velocity curve is equal to the distance traveled. In symbols:
+
+$$
+\int_a^b v(t) dt = s(b) - s(a)
+$$
+
+That is exactly what FTC2 says.
+
+We often use the notation:
+
+$$
+F(x) \Big|_a^b = F(b) - F(a)
+$$
+
+So the equation of FTC2 can be written as
+
+$$
+\int_a^b f(x) dx = F(x) \Big|_a^b
+$$
+
+### Differentiation and Integration as Inverse Processes
+
+Taken together, the two parts of the Fundamental Theorem of Calculus provide a complete and rigorous statement on the inverse relationship between differentiation and integration. By viewing them side-by-side, we can see how they form a perfectly symmetrical argument.
+
+1. **Part 1**: If
+
+$$
+g(x) = \int_a^x f(t) dt
+$$
+
+then
+
+$$
+g'(x) = f(x)
+$$
+
+2. **Part 2**: $\int_a^b f(x) dx = F(b) - F(a)$, where $F' = f$
+
+These two statements describe the same fundamental connection from opposite perspectives.
+
+![Differentiation and Integration are Inverse Processes](./assets/integration_differentiation_inverse.png)
+
+1. **Differentiation Undoes Integration**: Part 1, expressed in Leibniz notation, gives us the clear statement:
+
+$$
+\frac{\delta}{\delta x} \int_a^x f(t) dt = f(x)
+$$
+
+This equation shows that if we begin with a continuous function $f$, perform the operation of integration (with a variable upper limit), and then perform the operation of differentiation, we are returned to the original function $f$.
+
+2. **Integration Undoes Differentiation**: Part 2 can be adapted to demonstrate the reverse process. By replacing $f(x)$ with $F'(x)$, we can write:
+
+$$
+\int_a^x F'(t) dt = F(x) - F(a)
+$$
+
+This equation shows that if we begin with a function $F$, differentiate it to get $F'$, and then integrate the result, we recover the original function $F$, but not uniquely. We recover the function $F$ adjusted by the constant $F(a)$. This result is a direct manifestation of the fact that integration recovers a family of functions, $F(x) + C$. The definite integral from $a$ to $x$ selects the specific member of that family for which the value at $x = a$ is zero, thus pinning down the constant of integration.
+
+Taken together, these two symmetrical results provide the rigorous mathematical proof that differentiation and integration are inverse processes. This powerful relationship is what makes the theorem so central to the structure and application of calculus.
+
+The discovery and exploitation of this theorem transformed mathematics. It converted previously formidable problems of finding areas, volumes, and lengths of curves—challenges that were once accessible only to a "genius"—into a systematic and reliable method.
