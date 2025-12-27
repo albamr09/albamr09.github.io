@@ -181,23 +181,29 @@ So far we have only looked at in finite sets that are countable. There are indee
 
 ## Uncontable Sets, Cantor's Theorem and the Schroeder-Bernstein Theorem
 
-Before beginning, though, we must recall some simple facts about the decimal expansion of real numbers. We will assume that any nonnegative real number $x$ can be written in decimal form
+The study of infinite sets reveals a landscape that is far more complex and structured than finite arithmetic might suggest. While the set of integers represents a foundational, "countable" infinity, [Georg Cantor's](https://en.wikipedia.org/wiki/Georg_Cantor) pioneering work in the late 19th century demonstrated that not all infinities are the same size.
+
+This section explores the foundational theorems that formally differentiate between sizes of infinite sets, moving beyond the countably infinite to the vast realm of the uncountable. The purpose of this analysis is to construct a coherent narrative from the foundational theorems of Cantor and the Schroeder-Bernstein Theorem, demonstrating how they collectively dismantle the intuitive notion of a single infinity and erect in its place a structured, infinite hierarchy of cardinal numbers.
+
+To properly analyze the proofs that follow, it is essential to establish a clear and consistent convention for representing real numbers. This groundwork ensures that the arguments, which rely on the unique representation of numbers, are rigorous and unambiguous.
+
+A non-negative real number $x$ can be expressed through its decimal expansion, represented by the formula:
 
 $$
 x = a_0.a_1a_2a_3 \cdots = a_0 + \frac{a_1}{10} + \frac{a_2}{10^2} + \frac{a_3}{1000}
 $$
 
-where $a_0, a_1, a_2, a_3, \cdots$ are nonnegative integers and $a_1, a_2, a_3, \cdots$ are between $0$ and $9$.
+, where $a_0, a_1, a_2, a_3, \cdots$ are nonnegative integers and $a_1, a_2, a_3, \cdots$ are between $0$ and $9$.
 
-Every such expansion in fact represents a real number. Such an expansion is unique except for expansions like
+A critical issue with this representation is its potential for non-uniqueness. For instance, the value one-half can be written as both $0.5000...$ and $0.4999...$. This ambiguity arises whenever a decimal expansion could terminate, as it can also be expressed with an expansion ending in an infinite string of $9$s.
 
-$$
-\frac{1}{2} = 0.5000 \cdots = 0.4999 \cdots
-$$
+To ensure a unique representation for every real number, this analysis adopts the standard convention used in the underlying proofs: **decimal expansions that end in an infinite string of $9$s will not be used**.
 
-That is, the decimal representation is unique unless the expansion ends in an infinite string of $9$s.
+With these conventions established, we can proceed to the first major result: a formal demonstration that certain infinite sets, most notably the set of all real numbers, are fundamentally and provably larger than the set of integers.
 
-### Uncountable Sets
+### The Uncountability of the Continuum
+
+The proof that the set of real numbers is "uncountable" is a cornerstone of modern set theory. This concept demonstrates that not all infinite sets are numerically equivalent—a counter-intuitive but critical idea that shatters the monolithic view of infinity and introduces a rich structure of different infinite magnitudes. The proof, known as [Cantor's diagonalization argument](/math/dma/07_function_properties/#countable-sets), is a model of mathematical elegance and power.
 
 > [!TIP] **Theorem 6.2.1**
 >
@@ -205,70 +211,111 @@ That is, the decimal representation is unique unless the expansion ends in an in
 
 **Proof**
 
-The proof is by contradiction. We assume that $[0, 1)$ is countable and derive a contradiction. If $[0, 1)$ is countable, then there is a bijection $f: \mathbb{Z}^+ \to [0, 1)$. For each $i \in \mathbb{Z}^+$ let $x_i = f(i)$. Now by the previous remarks, each $x_i$ has a decimal expansion of the form
+The proof proceeds by contradiction.
+
+1. **Initial Assumption**: We begin by assuming that the interval $[0, 1)$ is countable. If this were true, it would mean that all the numbers in this interval could be put into a one-to-one correspondence with the set of positive integers, $\mathbb{Z}^+$. This implies the existence of a bijection $f: \mathbb{Z}^+ \to [0, 1)$.
+
+2. **Enumeration**: If such a function $f$ exists, we can list every number in the interval $[0, 1)$, that is assign a unique integer to a unique value in $[0, 1)$ for all values on said interval. Let $x_i = f(i)$ for each positive integer $i$. Using our convention for unique decimal expansions, we can represent each $x_i$ as:
 
 $$
-x_i = 0.a_1^ia_2^i \cdots
+x_1 = 0.a_1^1a_2^1 \cdots
 $$
 
-where $a_1^i, a_2^i$ are integers between $0$ and $9$.
+$$
+x_2 = 0.a_1^2a_2^2 \cdots
+$$
 
-We will derive our contradiction by constructing a real number $x$ in $[0 , 1)$ that is not equal to any $x_i$.
+$$
+x_3 = 0.a_1^3a_2^3 \cdots
+$$
 
-Let $x = 0.b_1b_2b_3 \cdots$ where $b_i = 0$ if $a_i^i = 1$ and $b_i = 1$ if $a_i^i \neq 1$. This
-means that $x$ differs from $x_i$ in the first decimal place, differs from $x_2$ in the second decimal place, differs from $x_3$ in the third decimal place, and so on.
+and so on, creating a comprehensive list of all numbers in $[0, 1)$.
 
-Hence $x \neq x_i$ for all $i$. In other words, $x \neq f(i)$ for any $i \in \mathbb{Z}^+$. But this contradicts the fact that $f$ is surjective. Thus $[0, 1)$ cannot be countable and therefore must be uncountable.
+3. **Construction of a New Number**: The next step is to construct a new real number, $x$, that is also in the interval $[0, 1)$ but is demonstrably not on our list. We define the digits of $x$ by referencing the "diagonal" of our list of numbers (the digits $a_1^1$, $a_2^2$, $a_3^3$, etc.). Let
 
-Since we now know that there are subsets of $\mathbb{R}$ that are uncountable, we will consider the question of the numerical equivalence of such sets. For example, it is not hard to prove that every closed interval $[a, b]$ is numerically equivalent to $[0, 1]$. It follows that any two closed intervals $[a, b]$ and $[e, d]$ are numerically equivalent. Similarly, any two bounded open intervals are numerically equivalent.
+$$
+x = 0.b_1b_2b_3 \cdots
+$$
+
+where $b_i = 0$ if $a_i^i = 1$ and $b_i = 1$ if $a_i^i \neq 1$.
+
+![Cantor Theorem Visualization](./assets/cantors_theorem_visualization.png)
+
+4. **Deriving the Contradiction**: By this construction, the new number $x$ is guaranteed to be different from every number $x_i$ on our list. Specifically, $x$ differs from $x_1$ in the first decimal place, from $x_2$ in the second decimal place, and so on. For any given $i$, $x \neq x_i$ because $b_i \neq a_i^i$. We have constructed a number $x$ that is clearly within the interval $[0, 1)$ but is not in the image of the function $f$.
+
+5. **Conclusion**: The existence of this number $x$ contradicts our initial assumption that $f$ is a surjective function mapping $\mathbb{Z}^+$ onto $[0, 1)$. Since no such surjective function can exist, there can be no bijection between $\mathbb{Z}^+$ and $[0, 1)$. Therefore, the interval $[0, 1)$ must be uncountable.
+
+This foundational theorem has several immediate and significant corollaries.
+
+> [!TIP] **Corollary 6.2.2**
+>
+> The closed interval $[0, 1]$ and the set of all real numbers, $\mathbb{R}$, are also uncountable.
+
+The reasoning is direct: if either of these sets were countable, then their subset $[0, 1)$ would also have to be countable. Since we have just proven $[0, 1)$ to be uncountable, this is a contradiction.
 
 Any two sets that are numerically equivalent to $\mathbb{R}$ have the same cardinality. We denote this cardinality by $c$, called the **power of the continuum**. $c$ is our second example of an infinite cardinal number. It follows from the previous remarks that every open or closed interval of real numbers has cardinality $c$.
 
+Having established a specific example of an uncountable set, we now turn to Cantor's Theorem, a more general result that provides a universal mechanism for generating an infinite hierarchy of ever-larger cardinalities.
+
 ### Cantor's Theorem
 
-Since there is a natural ordering of the positive integers, it is possible to determine the larger of two finite cardinal numbers. What about the infinite cardinals? Since $\aleph_0$ is the cardinality of $\mathbb{Z}$ and $c$ is the cardinality of $\mathbb{R}$, it makes sense that $\aleph_0$ be a "smaller" cardinal number than $c$ because $\mathbb{Z}$ is a "smaller" set than $\mathbb{R}$: $\mathbb{Z}$ is a subset of $\mathbb{R}$ and $\mathbb{Z}$ is not numerically equivalent to $\mathbb{R}$. We are led to the following definition of what it means for one set to be "smaller" than another.
+The discovery of uncountable sets naturally leads to the question of how to compare the sizes of different infinite sets. Cantor's Theorem provides a powerful and universal method for doing so. It is a mechanism for proving that for any given set, no matter how large, another set whose cardinality is strictly greater can always be constructed. This theorem reveals that there is not just one or two types of infinity, but an endless, ascending hierarchy of them.
+
+To formalize this concept, we must first define the ordering of cardinalities.
 
 > [!NOTE] **Cardinality Inequality**
 >
-> Let $A$ And $B$ be sets contained in some universal set $U$. We say that $A \prec B$ if there is an injection $f: A \to B$ but not bijection from $A$ to $B$.
+> Let $A$ and $B$ be sets.
 >
-> We say that $A \preceq B$ if $A \prec B$ or if $A$ is numerically equivalent to $B$.
+> - We say that $A \prec B$ if there exists an injection from $A$ to $B$, but no bijection exists between them.
+> - We say that $A \preceq B$ if either $A \prec B$ or $A$ is numerically equivalent to $B$.
 
 Now if we have two cardinal numbers, say $\textbf{x}$ and $\textbf{y}$, we will say that $\textbf{x} \prec \textbf{y}$ if $\textbf{x}$ is the cardinality of set $X$, $\textbf{y}$ is the cardinality of a set $Y$, and $X \prec Y$.
 
 Similarly, we will say that $\textbf{x} \preceq \textbf{y}$ if $\textbf{x}$ is the cardinality of set $X$, $\textbf{y}$ is the cardinality of a set $Y$, and $X \preceq Y$.
 
-> [!TIP] **Lemma 6.2.4**
->
-> Let $A, B, C, D$ be sets contained in a universal set $U$. Suppose that $A \approx B$, $C \approx D$. If $A \prec C$, then $B \prec D$. If $A \preceq C$, then $B \preceq D$.
-
-So we can now say that $\aleph_0 \prec c$.
-
-We might ask if there are any infinite cardinal numbers $\textbf{x}$ such that $\textbf{x} \prec \aleph_0$. The answer is no since it can be shown, although it is difficult, that every infinite set contains a countably infinite subset.
-
-Are there other infinite cardinal numbers besides $\aleph_0$ and $c$? The answer is yes, and in fact there are an infinite number of infinite cardinals. The following result, known as Cantor's Theorem, explains why.
+Using this framework, we can formally state the relationship between the cardinality of the positive integers ($\aleph_0$) and the cardinality of the continuum ($c$). Since there exists an injection from the integers to the reals (e.g., the identity map on the subset of integers) but no bijection, it follows that the cardinality of the integers is strictly less than the cardinality of the continuum, written as $\aleph_0 \prec c$.
 
 > [!NOTE] **Cantor's Theorem**
 >
 > Let $A$ be a set contained in a universal set $U$. Let $\mathcal{P}(A)$ denote the power set of $A$. Then $A \prec \mathcal{P}(A)$.
 
-**Proof**
+This theorem states that the cardinality of any set $A$ is strictly less than the cardinality of its power set, $\mathcal{P}(A)$.
 
-We first need to show that there is an injection $f: A \to \mathcal{P}(A)$. Such an injection must map elements of $A$ to subsets of $A$. There is a natural way to do this. Let $a \in A$ and map a to the subset $\\{a\\}$; that is, $f(a) = \\{a\\}$. It is easy to see that $f$ is injective: for if $f(a) = f(b)$ for some $a, b \in A$, then $\\{a\\} = \\{b\\}$ and hence $a = b$.
+![Cantor Theorem Example](./assets/cantors_theorem_example.png)
 
-Now we will show that there is no surjective function from $A$ to $\mathcal{P}(A)$. Suppose, on the contrary, that there is a surjective function $g: A \to \mathcal{P}(A)$. We will derive a contradiction.
-
-If $a \in A$, then $g(a)$ is a subset of $A$. Now the element $a$ may or may not be an element of this subset; that is, for some $a$, we may have $a \in g(a)$ and for some $a$, we may have $a \notin g(a)$.
-
-Let $B = \\{a \in A | a \notin g(a)\\}$. $B$ is the set of elements a of $A$ that get mapped to a subset of $A$ that does not contain $a$.
-
-Since $g$ is surjective and $B$ is a subset of $A$, $B$ must be in the image of $g$. This will be true even if $B$ is the empty set. So there exists an element $a_0$ in $A$ such that $g(a_0) = B$. Now we consider the question: is $a_o \in B$ or not? Here is where we will derive a contradiction by showing that either possibility leads to an absurdity.
-
-Suppose $a_o \in B$. Then, by definition of $B$, $ao \notin g(a_o)$. But $g(a_o) = B$, so we are led to the contradictory statement that if $a_o \in B$, then $a_o \notin B$.
-
-Now suppose that $a_0 \notin B$. Then it follows that $a_o \in g(a_o) = B$. So if $a_o \notin B$, then $a_o \in B$! There is no way out of this contradiction except to conclude that $B$ is not in the image of $g$, contradicting the fact that $g$ is surjective. Therefore, no such surjective function can exist.
-
-We have thus proved that $A \prec \mathcal{P}(A)$.
+> **Proof**. The proof is in two parts.
+>
+> **Part 1**: Proving $A \preceq \mathcal{P}(A)$
+>
+> To show that $A \preceq \mathcal{P}(A)$, we must demonstrate the existence of an injection from $A$ to $\mathcal{P}(A)$. We can define a natural function $f: A \to \mathcal{P}(A)$ as:
+>
+> $$f(a) = \{a\}$$
+>
+> This function maps each element $a$ in $A$ to the singleton set containing only that element. This function is injective because if $f(a) = f(b)$, then $\\{a\\} = \\{b\\}$, which by definition of set equality means $a = b$. The existence of this injection establishes that $A \preceq \mathcal{P}(A)$.
+>
+> **Part 2**: Proving No Surjection Exists from $A$ to $\mathcal{P}(A)$
+>
+> The second part of the proof is to show that no bijection can exist between $A$ and $\mathcal{P}(A)$ by proving that no function from $A$ to $\mathcal{P}(A)$ can be surjective.
+>
+> Assume, for the sake of contradiction, that a surjective function $g: A \to \mathcal{P}(A)$ does exist. This means that every subset of $A$ is the image of at least one element of $A$ under $g$.
+>
+> We construct a specific subset of $A$, which we will call $B$, defined as follows:
+>
+> $$B = \{a \in A | a \notin g(a)\}$$
+>
+> In words, $B$ is the set of all elements in $A$ that are not contained in the subset they map to under the function $g$.
+>
+> ![Cantor Theorem Paradoxical Set](./assets/cantors_theorem_proof_1.png)
+>
+> Deriving the Contradiction: Since we assumed $g$ is surjective and $B$ is a subset of $A$, $B$ must be in the image of $g$. This means there must be some element $a_0 \in A$ such that $g(a_0) = B$. Now, we ask a simple question: is the element $a_0$ in the set $B$?
+>
+> - Case 1: Assume $a_0 \in B$. By the definition of $B$, if $a_0$ is an element of $B$, then it must satisfy the condition $a_0 \notin g(a_0)$. But since we know $g(a_0) = B$, this implies $a_0 \notin B$. This is a direct contradiction.
+> - Case 2: Assume $a_0 \notin B$. If $a_0$ is not in $B$, it must fail the condition for membership in $B$. This means $a_0 \in g(a_0)$. Again, since $g(a_0) = B$, this implies $a_0 \in B$. This is also a contradiction.
+>
+> Both possibilities lead to an inescapable contradiction. Therefore, our initial assumption must be false, and no such surjective function $g$ can exist.
+>
+> Since there is an injection from $A$ to $\mathcal{P}(A)$ but no surjection, there can be no bijection. This establishes that $A \prec \mathcal{P}(A)$, meaning the cardinality of any set is strictly less than the cardinality of its power set.
 
 ### The Continuum Hypothesis
 
@@ -282,37 +329,25 @@ However, in 1963, [Paul Cohen](https://wikipedia.org/wiki/Paul_Cohen) (1934-2007
 
 ### The Schroeder-Bernstein Theorem
 
-Note that $\preceq$ is a relation on $\mathcal{P}(U)$, where $U$ is a universal set. But what kind of a relation is it?
+While Cantor's Theorem provides a way to create sets of strictly larger cardinality, the Schroeder-Bernstein Theorem offers a powerful method for proving that two sets are of the same size. Its utility lies in providing a non-constructive way to establish numerical equivalence. If a set $A$ can be injectively mapped into $B$ and $B$ can be injectively mapped into $A$, the theorem allows the conclusion that they have the same cardinality, even if the injections are not inverses.
 
 > [!NOTE] **Schroeder-Bernstein Theorem**
 >
 > Let $A$ and $B$ bet sets, and suppose that $A \preceq B$ and $B \preceq A$. Then $A \approx B$.
 
-**Proof**
-
-Let $f: A \to B$ and $g: B \to A$ be injections. We need to construct a bijection $h: A \to B$, so let $a \in A$. The key is to trace a back as far as possible through $f$ and $g$. That is, if $a = a_1 \in g(B)$, let $b_1$ be the unique element of $B$ such that $a_1 = g(b_1)$; if $b_1 \in f(A)$, let $a_2$ be the unique element of $A$ such that $b_1 = f(a_2)$; if $a_2 \in g(B)$, let $b_2$ be the unique element of $B$ such that $a_2 = g(b_2)$; and so on. We might call this tracing the ancestry of $a$, and we can visualize it as follows:
+The formal proof constructs the required bijection $h$ by partitioning the set $A$ based on the "ancestry" of its elements. The core idea is to trace an element $a \in A$ backward by alternately applying the injections. An element $a$ comes from $g(b_1)$ for some $b_1 ∈ B$, which in turn may come from $f(a_2)$ for some $a_2 ∈ A$, and so on. This chain of ancestors can either terminate or continue infinitely.
 
 ![Numerically Equivalency Tracing](./assets/numerically_equivalent_proof.png)
 
-We thus construct a set $\\{a = a_1, b_1, a_2, b_2, a_3, b_3\\}$ of ancestors of $a$. Now this may be a finite set: we may reach an oldest ancestor $a_i \notin g(B)$ or $b_i \notin f(A)$. Or the process may not stop, yielding an infinite set of ancestors. So let us define the following subsets of $A$:
+This process sorts the elements of $A$ into three disjoint categories:
 
-$$
-A_A = \{a \in A | a \text{ has an oldest ancestor } a_i \in A\}
-$$
+- $A_A$: The set of elements in $A$ whose chain of ancestors terminates with an "oldest ancestor" in $A$.
+- $A_B$: The set of elements in $A$ whose chain of ancestors terminates with an "oldest ancestor" in $B$.
+- $A_{\infty}$: The set of elements in $A$ whose chain of ancestors continues infinitely without a starting point.
 
-$$
-A_B = \{a \in A | a \text{ has an oldest ancestor } b_i \in B\}
-$$
+![The Shroeder-Bernstein Theorem](./assets/shroeder_bernstein_theorem.png)
 
-$$
-A_{\infty} = \{a \in A | a \text{ has no oldest ancestor }\}
-$$
-
-These sets are clearly pairwise disjoint and $A_A \cup A_B \cup A_{\infty} = A$; that is, every element of $A$ must satisfy exactly one of the three conditions.
-
-Finally, notice that we could perform the same analysis on $B$, and arrive at analogous subsets $B_B, B_A$, and $B_{\infty}$ of B. In fact, $f$ maps $A_A$ bijectively to $B_A$ and $A_{\infty}$, to $B_{\infty}$; similarly, $g$ maps $B_B$ bijectively to $A_B$.
-
-Thus we may construct the bijection $h$ as follows:
+These three sets form a partition of $A$. The bijection $h: A \in B$ is then constructed piecewise.
 
 $$
 h(a) = \begin{cases}
@@ -320,3 +355,33 @@ f(a) & \text{ if } a \in A_A \cup A_{\infty} \\
 b & \text{ where } a = g(b), \text{ if } a \in A_B \\
 \end{cases}
 $$
+
+This construction guarantees a one-to-one correspondence between A and B.
+
+One consequence of the Schroeder-Bernstein Theorem and Cantor's Theorem is that there must be an infinite number of infinite cardinals. For if $A \prec \mathcal{P}(A)$ for any set $A$, then $\mathcal{P}(A) \prec \mathcal{P}(\mathcal{P}(A)) \prec \mathcal{P}(\mathcal{P}(\mathcal{P}(A)))$. Each one of these sets has a different cardinality, giving us an infinite collection of cardinal numbers.
+
+![Infinite Infinites](./assets/cantors_infinite_infinities.png)
+
+The Schroeder-Bernstein theorem provides elegant proofs for equivalences that are otherwise cumbersome to establish.
+
+> [!TIP] **Corollary 6.2.7**
+>
+> The open interval $(0, 1)$ and the closed interval $[0, 1]$ are numerically equivalent.
+
+> The proof follows directly.
+>
+> An injection from $(0, 1)$ to $[0, 1]$ exists because $(0, 1)$ is a subset of $[0, 1]$, so $(0, 1) \preceq [0, 1]$.
+>
+> For the reverse, the interval $[0, 1]$ is numerically equivalent to its subset $[1/4, 3/4]$, which is contained within $(0, 1)$. This establishes an injection from $[0, 1]$ into $(0, 1)$, so $[0, 1] \preceq (0, 1)$.
+>
+> Since injections exist in both directions, the theorem confirms the intervals are numerically equivalent.
+
+### Conclusion: The Counter-Intuitive Nature of Infinity
+
+The theorems explored in this report fundamentally reshaped the mathematical understanding of infinity, revealing it to be a concept of unexpected depth and complexity. The core findings demonstrate a structured, hierarchical universe of infinite magnitudes, governed by precise and provable rules that often defy conventional intuition.
+
+These results were so revolutionary that they were initially met with resistance from parts of the mathematical community. This tension between formal proof and human intuition is a recurring theme in mathematics.
+
+### TLDR
+
+{{< youtube 8ODSWnoxOY0 >}}
