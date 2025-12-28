@@ -116,3 +116,7 @@ Using textNode instead of setting `innerText` will allow us to treat all element
 Finally, we append the `textNode` to the `h1` and the `h1` to the `root`.
 
 ![Render Output](./assets/0_review_1.png)
+
+## The `createElement` Function
+
+Let’s start again with another app. This time we’ll replace React code with our own version of React. We’ll start by writing our own `createElement`.
