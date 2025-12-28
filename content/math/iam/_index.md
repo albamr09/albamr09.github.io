@@ -11,4 +11,5 @@ type: docs
 {{< card link="04_binary_operations_and_relations" title="Binary Operations and Relations" >}}
 {{< card link="05_integers" title="The Integers" >}}
 {{< card link="06_infinite_sets" title="Infinite Sets" >}}
+{{< card link="07_real_and_complex_numbers" title="The Real and Complex Numbers" >}}
 {{< /cards >}}
