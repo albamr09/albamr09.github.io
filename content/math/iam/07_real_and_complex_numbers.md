@@ -337,3 +337,7 @@ The rigorous formalization of the real number system was a major focus of 19th-c
 ![Formalization of the Real Number System](./assets/real_number_system_formalization.png)
 
 These sophisticated constructions aimed to define irrational numbers based on the more accepted foundation of rational numbers, thereby capturing the property of continuity essential to the real number line.
+
+### The Real Numbers: TLDR;
+
+{{< youtube OKFQEGQiBFM >}}
