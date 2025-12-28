@@ -597,6 +597,8 @@ This result is remarkable. The definite integral on the left side of the equatio
 
 The power of FTC2 comes with a critical condition: **the function $f(x)$ must be continuous over the entire interval $[a, b]$**. If this condition is violated, the theorem cannot be applied, and doing so leads to an incorrect result.
 
+Why is continuity a requirement? The FTC cannot be applied to functions with infinite discontinuities. If the function is not continuous and has an infinite number of jump discontinuities, then the integral does not exist.
+
 #### Formal Proof
 
 Let $g(x) = \int_a^x f(t) dt$. We know from [Part 1](/math/cet/05_integrals/#the-fundamental-theorem-of-calculus-part-1) that $g'(x) = f(x)$. If $F$ is any other antiderivative of $f$ on $[a, b]$, then by [the definition of the general antiderivative](/math/cet/04_applications_differential_equations/#antiderivatives) we know that:
