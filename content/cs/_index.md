@@ -20,3 +20,9 @@ toc: false
 {{< cards >}}
 {{< card link="/cs/rtgw" title="3D Graphics with WebGL 2" icon="cube" >}}
 {{< /cards >}}
+
+## Web Development
+
+{{< cards >}}
+{{< card link="/cs/react" title="An In-Depth Walk Inside React" icon="lightning-bolt" >}}
+{{< /cards >}}
