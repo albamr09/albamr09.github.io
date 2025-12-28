@@ -189,6 +189,151 @@ The study of fields reveals a fascinating contrast between the finite and the in
 - **Finite Fields**: Thanks to the work of [Galois](https://wikipedia.org/wiki/%C3%89variste_Galois) and others like [E. H. Moore](https://wikipedia.org/wiki/E._H._Moore), the structure of all possible finite fields is very well understood. Mathematicians have a clear picture of how they are constructed and how they relate to one another.
 - **Infinite Fields**: The nature of infinite fields, especially algebraic number fields like $\mathbb{Q}(\sqrt{2})$, remains a vast and complex landscape. This area continues to be an active and rich domain of modern mathematical research, with many open questions still driving discovery.
 
-### TLDR
+### Fields: TLDR;
 
 {{< youtube Mz0lWR9FlDg >}}
+
+## The Real Numbers
+
+### Introduction
+
+The fundamental property that distinguishes the set of real numbers from the set of rational numbers is its completeness, formally captured by the **Least Upper Bound Axiom**. This axiom posits that any non-empty subset of real numbers that is bounded above must have a least upper bound within the real numbers. This property underpins the continuous nature of the real number line and is not shared by the rational numbers.
+
+The profound consequences of this axiom include the **Archimedean Principle**, which establishes that for any two positive real numbers, multiples of one can exceed the other, precluding the existence of infinitely large or small quantities. A direct result of this principle is the density of the rational numbers within the reals, proving that a rational number can be found between any two distinct real numbers.
+
+### Bounded Sets and Bounds
+
+The analysis of the real number system begins with the concepts of boundedness, which provide the necessary framework for understanding its completeness property.
+
+> [!NOTE] **Boundedness**
+>
+> - **Bounded Above**: A non-empty set of real numbers $S$ is considered **bounded above** if there exists a real number $x$ such that $a \leq x$ for all $a \in S$. The number $x$ is called an **upper bound** for $S$.
+> - **Bounded Below**: A non-empty set of real numbers $S$ is considered bounded below if there exists a real number $y$ such that $a \geq y$ for all $a \in S$. The number $y$ is called a **lower bound** for $S$.
+
+> [!NOTE] **Bounded Set**
+>
+> A set $S$ is referred to as **bounded** if it is both bounded above and bounded below.
+
+![Example of Bounded Sets](./assets/example_bounded_sets.png)
+
+> [!TIP] **Least Upper Bound**
+>
+> A **Least Upper Bound** (lub $S$), also known as **the supremum**, it is an upper bound $x$ for a set $S$ with the property that $x \leq z$ for any other upper bound $z$ of $S$.
+
+> [!TIP] **Greatest Lower Bound**
+>
+> A **Greatest Lower Bound** (glb $S$), also known as **the infimum**, it is a lower bound $y$ for a set $S$ with the property that $y \geq z$ for any other lower bound $z$ of $S$.
+
+![Example of LUB and GLB](./assets/example_lub_glb.png)
+
+If they exist, the least upper bound and greatest lower bound of a set are unique.
+
+The distinction between bounds and the specific concepts of supremum and infimum is clarified by the following examples. Notably, the supremum or infimum of a set may or may not be an element of the set itself.
+
+| Set (S)        | Description       | Bounded Above/Below | Upper/Lower Bounds                                     | Least Upper Bound (lub $S$) | Greatest Lower Bound (glb $S$) |
+| -------------- | ----------------- | ------------------- | ------------------------------------------------------ | --------------------------- | ------------------------------ |
+| $[0, 1]$       | Closed Interval   | Bounded             | Upper: Any number $\geq 1$, Lower: Any number $\leq 0$ | $1$                         | $0$                            |
+| $(0, 1)$       | Open Interval     | Bounded             | Upper: Any number $\geq 1$, Lower: Any number $\leq 0$ | $1$                         | $0$                            |
+| $\mathbb{Z}^+$ | Positive Integers | Bounded Below       | Lower: Any number $\leq 1$                             | Does not exist              | $1$                            |
+| $(-\infty, 0]$ | Interval          | Bounded Above       | Upper: Any number $\geq 0$                             | $0$                         | Does not exist                 |
+
+### The Completeness Axiom
+
+The structure of the real numbers as a complete ordered field is established by a final axiom that is not satisfied by the rational numbers.
+
+> [!NOTE] **Least Upper Bound Axiom**
+>
+> Any nonempty subset of $\mathbb{R}$ that is bounded above has a least upper bound.
+
+This axiom guarantees that there are no "gaps" in the real number line. A direct consequence, which can be proven from the axiom, is that any nonempty subset of $\mathbb{R}$ that is bounded below has a greatest lower bound.
+
+A critical consequence of the **Least Upper Bound Axiom** is the **Archimedean Principle**, which formalizes the notion that the real numbers cannot contain infinitesimal or infinitely large elements relative to one another.
+
+> [!NOTE] **Archimedean Principle**
+>
+> Let $a$ and $b$ be positive real numbers. Then there exists a positive integer $n$ such that $na > b$.
+
+This theorem states that no real number is infinitely large relative to another. Given enough "steps" of size $a$, one can always surpass any distance $b$.
+
+> **Proof**
+>
+> The proof proceeds by contradiction, assuming that $na \leq b$ for all $n \in \mathbb{Z}^+$.
+>
+> The set
+>
+> $$S = \{na | n \in \mathbb{Z}^+\}$$
+>
+> would then be bounded above by $b$ and thus by the Least Upper Bound Axiom, $S$ has a least upper bound $z$.
+>
+> Since $a > 0$, then $z - a < z$. So $z - a$ is not an upper bound for $S$. Therefore $\exists ma \in S$, such that $ma > z - a$. That is
+>
+> $$ma > z - a$$
+>
+> $$ma + a > z$$
+>
+> $$(m + 1)a > z$$
+>
+> Since $(ma + 1)a \in S$, this contradicts that $$z$$ is an upper bound.
+>
+> Thus the initial assumption must be false and $\exists n \in \mathbb{Z}^+$, such that $na > b$.
+
+A corollary to this principle further clarifies its implications:
+
+> [!TIP] **Corollary 7.2.4**
+>
+> If $b$ is any positive real number, then there exists a positive integer $n$ such that $\frac{1}{n} < b$.
+
+This goes to say that for every positive real number $b$, there exists an smaller rational number, namely $\frac{1}{n}$.
+
+Building upon the Archimedean Principle, it can be proven that the rational numbers are dense in the real numbers, meaning a rational number can always be found between any two distinct real numbers.
+
+> [!NOTE] **Theorem 7.2.6**
+>
+> Between any two real numbers there is a rational number.
+
+This means that the rational numbers are interwoven throughout the real number line. No matter how closely you magnify and interval, you will always find a rational number.
+
+![Density of Rational Numbers in the Real numbers](./assets/density_of_real_rational_numbers.png)
+
+The proof leverages the Archimedean Principle to demonstrate that for any real numbers $x < y$, there exists an integer $n$ such that $ny - nx > 1$. This ensures that an integer $m$ can be found such that $nx < m < ny$, which implies that the rational number $\frac{m}{n}$ lies between $x$ and $y$.
+
+### The Incompleteness of the Rational Number System
+
+The Least Upper Bound Axiom is the precise property that $\mathbb{R}$ possesses and $\mathbb{Q}$ lacks. This "incompleteness" of the rational numbers can be formally demonstrated.
+
+To prove that $\mathbb{Q}$ does not satisfy the axiom, it is sufficient to find a nonempty subset of $\mathbb{Q}$ that is bounded above but does not have a least upper bound in $\mathbb{Q}$. The canonical set for this demonstration is:
+
+$$
+S = \{x \in \mathbb{Q} | x > 0 \text{ and } x^2 < 2\}
+$$
+
+This set is clearly non-empty (e.g., $1 \in S$) and is bounded above by the rational number $2$. According to the axiom, if $\mathbb{Q}$ were complete, $S$ must have a least upper bound in $\mathbb{Q}$.
+
+> **Proof**
+>
+> If a rational least upper bound $z$ for $S$ were to exist, it must satisfy one of three conditions: $z^2 < 2$, $z^2 > 2$, or $z^2 = 2$.
+>
+> 1. If $z^2 < 2$, one can always find another rational number $r$ such that $z < r$ and $r^2 < 2$. This means $r$ is in $S$, contradicting that $z$ is an upper bound.
+> 2. If $z^2 > 2$, one can find a smaller rational number $r$ such that $r > \sqrt{2}$. This $r$ would also be an upper bound for $S$ but is smaller than $z$, contradicting that $z$ is the least upper bound.
+> 3. If $z^2 = 2$. We know that $\sqrt{2}$ is an irrational number. Therefore, no such rational number $z$ can exist.
+>
+> This contradiction demonstrates that the set $S$ does not have a least upper bound in $\mathbb{Q}$, proving that the rational number system is incomplete.
+
+### Consequential Properties of the Set of Real Numbers
+
+The completeness of the real number system enables fundamental results in mathematics, particularly in calculus and analysis.
+
+> [!TIP] **Theorem 7.2.7**
+>
+> If $x \in \mathbb{R}, x > 0$, then there exists $y \in \mathbb{R}, y > 0$, such that $y^2 = x$.
+
+![Axiom Cascade](./assets/axiom_cascade.png)
+
+The rigorous formalization of the real number system was a major focus of 19th-century mathematics, driven by the need to provide a solid logical basis for theorems in calculus, such as [the Intermediate Value Theorem](/math/cet/02_limits/#the-intermediate-value-theorem). Mathematicians realized that intuitive geometric arguments about a continuous line were insufficient.
+
+- [J. W. R. Dedekind](https://wikipedia.org/wiki/Richard_Dedekind) (1831-1916) developed the concept of "Dedekind cuts," defining real numbers as ordered pairs of sets of rational numbers, effectively partitioning the rational number line at a specific point.
+- [Georg Cantor](https://wikipedia.org/wiki/Georg_Cantor) (1845-1918) defined an irrational number as an infinite sequence of rational numbers that cluster together (a Cauchy sequence).
+
+![Formalization of the Real Number System](./assets/real_number_system_formalization.png)
+
+These sophisticated constructions aimed to define irrational numbers based on the more accepted foundation of rational numbers, thereby capturing the property of continuity essential to the real number line.
