@@ -382,7 +382,7 @@ The theorems explored in this report fundamentally reshaped the mathematical und
 
 These results were so revolutionary that they were initially met with resistance from parts of the mathematical community. This tension between formal proof and human intuition is a recurring theme in mathematics.
 
-### TLDR
+### Uncountable Sets: TL;DR
 
 {{< youtube 8ODSWnoxOY0 >}}
 

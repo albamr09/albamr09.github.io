@@ -693,6 +693,6 @@ Taken together, these two symmetrical results provide the rigorous mathematical 
 
 The discovery and exploitation of this theorem transformed mathematics. It converted previously formidable problems of finding areas, volumes, and lengths of curves—challenges that were once accessible only to a "genius"—into a systematic and reliable method.
 
-### TLDR
+### The Fundamental Theorem of Calculus: TL;DR
 
 {{< youtube 8oSZsP0Q2OE >}}

@@ -189,7 +189,7 @@ The study of fields reveals a fascinating contrast between the finite and the in
 - **Finite Fields**: Thanks to the work of [Galois](https://wikipedia.org/wiki/%C3%89variste_Galois) and others like [E. H. Moore](https://wikipedia.org/wiki/E._H._Moore), the structure of all possible finite fields is very well understood. Mathematicians have a clear picture of how they are constructed and how they relate to one another.
 - **Infinite Fields**: The nature of infinite fields, especially algebraic number fields like $\mathbb{Q}(\sqrt{2})$, remains a vast and complex landscape. This area continues to be an active and rich domain of modern mathematical research, with many open questions still driving discovery.
 
-### Fields: TLDR;
+### Fields: TL;DR
 
 {{< youtube Mz0lWR9FlDg >}}
 
@@ -338,6 +338,191 @@ The rigorous formalization of the real number system was a major focus of 19th-c
 
 These sophisticated constructions aimed to define irrational numbers based on the more accepted foundation of rational numbers, thereby capturing the property of continuity essential to the real number line.
 
-### The Real Numbers: TLDR;
+### The Real Numbers: TL;DR
 
 {{< youtube OKFQEGQiBFM >}}
+
+## The Complex Numbers
+
+In mathematics, we often encounter problems that challenge the limits of our current number system. Consider a seemingly simple polynomial equation:
+
+$$
+x^2 + 1 = 0
+$$
+
+If we try to solve this for $x$, we get $x^2 = -1$. Within the familiar world of real numbers, this equation has no solution. The square of any real number—whether positive, negative, or zero—is always non-negative. To overcome this limitation, mathematicians needed to create a richer set of numbers that contains a solution to this problem and, remarkably, to all other polynomial equations.
+
+To do this, we must dare to define a new type of number. These are the complex numbers. This chapter provides a formal analysis of the complex number system. We will begin by establishing its axiomatic foundation, defining complex numbers as ordered pairs of real numbers and verifying their properties as a field. From there, we will explore their powerful geometric interpretation in the complex plane, which provides profound intuition for their behavior. Finally, we will demonstrate how this algebraic and geometric machinery is applied to the foundational problem of finding the roots of polynomials.
+
+### Axiomatic Construction of the Complex Field
+
+We adopt a formal construction, developed by the mathematician [W. R. Hamilton](https://wikipedia.org/wiki/William_Rowan_Hamilton), based on ordered pairs of real numbers. This axiomatic approach provides a solid logical foundation for the entire system.
+
+> [!NOTE] **Set of Complex Numbers**
+>
+> The set of complex numbers, denoted by $\mathcal{C]$, is the set of all ordered pairs of real numbers, $(a, b)$.
+
+For two complex numbers $(a, b)$ and $(c, d)$ to be equal, their corresponding components must be equal; that is, $a = c$ and $b = d$.
+
+The algebraic structure of C is established by defining two binary operations: addition and multiplication.
+
+- **Addition**: The sum of two complex numbers is defined component-wise:
+
+$$
+(a, b) + (c, d) = (a + c, b + d)
+$$
+
+- **Multiplication**: The product of two complex numbers is defined by the following rule:
+
+$$
+(a, b) * (c, d) = (ac - bd, ad + bc)
+$$
+
+While the definition of addition is intuitive, the definition of multiplication is non-obvious. However, it is precisely this formulation that is essential for generating the unique and powerful algebraic properties of the complex field.
+
+#### Field Properties
+
+With these two operations, the set of complex numbers forms a [field](/math/iam/07_real_and_complex_numbers/#fields), this assertion means that C satisfies all the field axioms. The key elements that establish $\mathbb{C}$ as a field are:
+
+- **Additive Identity**: The identity element for addition is the ordered pair $(0, 0)$.
+- **Additive Inverse**: For any complex number $(a, b)$, its additive inverse is $(-a, -b)$.
+- **Multiplicative Identity**: The identity element for multiplication is the ordered pair $(1, 0)$.
+- **Multiplicative Inverse**: For any non-zero complex number $(a, b)$, its multiplicative inverse exists and is given by the formula: $(\frac{a}{a^2 + b^2}, -\frac{b}{a^2 + b^2})$
+
+The ordered-pair notation is cumbersome for algebraic manipulation, next we must now connect this formalism to the more intuitive $a + bi$ representation.
+
+### Standard Form and Fundamental Algebraic Concepts
+
+The ordered-pair formalism provides a solid logical foundation, but for practical computation, the standard form $a + bi$ is far more convenient. This notation not only simplifies algebraic manipulation but also makes the relationship between the real numbers and their complex extension more explicit.
+
+The bridge between the two notations is the special complex number known as the imaginary unit, which we denote by $i$.
+
+> [!NOTE] **Imaginary Unit**
+>
+> The imaginary unit $i$ is defined as the ordered pair $(0, 1)$.
+
+Using the rule for multiplication, we can compute the square of $i$:
+
+$$
+i^2 = (0, 1) * (0, 1) = ((0\cdot 0) - (0 \cdot 1), (0 \cdot 1) + (1 \cdot 0)) = (-1, 0)
+$$
+
+A critical step in this construction is the identification of complex numbers of the form $(a, 0)$ with the real number $a$. This allows us to consider the real numbers as a subfield of $\mathbb{C}$. Under this convention, the complex number $(-1, 0)$ is identified with the real number $-1$, establishing the fundamental property that distinguishes the complex numbers: $i^2 = -1$.
+
+With the definition of $i$, any complex number $(a, b)$ can be expressed in standard form. We can write $(a, b)$ as the sum of two other complex numbers:
+
+$$
+(a, b) = (a, 0) + (0, b)
+$$
+
+This can be further factored using the definition of multiplication:
+
+$$
+(a, b) = (a, 0) + (b, 0) * (0, 1)
+$$
+
+By identifying $(a, 0)$ with $a$, $(b, 0)$ with $b$, and $(0, 1)$ with $i$, we arrive at the standard notation:
+
+$$
+(a, b) = a + bi
+$$
+
+In this form, $a$ is called the real part of the complex number $z = a + bi$ (denoted $\text{Re} z$), and $b$ is called the imaginary part (denoted $\text{Im} z$). Consequently, two complex numbers are equal if and only if their real and imaginary parts are equal.
+
+![Imaginary Numbers](./assets/imaginary_numbers.png)
+
+#### Complex Conjugation and Absolute Value
+
+Two fundamental concepts associated with any complex number are its conjugate and its absolute value.
+
+- **Complex Conjugate**: The conjugate of a complex number $z = a + bi$ is denoted by $\overline{z}$ and is defined as $\overline{z} = a - bi$.
+- **Absolute Value (Modulus)**: The absolute value, or modulus, of $z = a + bi$ is denoted by $|z|$ and is defined as the non-negative real number $|z| = \sqrt{(a^2 + b^2)}$.
+
+### The Geometric Interpretation: The Complex Plane
+
+The strategic value of visualizing complex numbers cannot be overstated. By representing a complex number a + bi as a point in a two-dimensional plane, we can interpret algebraic operations geometrically.
+
+#### Cartesian Representation
+
+We represent complex numbers on the complex plane, a two-dimensional Cartesian grid where the horizontal axis represents the real part and the vertical axis represents the imaginary part. A complex number $z = a + bi$ corresponds directly to the point with coordinates $(a, b)$.
+
+![Complex Plane](./assets/complex_plane.png)
+
+In this geometric context, the absolute value $|z| = \sqrt{(a^2 + b^2)}$ has a clear interpretation: it is the Euclidean distance of the point $(a, b)$ from the origin $(0, 0)$.
+
+#### Polar Form
+
+In addition to Cartesian coordinates $(a, b)$, any non-zero point in the plane can be described by its polar coordinates $(r, \theta)$, where $r$ is the distance from the origin and $\theta$ is the angle made with the positive real axis. This leads to the **polar form** of a complex number.
+
+A non-zero complex number $z = a + bi$ can be written as: $z = r(\cos \theta + i \sin \theta)$
+
+- The modulus $r$ is equal to the absolute value $|z|$.
+- The angle $\theta$ is called the argument of $z$, denoted $\text{arg} z$.
+
+It is important to note that the argument $\theta$ is not unique; adding any integer multiple of $2 \pi$ to $\theta$ will result in the same point in the complex plane.
+
+#### Geometric Effect of Multiplication
+
+The true power of the polar form becomes evident when multiplying complex numbers.
+
+> [!NOTE] **Theorem 7.3.6.**
+>
+> Let $z = r(\cos \theta + i \sin \theta)$ and $w = s(\cos \phi + i \sin \phi)$.
+>
+> Then their product is: $zw = rs(\cos(\theta + \phi) + i \sin(\theta + \phi))$.
+
+This theorem carries a profound geometric implication: to multiply two complex numbers, you multiply their moduli and add their arguments. The act of multiplication in the complex plane is thus equivalent to a combination of scaling and rotation.
+
+![Complex Multiplication](./assets/complex_multiplication.png)
+
+Multiplying by a complex number $w$ scales the length of $z$ by a factor of $|w|$ and rotates it counter-clockwise by an angle of $\text{arg} w$.
+
+### Powers and Roots of Complex Numbers
+
+The polar representation of complex numbers is exceptionally powerful for simplifying the otherwise algebraically intensive operations of exponentiation and root extraction. The geometric interpretation of multiplication as scaling and rotation provides an intuitive framework for these calculations.
+
+> [!NOTE] **DeMoivre's Theorem**
+>
+> For any positive integer $n$ and complex number $z = r(\cos \theta + i \sin \theta)$:
+>
+> $$z^n = r^n(\cos n\theta + i \sin n\theta)$$
+
+That is, to raise a complex number to the nth power, one simply raises its modulus to the $n$th power and multiplies its argument by $n$.
+
+![DeMoivres Multiplication](./assets/demoivres_multiplication.png)
+
+> [!NOTE] **Finding $n$th Roots**
+>
+> A non-zero complex number $z = r(\cos \theta + i \sin \theta)$ has exactly $n$ distinct $n$th roots, given by the formula:
+>
+> $$w_k = r^{\frac{1}{n}}(\cos(\frac{\theta + 2\pi k}{n}) + i \sin(\frac{\theta + 2 \pi k}{n})) \text{ for } k = 0, 1, 2, ..., n-1$$
+
+This formula generates the $n$ roots, where each root has the same modulus, $r^{\frac{1}{n}}$, meaning they all lie on a circle of this radius. Their arguments are found by taking the principal argument $\frac{\theta}{n}$ and adding successive increments of $\frac{2 \pi}{n}$, effectively partitioning the circle into $n$ equal arcs.
+
+### Application to Solving Polynomial Equations
+
+The theory of complex numbers brings our discussion full circle, providing the complete framework for solving polynomial equations—the very problem that the real numbers alone could not handle.
+
+> [!TIP] **The Conjugate Root Theorem**
+>
+> Let $p(x)$ be a polynomial with real coefficients. If a complex number $z$ is a root of $p(x) = 0$, then its complex conjugate $\overline{z}$ must also be a root.
+
+The previous theorem state that for any polynomial with real coefficients, its non-real roots must always occur in conjugate pairs.
+
+### Conclusion and Historical Perspective
+
+The modern, rigorous understanding of complex numbers is largely credited to the Irish mathematician [W. R. Hamilton](https://wikipedia.org/wiki/William_Rowan_Hamilton). His ordered-pair definition in the 19th century stripped away the lingering mystery of "imaginary" numbers by grounding them in the familiar logic of real number pairs. In the true spirit of mathematical inquiry, Hamilton then wondered if this system could be extended further. He spent 15 years trying to define a consistent multiplication for three-dimensional "triples".
+
+The solution came to him in a flash of insight while walking across the Brougham Bridge in Dublin: the extension required not three, but four dimensions. He famously carved the fundamental formula for his new system—the quaternions—into the stone of the bridge:
+
+$$
+i^2 = j^2 = k^2 = ijk = -1
+$$
+
+To achieve this, Hamilton had to make a radical sacrifice: he abandoned the commutative property of multiplication (for example, $ij = -ji$). In doing so, he opened the door to the study of abstract algebraic structures where familiar axioms might not hold.
+
+The profound nature of Hamilton's work was confirmed later by [F. G. Frobenius](https://wikipedia.org/wiki/Ferdinand_Georg_Frobenius), who proved that the only associative division algebras over the real numbers are the reals themselves, the complex numbers ($\mathbb{C}$), and the quaternions ($\mathbb{H}$).
+
+### The Complex Numbers: TL;DR
+
+{{< youtube Xt1Fpcy52mc >}}
