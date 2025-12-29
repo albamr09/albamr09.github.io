@@ -12,4 +12,5 @@ type: docs
 {{< card link="05_integers" title="The Integers" >}}
 {{< card link="06_infinite_sets" title="Infinite Sets" >}}
 {{< card link="07_real_and_complex_numbers" title="The Real and Complex Numbers" >}}
+{{< card link="08_polynomials" title="Polynomials" >}}
 {{< /cards >}}
