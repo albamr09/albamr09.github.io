@@ -120,3 +120,103 @@ Finally, we append the `textNode` to the `h1` and the `h1` to the `root`.
 ## The `createElement` Function
 
 Let’s start again with another app. This time we’ll replace React code with our own version of React. We’ll start by writing our own `createElement`.
+
+As we saw in the previous step, an element is an object with `type` and `props`. The only thing that our function needs to do is create that object.
+
+```typescript
+import type { Element } from "@reakt/types";
+
+export const createElement = <T>(
+  type: Element<T>["type"],
+  props: Element<T>["props"],
+  // Children is always an array
+  ...children: Element[]
+) => {
+  return {
+    type,
+    props: {
+      ...props,
+      children,
+    },
+  };
+};
+```
+
+We use the spread operator for the `props` and the rest parameter syntax for the `children`, this way the children prop will always be an array.
+
+For example, `createElement("div")` returns:
+
+```json
+{
+  "type": "div",
+  "props": { "children": [] }
+}
+```
+
+The children array could also contain primitive values like strings or numbers. So we’ll wrap everything that isn’t an object inside its own element and create a special type for them: `TEXT_ELEMENT`.
+
+_React doesn’t wrap primitive values or create empty arrays when there aren’t children, but we do it because it will simplify our code_
+
+```typescript
+const createTextElement = (text: string) => {
+  return {
+    type: "TEXT_ELEMENT",
+    props: {
+      nodeValue: text,
+      children: [],
+    },
+  };
+};
+
+export const createElement = <T>(
+  type: Element<T>["type"],
+  props: Element<T>["props"],
+  // Children is always an array
+  ...children: Element[]
+) => {
+  return {
+    type,
+    props: {
+      ...props,
+      children: children.map((child) =>
+        typeof child === "object" ? child : createTextElement(child),
+      ),
+    },
+  };
+};
+```
+
+Now, if we were to create a typical `React` component within our example app as follows:
+
+```tsx
+// index.js
+// biome-ignore lint/correctness/noUnusedImports: Very much important so we can call Reakt.createElement when this is bundled
+import * as Reakt from "reakt";
+
+const Element = (
+  <div id="foo">
+    <a href="https://github.com/albamr09">bar</a>
+    <b />
+  </div>
+);
+
+// This outputs the result from calling Reakt.createElement!!
+console.log(Element);
+```
+
+```html
+// index.html
+<html>
+  <head>
+    <title>Create Element</title>
+    <script src="index.js" type="module"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+```
+
+We would see the following when we open `index.html`
+
+![Visualization Example](./assets/01_create_element_0.png)
