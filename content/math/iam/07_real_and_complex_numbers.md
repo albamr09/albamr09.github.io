@@ -489,7 +489,7 @@ The polar representation of complex numbers is exceptionally powerful for simpli
 
 That is, to raise a complex number to the nth power, one simply raises its modulus to the $n$th power and multiplies its argument by $n$.
 
-![DeMoivres Multiplication](./assets/demoivres_multiplication.png)
+![DeMoivres Multiplication](./assets/demoivres_theorem.png)
 
 > [!NOTE] **Finding $n$th Roots**
 >
