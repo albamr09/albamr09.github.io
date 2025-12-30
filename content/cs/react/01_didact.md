@@ -220,3 +220,7 @@ console.log(Element);
 We would see the following when we open `index.html`
 
 ![Visualization Example](./assets/01_create_element_0.png)
+
+## The `render` Function
+
+Next, we need to write our version of the `ReactDOM.render` function. For now, we only care about adding stuff to the DOM. We’ll handle updating and deleting later.

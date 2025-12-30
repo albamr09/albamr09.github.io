@@ -134,3 +134,120 @@ In summary, the set of polynomials over a field, $F[x]$, forms a commutative rin
 ### Polynomials: TL;DR
 
 {{< youtube TXnYXfkfuAQ >}}
+
+## Unique Factorization
+
+In the study of arithmetic, the Fundamental Theorem of Arithmetic stands as a pillar, guaranteeing that every integer greater than one can be expressed as a unique product of prime numbers. A similar principle governs the world of polynomials, providing a way to decompose any polynomial into its fundamental, indivisible components.
+
+### Irreducible Polynomials
+
+In the realm of polynomials, the role analogous to that of prime numbers is played by a class of polynomials known as "irreducible." These are the basic elements from which all other polynomials are constructed through multiplication.
+
+> [!NOTE] **Irreducible Polynomial**
+>
+> Let $F$ be a field and let $f(x) \in F[x]$ such that $\text{deg} f(x) \geq 1$. Then $f(x)$ is said to be **irreducible** over $F$ if $f(x)$ cannot be written as a product of two polynomials in $F[x]$ having smaller degree than $f(x)$.
+
+Determining irreducibility can be a difficult problem in general, but for polynomials of low degree, a straightforward diagnostic tool exists.
+
+> [!TIP] **Lemma 8.2.2**
+>
+> Let $f(x) \in F[x]$ with $\text{deg} f(x) = 2$ or $3$. Then $f(x)$ is irreducible over $F$ if and only if $f(x)$ has no zeros in $F$.
+
+This lemma provides a simple test: if a quadratic or cubic polynomial has no roots within the specified field, it must be irreducible. However, this tool has a critical limitation. For polynomials of degree $4$ or higher, the absence of zeros does not guarantee irreducibility. For instance, the polynomial $f(x) = x^4 + 2x^2 + 1$ has no real zeros, yet it is reducible over $\mathbb{R}$ because it factors into $(x^2+ 1)^2$.
+
+To standardize factorizations and ensure uniqueness, two additional concepts are required:
+
+> [TIP] **Monic Polynomial**
+>
+> A polynomial is monic if its leading coefficient is $1$. By factoring out the leading coefficient, any polynomial can be associated with a unique monic polynomial, creating a standard form essential for unique factorization.
+
+> [!TIP] **Associate Polynomials**
+>
+> Two polynomials, $f(x)$ and $g(x)$, are associates if they are non-zero constant multiples of each other (i.e., $f(x) = cg(x)$ for some $c \neq 0$ in $F$). Uniqueness in factorization is defined "up to associates," meaning that $(x-1)$ and $2(x-1)$ are considered equivalent factors in this framework.
+
+Within any set of associate polynomials, there is exactly one monic polynomial, which we can select as the canonical representative for that entire class of factors. This is the mechanism that makes a truly unique factorization possible.
+
+### Divisibility and the Greatest Common Divisor (GCD)
+
+To prove that the factorization of a polynomial is unique, we must first formalize the concepts of divisibility and common divisors.
+
+> [!NOTE] **Greatest Common Divisor (gcd)**
+>
+> Let $f(x)$ and $g(x)$ be nonzero polynomials in $F[x]$. A greatest common divisor of $f(x)$ and $g(x)$ is a monic polynomial $d(x)$ such that:
+>
+> 1. $d(x)$ divides both $f(x)$ and $g(x)$.
+> 2. if $h(x) \in F[x]$ divides both $f(x)$ and $g(x)$, then $h(x)$ divides $d(x)$.
+
+The GCD for polynomials possesses several crucial properties, analogous to those for integers, which are summarized in the following theorem.
+
+> [!NOTE] **Existence, Uniqueness, and Linear Combination**
+>
+> **Existence and Uniqueness:** For any two non-zero polynomials in $F[x]$, a unique greatest common divisor exists.
+>
+> **Linear Combination:** The g.c.d., $d(x)$, can always be expressed as a linear combination of the original polynomials: $d(x) = f(x)s(x) + g(x)t(x)$ for some polynomials $s(x)$ and $t(x)$ in $F[x]$.
+
+From this, we define two polynomials as relatively prime if their g.c.d. is $1$.
+
+> [!TIP] **Euclid's Lemma for Polynomials**
+>
+> If a polynomial $f(x)$ divides the product $g(x)h(x)$ and is relatively prime to $g(x)$, then $f(x)$ must divide $h(x)$.
+
+> [!TIP] **Property of Irreducibles**
+>
+> If an irreducible polynomial $p(x)$ divides a product of polynomials $f(x)g(x)$, then $p(x)$ must divide $f(x)$ or $p(x)$ must divide $g(x)$. This property is the direct analogue of a prime number dividing a product of integers.
+
+### The Unique Factorization Theorem for Polynomials
+
+> [!NOTE] **Unique Factorization Theorem for Polynomials**
+>
+> Let $f(x) \in F[x]$, $\text{deg} f(x) \geq 1$. Then $f(x)$ is irreducible or is a product of irreducible polynomials in $F[x]$. Moreover this product is unique in the following sense: if
+>
+> $$f(x) = p_1(x)p_2(x) \cdots p_m(x) = q_1(x)q_2(x) \cdots q_n(x)$$
+>
+> where each $p_i(x)$ and $q_j(x)$ is irreducible in $F[x]$, then $m = n$, and after renumbering, if necessary, $p_i(x)$ is associate to $q_j(x)$ for each $i = 1, 2, ..., m$.
+
+> The proof of this theorem proceeds in two logical steps:
+>
+> 1. **Proof of Existence**: The existence of a factorization into irreducibles is established using the Second Principle of Induction on the degree of the polynomial, $n$. If a polynomial $f(x)$ is already irreducible, the claim holds. If not, it can be factored as $f(x) = g(x)h(x)$, where both $g(x)$ and $h(x)$ have degrees less than $n$. By the induction hypothesis, both $g(x)$ and $h(x)$ can themselves be factored into irreducible polynomials. Combining these factors yields the desired factorization for $f(x)$.
+> 2. **Proof of Uniqueness**: Given two factorizations $p_1(x) \cdots p_m(x)$ and $q_1(x)\cdots q_n(x)$, we see that $p_1(x)$ must divide the entire product of the $q$ polynomials. This implies $p_1(x)$ must divide at least one of the factors, say $q_1(x)$. Since both $p_1(x)$ and $q_1(x)$ are irreducible, they must be associates, meaning $q_1(x) = c_1p_1(x)$ for some non-zero constant $c_1$. Substituting this into the equation allows us to divide out $p_1(x)$ from both sides (via the cancellation property in $F[x]$). This process is repeated until all factors are matched, proving that the number of factors must be the same ($m=n$) and that they are pairwise associates.
+
+![Polynomial Factorization Example](./assets/polynomial_factorization_example.png)
+
+This theorem can be refined into a more standardized form by grouping associate factors and using monic polynomials.
+
+> [!TIP] **Corollary 8.2.15**
+>
+> Let $f(x) \in F[x]$, $\text{deg} f(x) \geq 1$. Then there exist a unique element $c$ in $F$, unique monic irreducible polynomials $P_1(x), P_2(x), \cdots, P_r(x)$ in $F[x]$, and unique integers $m_1, m_2, \cdots, m_r$ such that
+>
+> $$f(x) = c P_1(x)^{m_1} \cdot P_2(x)^{m_2} \cdots P_r(x)^{m_r}$$
+
+### Zeros, Multiplicity, and Factorization
+
+The abstract idea of irreducible factors is connected to the more concrete task of finding a polynomial's roots, or zeros. The Unique Factorization Theorem provides a framework for understanding not just if a polynomial has zeros, but also how many times each zero contributes to the polynomial's overall structure.
+
+> [!NOTE] **Multiplicity of a Zero**
+>
+> Let $f(x) \in F[x]$ and let $c$ be a zero of $f(x)$. We say $c$ is a zero of $f(x)$ of multiplicity $m$ if $(x - c)^m$ is a factor of $f(x)$ but $(x - c)^{m + 1}$ is not.
+
+A zero with multiplicity $1$ is called a **simple zero**, while a zero with multiplicity greater than $1$ is a **multiple zero**.
+
+![Polynomial Multiplicity Example](./assets/polynomial_multiplicity_example.png)
+
+> [!TIP] **Theorem 8.2.17**
+>
+> Let $f(x) \in F[x]$ and let $c_1, c_2, \cdots, c_t$ be the distinct zeros of $f(x)$ with multiplicities $m_1, m_2, \cdots, m_t$ respectively. Then
+>
+> $$f(x) = (x - c_1)^{m_1}(x - c_2)^{m_2} \cdots (x - c_t)^{m_t}g(x)$$
+>
+> where $g(x) \in F[x]$ and $g(x)$ has no zeros in $F$.
+
+This theorem is highly significant because it effectively partitions any polynomial into two distinct parts.
+
+- The first part, $(x - c_1)^{m_1} \cdots (x - c_t)^{m_t}$, is composed entirely of linear factors corresponding to every root of the polynomial in the field $F$.
+- The second part, $g(x)$, is a polynomial that contains all the remaining irreducible factors of degree $2$ or higher, and as a consequence, it has no roots in $F$.
+
+This theorem can be seen as a practical re-indexing of the canonical factorization. It sorts all the unique monic irreducible factors into two groups: those of degree $1$ (the linear factors corresponding to zeros) and those of degree $2$ or higher (which constitute $g(x)$).
+
+### Unique Factorization: TL;DR
+
+{{< youtube YpzjoSPnZrY >}}
