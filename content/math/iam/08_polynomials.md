@@ -251,3 +251,108 @@ This theorem can be seen as a practical re-indexing of the canonical factorizati
 ### Unique Factorization: TL;DR
 
 {{< youtube YpzjoSPnZrY >}}
+
+## Polynomials over $\mathbb{R}$, $\mathbb{C}$ and $\mathbb{Q}$
+
+The ability to factor a polynomial is not an absolute property; it depends entirely on the set of numbers we are allowed to use for the factors. A polynomial that is irreducible (cannot be factored further) in one number system may be perfectly factorable in another.
+
+This section explores how and why the rules of polynomial factorization change across three fundamental number systems: the complex numbers ($\mathbb{C}$), the real numbers ($\mathbb{R}$), and the rational numbers ($\mathbb{Q}$). We will denote the set of polynomials with coefficients from these fields as $C[x]$, $R[x]$, and $Q[x]$, respectively, and examine the key theorems that govern factorization within each.
+
+### The World of Complex Polynomials ($C[x]$): Complete Factorization
+
+Factoring polynomials over the complex numbers is the most straightforward case.
+
+> [!NOTE] **Fundamental Theorem of Algebra**
+>
+> Let $f(x) \in C[x]$, $\text{deg} f(x) \geq 1$. Then $f(x)$ has at least one zero in $\mathbb{C}$.
+
+That is, every non-constant polynomial with complex coefficients has at least one complex root. If we can always find at least one root $c$, we can always factor out a linear term $(x - c)$. This process can be repeated until only linear factors remain.
+
+> [!TIP] **Complete Factorization**
+>
+> Every polynomial $f(x)$ in $C[x]$ of degree $n \geq 1$ can be written as a product of its leading coefficient and $n$ linear factors of the form $(x - c_i)$, where the roots $c_i$ are counted with multiplicity.
+
+> [!TIP] **Irreducible Factors**
+>
+> The only irreducible polynomials in $C[x]$ are those of degree $1$ (linear factors). Consequently, any polynomial of degree $2$ or higher is never irreducible in $C[x]$.
+
+The elegant simplicity of $C[x]$, where every polynomial can be fully deconstructed, provides a stark contrast to the slightly more complex landscape of real polynomials.
+
+### The World of Real Polynomials ($R[x]$): Linear Factors and Irreducible Quadratics
+
+Since real numbers are a subset of complex numbers ($\mathbb{R} \subset \mathbb{C}$), the Fundamental Theorem of Algebra still applies to polynomials in $R[x]$. However, our goal now is to factor these polynomials using only factors that have _real_ coefficients.
+
+The key to understanding factorization in $R[x]$ is recognizing what happens to non-real complex roots. For any polynomial with real coefficients, these roots always occur in complex conjugate pairs. If $z$ is a root, then its conjugate $\overline{z}$ must also be a root.
+
+The crucial insight is that when we multiply the linear factors corresponding to a conjugate pair, the result is a polynomial with real coefficients:
+
+$$
+(x - z)(x - \overline{z}) = x^2 - (z + \overline{z})x + z\overline{z}
+$$
+
+Since $z + \overline{z}$ and $z\overline{z}$ are always real numbers, this product is an irreducible quadratic polynomial over $\mathbb{R}$.
+
+> [!NOTE] **Discriminant**
+>
+> For a polynomial $f(x) = ax^2 + bx + c \in R[x]$, the real number $b^2 - 4ac$ is called the discriminant of $f(x)$.
+
+The discriminant's sign tells us:
+
+- If $b^2 - 4ac < 0$, the quadratic has no real roots and is irreducible over $\mathbb{R}$.
+- If $b^2 - 4ac \geq 0$, the quadratic has real roots and can be factored into linear terms over $\mathbb{R}$.
+
+> [!TIP] **Theorem 8.3.7**
+> Any polynomial $f(x) \in R[x]$ can be factored into a product of two types of irreducible factors:
+>
+> 1. **Linear polynomials** of the form $(x - r)$, corresponding to the real roots of $f(x)$.
+> 2. **Irreducible quadratic polynomials** ($ax^2 + bx + c$) with a negative discriminant, corresponding to the complex conjugate root pairs of $f(x)$.
+
+While factorization in $R[x]$ has a predictable structure, the world of rational polynomials, $Q[x]$, is far more varied and challenging.
+
+### The World of Rational Polynomials ($Q[x]$)
+
+Factoring over the rational numbers is a fundamentally different and often more difficult problem. The most significant difference is that, unlike $C[x]$ and $R[x]$, there are irreducible polynomials in $Q[x]$ of every degree. This diversity arises because, unlike the algebraically closed field $\mathbb{C}$ or the ordered field $\mathbb{R}$, the field of rational numbers $\mathbb{Q}$ has a much more complex algebraic structure.
+
+Because of this complexity, there is no single, overarching theorem. Instead, we use a diverse set of tools to hunt for roots and test for irreducibility.
+
+#### Step 1: Searching Rational Roots
+
+The first line of attack is to search for any rational roots using the Rational Root Theorem.
+
+> [!NOTE] **Rational Root Theorem**
+>
+> Let $f(x) = a_nx^n + \cdots + a_1x + a_0$ be a polynomial with integer coefficients. If $\frac{r}{s}$ is a rational root (in lowest terms), then:
+>
+> - The numerator $r$ must be an integer divisor of the constant term, $a_0$.
+> - The denominator $s$ must be an integer divisor of the leading coefficient, $a_n$.
+
+#### Step 2: Testing for Irreducibility
+
+If no rational roots are found, or if we are left with a factor of degree $2$ or higher after factoring out the linear terms, we must test for irreducibility using more advanced criteria.
+
+##### Method 1: Eisenstein's Prime Divisibility Test
+
+> [!NOTE] **Eisenstein's Criterion**
+>
+> Let $f(x) = a_nx^n + \cdots + a_0$ be a polynomial with integer coefficients. If there exists a prime number $p$ that satisfies all three of the following conditions, then $f(x)$ is irreducible over $Q$.
+>
+> 1. $p$ divides every coefficient except the leading one ($a_0, a_1, \cdots, a_{n - 1}$).
+> 2. $p$ does not divide the leading coefficient $a_n$.
+> 3. $p^2$ does not divide the constant term $a_0$.
+
+##### Method 2: Testing in a Simpler Number System (Reduction Mod $p$)
+
+This method involves simplifying the polynomial by looking at its coefficients in a finite field $\mathbb{Z}_p$.
+
+> [!NOTE] **Reduction Mod $p$**
+>
+> Let $f(x)$ be a polynomial with integer coefficients. Reduce its coefficients modulo a prime $p$ to create a new polynomial $f_p(x)$ in $\mathbb{Z}_p[x]$. If:
+>
+> 1. The degree of $f_p(x)$ is the same as the degree of $f(x)$.
+> 2. The new polynomial $f_p(x)$ is irreducible over $\mathbb{Z}_p$. Then the original polynomial $f(x)$ is irreducible over $\mathbb{Q}$.
+
+The journey of factoring a polynomial reveals the profound influence of the underlying number system. In the world of complex numbers, $C[x]$, the Fundamental Theorem of Algebra guarantees a simple, elegant, and complete factorization into linear terms for every polynomial. Moving to the real numbers, $R[x]$, introduces a slight complexity: factors are either linear or irreducible quadratics, but the structure remains predictable. Finally, in the realm of rational numbers, $Q[x]$, predictability vanishes. Here, irreducibility can occur at any degree, and determining whether a polynomial can be factored requires a versatile toolkit of specific and sometimes sophisticated tests. Understanding these distinctions is fundamental to mastering the behavior of polynomials.
+
+### Polynomials over $\mathbb{C}$, $\mathbb{R}$ and $\mathbb{Q}$: TL;DR
+
+{{< youtube 5zCWilkmnAI >}}
