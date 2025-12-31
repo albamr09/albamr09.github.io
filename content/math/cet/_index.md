@@ -1,6 +1,6 @@
 ---
 title: Calculus Early Transcendentals
-weight: 5
+weight: 6
 type: docs
 ---
 
