@@ -249,11 +249,51 @@ Let $A = \\{1, 2, 3, 4, 5, 6, 7\\}$. The collection $S = \\{\\{1, 6\\}, \\{2, 5\
 >
 > 1. **Non-Empty Subsets**: $X \neq \emptyset$ for every set $X \in S$.
 > 2. **Pairwise Disjoint**: For every two sets $X, Y \in S$, either $X = Y$ or $X \cap Y = \emptyset$.
-> 3. **Complete Union**: $\bigcup_{X \inS} X = A$.
+> 3. **Complete Union**: $\bigcup_{X \in S} X = A$.
 
 ![Partitions of Sets](./assets/partitions_of_sets.png)
 
 The 'non-empty' and 'complete union' properties together ensure that every element of $A$ belongs to at least one subset. The 'pairwise disjoint' property ensures that no element can belong to more than one. Combined, these three rigorous checks guarantee that every element of $A$ belongs to exactly one subset.
+
+The concept of partitions extends to well-known infinite sets, providing fundamental classifications:
+
+The set of integers $\mathbb{Z}$ can be partitioned into the set of even integers and the set of odd integers.
+
+The set of real numbers $\mathbb{R}$ can be partitioned into the set of positive real numbers ($\mathbb{R}^+$), the set of negative real numbers, and the singleton set $\\{0\\}$.
+
+The set of real numbers $\mathbb{R}$ can also be partitioned into the set of rational numbers ($\mathbb{Q}$) and the set of irrational numbers ($\mathbb{I}$).
+
+![Set Partitions Examples](./assets/set_partitions_examples.png)
+
+## Cartesian Products of Sets
+
+The Cartesian product is a fundamental set operation that creates a new set from two or more existing sets by forming ordered pairs of their elements.
+
+A critical distinction must be made between a set and an **ordered pair**. For a set containing two elements, such as $\\{x, y\\}$, the order is irrelevant, meaning $\\{x, y\\}$ is identical to $\\{y, x\\}$. In contrast, for an ordered pair $(x, y)$, the order is fundamental.
+
+In the ordered pair $(x, y)$, $x$ is designated as the **first coordinate** and $y$ as the **second coordinate**.
+
+The formal condition for the equality of two ordered pairs is that their corresponding coordinates must be identical. Consequently, if $x \neq y$, then the ordered pair $(x, y)$ is distinct from the ordered pair $(y, x)$.
+
+> [!NOTE] **Cartesian Product**
+>
+> The **Cartesian product** of two sets $A$ and $B$, denoted $A \times B$, is the set of all possible ordered pairs where the first coordinate is an element of $A$ and the second coordinate is an element of $B$.
+>
+> $$A \times B = \{(a, b) : a \in A \text{ and } b \in B\}$$
+
+The Cartesian product **is not a commutative operation**.
+
+> [!TIP] **Properties of Cartesian Products**
+>
+> Several key properties govern the behavior of Cartesian products:
+>
+> - **Cardinality**: For any two finite sets $A$ and $B$, the cardinality of their Cartesian product is the product of their individual cardinalities
+>
+> $$|A \times B| = |A| \cdot |B|$$
+>
+> - **The Empty Set**: If either of the sets in the product is the empty set, the resulting Cartesian product is also the empty set.
+
+A primary example of the Cartesian product is its application in geometry. The set $\mathbb{R} \times \mathbb{R}$ (the Cartesian product of the set of real numbers with itself) represents the set of all points in the two-dimensional Euclidean plane. This structure allows for the algebraic description of geometric figures.
 
 ## TL;DR
 
@@ -264,3 +304,7 @@ The 'non-empty' and 'complete union' properties together ensure that every eleme
 **Set Operations, Indexed Collections of Sets and Partitions**
 
 {{< youtube J9eiSOv_YhA >}}
+
+**Partitions of Sets and Cartesian Products of Sets**
+
+{{< youtube RcCfPZUAZaw >}}
