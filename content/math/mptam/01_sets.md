@@ -133,7 +133,7 @@ $$
 
 In the example above, $|A| = 3$, so $|\mathcal{P}(A)| = 2^3 = 8$.
 
-### Combining and Creating New Set
+## Set Operations
 
 Just as numbers can be combined with operations like addition and multiplication, sets can be combined using operations to create new sets. The two most fundamental operations are **union** and **intersection**.
 
@@ -143,12 +143,124 @@ Just as numbers can be combined with operations like addition and multiplication
 >
 > $$A \cup B = \{x : x \in A \text{ or } x \in B\}$$
 
+![Union of Sets](./assets/union_of_sets.png)
+
+- The union of the set of Natural Numbers ($\mathbb{N}$) and the set of Integers ($\mathbb{Z}$) is $\mathbb{Z}$, since every natural number is also an integer. Thus, $\mathbb{N} \cup \mathbb{Z} = \mathbb{Z}$.
+- The union of the set of Rational Numbers ($\mathbb{Q}$) and the set of Irrational Numbers ($\mathbb{Q}$) forms the set of all Real Numbers ($\mathbb{R}$). Thus, $\mathbb{Q} \cup \mathbb{I} = \\mathbb{R}$.
+
 > [!NOTE] **Intersection of Sets**
 >
 > The intersection of two sets $A$ and $B$, denoted $A \cap B$, is the set of all elements belonging to $A$ and $B$. That is:
 >
 > $$A \cap B = \{x : x \in A \text{ and } x \in B\}$$
 
-## Describing Sets and Subsets: TL;DR
+![Intersection of Sets](./assets/intersection_of_sets.png)
+
+- The intersection of $\mathbb{N}$ and $\mathbb{Z}$ is $\mathbb{N}$, as the natural numbers are the elements common to both sets. Thus, $\mathbb{N} \cap \mathbb{Z} = \mathbb{N}$.
+- The intersection of $\mathbb{Q}$ and $\mathbb{R}$ is $\mathbb{Q}$, since every rational number is also a real number. Thus, $\mathbb{Q} \cap \mathbb{R} = \mathbb{Q}$.
+
+When two sets have no elements in common, their intersection is the empty set ($\emptyset$). Such sets are defined as being **disjoint**.
+
+> [!NOTE] **Difference of Sets**
+>
+> The Difference between two sets, $A$ and $B$, denoted $A − B$, is the set of elements that belong to $A$ but do not belong to $B$. This operation is also written as $A \ B$.
+>
+> $$A − B = \{x : x \in A \text{ and } x \notin B\}$$
+
+![Difference of Sets](./assets/difference_of_sets.png)
+
+The difference $\mathbb{R} − \mathbb{Q}$ results in the set of Irrational Numbers ($\mathbb{I}$), as it includes all real numbers that are not rational.
+
+> [!NOTE] **Complement of Sets**
+>
+> The Complement of a set $A$, denoted $\overline{A}$, consists of all elements in a given universal set $U$ that are not in $A$. The concept of a complement is always relative to a defined universal set.
+>
+> $$\overline{A} = U − A = \{x : x \in U \text{ and } x \notin A\}$$
+
+![Complement of Sets](./assets/complement_of_sets.png)
+
+If the universal set is the set of all Integers ($U = \mathbb{Z}$), then the complement of the Natural Numbers ($\mathbb{N}$) is $\overline{\mathbb{N}} = \\{0, −1, −2, \dots\\}$.
+
+If the universal set is the set of all Real Numbers ($U = \mathbb{R}$), then the complement of the Rational Numbers ($\mathbb{Q}$) is the set of Irrational Numbers ($\mathbb{I}$). Thus, $\overline{\mathbb{Q}} = \mathbb{I}$.
+
+## Indexed Collections of Sets
+
+While we can manually write $A \cup B \cup C$, this approach is untenable for dozens or an infinite number of sets. To manage such scenarios we require a more scalable and rigorous notation. This is accomplished through the use of indexed collections, which provide a formal mechanism for addressing any number of sets simultaneously.
+
+> [!NOTE] **Indexed Collection of Sets**
+>
+> An **indexed collection of sets**, denoted
+>
+> $$\{S_{\alpha}\}_{\alpha \in I}$$
+>
+> is a collection where each set $S_{\alpha}$ is associated with a unique identifier $\alpha$ from an index set $I$.
+
+![Indexed Collection of Sets](./assets/indexed_collection_of_sets.png)
+
+The symbol $\alpha$ serves as a dummy variable, allowing us to reference any specific set within the collection.
+
+> [!TIP] **Union of an Indexed Collection**
+>
+> The union of an indexed collection is the set of all elements that appear in at least one of the sets in the collection:
+>
+> $$\bigcup_{\alpha \in I} S_{\alpha} = \{x : x \in S_{\alpha} \text{ for some } \alpha \in I\}$$
+
+For example, for each natural number $n \in \mathbb{N}$, define the set $A_n$ as the closed interval $[-\frac{1}{n}, \frac{1}{n}]$.
+
+The union results in $[−1, 1]$ because the collection of sets is nested ($\dots \subset A_3 \subset A_2 \subset A_1$). In such a nested sequence, the union is simply the largest set in the collection, which is $A_1 = [−1, 1]$.
+
+Therefore:
+
+$$
+\bigcup_{n \in \mathbb{N}} A_n = [−1, 1]
+$$
+
+> [!TIP] **Intersection of an Indexed Collection**
+>
+> The intersection of an indexed collection is the set of all elements that are common to every set in the collection.
+>
+> $$\bigcap_{\alpha \in I} S_{\alpha} = \{x : x \in S_{\alpha} \text{ for all } \alpha \in I\}$$
+
+![Operations on Indexed Collection of Sets](./assets/operations_on_indexed_collections.png)
+
+For example, re-examining the collection $A_n = [−\frac{1}{n}, \frac{1}{n}]$, the result
+
+$$
+\bigcap_{n \in \mathbb{N}} A_n = \{0\}
+$$
+
+is significant. To understand it, consider any non-zero real number, $x$. No matter how small $x$ is, we can always find a natural number $n$ large enough such that $\frac{1}{n} < |x|$.
+
+For this $n$, $x$ is not in the interval $A_n$, and thus it cannot be in the intersection. The only number that remains in every interval as $n$ approaches infinity is $0$.
+
+## Partitions of Sets
+
+Partitioning is a formal method for dividing a whole into a collection of non-overlapping, exhaustive parts. This concept is fundamental to classification problems, data clustering, and parallel processing.
+
+> [!NOTE] **Pairwise Disjoint Collections**
+>
+> A collection of subsets is **pairwise disjoint** if every two distinct subsets within the collection have an empty intersection.
+
+Let $A = \\{1, 2, 3, 4, 5, 6, 7\\}$. The collection $S = \\{\\{1, 6\\}, \\{2, 5\\}, \\{4, 7\\}\\}$ is pairwise disjoint because the intersection of any two distinct sets from $S$ is $\emptyset$ (e.g., $\\{1, 6\\} \cap \\{2, 5\\} = \emptyset$).
+
+> [!NOTE] **Partition of a Set**
+>
+> For a nonempty set $A$, a collection of subsets $S$ is a partition of $A$ if it satisfies three specific properties:
+>
+> 1. **Non-Empty Subsets**: $X \neq \emptyset$ for every set $X \in S$.
+> 2. **Pairwise Disjoint**: For every two sets $X, Y \in S$, either $X = Y$ or $X \cap Y = \emptyset$.
+> 3. **Complete Union**: $\bigcup_{X \inS} X = A$.
+
+![Partitions of Sets](./assets/partitions_of_sets.png)
+
+The 'non-empty' and 'complete union' properties together ensure that every element of $A$ belongs to at least one subset. The 'pairwise disjoint' property ensures that no element can belong to more than one. Combined, these three rigorous checks guarantee that every element of $A$ belongs to exactly one subset.
+
+## TL;DR
+
+**Describing Sets and Subsets**
 
 {{< youtube pWItjY4eOfM >}}
+
+**Set Operations and Indexed Collections of Sets**
+
+{{< youtube J9eiSOv_YhA >}}
