@@ -189,10 +189,6 @@ The study of fields reveals a fascinating contrast between the finite and the in
 - **Finite Fields**: Thanks to the work of [Galois](https://wikipedia.org/wiki/%C3%89variste_Galois) and others like [E. H. Moore](https://wikipedia.org/wiki/E._H._Moore), the structure of all possible finite fields is very well understood. Mathematicians have a clear picture of how they are constructed and how they relate to one another.
 - **Infinite Fields**: The nature of infinite fields, especially algebraic number fields like $\mathbb{Q}(\sqrt{2})$, remains a vast and complex landscape. This area continues to be an active and rich domain of modern mathematical research, with many open questions still driving discovery.
 
-### Fields: TL;DR
-
-{{< youtube Mz0lWR9FlDg >}}
-
 ## The Real Numbers
 
 ### Introduction
@@ -337,10 +333,6 @@ The rigorous formalization of the real number system was a major focus of 19th-c
 ![Formalization of the Real Number System](./assets/real_number_system_formalization.png)
 
 These sophisticated constructions aimed to define irrational numbers based on the more accepted foundation of rational numbers, thereby capturing the property of continuity essential to the real number line.
-
-### The Real Numbers: TL;DR
-
-{{< youtube OKFQEGQiBFM >}}
 
 ## The Complex Numbers
 
@@ -523,6 +515,16 @@ To achieve this, Hamilton had to make a radical sacrifice: he abandoned the comm
 
 The profound nature of Hamilton's work was confirmed later by [F. G. Frobenius](https://wikipedia.org/wiki/Ferdinand_Georg_Frobenius), who proved that the only associative division algebras over the real numbers are the reals themselves, the complex numbers ($\mathbb{C}$), and the quaternions ($\mathbb{H}$).
 
-### The Complex Numbers: TL;DR
+## TL;DR
+
+**Fields**
+
+{{< youtube Mz0lWR9FlDg >}}
+
+**The Real Numbers**
+
+{{< youtube OKFQEGQiBFM >}}
+
+**The Complex Numbers**
 
 {{< youtube Xt1Fpcy52mc >}}

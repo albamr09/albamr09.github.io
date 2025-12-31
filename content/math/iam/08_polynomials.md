@@ -131,10 +131,6 @@ This is an immediate result of the Remainder Theorem: $c$ is a zero means $f(c) 
 
 In summary, the set of polynomials over a field, $F[x]$, forms a commutative ring. This section has shown the analogy between the polynomial ring $F[x]$ and the integers $\mathbb{Z}$, a relationship anchored by the Division Algorithm.
 
-### Polynomials: TL;DR
-
-{{< youtube TXnYXfkfuAQ >}}
-
 ## Unique Factorization
 
 In the study of arithmetic, the Fundamental Theorem of Arithmetic stands as a pillar, guaranteeing that every integer greater than one can be expressed as a unique product of prime numbers. A similar principle governs the world of polynomials, providing a way to decompose any polynomial into its fundamental, indivisible components.
@@ -248,10 +244,6 @@ This theorem is highly significant because it effectively partitions any polynom
 
 This theorem can be seen as a practical re-indexing of the canonical factorization. It sorts all the unique monic irreducible factors into two groups: those of degree $1$ (the linear factors corresponding to zeros) and those of degree $2$ or higher (which constitute $g(x)$).
 
-### Unique Factorization: TL;DR
-
-{{< youtube YpzjoSPnZrY >}}
-
 ## Polynomials over $\mathbb{R}$, $\mathbb{C}$ and $\mathbb{Q}$
 
 The ability to factor a polynomial is not an absolute property; it depends entirely on the set of numbers we are allowed to use for the factors. A polynomial that is irreducible (cannot be factored further) in one number system may be perfectly factorable in another.
@@ -353,6 +345,16 @@ This method involves simplifying the polynomial by looking at its coefficients i
 
 The journey of factoring a polynomial reveals the profound influence of the underlying number system. In the world of complex numbers, $C[x]$, the Fundamental Theorem of Algebra guarantees a simple, elegant, and complete factorization into linear terms for every polynomial. Moving to the real numbers, $R[x]$, introduces a slight complexity: factors are either linear or irreducible quadratics, but the structure remains predictable. Finally, in the realm of rational numbers, $Q[x]$, predictability vanishes. Here, irreducibility can occur at any degree, and determining whether a polynomial can be factored requires a versatile toolkit of specific and sometimes sophisticated tests. Understanding these distinctions is fundamental to mastering the behavior of polynomials.
 
-### Polynomials over $\mathbb{C}$, $\mathbb{R}$ and $\mathbb{Q}$: TL;DR
+## TL;DR
+
+**Polynomials**
+
+{{< youtube TXnYXfkfuAQ >}}
+
+**Unique Factorization**
+
+{{< youtube YpzjoSPnZrY >}}
+
+**Polynomials over $\mathbb{C}$, $\mathbb{R}$ and $\mathbb{Q}$**
 
 {{< youtube 5zCWilkmnAI >}}

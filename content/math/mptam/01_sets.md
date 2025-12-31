@@ -261,6 +261,6 @@ The 'non-empty' and 'complete union' properties together ensure that every eleme
 
 {{< youtube pWItjY4eOfM >}}
 
-**Set Operations and Indexed Collections of Sets**
+**Set Operations, Indexed Collections of Sets and Partitions**
 
 {{< youtube J9eiSOv_YhA >}}
