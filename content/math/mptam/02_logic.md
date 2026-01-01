@@ -107,7 +107,7 @@ The injection truth table is as follows:
 
 > [!NOTE] **Implication: The Condition Statement**
 >
-> The **implication**, or **conditional** statement, denoted by $\P \rightarrow Q$, it is read as "If $P$, then $Q$." Its truth condition is that $P \rightarrow Q$ is false only in the specific case where $P$ is true and $Q$ is false. It is true in all other scenarios.
+> The **implication**, or **conditional** statement, denoted by $\P \rightarrow Q$, it is read as "If $P$, then $Q$." Where $P$ is identified as the **hypothesis** (or **premise) and $Q$ is the **conclusion\*\*. Its truth condition is that $P \rightarrow Q$ is false only in the specific case where $P$ is true and $Q$ is false. It is true in all other scenarios.
 
 The implication truth table is as follows:
 
@@ -117,6 +117,8 @@ The implication truth table is as follows:
 | T   | F   | F                 |
 | F   | T   | T                 |
 | F   | F   | T                 |
+
+This definition is formally captured by the fact that the statement $\neg (P \rightarrow Q)$ has the exact same truth table as the statement $P \land (\neg Q)$. This confirms that the only scenario that invalidates the implication is one where $P$ is true while $Q$ is simultaneously false.
 
 Of all the logical operators, the implication's truth table is often the most perplexing for newcomers. To demystify its logic, particularly the cases where the premise ($P$) is false, let us analyze a familiar, practical scenario. Imagine an instructor tells a student:
 
@@ -140,7 +142,11 @@ The conditional statement $P \rightarrow Q$ can be expressed in several equivale
 - $P$ is sufficient for $Q$.
 - $Q$ is necessary for $P$.
 
-The phrase "$P$ only if $Q$" can be challenging, but it asserts that $P$ can be true only under the condition that $Q$ is also true—in other words, it is impossible for $P$ to be true while $Q$ is false. Similarly, "$Q$ is necessary for $P$" means that for $P$ to be true, $Q$ must be true, which again mirrors the logic of the implication.
+The phrase "$P$ only if $Q$" can be challenging, but it asserts that $P$ can be true only under the condition that $Q$ is also true—in other words, it is impossible for $P$ to be true while $Q$ is false.
+
+Similarly, "$Q$ is necessary for $P$" means that for $P$ to be true, $Q$ must be true, which again mirrors the logic of the implication.
+
+While the statement “$P$ is sufficient for $Q$” means that the truth of $P$ is sufficient to establish the truth of $Q$; in other words, the truth of $P$ implies the truth of $Q$.
 
 ### Extending Logical Operations to Open Sentences
 
@@ -156,3 +162,97 @@ We can construct new open sentences using the logical operators:
 - **Disjunction**: $P_1(x) \lor P_2(x) : x = -3 \text{ or } |x| = 3$
 - **Conjunction**: $P_1(x) \land P_2(x) : x = -3 \text{ and } |x| = 3$
 - **Implication**: $P_1(x) \rightarrow P_2(x) : \text{If } x = −3, \text{ then } |x| = 3$
+
+## The Converse and the Biconditional Statement
+
+After analyzing a one-way implication, the logical next step is to investigate its reverse, known as the converse.
+
+> [!NOTE] **The Converse of an Implication**
+>
+> The **converse** of a given implication $P \rightarrow Q$ is the statement formed by reversing the hypothesis and conclusion, resulting in the new implication $Q \rightarrow P$.
+
+![The Converse](./assets/logic_the_converse.png)
+
+For example, consider the statements:
+
+- $P_1$: $3$ is an odd integer.
+- $P_2$: $57$ is prime.
+
+The implication $P1 \rightarrow P2$ is:
+
+> “If $3$ is an odd integer, then $57$ is prime.”
+
+Its corresponding converse, $P2 \rightarrow P1$, is:
+
+> “If $57$ is prime, then $3$ is an odd integer.”
+
+> [!NOTE] **The Biconditional**
+>
+> The **biconditional** of two statements $P$ and $Q$, denoted $P \leftrightarrow Q$, is defined as the conjunction of the original implication and its converse: $(P \rightarrow Q) \land (Q \rightarrow P)$
+
+An analysis of its truth table shows that the column for $(P \rightarrow Q) \land (Q \rightarrow P)$ is true only in the first row (where $P$ and $Q$ are both true) and the last row (where $P$ and $Q$ are both false). Thus, $P \leftrightarrow Q$ is true if and only if $P$ and $Q$ have the same truth value. If they have different truth values, the biconditional is false.
+
+This two-way relationship gives rise to its most common linguistic expressions:
+
+- $P$ if and only if $Q$.
+- $P$ is a necessary and sufficient condition for $Q$.
+
+These phrases are justified by their components. The phrase "$P$ if $Q$" corresponds to the converse ($Q \rightarrow P$), while the phrase "$P$ only if $Q$" corresponds to the original implication ($P \rightarrow Q$).
+
+## Logical Equivalence
+
+> [!NOTE] **Logical Equivalence**
+>
+> Two compound statements, $R$ and $S$, are logically equivalent (denoted $R \equiv S$) if they have the same truth values for all possible combinations of truth values of their component statements.
+
+It is important to distinguish the biconditional statement from the concept of logical equivalence. A biconditional ($R \leftrightarrow S$) is a compound statement whose truth depends on the specific truth values of its components, $R$ and $S$. In contrast, logical equivalence ($R \equiv S$) describes a relationship where two compound statements are identical in truth value under all possible circumstances.
+
+![The Bicondition and Logical Equivalence Distinction](./assets/biconditional_logical_equivalence_distinction.png)
+
+This concept is fundamentally connected to **tautologies**.
+
+> [!NOTE] **Tautology**
+>
+> A **tautology** is a compound statement that is true for all possible truth values of its components.
+
+> [!TIP] **Logical Equivalence and Tautologies**
+>
+> Two statements $R$ and $S$ are logically equivalent if and only if the biconditional statement $R \leftrightarrow S$ is a tautology.
+
+If two statements are logically equivalent, one can be substituted for the other within a logical argument without altering the argument's validity. This allows for the transformation of a statement into an equivalent form that may be simpler to analyze or prove.
+
+> [!TIP] **Theorem 2.17**
+>
+> Let $P$ and $Q$ be compount statements, then
+>
+> $$P \rightarrow Q \equiv (\neq P) \lor Q$$
+
+## Fundamental Properties and Laws of Logical Equivalence
+
+> [!TIP] **Foundational Laws**
+>
+> Given compound statement $P, Q$ and $R$
+>
+> - **Double Negation**:
+>
+> $$P \equiv \neg P$$
+>
+> - **Commutative Laws**:
+>
+> $$P \lor Q \equiv Q \lor P$$
+> $$P \land Q \equiv Q \land P$$
+>
+> - **Associative Laws**:
+>
+> $$P \lor (Q \lor R) \equiv (P \lor Q) \lor R$$
+> $$P \land (Q \land R) \equiv (P \land Q) \land R$$
+>
+> - **Distributive Laws**:
+>
+> $$P \lor (Q \land R) \equiv P \lor Q \land P \lor R$$
+> $$P \land (Q \lor R) \equiv P \land Q \lor P \land R$$
+>
+> - **De Morgan's Laws**:
+>
+> $$\neg (P \lor Q) \equiv \neg P \land \neg Q$$
+> $$\neg (P \land Q) \equiv \neg P \lor \neg Q$$
