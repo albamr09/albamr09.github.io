@@ -107,7 +107,7 @@ The injection truth table is as follows:
 
 > [!NOTE] **Implication: The Condition Statement**
 >
-> The **implication**, or **conditional** statement, denoted by $\P \rightarrow Q$, it is read as "If $P$, then $Q$." Where $P$ is identified as the **hypothesis** (or **premise) and $Q$ is the **conclusion\*\*. Its truth condition is that $P \rightarrow Q$ is false only in the specific case where $P$ is true and $Q$ is false. It is true in all other scenarios.
+> The **implication**, or **conditional** statement, denoted by $P \rightarrow Q$, it is read as "If $P$, then $Q$." Where $P$ is identified as the **hypothesis** (or **premise**) and $Q$ is the **conclusion**. Its truth condition is that $P \rightarrow Q$ is false only in the specific case where $P$ is true and $Q$ is false. It is true in all other scenarios.
 
 The implication truth table is as follows:
 
