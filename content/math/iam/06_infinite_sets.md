@@ -382,10 +382,6 @@ The theorems explored in this report fundamentally reshaped the mathematical und
 
 These results were so revolutionary that they were initially met with resistance from parts of the mathematical community. This tension between formal proof and human intuition is a recurring theme in mathematics.
 
-### Uncountable Sets: TL;DR
-
-{{< youtube 8ODSWnoxOY0 >}}
-
 ## Collections of Sets
 
 In mathematics, one of the most fundamental ideas is that of a "set", a simple collection of things. For example, we can easily understand the set $\\{1\\}$ as a collection whose only member is the number $1$. However, a surprising discovery by the mathematician and philosopher Bertrand Russell revealed a deep logical problem hidden within this simple idea. This seemingly simple idea of grouping things, however, leads to a very curious question when we start thinking about sets of sets.

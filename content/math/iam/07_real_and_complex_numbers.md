@@ -514,17 +514,3 @@ $$
 To achieve this, Hamilton had to make a radical sacrifice: he abandoned the commutative property of multiplication (for example, $ij = -ji$). In doing so, he opened the door to the study of abstract algebraic structures where familiar axioms might not hold.
 
 The profound nature of Hamilton's work was confirmed later by [F. G. Frobenius](https://wikipedia.org/wiki/Ferdinand_Georg_Frobenius), who proved that the only associative division algebras over the real numbers are the reals themselves, the complex numbers ($\mathbb{C}$), and the quaternions ($\mathbb{H}$).
-
-## TL;DR
-
-**Fields**
-
-{{< youtube Mz0lWR9FlDg >}}
-
-**The Real Numbers**
-
-{{< youtube OKFQEGQiBFM >}}
-
-**The Complex Numbers**
-
-{{< youtube Xt1Fpcy52mc >}}

@@ -294,17 +294,3 @@ The Cartesian product **is not a commutative operation**.
 > - **The Empty Set**: If either of the sets in the product is the empty set, the resulting Cartesian product is also the empty set.
 
 A primary example of the Cartesian product is its application in geometry. The set $\mathbb{R} \times \mathbb{R}$ (the Cartesian product of the set of real numbers with itself) represents the set of all points in the two-dimensional Euclidean plane. This structure allows for the algebraic description of geometric figures.
-
-## TL;DR
-
-**Describing Sets and Subsets**
-
-{{< youtube pWItjY4eOfM >}}
-
-**Set Operations, Indexed Collections of Sets and Partitions**
-
-{{< youtube J9eiSOv_YhA >}}
-
-**Partitions of Sets and Cartesian Products of Sets**
-
-{{< youtube RcCfPZUAZaw >}}

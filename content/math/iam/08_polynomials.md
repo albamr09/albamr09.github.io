@@ -344,17 +344,3 @@ This method involves simplifying the polynomial by looking at its coefficients i
 > 2. The new polynomial $f_p(x)$ is irreducible over $\mathbb{Z}_p$. Then the original polynomial $f(x)$ is irreducible over $\mathbb{Q}$.
 
 The journey of factoring a polynomial reveals the profound influence of the underlying number system. In the world of complex numbers, $C[x]$, the Fundamental Theorem of Algebra guarantees a simple, elegant, and complete factorization into linear terms for every polynomial. Moving to the real numbers, $R[x]$, introduces a slight complexity: factors are either linear or irreducible quadratics, but the structure remains predictable. Finally, in the realm of rational numbers, $Q[x]$, predictability vanishes. Here, irreducibility can occur at any degree, and determining whether a polynomial can be factored requires a versatile toolkit of specific and sometimes sophisticated tests. Understanding these distinctions is fundamental to mastering the behavior of polynomials.
-
-## TL;DR
-
-**Polynomials**
-
-{{< youtube TXnYXfkfuAQ >}}
-
-**Unique Factorization**
-
-{{< youtube YpzjoSPnZrY >}}
-
-**Polynomials over $\mathbb{C}$, $\mathbb{R}$ and $\mathbb{Q}$**
-
-{{< youtube 5zCWilkmnAI >}}
