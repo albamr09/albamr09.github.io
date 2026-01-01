@@ -62,10 +62,10 @@ The primary interest in mathematical logic arises not from analyzing individual 
 
 The core rule of negation is straightforward: the negation of a true statement is false, and the negation of a false statement is true. This is summarized in its truth table.
 
-| P   | \neq P |
-| --- | ------ |
-| T   | F      |
-| F   | T      |
+| $P$ | $\neg P$ |
+| --- | -------- |
+| T   | F        |
+| F   | T        |
 
 For example, consider the statements:
 
