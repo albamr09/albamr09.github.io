@@ -430,3 +430,104 @@ const performUnitOfWork = (fiber: Fiber): Fiber | undefined => {
   return findNextFiberInTraversal(fiber);
 };
 ```
+
+On the following example you can see this asynchronous mode at work, we are trying to render many elements on the page. But the browser is able to capture user input (e.g. the scrolling down) and act accordingly while updating the page with the new elements that are being rendered.
+
+![Fiber Demo](./assets/05_fiber_demo_2.gif)
+
+## Render and Commit Phases
+
+We are adding a new node to the DOM each time we work on an element. And, remember, the browser could interrupt our work before we finish rendering the whole tree. In that case, the user will see an incomplete UI. And we don’t want that. So we need to remove the part that mutates the DOM from here, that is we have to modify the function `commitFiberToDOM`, which does exactly what we are explaining.
+
+Thus now, this function will be called `createNodeFromFiber`:
+
+```typescript
+const performUnitOfWork = (fiber: Fiber): Fiber | undefined => {
+  if (!doesFiberHaveValidParent(fiber)) {
+    // Some error handling code
+    return undefined;
+  }
+
+  // Now the resonsibility of this function is only to create the DOM node, it does
+  // not add it to the DOM yet
+  fiber = createNodeFromFiber(fiber);
+  fiber = createChildFibers(fiber);
+  return findNextFiberInTraversal(fiber);
+};
+```
+
+Also, as we are not commiting nothing to the DOM, we have to somewhat save our "Virtual DOM" made up of fibers, so that we can traverse it later on and add each element to the DOM. This is done as follows:
+
+```typescript
+// We will use rootFiber as the entry point to our Virtual DOM
+export const startWorkLoop = (rootFiber: Fiber): void => {
+  let currentFiber: Fiber | undefined = rootFiber;
+
+  const workLoop: IdleRequestCallback = (deadline) => {
+    let shouldYield = false;
+    while (currentFiber !== undefined && !shouldYield) {
+      currentFiber = performUnitOfWork(currentFiber);
+      shouldYield = deadline.timeRemaining() < 1;
+    }
+
+    // THIS CONDITION IS THE MAIN CHANGE
+    // Now, when work loop finishes (all fibers have been created)
+    // we "commit" everything from the virtual DOM to the DOM
+    if (currentFiber === undefined && rootFiber) {
+      commitFiberRoot(rootFiber);
+      return;
+    }
+
+    // If there are still fibers to process, schedule the next work loop
+    requestIdleCallback(workLoop);
+  };
+
+  requestIdleCallback(workLoop);
+};
+```
+
+How does this commit work take place? Well the only thing we have to do is, for each fiber
+
+1. Add the DOM node created for that fiber to the DOM node of its parent.
+2. Continue recursively through its child
+3. Continue recursively through its sibling
+
+If follows the same flow as for the processing of the elements:
+
+![Fiber Tree](./assets/05_fiber_tree_1.png)
+
+```typescript
+/**
+ * Commits the entire fiber tree to the DOM, starting from the root fiber.
+ *
+ * This function initiates the commit phase, which recursively traverses the fiber tree
+ * and appends all fiber DOM nodes to their respective parent DOM nodes in the actual DOM.
+ * This is called after all fibers have been processed in the work loop.
+ *
+ * @param rootFiber - The root fiber of the fiber tree to commit to the DOM.
+ */
+export const commitFiberRoot = (rootFiber: Fiber) => {
+  commitWork(rootFiber);
+};
+
+/**
+ * Recursively commits a fiber and its descendants to the DOM.
+ *
+ * Traverses the fiber tree in a depth-first manner, appending each fiber's DOM node
+ * to its parent's DOM node. Skips fibers that don't have a DOM node or a valid parent.
+ *
+ * @param fiber - The fiber to commit. If undefined or if the fiber has no DOM node,
+ *                the function returns early without processing.
+ */
+const commitWork = (fiber?: Fiber) => {
+  const domParent = fiber?.parent?.dom;
+  if (!fiber?.dom || !domParent) {
+    return;
+  }
+
+  domParent.appendChild(fiber.dom);
+
+  commitWork(fiber.child);
+  commitWork(fiber.sibling);
+};
+```
