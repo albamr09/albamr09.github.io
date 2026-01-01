@@ -256,3 +256,98 @@ If two statements are logically equivalent, one can be substituted for the other
 >
 > $$\neg (P \lor Q) \equiv \neg P \land \neg Q$$
 > $$\neg (P \land Q) \equiv \neg P \lor \neg Q$$
+
+Each of these laws can be formally verified by constructing a truth table. For instance, the distributive law $P \lor (Q \land R) \equiv (P \lor Q) \land (P \lor R)$ is proven by demonstrating that the truth columns for both statements are identical for all possible truth values of $P$, $Q$, and $R$.
+
+| $P$ | $Q$ | $R$ | $Q \land R$ | $P \lor (Q \land R)$ | $P \lor Q$ | $P \lor R$ | $(P\lor Q) \land (P\lor R)$ |
+| --- | --- | --- | ----------- | -------------------- | ---------- | ---------- | --------------------------- |
+| T   | T   | T   | T           | **T**                | T          | T          | **T**                       |
+| T   | T   | F   | F           | **T**                | T          | T          | **T**                       |
+| T   | F   | T   | F           | **T**                | T          | T          | **T**                       |
+| T   | F   | F   | F           | **T**                | T          | F          | **T**                       |
+| F   | T   | T   | T           | **T**                | T          | T          | **T**                       |
+| F   | T   | F   | F           | **F**                | T          | F          | **F**                       |
+| F   | F   | T   | F           | **F**                | F          | T          | **F**                       |
+| F   | F   | F   | F           | **F**                | F          | F          | **F**                       |
+
+## Quantified Statements
+
+Quantification is a method used in logic to transform an open sentence, which contains variables, into a formal statement with a definitive truth value. An open sentence $P(x)$ over a domain $S$ becomes a statement for each $x \in S$. Quantification provides another way to convert $P(x)$ into a single statement.
+
+> [!NOTE] **The Universal Quantifier**
+>
+> The phrase "for every," "for each," or "for all" is the **universal quantifier**, denoted by the symbol $\forall$.
+
+The quantified statement $\forall x \in S, P(x)$ is true if and only if $P(x)$ is true for every element $x$ in the domain $S$. It is false if there is at least one element $x$ in $S$ for which $P(x)$ is false.
+
+> [!NOTE] **The Existential Quantifier**
+>
+> The phrase "there exists," "there is," "for some," or "for at least one" is the **existential quantifier**, denoted by the symbol $\exists$.
+
+The quantified statement $\exists x \in S, P(x)$ is true if and only if $P(x)$ is true for at least one element $x$ in the domain $S$. It is false if $P(x)$ is false for all elements $x$ in $S$.
+
+### Negation of Quantified Statements
+
+The negation of quantified statements follows specific rules that invert the quantifier and negate the open sentence.
+
+**Negation of a Universal Statement:**
+
+$$
+\neg (\forall x \in S, P(x)) \equiv \exists x \in S, \neg P(x)
+$$
+
+Says that the statement "It is not the case that for all $x$, $P(x)$" is equivalent to "There exists an $x$ such that not $P(x)$."
+
+Negation of an Existential Statement:
+
+$$
+\neg (\exists x \in S, Q(x)) \equiv \forall x \in S, \neg Q(x)
+$$
+
+Says that the statement "It is not the case that there exists an $x$ such that $Q(x)$" is equivalent to "For all $x$, not $Q(x)$."
+
+### Statements with Multiple Quantifiers
+
+Statements can involve multiple variables and quantifiers. The order and type of quantifiers are critical to the meaning of the statement.
+
+**Negating Two Universal Quantifiers:**
+
+$$
+\neg (\forall x \in S, \forall y \in T, P(x, y)) \equiv \exists x \in S, \exists y \in T, \neg P(x, y)
+$$
+
+**Negating Two Existential Quantifiers:**
+
+$$
+\neg (\exists x \in S, \exists y \in T, P(x, y)) \equiv \forall x \in S, \forall y \in T, \neg P(x, y)
+$$
+
+**Negating Mixed Quantifiers:**
+
+$$
+\neg (\forall a \in S, \exists b \in T, P(a, b)) \equiv \exists a \in S, \forall b \in T, \neg P(a, b)
+$$
+
+$$
+\neg (\exists a \in S, \forall b \in T, Q(a, b)) \equiv \forall a \in S, \exists b \in T, \neg Q(a, b)
+$$
+
+## Characterizations of Statements
+
+A characterization provides an alternative, logically equivalent way of defining or describing a mathematical concept.
+
+> [!NOTE] **Characterization**
+>
+> Let $P(x)$ be an open sentence over a domain $S$ that defines a concept, and let $Q(x)$ be another open sentence over the same domain. $Q(x)$ is said to be a **characterization** of the concept if the quantified statement
+>
+> $$\forall x \in S, P(x) \leftrightarrow Q(x)$$
+>
+> is true.
+
+Examples of Characterizations:
+
+> Irrational Numbers: A real number $r$ is irrational if and only if $r$ has a nonrepeating decimal expansion.
+
+> Equilateral Triangles: A triangle $T$ is equilateral if and only if $T$ has three equal angles.
+
+It is important to distinguish a characterization from a definition. A definition establishes the primary meaning of a concept. For example, "A triangle $T$ is equilateral if and only if $T$ has three equal sides" is the definition, not a characterization. A characterization provides a valuable, equivalent alternative perspective that can be useful in proofs and further study.
