@@ -326,3 +326,107 @@ Reakt.render(root!, Element);
 ```
 
 ![Render Function Example](./assets/02_render_function_0.png)
+
+## Concurrent Mode
+
+But… before we start adding more code we need a refactor.
+
+There’s a problem with this recursive call.
+
+Once we start rendering, we won’t stop until we have rendered the complete element tree. If the element tree is big, it may block the main thread for too long. And if the browser needs to do high priority stuff like handling user input or keeping an animation smooth, it will have to wait until the render finishes.
+
+So we are going to break the work into small units, and after we finish each unit we’ll let the browser interrupt the rendering if there’s anything else that needs to be done.
+
+```typescript
+/**
+ * Renders a virtual DOM element to the actual DOM.
+ *
+ * @param container - The DOM container where the element should be rendered
+ * @param element - The virtual DOM element to render
+ */
+export const render = (container: HTMLElement, element: ReaktElement): void => {
+  const rootFiber = createRootFiber({ container, element });
+  startWorkLoop(rootFiber);
+};
+```
+
+We use [`requestIdleCallback`](https://developer.mozilla.org/es/docs/Web/API/Window/requestIdleCallback) to make a loop. You can think of requestIdleCallback as a setTimeout, but instead of us telling it when to run, the browser will run the callback when the main thread is idle.
+
+_React doesn’t use requestIdleCallback anymore. But for this use case it’s conceptually the same._
+
+To organize the units of work we’ll need a data structure: a **fiber tree**. We’ll have one fiber for each element and each fiber will be a unit of work.
+
+![Fiber Tree](./assets/05_fiber_tree_0.png)
+
+In the render we’ll create the root fiber and set it as the `currentFiber`. The rest of the work will happen on the `performUnitOfWork` function, there we will do three things for each fiber:
+
+1. Add the element to the DOM (`commitFiberToDOM`)
+2. Create the fibers for the element’s children (`createChildFibers`)
+3. Select the next unit of work (`findNextFiberInTraversal`)
+
+```typescript
+/**
+ * Starts the work loop to process fibers and render them to the DOM.
+ *
+ * Begins processing the fiber tree using requestIdleCallback for incremental rendering.
+ * The work loop will continue until all fibers have been processed or the browser
+ * needs to yield control for other tasks.
+ *
+ * @param rootFiber - The root fiber to start processing from. Should be created using
+ *                    `createRootFiber` before calling this function.
+ */
+export const startWorkLoop = (rootFiber: Fiber): void => {
+  let currentFiber: Fiber | undefined = rootFiber;
+
+  const workLoop: IdleRequestCallback = (deadline) => {
+    let shouldYield = false;
+    while (currentFiber !== undefined && !shouldYield) {
+      currentFiber = performUnitOfWork(currentFiber);
+      shouldYield = deadline.timeRemaining() < 1;
+    }
+
+    // If there are still fibers to process, schedule the next work loop
+    if (currentFiber !== undefined) {
+      requestIdleCallback(workLoop);
+    }
+  };
+
+  requestIdleCallback(workLoop);
+};
+```
+
+To start using the work loop we’ll need to set the first unit of work, and then write a `performUnitOfWork` function that not only performs the work but also returns the next unit of work.
+
+One of the goals of this data structure is to make it easy to find the next unit of work. That’s why each fiber has a link to its first child, its next sibling and its parent.
+
+![Fiber Tree](./assets/05_fiber_tree_1.png)
+
+When we finish performing work on a fiber, if it has a `child` that fiber will be the next unit of work. If the fiber doesn’t have a `child`, we use the `sibling` as the next unit of work.
+
+And if the fiber doesn’t have a `child` nor a `sibling` we go to the “uncle”: the `sibling` of the `parent`.
+
+```typescript
+/**
+ * Performs a unit of work on a fiber: commits it to the DOM, creates child fibers, and returns the next fiber to process.
+ *
+ * This function processes a single fiber in the work loop by:
+ * 1. Validating that the fiber has a valid parent with a DOM node
+ * 2. Creating and appending the fiber's DOM node to its parent
+ * 3. Creating child fibers from the element's children
+ * 4. Returning the next fiber to process in the depth-first traversal
+ *
+ * @param fiber - The fiber to process. Must have a valid parent with a DOM node (HTMLElement, not Text).
+ * @returns The next fiber to process in the traversal, or `undefined` if the fiber has an invalid parent.
+ * @throws {Error} If the fiber structure is invalid and cannot be recovered from.
+ */
+const performUnitOfWork = (fiber: Fiber): Fiber | undefined => {
+  if (!doesFiberHaveValidParent(fiber)) {
+    // Some error handling code
+    return undefined;
+  }
+
+  fiber = commitFiberToDOM(fiber);
+  fiber = createChildFibers(fiber);
+  return findNextFiberInTraversal(fiber);
+};
+```
