@@ -691,4 +691,137 @@ This equation shows that if we begin with a function $F$, differentiate it to ge
 
 Taken together, these two symmetrical results provide the rigorous mathematical proof that differentiation and integration are inverse processes. This powerful relationship is what makes the theorem so central to the structure and application of calculus.
 
-The discovery and exploitation of this theorem transformed mathematics. It converted previously formidable problems of finding areas, volumes, and lengths of curves—challenges that were once accessible only to a "genius"—into a systematic and reliable method.
+The discovery and exploitation of this theorem transformed mathematics. It converted previously formidable problems of finding areas, volumes, and lengths of curves into a systematic and reliable method.
+
+## Indefinite Integrals and the Net Change Theorem
+
+### Indefinite Integrals
+
+> [!NOTE] **Indefinite Integral**
+>
+> An **indefinite integral** is used to represent the entire family of functions that have a given function as their derivative.
+>
+> $$\int f(x) dx = F(x) \leftrightarrow F'(x) = f(x)$$
+
+Where, $\in f(x) dx$ is called the indefinite integral of $f$ with respect to $x$. The function $f(x)$ is the integrand. The function $F(x)$ is a particular antiderivative of $f(x)$.
+
+It is very important to distinguish between definite and indefinite integrals:
+
+- A **definite integral**, $\int_a^b f(x) dx$, is a **number**. It represents a specific value, such as the net area under the curve of $f(x)$ from $x=a$ to $x=b$.
+
+- An **indefinite integral**, $\int f(x) dx$, is a **function** (or more accurately, a family of functions). It represents the general form of the antiderivative of the integrand.
+
+![Definite vs Indefinite Integral](./assets/definite_vs_indefinite_integral.png)
+
+The connection between these two concepts is established by [Part 2 of the Fundamental Theorem of Calculus (FTC2)](/math/cet/05_integrals/#the-fundamental-theorem-of-calculus-part-2). If $f$ is continuous on the interval $[a, b]$, then:
+
+$$
+\int_a^b f(x) dx = \left[\int f(x) dx\right]_a^b = F(b) - F(a)
+$$
+
+where $F$ is any antiderivative of $f$.
+
+#### Table of Indefinite Integrals
+
+A foundational set of antiderivatives, presented in the notation of indefinite integrals, is essential for applying the Fundamental Theorem. Any formula can be verified by differentiating the function on the right side to obtain the integrand.
+
+| Integral Formula                                              | Rationale (Derivative of the Right Side)                                 |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| $\int cf(x) dx = c \int f(x) dx$                              | Follows from the constant multiple rule for derivatives.                 |
+| $\int [f(x) + g(x)] dx = \int f(x) dx + \int g(x) dx$         | Follows from the sum rule for derivatives.                               |
+| $\int k dx = kx + C$                                          | $\frac{\delta}{delta x} (kx + C) = k$                                    |
+| $\int x^n dx = \frac{x^{n + 1}}{n + 1} + C$ (for $n \neq -1$) | $\frac{\delta}{\delta x} \left(\frac{x^{n + 1}}{n + 1} + C\right) = x^n$ |
+| $\int (\frac{1}{x}) dx = \ln\|x\| + C$                        | $\frac{\delta}{\delta x} \ln \|x\| + C = x$                              |
+| $\int e^x dx = e^x + C$                                       | $\frac{\delta}{\delta x} (e^x + C) = e^x$                                |
+| $\int b^x dx = \frac{b^x}{\ln b} + C$                         | $\frac{\delta}{\delta x} \frac{b^x}{\ln b} + C = b^x$                    |
+| $\int \sin x dx = -\cos x + C$                                | $\frac{\delta}{\delta x} (-\cos x + C) = \sin x$                         |
+| $\int \cos x dx = \sin x + C$                                 | $\frac{\delta}{\delta x} (\sin x + C) = \cos x$                          |
+| $\int \sec^2(x) dx = \tan x + C$                              | $\frac{\delta}{\delta x} (\tan x + C) = \sec^2 (x)$                      |
+| $\int \csc^2(x) dx = -\cot x + C$                             | $\frac{\delta}{\delta x} (-\cot x + C) = \csc^2 (x)$                     |
+| $\int \sec x \tan x dx = \sec x + C$                          | $\frac{\delta}{\delta x} (\sec x + C) = \sec x \tan x$                   |
+| $\int \csc x \cot x dx = -\csc x + C$                         | $\frac{\delta}{\delta x} (-\csc x + C) = \csc x \cot x$                  |
+| $\int \frac{1}{x^2+1} dx = \tan^{-1}x + C$                    | $\frac{\delta}{\delta x} (\tan^{-1}x + C) = \frac{1}{x^2+1}$             |
+| $\int \frac{1}{\sqrt{1-x^2}} dx = \sin^{-1}x + C$             | $\frac{\delta}{\delta x} (\sin^{-1}x + C) = \frac{1}{1-x^2}$             |
+| $\int \sinh x dx = \cosh x + C$                               | $\frac{\delta}{\delta x} (\cosh x + C) = \sinh x$                        |
+| $\int \cosh x dx = \sinh x + C$                               | $\frac{\delta}{\delta x} (\sinh x + C) = \cosh x$                        |
+
+> [!TIP] **Integral Interval Validity**
+>
+> By convention, a formula for a general indefinite integral is understood to be **valid on an interval**.
+
+For instance,
+
+$$
+∫ \frac{1}{x^2} dx = -\frac{1}{x} + C
+$$
+
+is valid on $(0, \infty)$ or on $(-\infty, 0)$. The most general antiderivative of $f(x) = \frac{1}{x^2}$ for $x \neq 0$ is $F(x) = -\frac{1}{x} + C_1$ if $x < 0$ and $F(x) = -\frac{1}{x} + C_2$ if $x > 0$, where $C_1$ and $C_2$ can be different constants.
+
+### The Net Change Theorem
+
+The Net Change Theorem is a powerful reformulation of the Fundamental Theorem of Calculus, Part 2, that emphasizes its practical application. It provides a direct interpretation of the definite integral in contexts involving rates of change.
+
+> [!NOTE] **Net Change Theorem**
+>
+> The second part of the Fundamental Theorem states that if $F$ is an antiderivative of $f$, then $\int_a^b f(x) dx = F(b) - F(a)$. Since $F' = f$, this can be rewritten as:
+>
+> $$\int_a^b F'(x) dx = F(b) - F(a)$$
+>
+> Thus:
+>
+> - $F'(x)$ represents the rate of change of the quantity $y = F(x)$.
+> - $F(b) - F(a)$ represents the net change in the quantity $y$ as $x$ changes from $a$ to $b$.
+>
+> So we can conclude that **the integral of a rate of change is the net change**.
+
+![The Net Change Theorem](./assets/net_change_theorem.png)
+
+#### Applications of the Net Change Theorem
+
+The theorem can be applied to any context where a quantity's rate of change is known and the goal is to find the net change in that quantity over an interval.
+
+##### Physics: Motion of an Object
+
+For an object moving along a straight line with position $s(t)$, velocity $v(t) = s'(t)$, and acceleration $a(t) = v'(t)$:
+
+**Displacement (Net Change of Position)**
+
+The displacement of the object from time $t_1$ to $t_2$ is the integral of its velocity.
+
+$$
+s(t_2) - s(t_1) = \int_{t_1}^{t_2} v(t) dt
+$$
+
+This value represents the net change in position. For example, a displacement of $-4.5$ m means the object's final position is $4.5$ m to the left of its initial position.
+
+![Net Area Theorem: Displacement](./assets/net_area_theorem_example_displacement.png)
+
+**Total Distance Traveled**
+
+To find the total distance traveled, one must integrate the object's speed, $|v(t)|$. This is because distance is cumulative, regardless of direction.
+
+$$
+\int_{t_1}^{t_2} |v(t)| dt
+$$
+
+![Net Area Theorem: Total Distance Traveled](./assets/net_area_theorem_example_total_distance.png)
+
+Calculating this integral often requires splitting the interval $[t_1, t_2]$ into subintervals where $v(t) \geq 0$ and $v(t) \leq 0$. Visually, this corresponds to summing all the areas between the velocity curve and the time axis, treating all areas as positive.
+
+**Change in Velocity**
+
+The net change in velocity from time $t_1$ to $t_2$ is the integral of acceleration.
+
+$$
+v(t_2) - v(t_1) = \int_{t_1}^{t_2} a(t) dt
+$$
+
+##### Other Scientific and Economic Applications
+
+| Field             | Rate of Change                                            | Integral Interpretation                                                                                                       |
+| ----------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Hydrology         | $V'(t)$: Rate of water flow into a reservoir.             | $\int_{t_1}^{t_2} V'(t) dt = V(t_2) - V(t_1)$ is the change in the volume of water between $t_1$ and $t_2$.                   |
+| Chemistry         | $\frac{\delta C}{\delta t}$: Rate of a chemical reaction. | $\int_{t_1}^{t_2} (\frac{\delta C}{\delta t}) dt = C(t_2) - C(t_1)$ is the change in the concentration of the product.        |
+| Physics (Statics) | $\rho(x) = m'(x)$: Linear density of a rod.               | $\int_a^b \rho(x) dx = m(b) - m(a)$ is the mass of the rod segment from $x=a$ to $x=b$.                                       |
+| Biology           | $\frac{\delta n}{\delta t}$: Rate of population growth.   | $\int_{t_1}^{t_2} \frac{\delta n}{\delta t} dt = n(t_2) - n(t_2)$ is the net change in population (births minus deaths).      |
+| Economics         | $C'(x)$: Marginal cost of production.                     | $\int_{x_1}^{x_2} C'(x) dx = C(x_2) - C(x_1)$ is the increase in cost when production is increased from $x_1$ to $x_2$ units. |
