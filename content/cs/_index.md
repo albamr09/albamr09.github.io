@@ -24,5 +24,5 @@ toc: false
 ## Web Development
 
 {{< cards >}}
-{{< card link="/cs/react" title="An In-Depth Walk Inside React" icon="lightning-bolt" >}}
+{{< card link="/cs/web/react" title="An In-Depth Walk Inside React" icon="lightning-bolt" >}}
 {{< /cards >}}
