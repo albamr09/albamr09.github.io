@@ -220,3 +220,157 @@ Proofs in set theory adhere to their own established conventions, which are buil
 > To show $A \cup B \subseteq A$, let $y \in A \cup B$. This means $y \in A$ or $y \in B$. If $y \in A$, the condition is met. If $y \in B$, then since we assumed $B \subseteq A$, it follows that $y \in A$. In either case, $y \in A$. Thus, $A \cup B \subseteq A$.
 >
 > Since both implications have been proven, the biconditional statement is true.
+
+## Fundamental Properties of Set Operations
+
+The operations of union, intersection, and complementation are governed by fundamental properties such as the commutative, associative, and distributive laws. Their validity is deeply rooted in logic, as each property corresponds directly to a logical equivalence from symbolic logic. For example, the commutative law of union ($A \cup B = B \cup A$) is the set-theoretic analogue of the logical equivalence of $P \lor Q$ and $Q \lor P$.
+
+> [!NOTE] **Fundamental Set Properties**
+>
+> 1. **Commutative Laws**:
+>    - $A \cup B = B \cup A$
+>    - $A \cap B = B \cap A$
+> 2. **Associative Laws**:
+>    - $A \cup (B \cup C) = (A \cup B) \cup C$
+>    - $A \cap (B \cap C) = (A \cap B) \cap C$
+> 3. **Distributive Laws**:
+>    - $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$
+>    - $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$
+> 4. **De Morgan’s Laws**:
+>    - $\overline{(A \cup B)} = \overline{A} \cap \overline{B}$
+>    - $\overline{(A \cap B)} = \overline{A} \cup \overline{B}$
+
+> [!TIP] **The Commutative Law of Union**
+>
+> $$A \cup B = B \cup A$$
+
+> **Proof**
+>
+> Assume $x$ is an arbitrary element of $A \cup B$. By the definition of union, this means $x \in A$ or $x \in B$.
+>
+> The logical statement "$x \in A$ or $x \in B$" is logically equivalent to "$x \in B$ or $x \in A$" due to the [commutative law for logical disjunction](/math/mptam/02_logic/#fundamental-properties-and-laws-of-logical-equivalence). This second statement is the definition of $x$ being an element of $B \cup A$. Therefore, $A \cup B \subseteq B \cup A$.
+>
+> The proof for the reverse inclusion, $B \cup A \subseteq A \cup B$, follows an identical line of reasoning and is therefore omitted.
+
+> [!TIP] **The Distributive Law of Union over Intersection**
+>
+> $$A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$$
+
+> **Proof**
+>
+> **Part 1: $A \cup (B \cap C) \subseteq (A \cup B) \cap (A \cup C)$**
+> Let $x$ be an element of $A \cup (B \cap C)$. This means $x \in A$ or $x \in B \cap C$.
+>
+> - Case 1: $x \in A$. If $x$ is in $A$, then by definition it is in $A \cup B$ and also in $A \cup C$. Therefore, $x$ must be in the intersection $(A \cup B) \cap (A \cup C)$.
+> - Case 2: $x \in B \cap C$. If $x$ is in $B \cap C$, then by definition $x \in B$ and $x \in C$.
+>   - Since $x \in B$, it is also in $A \cup B$.
+>   - Since $x \in C$, it is also in $A \cup C$.
+>   - Because $x$ is in both sets, it must be in their intersection $(A \cup B) \cap (A \cup C)$.
+>
+> In both cases, any element of $A \cup (B \cap C)$ is also an element of $(A \cup B) \cap (A \cup C)$.
+>
+> **Part 2: $(A \cup B) \cap (A \cup C) \subseteq A \cup (B \cap C)$**
+> Let $x$ be an element of $(A \cup B) \cap (A \cup C)$. This means $x \in A \cup B$ and $x \in A \cup C$.
+>
+> - Case 1: $x \in A$. If $x$ is in $A$, then it is automatically in $A \cup (B \cap C)$, and the condition is satisfied.
+> - Case 2: $x \notin A$. If $x$ is not in $A$:
+>   - Since $x \in A \cup B$, it must be that $x \in B$.
+>   - Since $x \in A \cup C$, it must be that $x \in C$.
+>   - Because $x \in B$ and $x \in C$, it follows that $x \in B \cap C$.
+>   - Therefore, $x$ is an element of $A \cup (B \cap C)$.
+>
+> In both cases, the inclusion holds. This completes the proof of equality.
+
+> [!TIP] **De Morgan’s Laws: Complement of the Union**
+>
+> $$\overline{(A \cup B)} = \overline{A} \cap \overline{B}$$
+
+> **Proof**
+>
+> **Part 1: $\overline{(A \cup B)} \subseteq \overline{A} \cap \overline{B}$**
+>
+> Let $x \in \overline{(A \cup B)}$. By the definition of a complement, this means $x \notin A \cup B$.
+>
+> For $x$ not to be in the union of $A$ and $B$, it must be the case that $x \notin A$ and $x \notin B$.From $x \notin A$, we conclude $x \in \overline{A}$. From $x \notin B$, we conclude $x \in \overline{B}$.
+>
+> Since $x \in \overline{A}$ and $x \in \overline{B}$, it must be that $x \in \overline{A} \cap \overline{B}$.
+>
+> **Part 2: $\overline{A} \cap \overline{B} \subseteq \overline{(A \cup B)}$**
+>
+> Let $x \in \overline{A} \cap \overline{B}$. This means $x \in \overline{A}$ and $x \in \overline{B}$.
+>
+> From $x \in \overline{A}$, we know that $x \notin A$. From $x \in \overline{B}$, we know that $x \notin B$. Since $x$ is in neither $A$ nor $B$, it cannot be in their union. Thus, $x \notin A \cup B$.
+>
+> By definition, this means $x \in \overline{(A \cup B)}$.
+
+![De Morgan's Law: Union Negation](./assets/de_morgans_law_union_negation.png)
+
+## Proofs Involving Cartesian Products of Sets
+
+> [!TIP] **Cartesian Products and Subset Inclusion**
+>
+> Let $A, B, C$ and $D$ be sets. If $A \subseteq C$ and $B \subseteq D$, then
+>
+> $$A \times B \subseteq C \times D$$
+
+> **Proof**
+>
+> Let $(x, y)$ be an arbitrary element of $A \times B$.By the definition of the [Cartesian product](/math/mptam/01_sets/#cartesian-products-of-sets), this means $x \in A$ and $y \in B$.
+>
+> We are given the premise that $A \subseteq C$ and $B \subseteq D$. Since $x \in A$ and $A \subseteq C$, it follows that $x \in C$. Similarly, since $y \in B$ and $B \subseteq D$, it follows that $y \in D$.
+>
+> Now we know that $x \in C$ and $y \in D$. By the definition of the [Cartesian product](/math/mptam/01_sets/#cartesian-products-of-sets), this means the ordered pair $(x, y)$ is an element of $C \times D$. Thus, any element of $A \times B$ is also an element of $C \times D$, proving that $A \times B \subseteq C \times D$.
+
+> [!TIP] **Distributivity over Union**
+>
+> For sets $A, B$ and $C$
+>
+> $$A \times (B \cup C) = (A \times B) \cup (A \times C)$$
+
+> **Proof**
+>
+> **Part 1: $A \times (B \cup C) \subseteq (A \times B) \cup (A \times C)$**
+>
+> Let $(x, y)$ be an element of $A \times (B \cup C)$. This means $x \in A$ and $y \in B \cup C$.
+>
+> The condition $y \in B \cup C$ implies that $y \in B$ or $y \in C$. If $y \in B$, then with $x \in A$, we have $(x, y) \in A \times B$. If $y \in C$, then with $x \in A$, we have $(x, y) \in A \times C$.
+>
+> In either case, $(x, y)$ belongs to $A \times B$ or $A \times C$, which means $(x, y) \in (A \times B) \cup (A \times C)$.
+>
+> **Part 2: $(A \times B) \cup (A \times C) \subseteq A \times (B \cup C)$**
+>
+> Let $(x, y)$ be an element of $(A \times B) \cup (A \times C)$. This means $(x, y) \in A \times B$ or $(x, y) \in A \times C$.
+>
+> If $(x, y) \in A \times B$, then $x \in A$ and $y \in B$. If $(x, y) \in A \times C$, then $x \in A$ and $y \in C$.
+>
+> In both cases, we know $x \in A$. In the first case, $y \in B$, which implies $y \in B \cup C$. In the second case, $y \in C$, which also implies $y \in B \cup C$.
+>
+> Therefore, we can conclude that $x \in A$ and $y \in B \cup C$, which means $(x, y) \in A \times (B \cup C)$.
+
+> [!TIP] **Distributivity over Set Difference**
+>
+> For sets $A, B$ and $C$,
+>
+> $$A \times (B − C) = (A \times B) − (A \times C)$$
+
+> **Proof**
+>
+> **Part 1: $A \times (B − C) \subseteq (A \times B) − (A \times C)$**
+>
+> Let $(x, y) \in A \times (B − C)$. This means $x \in A$ and $y \in B − C$.
+>
+> The condition $y \in B − C$ means $y \in B$ and $y \notin C$. Since $x \in A$ and $y \in B$, we know $(x, y) \in A \times B$.
+>
+> Since $y \notin C$, we know that the ordered pair $(x, y)$ cannot be an element of $A \times C$.
+>
+> Combining these facts, we have $(x, y) \in A \times B$ and $(x, y) \notin A \times C$. This is the definition of the set difference $(A \times B) − (A \times C)$.
+>
+> **Part 2: $(A \times B) − (A \times C) \subseteq A \times (B − C)$**
+>
+> Let $(x, y) \in (A \times B) − (A \times C)$. This means $(x, y) \in A \times B$ and $(x, y) \notin A \times C$.
+>
+> From $(x, y) \in A \times B$, we conclude that $x \in A$ and $y \in B$.
+>
+> From $(x, y) \notin A \times C$, we use our established fact that $x \in A$ to deduce the reason for non-inclusion. The only possibility is that $y \notin C$. Now we know $y \in B$ and $y \notin C$, which means $y \in B − C$.
+>
+> Since $x \in A$ and $y \in B − C$, it follows that $(x, y) \in A \times (B − C)$.

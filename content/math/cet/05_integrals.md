@@ -729,7 +729,7 @@ A foundational set of antiderivatives, presented in the notation of indefinite i
 | ------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | $\int cf(x) dx = c \int f(x) dx$                              | Follows from the constant multiple rule for derivatives.                 |
 | $\int [f(x) + g(x)] dx = \int f(x) dx + \int g(x) dx$         | Follows from the sum rule for derivatives.                               |
-| $\int k dx = kx + C$                                          | $\frac{\delta}{delta x} (kx + C) = k$                                    |
+| $\int k dx = kx + C$                                          | $\frac{\delta}{\delta x} (kx + C) = k$                                   |
 | $\int x^n dx = \frac{x^{n + 1}}{n + 1} + C$ (for $n \neq -1$) | $\frac{\delta}{\delta x} \left(\frac{x^{n + 1}}{n + 1} + C\right) = x^n$ |
 | $\int (\frac{1}{x}) dx = \ln\|x\| + C$                        | $\frac{\delta}{\delta x} \ln \|x\| + C = x$                              |
 | $\int e^x dx = e^x + C$                                       | $\frac{\delta}{\delta x} (e^x + C) = e^x$                                |
