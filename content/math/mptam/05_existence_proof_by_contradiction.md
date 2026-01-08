@@ -129,3 +129,126 @@ Prisoner #1 observes reality. Time passes, and neither Prisoner #2 nor Prisoner 
 The Conclusion: Since the assumption ("my dot is blue") leads to a contradiction with the observed facts, the assumption must be false. Prisoner #1 concludes, _"Therefore, my dot must be red."_
 
 ![The Three Prisoner Problem](./assets/three_prisoner_problem.png)
+
+## Existence Proofs
+
+Existence theorems are a foundational component of mathematics. They assert that an object possessing a specific set of properties exists within a given mathematical system. The insight these theorems offer is that they guarantee existence without necessarily providing a method to find or construct the object in question.
+
+> [!NOTE] **Existence Proof**
+>
+> An existence theorem concerning an open sentence $R(x)$ over a domain $S$ can be expressed formally using a quantified statement:
+>
+> $$\exists x \in S, R(x)$$
+>
+> This is read in plain language as:
+>
+> "There exists ∈ such that ."
+>
+> A proof that establishes the truth of such a statement is known as an existence proof.
+
+Existence proofs are generally categorized into two primary types, distinguished by their methodology.
+
+- **Constructive Proofs**: This method provides an explicit example of an object that satisfies the required properties. By displaying or constructing the object, the proof offers direct and concrete evidence of its existence.
+
+**Non-Constructive Proofs**: This method verifies that an object must exist without producing a specific example. Such proofs often rely on other established theorems or logical arguments, like proof by contradiction, to demonstrate that the absence of such an object would lead to an impossibility.
+
+Let's focus on an example of a constructive proof.
+
+> [!TIP] **Theorem 5.19**
+>
+> There exists an integer whose cube equals its square.
+
+> **Proof**
+>
+> Let $x$ be an integer such that
+>
+> $$x^3 = x^2 \cdot x^3 − x^2 = 0 x^2(x − 1) = 0$$
+>
+> The solutions to this equation are $x = 0$ and $x = 1$. Since we have found at least one such integer (in fact, two), the existence is proven.
+
+What about non-constructive existence proofs?
+
+> [!TIP] **Theorem 5.21**
+>
+> There exist irrational numbers $a$ and $b$ such that $a^b$ is rational.
+
+> **Proof**
+>
+> To prove this, we do not need to find a definitive pair of numbers. Instead, we can use a logical fork based on the number $\sqrt{2}^{\sqrt{2}}$. This number must be either rational or irrational. We can prove the theorem by examining both possibilities in a proof by cases.
+>
+> **Case 1**: $\sqrt{2}^{\sqrt{2}}$ is rational. If this is true, then we have found our pair of irrational numbers: $a = \sqrt{2}$ and $b = \sqrt{2}$. Their power, $a^b$, is rational, and the theorem is proven.
+>
+> **Case 2**: $\sqrt{2}^{\sqrt{2}}$ is irrational. If this is true, we can choose $a = \sqrt{2}^{\sqrt{2}}$ and $b = \sqrt{2}$, which are both irrational. Now, let's compute $a^b$:
+>
+> $$a^b = (\sqrt{2}^{\sqrt{2}})^{\sqrt{2}} = \sqrt{2}^{\sqrt{2} \cdot \sqrt{2}} = \sqrt{2}^2 = 2$$
+>
+> The result, $2$, is a rational number. So, in this case, we have also found a pair of irrational numbers whose power is rational.
+>
+> Since one of these two cases must be true, we have proven that such numbers $a$ and $b$ must exist. However, the proof does not definitively tell us which pair it is.
+
+### Extending Existence to Uniqueness
+
+In mathematics, establishing the existence of a solution or object is often just the first step. The next critical stage is to determine if it is the **only** such solution.
+
+> [!NOTE] **Uniqueness**
+>
+> An element possessing a certain property $P$ within a set $A$ is said to be unique if it is the only element of $A$ that has property $P$.
+
+There are two primary strategies for establishing uniqueness:
+
+- **Direct Proof Method**: Assume that $a$ and $b$ are two elements that both possess the property P. Then, through logical and algebraic manipulation, demonstrate that it must be the case that $a = b$.
+- **Proof by Contradiction Method**: Assume that $a$ and $b$ are two distinct ($a \neq b$) elements that both possess property $P$. Then, show that this assumption leads to a logical contradiction, thereby proving that distinct elements with the property cannot exist.
+
+Let's examine how these strategies are applied.
+
+> [!TIP] **Theorem 5.23**
+>
+> he equation $x^5 + 2x − 5 = 0$ has a unique real number solution between $x = 1$ and $x = 2$.
+
+> **Proof**
+>
+> We have already established existence; now we prove uniqueness. This proof utilizes the Proof by Contradiction method.
+>
+> Assume, to the contrary, that the equation has two distinct solutions, $a$ and $b$, in the interval $(1, 2)$. Let us assume $a < b$. Since $1 < a < b < 2$, it follows that
+>
+> $$a^5 < b^5 \text{ and } 2a < 2b$$
+>
+> $$a^5 + 2a - 5 < b^5 + 2b - 5$$
+>
+> However, since both $a$ and $b$ are solutions to the equation, we know that $a^5 + 2a − 5 = 0$ and $b^5 + 2b − 5 = 0$.
+>
+> Substituting these values into the inequality yields:
+>
+> $$0 = a^5 + 2a − 5 < b^5 + 2b − 5 = 0$$
+>
+> This statement, $0 < 0$, is a contradiction. Therefore, our assumption that two distinct solutions exist must be false. The solution is unique.
+
+## Disproving Existence Statements
+
+Disproving an existence claim is a different task than providing a counterexample to a universal claim. The logical foundation for disproving an existence statement lies in the equivalence between the negation of an existential quantifier and a universal quantifier. Formally:
+
+$$
+\neq (\exists x \in S, R(x)) \equiv \forall x \in S, \neg R(x)
+$$
+
+In words, the statement "There does not exist an $x$ in set $S$ with property $R(x)$" is logically equivalent to the statement "For all $x$ in set $S$, $x$ does not have property $R(x)$." This equivalence transforms the task of disproving existence into the task of proving a universal statement.
+
+The following example demonstrates how to prove that no element in a given domain has the specified property.
+
+> [!TIP] **Example 5.26**
+>
+> There exists an odd integer $n$ such that $n^2 + 2n + 3$ is odd.
+
+> **Proof**
+>
+> We will prove the negation: **For every odd integer $n$, the expression $n^2 + 2n + 3$ is even**
+>
+> Let $n$ be an arbitrary odd integer. By definition, $n = 2k + 1$ for some integer $k$. Substituting this into the expression:
+>
+> $$n^2 + 2n + 3 = (2k + 1)^2 + 2(2k + 1) + 3$$
+>
+> $$= (4k^2 + 4k + 1) + (4k + 2) + 3$$
+>
+> $$= 4k^2 + 8k + 6 = 2(2k^2 + 4k + 3)$$
+>
+> Since $2k^2 + 4k + 3$ is an integer, the entire expression is a multiple of $2$ and is therefore even. Because this holds for any odd integer $n$, no odd $n$ exists for which the expression is odd.
