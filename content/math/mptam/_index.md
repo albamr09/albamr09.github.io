@@ -11,4 +11,5 @@ type: docs
 {{< card link="04_more_direct_contrapositive_proof" title="More on Direct Proof and Proof by Contrapositive" >}}
 {{< card link="05_existence_proof_by_contradiction" title="Existence and Proof by Contradiction" >}}
 {{< card link="06_mathematical_induction" title="Mathematical Induction" >}}
+{{< card link="07_prove_disprove" title="Prove or Disprove" >}}
 {{< /cards >}}
