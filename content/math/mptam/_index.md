@@ -12,4 +12,5 @@ type: docs
 {{< card link="05_existence_proof_by_contradiction" title="Existence and Proof by Contradiction" >}}
 {{< card link="06_mathematical_induction" title="Mathematical Induction" >}}
 {{< card link="07_prove_disprove" title="Prove or Disprove" >}}
+{{< card link="08_equivalence_relations" title="Equivalence Relations" >}}
 {{< /cards >}}
