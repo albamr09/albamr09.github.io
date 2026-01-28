@@ -13,4 +13,5 @@ type: docs
 {{< card link="06_mathematical_induction" title="Mathematical Induction" >}}
 {{< card link="07_prove_disprove" title="Prove or Disprove" >}}
 {{< card link="08_equivalence_relations" title="Equivalence Relations" >}}
+{{< card link="09_functions" title="Functions" >}}
 {{< /cards >}}
