@@ -14,4 +14,5 @@ type: docs
 {{< card link="07_prove_disprove" title="Prove or Disprove" >}}
 {{< card link="08_equivalence_relations" title="Equivalence Relations" >}}
 {{< card link="09_functions" title="Functions" >}}
+{{< card link="10_cardinalities_sets" title="Cardinalities of Sets" >}}
 {{< /cards >}}
