@@ -124,3 +124,91 @@ To prove that two different infinite sets possess the same cardinality, we must 
 > For any $r \in \mathbb{R}$, if $r > 0$, we find $x = \frac{r}{1+r} \in (0, 1)$ such that $f(x) = r$. If $r < 0, x = \frac{r}{1-r} \in (-1, 0)$ maps to $r$.
 >
 > Thus, $f$ is bijective.
+
+## Comparing Cardinalities of Sets
+
+In advanced set theory, identifying equivalent structures across disparate notations is essential for deep analysis. A instance of this is the relationship between the power set $\mathcal{P}(A)$, that is the collection of all subsets of $A$, and the function space $2^A$, which denotes the set of all functions mapping from $A$ to the codomain $\\{0, 1\\}$.
+
+> [!TIP] **Theorem 10.16**
+>
+> For every nonempty set $A$, the sets $P(A)$ and $2^A$ are numerically equivalent.
+
+> **Proof**
+>
+> To establish this equivalence, we define a bijection
+>
+> $$\phi: P(A) \to 2^A$$
+>
+> For any subset $S \subseteq A$, we map $S$ to a specific indicator function (or characteristic function) $f_S \in 2^A$.
+>
+> We define this mapping $\phi(S) = f_S$, where for each $x \in A$:
+>
+> $$f_S(x) = \begin{cases} 1 & \text{if } x \in S \\ 0 & \text{if } x \notin S \end{cases}$$
+>
+> Consider the case where $A = \\{a, b\\}$. The power set $P(A)$ contains $2^{|A|} = 4$ elements. The mapping is illustrated in the following table:
+>
+> |Subset $S \in P(A)$|Function $f_S \in 2^A$|Formal Mapping Details|
+> |$\emptyset$|$f_1$|$\\{(a, 0), (b, 0)\\}$|
+> |$\{a\}$|$f_2$|$\{(a, 1), (b, 0)\}$|
+> |$\{b\}$|$f_3$|$\{(a, 0), (b, 1)\}$|
+> |$\{a, b\}$|$f_4$|$\{(a, 1), (b, 1)\}$|
+>
+> Verification of Bijection:
+>
+> Injectivity:
+>
+> Assume $\phi(S) = \phi(T)$. This implies $f_S = f_T$, and thus $f_S(x) = f_T(x)$ for all $x \in A$. By the definition of the indicator function, $x \in S$ if and only if $x \in T$, necessitating that $S = T$.
+>
+> Surjectivity:
+>
+> Given any function $f \in 2^A$, we define the set $S = \\{x \in A : f(x) = 1\\}$. It follows immediately that $f_S = f$, proving that every function in $2^A$ is the image of a subset in $P(A)$.
+
+### Cantor’s Theorem and the Hierarchy of Infinity
+
+> [!TIP] **Theorem 10-17**
+>
+> Every set $A$ is strictly smaller in cardinality than its power set $P(A)$.
+
+> **Proof by Contradiction**
+>
+> Assume there exists a bijective function $g: A \to P(A)$. For every $x \in A$, let $g(x) = A_x$, where $A_x \subseteq A$.
+>
+> Define a specific subset $B \subseteq A$ as $B = \\{x \in A : x \notin A_x\\}$. Since $g$ is assumed to be surjective, there must exist some $y \in A$ such that $g(y) = B$.
+>
+> Let us analyze the membership of $y$ in $B$:
+>
+> - If $y \in B$, then by the definition of $B$, $y \notin A_y$. Since $A_y = B$, this implies $y \notin B$, a contradiction.
+> - If $y \notin B$, then $y \notin A_y$. By the definition of $B$, this implies $y \in B$, also a contradiction.
+>
+> Thus, no such $y$ can exist, and the assumption of a bijection is false.
+
+The implication says that **there is no largest set**. One can always construct a larger infinity by taking the power set of a set, leading to an infinite progression of cardinalities.
+
+### The Aleph Null, the Continuum, and the Continuum Hypothesis
+
+The cardinality of denumerable sets, such as $\mathbb{N}$, is denoted by $\aleph_0$ or **"aleph null"**. Any set in a one-to-one correspondence with $\mathbb{N}$ has cardinality $\aleph_0$.
+
+Conversely, the cardinality of the real numbers $\mathbb{R}$ is termed the **continuum**, denoted by $c$. As established, $\aleph_0 < c$.
+
+The **Continuum Hypothesis (CH)** represents one of the most significant questions in the foundations of mathematics. It posits that there is no set $S$ such that $\aleph_0 < |S| < c$. The resolution of this hypothesis reveals the limits of axiomatic systems:
+
+- [Kurt Gödel](https://wikipedia.org/wiki/Kurt_G%C3%B6del) (1931) proved that CH is consistent with the standard axioms of set theory and cannot be disproved.
+- [Paul Cohen](https://wikipedia.org/wiki/Paul_Cohen) (1963) proved that CH is independent of those same axioms and cannot be proved.
+
+Thus, CH is undecidable within. While we know $|P(\mathbb{N})| > \aleph_0$, investigating sets with cardinality greater than $c$ requires powerful tools.
+
+## The Schröder-Bernstein Theorem
+
+> [!TIP] **Theorem 10.19**
+>
+> If $B \subseteq A$ and there exists an injection $f: A \to B$, then there exists a bijection from $A to B$.
+
+> For any $x \in A$, we define $f^1(x) = f(x)$, and for $n \ge 2$, $f^n(x) = f(f^{n-1}(x))$.
+>
+> We define a specific subset $B' \subseteq B$ as:
+>
+> $$B' = \{f^n(x) : x \in A - B, n \in \mathbb{N}\}$$
+>
+> By defining $C = (A - B) \cup B'$ and using the restriction $f_1: C \to B'$, we can construct a bijective function $h: A \to B$ by mapping elements of $C$ via $f$ and elements of $D = B - B'$ via the identity function $i_D$.
+>
+> This recursive sequence $f^1(x), f^2(x), f^3(x), \dots$ is what essentially allows us to "rearrange" the set into a bijection.
