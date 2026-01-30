@@ -15,4 +15,5 @@ type: docs
 {{< card link="08_equivalence_relations" title="Equivalence Relations" >}}
 {{< card link="09_functions" title="Functions" >}}
 {{< card link="10_cardinalities_sets" title="Cardinalities of Sets" >}}
+{{< card link="11_proofs_number_theory" title="Proofs in Number Theory" >}}
 {{< /cards >}}
