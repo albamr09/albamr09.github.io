@@ -106,3 +106,215 @@ $$
 $$
 
 choose $\delta = \epsilon/3$. Thus, $3|x-4| < 3(\epsilon/3) = \epsilon$.
+
+## Fundamental Properties of Limit Functions
+
+> [!NOTE] The Arithmetic of Limits
+>
+> If $\lim_{x \to a} f(x) = L$ and $\lim_{x \to a} g(x) = M$, then:
+>
+> $$\lim_{x \to a} (f(x) + g(x)) = L + M$$
+
+> **Proof**
+>
+> Let $\epsilon > 0$. Since $\lim_{x \to a} f(x) = L$, there exists $\delta_1 > 0$ such that if $0 < |x - a| < \delta_1$, then $|f(x) - L| < \epsilon/2$.
+>
+> Similarly, since $\lim_{x \to a} g(x) = M$, there exists $\delta_2 > 0$ such that if $0 < |x - a| < \delta_2$, then $|g(x) - M| < \epsilon/2$
+>
+> Choose $\delta = \min(\delta_1, \delta_2)$ and let $x \in \mathbb{R}$ such that $0 < |x - a| < \delta$.
+>
+> This implies that both $0 < |x - a| < \delta_1$ and $0 < |x - a| < \delta_2$ are satisfied. Therefore:
+>
+> $$|(f(x) + g(x)) - (L + M)| = |(f(x) - L) + (g(x) - M)|$$
+>
+> Applying the [Triangle Inequality](/math/dma/04_elementary_number_theory/#absolute-value-and-the-triangle-inequality):
+>
+> $$|(f(x) - L) + (g(x) - M)| \leq |f(x) - L| + |g(x) - M| < \epsilon/2 + \epsilon/2 = \epsilon$$
+
+The limit of a product is not a direct extension of the sum rule; it requires an intermediary understanding of local boundedness. In a product, the error of one function is scaled by the magnitude of the other. Thus, we must first prove that a function is contained within a finite range near the point of convergence.
+
+> [!TIP] **The Boundedness Principle**
+>
+> If $\lim_{x \to a} f(x) = L$, then there exists a $\delta > 0$ such that if $0 < |x - a| < \delta$, then $|f(x)| < 1 + |L|$.
+
+> **Proof**
+>
+> Let $\epsilon = 1$. By the definition of a limit, there exists $\delta > 0$ such that
+>
+> $$0 < |x - a| < \delta \implies |f(x) - L| < 1$$
+>
+> By the [Triangle Inequality](/math/dma/04_elementary_number_theory/#absolute-value-and-the-triangle-inequality):
+>
+> $$|f(x)| = |f(x) - L + L| \leq |f(x) - L| + |L| < 1 + |L|$$
+
+> [!NOTE] **The Product Theorem**
+>
+> If $\lim_{x \to a} f(x) = L$ and $\lim_{x \to a} g(x) = M$, then
+>
+> $$\lim_{x \to a} f(x) \cdot g(x) = LM$$
+
+> **Proof**
+>
+> Let $\epsilon > 0$. We know there exists $\delta_1 > 0$ such that if $0 < |x - a| < \delta_1$, then $|f(x)| < 1 + |L|$.
+>
+> Since $\lim_{x \to a} g(x) = M$, there exists $\delta_2 > 0$ such that if $0 < |x - a| < \delta_2$, then $|g(x) - M| < \frac{\epsilon}{2(1 + |L|)}$.
+>
+> _Case 1_: $M = 0$.
+>
+> Choose $\delta = \min(\delta_1, \delta_2)$. For $0 < |x - a| < \delta$:
+>
+> $$|f(x)g(x) - LM| = |f(x)g(x) - 0| = |f(x)||g(x) - M| < (1+|L|) \cdot \frac{\epsilon}{2(1+|L|)} = \epsilon/2 < \epsilon$$
+>
+> _Case 2_: $M \neq 0$.
+>
+> There exists $\delta_3 > 0$ such that if $0 < |x - a| < \delta_3$, then
+>
+> $$|f(x) - L| < \frac{\epsilon}{2|M|}$$
+>
+> Choose $\delta = \min(\delta_1, \delta_2, \delta_3)$. For $0 < |x - a| < \delta$:
+>
+> $$|f(x)g(x) - LM| = |f(x)g(x) - f(x)M + f(x)M - LM|$$
+>
+> $$= |f(x)(g(x) - M) + (f(x) - L)M| \leq |f(x)||g(x) - M| + |f(x) - L||M|$$
+>
+> $$< (1+|L|)\frac{\epsilon}{2(1+|L|)} + \left(\frac{\epsilon}{2|M|}\right)|M| = \epsilon/2 + \epsilon/2 = \epsilon$$
+
+The primary analytical challenge of quotients is keeping the denominator away from zero. To perform a rigorous $\epsilon-\delta$ proof, we must establish a "safe zone"—a neighborhood where the denominator is bounded away from zero.
+
+> [!TIP] **Lower Bounds of Functions**
+>
+> If $\lim_{x \to a} g(x) = M \neq 0$, then $1/|g(x)| < 2/|M|$ for all $x$ in some deleted neighborhood of $a$.
+
+> **Proof**
+>
+> Let $\epsilon = |M|/2$. There exists $\delta > 0$ such that if $0 < |x - a| < \delta$, then
+>
+> $$|g(x) - M| < |M|/2$$
+>
+> By the [Triangle Inequality](/math/dma/04_elementary_number_theory/#absolute-value-and-the-triangle-inequality):
+>
+> $$|M| = |M - g(x) + g(x)| \leq |M - g(x)| + |g(x)|$$
+>
+> Thus,
+>
+> $$|g(x)| \geq |M| - |M - g(x)| > |M| - |M|/2 = |M|/2$$
+>
+> Inverting this gives $1/|g(x)| < 2/|M|$.
+
+> [!NOTE] **The Quotient Theorem**
+>
+> If $\lim_{x \to a} f(x) = L$ and $\lim_{x \to a} g(x) = M \neq 0$, then
+>
+> $$\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{L}{M}$$
+
+![Quotient Boundness](./assets/quotient_boundness.png)
+
+> **Proof**
+>
+> Let $\epsilon > 0$. We know there exists $\delta_1 > 0$ such that if $0 < |x - a| < \delta_1$, then $1/|g(x)| < 2/|M|$.
+>
+> Also, there exists $\delta_2 > 0$ such that if $0 < |x - a| < \delta_2$, then $|f(x) - L| < |M|\epsilon/4$.
+>
+> _Case 1_: $L = 0$.
+>
+> Choose $\delta = \min(\delta_1, \delta_2)$. For $0 < |x - a| < \delta$:
+>
+> $$\left| \frac{f(x)}{g(x)} - \frac{L}{M} \right| \leq \frac{|f(x) - L|}{|g(x)|} < \left(\frac{|M|\epsilon}{4}\right)\left(\frac{2}{|M|}\right) = \epsilon/2 < \epsilon$$
+>
+> _Case 2_: $L \neq 0$.
+>
+> Since $\lim_{x \to a} g(x) = M$, there exists $\delta_3 > 0$ such that if $0 < |x - a| < \delta_3$, then $|g(x) - M| < \frac{|M|^2\epsilon}{4|L|}$. Choose $\delta = \min(\delta_1, \delta_2, \delta_3)$. For $0 < |x - a| < \delta$:
+>
+> $$\left| \frac{f(x)}{g(x)} - \frac{L}{M} \right| \leq \frac{|f(x) - L||M| + |L||M - g(x)|}{|g(x)||M|} < \frac{(|M|\epsilon/4)|M| + |L|(|M|^2\epsilon/4|L|)}{(|M|/2)|M|} = \frac{|M|^2\epsilon/4 + |M|^2\epsilon/4}{|M|^2/2} = \epsilon$$
+
+> [!TIP] **Fundamental Theorems**
+>
+> **Constant Limits**: If $f(x) = c$, then
+>
+> $$\lim_{x \to a} f(x) = c$$
+>
+> **Identity Limits**: If $f(x) = x$, then
+>
+> $$\lim_{x \to a} f(x) = a$$
+>
+> **Limits of Power Functions**: For $n \in \mathbb{N}$,
+>
+> $$\lim_{x \to a} x^n = a^n$$
+>
+> **Limits of Sum of $n$ Functions**: For functions $f_1, \dots, f_n$ where $\lim_{x \to a} f_i(x) = L_i$:
+>
+> $$\lim_{x \to a} \sum_{i=1}^n f_i(x) = \sum_{i=1}^n L_i$$
+
+## Continuity
+
+> [!NOTE] **Continuity of a Function**
+>
+> A function $f$ is continuous at a if:
+>
+> 1. $f(a)$ is defined.
+> 2. $\lim_{x \to a} f(x)$ exists.
+> 3. $\lim_{x \to a} f(x) = f(a)$.
+
+For
+
+$$
+f(x) = \frac{x^2 - 3x + 2}{x^2 - 1}
+$$
+
+the function is undefined at $x=1$. However, the limit exists:
+
+$$
+\lim_{x \to 1} \frac{(x-1)(x-2)}{(x-1)(x+1)} = \lim_{x \to 1} \frac{x-2}{x+1} = -1/2
+$$
+
+Thus, $f$ is continuous at $1$ only if we define $f(1) = -1/2$.
+
+## Differentiability
+
+We define the derivative of a function as the limit of a difference quotient, geometrically representing the tangent slope.
+
+> [!NOTE] **The Derivative Definition**
+>
+> Given a function $f$, its derivative, denoted $f'(a)$, is defined as:
+>
+> $$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}$$
+
+For
+
+$$
+f(x) = 1/x^2
+$$
+
+at $a=1$, the difference quotient simplifies to
+
+$$
+\frac{-(x+1)}{x^2}
+$$
+
+which has a limit of $-2$. To prove this via $\epsilon-\delta$, we examine:
+
+$$
+\left| \frac{2x^2 - x - 1}{x^2} \right| = \frac{|x-1||2x+1|}{x^2}
+$$
+
+Restricting $\delta \leq 1/2$ ensures $1/2 < x < 3/2$. Consequently,
+
+$$
+x^2 > 1/4 \implies 1/x^2 < 4, and |2x+1| < 4
+$$
+
+Thus, the expression is bounded by $16|x-1|$. By choosing $\delta = \min(1/2, \epsilon/16)$, we satisfy the limit definition.
+
+> [!TIP] **Theorem 12.38**
+>
+> If $f$ is differentiable at $a$, then $f$ is continuous at $a$.
+
+> **Proof**
+>
+> $$f(x) = \frac{f(x) - f(a)}{x - a}(x - a) + f(a)$$
+>
+> Taking the limit:
+>
+> $$\lim_{x \to a} f(x) = [f'(a) \cdot 0] + f(a) = f(a)$$
+
+While differentiability implies continuity, the converse is false. Functions such as $f(x) = |x|$ (proven non-differentiable at $0$) and $g(x) = \sqrt[3]{x}$ are continuous at zero but fail to be differentiable due to sharp corners or vertical tangents.
