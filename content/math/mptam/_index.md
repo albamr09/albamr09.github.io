@@ -16,4 +16,5 @@ type: docs
 {{< card link="09_functions" title="Functions" >}}
 {{< card link="10_cardinalities_sets" title="Cardinalities of Sets" >}}
 {{< card link="11_proofs_number_theory" title="Proofs in Number Theory" >}}
+{{< card link="12_proofs_calculus" title="Proofs in Calculus" >}}
 {{< /cards >}}
