@@ -103,7 +103,7 @@ $$
 
 > **Proof**
 >
-> If $n$ is composite, there exist integers $a, b$ where $2 \le a, b \le n-1$ such that $ab = n$. In the context of $\mathbb{Z}_n^*$, this implies $[a][b] = [n] = [0]$. Since $[0] \notin \mathbb{Z}_n^*$, the operation fails closure, disqualifying it as a group.
+> If $n$ is composite, there exist integers $a, b$ where $2 \le a, b \le n-1$ such that $ab = n$. In the context of $\mathbb{Z}_n^\*$, this implies $[a][b] = [n] = [0]$. Since $[0] \notin \mathbb{Z}_n^*$, the operation fails closure, disqualifying it as a group.
 >
 > If $p$ is prime, closure is guaranteed because $p | ab$ implies $p | a$ or $p | b$ by primality, meaning the product of two non-zero residues remains non-zero.
 >
@@ -263,7 +263,9 @@ $$
 >
 > Then
 >
-> $$f \circ h = h = \phi(g) = \phi(e * g) = \phi(e) \circ \phi(g) = \phi(e) \circ h. By Right Cancellation in H, f = \phi(e)$$
+> $$f \circ h = h = \phi(g) = \phi(e * g) = \phi(e) \circ \phi(g) = \phi(e) \circ h$$
+>
+> By Right Cancellation in $H$, $f = \phi(e)$.
 
 > **Proof of (2)**
 >
