@@ -122,3 +122,157 @@ $$
 > $$f: A \to A$$
 
 Under the operation of function composition ($\circ$), the set $S_A$ of all permutations forms a group, designated the **Symmetric Group**.
+
+## Fundamental Properties of Groups
+
+> [!NOTE] **The Cancellation Laws**
+>
+> In any group $(G, *)$, the following properties hold for all $a, b, c \in G$:
+>
+> - **Left Cancellation Law**: If $a * b = a * c$, then $b = c$.
+> - **Right Cancellation Law**: If $b * a = c * a$, then $b = c$.
+
+> **Proof of the Left Cancellation Law**:
+>
+> Assume $a * b = a * c$. By axiom G3, there exists an inverse $s$ for the element a such that
+>
+> $$s * a = e$$
+>
+> where $e$ is the identity. Multiplying both sides by $s$ on the left, we obtain
+>
+> $$s * (a * b) = s * (a * c)$$
+>
+> By the associative property (G1), this yields
+>
+> $$(s * a) * b = (s * a) * c$$
+>
+> Substituting the identity, we have $e * b = e * c$, which simplifies to $b = c$.
+
+> [!TIP] **Unique Solutions to Linear Equations**
+>
+> For any $a, b \in G$, the linear equations $a * x = b$ and $x * a = b$ have unique solutions in $G$.
+
+> **Proof**
+>
+> Let $e$ be the identity and $a^{-1}$ be the inverse of $a$.
+>
+> Define $x = a^{-1} * b$. Substitution shows
+>
+> $$a * (a^{-1} * b) = (a * a^{-1}) * b = e * b = b$$
+>
+> confirming $x = a^{-1} * b$ is a solution.
+>
+> To establish uniqueness, suppose $x_1$ and $x_2$ are both solutions. Then $a * x_1 = b$ and $a * x_2 = b$, so $a * x_1 = a * x_2$.
+>
+> By the Left Cancellation Law, $x_1 = x_2$.
+
+**The "Latin Square" Property**, the unique solvability of these equations ensures that in a group table, every element $b$ must appear exactly once in the row corresponding to a and exactly once in every column. This "Latin Square" arrangement is mathematically significant because it prevents "information loss" during the group operation; every element remains distinct and reachable, ensuring the operation is a perfect rearrangement of the group's domain.
+
+> [!NOTE] **Uniqueness of Identity and Inverses**
+>
+> In any group $G$:
+>
+> - The identity element is unique.
+> - Each element $g \in G$ has a unique inverse.
+
+> **Proof of the uniqueness of the identity**
+>
+> Assume $e$ and $f$ are both identities. Since $e$ is an identity, $ef = f$.
+>
+> Since $f$ is an identity, $ef = e$. Therefore, $e = ef = f$.
+
+> **Proof of the uniqueness and existence of the inverse**
+>
+> Let $g \in G$ and suppose $s$ and $t$ are both inverses of $g$. Thus,
+>
+> $$gs = sg = e$$
+>
+> $$gt = tg = e$$
+>
+> It follows that
+>
+> $$s = se = s(gt) = (sg)t = et = t$$
+
+In professional mathematics, we typically adopt multiplicative notation, writing $ab$ for $a * b$ and $a^{-1}$ for the inverse. In abelian groups using additive notation, we use $0$ and $-a$.
+
+## Subgroups
+
+> [!NOTE] **Subgroups**
+>
+> If $(G, *)$ is a group and $H \subseteq G$, $H$ is a subgroup if it satisfies the group axioms under the same operation.
+
+Typical examples include $(\mathbb{Z}, +)$ as a subgroup of $(\mathbb{Q}, +)$ and $(2\mathbb{Z}, +)$ within $(\mathbb{Z}, +)$.
+
+> [!NOTE] **The Subgroup Test**
+>
+> A nonempty subset $H$ of $G$ is a subgroup if and only if:
+>
+> - $ab \in H$ for all $a, b \in H$ (_Closure under multiplication_).
+> - $a^{-1} \in H$ for all $a \in H$ (_Closure under inversion_).
+
+> **Proof**
+>
+> If $H$ is a subgroup, these properties are required by definition of a group.
+>
+> Conversely, if $H$ satisfies these, it inherits G1 (Associativity) from $G$ because all elements of $H$ are also elements of $G$.
+>
+> Since $H$ is nonempty, $\exists a \in H$. By the closure under inversion, $a^{-1} \in H$, and by the closure under multiplication, $aa^{-1} = e \in H$. Thus $H$ contains the identity and all inverses, satisfying all axioms.
+
+> [!NOTE] **Subgroup-Based Equivalenc**e
+>
+> For a subgroup $H$ of $G$, the relation $aRb$ defined by $a = bh$ for $h \in H$ is an equivalence relation.
+>
+> - **Reflexive**: $a = ae$, thus $aRa$.
+> - **Symmetric**: If $a = bh$, then $b = ah^{-1}$. Since $h^{-1} \in H, bRa$.
+> - **Transitive**: If $a = bh_1$ and $b = ch_2$, then $a = (ch_2)h_1 = c(h_2h_1)$. Since $h_2h_1 \in H, aRc$.
+
+### Left Cosets and Cardinality
+
+The equivalence classes are **Left Cosets**,
+
+$$
+gH = \{gh : h \in H\}
+$$
+
+## Isomorphic Groups
+
+> [!NOTE] **Isomorphism**
+>
+> An isomorphism is a bijective, operation-preserving function
+>
+> $$\phi: G \to H$$
+>
+> such that
+>
+> $$\phi(a * b) = \phi(a) \circ \phi(b)$$
+
+![Isomorphism](./assets/isomorphism.png)
+
+> [!TIP] **Theorem 13.18: Properties of Isomorphisms**
+>
+> Let $\phi: G \to H$ be an isomorphism, with identities $e \in G$ and $f \in H$.
+>
+> 1. $\phi(e) = f$: .
+> 2. $\phi(g^{-1}) = (\phi(g))^{-1}$:
+
+> **Proof of (1)**
+>
+> Let $h \in H$. Since $\phi$ is onto,
+>
+> $$\exists g \in G \text{ such that } \phi(g) = h$$
+>
+> Then
+>
+> $$f \circ h = h = \phi(g) = \phi(e * g) = \phi(e) \circ \phi(g) = \phi(e) \circ h. By Right Cancellation in H, f = \phi(e)$$
+
+> **Proof of (2)**
+>
+> Since $g * g^{-1} = e$, then
+>
+> $$\phi(g * g^{-1}) = \phi(e) = f$$
+>
+> Because $\phi$ is operation-preserving,
+>
+> $$\phi(g) \circ \phi(g^{-1}) = f$$
+>
+> This confirms $\phi(g^{-1})$ is the unique inverse of $\phi(g)$.
