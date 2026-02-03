@@ -57,15 +57,15 @@ $$
 
 The following table analyzes how different structures satisfy or fail these properties:
 
-| Structure                           | G1  | G2          | G3             | G4  | Note                                                                        |
-| ----------------------------------- | --- | ----------- | -------------- | --- | --------------------------------------------------------------------------- | -------------------------------------- |
-| $(\mathbb{Z}, +)$                   | Yes | Yes ($0$)   | Yes ($-n$)     | Yes | A classic abelian structure.                                                |
-| $(\mathbb{Z}, \cdot)$               | Yes | Yes ($1$)   | No             | Yes | Lacks multiplicative inverses for elements $\neq 1, -1$.                    |
-| $(\mathbb{M}_2(\mathbb{R}), +)$     | Yes | Yes         | $(\mathbf{0})$ | Yes | Yes                                                                         | Standard $2 \times 2$ matrix addition. |
-| $(\mathbb{M}_2(\mathbb{R}), \cdot)$ | Yes | Yes ($I$)   | No             | No  | Fails G3 as singular matrices (determinant zero) lack inverses.             |
-| $(\mathbb{Z}_n, \cdot)$             | Yes | Yes ([$1$]) | No             | Yes | [$0$] lacks an inverse; composite $n$ may fail closure in $\mathbb{Z}_n^*$. |
+| Structure                           | G1  | G2                 | G3         | G4  | Note                                                                        |
+| ----------------------------------- | --- | ------------------ | ---------- | --- | --------------------------------------------------------------------------- |
+| $(\mathbb{Z}, +)$                   | Yes | Yes ($0$)          | Yes ($-n$) | Yes | A classic abelian structure.                                                |
+| $(\mathbb{Z}, \cdot)$               | Yes | Yes ($1$)          | No         | Yes | Lacks multiplicative inverses for elements $\neq 1, -1$.                    |
+| $(\mathbb{M}_2(\mathbb{R}), +)$     | Yes | Yes $(\mathbf{0})$ | Yes        | Yes | Standard $2 \times 2$ matrix addition.                                      |
+| $(\mathbb{M}_2(\mathbb{R}), \cdot)$ | Yes | Yes ($I$)          | No         | No  | Fails G3 as singular matrices (determinant zero) lack inverses.             |
+| $(\mathbb{Z}_n, \cdot)$             | Yes | Yes ([$1$])        | No         | Yes | [$0$] lacks an inverse; composite $n$ may fail closure in $\mathbb{Z}_n^*$. |
 
-The failure of a specific property often dictates the necessary restriction of a set to maintain algebraic utility. For instance, (\mathbb{R}, \cdot) fails G3 because the element zero possesses no multiplicative inverse. To satisfy G3, we must restrict the set to the non-zero real numbers, denoted \mathbb{R}^\*.
+The failure of a specific property often dictates the necessary restriction of a set to maintain algebraic utility. For instance, $(\mathbb{R}, \cdot)$ fails G3 because the element zero possesses no multiplicative inverse. To satisfy G3, we must restrict the set to the non-zero real numbers, denoted $\mathbb{R}^*$.
 
 ## Groups
 
