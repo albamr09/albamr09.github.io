@@ -17,4 +17,5 @@ type: docs
 {{< card link="10_cardinalities_sets" title="Cardinalities of Sets" >}}
 {{< card link="11_proofs_number_theory" title="Proofs in Number Theory" >}}
 {{< card link="12_proofs_calculus" title="Proofs in Calculus" >}}
+{{< card link="13_proofs_group_theory" title="Proofs in Group Theory" >}}
 {{< /cards >}}
