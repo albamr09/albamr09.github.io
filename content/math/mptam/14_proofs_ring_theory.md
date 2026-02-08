@@ -237,3 +237,146 @@ is a subring of $\mathbb{C}$. The difference and product of any two Gaussian int
 **Intersection of Subrings**
 
 If $S_1$ and $S_2$ are subrings, $S_1 \cap S_2$ is a subring because the zero element exists in both, and closure under subtraction and multiplication is maintained within the intersection.
+
+## Integral Domains
+
+The transition from general rings to integral domains marks a shift toward reclaiming the "Cancellation Law", that elegant property of integers where common factors can be eliminated from equations. In many abstract rings, this property is absent due to the existence of "zero divisors," which we must catalog and understand to appreciate the stability of more restricted domains.
+
+> [!NOTE] **Zero Divisor**
+>
+> A nonzero element $a$ in a ring $R$ is a zero divisor if there exists a nonzero element $b \in R$ such that
+>
+> $$ab = 0 or ba = 0$$
+
+While our intuition from \mathbb{Z} and \mathbb{R} suggests that a product can only be zero if at least one factor is zero, abstract ring theory presents us with various "pathological" counter-examples.
+
+Consider $\mathbb{Z}_6$, in this system, the interaction of composite factors yields
+
+$$[2] \cdot [3] = [6] = [0] and [4] \cdot [3] = [12] = [0]$$
+
+Thus, $[2], [3]$, and $[4]$ are identified as zero divisors.
+
+On the ring $F_{\mathbb{R}}$ consider $f(x) = 1$ for $x \in \mathbb{Q}$ and $0$ for $x \notin \mathbb{Q}$, and $g(x) = 0$ for $x \in \mathbb{Q}$ and $1$ for $x \notin \mathbb{Q}$.
+
+Though neither function is the zero function, their product $(f \cdot g)(x) = 0$ for all $x$, rendering them zero divisors.
+
+> [!TIP] **The Unity/Zero Distinction**
+>
+> In a nontrivial ring, the multiplicative identity cannot be the same as the additive identity.
+
+> **Proof by Contradiction**
+>
+> Suppose $1 = 0$. For any nonzero element a \in R,
+>
+> $$a = a \cdot 1 = a \cdot 0 = 0$$
+>
+> This forces $a = 0$ for all elements, contradicting the definition of a nontrivial ring.
+
+> [!NOTE] **Integral Domain**
+>
+> An **Integral Domain** is a nontrivial commutative ring with unity that contains no zero divisors.
+
+Familiar systems such as $\mathbb{Z}$, $\mathbb{Q}$, $\mathbb{R}$, and $\mathbb{C}$ meet this standard. However, $2\mathbb{Z}$ fails this classification; despite being commutative and devoid of zero divisors, it lacks the requisite "unity" (the element $1$).
+
+The utility of a ring for solving equations is dictated by the Cancellation Law of Multiplication.
+
+> [!TIP] **The Equivalence Proof**
+>
+> The Cancellation Laws hold in a ring $R$ if and only if $R$ contains no zero divisors.
+
+> **Proof**
+>
+> Assume $R$ has no zero divisors and let $ab = ac$ with $a \neq 0$. Then $ab - ac = 0$, implying $a(b - c) = 0$.
+>
+> Since $a \neq 0$ and zero divisors are absent, $b - c$ must be $0$, which yields $b = c$.
+>
+> Assume the Cancellation Laws hold. Let $ab = 0$. If $a \neq 0$, we observe $ab = a \cdot 0$. By canceling $a$, we find $b = 0$. Thus, $R$ possesses no zero divisors.
+
+> [!TIP] **The Commutative Link**
+>
+> For a nontrivial commutative ring with unity, the ring is an integral domain if and only if the Cancellation Law of Multiplication holds.
+
+## Fields
+
+> [!TIP] **The Unit**
+>
+> A unit is any element $a$ on a ring $R$ that possesses a multiplicative inverse $b$ such that $ab = ba = 1$.
+
+> [!NOTE] **Field**
+>
+> A nontrivial commutative ring, with unity in which every nonzero element is a unit is called a **field**.
+
+> [!TIP] **Uniqueness of Inverses**
+>
+> In a nontrivial ring with unity, each unit has a unique multiplicative inverse.
+
+> **Proof**
+>
+> Let $b$ and $c$ be inverses of $a$. Then
+>
+> $$b = b \cdot 1 = b(ac) = (ba)c = 1 \cdot c = c$$
+>
+> This uniqueness is a direct consequence of the associative law.
+
+**Case Study: The Field of Complex Numbers ($\mathbb{C}$)**
+
+To prove $\mathbb{C}$ is a field, we must derive an inverse for any $x = a + bi \neq 0$.
+
+We seek $y = c + di$ such that $(a+bi)(c+di) = 1 + 0i$. Expanding this product yields the system:
+
+1. $ac - bd = 1$
+2. $ad + bc = 0$
+
+To isolate $c$, multiply (1) by a and (2) by $b$:
+
+$$
+a^2c - abd = a abd + b^2c = 0
+$$
+
+Summing these gives $(a^2 + b^2)c = a$, hence $c = \frac{a}{a^2 + b^2}$.
+
+To isolate $d$, multiply (1) by $-b$ and (2) by $a$:
+
+$$
+-abc + b^2d = -b a^2d + abc = 0
+$$
+
+Summing these gives $(a^2 + b^2)d = -b$, hence $d = \frac{-b}{a^2 + b^2}$.
+
+Since $a+bi \neq 0$ implies $a^2+b^2 \neq 0$, the inverse
+
+$$
+x^{-1} = \frac{a}{a^2 + b^2} + \frac{-b}{a^2 + b^2}i
+$$
+
+always exists.
+
+### The Hierarchical Relationship
+
+> [!TIP] **Field to Domain Implication**
+>
+> Every field is an integral domain.
+
+> **Proof**
+>
+> Let $F$ be a field. If $ab = 0$ and $a \neq 0$, we multiply by
+>
+> $$a^{-1}: a^{-1}(ab) = a^{-1} \cdot 0 \implies (a^{-1}a)b = 0 \implies 1b = 0 \implies b = 0$$
+>
+> Since $b$ must be zero, $F$ contains no zero divisors.
+
+> [!TIP] **The Finite Constraint**
+>
+> Every finite integral domain is a field.
+
+Summary Table
+
+| Ring                       | Commutative | Unity | No Zero Divisors | Integral Domain | Field |
+| -------------------------- | ----------- | ----- | ---------------- | --------------- | ----- |
+| $\mathbb{Z}$               | Yes         | Yes   | Yes              | Yes             | No    |
+| $\mathbb{Q}$               | Yes         | Yes   | Yes              | Yes             | Yes   |
+| $\mathbb{Z}_n$ (composite) | Yes         | Yes   | No               | No              | No    |
+| $\mathbb{Z}_p$ (prime)     | Yes         | Yes   | Yes              | Yes             | Yes   |
+| $2\mathbb{Z}$              | Yes         | No    | Yes              | No              | No    |
+
+![Fields](./assets/fields.png)
