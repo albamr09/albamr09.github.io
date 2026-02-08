@@ -18,4 +18,5 @@ type: docs
 {{< card link="11_proofs_number_theory" title="Proofs in Number Theory" >}}
 {{< card link="12_proofs_calculus" title="Proofs in Calculus" >}}
 {{< card link="13_proofs_group_theory" title="Proofs in Group Theory" >}}
+{{< card link="14_proofs_ring_theory" title="Proofs in Ring Theory" >}}
 {{< /cards >}}
