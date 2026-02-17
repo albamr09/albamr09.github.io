@@ -294,3 +294,221 @@ The integrity of an algebraic system requires the rigorous proof of "obvious" pr
 > $$(-1)\mathbf{v} = -\mathbf{v} \in W$$
 >
 > that is, Axiom 4. Thus, $W$ is a vector space.
+
+## Spans of Vectors
+
+A **span** describes the total "reach" of a set of vectors through the operations of addition and scaling. It is the formal method by which we define a subspace $W$ within a larger vector space $V$.
+
+> [!NOTE] **Linear Combination and Span**
+>
+> Given a set of vectors $S = \{v_1, v_2, \dots, v_n\}$ in $V$, a **linear combination** is any vector of the form $\alpha_1v_1 + \alpha_2v_2 + \dots + \alpha_nv_n$, where $\alpha_i \in \mathbb{R}$. The set of all such combinations is the **span**, denoted $\langle v_1, v_2, \dots, v_n \rangle$.
+
+![Linear Combination](./assets/linear_combination.png)
+
+![Span](./assets/span.png)
+
+To visualize this, consider the subspace $W$ of $2 \times 2$ matrices $M_2(\mathbb{R})$ defined by the condition that the upper-right entry is zero. Any matrix $A \in W$ can be decomposed into a linear combination of three basis-like elements:
+
+$$
+A = \begin{bmatrix} a & 0 \\ b & c \end{bmatrix} = a \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} + b \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix} + c \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}
+$$
+
+Thus,
+
+$$W = \langle \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix} \rangle$$
+
+> [!TIP] **The Subspace Property of Spans**
+>
+> The set $W$ of all linear combinations of $\{v_1, \dots, v_n\}$ is a subspace of $V$.
+
+> **Proof**
+>
+> We verify this using the formal two-step Subspace Test:
+>
+> **1. Non-emptiness (Zero Vector Inclusion)**:
+>
+> By setting all scalars $\alpha_i = 0$, we see that
+>
+> $$\mathbf{z} = 0v_1 + 0v_2 + \dots + 0v_n$$
+>
+> Thus, $\mathbf{z} \in W$.
+>
+> 2. **Closure under Addition and Scalar Multiplication**:
+>
+> Let $\mathbf{u}, \mathbf{w} \in W$ and $\alpha \in \mathbb{R}$. Then
+>
+> $$\mathbf{u} = \sum_{i=1}^n \alpha_i v_i$$
+>
+> and
+>
+> $$\mathbf{w} = \sum_{i=1}^n \beta_i v_i$$
+>
+> Addition:
+>
+> $$\mathbf{u} + \mathbf{w} = (\alpha_1 + \beta_1)v_1 + (\alpha_2 + \beta_2)v_2 + \dots + (\alpha_n + \beta_n)v_n$$
+>
+> Since $\alpha_i + \beta_i \in \mathbb{R}$, $\mathbf{u} + \mathbf{w} \in W$.
+>
+> Scalar Multiplication:
+>
+> $$\alpha \mathbf{u} = (\alpha \alpha_1)v_1 + (\alpha \alpha_2)v_2 + \dots + (\alpha \alpha_n)v_n$$
+>
+> Since $\alpha \alpha_i \in \mathbb{R}$, $\alpha \mathbf{u} \in W$.
+
+Different sets can generate identical subspaces. For example, in the polynomial space $\mathbb{R}[x]$, the sets $S_1 = \{1, 1+x^2, 1+x^2+x^4\}$ and $S_2 = \{1, x^2, x^4\}$ span the same space. This highlights the pedagogical "So What?": we often have a choice in how we describe a space, and we generally seek the most efficient description.
+
+Furthermore, $\langle v_1, \dots, v_n \rangle$ is the smallest (most restrictive) subspace containing those vectors. If any other subspace $W'$ contains $S$, it must also contain $\text{span}(S)$. This ensures that a span contains no elements other than those strictly required by the axioms of a vector space.
+
+While the span describes the "reach" of a set, it does not account for redundancy. To determine the efficiency of our building blocks, we must turn to linear independence.
+
+## Linear Dependence and Independence
+
+> [!NOTE] **Linear Independence**
+>
+> A set is independent if no vector in it can be built from the others. That is, the vector equation $\sum c_i v_i = \mathbf{z}$ has only the trivial solution: $c_1 = c_2 = \dots = c_m = 0$.
+
+> [!NOTE] **Linear Dependence**
+>
+> A set of vectors $v_1, \dots, v_m$ is linearly dependent if there exist scalars $c_1, \dots, c_m$, not all zero, such that $\sum c_i v_i = \mathbf{z}$.
+
+![Linear Dependence and Independence](./assets/linear_dependence_independence.png)
+
+The following comparison illustrates how system solutions dictate set classification:
+
+> **Example 15.18**: Independence in $\mathbb{R}^3$
+> Let the set: $\\{(1,1,1), (1,1,0), (0,1,1)\\}$
+> We build the equation system:
+>
+> $$a + b = 0$$
+>
+> $$a + b + c = 0$$
+>
+> $$a + c = 0$$
+>
+> Subtracting (1) from (2) yields $c=0$, which implies $a=0$ and $b=0$. Only the trivial solution exists thus the set is **linearly independent**.
+
+Note that **independence is "hereditary"**, removing elements from an independent set cannot create dependence. With these structural relationships established, we can now examine how linear transformations move these structures between spaces.
+
+## Linear Transformations
+
+> [!NOTE] **Linear Transformation**
+>
+> A **linear transformation** $T: V \to V'$ is a map that respects the algebraic properties of the vector space. They are "structure-preserving" because the relationship between vectors in the domain is mirrored in the codomain.
+
+![Linear Transformation](./assets/linear_transformation.png)
+
+> [!NOTE] **Linear Function**
+>
+> A function is linear if and only if it satisfies:
+>
+> 1. **Preservation of Addition**:
+>
+> $$T(\mathbf{u} + \mathbf{v}) = T(\mathbf{u}) + T(\mathbf{v})$$
+>
+> 2. **Preservation of Scalar Multiplication**:
+>
+> $$T(\alpha \mathbf{v}) = \alpha T(\mathbf{v})$$
+
+In $\mathbb{R}^n$, transformations are often expressed as matrix multiplications
+
+$$
+T(\mathbf{v}) = A\mathbf{v}
+$$
+
+For example,
+
+$$
+T(a, b, c) = (2a+c, 3c-b)
+$$
+
+corresponds to a $2 \times 3$ matrix.
+
+$$
+T(v) = \begin{bmatrix}
+2 & 0 & 1 \\
+0 & -1 & 3 \\
+\end{bmatrix}
+\begin{bmatrix}
+a \\
+b \\
+c
+\end{bmatrix}
+= \begin{bmatrix}
+2a + c \\
+3c - b
+\end{bmatrix}
+$$
+
+> [!TIP] **Composition of Transformations**
+>
+> The composition of two linear transformations $T_1: V \to V'$ and $T_2: V' \to V''$ is itself linear.
+
+> **Proof**:
+>
+> 1. **Preservation of Addtition**:
+>
+> $$(T_2 \circ T_1)(\mathbf{u} + \mathbf{v}) = T_2(T_1(\mathbf{u} + \mathbf{v})) = T_2(T_1(\mathbf{u}) + T_1(\mathbf{v}))$$
+>
+> $$= T_2(T_1(\mathbf{u})) + T_2(T_1(\mathbf{v})) = (T_2 \circ T_1)(\mathbf{u}) + (T_2 \circ T_1)(\mathbf{v})$$
+>
+> 2. **Preservation of Scalar Multiplication**:
+>
+> $$(T_2 \circ T_1)(\alpha \mathbf{u}) = T_2(T_1(\alpha \mathbf{u})) $$
+>
+> $$= T_2(\alpha T_1(\mathbf{u})) = \alpha T_2(T_1(\mathbf{u})) = \alpha (T_2 \circ T_1)(\mathbf{u})$$
+
+This property is the reason matrix multiplication is defined as it is; the product $A_2A_1$ represents the composition $T_2 \circ T_1$.
+
+![Compisition via Matrix Multiplication](./assets/composition_via_matrix_multiplication.png)
+
+### Properties of Linear Transformations
+
+Linearity imposes strict geometric constraints:
+
+1. **A linear map must fix the origin**
+
+$$
+T(\mathbf{z}) = \mathbf{z}': T(0\mathbf{z}) = 0T(\mathbf{z}) = \mathbf{z}'
+$$
+
+2. **Inverting a vector in the domain results in an inverted image in the codomain**
+
+$$
+T(-\mathbf{v}) = -T(\mathbf{v})
+$$
+
+### The Kernel and Image
+
+> [!TIP] **The Image**
+>
+> The Image $T(W)$ of a subspace is a subspace of the codomain.
+
+> [!TIP] **The Kernel**
+>
+> The Kernel,
+>
+> $$\text{ker}(T) = \{\mathbf{v} \in V : T(\mathbf{v}) = \mathbf{z}'\}$$
+>
+> is a subspace of the domain.
+
+> **Proof**
+>
+> Since $T(\mathbf{z}) = \mathbf{z}', \mathbf{z} \in \text{ker}(T)$
+>
+> If $\mathbf{u}, \mathbf{v} \in \text{ker}(T)$, then
+>
+> $$T(\mathbf{u}+\mathbf{v}) = T(\mathbf{u}) + T(\mathbf{v}) = \mathbf{z}' + \mathbf{z}' = \mathbf{z}'$$
+>
+> Similarly,
+>
+> $$T(\alpha \mathbf{u}) = \alpha T(\mathbf{u}) = \alpha \mathbf{z}' = \mathbf{z}'$$
+
+> **Example**
+>
+> Consider $T(a, b, c) = (2a+c, 3c-b)$. To find the kernel, solve $T(a, b, c) = (0, 0)$:
+>
+> $$2a + c = 0 \implies a = -c/2$$
+>
+> $$3c - b = 0 \implies b = 3c$$
+>
+> This yields vectors of the form $(-c/2, 3c, c)$, or $c(-1/2, 3, 1)$. The kernel is thus the subspace $\langle (-1/2, 3, 1) \rangle$. This identifies the specific dimension of the domain that is "lost" or collapsed to zero by the transformation.
