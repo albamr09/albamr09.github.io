@@ -7,4 +7,5 @@ title: Data Science
 {{< card link="/datascience/mlsc" title="Machine Learning Stanford Coursera" icon="desktop-computer">}}
 {{< card link="/datascience/robotics/air" title="Artificial Intelligence Robotics" icon="chip">}}
 {{< card link="/datascience/robotics/otmr" title="Online Training: Mobile Robotics" icon="device-mobile">}}
+{{< card link="/datascience/tensortonic" title="Tensortonic" icon="academic-cap">}}
 {{< /cards >}}
