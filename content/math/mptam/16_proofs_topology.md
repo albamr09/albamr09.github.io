@@ -173,3 +173,113 @@ The "shape" of $S_r(a)$ varies by metric:
 > $$f(S_\delta(x)) \subseteq S_\epsilon(f(x)) \subseteq O$$
 >
 > Thus $S_\delta(x) \subseteq f^{-1}(O)$, and $f^{-1}(O)$ is open. The converse follows by considering $O = S_\epsilon(f(a))$.
+
+## Topological Spaces
+
+By stripping away the distance function, we identify the minimal conditions required to study continuity and convergence. "Topological spaces" allow us to generalize these concepts to environments where a metric may be irrelevant or entirely absent.
+
+> [!NOTE] The Topological Space $(X, \tau)$
+>
+> A topological space is a pair $(X, \tau)$ consisting of a nonempty set $X$ and a collection of subsets $\tau$ (the topology) that satisfy three fundamental properties:
+>
+> 1. **Universal Axiom**: The entire set $X$ and the empty set $\emptyset$ must be members of $\tau$.
+> 2. **Finite Intersections**: If $O_1, O_2, \dots, O_n \in \tau$, then $\bigcap_{i=1}^{n} O_i \in \tau$.
+> 3. **Arbitrary Unions**: If
+>
+> $$\{O_\alpha\}_{\alpha \in I}$$
+>
+> is a collection of sets in $\tau$, then $\bigcup_{\alpha \in I} O_\alpha \in \tau$.
+
+The members of $\tau$ are the open sets of the space. Consider the two extremes of this hierarchy:
+
+**The Trivial Topology**
+
+The coarsest possible structure, providing no internal resolution.
+
+$$
+\tau_1 = \{\emptyset, X\}
+$$
+
+One must recognize that while all metric spaces are topological spaces, the converse is false. The topological axioms are far more permissive than the rigid requirements of a distance function.
+
+Consider the set $X = \\{a, b, c\\}$ with the topology
+
+$$
+\tau = \{\emptyset, X, \{a\}, \{a, b\}, \{a, c\}\}
+$$
+
+We can prove this space is not metrizable by contradiction.
+
+Assume a metric $d$ exists that generates $\tau$. Let
+
+$$
+r = \min\{d(a, b), d(b, c)\}
+$$
+
+Since $a, b, c$ are distinct, $r > 0$. The open sphere
+
+$$
+S_r(b) = \{x \in X : d(x, b) < r\}
+$$
+
+would necessarily exclude $a$ (since $d(a,b) \ge r$) and $c$ (since $d(b,c) \ge r$). Thus, $S_r(b) = \\{b\\}$. However, $\\{b\\} \notin \tau$.
+
+Since every open sphere in a metric space must be an open set in its topology, this contradiction proves that no such metric $d$ can exist.
+
+> [!TIP] **The Finite Complement Topology**
+>
+> For a nonempty set $X$, let
+>
+> $$\tau = \{\emptyset\} \cup \{O \subseteq X : X \setminus O \text{ is finite}\}$$
+
+### The Hausdorff Property
+
+> [!NOTE] **Hausdorff Space**
+>
+> A topological space $(X, \tau)$ is a **Hausdorff Space** if for every pair of distinct points $a, b \in X$, there exist disjoint open sets $O_a$ and $O_b$ containing $a$ and $b$, respectively.
+
+In non-Hausdorff spaces, standard analytical concepts like the uniqueness of limits for sequences break down. Metric spaces, however, are shielded from such pathology:
+
+> [!TIP] **Corollary 16.21**
+>
+> Every metric space is Hausdorff.
+
+## Continuity in Topological Spaces
+
+In the abstract setting, the definition of continuity is purely topological: $f: X \to Y$ is continuous if $f^{-1}(O)$ is open in $X$ for every open $O \subseteq Y$.
+
+Behavior under Extremal Topologies
+
+**Discrete Topology**
+
+If $X$ has the discrete topology, every function $f: X \to Y$ is continuous because $f^{-1}(O)$, being a subset of $X$, is automatically open.
+
+**Trivial Topology**
+
+If $X$ has the trivial topology and $f$ is surjective, $f$ is continuous if and only if $Y$ also has the trivial topology.
+
+If $Y$ possessed a non-trivial open set $O$, the surjectivity of $f$ ensures that $f^{-1}(O)$ is neither $\emptyset$ nor $X$.
+
+Since only $\emptyset$ and $X$ are open in the trivial topology, $f$ would fail to be continuous. Surjectivity is the key here; without it, $f^{-1}(O)$ might still map to $\emptyset$, masking the non-triviality of $Y$.
+
+### Neighborhood Equivalence
+
+The modern definition of continuity is functionally equivalent to the neighborhood-based definition of classical analysis.
+
+> [!TIP] **Lemma 16.26**
+>
+> For any $f: X \to Y$ and $B \subseteq Y, f(f^{-1}(B)) \subseteq B$.
+
+> [!NOTE] **Continuity based on Topologies**
+>
+> The function $f$ is continuous if and only if for every $x \in X$ and every open $O \subseteq Y$ containing $f(x)$, there exists an open $U \subseteq X$ containing $x$ such that $f(U) \subseteq O$.
+
+> **Proof**
+>
+> If $f$ is continuous, for any $x$ and open $O$ containing $f(x)$, we set $U = f^{-1}(O)$. By definition, $U$ is open, contains $x$, and $f(U) = f(f^{-1}(O)) \subseteq O$ by Lemma 16.26.
+>
+> Conversely, let $B$ be an open set in $Y$. For each $x \in f^{-1}(B)$, we have $f(x) \in B$.
+>
+> By hypothesis, there is an open set $U_x$ containing $x$ such that $f(U_x) \subseteq B$, meaning $U_x \subseteq f^{-1}(B)$. Then $f^{-1}(B) = \bigcup_{x \in f^{-1}(B)} U_x$.
+>
+> Since the union of open sets is open, $f^{-1}(B)$ is open, and $f$ is continuous.
