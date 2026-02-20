@@ -20,4 +20,5 @@ type: docs
 {{< card link="13_proofs_group_theory" title="Proofs in Group Theory" >}}
 {{< card link="14_proofs_ring_theory" title="Proofs in Ring Theory" >}}
 {{< card link="15_proofs_linear_algebra" title="Proofs in Linear Algebra" >}}
+{{< card link="16_proofs_topology" title="Proofs in Topology" >}}
 {{< /cards >}}
