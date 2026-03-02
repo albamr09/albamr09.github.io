@@ -391,13 +391,75 @@ The evolution of tokenization in NLP reflects the broader evolution of the field
 
 The trend is clear: from simple word splitting to sophisticated subword algorithms that balance vocabulary size, sequence length, and language coverage.
 
+### Code Example
+
+```python
+import numpy as np
+from typing import List, Dict
+
+class SimpleTokenizer:
+    """
+    A word-level tokenizer with special tokens.
+    """
+
+    def __init__(self):
+        self.word_to_id: Dict[str, int] = {}
+        self.id_to_word: Dict[int, str] = {}
+        self.vocab_size = 0
+
+        # Special tokens
+        self.pad_token = "<PAD>"
+        self.unk_token = "<UNK>"
+        self.bos_token = "<BOS>"
+        self.eos_token = "<EOS>"
+
+    def build_vocab(self, texts: List[str]) -> None:
+        """
+        Build vocabulary from a list of texts.
+        Add special tokens first, then unique words.
+        """
+        def add_token(token: str):
+            if token in self.word_to_id:
+                return
+            self.word_to_id[token] = self.vocab_size
+            self.id_to_word[self.vocab_size] = token
+            self.vocab_size += 1
+
+        add_token(self.pad_token)
+        add_token(self.unk_token)
+        add_token(self.bos_token)
+        add_token(self.eos_token)
+
+        for text in texts:
+            for word in text.split(" "):
+                add_token(word)
+
+    def encode(self, text: str) -> List[int]:
+        """
+        Convert text to list of token IDs.
+        Use UNK for unknown words.
+        """
+
+        return [
+            self.word_to_id[word] if word in self.word_to_id else self.word_to_id[self.unk_token]
+            for word in text.split(" ")
+        ]
+
+    def decode(self, ids: List[int]) -> str:
+        """
+        Convert list of token IDs back to text.
+        """
+
+        return " ".join([self.id_to_word[id] for id in ids])
+```
+
 ## Embedding Layer
 
-### Foundations: Transitioning from Discrete Tokens to Continuous Space
+### From Discrete Tokens to Dense Vectors
 
 The embedding layer serves as the essential "translator" within the Transformer architecture, bridging the gap between human language and machine computation. While humans communicate through discrete symbols—words, charactersi, neural networks operate exclusively within a landscape of numbers. The necessity of the embedding layer lies in its ability to map these discrete token IDs into dense, learnable vector representations, providing the numerical foundation upon which all subsequent layers perform their complex reasoning.
 
-**The "Why" of Dense Vectors**
+#### The "Why" of Dense Vectors
 
 Traditional NLP methods like one-hot encoding represent language through sparse, high-dimensional vectors. For a vocabulary of 30,000 tokens, a one-hot vector would have 30,000 dimensions with only a single "1" and 29,999 zeros. This approach is computationally inefficient and semantically "blind." Dense embeddings offer four advantages:
 
@@ -408,7 +470,7 @@ Traditional NLP methods like one-hot encoding represent language through sparse,
 
 ![Embedding Matrix Lookup](./assets/01_transformers_dense_vs_sparse_matrix.png)
 
-**The Geometry of Meaning**
+#### The Geometry of Meaning
 
 The "distributional hypothesis" suggests that "you shall know a word by the company it keeps." In a well-trained embedding space, this hypothesis manifests as physical geometry. Similar words cluster together because they appear in similar contexts (e.g., "petted the dog" vs. "petted the cat").
 
@@ -424,13 +486,13 @@ $$
 
 ![Embedding Semantic Geometry](./assets/01_transformers_embeddings_semantic_geometry.png)
 
-This spatial mapping even extends across languages. In multilingual models, words with similar meanings across different languages end up near each other in the same vector space. This enables **zero-shot cross-lingual transfer**, where a model trained on English data can perform tasks in French because the embeddings occupy aligned regions of the space.
+This spatial mapping even extends across languages. In multilingual models, words with similar meanings across different languages end up near each other in the same vector space. This enables **zero-shot cross-lingual transfer**, where a model trained on English data can perform tasks in French because the embeddings occupy aligned regions of the space. The key requirement is that the model sees enough parallel or comparable text across languages during training to align the embedding spaces.
 
-### The Architecture and Mechanics of the Embedding Matrix
+### The Embedding Matrix
 
 The main concept of this layer is the **Embedding Matrix** ($W_E$). This matrix is one of the largest parameter blocks in a Transformer, acting as a persistent "lookup table" that stores a unique vector for every token in the model's vocabulary.
 
-**Mathematical Model**
+#### Mathematical Model
 
 The matrix is defined as $W_E \in \mathbb{R}^{V \times d_{model}}$, where $V$ represents the vocabulary size and $d_{\text{model}}$ is the embedding (or model) dimension. The relationship between a Token ID and its vector is a direct mapping where the Token ID acts as the row index:
 
@@ -442,7 +504,7 @@ The matrix is defined as $W_E \in \mathbb{R}^{V \times d_{model}}$, where $V$ re
 
 ![Embedding Matrix Lookup](./assets/01_transformers_embedding_matrix_lookup.png)
 
-**Lookup vs. One-Hot Multiplication**
+#### Lookup vs. One-Hot Multiplication
 
 Mathematically, retrieving an embedding is equivalent to a one-hot multiplication
 
@@ -460,12 +522,19 @@ $$
 
 This is the industry standard for performance, as it avoids the massive memory and computational overhead of multiplying large, sparse vectors.
 
-**Dimensional Analysis and Memory Footprint**
+#### Dimensional Analysis and Memory Footprint
 
 As data flows through the pipeline, it undergoes specific shape transformations:
 
-1. Input: A tensor of Token IDs with shape _(Batch, Sequence Length)_.
-2. Output: A tensor of continuous vectors with shape _(Batch, Sequence Length, $d_{\text{model}}$)\_.
+- **Input**: A tensor of token IDs with shape $(B, L)$
+  - $B$ is the batch size
+  - $L$ is the sequence length
+  - Each element is an integer in $\{0, 1, \ldots, V-1\}$
+- **Embedding matrix**: Shape $(V, d_{model})$
+- **Output (before scaling)**: Shape $(B, L, d_{model})$
+  - Each token ID has been replaced by its $d_{model}$-dimensional embedding vector
+- **Output (after scaling)**: Shape $(B, L, d_{model})$
+  - Same shape, but each value multiplied by $\sqrt{d_{model}}$
 
 The $d_{\text{model}}$ dimension is always the last dimension (the feature dimension). This is a crucial detail for understanding how data is sliced and processed by attention heads and feed-forward modules.
 
@@ -480,11 +549,11 @@ The choice of d\_{model} significantly impacts the model’s representational ca
 
 In a BERT-Base model ($V=30,522$, $d_{\text{model}}=768$), the embedding matrix accounts for approximately $89$ MB, representing roughly 21% of the model’s total parameters.
 
-### Mathematical Refinement: Scaling and Weight Tying
+### Scaling and Weight Tying
 
 Raw embeddings are rarely sent directly into the Transformer. They require mathematical balancing to ensure that the token's identity remains clear when combined with positional encodings.
 
-**Initialization and the Scaling Factor ($\sqrt{d_{\text{model}}}$)**
+#### Initialization and the Scaling Factor ($\sqrt{d_{\text{model}}}$)
 
 Embeddings are typically initialized with small random values to facilitate training. Common strategies include:
 
@@ -510,7 +579,7 @@ This scaling is necessary because the random initialization results in a vector 
 
 Without scaling, the position information would overwhelm the token's identity. Scaling the embeddings brings their magnitude to $\approx \sqrt{d_{\text{model}}}$, creating parity between meaning and position.
 
-**The "Weight Tying" Technique**
+#### The "Weight Tying" Technique
 
 To optimize efficiency, the Transformer shares the same embedding matrix across the Input Embedding, Output Embedding, and Output Projection. By tying these weights, the Output Projection ($W_{\text{out}}$) becomes the transpose of the Embedding Matrix ($W_E$):
 
@@ -548,7 +617,7 @@ Intuitively, the model is asking: "Which token's embedding is most similar to th
 
 Embeddings are learned features shaped by backpropagation from random noise into a structured semantic map.
 
-**The Learning Process and Rare Token Problem**
+#### The Learning Process and Rare Token Problem
 
 During training, gradients only update the rows of $W_E$ corresponding to tokens present in the current batch. This leads to the **"Rare Token Problem"**: infrequent words receive fewer updates and remain poorly defined.
 
@@ -556,26 +625,89 @@ During training, gradients only update the rows of $W_E$ corresponding to tokens
 
 This is why subword tokenization is a fundamental implementation choice. By breaking "uncommon" words into "common" subword pieces, we ensure that every row in the embedding matrix is updated frequently, preventing "dead" or untrained vectors.
 
-**Common Pitfall: Pre-trained vs. Learned from Scratch**
+#### Common Pitfall: Pre-trained vs. Learned from Scratch
 
 - **Learned from Scratch**: Standard for LLMs (GPT, LLaMA). Optimized specifically for the target task but requires massive data.
 - **Pre-trained** (Word2Vec, GloVe): Useful for small datasets.
 - **The Pitfall**: If using pre-trained embeddings, one must decide whether to freeze them (no updates) or fine-tune them. Freezing preserves the original semantic space but can prevent the model from adapting to the specific nuances of your data.
 
-**Practical Considerations**
+#### Practical Considerations
 
 - **Padding Tokens**: The `PAD` token should not influence the model's math. Implementations typically either initialize the `PAD` embedding to all zeros and freeze it or, more commonly, use attention masks to ensure the model never "looks" at the padding during computation.
 - **Numerical Precision**: While lookup is numerically exact (indexing), scaling and subsequent layers often use float16 or bfloat16 to save memory.
 
 **Static vs. Contextual Embeddings**
 
-It is vital to distinguish between these two states:
+The embedding lookup layer produces **static embeddings**: each token always maps to the same vector, regardless of context.
 
-- **Static Embeddings**: The direct output of the embedding layer: $\mathbf{h}^{(0)}$. "Bank" (river) and "Bank" (finance) have identical vectors here.
-- **Contextual Embeddings**: The representations generated after passing through Transformer layers. Attention resolves the ambiguity of "Bank" by incorporating surrounding tokens.
+- The word "bank" gets the same embedding whether it means a financial institution or a river bank
+- The word "play" gets the same embedding whether it is a noun or a verb
 
-![Rare Token Problem](./assets/01_transformers_static_vs_contextual_embeddings.png)
+However, once these static embeddings pass through the Transformer layers (attention + feed-forward), they become **contextual embeddings**. The attention mechanism allows each token's representation to incorporate information from surrounding tokens, resolving ambiguity.
 
-**The Complete Pipeline**
+$$
+\mathbf{h}_{\text{bank}}^{(0)} = W_E[\text{bank}] \cdot \sqrt{d_{model}} \quad \text{(static, same for all contexts)}
+$$
+
+$$
+\mathbf{h}_{\text{bank}}^{(L)} = \text{TransformerLayers}(\mathbf{h}^{(0)}) \quad \text{(contextual, different for each context)}
+$$
+
+![Static vs Contextual Embeddings](./assets/01_transformers_static_vs_contextual_embeddings.png)
+
+#### The Complete Pipeline
+
+The embedding layer sits at the very beginning of the Transformer:
+
+$$
+\text{Text} \xrightarrow{\text{tokenize}} \text{Token IDs} \xrightarrow{\text{embed + scale}} \text{Vectors} \xrightarrow{+ \text{PE}} \text{Input to Encoder}
+$$
+
+After the embedding layer:
+
+1. Positional encodings are added to give the model position information
+2. The result enters the first encoder (or decoder) layer
+3. From this point forward, everything operates on continuous vectors of dimension $d_{model}$
+   The embedding layer is the last place where the discrete nature of language is visible. Once tokens become vectors, the Transformer operates in a purely continuous mathematical space.
 
 ![Token to Embedding Pipeline](./assets/01_transformers_token_to_embedding_pipeline.png)
+
+### Code Example
+
+```python
+import torch
+import torch.nn as nn
+import math
+
+"""
+Given a vocabulary size and embedding dimension, implement an embedding layer that converts
+token indices into dense vector representations.
+
+The embedding layer maps each token index to a learnable vector.
+For an input sequence of token indices, return the corresponding embedding matrix
+scaled by the square root of the model dimension.
+"""
+
+def create_embedding_layer(vocab_size: int, d_model: int) -> nn.Embedding:
+    """
+    Create an embedding layer.
+    """
+    # Torch provides a class that does exactly what we want, it creates a V x d_model matrix
+    #
+    # You can "execute" this class by passing it a list of indices (tokens), the Embedding class
+    # will automatically perform the lookup operation.
+    #
+    # See https://docs.pytorch.org/docs/stable/generated/torch.nn.Embedding.html
+    return nn.Embedding(vocab_size, d_model)
+
+def embed_tokens(embedding: nn.Embedding, tokens: torch.Tensor, d_model: int) -> torch.Tensor:
+    """
+    Convert token indices to scaled embeddings.
+    """
+    # Does the W_E[z] indexing thing for an input of tokens  as a tensor that could look as follows
+    # torch.LongTensor([[1, 2, 4, 5], [4, 3, 2, 9]])
+    E_x = embedding(tokens)
+
+    # Now we apply scaling :)
+    return E_x * math.sqrt(d_model)
+```
