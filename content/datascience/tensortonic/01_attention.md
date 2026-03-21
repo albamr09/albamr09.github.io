@@ -7,19 +7,13 @@ math: true
 
 ## Tokenization
 
-### Part 1: Foundations
-
-#### 1. What Is Tokenization?
+### Foundations
 
 Tokenization is the process of converting raw text into a sequence of discrete symbols that a neural network can process. It is the very first step in any natural language processing pipeline, and its design has profound effects on everything downstream: vocabulary size, sequence length, model capacity, and generalization ability.
 
 A neural network cannot operate on raw strings of characters. It requires numerical inputs, typically integer indices that map into an embedding table. Tokenization provides this mapping: from human-readable text to machine-readable integers, and back again.
 
 ![Tokenization Introduction](./assets/01_transformers_tokenization_intro.png)
-
----
-
-#### 2. Why Tokenization Matters
 
 The choice of tokenization strategy affects nearly every aspect of a language model:
 
@@ -39,13 +33,11 @@ The choice of tokenization strategy affects nearly every aspect of a language mo
 
 ---
 
-### Part 2: Word-Level Tokenization
-
-#### 3. Word-Level Tokenization
+### Word-Level Tokenization
 
 The simplest approach splits text on whitespace (and optionally punctuation) to produce one token per word.
 
-###### Building the Vocabulary
+#### Building the Vocabulary
 
 Given a collection of training texts, word-level tokenization:
 
@@ -67,8 +59,6 @@ These two mappings must be consistent inverses of each other: for every word $w$
 
 $$\text{id\_to\_word}(\text{word\_to\_id}(w)) = w$$
 
-###### Vocabulary Construction
-
 Building the vocabulary involves several key design decisions:
 
 **How to split text into words?**
@@ -89,9 +79,7 @@ Building the vocabulary involves several key design decisions:
 - Including all of them creates a very large embedding matrix
 - Common practice is to keep only the top $V$ most frequent words and map everything else to UNK
 
----
-
-#### 4. Special Tokens
+#### Special Tokens
 
 Every tokenizer needs a set of special tokens that serve structural roles beyond representing words. These are typically assigned the lowest integer IDs in the vocabulary:
 
@@ -110,9 +98,9 @@ Every tokenizer needs a set of special tokens that serve structural roles beyond
 
 ---
 
-### Part 3: Encoding & Decoding
+### Encoding & Decoding
 
-#### 5. The Encoding Process
+#### The Encoding Process
 
 Encoding converts a string of text into a list of integer IDs:
 
@@ -136,7 +124,7 @@ Given vocabulary: `{PAD: 0, UNK: 1, BOS: 2, EOS: 3, cat: 4, sat: 5, the: 6}`
 
 ---
 
-#### 6. The Decoding Process
+#### The Decoding Process
 
 Decoding is the inverse of encoding — it converts a list of integer IDs back into human-readable text:
 
@@ -147,7 +135,7 @@ The process involves two steps:
 1. **Lookup:** Map each integer ID to its corresponding word using the ID-to-word dictionary
 2. **Joining:** Concatenate the words with spaces between them
 
-###### The Roundtrip Property
+**The Roundtrip Property**
 
 For any text $t$ that contains only known vocabulary words:
 
@@ -157,16 +145,14 @@ However, this property breaks when unknown words are present. If the original te
 
 ---
 
-### Part 4: Worked Example
-
-#### 7. Building a Complete Tokenizer
+#### Worked Example
 
 **Training corpus:**
 
 - `"the cat sat on the mat"`
 - `"the dog chased the cat"`
 
-###### Step 1: Reserve special tokens
+**Step 1**: Reserve special tokens
 
 | Token | ID  |
 | ----- | --- |
@@ -175,13 +161,13 @@ However, this property breaks when unknown words are present. If the original te
 | BOS   | 2   |
 | EOS   | 3   |
 
-###### Step 2: Collect unique words (sorted alphabetically)
+**Step 2**: Collect unique words (sorted alphabetically)
 
 All words (lowercased): the, cat, sat, on, the, mat, the, dog, chased, the, cat
 
 Unique words: `cat, chased, dog, mat, on, sat, the`
 
-###### Step 3: Assign IDs to words
+**Step 3**: Assign IDs to words
 
 | Word   | ID  |
 | ------ | --- |
@@ -193,9 +179,9 @@ Unique words: `cat, chased, dog, mat, on, sat, the`
 | sat    | 9   |
 | the    | 10  |
 
-**Vocabulary size** $V = 11$.
+_Vocabulary size_ $V = 11$.
 
-###### Step 4: Encoding and decoding examples
+**Step 4**: Encoding and decoding examples
 
 | Operation             | Input                      | Output                        |
 | --------------------- | -------------------------- | ----------------------------- |
@@ -203,11 +189,7 @@ Unique words: `cat, chased, dog, mat, on, sat, the`
 | Encode (unknown word) | `"the bird sat"`           | `[10, 1, 9]` — "bird" → UNK=1 |
 | Decode                | `[10, 4, 9]`               | `"the cat sat"`               |
 
----
-
-### Part 5: The OOV Problem & Subword Methods
-
-#### 8. The Out-of-Vocabulary Problem
+### The OOV Problem & Subword Methods
 
 Word-level tokenization has a fundamental limitation: it cannot represent words it has not seen during training. This is known as the **out-of-vocabulary (OOV) problem**.
 
@@ -228,15 +210,11 @@ The severity of this problem depends on the application:
 >
 > In English, a vocabulary of 30,000 words covers approximately 95% of typical text. But the remaining 5% often carries the most important information: proper nouns, technical terms, and novel words.
 
----
-
-#### 9. Beyond Word-Level: Subword Tokenization
-
 The OOV problem motivated the development of subword tokenization methods, which split rare words into smaller, more common pieces while keeping frequent words intact.
 
 ![Subword Tokenization](./assets/01_transformers_subword_tokenization.png)
 
-###### Byte-Pair Encoding (BPE)
+**Byte-Pair Encoding (BPE)**
 
 BPE starts with a character-level vocabulary and iteratively merges the most frequent adjacent pairs:
 
@@ -247,7 +225,7 @@ BPE starts with a character-level vocabulary and iteratively merges the most fre
 
 ![Byte-Pair Encoding](./assets/01_transformers_byte_pair_encoding.png)
 
-###### WordPiece
+**WordPiece**
 
 Similar to BPE but uses a different merging criterion. Instead of frequency, WordPiece merges the pair that maximizes the likelihood of the training data:
 
@@ -258,15 +236,13 @@ This tends to merge pairs where the combination is more informative than its ind
 - `"playing"` → `["play", "###ing"]`
 - `"unhappiness"` → `["un", "###happy", "###ness"]`
 
-###### SentencePiece
+**SentencePiece**
 
 Treats the input as a raw character stream (including spaces) and applies BPE or unigram language model segmentation. This makes it language-agnostic and handles languages without clear word boundaries (like Chinese and Japanese).
 
----
+### Advanced Concepts
 
-### Part 6: Advanced Topics
-
-#### 10. Vocabulary Size Trade-offs
+**Vocabulary Size Trade-offs**
 
 Vocabulary size $V$ is one of the most important hyperparameters in a language model:
 
@@ -275,7 +251,7 @@ Vocabulary size $V$ is one of the most important hyperparameters in a language m
 | **Small** (~8K–16K)    | Better rare-word handling; smaller embedding matrix | Longer sequences; higher attention compute cost               |
 | **Large** (~50K–100K+) | Shorter sequences; faster inference                 | Larger embedding matrix; rare tokens may have poor embeddings |
 
-**Vocabulary sizes of notable models:**
+_Vocabulary sizes of notable models:_
 
 | Model                | Tokenizer     | Vocabulary Size |
 | -------------------- | ------------- | --------------- |
@@ -289,9 +265,7 @@ Vocabulary size $V$ is one of the most important hyperparameters in a language m
 >
 > Modern models move toward larger vocabularies, enabled by more training data that provides sufficient examples for each token.
 
----
-
-#### 11. The Embedding Connection
+**The Embedding Connection**
 
 Tokenization feeds directly into the embedding layer. After tokenization converts text to integer IDs, the embedding layer converts those IDs into dense vectors:
 
@@ -306,9 +280,7 @@ where each $\mathbf{e}\_{i} \in \mathbb{R}^{d_{model}}$. The vocabulary size det
 
 $$\mathbf{e}_i = W_E[z_i] = \mathbf{1}_{z_i}^T W_E$$
 
----
-
-#### 12. Weight Tying
+**Weight Tying**
 
 The original Transformer paper introduced an important trick: **sharing weights between the embedding layer and the output projection layer**.
 
@@ -320,9 +292,7 @@ $$\text{logits} = hW_{out} + b \quad \text{where } W_{out} \in \mathbb{R}^{d_{mo
 
 With weight tying: $W_{out} = W_E^T$. This reduces parameters by $V \times d_{model}$ and forces the model to use consistent representations — words that are close in embedding space also compete for similar output probabilities.
 
----
-
-#### 13. Normalization and Preprocessing
+**Normalization and Preprocessing**
 
 Before splitting text into tokens, most tokenizers apply normalization. These choices are **permanent and cannot be reversed**:
 
@@ -331,11 +301,11 @@ Before splitting text into tokens, most tokenizers apply normalization. These ch
 - **Whitespace normalization:** Collapse multiple spaces into one, trim leading/trailing spaces.
 - **Special character handling:** Decide whether to keep or remove punctuation, emojis, and special characters.
 
-> **Warning:** A tokenizer that lowercases cannot distinguish `"apple"` (fruit) from `"Apple"` (company).
+> **Warning:**
+>
+> A tokenizer that lowercases cannot distinguish `"apple"` (fruit) from `"Apple"` (company).
 
----
-
-#### 14. Tokenization for Different Modalities
+**Tokenization for Different Modalities**
 
 While text tokenization is the most common, the concept extends to other domains. The Transformer architecture is agnostic to modality — all it needs is a sequence of discrete tokens with embeddings:
 
@@ -346,9 +316,7 @@ While text tokenization is the most common, the concept extends to other domains
 | Audio        | Frame windowing                      | 25ms spectral feature frames         |
 | Proteins     | Character-level                      | Individual amino acids (20 standard) |
 
----
-
-#### 15. Handling Batches and Padding
+**Handling Batches and Padding**
 
 Real training happens in batches, and sequences within a batch often have different lengths. Padding resolves this:
 
@@ -359,9 +327,7 @@ Real training happens in batches, and sequences within a batch often have differ
 
 The PAD token (ID 0) fills the gap. Attention masks indicate which positions contain real tokens (1) and which are padding (0), ensuring padding tokens do not influence the computation.
 
----
-
-#### 16. Determinism and Reproducibility
+**Determinism and Reproducibility**
 
 A well-designed tokenizer must be deterministic:
 
@@ -371,11 +337,7 @@ A well-designed tokenizer must be deterministic:
 
 > **Critical:** Without determinism, models trained with one tokenizer cannot be evaluated with another, and saved models become unusable if the tokenizer changes. This is why vocabulary files are saved alongside model weights — **the tokenizer and the model are inseparable**.
 
----
-
-### Part 7: Historical Context & Summary
-
-#### 17. Historical Context
+### Historical Context & Summary
 
 The evolution of tokenization in NLP reflects the broader evolution of the field:
 
@@ -455,26 +417,18 @@ class SimpleTokenizer:
 
 ## Embedding Layer
 
-### From Discrete Tokens to Dense Vectors
-
-The embedding layer serves as the essential "translator" within the Transformer architecture, bridging the gap between human language and machine computation. While humans communicate through discrete symbols—words, charactersi, neural networks operate exclusively within a landscape of numbers. The necessity of the embedding layer lies in its ability to map these discrete token IDs into dense, learnable vector representations, providing the numerical foundation upon which all subsequent layers perform their complex reasoning.
-
-#### The "Why" of Dense Vectors
+The embedding layer bridges the gap between human language and machine computation. While humans communicate through discrete symbols, neural networks operate exclusively with numbers. The embedding layer lies is essential given its ability to map these discrete token IDs into dense, learnable vector representations, providing the basis upon which all subsequent layers perform their complex reasoning.
 
 Traditional NLP methods like one-hot encoding represent language through sparse, high-dimensional vectors. For a vocabulary of 30,000 tokens, a one-hot vector would have 30,000 dimensions with only a single "1" and 29,999 zeros. This approach is computationally inefficient and semantically "blind." Dense embeddings offer four advantages:
 
 - **Compactness**: Information is condensed into a significantly smaller space (e.g., 512 dimensions), allowing a single vector to carry richer data than a massive sparse one.
 - **Similarity**: Because they are continuous, dense vectors can capture semantic similarity. Words with related meanings point in similar directions in the vector space.
 - **Generalization**: If "cat" and "dog" have similar vectors, the model can partially transfer knowledge learned about one to the other.
-- **Composability**: Dense vectors can be mathematically manipulated—added, averaged, or transformed—enabling the model to perform complex logic across different concepts.
+- **Composability**: Dense vectors can be mathematically manipulated enabling the model to perform complex logic across different concepts.
 
 ![Embedding Matrix Lookup](./assets/01_transformers_dense_vs_sparse_matrix.png)
 
-#### The Geometry of Meaning
-
-The "distributional hypothesis" suggests that "you shall know a word by the company it keeps." In a well-trained embedding space, this hypothesis manifests as physical geometry. Similar words cluster together because they appear in similar contexts (e.g., "petted the dog" vs. "petted the cat").
-
-Furthermore, abstract concepts emerge as "semantic directions." Relationships like gender, tense, or geography manifest as geometric parallelograms:
+The [distributional hypothesis](https://en.wikipedia.org/wiki/Distributional_semantics) suggests that "you shall know a word by the company it keeps." This hypothesis states that similar words cluster together because they appear in similar contexts (e.g., "petted the dog" vs. "petted the cat"). Furthermore, abstract concepts emerge as "semantic directions." Relationships like gender, tense, or geography manifest as geometric parallelograms:
 
 $$
 \mathbf{e}_{queen} - \mathbf{e}_{king} \approx \mathbf{e}_{woman} - \mathbf{e}_{man}
@@ -486,15 +440,11 @@ $$
 
 ![Embedding Semantic Geometry](./assets/01_transformers_embeddings_semantic_geometry.png)
 
-This spatial mapping even extends across languages. In multilingual models, words with similar meanings across different languages end up near each other in the same vector space. This enables **zero-shot cross-lingual transfer**, where a model trained on English data can perform tasks in French because the embeddings occupy aligned regions of the space. The key requirement is that the model sees enough parallel or comparable text across languages during training to align the embedding spaces.
+In multilingual models, words with similar meanings across different languages end up near each other in the same vector space. This enables **[zero-shot](https://en.wikipedia.org/wiki/Zero-shot_learning) cross-lingual transfer**, where a model trained on English data can perform tasks in French because the embeddings occupy aligned regions of the space. The key requirement is that the model sees enough parallel or comparable text across languages during training to align the embedding spaces.
 
 ### The Embedding Matrix
 
-The main concept of this layer is the **Embedding Matrix** ($W_E$). This matrix is one of the largest parameter blocks in a Transformer, acting as a persistent "lookup table" that stores a unique vector for every token in the model's vocabulary.
-
-#### Mathematical Model
-
-The matrix is defined as $W_E \in \mathbb{R}^{V \times d_{model}}$, where $V$ represents the vocabulary size and $d_{\text{model}}$ is the embedding (or model) dimension. The relationship between a Token ID and its vector is a direct mapping where the Token ID acts as the row index:
+The main concept of the Embedding Layer is the **Embedding Matrix** ($W_E$). This matrix acts as a "lookup table" that stores a unique vector for every token in the model's vocabulary. The matrix is defined as $W_E \in \mathbb{R}^{V \times d_{model}}$, where $V$ represents the vocabulary size and $d_{\text{model}}$ is the embedding (or model) dimension. The relationship between a Token ID and its vector is a direct mapping where the Token ID acts as the row index:
 
 | Token ID | Matrix Row Index | Vector Representation (Size $d_{\text{model}}$)      |
 | -------- | ---------------- | ---------------------------------------------------- |
@@ -503,8 +453,6 @@ The matrix is defined as $W_E \in \mathbb{R}^{V \times d_{model}}$, where $V$ re
 | i        | Row i            | $[w_{i,1}, w_{i,2}, \ldots, w_{i,d_{\text{model}}}]$ |
 
 ![Embedding Matrix Lookup](./assets/01_transformers_embedding_matrix_lookup.png)
-
-#### Lookup vs. One-Hot Multiplication
 
 Mathematically, retrieving an embedding is equivalent to a one-hot multiplication
 
@@ -522,8 +470,6 @@ $$
 
 This is the industry standard for performance, as it avoids the massive memory and computational overhead of multiplying large, sparse vectors.
 
-#### Dimensional Analysis and Memory Footprint
-
 As data flows through the pipeline, it undergoes specific shape transformations:
 
 - **Input**: A tensor of token IDs with shape $(B, L)$
@@ -536,9 +482,7 @@ As data flows through the pipeline, it undergoes specific shape transformations:
 - **Output (after scaling)**: Shape $(B, L, d_{model})$
   - Same shape, but each value multiplied by $\sqrt{d_{model}}$
 
-The $d_{\text{model}}$ dimension is always the last dimension (the feature dimension). This is a crucial detail for understanding how data is sliced and processed by attention heads and feed-forward modules.
-
-The choice of d\_{model} significantly impacts the model’s representational capacity and memory footprint:
+The $d_{\text{model}}$ dimension is always the last dimension (the feature dimension). This is a crucial detail for understanding how data is sliced and processed by attention heads and feed-forward modules. The choice of $d_{model}$ significantly impacts the model’s representational capacity and memory footprint:
 
 - $d_{\text{model}} = 256$: Small models, fast experimentation.
 - $d_{\text{model}} = 512$: Original Transformer "Base."
@@ -551,19 +495,15 @@ In a BERT-Base model ($V=30,522$, $d_{\text{model}}=768$), the embedding matrix 
 
 ### Scaling and Weight Tying
 
-Raw embeddings are rarely sent directly into the Transformer. They require mathematical balancing to ensure that the token's identity remains clear when combined with positional encodings.
+Raw embeddings are rarely sent directly into the Transformer. They require mathematical balancing to ensure that the token's identity remains clear when combined with positional encodings. Embeddings are typically initialized with small random values to facilitate training. Common strategies include:
 
-#### Initialization and the Scaling Factor ($\sqrt{d_{\text{model}}}$)
-
-Embeddings are typically initialized with small random values to facilitate training. Common strategies include:
-
-- Normal Distribution:
+- **Normal Distribution**:
 
 $$
 W_{E_{ij}} \sim \mathcal{N}(0, 1/d_{\text{model}}) or \mathcal{N}(0, 0.02)
 $$
 
-- Uniform Distribution:
+- **Uniform Distribution**:
 
 $$
 W_{E_{ij}} \sim \mathcal{U}(-1/\sqrt{d_{\text{model}}}, 1/\sqrt{d_{\text{model}}})
@@ -575,11 +515,9 @@ $$
 E(x) = W_E[x] \cdot \sqrt{d_{\text{model}}}
 $$
 
-This scaling is necessary because the random initialization results in a vector magnitude ($\|\mathbf{e}\|$) of approximately $1$. However, Positional Encodings (PE) have a magnitude of roughly $\sqrt{d_{\text{model}}/2}$.
+This scaling is necessary because the random initialization results in a vector magnitude ($\|\mathbf{e}\|$) of approximately $1$. However, Positional Encodings (PE) have a magnitude of roughly $\sqrt{d_{\text{model}}/2}$. Without scaling, the position information would overwhelm the token's identity. Scaling the embeddings brings their magnitude to $\approx \sqrt{d_{\text{model}}}$, creating parity between meaning and position.
 
-Without scaling, the position information would overwhelm the token's identity. Scaling the embeddings brings their magnitude to $\approx \sqrt{d_{\text{model}}}$, creating parity between meaning and position.
-
-#### The "Weight Tying" Technique
+#### The Weight Tying Technique
 
 To optimize efficiency, the Transformer shares the same embedding matrix across the Input Embedding, Output Embedding, and Output Projection. By tying these weights, the Output Projection ($W_{\text{out}}$) becomes the transpose of the Embedding Matrix ($W_E$):
 
@@ -613,30 +551,27 @@ Intuitively, the model is asking: "Which token's embedding is most similar to th
 >
 > 2. Scaled Embeddings: $$\begin{pmatrix} 0.4 & 0.2 & -0.8 & 0.6 \\ 0.2 & -0.4 & 0.6 & -0.2 \\ 0.8 & 0.4 & -0.2 & -0.4 \end{pmatrix}$$
 
-### Training Dynamics and Practical Considerations
+### Practical Considerations
 
-Embeddings are learned features shaped by backpropagation from random noise into a structured semantic map.
-
-#### The Learning Process and Rare Token Problem
-
-During training, gradients only update the rows of $W_E$ corresponding to tokens present in the current batch. This leads to the **"Rare Token Problem"**: infrequent words receive fewer updates and remain poorly defined.
+Embeddings are learned features shaped by backpropagation from random noise into a structured semantic map. During training, gradients only update the rows of $W_E$ corresponding to tokens present in the current batch. This leads to the **"Rare Token Problem"**: infrequent words receive fewer updates and remain poorly defined.
 
 ![Rare Token Problem](./assets/01_transformers_embedding_grandient.png)
 
 This is why subword tokenization is a fundamental implementation choice. By breaking "uncommon" words into "common" subword pieces, we ensure that every row in the embedding matrix is updated frequently, preventing "dead" or untrained vectors.
 
-#### Common Pitfall: Pre-trained vs. Learned from Scratch
-
-- **Learned from Scratch**: Standard for LLMs (GPT, LLaMA). Optimized specifically for the target task but requires massive data.
-- **Pre-trained** (Word2Vec, GloVe): Useful for small datasets.
-- **The Pitfall**: If using pre-trained embeddings, one must decide whether to freeze them (no updates) or fine-tune them. Freezing preserves the original semantic space but can prevent the model from adapting to the specific nuances of your data.
-
-#### Practical Considerations
+There are some other things to note on the training process:
 
 - **Padding Tokens**: The `PAD` token should not influence the model's math. Implementations typically either initialize the `PAD` embedding to all zeros and freeze it or, more commonly, use attention masks to ensure the model never "looks" at the padding during computation.
 - **Numerical Precision**: While lookup is numerically exact (indexing), scaling and subsequent layers often use float16 or bfloat16 to save memory.
 
-**Static vs. Contextual Embeddings**
+#### Pre-trained vs. Learned from Scratch
+
+- **Learned from Scratch**: Standard for LLMs (GPT, LLaMA). Optimized specifically for the target task but requires massive data.
+- **Pre-trained** (Word2Vec, GloVe): Useful for small datasets.
+
+If using pre-trained embeddings, one must decide whether to freeze them (no updates) or fine-tune them. Freezing preserves the original semantic space but can prevent the model from adapting to the specific nuances of your data.
+
+#### Static vs. Contextual Embeddings
 
 The embedding lookup layer produces **static embeddings**: each token always maps to the same vector, regardless of context.
 
@@ -668,7 +603,8 @@ After the embedding layer:
 1. Positional encodings are added to give the model position information
 2. The result enters the first encoder (or decoder) layer
 3. From this point forward, everything operates on continuous vectors of dimension $d_{model}$
-   The embedding layer is the last place where the discrete nature of language is visible. Once tokens become vectors, the Transformer operates in a purely continuous mathematical space.
+
+The embedding layer is the last place where the discrete nature of language is visible. Once tokens become vectors, the Transformer operates in a purely continuous mathematical space.
 
 ![Token to Embedding Pipeline](./assets/01_transformers_token_to_embedding_pipeline.png)
 
