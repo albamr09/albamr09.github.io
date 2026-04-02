@@ -647,3 +647,125 @@ def embed_tokens(embedding: nn.Embedding, tokens: torch.Tensor, d_model: int) ->
     # Now we apply scaling :)
     return E_x * math.sqrt(d_model)
 ```
+
+## Positional Encoding
+
+### RNNs vs. Transformers
+
+The evolution of natural language processing reached a pivotal turning point with the transition from Recurrent Neural Networks (RNNs) to Transformers. RNNs are inherently sequential; they process tokens one by one, maintaining a hidden state that naturally captures the passage of time. In an RNN, the model knows "this is the fifth word" simply because it is the fifth computation step. Transformers, however, abandoned this recurrence in favor of massive parallelization. By utilizing matrix operations to process all tokens in a sequence simultaneously, **Transformers achieved unprecedented training efficiency but at a significant cost: the loss of inherent order**.
+
+Without a dedicated mechanism for spatial awareness, the Transformer attention mechanism is permutation equivariant. If you shuffle the input tokens, the attention mechanism, which relies on dot products between token embeddings, simply shuffles the output tokens with no change to their underlying values.
+
+Consider the sentences "The dog bit the man" and "The man bit the dog." Because dot products are symmetric with respect to ordering, the attention mechanism views these as an identical set of embeddings. To the model, these two distinct scenarios are indistinguishable, representing a "bag of words" rather than a structured sentence. Positional Encoding is the introduction of order into this sequence-agnostic system, breaking the symmetry and allowing the model to distinguish position 1 from position 7.
+
+### The Order Problem
+
+To restore order, we must synthesize "what" a token is with "where" it resides. This requires us to assign every token a unique geographic coordinate within the model's high-dimensional vector space.
+
+That we, we will add a positional vector to the semantic embedding:
+
+$$
+\mathbf{x}_i = \mathbf{e}_i + \text{PE}(i)
+$$
+
+In this equation, $\mathbf{e}_i$ represents the token embedding (with semantic meaning) and $\text{PE}(i) \in \mathbb{R}^{d\_{model}}$ is the positional encoding for position $i$. While one might consider concatenation, the original Transformer architecture opted for addition due to its superior efficiency.
+
+A critical detail in this synthesis is the $\sqrt{d_{model}}$ scaling factor applied to the token embeddings before addition (see [Scaling and Weight Tying](/datascience/tensortonic/01_attention/#scaling-and-weight-tying)).
+
+This is necessary as semantic embeddings grow in magnitude with the dimensionality, while positional encodings are bounded between $[-1, 1]$. Without this scaling, the semantic signal would overwhelm the positional signal, rendering the "geography" of the token invisible to the model.
+
+### Sinusoidal Encoding
+
+The original Transformer designers chose deterministic sine and cosine functions over simple integers or learned embeddings. A simple integer-based counter (0, 1, 2...) would lead to numerical instability as sequences grew longer, with position 1000 having a magnitude vastly larger than position 1. By contrast, sinusoidal functions provide bounded, periodic signals that create a unique "fingerprint" for every position.
+
+The formulas for generating these encodings are defined as:
+
+$$
+\text{PE}(pos, 2i) = \sin\left(\frac{pos}{10000^{2i / d_{model}}}\right)
+$$
+
+$$
+\text{PE}(pos, 2i+1) = \cos\left(\frac{pos}{10000^{2i / d_{model}}}\right)
+$$
+
+Where:
+
+- $pos$: The absolute position in the sequence ($0, 1, 2, \dots$).
+- $i$: The dimension index, ranging from $0$ to $d_{model}/2 - 1$.
+- $d_{model}$: The total dimensionality of the model.
+
+This formulation has the ability to represent relative position. For any fixed offset $k$, the encoding at position $pos + k$ can be expressed as a linear transformation of the encoding at $pos$ via a rotation matrix:
+
+$$
+\begin{pmatrix}
+\text{PE}(pos+k, 2i) \\
+\text{PE}(pos+k, 2i+1)
+\end{pmatrix} =
+\begin{pmatrix}
+\cos(k\omega_i) & \sin(k\omega_i) \\
+-\sin(k\omega_i) & \cos(k\omega_i)
+\end{pmatrix}
+\begin{pmatrix}
+\text{PE}(pos, 2i) \\
+\text{PE}(pos, 2i+1)
+\end{pmatrix}
+$$
+
+![Positional Encoding Relativity](./assets/01_positional_encoding_relativity.png)
+
+This property ensures that the attention mechanism can learn distance-based relationships (e.g., "the word 3 positions to the left") through simple dot products, regardless of the tokens' absolute positions in the sequence. By using both sine and cosine, the model effectively maps each position to a point on a multidimensional circle that can be rotated to find relative neighbors.
+
+### Frequency Signals
+
+The positional encoding vector is a composite of signals with varying frequencies, capturing positional information at multiple scales simultaneously.
+
+- **Binary Counting Analogy**: Much like bits in a binary number, the low-index dimensions of the vector flip rapidly (like the least significant bit), while high-index dimensions change slowly.
+- **Clock Hand Analogy**: Each sine-cosine pair acts as a "clock hand" rotating at a different speed. The "fast hands" in the low dimensions ($i=0$) complete a cycle every $2\pi$ positions, distinguishing immediate neighbors. The "slow hands" in the high dimensions ($i = d_{model}/2 - 1$) rotate at a frequency of 1/10000, providing coarse-grained data.
+
+![Positional Encoding Frequency](./assets/01_positional_encoding_frequencies.png)
+
+The choice of 10,000 as the base for the frequency denominator is a decision that determines the range of the "clock." With this base, the longest wavelength is approximately $10,000 \times 2\pi \approx 62,832$ positions.
+
+What if we changed the base?
+
+- Base $100$: The frequency range would compress. The slowest dimensions would cycle too quickly, and the model would lose the ability to distinguish between tokens separated by long distances.
+- Base $1,000,000$: The frequencies would spread too far apart. While this provides a massive range, the change in the slow dimensions might become so infinitesimal that the model struggles to learn meaningful position-dependent patterns during training.
+
+#### Example: A $d_{model} = 4$ Case Study
+
+To demystify these mechanics, consider a sequence where $d_{model} = 4$. We calculate the frequencies as $\omega_0 = 1/10000^{0/4} = 1$ and $\omega_1 = 1/10000^{2/4} = 0.01$.
+
+**Calculated Encodings for $d_{model}=4$**
+
+```
+Position 0: [ 0.000,  1.000,  0.000,  1.000] (sin(0), cos(0), sin(0), cos(0))
+Position 1: [ 0.841,  0.540,  0.010,  1.000] (sin(1), cos(1), sin(0.01), cos(0.01))
+Position 2: [ 0.909, -0.416,  0.020,  1.000] (sin(2), cos(2), sin(0.02), cos(0.02))
+```
+
+In this example, dimensions 0 and 1 (high frequency) change dramatically as we move from position 0 to 2. However, dimensions 2 and 3 (low frequency) remain nearly static, shifting only by $0.01$ and less than $0.001$ respectively.
+
+This demonstrates the multi-scale nature of the vector: the first half provides high-resolution local tracking, while the second half provides a stable anchor for the broader context.
+
+### Fixed vs. Learned Encodings
+
+While the original Transformer used fixed sinusoidal encodings, the field has continuously debated the merits of Learned Positional Embeddings, where a unique vector for every position is treated as a learnable parameter.
+
+- **Sinusoidal (Fixed)**: These require no extra parameters and allow for "extrapolation"—the ability to handle sequences longer than those seen in training.
+- **Learned**: Used by models like BERT and GPT-2, these are highly flexible but are strictly limited to a maximum sequence length ($L_{max}$) defined at training.
+
+Interestingly, the original Transformer paper found that fixed and learned encodings produced nearly identical results. However, as models have scaled, more sophisticated alternatives have emerged to solve the extrapolation problem:
+
+- **Rotary Position Embeddings (RoPE)**: Used in LLaMA, RoPE rotates the query and key vectors during the attention step, making the dot product naturally relative.
+- **ALiBi (Attention with Linear Biases)**: This adds a penalty to attention scores that increases with distance, controlled by a head-specific slope m.
+- **Relative Position Encodings**: These explicitly model the distance between every pair of tokens rather than their absolute coordinates.
+
+### What About Semantics
+
+The intuitive concern that adding position vectors might "corrupt" the semantic meaning of a word is addressed by the Information-Theoretic Perspective. In a high-dimensional space (e.g., $d_{model} = 512$), there is an immense amount of "geometric room."
+
+Token embeddings typically occupy a low-dimensional subspace of the available space. Because the positional encodings are designed with specific periodicities, they generally occupy a different, non-overlapping subspace. Through training, the Transformer layers learn to disentangle these signals, treating some dimensions as content carriers and others as context markers.
+
+![Positional Encoding and Meaning](./assets/01_positional_encoding_and_meaning.png)
+
+Furthermore, these encodings introduce a beneficial local attention bias. Because nearby positions have high dot-product similarity in their encodings, the attention mechanism naturally favors local context.
