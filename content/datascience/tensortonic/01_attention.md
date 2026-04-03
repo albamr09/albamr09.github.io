@@ -769,3 +769,24 @@ Token embeddings typically occupy a low-dimensional subspace of the available sp
 ![Positional Encoding and Meaning](./assets/01_positional_encoding_and_meaning.png)
 
 Furthermore, these encodings introduce a beneficial local attention bias. Because nearby positions have high dot-product similarity in their encodings, the attention mechanism naturally favors local context.
+
+### Code Example
+
+```python
+import numpy as np
+
+def positional_encoding(seq_length: int, d_model: int) -> np.ndarray:
+    """
+    Generate sinusoidal positional encodings.
+
+    """
+    positional_vector = np.zeros(shape=(seq_length, d_model))
+    # 'pos' is the position in the sequence
+    for pos in range(0, seq_length):
+        # 'i' is the dimension index.
+        for i in range(0, d_model // 2):
+            positional_vector[pos, 2*i] = np.sin(pos / np.pow(1000, 2*i/d_model))
+            positional_vector[pos, 2*i + 1] = np.cos(pos / np.pow(1000, 2*i/d_model))
+
+    return positional_vector
+```
