@@ -790,3 +790,237 @@ def positional_encoding(seq_length: int, d_model: int) -> np.ndarray:
 
     return positional_vector
 ```
+
+## Scaled Dot-Product Attention
+
+### The Concept of Dynamic Information Routing
+
+In traditional neural network architectures, such as standard feed-forward networks, information is processed in isolation. A token at position $i$ has no inherent mechanism to communicate with a token at position $j$ during a single forward pass. This creates a bottleneck for natural language processing, where meaning is strictly relational. The breakthrough of the **Attention Mechanism** lies in its ability to transform these static, independent representations into a dynamic, relational framework.
+
+Language is context-dependent by nature. Consider the sentence:
+
+> "The animal didn't cross the street because it was too tired."
+
+To compute a meaningful representation of the word "it," the model must resolve its coreference. In this specific context, the representation of "it" must incorporate information from "animal." If the sentence ended with "...because it was too wide," the focus would shift to "street."
+
+![Dynamic Routing](./assets/01_scaled_dot_product_dynamic_routing.png)
+
+Attention allows every token in a sequence to "look" at every other token and selectively gather information from the most relevant ones. This represents a shift from fixed, hard-coded connectivity to dynamic, input-dependent routing. This mechanism mimics human cognitive focus—prioritizing specific stimuli while filtering out noise—and is coordinated through a specific mathematical framework involving three distinct functional roles.
+
+### Queries, Keys, and Values
+
+To achieve selective focus, the attention mechanism utilizes an information retrieval logic based on three actors:
+
+- **Queries** ($Q$),
+- **Keys** ($K$), and
+- **Values** ($V$).
+
+These are roles that define how information is sought and retrieved.
+
+- **Query** ($Q$): "What am I looking for?" Each row of $Q$ represents a question asked by a token, encoding the specific features or context it requires to enhance its own representation.
+- **Key** ($K$): "What do I contain?" Each row of $K$ acts as a label or advertisement. Keys are matched against queries to determine the relevance of a particular token's information.
+- **Value** ($V$): "Here is my actual information." These contain the substantive content that is aggregated once relevance is established.
+
+![Soft Lookup](./assets/01_scaled_dot_product_soft_lookup.png)
+
+Imagine a researcher in a library. The researcher has a specific research question (the **Query**). The books on the shelves have titles printed on their spines (the **Keys**). The researcher compares the question to the titles to determine which books are relevant. Once the relevant books are identified, the researcher opens them to extract the actual data inside (the **Values**).
+
+By separating these three roles, the model distinguishes between the criteria for selection (Queries and Keys) and the information to be selected (Values). This allows for a "Soft Lookup", that is, a weighted aggregation of all information rather than a binary "Hard Lookup" found in traditional databases—making the entire process differentiable and learnable via backpropagation.
+
+### The Mathematical Mechanics of Attention
+
+The core operation of modern Transformers is **Scaled Dot-Product Attention**, defined by the following formula:
+
+$$
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+$$
+
+This represents a four-step sequence designed for both representational power and computational efficiency.
+
+#### Step 1: Compatibility Scores ($QK^T$)
+
+The process begins with computing the alignment between queries and keys via the dot product. For a query vector $\mathbf{q}$ and key vector $\mathbf{k}$, the score is
+
+$$
+\mathbf{q} \cdot \mathbf{k} = \|\mathbf{q}\| \|\mathbf{k}\| \cos\theta.
+$$
+
+![Compatibility](./assets/01_scaled_dot_product_compatibility.png)
+
+- **High positive values**: Vectors are aligned (high compatibility).
+- **Near zero**: Vectors are orthogonal (no relationship).
+- **High negative values**: Vectors are in opposition (low compatibility).
+
+#### Step 2: The Scaling ($\sqrt{d_k}$)
+
+Scaling by the square root of the key dimension ($d_k$) is an important requirement for training stability. As $d_k$ increases, the variance of the dot product grows, leading to the softmax saturation problem.
+
+Assume the components of $\mathbf{q}$ and $\mathbf{k}$ are independent random variables with mean $0$ and variance $1$. For the dot product
+
+$$
+\mathbf{q} \cdot \mathbf{k} = \sum_{j=1}^{d_k} q_j k_j
+$$
+
+We have:
+
+$$
+\mathbb{E}[q_j k_j] = E[q_j]E[k_j] = 0
+$$
+
+$$
+\text{Var}(q_j k_j) = E[q_j^2 k_j^2] - (E[q_j k_j])^2 = 1 \cdot 1 - 0 = 1
+$$
+
+Since there are $d_k$ independent terms,
+
+$$
+\text{Var}(\mathbf{q} \cdot \mathbf{k}) = d_k.
+$$
+
+![Compatibility](./assets/01_scaled_dot_product_scaling.png)
+
+Without scaling, the standard deviation is $\sqrt{d_k}$. For large $d_k$, the dot products reach large magnitudes where the gradient of the softmax function is nearly zero (vanishing gradients).
+
+Dividing by $\sqrt{d_k}$ ensures that
+
+$$
+\text{Var}\left(\frac{\mathbf{q} \cdot \mathbf{k}}{\sqrt{d_k}}\right) = 1
+$$
+
+Keeping the model in a regime where it can continue to learn.
+
+#### Step 3: The Softmax Operation
+
+The scaled scores are converted into a probability distribution $\alpha$ along the key dimension. This produces "attention weights" where $\alpha_{ij} \geq 0$ and $\sum_j \alpha_{ij} = 1$.
+
+![Softmax](./assets/01_scaled_dot_product_softmax.png)
+
+The scaling factor controls the "sharpness" of this distribution; without it, the model would converge prematurely to a "one-hot" focus on a single token.
+
+#### Step 4: Weighted Aggregation
+
+The final output is the matrix product of the attention weights and the values ($\alpha V$). Each output vector is a context-aware blend of the input values, prioritized by their relevance to the original query.
+
+![Weighted Aggregations](./assets/01_scaled_dot_product_weighted_aggregation.png)
+
+#### Why Dot-Product Attention?
+
+While Additive Attention (using a small neural network to compute scores) is theoretically more expressive, the Transformer architecture utilizes Dot-Product Attention because it is significantly faster and more space-efficient. It can be implemented as highly optimized matrix multiplications ($QK^T$), taking full advantage of GPU and TPU hardware acceleration.
+
+#### Numerical Walkthrough of the Attention Process
+
+To illustrate these mechanics, consider a sequence of three tokens with dimension $d_k = 2$.
+
+Data Setup
+
+$$
+Q = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix}, \quad K = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 0.5 & 0.5 \end{pmatrix}, \quad V = \begin{pmatrix} 10 & 0 \\ 0 & 10 \\ 5 & 5 \end{pmatrix}
+$$
+
+Raw Scores $(QK^T)$
+
+$$
+QK^T = \begin{pmatrix} 1 & 0 & 0.5 \\ 0 & 1 & 0.5 \\ 1 & 1 & 1 \end{pmatrix}
+$$
+
+Scaling ($\sqrt{2} \approx 1.414$):
+
+$$
+S_{\text{scaled}} = \begin{pmatrix} 0.707 & 0 & 0.354 \\ 0 & 0.707 & 0.354 \\ 0.707 & 0.707 & 0.707 \end{pmatrix}
+$$
+
+Softmax (Attention Weights $\alpha$):
+
+Row 1: Query 1 attends mostly to Key 1 because both share a strong first component
+
+$$
+[0.430, 0.212, 0.302]
+$$
+
+Row 2: Query 2 attends mostly to Key 2 because both share a strong second component.
+
+$$
+[0.212, 0.430, 0.302]
+$$
+
+Row 3: Query 3 attends equally to all keys due to identical compatibility.
+
+$$
+[0.333, 0.333, 0.333]
+$$
+
+Final Output ($\alpha V$):
+
+$$
+\text{Output}_1 \approx [5.81, 3.63]
+$$
+
+$$
+\text{Output}_2 \approx [3.63, 5.81]
+$$
+
+$$
+\text{Output}_3 = [5.0, 5.0]
+$$
+
+These results demonstrate the "soft lookup" in action: Output 1 is heavily influenced by Value 1, while Output 3 is a perfect average of all available information.
+
+### Implementation: Self-Attention and Masking
+
+The attention mechanism is deployed in distinct configurations based on the structural requirements of the model.
+
+#### Self-Attention vs. Cross-Attention
+
+- **Self-Attention**: $Q$, $K$, and $V$ are derived from the same input sequence $X$ via learned projection matrices ($XW^Q, XW^K, XW^V$). Every token interacts with every other token in its own sequence to build internal context.
+
+![Self-Attention](./assets/01_scaled_dot_product_self_attention.png)
+
+- **Cross-Attention**: $Q$ is derived from one sequence (e.g., a decoder), while $K$ and $V$ come from a different sequence (e.g., an encoder). This allows the model to map relationships between two different data streams, such as text and images or source and target languages.
+
+![Cross-Attention](./assets/01_scaled_dot_product_cross_attention.png)
+
+#### Preventing Future Information Leakage
+
+In autoregressive models like GPT, the model must not "cheat" during training by looking at tokens that appear later in the sequence. To prevent this future information leakage, we apply a causal mask.
+
+Before the softmax operation, we modify the score matrix $S$ such that
+
+$$
+S_{ij} = -\infty
+$$
+
+for all $j > i$. Because
+
+$$
+\text{softmax}(-\infty) = 0
+$$
+
+![Autoregressive Masking](./assets/01_scaled_dot_product_masking.png)
+
+The attention weights for future positions become zero. This is implemented using a lower-triangular mask matrix $M$:
+
+$$
+M = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 1 & 1 & 0 & 0 \\ 1 & 1 & 1 & 0 \\ 1 & 1 & 1 & 1 \end{pmatrix}
+$$
+
+### Practical Implications and Dimensional Analysis
+
+#### Computational Complexity and Bottlenecks
+
+The primary constraint of the attention mechanism is its quadratic scaling ($O(L^2 \cdot d_k)$), where $L$ is the sequence length. Because the mechanism computes an $L \times L$ attention matrix $\alpha$, doubling the sequence length quadruples the memory and computational requirements. This O($L^2$) bottleneck is the main reason why processing long documents remains a significant challenge in AI research.
+
+![Computation Complexity](./assets/01_scaled_dot_product_complexity.png)
+
+#### Dimensional Analysis
+
+Tracking tensor shapes is vital for architectural implementation. Given Batch size ($B$), Queries ($n$), Keys/Values ($m$), Key dimension ($d_k$), and Value dimension ($d_v$):
+
+- $Q$: ($B, n, d_k$)
+- $K$: ($B, m, d_k$)
+- $V$: ($B, m, d_v$)
+- $\alpha$ (Attention Weights): ($B, n, m$)
+- Output: ($B, n, d_v$)
+
+![Dimensional Analysis](./assets/01_scaled_dot_product_dimensional_analysis.png)
+
+The scaled dot-product attention mechanism itself has **zero learnable parameters**. It is a pure mathematical function. All learnable parameters reside in the linear projection matrices ($W^Q, W^K, W^V$) that transform input embeddings into $Q$, $K$, and $V$.
